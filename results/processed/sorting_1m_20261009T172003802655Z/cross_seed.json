@@ -1,0 +1,822 @@
+{
+  "schema_version": 1,
+  "study": "sorting_1m_20261009T172003802655Z",
+  "source": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/sorting_1m_20261009T172003802655Z/matrix",
+  "elapsed_unit": "ns",
+  "aggregation_unit": "one median per seed dataset",
+  "method": "equal-weight descriptive statistics of three five-trial seed medians; no pooled trial statistics",
+  "stdev_definition": "sample_ddof_1_across_seed_medians",
+  "outlier_policy": "retain_all",
+  "groups": [
+    {
+      "algorithm": "std_sort",
+      "distribution": "uniform",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 56768174
+        },
+        {
+          "seed": 42,
+          "median_ns": 61641907
+        },
+        {
+          "seed": 2718,
+          "median_ns": 57698583
+        }
+      ],
+      "median_of_seed_medians_ns": 57698583,
+      "mean_of_seed_medians_ns": 58702888,
+      "sample_stdev_of_seed_medians_ns": 2587429.175570029,
+      "min_seed_median_ns": 56768174,
+      "max_seed_median_ns": 61641907
+    },
+    {
+      "algorithm": "std_sort",
+      "distribution": "sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 8643006
+        },
+        {
+          "seed": 42,
+          "median_ns": 8763239
+        },
+        {
+          "seed": 2718,
+          "median_ns": 8740275
+        }
+      ],
+      "median_of_seed_medians_ns": 8740275,
+      "mean_of_seed_medians_ns": 8715506.666666666,
+      "sample_stdev_of_seed_medians_ns": 63828.64814746849,
+      "min_seed_median_ns": 8643006,
+      "max_seed_median_ns": 8763239
+    },
+    {
+      "algorithm": "std_sort",
+      "distribution": "reverse_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 5978201
+        },
+        {
+          "seed": 42,
+          "median_ns": 6377411
+        },
+        {
+          "seed": 2718,
+          "median_ns": 5843991
+        }
+      ],
+      "median_of_seed_medians_ns": 5978201,
+      "mean_of_seed_medians_ns": 6066534.333333333,
+      "sample_stdev_of_seed_medians_ns": 277464.0651207528,
+      "min_seed_median_ns": 5843991,
+      "max_seed_median_ns": 6377411
+    },
+    {
+      "algorithm": "std_sort",
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 19039206
+        },
+        {
+          "seed": 42,
+          "median_ns": 21875877
+        },
+        {
+          "seed": 2718,
+          "median_ns": 20182188
+        }
+      ],
+      "median_of_seed_medians_ns": 20182188,
+      "mean_of_seed_medians_ns": 20365757,
+      "sample_stdev_of_seed_medians_ns": 1427217.1432129731,
+      "min_seed_median_ns": 19039206,
+      "max_seed_median_ns": 21875877
+    },
+    {
+      "algorithm": "std_sort",
+      "distribution": "nearly_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 10272176
+        },
+        {
+          "seed": 42,
+          "median_ns": 10945874
+        },
+        {
+          "seed": 2718,
+          "median_ns": 10406520
+        }
+      ],
+      "median_of_seed_medians_ns": 10406520,
+      "mean_of_seed_medians_ns": 10541523.333333334,
+      "sample_stdev_of_seed_medians_ns": 356562.3000393246,
+      "min_seed_median_ns": 10272176,
+      "max_seed_median_ns": 10945874
+    },
+    {
+      "algorithm": "quick_sort",
+      "distribution": "uniform",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 83423949
+        },
+        {
+          "seed": 42,
+          "median_ns": 92384262
+        },
+        {
+          "seed": 2718,
+          "median_ns": 83770908
+        }
+      ],
+      "median_of_seed_medians_ns": 83770908,
+      "mean_of_seed_medians_ns": 86526373,
+      "sample_stdev_of_seed_medians_ns": 5076045.97981155,
+      "min_seed_median_ns": 83423949,
+      "max_seed_median_ns": 92384262
+    },
+    {
+      "algorithm": "quick_sort",
+      "distribution": "sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 74458851
+        },
+        {
+          "seed": 42,
+          "median_ns": 74436330
+        },
+        {
+          "seed": 2718,
+          "median_ns": 77685218
+        }
+      ],
+      "median_of_seed_medians_ns": 74458851,
+      "mean_of_seed_medians_ns": 75526799.66666667,
+      "sample_stdev_of_seed_medians_ns": 1869279.0254834439,
+      "min_seed_median_ns": 74436330,
+      "max_seed_median_ns": 77685218
+    },
+    {
+      "algorithm": "quick_sort",
+      "distribution": "reverse_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 72089704
+        },
+        {
+          "seed": 42,
+          "median_ns": 76609559
+        },
+        {
+          "seed": 2718,
+          "median_ns": 68861224
+        }
+      ],
+      "median_of_seed_medians_ns": 72089704,
+      "mean_of_seed_medians_ns": 72520162.33333333,
+      "sample_stdev_of_seed_medians_ns": 3892061.741623369,
+      "min_seed_median_ns": 68861224,
+      "max_seed_median_ns": 76609559
+    },
+    {
+      "algorithm": "quick_sort",
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 14573535
+        },
+        {
+          "seed": 42,
+          "median_ns": 14253238
+        },
+        {
+          "seed": 2718,
+          "median_ns": 15165048
+        }
+      ],
+      "median_of_seed_medians_ns": 14573535,
+      "mean_of_seed_medians_ns": 14663940.333333334,
+      "sample_stdev_of_seed_medians_ns": 462578.87137906905,
+      "min_seed_median_ns": 14253238,
+      "max_seed_median_ns": 15165048
+    },
+    {
+      "algorithm": "quick_sort",
+      "distribution": "nearly_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 31615425
+        },
+        {
+          "seed": 42,
+          "median_ns": 33266753
+        },
+        {
+          "seed": 2718,
+          "median_ns": 31782987
+        }
+      ],
+      "median_of_seed_medians_ns": 31782987,
+      "mean_of_seed_medians_ns": 32221721.666666668,
+      "sample_stdev_of_seed_medians_ns": 908893.3500127137,
+      "min_seed_median_ns": 31615425,
+      "max_seed_median_ns": 33266753
+    },
+    {
+      "algorithm": "pdq_sort",
+      "distribution": "uniform",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 24016106
+        },
+        {
+          "seed": 42,
+          "median_ns": 26766690
+        },
+        {
+          "seed": 2718,
+          "median_ns": 24456920
+        }
+      ],
+      "median_of_seed_medians_ns": 24456920,
+      "mean_of_seed_medians_ns": 25079905.333333332,
+      "sample_stdev_of_seed_medians_ns": 1477332.437004391,
+      "min_seed_median_ns": 24016106,
+      "max_seed_median_ns": 26766690
+    },
+    {
+      "algorithm": "pdq_sort",
+      "distribution": "sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 718174
+        },
+        {
+          "seed": 42,
+          "median_ns": 763870
+        },
+        {
+          "seed": 2718,
+          "median_ns": 770770
+        }
+      ],
+      "median_of_seed_medians_ns": 763870,
+      "mean_of_seed_medians_ns": 750938,
+      "sample_stdev_of_seed_medians_ns": 28583.42652657305,
+      "min_seed_median_ns": 718174,
+      "max_seed_median_ns": 770770
+    },
+    {
+      "algorithm": "pdq_sort",
+      "distribution": "reverse_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 1557606
+        },
+        {
+          "seed": 42,
+          "median_ns": 1583518
+        },
+        {
+          "seed": 2718,
+          "median_ns": 1427301
+        }
+      ],
+      "median_of_seed_medians_ns": 1557606,
+      "mean_of_seed_medians_ns": 1522808.3333333333,
+      "sample_stdev_of_seed_medians_ns": 83720.34386177194,
+      "min_seed_median_ns": 1427301,
+      "max_seed_median_ns": 1583518
+    },
+    {
+      "algorithm": "pdq_sort",
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 4691128
+        },
+        {
+          "seed": 42,
+          "median_ns": 4210558
+        },
+        {
+          "seed": 2718,
+          "median_ns": 4247840
+        }
+      ],
+      "median_of_seed_medians_ns": 4247840,
+      "mean_of_seed_medians_ns": 4383175.333333333,
+      "sample_stdev_of_seed_medians_ns": 267345.50783832767,
+      "min_seed_median_ns": 4210558,
+      "max_seed_median_ns": 4691128
+    },
+    {
+      "algorithm": "pdq_sort",
+      "distribution": "nearly_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 8401813
+        },
+        {
+          "seed": 42,
+          "median_ns": 8805952
+        },
+        {
+          "seed": 2718,
+          "median_ns": 8626962
+        }
+      ],
+      "median_of_seed_medians_ns": 8626962,
+      "mean_of_seed_medians_ns": 8611575.666666666,
+      "sample_stdev_of_seed_medians_ns": 202508.363457743,
+      "min_seed_median_ns": 8401813,
+      "max_seed_median_ns": 8805952
+    },
+    {
+      "algorithm": "tim_sort",
+      "distribution": "uniform",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 82326229
+        },
+        {
+          "seed": 42,
+          "median_ns": 84395885
+        },
+        {
+          "seed": 2718,
+          "median_ns": 81262901
+        }
+      ],
+      "median_of_seed_medians_ns": 82326229,
+      "mean_of_seed_medians_ns": 82661671.66666667,
+      "sample_stdev_of_seed_medians_ns": 1593200.7164915956,
+      "min_seed_median_ns": 81262901,
+      "max_seed_median_ns": 84395885
+    },
+    {
+      "algorithm": "tim_sort",
+      "distribution": "sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 395861
+        },
+        {
+          "seed": 42,
+          "median_ns": 394531
+        },
+        {
+          "seed": 2718,
+          "median_ns": 415617
+        }
+      ],
+      "median_of_seed_medians_ns": 395861,
+      "mean_of_seed_medians_ns": 402003,
+      "sample_stdev_of_seed_medians_ns": 11808.809084746861,
+      "min_seed_median_ns": 394531,
+      "max_seed_median_ns": 415617
+    },
+    {
+      "algorithm": "tim_sort",
+      "distribution": "reverse_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 2236576
+        },
+        {
+          "seed": 42,
+          "median_ns": 2056559
+        },
+        {
+          "seed": 2718,
+          "median_ns": 1768848
+        }
+      ],
+      "median_of_seed_medians_ns": 2056559,
+      "mean_of_seed_medians_ns": 2020661,
+      "sample_stdev_of_seed_medians_ns": 235921.32226443628,
+      "min_seed_median_ns": 1768848,
+      "max_seed_median_ns": 2236576
+    },
+    {
+      "algorithm": "tim_sort",
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 39185299
+        },
+        {
+          "seed": 42,
+          "median_ns": 40939090
+        },
+        {
+          "seed": 2718,
+          "median_ns": 42375244
+        }
+      ],
+      "median_of_seed_medians_ns": 40939090,
+      "mean_of_seed_medians_ns": 40833211,
+      "sample_stdev_of_seed_medians_ns": 1597606.036461117,
+      "min_seed_median_ns": 39185299,
+      "max_seed_median_ns": 42375244
+    },
+    {
+      "algorithm": "tim_sort",
+      "distribution": "nearly_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 7553570
+        },
+        {
+          "seed": 42,
+          "median_ns": 8072686
+        },
+        {
+          "seed": 2718,
+          "median_ns": 7693301
+        }
+      ],
+      "median_of_seed_medians_ns": 7693301,
+      "mean_of_seed_medians_ns": 7773185.666666667,
+      "sample_stdev_of_seed_medians_ns": 268619.66670430766,
+      "min_seed_median_ns": 7553570,
+      "max_seed_median_ns": 8072686
+    },
+    {
+      "algorithm": "merge_sort",
+      "distribution": "uniform",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 75129290
+        },
+        {
+          "seed": 42,
+          "median_ns": 83319411
+        },
+        {
+          "seed": 2718,
+          "median_ns": 74383552
+        }
+      ],
+      "median_of_seed_medians_ns": 75129290,
+      "mean_of_seed_medians_ns": 77610751,
+      "sample_stdev_of_seed_medians_ns": 4957885.69229475,
+      "min_seed_median_ns": 74383552,
+      "max_seed_median_ns": 83319411
+    },
+    {
+      "algorithm": "merge_sort",
+      "distribution": "sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 10408123
+        },
+        {
+          "seed": 42,
+          "median_ns": 10968926
+        },
+        {
+          "seed": 2718,
+          "median_ns": 10941720
+        }
+      ],
+      "median_of_seed_medians_ns": 10941720,
+      "mean_of_seed_medians_ns": 10772923,
+      "sample_stdev_of_seed_medians_ns": 316218.78756487573,
+      "min_seed_median_ns": 10408123,
+      "max_seed_median_ns": 10968926
+    },
+    {
+      "algorithm": "merge_sort",
+      "distribution": "reverse_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 10903340
+        },
+        {
+          "seed": 42,
+          "median_ns": 11223775
+        },
+        {
+          "seed": 2718,
+          "median_ns": 9198954
+        }
+      ],
+      "median_of_seed_medians_ns": 10903340,
+      "mean_of_seed_medians_ns": 10442023,
+      "sample_stdev_of_seed_medians_ns": 1088386.4439513201,
+      "min_seed_median_ns": 9198954,
+      "max_seed_median_ns": 11223775
+    },
+    {
+      "algorithm": "merge_sort",
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 33276031
+        },
+        {
+          "seed": 42,
+          "median_ns": 36602228
+        },
+        {
+          "seed": 2718,
+          "median_ns": 43234581
+        }
+      ],
+      "median_of_seed_medians_ns": 36602228,
+      "mean_of_seed_medians_ns": 37704280,
+      "sample_stdev_of_seed_medians_ns": 5069917.995752298,
+      "min_seed_median_ns": 33276031,
+      "max_seed_median_ns": 43234581
+    },
+    {
+      "algorithm": "merge_sort",
+      "distribution": "nearly_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 13568511
+        },
+        {
+          "seed": 42,
+          "median_ns": 16649387
+        },
+        {
+          "seed": 2718,
+          "median_ns": 15330034
+        }
+      ],
+      "median_of_seed_medians_ns": 15330034,
+      "mean_of_seed_medians_ns": 15182644,
+      "sample_stdev_of_seed_medians_ns": 1545717.338622751,
+      "min_seed_median_ns": 13568511,
+      "max_seed_median_ns": 16649387
+    },
+    {
+      "algorithm": "radix_sort",
+      "distribution": "uniform",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 7131846
+        },
+        {
+          "seed": 42,
+          "median_ns": 8025414
+        },
+        {
+          "seed": 2718,
+          "median_ns": 7268327
+        }
+      ],
+      "median_of_seed_medians_ns": 7268327,
+      "mean_of_seed_medians_ns": 7475195.666666667,
+      "sample_stdev_of_seed_medians_ns": 481364.65033520415,
+      "min_seed_median_ns": 7131846,
+      "max_seed_median_ns": 8025414
+    },
+    {
+      "algorithm": "radix_sort",
+      "distribution": "sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 7504683
+        },
+        {
+          "seed": 42,
+          "median_ns": 8310833
+        },
+        {
+          "seed": 2718,
+          "median_ns": 8558973
+        }
+      ],
+      "median_of_seed_medians_ns": 8310833,
+      "mean_of_seed_medians_ns": 8124829.666666667,
+      "sample_stdev_of_seed_medians_ns": 551207.5661974655,
+      "min_seed_median_ns": 7504683,
+      "max_seed_median_ns": 8558973
+    },
+    {
+      "algorithm": "radix_sort",
+      "distribution": "reverse_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 7721099
+        },
+        {
+          "seed": 42,
+          "median_ns": 9227893
+        },
+        {
+          "seed": 2718,
+          "median_ns": 7285719
+        }
+      ],
+      "median_of_seed_medians_ns": 7721099,
+      "mean_of_seed_medians_ns": 8078237,
+      "sample_stdev_of_seed_medians_ns": 1019151.9145112764,
+      "min_seed_median_ns": 7285719,
+      "max_seed_median_ns": 9227893
+    },
+    {
+      "algorithm": "radix_sort",
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 12710092
+        },
+        {
+          "seed": 42,
+          "median_ns": 13409832
+        },
+        {
+          "seed": 2718,
+          "median_ns": 13285573
+        }
+      ],
+      "median_of_seed_medians_ns": 13285573,
+      "mean_of_seed_medians_ns": 13135165.666666666,
+      "sample_stdev_of_seed_medians_ns": 373330.6729165625,
+      "min_seed_median_ns": 12710092,
+      "max_seed_median_ns": 13409832
+    },
+    {
+      "algorithm": "radix_sort",
+      "distribution": "nearly_sorted",
+      "size": 1000000,
+      "dataset_count": 3,
+      "successful_trials": 15,
+      "failed_trials": 0,
+      "seed_medians_ns": [
+        {
+          "seed": 1729,
+          "median_ns": 7423327
+        },
+        {
+          "seed": 42,
+          "median_ns": 8774693
+        },
+        {
+          "seed": 2718,
+          "median_ns": 8387864
+        }
+      ],
+      "median_of_seed_medians_ns": 8387864,
+      "mean_of_seed_medians_ns": 8195294.666666667,
+      "sample_stdev_of_seed_medians_ns": 695959.5732471343,
+      "min_seed_median_ns": 7423327,
+      "max_seed_median_ns": 8774693
+    }
+  ]
+}

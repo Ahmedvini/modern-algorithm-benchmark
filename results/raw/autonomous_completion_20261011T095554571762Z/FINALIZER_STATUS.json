@@ -1,0 +1,31 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "results/raw/autonomous_completion_20261011T095554571762Z/finalize.py"
+  ],
+  "note": "Exit0 is independently observable from the terminal result; no workload executed by this finalizer.",
+  "preservation": {
+    "build_metadata_sha256": {
+      "changed": [],
+      "files": 65,
+      "missing": []
+    },
+    "frozen_sha256": {
+      "changed": [],
+      "files": 4,
+      "missing": []
+    },
+    "protected_sha256": {
+      "changed": [],
+      "files": 80,
+      "missing": []
+    },
+    "results_sha256": {
+      "changed": [],
+      "files": 12575,
+      "missing": []
+    }
+  },
+  "validation_assertions_passed": true
+}
