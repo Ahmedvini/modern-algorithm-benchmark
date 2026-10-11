@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "discovery_complete": true,
+  "cuda_operational": false,
+  "files_sha256": {
+    "report.json": "d219ab9872b08e886057b2a3b2aa0851588aa7cc7848e2030e1edee03b69f0b8",
+    "SUMMARY.txt": "b5ec967523b7421a43fd8bf143a4fa63297bf9cc7e48b2eaddd8661fdf4e92c8"
+  }
+}

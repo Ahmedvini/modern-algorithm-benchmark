@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "180",
+    "colab",
+    "--config",
+    "build/cuda_timing_20261009T231303050084Z/private_cli/sessions.json",
+    "download",
+    "/content/cuda_timing_20261009T231303050084Z_evidence.tar.gz",
+    "results/raw/cuda_timing_20261009T231303050084Z/colab_gpu_timing_evidence.tar.gz",
+    "--session",
+    "mab-t4-20261009T231303050084Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:27:51.647932+00:00"
+}

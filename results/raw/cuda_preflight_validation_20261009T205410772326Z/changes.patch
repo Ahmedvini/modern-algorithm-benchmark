@@ -1,0 +1,1085 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,6 +2,7 @@
+ project(modern_algorithm_benchmark VERSION 0.1.0 LANGUAGES CXX)
+ 
+ option(MAB_ENABLE_SANITIZERS "Enable address and undefined-behavior sanitizers" OFF)
++option(MAB_ENABLE_CUDA "Build the optional CUDA readiness probe (no GPU algorithms)" OFF)
+ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+@@ -100,6 +101,8 @@
+     add_test(NAME baselines COMMAND test_baselines)
+     add_test(NAME environment_manifest
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_environment.py)
++    add_test(NAME cuda_preflight
++             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cuda_preflight.py)
+     add_executable(test_datasets tests/test_datasets.cpp)
+     target_link_libraries(test_datasets PRIVATE mab_core)
+     add_test(NAME datasets COMMAND test_datasets)
+@@ -144,6 +147,10 @@
+                      $<TARGET_FILE:sort_benchmark>)
+ endif()
+ 
++if(MAB_ENABLE_CUDA)
++    include(cmake/cuda.cmake)
++endif()
++
+ # Optional OpenMP family; original six-entry registry and timing CLIs are unchanged.
+ option(MAB_ENABLE_OPENMP "Build the separate OpenMP parallel sorting family" ON)
+ if(MAB_ENABLE_OPENMP)
+--- a/README.md
++++ b/README.md
+@@ -527,3 +527,43 @@
+ The shared-machine study does not establish significance or universal superiority.
+ Next roadmap milestone: Phase7 CUDA device/runtime preflight and reproducible
+ Colab/cloud guide, with GPU results explicitly not run until a device is verified.
++
++## CUDA readiness and cloud execution (Phase 7)
++
++CUDA support is **disabled by default** (`MAB_ENABLE_CUDA=OFF`). CPU algorithms,
++registries, defaults and timing schemas are unchanged. Preflight needs only Python
++standard-library modules and does not install software or change drivers/settings:
++
++```sh
++python3 scripts/cuda_preflight.py --output results/raw/NEW_CUDA_PREFLIGHT
++```
++
++The output directory must not exist. JSON diagnostics, a human summary and a
++hashed discovery-completion marker are saved. Exit0 requires an actually checked
++device0 kernel; exit2 with a report means CUDA unavailable/unverified, not a CPU
++project failure. Exit1 is a reporting error, exit130 interruption. Missing tools,
++failed commands and skipped build/runtime steps remain explicit. No environment
++or whole PATH dump; allowlisted CUDA paths/visibility and redacted diagnostics only.
++
++The [versioned readiness contract](docs/CUDA_PREFLIGHT_PROTOCOL_v1.md) and
++[Colab/cloud guide](docs/CUDA_EXECUTION_GUIDE_v1.md) document classifications,
++source verification, isolated builds, optional smoke commands, CPU fallback,
++troubleshooting and persistent evidence export. CUDA ON requires CMake>=3.18,
++NVIDIA toolkit>=11.0 with C++17 and a compatible host compiler. It currently builds
++only `cuda_runtime_probe`; no GPU sorter or benchmark exists. CPU sanitizer and
++CUDA builds must be separate. Existing CPU minimum CMake3.16 stays unchanged.
++
++Local discovery found NVIDIA GA107M / GeForce RTX3050Ti Mobile PCI evidence,
++but no discoverable nvcc, nvidia-smi, driver version file or CUDA libraries.
++Driver usability is unverified; CUDA configure/build/kernel execution and Colab
++execution are **not run**. Mocked readiness tests are not GPU execution evidence.
++See the latest [audit](docs/AUDIT.md) for fresh CPU validation and integrity results.
++
++The requested Phase7 readiness/guide milestone passed fresh **25/25 Release and
++ASan/UBSan groups** with leak detection enabled, including22 preflight/isolation
++methods. All8,447 earlier artifacts remain unchanged. [Local readiness evidence](results/raw/cuda_preflight_20261009T205410772326Z_reviewed/report.json)
++records unavailable CUDA (exit2); optional CUDA compilation/kernel execution and
++Colab steps remain unvalidated. [Audit evidence](results/raw/cuda_preflight_validation_20261009T205410772326Z/FINAL_AUDIT.md)
++and COMMANDS.md retain commands/statuses. The original GPU sorting/timing goals
++remain pending. Next GPU step: validate the guide on an allocated operational GPU
++before CUB sorting or transfer/kernel/end-to-end measurement work.
+--- a/docs/AUDIT.md
++++ b/docs/AUDIT.md
+@@ -1893,3 +1893,161 @@
+ Colab/cloud guide with separate transfer/kernel/end-to-end semantics; do not claim
+ GPU results until actual verified execution. Other deferred research remains listed
+ in ROADMAP.md.
++
++## Phase 7 — CUDA readiness and reproducible cloud guide
++
++This completes the **requested preflight/guide milestone**, not the original
++roadmap's CUDA sorting/timing experiment. No CUDA sorting/searching algorithm,
++acceleration result, GPU performance measurement or100M experiment was added/run.
++Workspace writable via anonymous temporary-file check; Git status128/no metadata,
++no Git initialization. Read AGENTS.md, current roadmap/audit/README/CMake/timing
++architecture, Phase6 protocol/report/final audit/integrity records before edits.
++Phase6 reviewed source120/120 hashes matched starting state. Initial source120
++files and8,447 raw/processed/figure artifacts were hashed/backed up before editing.
++`results/raw/cuda_preflight_validation_20261009T205410772326Z/source_before.json`, prior_artifacts_sha256.json, inspection.json
++and `build/cuda_review_20261009T205410772326Z` retain this baseline. Baseline Release configure/build/CTest
++exited0 with24/24 groups passed30.14s. No prior correctness defect was observed.
++
++Contract docs/CUDA_PREFLIGHT_PROTOCOL_v1.md was frozen before implementation,
++with copy PROTOCOL_v1.md/hash protocol.json retained. scripts/cuda_preflight.py
++uses standard-library discovery, Linux NVIDIA display/compute PCI and kernel-driver
++binding/module/device/version evidence, lspci and nvidia-smi management queries,
++resolved nvcc/toolkit/header/library paths, OS/kernel/architecture/CPU/Python,
++CMake version/CUDA_STANDARD availability, relevant allowlisted environment paths
++and source hashes. No full environment/PATH/cache dump. Secret-named environment
++values, URL credentials and sensitive query values are redacted from retained
++strings/path keys. Selected CMake cache fields only; scratch builds are deleted.
++Commands have timeout/default60s and explicit return code/stdout/stderr/status.
++Missing tools/files and skipped steps are explicit, not successful probes.
++
++Only when a candidate NVIDIA nvcc answers and CMake>=3.18 exists does preflight
++configure the actual project with CUDA ON, OpenMP/sanitizers/testing OFF, Release
++and explicit compiler, build cuda_runtime_probe, and attempt enumeration/device0
++kernel/copyback validation. Driver/toolkit/device capabilities are separate, not
++inferred from nvcc version. Seven states include the five required scenarios plus
++toolchain_unverified/detection_unavailable. Operational requires strict runtime
++JSON+successful configure/build/checked kernel. COMPLETE.json means discovery
++finished, not CUDA working. Exit0 operational, exit2 unavailable/unverified report,
++exit1 reporting/IO/internal error,130 interrupted (incomplete marker); argparse
++usage errors exit2 without discovery completion. Atomic directory ownership rejects
++existing output before any probe and preserves previous/concurrent-run evidence.
++
++CMake MAB_ENABLE_CUDA defaults OFF; no CUDA discovery/language/toolkit dependency
++in the CPU path. New cmake/cuda.cmake requires CMake>=3.18 and NVIDIA toolkit>=11.0
++with C++17/compatible host compiler on explicit opt-in. Existing CPU CMake3.16/
++C++17 minimum, algorithms/default/registries/timing and OpenMP policy unchanged.
++New src/cuda/runtime_probe.cu links only CUDA::cudart, independently of CPU
++sanitizer flags; combining CUDA and CPU sanitizers explicitly rejects. Enumerate
++visible device properties/API versions; test only device0 with one-int write1729,
++launch/synchronization/copy-back/reference/free checks. No timing or sorting.
++Probe exit77 on enumeration unavailable/no device maps to optional CTest skip;
++post-enumeration failure exits1/CTest fail. This source is **not compiled or run
++locally** because no toolkit is available; no CUDA test pass/skip is claimed for
++CPU-OFF builds, where that test is not registered.
++
++Files added: scripts/cuda_preflight.py, tests/test_cuda_preflight.py,
++cmake/cuda.cmake, src/cuda/runtime_probe.cu, docs/CUDA_PREFLIGHT_PROTOCOL_v1.md,
++docs/CUDA_EXECUTION_GUIDE_v1.md. Modified: CMakeLists.txt, README.md,
++docs/ROADMAP.md, docs/AUDIT.md. Existing algorithms, interfaces, dataset generation,
++benchmark/Python implementation/tests, third-party licenses/sources and historical
++protocols/results remain unchanged. Detailed inventory/review patch/source manifest
++are retained in file_changes.json/changes.patch/source_after.json.
++
++Final commands below all exited0, with exact argv/stdout/stderr/times/status
++retained in commands/reviewed_*.json and COMMANDS.md:
++```sh
++python3 tests/test_cuda_preflight.py
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_CUDA=OFF -DMAB_ENABLE_OPENMP=ON -DMAB_ENABLE_SANITIZERS=OFF
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DMAB_ENABLE_CUDA=OFF -DMAB_ENABLE_OPENMP=ON -DMAB_ENABLE_SANITIZERS=ON
++cmake --build build/sanitize --parallel 2
++env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V
++```
++Final reviewed Release25/25 passed27.09s, ASan/UBSan25/25 passed78.64s.
++All22 preflight/build-isolation methods passed standalone and in both final suites;
++13 OpenMP framework and23 existing orchestration Python methods still pass.
++Existing sorting/search/structure/OpenMP differential/invariant tests remain
++registered/passing. No fresh configure/build/test failures or compiler warnings.
++Leak detection enabled; ptrace limitation did not recur, no detect_leaks=0 retry.
++The first25/25 Release/sanitizer runs also passed before final privacy/path-driver
++review; they are intermediate evidence, not substituted for final reviewed suites.
++
++Tests cover five readiness scenarios, extra unknown/toolchain states, nvcc version
++not implying kernel readiness, failed kernels, management CSV escaping, malformed
++runtime JSON, missing commands/files, subprocess exit/timeout diagnostics, disabled
++compiler gating, mocked build pipeline failure boundaries, redaction/path-key
++redaction/numeric JSON preservation, consecutive-run isolation, output collision,
++interrupted/report-error markers and invalid CLI timeout. A real CMake option test
++configures both default/explicit CUDA OFF with deliberately unavailable CUDACXX/
++CUDAToolkit_ROOT, verifying no CUDA compiler cache/check. No mocked fixture is
++represented as actual GPU capability. Additional CPU fallback commands (all0):
++```sh
++cmake -S . -B build/cuda_cpu_fallback -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_CUDA=OFF -DMAB_ENABLE_OPENMP=OFF -DBUILD_TESTING=OFF
++cmake --build build/cuda_cpu_fallback --target sort_benchmark --parallel 2
++build/cuda_cpu_fallback/sort_benchmark --list-sorts
++```
++The original6 sorter names were returned. This fallback has testing OFF; no full
++fallback CTest pass is claimed. Full fresh suites above keep existing OpenMP ON.
++CPU environment capture exited0:
++```sh
++python3 scripts/capture_environment.py --build-dir build/release --output results/raw/cuda_preflight_validation_20261009T205410772326Z/cpu_environment.json
++```
++The unchanged older CPU tool says GPU not probed; GPU evidence is the new report.
++
++Actual local preflight (exit2, expected unavailable readiness):
++```sh
++python3 scripts/cuda_preflight.py --output results/raw/cuda_preflight_20261009T205410772326Z_reviewed
++```
++Earlier discovery at `results/raw/cuda_preflight_20261009T205410772326Z` also exited2, retained unchanged; final
++report includes additional human model/driver-path/redaction review. report.json,
++SUMMARY.txt, COMPLETE.json and source hashes are retained in each exclusive path.
++Observed Linux6.18.7-76061807-generic/x86_64, CMake3.28.3. PCI0000:01:00.0,
++NVIDIA10de:25a0/class030000; lspci exit0 identifies GA107M [GeForce RTX3050Ti Mobile].
++No bound kernel driver, visible nvidia module, /dev/nvidia0 or /dev/nvidiactl;
++/proc/driver/nvidia/version missing. nvidia-smi and nvcc missing (returncode=null,
++status unavailable), no discovered CUDA driver/runtime libraries or toolkit files.
++Driver/runtime/toolkit versions unknown, not invented. CMake version and
++CUDA_STANDARD-help commands exit0, documenting language feature availability,
++**not** an available CUDA compiler. Configure/build/runtime are explicitly skipped;
++CUDA ON configuration was never attempted. Classification gpu_driver_unavailable
++means CUDA driver unavailable/unverified from current evidence, not a diagnosis
++that hardware is broken. No software installation or system/permission change.
++
++The guide covers allocated GPU verification, source URL/revision supplied by user
++(no invented remote), alternatively audited source archive+hash verification,
++cloud-only dependency setup, CPU fallback, isolated CUDA smoke/CTest semantics,
++metadata/visibility, troubleshooting and persistent Drive/cloud export. It uses
++current project options. Colab/cloud execution, remote clone, dependency installs,
++Drive mounting/upload and CUDA-enabled commands have **not run locally or in Colab**.
++A source-only archive and126-file manifest are retained as phase7_source.tar.gz/
++source_after.json, archive hash in source_bundle.json and final audit appendix;
++local extraction/integrity/relocated CUDA-OFF configure are checked separately.
++No earlier experiment results are included in the source archive or overwritten.
++
++Primary documentation consulted for compatibility/guide facts: CMake3.28
++CheckLanguage, FindCUDAToolkit and CUDA_STANDARD; NVIDIA CUDA11 NVCC C++17,
++CUDA runtime device/version APIs and driver/toolkit compatibility; official Colab
++FAQ. Links are in the guide. These are documentation checks, not cloud experiments.
++
++Integrity: all8,447 starting result files remain unchanged, including Phase6 smoke,
++failed attempt/full retry, reports/figures/validation snapshots, earlier1M sorting
++and Phase5 studies. All original frozen protocols remain byte-identical. All116
++unmodified starting project files are protected; only the4 listed originals change.
++Final reviewed source126 files, new readiness protocol and retained initial local
++preflight are hash-verified. final_review.json and FINAL_AUDIT.md support completion,
++commands_index.json/COMMANDS.md retain exact command statuses, reviewed_source
++contains the saved source snapshot and changes.patch makes edits reviewable without
++Git. Archive relocation evidence is source_bundle_validation.json.
++
++Requested Phase7 preflight/guide milestone complete with **unavailable local CUDA**.
++Limitations: GPU CMake branch and .cu compilation/execution are unverified; no CUDA
++compiler/runtime version/device execution, sorting or performance evidence. GPU
++readiness mocks are not hardware tests. Linux discovery is primary; other platforms
++are best-effort/unvalidated. The tiny kernel checks device0 only, not all devices.
++No privileged install/driver change, inferred acceleration or100M attempt.
++Original Phase7 GPU sorter/timing objectives remain pending. Exact next GPU step:
++allocate a supported cloud GPU, verify the source archive, run this guide/preflight
++and isolated runtime smoke, then separately pin/license CUB and implement signed
++sorting/differential checks plus synchronized H2D/algorithm/D2H/end-to-end metrics
++under a new frozen protocol. Phase8/9/10 and deferred CPU research remain listed.
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -12,7 +12,7 @@
+ | 4 — search data structures | Complete: Skip List and B-tree orders 10/16/32/64, differential/invariant tests, separate build/lookup smoke and verified immutable evidence |
+ | 5 — orchestration and analysis | Complete for CPU timing: strict all-family orchestration, hierarchical statistics, SVG/PDF variability plots/report, validated smoke and full multi-size study |
+ | 6 — OpenMP | Complete: stable task Merge Sort, team metadata, fresh 24/24 Release/sanitizer groups and validated 1/2/4/8-thread scaling study; TSan startup limitation retained |
+-| 7 — CUDA | Pending; not run |
++| 7 — CUDA | Preflight/guide milestone complete: 25/25 CPU Release/sanitizer groups; local GPU detected but driver/toolkit unavailable; CUDA target/GPU sorting/timing and Colab execution not run |
+ | 8 — learned index and AlphaDev study | Pending |
+ | 9 — 100M scale | Pending; not run |
+ | 10 — report and presentation | Pending |
+@@ -180,3 +180,28 @@
+ 100M/resource scaling and final research report/presentation remain pending.
+ Independent-session CPU replication, direct per-query latency calibration and
+ separate comparison/memory experiment figures remain deferred research work.
++
++Phase7's **requested readiness/guide milestone is complete**, distinct from the
++original roadmap's GPU sorting and timing objectives. MAB_ENABLE_CUDA defaults OFF;
++CUDA discovery and the isolated tiny runtime target exist only on explicit opt-in.
++The versioned [readiness contract](CUDA_PREFLIGHT_PROTOCOL_v1.md) and
++[Colab/cloud guide](CUDA_EXECUTION_GUIDE_v1.md) cover verified source snapshots,
++readiness classification, optional builds/smoke, CPU fallback and persistent export.
++
++Fresh final CPU Release25/25 and ASan/UBSan25/25 groups passed (leaks enabled),
++including22 preflight/build-isolation methods. Default/explicit CUDA OFF ignore an
++unavailable CUDACXX; separate CPU fallback configure/build/registry passed. Local
++PCI shows NVIDIA GA107M/GeForce RTX3050Ti Mobile, but no bound kernel driver,
++NVIDIA module/device nodes, driver version file, discoverable CUDA libraries,
++nvidia-smi or nvcc. Preflight exited2 (unavailable/unverified), not a CPU failure.
++CUDA ON configure/build/kernel and Colab execution were **not run**; mocked
++operational fixtures are not hardware evidence. All8,447 earlier artifacts match.
++Evidence: [results/raw/cuda_preflight_20261009T205410772326Z_reviewed/report.json](../results/raw/cuda_preflight_20261009T205410772326Z_reviewed/report.json),
++[results/raw/cuda_preflight_validation_20261009T205410772326Z](../results/raw/cuda_preflight_validation_20261009T205410772326Z) and AUDIT.md.
++
++Next GPU milestone: run the source-verified guide/preflight and isolated target
++on an actually allocated GPU, then separately implement pinned/licensed CUB
++sorting, CPU differential validation and synchronized H2D/algorithm/D2H/end-to-end
++metrics under a new protocol. Original Phase7 GPU experiments remain pending;
++Phase8 learned-index/AlphaDev, Phase9 scaling and Phase10 research deliverables
++also remain pending. No CUDA performance or100M execution is claimed.
+--- /dev/null
++++ b/cmake/cuda.cmake
+@@ -0,0 +1,25 @@
++# This file is included only on explicit opt-in; no CUDA discovery for CPU users.
++if(CMAKE_VERSION VERSION_LESS 3.18)
++    message(FATAL_ERROR "MAB_ENABLE_CUDA requires CMake >= 3.18; CPU builds require only 3.16")
++endif()
++if(MAB_ENABLE_SANITIZERS)
++    message(FATAL_ERROR "Use separate CPU sanitizer and CUDA build directories")
++endif()
++include(CheckLanguage)
++check_language(CUDA)
++if(NOT CMAKE_CUDA_COMPILER)
++    message(FATAL_ERROR "CUDA compiler unavailable; use MAB_ENABLE_CUDA=OFF and scripts/cuda_preflight.py")
++endif()
++enable_language(CUDA)
++if(NOT CMAKE_CUDA_COMPILER_ID STREQUAL "NVIDIA")
++    message(FATAL_ERROR "This CUDA readiness target currently supports NVIDIA nvcc only")
++endif()
++find_package(CUDAToolkit 11.0 REQUIRED)
++add_executable(cuda_runtime_probe src/cuda/runtime_probe.cu)
++set_target_properties(cuda_runtime_probe PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON
++                      CUDA_EXTENSIONS OFF CUDA_RUNTIME_LIBRARY Shared)
++target_link_libraries(cuda_runtime_probe PRIVATE CUDA::cudart)
++if(BUILD_TESTING)
++    add_test(NAME cuda_runtime_smoke COMMAND cuda_runtime_probe)
++    set_tests_properties(cuda_runtime_smoke PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 60)
++endif()
+--- /dev/null
++++ b/docs/CUDA_EXECUTION_GUIDE_v1.md
+@@ -0,0 +1,226 @@
++# CUDA preflight and Colab/cloud guide v1
++
++This guide prepares future GPU work. **No CUDA sorter or GPU timing exists yet.**
++The local validation machine has an NVIDIA PCI device, but no discoverable nvcc,
++nvidia-smi or working CUDA driver evidence. CUDA target compilation, kernel
++execution and the Colab workflow have **not been validated on a GPU**. Mocked
++readiness results are tests, never hardware evidence. The existing CPU studies
++remain frozen. Follow [the readiness contract](CUDA_PREFLIGHT_PROTOCOL_v1.md).
++
++## 1. Allocate and verify an environment
++
++In Google Colab select Runtime → Change runtime type → an available GPU hardware
++accelerator, then connect. A selection is not evidence a GPU was allocated;
++[Colab does not guarantee particular resources](https://research.google.com/colaboratory/faq.html).
++Equivalent cloud environments need an NVIDIA GPU instance and provider-supported
++CUDA image. Do not upgrade or replace hosted drivers from this guide.
++
++Run discovery in a notebook `%%bash` cell (or ordinary cloud shell):
++
++```sh
++uname -a
++python3 --version
++cmake --version
++command -v nvidia-smi || true
++command -v nvcc || true
++nvidia-smi --query-gpu=index,name,driver_version --format=csv,noheader,nounits
++nvcc --version
++```
++
++Each command's status matters. Missing nvidia-smi/nvcc is expected on a CPU-only
++runtime. `nvcc --version` is not a kernel test. nvidia-smi's displayed CUDA version
++is the driver's supported CUDA level, not proof the toolkit is installed; see
++[NVIDIA's compatibility explanation](https://docs.nvidia.com/datacenter/tesla/drivers/cuda-toolkit-driver-and-architecture-matrix.html).
++Do not assume a GPU model, compute capability, toolkit version or free memory.
++
++## 2. Obtain an identified project snapshot
++
++Use one of these source paths. No canonical remote/revision can be inferred from
++the local directory: its Git metadata is absent. Supply a trusted URL and immutable
++commit yourself, or use the retained audited source archive.
++
++Git checkout (requires network and a real published revision; **not locally tested**):
++
++```sh
++export MAB_SOURCE_URL='REPLACE_WITH_VERIFIED_REPOSITORY_URL'
++export MAB_SOURCE_REV='REPLACE_WITH_FULL_IMMUTABLE_COMMIT'
++git clone "$MAB_SOURCE_URL" modern-algorithm-benchmark
++cd modern-algorithm-benchmark
++git checkout --detach "$MAB_SOURCE_REV"
++git rev-parse HEAD
++git status --short
++```
++
++Archive alternative: upload `phase7_source.tar.gz` and its independently retained
++SHA256 value to `/content` (or a cloud work directory). Do not use an unknown
++archive. The Phase7 final audit records its hash. Before extracting:
++
++```sh
++export MAB_ARCHIVE_SHA256='REPLACE_WITH_RETAINED_AUDIT_HASH'
++python3 - <<'PY'
++import hashlib, os
++from pathlib import Path
++assert hashlib.sha256(Path('phase7_source.tar.gz').read_bytes()).hexdigest() == os.environ['MAB_ARCHIVE_SHA256']
++PY
++test ! -e modern-algorithm-benchmark || exit 1
++tar -xzf phase7_source.tar.gz
++cd modern-algorithm-benchmark
++python3 - <<'PY'
++import hashlib, json
++from pathlib import Path
++manifest = json.loads(Path('SOURCE_SHA256.json').read_text())
++assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest() == h for p, h in manifest.items())
++print('Verified', len(manifest), 'source files')
++PY
++```
++
++The generated archive contains source/docs/tests/vendors and a manifest, not old
++experiment data. Its export/integrity commands are locally validated; uploading
++and executing it in Colab is untested. Retain the archive/hash with future results.
++
++## 3. Prepare CPU dependencies and fallback
++
++Create empty output parents in a source-only checkout/archive:
++
++```sh
++mkdir -p results/raw results/processed results/figures
++```
++
++Preflight itself uses Python's standard library. Full CPU tests also require CMake,
++a compatible C++17 host compiler, Python3 and Matplotlib/NumPy. The local validated
++stack is Python3.12.3, Matplotlib3.11.0, NumPy1.26.4, CMake3.28.3, GCC13.3.0.
++Cloud images vary; confirm compatibility before installing into a dedicated venv.
++These dependency-setup commands are for the cloud, **not executed locally here**:
++
++```sh
++python3 -m venv .venv
++. .venv/bin/activate
++python3 -m pip install 'matplotlib==3.11.0' 'numpy==1.26.4'
++```
++
++If a toolchain/venv package is missing, select a supported provider image or arrange
++user-approved environment setup; preflight never installs anything. Do not use
++privileged driver installation as a workaround. All following commands assume
++repository cwd and the same activated venv. In separate notebook `%%bash` cells,
++repeat `cd` and activation; shell variables/cwd do not persist between cells.
++
++CPU fallback (validated project options, no CUDA compiler discovery):
++
++```sh
++cmake -S . -B build/cloud_cpu -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_CUDA=OFF -DMAB_ENABLE_OPENMP=OFF
++cmake --build build/cloud_cpu --parallel 2
++ctest --test-dir build/cloud_cpu --output-on-failure -V
++```
++
++OpenMP is optional; enable it explicitly when the image has a supported runtime.
++CPU fallback never means GPU work succeeded. These commands/options were checked
++locally; the cloud environment and its test outcomes remain unverified.
++
++## 4. Save readiness evidence
++
++Choose a previously nonexistent run directory. In a Python notebook cell:
++
++```python
++import datetime, pathlib, subprocess
++stamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
++run = pathlib.Path('results/raw') / ('cloud_cuda_preflight_' + stamp)
++r = subprocess.run(['.venv/bin/python', 'scripts/cuda_preflight.py',
++                    '--output', str(run), '--timeout-seconds', '180'], text=True)
++print('preflight exit:', r.returncode, 'evidence:', run)
++assert r.returncode in (0, 2), 'reporting failed; inspect diagnostics'
++```
++
++Exit0 requires actual checked device0 execution; exit2 means unavailable/unverified
++CUDA and a valid completed discovery report. Read report.json and SUMMARY.txt before
++continuing. COMPLETE.json means **discovery complete**, not GPU operational.
++Exit1 is a reporting error; exit130 is interruption. Every attempted command has
++its argv/status/stdout/stderr; skipped configure/build/runtime has a reason.
++The script does not print the entire environment or PATH and redacts known secret
++values/URL credentials. Review diagnostics before sharing; local paths remain.
++No CUDA-enabled configuration is attempted without a working candidate nvcc and
++CMake>=3.18. It uses a temporary project build and deletes that scratch directory.
++
++## 5. Optional persistent CUDA build and smoke
++
++**GPU/toolkit-dependent commands below have not run locally.** Proceed only after
++an operational preflight. Use a separate build; MAB_ENABLE_CUDA is OFF by default.
++CUDA ON requires CMake>=3.18, NVIDIA toolkit>=11.0/C++17, and a compatible host
++compiler. [CMake CheckLanguage](https://cmake.org/cmake/help/v3.28/module/CheckLanguage.html)
++and [FindCUDAToolkit](https://cmake.org/cmake/help/v3.28/module/FindCUDAToolkit.html)
++validate compiler/toolkit independently from device execution.
++
++```sh
++cmake -S . -B build/cloud_cuda -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_CUDA=ON -DMAB_ENABLE_OPENMP=OFF -DMAB_ENABLE_SANITIZERS=OFF
++cmake --build build/cloud_cuda --target cuda_runtime_probe --parallel 2
++build/cloud_cuda/cuda_runtime_probe
++ctest --test-dir build/cloud_cuda --output-on-failure -V -R '^cuda_runtime_smoke$'
++```
++
++The probe enumerates devices, records runtime/driver API versions, and tests only
++device0 using a tiny kernel plus synchronized copy-back/reference check. Version
++integers follow the [CUDA runtime API](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART____VERSION.html).
++Probe exit77/CTest skip means unavailable enumeration or no devices; it is never a
++GPU pass. Post-enumeration allocation/launch/synchronization/copy/verification failure
++exits1 and fails CTest. Exit0 checks one kernel, not sorting or CUDA acceleration.
++If architecture selection is needed, set CMAKE_CUDA_ARCHITECTURES using the actual
++GPU compute capability and toolkit-supported targets; no architecture is guessed.
++Use separate CPU ASan/UBSan and CUDA builds; combining options is explicitly rejected.
++
++Capture CPU build metadata separately (validated existing CLI):
++
++```sh
++python3 scripts/capture_environment.py --build-dir build/cloud_cpu --output results/raw/NEW_CLOUD_CPU_ENVIRONMENT.json
++```
++
++This older CPU tool deliberately says GPU not probed; use cuda_preflight/report.json
++for GPU capabilities. Retain both records and identify which build produced each.
++Do not mix future GPU timing rows into the current CPU schemas/plots.
++
++## 6. Persist before runtime shutdown
++
++Colab/cloud workspace files are ephemeral. Save the source archive/hash, preflight
++report/summary/marker, exact build commands and stdout/stderr, CPU environment,
++compile_commands.json and relevant build logs outside the VM. No experiment is
++complete if its evidence is lost. Use fresh destinations; never overwrite studies.
++
++Colab example (**requires Colab authorization; not locally executed**):
++
++```python
++from google.colab import drive
++from pathlib import Path
++import shutil
++# Mount your own persistent storage; review the notebook before authorizing it.
++drive.mount('/content/drive')
++destination = Path('/content/drive/MyDrive/mab_evidence') / run.name
++assert not destination.exists()
++destination.parent.mkdir(parents=True, exist_ok=True)
++shutil.copytree(run, destination)
++assert (run / 'report.json').read_bytes() == (destination / 'report.json').read_bytes()
++```
++
++Also export build/environment/source evidence to exclusive sibling paths. An
++alternative is downloading an evidence archive or an authenticated cloud-storage
++upload configured by the user. Never embed credentials in commands/notebooks.
++
++## Troubleshooting and next GPU milestone
++
++- No device detected: confirm allocation/runtime type, account quota and provider
++  visibility. A CPU fallback remains valid; do not report GPU results.
++- GPU PCI evidence but driver unverified: missing tools/module/library is evidence
++  of unavailable readiness, not proof physical hardware is broken. Use a supported
++  provider GPU image or administrator-managed environment; no driver changes here.
++- Driver works, nvcc absent: runtime-only images can expose a GPU without a compiler.
++  Select a development image; do not infer toolkit from nvidia-smi's CUDA banner.
++- nvcc works, configure/build fails: inspect recorded host-compiler/toolkit/architecture
++  diagnostics; consult the installed toolkit's compatibility documentation. A compiler
++  version string is not a successful target build.
++- Build works, enumeration/kernel fails: preserve diagnostics and visibility variables;
++  driver/toolkit/device compatibility, allocation or image architecture can matter.
++  Never suppress a failed kernel as a successful smoke test.
++- Colab resource interruption: export partial evidence, use a new run identifier after
++  reconnecting, and never pool partial attempts into a completed study.
++
++Next GPU work: validate this guide/probe on an actually allocated device, then
++separately pin/license CUB/CCCL, implement signed-int32 sorting/full CPU differential
++checks, and freeze synchronized H2D/algorithm/D2H/end-to-end semantics with allocation
++scope before experiments. No100M, GPU sorting timing or performance claims here.
+--- /dev/null
++++ b/docs/CUDA_PREFLIGHT_PROTOCOL_v1.md
+@@ -0,0 +1,101 @@
++# Phase 7 CUDA readiness protocol v1
++
++Scope: non-destructive environment discovery and a reproducible future execution
++path. This extends the roadmap with a preflight/guide milestone; CUDA sorting,
++benchmark timing and acceleration results remain **not implemented/not run**.
++Existing CPU interfaces, defaults, protocols and experiment bytes are preserved.
++
++## Discovery and evidence
++
++`python3 scripts/cuda_preflight.py --output NEW_DIRECTORY` exclusively creates
++report.json, SUMMARY.txt and COMPLETE.json. No overwrite or resume. Record UTC,
++OS/kernel/architecture/CPU, Python, source hashes, executable discovery, bounded
++command diagnostics/return codes, NVIDIA display/compute PCI evidence (Linux),
++driver evidence, toolkit/header/library paths, CMake version and CUDA-language
++property availability. Missing commands/files are explicit. Discovery is scoped
++to this process/container; no claim about hidden host hardware. Never install
++packages, change permissions, drivers, environment variables or system settings.
++
++Use only an explicit allowlist of CUDA/path environment variables. Do not dump
++the environment, credentials or the entire PATH. Record resolved tools and CUDA
++path entries; redact credentials in URLs and values of secret-named environment
++variables from command diagnostics. Capture selected CMake cache fields, never
++publish the whole cache. Temporary configure/build files are deleted after use;
++retained reports include commands and diagnostics. Review reports before sharing.
++Each command has a configurable finite timeout (default60s, range1..300).
++
++When a discovered NVIDIA nvcc answers --version successfully and CMake>=3.18 is
++available, configure this project's optional target in a fresh temporary build:
++MAB_ENABLE_CUDA=ON, MAB_ENABLE_OPENMP=OFF, MAB_ENABLE_SANITIZERS=OFF,
++BUILD_TESTING=OFF, Release, explicit CMAKE_CUDA_COMPILER. Build only
++cuda_runtime_probe, then run it. Otherwise record each skipped step/reason; do
++not attempt CUDA-enabled configuration without a working candidate compiler.
++CMake property documentation is evidence of CMake's CUDA language feature, not
++of an installed working compiler or device. Failures never imply CPU failure.
++
++## Readiness classification
++
++Capability fields retain all overlapping evidence; classification precedence is:
++
++1. **operational**: project configure/build succeeds and the runtime probe's
++   strict JSON reports enumeration and the checked kernel success (exit0).
++2. **gpu_driver_unavailable**: NVIDIA GPU evidence exists, but neither successful
++   nvidia-smi enumeration nor runtime enumeration establishes a usable driver.
++   Missing driver evidence is unverified, not a diagnosis of a broken driver.
++3. **driver_toolkit_unavailable**: driver/device enumeration works but no working
++   NVIDIA nvcc is discoverable. Headers/libraries alone are not a full toolchain.
++4. **toolkit_no_usable_device**: project CUDA target builds, but enumeration or
++   the checked device0 runtime probe fails. Separate runtime stage/exit/diagnostic
++   distinguishes no device, unavailable driver and kernel/allocation failures.
++5. **toolchain_unverified**: nvcc answers, but CMake/build is missing, unsupported,
++   skipped or fails; device usability is not inferred from nvcc --version.
++6. **no_nvidia_gpu_detected**: no GPU evidence in available visibility probes and
++   no working nvcc. This is absence of detection, not proof about host hardware.
++7. **detection_unavailable**: visibility probes are unavailable/inconclusive and
++   no stronger evidence establishes a category.
++
++Runtime enumeration overrides absent management tooling. Contradictory evidence
++is retained. All5 required hardware/toolkit scenarios have independent mocked
++fixtures; extra unverified states avoid misleading readiness claims.
++
++Exit0 means verified operational CUDA. Exit2 with a completed report means CUDA
++unavailable/unverified, not CPU-project failure. Exit1 means a reporting/IO/internal
++error; argparse usage errors exit2 without a completed report. Interrupted runs
++exit130 and leave an explicit incomplete marker. COMPLETE means discovery finished,
++**not** that CUDA is operational. No benchmark measurements in this schema.
++
++## Build and runtime isolation
++
++MAB_ENABLE_CUDA defaults OFF. CPU minimum CMake3.16/C++17 is unchanged. CUDA ON
++requires CMake>=3.18, a NVIDIA CUDA toolkit>=11.0 with C++17 support and a compatible
++host compiler; actual version/architecture compatibility must be checked. CUDA
++language and FindCUDAToolkit run only inside the ON branch. The tiny target is
++independent of mab_core and CPU sanitizer flags; CUDA+MAB_ENABLE_SANITIZERS is
++explicitly rejected, use separate CPU sanitizer/CUDA build directories.
++No GPU algorithms or sorting-registry entries are added. Existing OpenMP option
++and default remain unchanged. CUDA_RUNTIME_LIBRARY is Shared (CUDA::cudart).
++
++Runtime probe enumerates visible devices and records name, compute capability and
++memory for each. It tests **device0 only**: allocate one int, launch a one-thread
++kernel writing1729, check launch/synchronize, copy back, compare and free. No timing
++or sorting is measured; CUDA context creation may itself use runtime memory.
++Probe exit77 means enumeration unavailable/no devices (CTest skip), exit1 means
++post-enumeration failure (CTest fail), exit0 means checked success. A failure
++cannot become a successful preflight. Other devices' execution is unverified.
++
++## Validation and completion
++
++Before marking this scoped milestone complete: mocked classification/diagnostic/
++timeout/output/privacy tests; actual CUDA-OFF default/explicit CMake option tests;
++fresh full CPU Release and ASan/UBSan CTest (leaks disabled only for documented
++ptrace recurrence); actual local preflight; hash verification of all previous
++raw/processed/figures and frozen protocols. Review commands/warnings and retain
++new unique evidence. GPU-target compilation/execution and Colab steps remain
++explicitly unverified if prerequisites are unavailable. No expensive experiment.
++
++The cloud guide must use an immutable source revision or verified archive,
++separate CPU/CUDA builds, preflight evidence, explicit GPU allocation checks and
++persistent output export. No unverified repository URL/revision is invented.
++Future GPU sorting requires a new implementation/protocol: pin CUB/CCCL/license,
++full CPU differential correctness, synchronized transfer/kernel/end-to-end metrics
++and resource gates before experiments. No100M or CUDA performance study here.
+--- /dev/null
++++ b/scripts/cuda_preflight.py
+@@ -0,0 +1,222 @@
++#!/usr/bin/env python3
++"""Non-destructive CUDA readiness. Exit 0 ready, 2 unavailable, 1 report error."""
++import argparse
++import csv
++import ctypes.util
++import datetime
++import hashlib
++import io
++import json
++import os
++from pathlib import Path
++import platform
++import re
++import shutil
++import subprocess
++import sys
++import tempfile
++
++ROOT=Path(__file__).resolve().parents[1]
++ENV_NAMES=('CUDA_VISIBLE_DEVICES','NVIDIA_VISIBLE_DEVICES','CUDACXX','CUDAHOSTCXX',
++           'CUDAToolkit_ROOT','CUDA_HOME','CUDA_PATH','LD_LIBRARY_PATH')
++
++
++def scrub(text,environ):
++    text=str(text)
++    for name,value in environ.items():
++        if re.search(r'TOKEN|PASSWORD|SECRET|CREDENTIAL|API_KEY|PRIVATE_KEY',name,re.I) and len(value)>=4:
++            text=text.replace(value,'<redacted>')
++    text=re.sub(r'([A-Za-z][A-Za-z0-9+.-]*://)[^/\s@]+@',r'\1<redacted>@',text)
++    return re.sub(r'(?i)([?&](?:token|password|secret|api_key)=)[^&\s]+',r'\1<redacted>',text)
++
++
++def command(argv,timeout=60):
++    result=dict(command=list(argv),returncode=None,stdout='',stderr='',status='unavailable')
++    try:
++        r=subprocess.run(argv,capture_output=True,text=True,errors='replace',timeout=timeout,check=False)
++        result.update(returncode=r.returncode,stdout=r.stdout,stderr=r.stderr,status='completed')
++    except subprocess.TimeoutExpired as error:
++        def decoded(value):return value.decode(errors='replace') if isinstance(value,bytes) else value or ''
++        result.update(status='timeout',stdout=decoded(error.stdout),stderr=decoded(error.stderr),error='command timeout')
++    except OSError as error:result['error']=str(error)
++    return result
++
++
++def read_optional(path):
++    try:return dict(path=str(path),available=True,text=Path(path).read_text(encoding='utf-8',errors='replace'))
++    except OSError as error:return dict(path=str(path),available=False,error=str(error))
++
++
++def discover(environ,which=shutil.which):
++    gpu=[];errors=[];pci=Path('/sys/bus/pci/devices');visible=False
++    if sys.platform.startswith('linux'):
++        try:
++            for device in pci.iterdir():
++                try:
++                    if (device/'vendor').read_text().strip()=='0x10de' and int((device/'class').read_text().strip(),16)>>16==3:
++                        gpu.append(dict(pci_address=device.name,vendor='0x10de',device=(device/'device').read_text().strip(),device_class=(device/'class').read_text().strip(),
++                                        kernel_driver=(device/'driver').resolve().name if (device/'driver').is_symlink() else None))
++                except (OSError,ValueError) as error:errors.append(str(error))
++            visible=not errors
++        except OSError as error:errors.append(str(error))
++    roots=[]
++    for key in ['CUDAToolkit_ROOT','CUDA_HOME','CUDA_PATH']:
++        if environ.get(key):roots.append(Path(environ[key]))
++    roots.extend([Path('/usr/local/cuda'),Path('/opt/cuda')])
++    roots.extend(sorted(Path('/usr/local').glob('cuda-*')))
++    path_nvcc=which('nvcc');candidates=[]
++    if environ.get('CUDACXX'):candidates.append(environ['CUDACXX'])
++    if path_nvcc:candidates.append(path_nvcc)
++    for directory in roots:candidates.extend([str(directory/'bin/nvcc'),str(directory/'bin/nvcc.exe')])
++    nvcc=next((which(s) or str(Path(s).resolve()) for s in candidates if which(s) or Path(s).is_file()),None)
++    if nvcc:roots.insert(0,Path(nvcc).resolve().parent.parent)
++    files={}
++    for directory in roots:
++        for pattern in ['version.json','version.txt','include/cuda_runtime.h','lib64/libcudart.so*','lib/x64/cudart.lib','targets/*/lib/libcudart.so*']:
++            for f in directory.glob(pattern):
++                if f.is_file():
++                    entry=dict(kind='version' if f.name.startswith('version.') else 'header' if f.suffix=='.h' else 'runtime_library',sha256=None)
++                    if entry['kind']=='version':
++                        try:entry['sha256']=hashlib.sha256(f.read_bytes()).hexdigest()
++                        except OSError as error:entry['error']=str(error)
++                    files[str(f.resolve())]=entry
++    return dict(pci_scan_available=visible,pci_gpus=gpu,pci_errors=errors,driver_file=read_optional('/proc/driver/nvidia/version'),
++                nvidia_module_visible=Path('/sys/module/nvidia').is_dir(),device_nodes={str(f):f.exists() for f in [Path('/dev/nvidiactl'),Path('/dev/nvidia0')]},
++                tools=dict(nvidia_smi=which('nvidia-smi'),nvcc=nvcc,cmake=which('cmake'),lspci=which('lspci')),
++                toolkit_files=files,driver_library=ctypes.util.find_library('cuda'),runtime_library=ctypes.util.find_library('cudart'))
++
++
++def gpu_rows(record):
++    if record.get('returncode')!=0:return []
++    rows=[]
++    for row in csv.reader(io.StringIO(record['stdout'])):
++        if len(row)==3 and all(s.strip() for s in row):rows.append(dict(index=row[0].strip(),model=row[1].strip(),driver_version=row[2].strip()))
++    return rows
++
++
++def runtime_json(record):
++    try:
++        value=json.loads(record.get('stdout',''))
++        if not isinstance(value,dict) or value.get('schema_version')!=1 or value.get('record_kind')!='cuda_runtime_probe':return None
++        if type(value.get('device_count')) is not int or value['device_count']<0:return None
++        if value.get('status') not in ['ok','error','unavailable']:return None
++        if value['status']=='ok' and (record.get('returncode')!=0 or value['device_count']<1 or value.get('stage')!='complete' or value.get('kernel_result')!=1729 or type(value.get('tested_device')) is not int or value['tested_device']!=0 or value.get('cuda_error_code')!=0 or not isinstance(value.get('devices'),list) or len(value['devices'])!=value['device_count']):return None
++        return value
++    except (ValueError,TypeError):return None
++
++
++def classify(discovery,probes):
++    smi=gpu_rows(probes.get('nvidia_smi',{}));runtime=runtime_json(probes.get('runtime',{}))
++    count=runtime['device_count'] if runtime else None
++    driver=bool(smi) or bool(count and runtime.get('stage')!='enumerate')
++    pci=bool(discovery['pci_gpus']);lspci=probes.get('lspci',{})
++    pci=pci or (lspci.get('returncode')==0 and bool(re.search(r'VGA|3D controller|Display controller',lspci.get('stdout',''),re.I)))
++    gpu=pci or bool(smi) or bool(count)
++    nvcc=probes.get('nvcc',{}).get('returncode')==0
++    built=probes.get('configure',{}).get('returncode')==0 and probes.get('build',{}).get('returncode')==0
++    usable=built and runtime is not None and runtime['status']=='ok' and probes['runtime']['returncode']==0
++    if usable:state='operational'
++    elif gpu and not driver:state='gpu_driver_unavailable'
++    elif driver and not nvcc:state='driver_toolkit_unavailable'
++    elif built:state='toolkit_no_usable_device'
++    elif nvcc:state='toolchain_unverified'
++    elif discovery['pci_scan_available'] or lspci.get('returncode')==0 or probes.get('nvidia_smi',{}).get('returncode')==0:state='no_nvidia_gpu_detected'
++    else:state='detection_unavailable'
++    return dict(state=state,gpu_detected=gpu,driver_operational_evidence=driver,nvcc_answers=nvcc,
++                project_cuda_target_built=built,device0_kernel_verified=usable,
++                runtime_device_count=count,management_devices=smi,
++                scope='Visible to this process/container; absence of detection does not prove host GPU absence.')
++
++
++def collect(timeout=60,runner=command,environ=None,discovery=None,which=shutil.which):
++    environ=dict(os.environ if environ is None else environ)
++    found=discover(environ,which) if discovery is None else discovery
++    probes={}
++    def run(name,argv):
++        probes[name]=runner(argv,timeout);return probes[name]
++    run('nvidia_smi',[found['tools']['nvidia_smi'] or 'nvidia-smi','--query-gpu=index,name,driver_version','--format=csv,noheader,nounits'])
++    run('lspci',[found['tools']['lspci'] or 'lspci','-nn','-d','10de:'])
++    run('nvcc',[found['tools']['nvcc'] or 'nvcc','--version'])
++    cmake=found['tools']['cmake'] or 'cmake';version=run('cmake',[cmake,'--version'])
++    run('cmake_cuda_property',[cmake,'--help-property','CUDA_STANDARD'])
++    match=re.search(r'cmake version (\d+)\.(\d+)',version['stdout'])
++    cmake_ok=version['returncode']==0 and match is not None and tuple(map(int,match.groups()))>=(3,18)
++    cache={};runtime=None
++    if probes['nvcc']['returncode']==0 and found['tools']['nvcc'] and cmake_ok:
++        with tempfile.TemporaryDirectory(prefix='mab_cuda_preflight_') as temporary:
++            build=Path(temporary)/'build'
++            cfg=run('configure',[cmake,'-S',str(ROOT),'-B',str(build),'-DCMAKE_BUILD_TYPE=Release','-DBUILD_TESTING=OFF',
++                '-DMAB_ENABLE_CUDA=ON','-DMAB_ENABLE_OPENMP=OFF','-DMAB_ENABLE_SANITIZERS=OFF','-DCMAKE_CUDA_COMPILER='+found['tools']['nvcc']])
++            if cfg['returncode']==0:
++                b=run('build',[cmake,'--build',str(build),'--target','cuda_runtime_probe','--config','Release','--parallel','2'])
++                if b['returncode']==0:
++                    binary=next((f for f in [build/'cuda_runtime_probe',build/'Release/cuda_runtime_probe',build/'Release/cuda_runtime_probe.exe',build/'cuda_runtime_probe.exe'] if f.is_file()),build/'cuda_runtime_probe')
++                    run('runtime',[str(binary)]);runtime=runtime_json(probes['runtime'])
++            allowed={'CMAKE_CUDA_COMPILER','CMAKE_CUDA_HOST_COMPILER','CMAKE_CUDA_ARCHITECTURES','CMAKE_CUDA_FLAGS','CMAKE_BUILD_TYPE','CUDAToolkit_NVCC_EXECUTABLE','CUDAToolkit_INCLUDE_DIR','CUDA_cudart_LIBRARY'}
++            text=read_optional(build/'CMakeCache.txt')
++            for line in text.get('text','').splitlines():
++                if ':' in line and '=' in line and line.split(':',1)[0] in allowed:
++                    key,value=line.split('=',1);cache[key.split(':',1)[0]]=value
++    for step in ['configure','build','runtime']:
++        if step not in probes:probes[step]=dict(status='skipped',returncode=None,stdout='',stderr='',reason='Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.')
++    report=dict(schema_version=1,protocol='cuda_preflight_v1',record_kind='cuda_readiness',captured_at_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++        platform=dict(os=platform.system(),release=platform.release(),kernel=platform.version(),architecture=platform.machine(),cpu=platform.processor() or None,logical_cpu_count=os.cpu_count(),python=sys.version),
++        environment={name:environ.get(name) for name in ENV_NAMES},
++        cuda_path_entries=[s for s in environ.get('PATH','').split(os.pathsep) if re.search(r'cuda|nvidia',s,re.I)],
++        discovery=found,probes=probes,cmake_selected_cache=cache,runtime_probe=runtime,
++        classification=classify(found,probes),timeout_seconds=timeout,
++        source_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['CMakeLists.txt','cmake/cuda.cmake','src/cuda/runtime_probe.cu','scripts/cuda_preflight.py']},
++        limitations=['No installation/system changes; no sorting/performance experiment.','Only device0 kernel execution is checked; other enumerated devices untested.','Toolkit/Colab GPU path unvalidated unless operational evidence is present.'])
++    # Scrub before any report/summary output, including diagnostics and allowlisted paths.
++    def sanitized(value):
++        if isinstance(value,str):return scrub(value,environ)
++        if isinstance(value,list):return [sanitized(v) for v in value]
++        if isinstance(value,dict):
++            return {(scrub(k,environ) if '/' in k or '\\' in k else k):sanitized(v) for k,v in value.items()}
++        return value
++    return sanitized(report)
++
++
++def summary(report):
++    c=report['classification'];lines=['CUDA readiness: '+c['state'],
++        'Device0 kernel verified: '+str(c['device0_kernel_verified']),
++        'NVIDIA nvcc answers: '+str(c['nvcc_answers']),
++        'Project CUDA target built: '+str(c['project_cuda_target_built']),
++        'CPU project: unaffected by unavailable CUDA; use MAB_ENABLE_CUDA=OFF.',c['scope']]
++    for name,r in report['probes'].items():lines.append(f"{name}: {r['status']}; exit={r['returncode']}"+(('; '+r['reason']) if 'reason' in r else ''))
++    for gpu in c['management_devices']:lines.append('NVIDIA GPU: '+gpu['model']+'; driver='+gpu['driver_version'])
++    if not c['management_devices']:
++        for line in report['probes']['lspci']['stdout'].splitlines():
++            if re.search(r'VGA|3D controller|Display controller',line,re.I):lines.append('PCI GPU evidence: '+line)
++    lines.extend(report['limitations']);return '\n'.join(lines)+'\n'
++
++
++def execute(output,timeout=60,collector=collect):
++    output=Path(output)
++    # Atomic ownership protects earlier evidence and concurrent invocations.
++    output.mkdir(exist_ok=False)
++    try:
++        report=collector(timeout=timeout)
++        text=json.dumps(report,indent=2,sort_keys=True,allow_nan=False)+'\n'
++        with (output/'report.json').open('x',encoding='utf-8') as f:f.write(text)
++        human=summary(report)
++        with (output/'SUMMARY.txt').open('x',encoding='utf-8') as f:f.write(human)
++        marker=dict(schema_version=1,discovery_complete=True,cuda_operational=report['classification']['device0_kernel_verified'],
++                    files_sha256={name:hashlib.sha256((output/name).read_bytes()).hexdigest() for name in ['report.json','SUMMARY.txt']})
++        with (output/'COMPLETE.json').open('x') as f:json.dump(marker,f,indent=2);f.write('\n')
++        print(human,end='');return 0 if marker['cuda_operational'] else 2
++    except (Exception,KeyboardInterrupt) as error:
++        with (output/'INCOMPLETE.json').open('x') as f:json.dump(dict(complete=False,error='interrupted' if isinstance(error,KeyboardInterrupt) else type(error).__name__),f)
++        raise
++
++
++def main():
++    parser=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
++    parser.add_argument('--output',required=True,type=Path);parser.add_argument('--timeout-seconds',default=60,type=int)
++    args=parser.parse_args()
++    if not 1<=args.timeout_seconds<=300:parser.error('timeout must be in [1,300] seconds')
++    try:return execute(args.output,args.timeout_seconds)
++    except KeyboardInterrupt:print('CUDA preflight interrupted; incomplete evidence retained.',file=sys.stderr);return 130
++    except Exception as error:
++        print('CUDA preflight reporting error: '+scrub(str(error),dict(os.environ)),file=sys.stderr);return 1
++if __name__=='__main__':sys.exit(main())
+--- /dev/null
++++ b/src/cuda/runtime_probe.cu
+@@ -0,0 +1,67 @@
++#include <cuda_runtime.h>
++#include <iostream>
++#include <string>
++#include <vector>
++
++namespace {
++std::string quote(const char* text) {
++    std::string result="\"";
++    const char* digits="0123456789abcdef";
++    for (const unsigned char c:std::string(text)) {
++        if (c=='"' || c=='\\') { result+='\\'; result+=static_cast<char>(c); }
++        else if (c<32) { result+="\\u00"; result+=digits[c>>4]; result+=digits[c&15]; }
++        else result+=static_cast<char>(c);
++    }
++    return result+'"';
++}
++__global__ void write_value(int* value) { *value=1729; }
++}
++int main() {
++    int driver=0,runtime=0,count=0;
++    const auto driver_status=cudaDriverGetVersion(&driver);
++    const auto runtime_status=cudaRuntimeGetVersion(&runtime);
++    auto status=cudaGetDeviceCount(&count);
++    std::string stage="enumerate";
++    int exit_code=(status!=cudaSuccess || count==0)?77:0;
++    std::vector<cudaDeviceProp> devices;
++    if (!exit_code) {
++        for(int i=0;i<count;++i) {
++            cudaDeviceProp prop{};status=cudaGetDeviceProperties(&prop,i);
++            if(status!=cudaSuccess) { stage="properties";exit_code=1;break; }
++            devices.push_back(prop);
++        }
++    }
++    int* device=nullptr;int result=0;
++    if(!exit_code) { stage="select";status=cudaSetDevice(0);if(status!=cudaSuccess)exit_code=1; }
++    if(!exit_code) { stage="allocate";status=cudaMalloc(reinterpret_cast<void**>(&device),sizeof(int));if(status!=cudaSuccess)exit_code=1; }
++    if(!exit_code) {
++        stage="launch";write_value<<<1,1>>>(device);status=cudaGetLastError();if(status!=cudaSuccess)exit_code=1;
++    }
++    if(!exit_code) { stage="synchronize";status=cudaDeviceSynchronize();if(status!=cudaSuccess)exit_code=1; }
++    if(!exit_code) { stage="copy_back";status=cudaMemcpy(&result,device,sizeof(int),cudaMemcpyDeviceToHost);if(status!=cudaSuccess)exit_code=1; }
++    if(!exit_code && result!=1729) { stage="verify";exit_code=1; }
++    if(device) {
++        const auto freed=cudaFree(device);
++        if(!exit_code && freed!=cudaSuccess) { stage="free";status=freed;exit_code=1; }
++    }
++    if(!exit_code)stage="complete";
++    std::cout<<"{\"schema_version\":1,\"record_kind\":\"cuda_runtime_probe\",\"status\":"
++             <<quote(exit_code==0?"ok":exit_code==77?"unavailable":"error")
++             <<",\"stage\":"<<quote(stage.c_str())<<",\"cuda_error_code\":"<<static_cast<int>(status)
++             <<",\"cuda_error\":"<<quote(cudaGetErrorString(status))
++             <<",\"driver_api_version\":"<<(driver_status==cudaSuccess?std::to_string(driver):"null")
++             <<",\"driver_version_status\":"<<static_cast<int>(driver_status)
++             <<",\"runtime_api_version\":"<<(runtime_status==cudaSuccess?std::to_string(runtime):"null")
++             <<",\"runtime_version_status\":"<<static_cast<int>(runtime_status)
++             <<",\"device_count\":"<<count<<",\"tested_device\":"<<(exit_code==77?"null":"0")
++             <<",\"kernel_result\":"<<result<<",\"devices\":[";
++    for(std::size_t i=0;i<devices.size();++i) {
++        if(i)std::cout<<',';
++        const auto& prop=devices[i];
++        std::cout<<"{\"ordinal\":"<<i<<",\"name\":"<<quote(prop.name)
++                 <<",\"compute_major\":"<<prop.major<<",\"compute_minor\":"<<prop.minor
++                 <<",\"total_global_memory_bytes\":"<<prop.totalGlobalMem<<'}';
++    }
++    std::cout<<"]}\n";
++    return exit_code;
++}
+--- /dev/null
++++ b/tests/test_cuda_preflight.py
+@@ -0,0 +1,146 @@
++#!/usr/bin/env python3
++"""Readiness tests use fake command results; only CUDA-OFF CMake checks are real."""
++import contextlib
++import copy
++import io
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++
++ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'))
++import cuda_preflight as cuda
++
++
++def result(stdout='',code=0):return dict(command=[],returncode=code,stdout=stdout,stderr='',status='completed')
++
++def discovery(gpu=False):
++    return dict(pci_scan_available=True,pci_gpus=[dict(pci_address='synthetic')] if gpu else [],pci_errors=[],
++                driver_file=dict(available=False),tools=dict(nvcc=None,cmake='cmake',nvidia_smi=None,lspci=None),toolkit_files={},driver_library=None,runtime_library=None)
++
++def runtime(status='ok',code=0,count=1,stage='complete'):
++    return result(json.dumps(dict(schema_version=1,record_kind='cuda_runtime_probe',status=status,stage=stage,device_count=count,
++                   kernel_result=1729,tested_device=0,cuda_error_code=0,devices=[dict(ordinal=i,name='synthetic') for i in range(count)])),code)
++
++
++class ReadinessTests(unittest.TestCase):
++    def setUp(self):self.found=discovery();self.probes=dict(nvidia_smi=result('',127),nvcc=result('',127),lspci=result('',127))
++    def state(self):return cuda.classify(self.found,self.probes)['state']
++    def test_no_gpu_detected(self):self.assertEqual(self.state(),'no_nvidia_gpu_detected')
++    def test_gpu_driver_unavailable(self):
++        self.found['pci_gpus']=[{'synthetic':True}];self.assertEqual(self.state(),'gpu_driver_unavailable')
++    def test_driver_without_toolkit(self):
++        self.probes['nvidia_smi']=result('0, Synthetic GPU, 999.00\n');self.assertEqual(self.state(),'driver_toolkit_unavailable')
++    def test_toolkit_without_usable_device(self):
++        self.probes.update(nvcc=result('NVIDIA nvcc'),configure=result(),build=result(),runtime=runtime('unavailable',77,0,'enumerate'))
++        self.assertEqual(self.state(),'toolkit_no_usable_device')
++    def test_operational_requires_kernel_not_version(self):
++        self.probes['nvcc']=result('NVIDIA nvcc');self.assertEqual(self.state(),'toolchain_unverified')
++        self.probes.update(configure=result(),build=result(),runtime=runtime());self.assertEqual(self.state(),'operational')
++        self.assertTrue(cuda.classify(self.found,self.probes)['driver_operational_evidence'])
++    def test_inconclusive_visibility(self):
++        self.found['pci_scan_available']=False;self.assertEqual(self.state(),'detection_unavailable')
++    def test_failed_kernel_is_not_ready(self):
++        self.probes.update(nvcc=result(),configure=result(),build=result(),runtime=runtime('error',1,1,'synchronize'))
++        self.assertEqual(self.state(),'toolkit_no_usable_device')
++    def test_broken_driver_with_toolkit_evidence_retained(self):
++        self.found['pci_gpus']=[{}];self.probes.update(nvcc=result(),configure=result(),build=result(),runtime=runtime('unavailable',77,0,'enumerate'))
++        c=cuda.classify(self.found,self.probes);self.assertEqual(c['state'],'gpu_driver_unavailable');self.assertTrue(c['project_cuda_target_built'])
++    def test_driver_file_alone_does_not_prove_operational(self):
++        self.found['driver_file']=dict(available=True,text='kernel module version');self.assertEqual(self.state(),'no_nvidia_gpu_detected')
++    def test_lspci_gpu_evidence_excludes_audio(self):
++        self.probes['lspci']=result('Audio device: NVIDIA');self.assertEqual(self.state(),'no_nvidia_gpu_detected')
++        self.probes['lspci']=result('3D controller: NVIDIA Synthetic');self.assertEqual(self.state(),'gpu_driver_unavailable')
++    def test_csv_gpu_name_escaping(self):
++        self.assertEqual(cuda.gpu_rows(result('0,"Synthetic, GPU",999\n'))[0]['model'],'Synthetic, GPU')
++        self.assertEqual(cuda.gpu_rows(result('NVIDIA-SMI failed',1)),[])
++    def test_runtime_malformed_or_contradictory(self):
++        for r in [result('not JSON'),result('[]'),runtime(code=1),runtime(count=0),runtime(stage='launch'),result('{"device_count":true}')]:
++            with self.subTest(record=r):self.assertIsNone(cuda.runtime_json(r))
++    def test_missing_command_and_timeout_diagnostics(self):
++        with patch.object(cuda.subprocess,'run',side_effect=FileNotFoundError('missing')):
++            r=cuda.command(['unavailable']);self.assertIsNone(r['returncode']);self.assertEqual(r['status'],'unavailable')
++        with patch.object(cuda.subprocess,'run',side_effect=subprocess.TimeoutExpired(['fake'],1,output=b'partial',stderr=b'diagnostic')):
++            r=cuda.command(['fake'],1);self.assertEqual(r['status'],'timeout');self.assertEqual(r['stdout'],'partial');self.assertEqual(r['stderr'],'diagnostic')
++        with patch.object(cuda.subprocess,'run',return_value=subprocess.CompletedProcess(['fake'],9,'out','err')):
++            r=cuda.command(['fake']);self.assertEqual((r['returncode'],r['stdout'],r['stderr']),(9,'out','err'))
++    def test_collection_gates_no_enabled_config_without_nvcc(self):
++        calls=[]
++        def runner(argv,timeout):
++            calls.append(argv);return result('cmake version 3.28.3' if argv[-1]=='--version' and argv[0]=='cmake' else '',0 if argv[0]=='cmake' else 127)
++        r=cuda.collect(runner=runner,environ={},discovery=discovery())
++        self.assertFalse(any('-DMAB_ENABLE_CUDA=ON' in c for c in calls));self.assertEqual(r['probes']['configure']['status'],'skipped')
++        self.assertEqual(r['classification']['state'],'no_nvidia_gpu_detected')
++    def test_full_mocked_collection_and_failure_boundaries(self):
++        found=discovery();found['tools']['nvcc']='/synthetic/nvcc'
++        for failure in [None,'configure','build','runtime']:
++            calls=[]
++            def runner(argv,timeout):
++                calls.append(argv)
++                if '--version' in argv:return result('cmake version 3.28.3' if argv[0]=='cmake' else 'NVIDIA nvcc release 12.0')
++                if '-S' in argv:return result('',1 if failure=='configure' else 0)
++                if '--build' in argv:return result('',1 if failure=='build' else 0)
++                if 'cuda_runtime_probe' in argv[0]:return runtime('error',1,1,'launch') if failure=='runtime' else runtime()
++                return result('',127)
++            r=cuda.collect(runner=runner,environ={},discovery=found)
++            with self.subTest(failure=failure):
++                self.assertEqual(r['classification']['device0_kernel_verified'],failure is None)
++                if failure=='configure':self.assertEqual(r['probes']['build']['status'],'skipped')
++                if failure=='build':self.assertEqual(r['probes']['runtime']['status'],'skipped')
++    def test_redaction_allowlist_and_counter_isolation(self):
++        env={'SERVICE_TOKEN':'secret-value','PATH':'/ordinary/private/path:/cuda/bin','CUDA_HOME':'https://user:password@example.test/?token=hidden','CUDA_VISIBLE_DEVICES':'0','NOT_RELEVANT':'do-not-print'}
++        def runner(argv,timeout):return result('secret-value',127)
++        a=cuda.collect(runner=runner,environ=env,discovery=discovery());b=cuda.collect(runner=runner,environ={},discovery=discovery())
++        text=json.dumps(a);self.assertNotIn('secret-value',text);self.assertNotIn('do-not-print',text);self.assertNotIn('/ordinary/private/path',text);self.assertNotIn('user:password',text);self.assertNotIn('hidden',text)
++        self.assertEqual(a['cuda_path_entries'],['/cuda/bin']);self.assertIsNone(b['environment']['CUDA_HOME'])
++        self.assertEqual(cuda.scrub('value=1234',{'API_KEY':'1234'}),'value=<redacted>')
++    def test_output_exclusivity_summary_and_status(self):
++        r=cuda.collect(runner=lambda a,t:result('',127),environ={},discovery=discovery())
++        with tempfile.TemporaryDirectory() as temporary:
++            directory=Path(temporary)/'output'
++            with contextlib.redirect_stdout(io.StringIO()):code=cuda.execute(directory,collector=lambda **kwargs:r)
++            self.assertEqual(code,2);before={f.name:f.read_bytes() for f in directory.iterdir()}
++            self.assertFalse(json.loads(before['COMPLETE.json'])['cuda_operational']);self.assertIn('CPU project: unaffected',before['SUMMARY.txt'].decode())
++            with self.assertRaises(FileExistsError):cuda.execute(directory,collector=lambda **kwargs:self.fail('must not probe existing output'))
++            self.assertEqual(before,{f.name:f.read_bytes() for f in directory.iterdir()})
++            r['classification']['device0_kernel_verified']=True
++            with contextlib.redirect_stdout(io.StringIO()):self.assertEqual(cuda.execute(Path(temporary)/'ready',collector=lambda **kwargs:r),0)
++    def test_interrupt_and_report_errors_are_incomplete(self):
++        for error in [KeyboardInterrupt(),ValueError('synthetic')]:
++            with tempfile.TemporaryDirectory() as temporary:
++                directory=Path(temporary)/'output'
++                def collect(**kwargs):raise error
++                with self.assertRaises(type(error)):cuda.execute(directory,collector=collect)
++                self.assertTrue((directory/'INCOMPLETE.json').exists());self.assertFalse((directory/'COMPLETE.json').exists())
++    def test_missing_file_is_explicit(self):
++        with tempfile.TemporaryDirectory() as temporary:self.assertFalse(cuda.read_optional(Path(temporary)/'missing')['available'])
++    def test_redaction_in_discovered_path_keys_preserves_numeric_json(self):
++        found=discovery();found['toolkit_files']={'/cuda/secret-value/version.json':{'sha256':'1234'}}
++        r=cuda.collect(runner=lambda a,t:result('',127),environ={'SERVICE_TOKEN':'secret-value','API_KEY':'1234'},discovery=found)
++        self.assertNotIn('secret-value',json.dumps(r));self.assertIn('/cuda/<redacted>/version.json',r['discovery']['toolkit_files'])
++        self.assertEqual(r['schema_version'],1)
++    def test_cli_invalid_timeout(self):
++        r=subprocess.run([sys.executable,str(ROOT/'scripts/cuda_preflight.py'),'--output','unused','--timeout-seconds','0'],capture_output=True,text=True)
++        self.assertEqual(r.returncode,2);self.assertIn('timeout',r.stderr)
++
++
++class CudaOffBuildIsolation(unittest.TestCase):
++    def test_default_and_explicit_off_ignore_cuda_environment(self):
++        env=dict(os.environ,CUDACXX='/nonexistent/mab_nvcc',CUDAToolkit_ROOT='/nonexistent/mab_toolkit')
++        with tempfile.TemporaryDirectory() as temporary:
++            for mode in ['default','explicit']:
++                build=Path(temporary)/mode
++                cmd=['cmake','-S',str(ROOT),'-B',str(build),'-DBUILD_TESTING=OFF','-DMAB_ENABLE_OPENMP=OFF']
++                if mode=='explicit':cmd.append('-DMAB_ENABLE_CUDA=OFF')
++                r=subprocess.run(cmd,capture_output=True,text=True,env=env)
++                with self.subTest(mode=mode):
++                    self.assertEqual(r.returncode,0,r.stdout+r.stderr)
++                    cache=(build/'CMakeCache.txt').read_text();self.assertIn('MAB_ENABLE_CUDA:BOOL=OFF',cache)
++                    self.assertNotIn('CMAKE_CUDA_COMPILER:',cache);self.assertNotIn('CUDA compiler',r.stdout)
++                    self.assertFalse((build/'CMakeFiles/CheckCUDA').exists())
++
++if __name__=='__main__':unittest.main()

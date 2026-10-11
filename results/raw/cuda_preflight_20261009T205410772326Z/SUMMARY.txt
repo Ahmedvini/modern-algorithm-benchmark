@@ -1,0 +1,17 @@
+CUDA readiness: gpu_driver_unavailable
+Device0 kernel verified: False
+NVIDIA nvcc answers: False
+Project CUDA target built: False
+CPU project: unaffected by unavailable CUDA; use MAB_ENABLE_CUDA=OFF.
+Visible to this process/container; absence of detection does not prove host GPU absence.
+nvidia_smi: unavailable; exit=None
+lspci: completed; exit=0
+nvcc: unavailable; exit=None
+cmake: completed; exit=0
+cmake_cuda_property: completed; exit=0
+configure: skipped; exit=None; Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.
+build: skipped; exit=None; Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.
+runtime: skipped; exit=None; Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.
+No installation/system changes; no sorting/performance experiment.
+Only device0 kernel execution is checked; other enumerated devices untested.
+Toolkit/Colab GPU path unvalidated unless operational evidence is present.

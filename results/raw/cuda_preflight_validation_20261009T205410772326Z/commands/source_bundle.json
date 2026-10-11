@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cuda_preflight_validation_20261009T205410772326Z/prepare_source_bundle.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:12:02.466162+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive\": \"results/raw/cuda_preflight_validation_20261009T205410772326Z/phase7_source.tar.gz\",\n  \"sha256\": \"f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5\",\n  \"bytes\": 253980,\n  \"source_files\": 126,\n  \"archive_members\": 127,\n  \"byte_identical_repack\": true,\n  \"extracted_source_hashes_match\": true,\n  \"relocated_cuda_off_configure_exit\": 0\n}\n{\n  \"modified\": [\n    \"CMakeLists.txt\",\n    \"README.md\",\n    \"docs/AUDIT.md\",\n    \"docs/ROADMAP.md\"\n  ],\n  \"added\": [\n    \"cmake/cuda.cmake\",\n    \"docs/CUDA_EXECUTION_GUIDE_v1.md\",\n    \"docs/CUDA_PREFLIGHT_PROTOCOL_v1.md\",\n    \"scripts/cuda_preflight.py\",\n    \"src/cuda/runtime_probe.cu\",\n    \"tests/test_cuda_preflight.py\"\n  ]\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.30790624499786645,
+  "ended_utc": "2026-10-09T21:12:02.774193+00:00"
+}

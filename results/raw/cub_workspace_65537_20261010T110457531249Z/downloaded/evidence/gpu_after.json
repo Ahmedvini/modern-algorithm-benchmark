@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "nvidia-smi",
+    "--query-gpu=name,uuid,driver_version,memory.total,memory.free,temperature.gpu,clocks.sm,clocks.mem,power.limit",
+    "--format=csv,noheader,nounits"
+  ],
+  "cwd": null,
+  "exit_code": 0,
+  "started_utc": "2026-10-10T11:07:41.919522+00:00",
+  "stderr": "",
+  "stdout": "Tesla T4, GPU-254f8621-6cbe-18b0-bf2d-444f22727deb, 580.82.07, 15360, 14913, 43, 945, 5000, 70.00\n"
+}

@@ -1,0 +1,17 @@
+{
+  "modified": [
+    "CMakeLists.txt",
+    "README.md",
+    "docs/AUDIT.md",
+    "docs/ROADMAP.md"
+  ],
+  "added": [
+    "cmake/cuda.cmake",
+    "docs/CUDA_EXECUTION_GUIDE_v1.md",
+    "docs/CUDA_PREFLIGHT_PROTOCOL_v1.md",
+    "scripts/cuda_preflight.py",
+    "src/cuda/runtime_probe.cu",
+    "tests/test_cuda_preflight.py"
+  ],
+  "protected_original_files": 116
+}

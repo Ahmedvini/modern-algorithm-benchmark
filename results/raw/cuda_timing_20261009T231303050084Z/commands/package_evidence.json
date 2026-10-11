@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "180",
+    "colab",
+    "--config",
+    "build/cuda_timing_20261009T231303050084Z/private_cli/sessions.json",
+    "exec",
+    "--session",
+    "mab-t4-20261009T231303050084Z",
+    "--file",
+    "results/raw/cuda_timing_20261009T231303050084Z/package_remote.py",
+    "--timeout",
+    "150"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:27:29.652442+00:00",
+  "exit_code": 0,
+  "stdout": "MAB_EVIDENCE={\"archive\": \"/content/cuda_timing_20261009T231303050084Z_evidence.tar.gz\", \"sha256\": \"236b32018d74ac5be6252df130038eadcbc95169509107bd6d3e7ea323290c41\", \"files\": 1115, \"bytes\": 3187559}\n",
+  "stderr": "",
+  "wall_seconds": 6.153953599000033,
+  "ended_utc": "2026-10-09T23:27:35.806545+00:00"
+}

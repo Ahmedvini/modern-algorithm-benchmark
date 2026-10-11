@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cuda_preflight_validation_20261009T205410772326Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:13:41.776359+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"scope\": \"Phase7 CUDA preflight and cloud guide; original GPU sorting/timing remain pending\",\n  \"release_groups\": 25,\n  \"sanitizer_groups\": 25,\n  \"preflight_build_isolation_methods\": 22,\n  \"leak_detection_enabled\": true,\n  \"local_preflight_exit\": 2,\n  \"local_readiness\": \"gpu_driver_unavailable\",\n  \"gpu_pci_detected\": true,\n  \"gpu_model_evidence\": \"lspci: GA107M GeForce RTX 3050 Ti Mobile\",\n  \"cuda_configure\": \"not attempted: nvcc unavailable\",\n  \"cuda_probe_compile\": \"not run\",\n  \"cuda_kernel_execution\": \"not run\",\n  \"colab_execution\": \"not run\",\n  \"prior_artifacts_unchanged\": 8447,\n  \"original_project_files_unchanged\": 116,\n  \"source_files\": 126,\n  \"modified_files\": 4,\n  \"added_files\": 6,\n  \"source_archive_sha256\": \"f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5\",\n  \"archive_repack_byte_identical\": true,\n  \"archive_manifest_and_relocated_off_configure_verified\": true,\n  \"protocol_sha256\": \"65508d02c66cdcc9092aa3dd398a63772be0f5469224982bf933695613ffde22\",\n  \"source_manifest_sha256\": \"6b84ea11cd2812e6f9c034243a33bee41b5ade74bffa953a8e2141ed2343cdd2\",\n  \"patch_sha256\": \"98ead349a994f2b81785a8b170a73c013953daab1fa1df49e9a3e3762369738c\",\n  \"audit_sha256\": \"d380dfed085a1b00439ce9cefcfb7cefa1fc443b76959df8bbfb783a016d531a\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.3463470229980885,
+  "ended_utc": "2026-10-09T21:13:42.122826+00:00"
+}

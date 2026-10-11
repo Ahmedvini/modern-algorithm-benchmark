@@ -1,0 +1,162 @@
+{
+  "captured_at_utc": "2026-10-09T21:05:06.554406+00:00",
+  "classification": {
+    "device0_kernel_verified": false,
+    "driver_operational_evidence": false,
+    "gpu_detected": true,
+    "management_devices": [],
+    "nvcc_answers": false,
+    "project_cuda_target_built": false,
+    "runtime_device_count": null,
+    "scope": "Visible to this process/container; absence of detection does not prove host GPU absence.",
+    "state": "gpu_driver_unavailable"
+  },
+  "cmake_selected_cache": {},
+  "cuda_path_entries": [],
+  "discovery": {
+    "device_nodes": {
+      "/dev/nvidia0": false,
+      "/dev/nvidiactl": false
+    },
+    "driver_file": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/proc/driver/nvidia/version'",
+      "path": "/proc/driver/nvidia/version"
+    },
+    "driver_library": null,
+    "nvidia_module_visible": false,
+    "pci_errors": [],
+    "pci_gpus": [
+      {
+        "device": "0x25a0",
+        "device_class": "0x030000",
+        "kernel_driver": null,
+        "pci_address": "0000:01:00.0",
+        "vendor": "0x10de"
+      }
+    ],
+    "pci_scan_available": true,
+    "runtime_library": null,
+    "toolkit_files": {},
+    "tools": {
+      "cmake": "/usr/bin/cmake",
+      "lspci": "/usr/bin/lspci",
+      "nvcc": null,
+      "nvidia_smi": null
+    }
+  },
+  "environment": {
+    "CUDACXX": null,
+    "CUDAHOSTCXX": null,
+    "CUDAToolkit_ROOT": null,
+    "CUDA_HOME": null,
+    "CUDA_PATH": null,
+    "CUDA_VISIBLE_DEVICES": null,
+    "LD_LIBRARY_PATH": null,
+    "NVIDIA_VISIBLE_DEVICES": null
+  },
+  "limitations": [
+    "No installation/system changes; no sorting/performance experiment.",
+    "Only device0 kernel execution is checked; other enumerated devices untested.",
+    "Toolkit/Colab GPU path unvalidated unless operational evidence is present."
+  ],
+  "platform": {
+    "architecture": "x86_64",
+    "cpu": "x86_64",
+    "kernel": "#202601231045~1769703228~24.04~cb87b5b SMP PREEMPT_DYNAMIC Thu J",
+    "logical_cpu_count": 12,
+    "os": "Linux",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+    "release": "6.18.7-76061807-generic"
+  },
+  "probes": {
+    "build": {
+      "reason": "Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.",
+      "returncode": null,
+      "status": "skipped",
+      "stderr": "",
+      "stdout": ""
+    },
+    "cmake": {
+      "command": [
+        "/usr/bin/cmake",
+        "--version"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "cmake version 3.28.3\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n"
+    },
+    "cmake_cuda_property": {
+      "command": [
+        "/usr/bin/cmake",
+        "--help-property",
+        "CUDA_STANDARD"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "CUDA_STANDARD\n-------------\n\n.. versionadded:: 3.8\n\nThe CUDA/C++ standard whose features are requested to build this target.\n\nThis property specifies the CUDA/C++ standard whose features are requested\nto build this target.  For some compilers, this results in adding a\nflag such as ``-std=gnu++11`` to the compile line.\n\nSupported values are:\n\n``98``\n  CUDA C++98. Note that this maps to the same as ``03`` internally.\n\n``03``\n  CUDA C++03\n\n``11``\n  CUDA C++11\n\n``14``\n  CUDA C++14. While CMake 3.8 and later *recognize* ``14`` as a valid value,\n  CMake 3.9 was the first version to include support for any compiler.\n\n``17``\n  CUDA C++17. While CMake 3.8 and later *recognize* ``17`` as a valid value,\n  CMake 3.18 was the first version to include support for any compiler.\n\n``20``\n  .. versionadded:: 3.12\n\n  CUDA C++20. While CMake 3.12 and later *recognize* ``20`` as a valid value,\n  CMake 3.18 was the first version to include support for any compiler.\n\n``23``\n  .. versionadded:: 3.20\n\n  CUDA C++23\n\n``26``\n  .. versionadded:: 3.25\n\n  CUDA C++26. CMake 3.25 and later *recognize* ``26`` as a valid value,\n  no version has support for any compiler.\n\nIf the value requested does not result in a compile flag being added for\nthe compiler in use, a previous standard flag will be added instead.  This\nmeans that using:\n\n set_property(TARGET tgt PROPERTY CUDA_STANDARD 11)\n\nwith a compiler which does not support ``-std=gnu++11`` or an equivalent\nflag will not result in an error or warning, but will instead add the\n``-std=gnu++03`` flag if supported.  This \"decay\" behavior may be controlled\nwith the ``CUDA_STANDARD_REQUIRED`` target property.\nAdditionally, the ``CUDA_EXTENSIONS`` target property may be used to\ncontrol whether compiler-specific extensions are enabled on a per-target basis.\n\nSee the ``cmake-compile-features(7)`` manual for information on\ncompile features and a list of supported compilers.\n\nThis property is initialized by the value of\nthe ``CMAKE_CUDA_STANDARD`` variable if it is set when a target\nis created.\n"
+    },
+    "configure": {
+      "reason": "Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.",
+      "returncode": null,
+      "status": "skipped",
+      "stderr": "",
+      "stdout": ""
+    },
+    "lspci": {
+      "command": [
+        "/usr/bin/lspci",
+        "-nn",
+        "-d",
+        "10de:"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "0000:01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GA107M [GeForce RTX 3050 Ti Mobile] [10de:25a0] (rev a1)\n0000:01:00.1 Audio device [0403]: NVIDIA Corporation Device [10de:2291] (rev a1)\n"
+    },
+    "nvcc": {
+      "command": [
+        "nvcc",
+        "--version"
+      ],
+      "error": "[Errno 2] No such file or directory: 'nvcc'",
+      "returncode": null,
+      "status": "unavailable",
+      "stderr": "",
+      "stdout": ""
+    },
+    "nvidia_smi": {
+      "command": [
+        "nvidia-smi",
+        "--query-gpu=index,name,driver_version",
+        "--format=csv,noheader,nounits"
+      ],
+      "error": "[Errno 2] No such file or directory: 'nvidia-smi'",
+      "returncode": null,
+      "status": "unavailable",
+      "stderr": "",
+      "stdout": ""
+    },
+    "runtime": {
+      "reason": "Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.",
+      "returncode": null,
+      "status": "skipped",
+      "stderr": "",
+      "stdout": ""
+    }
+  },
+  "protocol": "cuda_preflight_v1",
+  "record_kind": "cuda_readiness",
+  "runtime_probe": null,
+  "schema_version": 1,
+  "source_sha256": {
+    "CMakeLists.txt": "050d2c7454750cb34358d2ba690c883d2c93276716028f8d4e2ca92e6b0daf48",
+    "cmake/cuda.cmake": "80da3ee8d14cd6b2d0798692398e91eba1df637f54911ad92d92dfc49faffb89",
+    "scripts/cuda_preflight.py": "6338c3ef5ad73c3c13eadc9d765a8480b4377e6b8da5909eabdca55ffed44cd8",
+    "src/cuda/runtime_probe.cu": "313d37414ae36529c4eab5cf5def9443bdec3b859eeff9b2e7b78e66a0aad73b"
+  },
+  "timeout_seconds": 60
+}

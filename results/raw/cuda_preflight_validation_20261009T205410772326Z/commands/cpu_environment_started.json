@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/release",
+    "--output",
+    "results/raw/cuda_preflight_validation_20261009T205410772326Z/cpu_environment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:05:28.523865+00:00"
+}

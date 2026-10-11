@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cuda_timing_20261009T231303050084Z/final_review_v2.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:33:58.889946+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"added\": [\n    \"docs/CUDA_TIMING_PROTOCOL_v1.md\",\n    \"include/benchmark/cuda_timing.hpp\",\n    \"scripts/analyze_cuda_results.py\",\n    \"scripts/run_cuda_matrix.py\",\n    \"scripts/validate_cuda_timing.py\",\n    \"src/benchmark/cuda_main.cpp\",\n    \"src/cuda/cub_timing.cu\",\n    \"tests/test_cuda_benchmark.py\"\n  ],\n  \"modified\": [\n    \"CMakeLists.txt\",\n    \"README.md\",\n    \"cmake/cuda.cmake\",\n    \"docs/ALGORITHMS.md\",\n    \"docs/AUDIT.md\",\n    \"docs/BENCHMARKING.md\",\n    \"docs/EXPERIMENT_PROTOCOL.md\",\n    \"docs/METRICS.md\",\n    \"docs/ROADMAP.md\"\n  ],\n  \"deleted\": [],\n  \"protected_starting_sources\": 131,\n  \"protected_sources_unchanged\": true,\n  \"final_code_matches_gpu_tested_bundle\": true,\n  \"gpu_tested_files_checked\": 125,\n  \"timing_protocol_unchanged_after_execution\": true,\n  \"prior_artifacts_verified\": 9568,\n  \"prior_artifacts_changed\": 0\n}\n",
+  "stderr": "",
+  "wall_seconds": 1.0328217689998382,
+  "ended_utc": "2026-10-09T23:33:59.922884+00:00"
+}

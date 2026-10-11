@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh/cpu_gpu_comparison",
+    "--resources",
+    "65537"
+  ],
+  "cwd": "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "started_utc": "2026-10-10T11:07:41.474925+00:00",
+  "stderr": "",
+  "stdout": "{\"adapter_diagnostic_cudaMalloc_requested_bytes\":279295,\"adapter_query_bytes\":279295,\"allocation_observation\":\"successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured\",\"combined_device_payload_bytes\":1607182,\"compute_major\":7,\"compute_minor\":5,\"driver_api_version\":13000,\"free_device_bytes_before_buffers\":15527116800,\"gpu_name\":\"Tesla T4\",\"known_host_peak_payload_bytes\":1572888,\"prepared_diagnostic_cudaMalloc_requested_bytes\":279295,\"prepared_query_bytes\":279295,\"production_workspace_observation\":\"not instrumented; isolated same-parameter sizing query only\",\"runtime_api_version\":13000,\"size\":65537,\"total_device_bytes\":15637086208,\"workspace_policy_cap_each_bytes\":67108864}\n"
+}

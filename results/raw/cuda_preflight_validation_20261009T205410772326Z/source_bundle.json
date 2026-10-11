@@ -1,0 +1,10 @@
+{
+  "archive": "results/raw/cuda_preflight_validation_20261009T205410772326Z/phase7_source.tar.gz",
+  "archive_members": 127,
+  "byte_identical_repack": true,
+  "bytes": 253980,
+  "extracted_source_hashes_match": true,
+  "relocated_cuda_off_configure_exit": 0,
+  "sha256": "f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5",
+  "source_files": 126
+}

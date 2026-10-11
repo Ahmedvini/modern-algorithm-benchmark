@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh/cpu_gpu_comparison",
+    "--describe"
+  ],
+  "cwd": "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "started_utc": "2026-10-10T11:07:40.641071+00:00",
+  "stderr": "",
+  "stdout": "{\"architecture\":\"x86_64\",\"binary_dir\":\"/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh\",\"build_type\":\"Release\",\"compiler_id\":\"GNU\",\"compiler_path\":\"/usr/bin/c++\",\"compiler_version\":\"13.3.0\",\"configuration_flags\":\"-O3 -DNDEBUG\",\"cub_version\":300001,\"cuda_architectures\":\"75\",\"cuda_compiler_version\":\"13.0.88\",\"cuda_flags\":\"\",\"cuda_release_flags\":\"-O3 -DNDEBUG\",\"cuda_toolkit_version\":\"13.0.88\",\"cxx_standard\":17,\"global_flags\":\"\",\"implementation_version\":\"cpu_gpu_comparison_driver_v1\",\"openmp_flags\":\"-fopenmp\",\"openmp_libraries\":\"/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so;/usr/lib/x86_64-linux-gnu/libpthread.a\",\"openmp_version\":\"4.5\",\"platform\":\"Linux\",\"sanitizers\":false,\"source_dir\":\"/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark\"}\n"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cuda_benchmark.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:23:44.971320+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "ss...run_0000 exit 9\nrun_0000 timed out\n.......[Errno 17] File exists: '/tmp/tmpq9khiv8j/processed'\n.correctness exit 9\n.\n----------------------------------------------------------------------\nRan 14 tests in 0.180s\n\nOK (skipped=2)\n",
+  "wall_seconds": 0.272364701000015,
+  "ended_utc": "2026-10-09T23:23:45.243875+00:00"
+}

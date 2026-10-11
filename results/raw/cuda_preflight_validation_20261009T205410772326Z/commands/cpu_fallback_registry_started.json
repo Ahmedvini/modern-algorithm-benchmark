@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "build/cuda_cpu_fallback/sort_benchmark",
+    "--list-sorts"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:06:34.256986+00:00"
+}

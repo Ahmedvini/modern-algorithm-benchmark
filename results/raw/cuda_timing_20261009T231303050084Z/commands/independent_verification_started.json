@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cuda_timing_20261009T231303050084Z/verify_results.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:28:58.105246+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cuda_timing_20261009T231303050084Z/verify_results.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:28:58.105246+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"matrix_configurations\": 48,\n  \"matrix_measured_trials\": 240,\n  \"matrix_warmups\": 48,\n  \"smallest_measured_trials\": 5,\n  \"smallest_warmups\": 1,\n  \"failed_trials\": 0,\n  \"missing_trials\": 0,\n  \"raw_metrics_checked\": 980,\n  \"independent_statistics_checked\": 196,\n  \"remote_summary_byte_regeneration\": true,\n  \"local_summary_byte_regeneration\": true,\n  \"remote_local_groups_equal\": true,\n  \"provenance_note\": \"Absolute source path differs between local and remote summaries; groups and all statistics identical.\",\n  \"earlier_artifacts_verified\": 9568,\n  \"earlier_artifacts_changed\": [],\n  \"downloaded_files_reverified\": 1115\n}\nEXAMPLE_METRICS_NS={\"h2d_ns\": {\"successful_trials\": 5, \"median_ns\": 28896.000236272812, \"mean_ns\": 29164.79967534542, \"stdev_ns\": 1117.1622463798565, \"min_ns\": 28031.999245285988, \"max_ns\": 31039.999797940254}, \"device_sort_ns\": {\"successful_trials\": 5, \"median_ns\": 63904.00230884552, \"mean_ns\": 63392.00064539909, \"stdev_ns\": 1419.9491301833073, \"min_ns\": 61312.0011985302, \"max_ns\": 64704.00094985962}, \"d2h_ns\": {\"successful_trials\": 5, \"median_ns\": 27680.00029027462, \"mean_ns\": 27430.400252342224, \"stdev_ns\": 2204.101084079375, \"min_ns\": 24736.00022494793, \"max_ns\": 30368.000268936157}, \"end_to_end_ns\": {\"successful_trials\": 5, \"median_ns\": 128136.0, \"mean_ns\": 127790.2, \"stdev_ns\": 1683.5538898413677, \"min_ns\": 125231.0, \"max_ns\": 129542.0}}\n",
+  "stderr": "",
+  "wall_seconds": 1.8306647090000752,
+  "ended_utc": "2026-10-09T23:28:59.936061+00:00"
+}

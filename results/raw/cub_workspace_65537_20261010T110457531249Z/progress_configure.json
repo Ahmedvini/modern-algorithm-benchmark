@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DBUILD_TESTING=OFF",
+    "-DMAB_ENABLE_SANITIZERS=OFF",
+    "-DMAB_ENABLE_CUDA=ON",
+    "-DMAB_ENABLE_CUDA_SORT=ON",
+    "-DMAB_ENABLE_OPENMP=ON",
+    "-DMAB_ENABLE_CPU_GPU_COMPARISON=ON",
+    "-DCMAKE_CUDA_ARCHITECTURES=75",
+    "-DCMAKE_CXX_FLAGS=",
+    "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+    "-DCMAKE_CUDA_FLAGS=",
+    "-DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG"
+  ],
+  "cwd": "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "started_utc": "2026-10-10T11:06:54.755002+00:00",
+  "stderr": "",
+  "stdout": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Looking for a CUDA compiler\n-- Looking for a CUDA compiler - /usr/local/cuda/bin/nvcc\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found suitable version \"13.0.88\", minimum required is \"11.0\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- Found OpenMP_CXX: -fopenmp (found version \"4.5\")\n-- Found OpenMP: TRUE (found version \"4.5\") found components: CXX\n-- Configuring done (8.2s)\n-- Generating done (0.0s)\n-- Build files have been written to: /content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh\n"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "tests/test_cuda_preflight.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:02:15.292386+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ".....................\n----------------------------------------------------------------------\nRan 21 tests in 0.347s\n\nOK\n",
+  "wall_seconds": 0.4216957490025379,
+  "ended_utc": "2026-10-09T21:02:15.714199+00:00"
+}

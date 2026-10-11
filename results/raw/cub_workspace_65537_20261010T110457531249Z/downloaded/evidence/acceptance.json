@@ -1,0 +1,12 @@
+{
+  "allocation_basis": "checked cudaMalloc and checked cleanup returned before valid JSON; physical footprint not measured",
+  "complete": true,
+  "host_and_disk_environment_gate_passed": true,
+  "no_full_study_executed": true,
+  "no_pilot_executed": true,
+  "no_sort_executed": true,
+  "prepared_diagnostic_allocation_succeeded": true,
+  "production_parameter_diagnostic_allocation_succeeded": true,
+  "resource_gate_passed": true,
+  "size": 65537
+}

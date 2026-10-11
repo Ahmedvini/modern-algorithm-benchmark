@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cuda_timing_20261009T231303050084Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:33:41.138155+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cuda_timing_20261009T231303050084Z/final_review.py\", line 12, in <module>\n    assert Path('cmake/cuda.cmake').read_text().split('    # Benchmark-only prepared execution.')[0]==(b/'cmake/cuda.cmake').read_text().split('    if(BUILD_TESTING)\\n        add_executable(test_cuda_sorting')[0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "wall_seconds": 0.092076464999991,
+  "ended_utc": "2026-10-09T23:33:41.230376+00:00"
+}

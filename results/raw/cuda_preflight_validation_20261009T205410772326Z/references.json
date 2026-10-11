@@ -1,0 +1,13 @@
+{
+  "primary_documentation": [
+    "https://cmake.org/cmake/help/v3.28/module/CheckLanguage.html",
+    "https://cmake.org/cmake/help/v3.28/module/FindCUDAToolkit.html",
+    "https://cmake.org/cmake/help/v3.28/prop_tgt/CUDA_STANDARD.html",
+    "https://docs.nvidia.com/cuda/archive/11.0/cuda-compiler-driver-nvcc/index.html",
+    "https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__DEVICE.html",
+    "https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART____VERSION.html",
+    "https://docs.nvidia.com/datacenter/tesla/drivers/cuda-toolkit-driver-and-architecture-matrix.html",
+    "https://research.google.com/colaboratory/faq.html"
+  ],
+  "note": "Reviewed official documentation; no cloud/GPU experiment implied."
+}

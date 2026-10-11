@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cuda_benchmark.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:23:44.971320+00:00"
+}

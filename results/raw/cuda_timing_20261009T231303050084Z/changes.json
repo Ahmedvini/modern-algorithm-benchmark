@@ -1,0 +1,31 @@
+{
+  "added": [
+    "docs/CUDA_TIMING_PROTOCOL_v1.md",
+    "include/benchmark/cuda_timing.hpp",
+    "scripts/analyze_cuda_results.py",
+    "scripts/run_cuda_matrix.py",
+    "scripts/validate_cuda_timing.py",
+    "src/benchmark/cuda_main.cpp",
+    "src/cuda/cub_timing.cu",
+    "tests/test_cuda_benchmark.py"
+  ],
+  "modified": [
+    "CMakeLists.txt",
+    "README.md",
+    "cmake/cuda.cmake",
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/METRICS.md",
+    "docs/ROADMAP.md"
+  ],
+  "deleted": [],
+  "protected_starting_sources": 131,
+  "protected_sources_unchanged": true,
+  "final_code_matches_gpu_tested_bundle": true,
+  "gpu_tested_files_checked": 125,
+  "timing_protocol_unchanged_after_execution": true,
+  "prior_artifacts_verified": 9568,
+  "prior_artifacts_changed": 0
+}

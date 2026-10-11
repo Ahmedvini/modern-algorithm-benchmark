@@ -1,0 +1,40 @@
+{
+  "archive": "results/raw/cuda_preflight_validation_20261009T205410772326Z/phase7_source.tar.gz",
+  "archive_members": 127,
+  "byte_identical_repack": true,
+  "bytes": 253980,
+  "commands": [
+    {
+      "command": [
+        "tar",
+        "-xzf",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cuda_preflight_validation_20261009T205410772326Z/phase7_source.tar.gz",
+        "-C",
+        "/tmp/mab_cloud_source_check_eu89ndz4"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "cmake",
+        "-S",
+        "/tmp/mab_cloud_source_check_eu89ndz4/modern-algorithm-benchmark",
+        "-B",
+        "/tmp/mab_cloud_source_check_eu89ndz4/build",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DMAB_ENABLE_CUDA=OFF",
+        "-DMAB_ENABLE_OPENMP=OFF",
+        "-DBUILD_TESTING=OFF"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done (0.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /tmp/mab_cloud_source_check_eu89ndz4/build\n"
+    }
+  ],
+  "extracted_source_hashes_match": true,
+  "relocated_cuda_off_configure_exit": 0,
+  "sha256": "f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5",
+  "source_files": 126
+}

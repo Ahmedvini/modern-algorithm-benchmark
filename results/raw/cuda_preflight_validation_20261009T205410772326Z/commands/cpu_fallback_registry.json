@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "build/cuda_cpu_fallback/sort_benchmark",
+    "--list-sorts"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:06:34.256986+00:00",
+  "exit_code": 0,
+  "stdout": "std_sort\nquick_sort\npdq_sort\ntim_sort\nmerge_sort\nradix_sort\n",
+  "stderr": "",
+  "wall_seconds": 0.0013465269985317718,
+  "ended_utc": "2026-10-09T21:06:34.258508+00:00"
+}
