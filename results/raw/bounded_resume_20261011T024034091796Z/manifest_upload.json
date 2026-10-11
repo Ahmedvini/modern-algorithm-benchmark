@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "upload",
+    "results/raw/bounded_resume_20261011T024034091796Z/SOURCE_MANIFEST.json",
+    "/content/mab_bounded_resume_20261011T024034091796Z/source_manifest.json",
+    "--session",
+    "cpu-gpu-bounded-validation-v3"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:44:47.981657+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Uploaded 'results/raw/bounded_resume_20261011T024034091796Z/SOURCE_MANIFEST.json' to '/content/mab_bounded_resume_20261011T024034091796Z/source_manifest.json'\n",
+  "stderr": "",
+  "scope": "Transfer reviewed SHA256 manifest only to exclusive destination"
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation-v3",
+    "--file",
+    "results/raw/bounded_resume_20261011T024034091796Z/remote_prepare.py",
+    "--timeout",
+    "60"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:44:14.368104+00:00",
+  "exit_code": 0,
+  "stdout": "{\"content_entries\": [\".config\", \"sample_data\"], \"destination\": \"/content/mab_bounded_resume_20261011T024034091796Z\", \"exists\": false}\nEXCLUSIVE_REMOTE_ROOT_CREATED\n",
+  "stderr": "",
+  "scope": "Inspect /content and create exclusive isolated destination only; no existing content overwritten"
+}

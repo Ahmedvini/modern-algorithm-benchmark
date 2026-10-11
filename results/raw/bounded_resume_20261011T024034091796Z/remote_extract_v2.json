@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation-v3",
+    "--file",
+    "results/raw/bounded_resume_20261011T024034091796Z/remote_extract_v2.py",
+    "--timeout",
+    "120"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:55:13.534466+00:00",
+  "exit_code": 0,
+  "stdout": "TRANSFER_VERIFIED 188 5303683f37e48ab03bcb287b2c560d2100293b68209f63cc354fe0923ab9102f\n",
+  "stderr": "",
+  "scope": "Verify revision2 remote archive/member/source/frozen identities then exclusive extraction; no workloads"
+}

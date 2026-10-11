@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "tests/test_ctest_build_guard.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:42:58.157301+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "....................................\n----------------------------------------------------------------------\nRan 36 tests in 1.915s\n\nOK\n",
+  "scope": "Focused inert regressions; inspected subprocess/shell entry points mocked, no CTest/timing/GPU"
+}

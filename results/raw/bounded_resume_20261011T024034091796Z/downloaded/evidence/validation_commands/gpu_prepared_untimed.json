@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_cuda_prepared_correctness"
+  ],
+  "cwd": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source",
+  "started_utc": "2026-10-11T03:02:29.092628+00:00",
+  "exit_code": 0,
+  "status": "completed",
+  "stdout": "{\"schema_version\":1,\"artifact_kind\":\"correctness_validation\",\"scope\":\"prepared_cuda_untimed_v1\",\"study_eligible\":false,\"status\":\"passed\",\"inputs\":163,\"output_checks\":489,\"invalid_operations_rejected\":489,\"failures\":0}\n",
+  "stderr": "",
+  "omp_environment": {
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_MAX_ACTIVE_LEVELS": "1",
+    "OMP_PROC_BIND": "FALSE",
+    "OMP_THREAD_LIMIT": "2",
+    "OMP_WAIT_POLICY": "PASSIVE"
+  }
+}

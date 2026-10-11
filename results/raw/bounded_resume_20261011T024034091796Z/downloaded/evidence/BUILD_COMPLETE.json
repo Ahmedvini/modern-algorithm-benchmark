@@ -1,0 +1,34 @@
+{
+  "builds": {
+    "cpu-release": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release",
+    "cpu-sanitize": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize",
+    "gpu-release": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release"
+  },
+  "source_verified": true,
+  "identities": {
+    "cpu-release": {
+      "CMakeCache.txt": "9027445f029af2f4db48368240e3f51a0d7f6153f5198ee82370ce7721c6551c",
+      "compile_commands.json": "7da0cb11f59af3fc92fbb0dbfc83e871813edce6c15ca49874b135d0151766db",
+      "CTestTestfile.cmake": "a4eae00f89be32c1b3b0fa10979e4abac98070233abeda525fce26f756aee7ed",
+      "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6",
+      "libmab_parallel.a": "5a316a67182a9375f39376a5b7fefd80e71985809e7f7d2c6a58b94de76381b2"
+    },
+    "cpu-sanitize": {
+      "CMakeCache.txt": "99943f804b81a3b5a75e83d1396365362f682495155eeefc5a17833300303822",
+      "compile_commands.json": "da093b08219ed3b31a1701ffb07f6bac06a215e71c1efde4a6d5d3ec3c25f17b",
+      "CTestTestfile.cmake": "1e59816ebc3c013ecf4ed4d6ed3dc83efe5455a2b6a356c9463dd740661eb7f5",
+      "test_parallel_workers": "2a4363cbfc26b1afc389c4e3764df43beee00ba2a6b16eb49c728d3115566b33",
+      "libmab_parallel.a": "3be13a1ecdd60318fc9457c217bdc40c2624718fb382014f32d48d6ed36a37d8"
+    },
+    "gpu-release": {
+      "CMakeCache.txt": "f52ae62662eba59034f6ca20b5fd0ec818c74266308473edc59000766f97822f",
+      "compile_commands.json": "932965ab6968503892f82b35b861fd92b652234232b3f51b3253c92fb7c9d39b",
+      "CTestTestfile.cmake": "aceedf63d79dd4ce9eb88f8222d947d0cead4a6f823f1909e0fac3674ce285d5",
+      "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6",
+      "libmab_parallel.a": "5a316a67182a9375f39376a5b7fefd80e71985809e7f7d2c6a58b94de76381b2",
+      "cpu_gpu_comparison": "d3416ec4fb1e6d3b3536350ae6c7340fa1cfa9831d4460bf4027421897318835",
+      "test_cuda_prepared_correctness": "37d4f4ea6b3e0c136efce5c688127bae7bdbd6de15f5b5cb5e31d4e06b4158f7",
+      "libmab_cuda_timing.a": "d2f8e7fff13ded945f6b7016a73cb528082ee6626ffdd705247381c75030049d"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation-v3",
+    "--file",
+    "results/raw/bounded_resume_20261011T024034091796Z/remote_selection_review.py",
+    "--timeout",
+    "120"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:48:48.207482+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"cpu-release\": {\n    \"guarded_build\": \"/content/mab_bounded_resume_20261011T024034091796Z/cpu-release\",\n    \"registered\": 31,\n    \"selected\": [\n      \"baselines\",\n      \"cli\",\n      \"comparisons\",\n      \"cpu_gpu_comparison_framework\",\n      \"cuda_benchmark_analysis\",\n      \"cuda_preflight\",\n      \"cuda_sort_handoff\",\n      \"datasets\",\n      \"environment_manifest\",\n      \"memory\",\n      \"memory_unsupported\",\n      \"mergesort\",\n      \"metrics_cli\",\n      \"parallel_workers_correctness\",\n      \"pdqsort\",\n      \"quicksort\",\n      \"radixsort\",\n      \"searching\",\n      \"structures\",\n      \"timsort\",\n      \"validation_policy\"\n    ],\n    \"discovery_ran\": false\n  },\n  \"cpu-sanitize\": {\n    \"guarded_build\": \"/content/mab_bounded_resume_20261011T024034091796Z/cpu-sanitize\",\n    \"registered\": 31,\n    \"selected\": [\n      \"baselines\",\n      \"cli\",\n      \"comparisons\",\n      \"cpu_gpu_comparison_framework\",\n      \"cuda_benchmark_analysis\",\n      \"cuda_preflight\",\n      \"cuda_sort_handoff\",\n      \"datasets\",\n      \"environment_manifest\",\n      \"memory\",\n      \"memory_unsupported\",\n      \"mergesort\",\n      \"metrics_cli\",\n      \"parallel_workers_correctness\",\n      \"pdqsort\",\n      \"quicksort\",\n      \"radixsort\",\n      \"searching\",\n      \"structures\",\n      \"timsort\",\n      \"validation_policy\"\n    ],\n    \"discovery_ran\": false\n  },\n  \"gpu-release\": {\n    \"guarded_build\": \"/content/mab_bounded_resume_20261011T024034091796Z/gpu-release\",\n    \"registered\": 35,\n    \"selected\": [\n      \"baselines\",\n      \"cli\",\n      \"comparisons\",\n      \"cpu_gpu_comparison_framework\",\n      \"cuda_benchmark_analysis\",\n      \"cuda_preflight\",\n      \"cuda_sort_handoff\",\n      \"datasets\",\n      \"environment_manifest\",\n      \"memory\",\n      \"memory_unsupported\",\n      \"mergesort\",\n      \"metrics_cli\",\n      \"parallel_workers_correctness\",\n      \"pdqsort\",\n      \"quicksort\",\n      \"radixsort\",\n      \"searching\",\n      \"structures\",\n      \"timsort\",\n      \"validation_policy\"\n    ],\n    \"discovery_ran\": false\n  }\n}\nSTATIC_SELECTION_REVIEW_PASSED\n",
+  "stderr": "",
+  "scope": "Shared static pre-discovery guard only; retain exact19+2 plan for all fresh builds; no CTest execution/discovery yet"
+}

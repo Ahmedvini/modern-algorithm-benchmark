@@ -1,0 +1,51 @@
+--- before/README.md
++++ README.md
+@@ -809,23 +809,28 @@
+ All47 focused inert regressions pass; no CTest, build, prerequisite, resource or
+ GPU command ran. The approved19 CPU selection and supported layouts are unchanged.
+ This repair still requires separate independent review; study launch remains NO-GO.
+-# Bounded CPU/GPU validation extension — incomplete
+-
+-The explicitly opted-in `MAB_ENABLE_VALIDATION_DIAGNOSTICS=ON` targets provide
+-prepared-CUB correctness without timing and an OpenMP runtime-team diagnostic.
+-The [v2 validation policy](docs/CPU_GPU_VALIDATION_POLICY_v2.md) preserves the
+-original 19-test CPU selection and keeps diagnostics separate from timing tests.
+-Historical study protocols, production CUB sorting and CUB3.0.1 are unchanged.
+-
+-Fresh replacement-T4 builds passed. Direct prepared-GPU correctness passed
+-163 inputs/489 output checks, three frozen-size workspace checks passed, and
+-12 public/registry worker checks verified actual team sizes. **CPU regression and
+-ASan/UBSan execution remain blocked**: the pre-discovery guard rejects the new
+-CMake3.31 Dart metadata. No CTest discovery or suite execution occurred, and no
+-benchmark, pilot, warm-up or measured trial ran.
+-
+-See [the bounded-validation audit](results/raw/bounded_validation_20261011T020343203635Z/FINAL_AUDIT.md).
+-Next: review the exact Dart metadata differences and an appropriately bounded
+-policy extension before rerunning guarded correctness suites. Full-study
+-execution remains unauthorized; correctness evidence is not timing validation.
+-
++# Bounded CPU/GPU validation — passed; full study not authorized
++
++The opted-in `MAB_ENABLE_VALIDATION_DIAGNOSTICS=ON` targets provide prepared-CUB
++correctness without timing and an OpenMP runtime-team diagnostic. The
++[v2 classification policy](docs/CPU_GPU_VALIDATION_POLICY_v2.md) keeps correctness,
++timing smoke, pilot and full prerequisites distinct; it grants no study eligibility
++or execution authorization. Historical protocols and production algorithms are unchanged.
++
++The [reviewed CMake3.31 metadata alternative](docs/CTEST_COLAB_METADATA_v2.md)
++preserves the original19 correctness groups plus two explicitly selected diagnostics.
++Fresh isolated T4 builds and guarded suites passed: Release21/21, Debug ASan/UBSan21/21
++with leak detection enabled. Prepared GPU correctness passed163 inputs/489 output
++checks and489 invalid-operation rejections. Bounded resources passed all frozen sizes
++(1,025/65,537/1,000,000);12 worker checks verified team1 below32,768 and team2 at/above.
++Host-only analysis intentionally skipped two GPU timing Python methods in each suite;
++no CTest group was skipped. Worker-team size does not prove task participation.
++
++The initial synthetic-fixture failures, harness errors and stale Colab import rejection
++are retained with the successful revision in the
++[current audit](results/raw/bounded_resume_20261011T024034091796Z/FINAL_AUDIT.md).
++The [earlier blocked attempt](results/raw/bounded_validation_20261011T020343203635Z/FINAL_AUDIT.md)
++remains immutable. No timing smoke, pilot, warm-up, measured trial or study ran here.
++Next: independent review of the consolidated validation evidence. Legacy full-study
++provenance gates remain unchanged and reject the deliberately extended framework;
++current correctness evidence does not establish timing validity or authorize a launch.

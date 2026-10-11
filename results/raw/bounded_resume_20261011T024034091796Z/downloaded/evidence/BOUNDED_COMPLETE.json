@@ -1,0 +1,62 @@
+{
+  "complete": true,
+  "study_eligible": false,
+  "study_execution_authorized": false,
+  "tests": {
+    "cpu_release": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "passed": 21,
+      "sha256": "aa58f9e399510de56f959939b8367771d3c8ab88fb59b82673f8c6842af90a45"
+    },
+    "cpu_sanitize": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "passed": 21,
+      "sha256": "c5a99b99de3bbb4faf5246562d4f3f1ce647c8812d3919c243d4ab49d46a8134"
+    },
+    "gpu_prepared": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "inputs": 163,
+      "output_checks": 489,
+      "failures": 0,
+      "sha256": "84b721a6d9b3e275eeeb64bb74435e0371aa418325b59d81ddb920ab4525829d"
+    },
+    "workspace": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "sizes": [
+        1025,
+        65537,
+        1000000
+      ],
+      "all_limits_passed": true,
+      "sha256": "35348c2bf010096ff7a5c5b7ef1da113620ad0b158e867ee9858f33aad7f91a9"
+    },
+    "workers": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "output_checks": 12,
+      "threshold_team_verified": true,
+      "sha256": "bbc232eb3c356bcb205490a71e837446de6f6720218f57db4a3f045a36706ac2"
+    }
+  },
+  "executable_sha256": {
+    "cpu_gpu_comparison": "d3416ec4fb1e6d3b3536350ae6c7340fa1cfa9831d4460bf4027421897318835",
+    "test_cuda_prepared_correctness": "37d4f4ea6b3e0c136efce5c688127bae7bdbd6de15f5b5cb5e31d4e06b4158f7",
+    "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6"
+  },
+  "benchmark_trials": 0,
+  "warmups": 0
+}

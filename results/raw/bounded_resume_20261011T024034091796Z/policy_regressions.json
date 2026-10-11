@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "tests/test_validation_policy.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:42:59.558594+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.104s\n\nOK\n",
+  "scope": "Focused inert regressions; inspected subprocess/shell entry points mocked, no CTest/timing/GPU"
+}

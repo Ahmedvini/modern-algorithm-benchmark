@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nE=Path('results/raw/bounded_resume_20261011T024034091796Z')\nfor n in ['tests/test_cpu_gpu_comparison.py','docs/NON_TIMING_TEST_SELECTION_v3.json']:\n p=E/'before'/n;p.parent.mkdir(parents=True,exist_ok=True)\n with p.open('xb') as f:f.write(Path(n).read_bytes())\nprint('Pre-fix files preserved')"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:52:07.050397+00:00",
+  "exit_code": 0,
+  "stdout": "Pre-fix files preserved\n",
+  "stderr": "",
+  "scope": "Evidence-only preservation of pre-fix test and initial v3 manifest; no workloads"
+}

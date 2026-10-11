@@ -1,0 +1,24 @@
+--- before/scripts/non_timing_tests.py
++++ scripts/non_timing_tests.py
+@@ -11,8 +11,8 @@
+ from cpu_gpu_provenance import strict_json, validate_digest_map
+ from ctest_build_guard import validate_build_tree
+ 
+-# v1 remains immutable history. v2 binds this authorized diagnostic revision.
+-MANIFEST = ROOT / 'docs/NON_TIMING_TEST_SELECTION_v2.json'
++# v1/v2 remain immutable history. v3 reviews the exact Colab Dart alternative.
++MANIFEST = ROOT / 'docs/NON_TIMING_TEST_SELECTION_v3.json'
+ SAFE_CLASSES = {'cpu_correctness', 'gpu_correctness'}
+ CLASSES = SAFE_CLASSES | {'timing'}
+ # Fixtures/dependencies can implicitly schedule tests outside an -R expression.
+@@ -25,8 +25,8 @@
+ def load_manifest():
+     manifest = strict_json(MANIFEST.read_text())
+     require(isinstance(manifest, dict) and type(manifest.get('schema_version')) is int and
+-            manifest['schema_version'] in [1, 2] and manifest.get('policy') in
+-            ['non_timing_correctness_v1', 'non_timing_correctness_v2'],
++            manifest['schema_version'] in [1, 2, 3] and manifest.get('policy') in
++            ['non_timing_correctness_v1', 'non_timing_correctness_v2', 'non_timing_correctness_v3'],
+             'invalid non-timing manifest')
+     hashes = manifest.get('reviewed_source_sha256')
+     validate_digest_map(hashes, 'reviewed non-timing source snapshot')

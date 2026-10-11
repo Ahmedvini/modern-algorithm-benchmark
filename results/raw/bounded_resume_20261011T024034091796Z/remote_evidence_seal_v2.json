@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation-v3",
+    "--file",
+    "results/raw/bounded_resume_20261011T024034091796Z/remote_seal_v2.py",
+    "--timeout",
+    "120"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T03:02:46.984352+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive\": \"/content/mab_bounded_resume_20261011T024034091796Z_revision2/validation_evidence.tar.gz\",\n  \"sha256\": \"7339833e631df7f5dda203b6a4ef9a42a7714682331ac558d4a25e2a798780a9\",\n  \"members\": 53,\n  \"source_files_verified\": 188,\n  \"build_identities_verified\": true,\n  \"all_validation_complete\": true,\n  \"full_study_authorized\": false\n}\nREMOTE_EVIDENCE_SEALED\n",
+  "stderr": "",
+  "scope": "Hash source/build identities and archive bounded validation evidence; final nvidia-smi diagnostic only"
+}

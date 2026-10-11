@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nE=Path(\"results/raw/bounded_resume_20261011T024034091796Z\");old=Path('results/raw/bounded_validation_20261011T020343203635Z')\ns=(old/'remote_validate.py').read_text().replace('/content/mab_bounded_20261011T020343203635Z',\"/content/mab_bounded_resume_20261011T024034091796Z\").replace('gpu-t4-s-kkb-usw4b1-2i9q6dkvjw07d',\"gpu-t4-s-kkb-usw1b1-zafww0nxdtgf\")\n# The complete bounded runner remains the earlier reviewed correctness-only flow.\nwith (E/'remote_validate.py').open('x') as f:f.write(s)\np=E/'remote_seal.py';s=p.read_text().replace(\"assert (e/'DIRECT_DIAGNOSTICS_COMPLETE.json').is_file()\",\"assert (e/'BOUNDED_COMPLETE.json').is_file() and json.loads((e/'BOUNDED_COMPLETE.json').read_text())['complete'] is True\").replace('GPU-cd5085b4-b6d1-d004-07cc-6f1b32e3a0a2','GPU-5d327ac4-2d0a-4a11-6bd7-97474ba6359c').replace('all_validation_complete=False','all_validation_complete=True')\n# Preserve all generated configuration metadata without running CMake/CTest again.\ninsert=\"\"\"for name,b in builds['builds'].items():\n    dest=e/('metadata_'+name);dest.mkdir()\n    base=Path(b)\n    for rel in ['CMakeCache.txt','CTestTestfile.cmake','DartConfiguration.tcl','compile_commands.json']:\n        target=dest/rel\n        with target.open('xb') as out:out.write((base/rel).read_bytes())\n    for f in sorted((base/'generated').rglob('*')):\n        if f.is_file():\n            target=dest/f.relative_to(base);target.parent.mkdir(parents=True,exist_ok=True)\n            with target.open('xb') as out:out.write(f.read_bytes())\n\"\"\"\ns=s.replace(\"gpu=Path(builds['builds']['gpu-release'])\",insert+\"gpu=Path(builds['builds']['gpu-release'])\")\np.write_text(s)\nassert '.sample(' not in (E/'remote_validate.py').read_text()\nprint('Bounded runner and evidence sealer assembled; no execution')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:45:19.094016+00:00",
+  "exit_code": 0,
+  "stdout": "Bounded runner and evidence sealer assembled; no execution\n",
+  "stderr": "",
+  "scope": "Evidence script assembly only; reviewed correctness-only runner, no execution at assembly"
+}

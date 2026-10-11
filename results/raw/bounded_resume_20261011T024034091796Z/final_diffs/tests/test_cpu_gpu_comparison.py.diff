@@ -1,0 +1,49 @@
+--- before/tests/test_cpu_gpu_comparison.py
++++ tests/test_cpu_gpu_comparison.py
+@@ -383,6 +383,18 @@
+         self.args=types.SimpleNamespace(output=self.base/'output',executable=self.base/'worker',input_tool=self.base/'input',
+                                        prerequisites=self.base/'prerequisites.json',dry_run=False)
+         self.model=load_protocol();self.calls=[];self.failure=None
++        # This class models the historical v1 orchestration flow entirely with
++        # mocks, not eligibility of today's deliberately extended framework.
++        from cpu_gpu_protocol import source_manifest
++        from cpu_gpu_provenance import trusted_source_anchors, TRUSTED_CMAKE_REVIEW_SHA256
++        retained=source_manifest()
++        retained.update({p:h for p,h in trusted_source_anchors(self.model).items() if not p.startswith('docs/')})
++        self.historical_source=dict(current_source_sha256=retained,changed_anchors=['CMakeLists.txt'],
++                                    cmake_review_sha256=TRUSTED_CMAKE_REVIEW_SHA256)
++        # CTest supplies CTEST_* metadata to tests. A nested inert fixture must
++        # model its own environment; the real selector still rejects overrides.
++        environment={k:v for k,v in os.environ.items() if not k.startswith('CTEST_')}
++        patch=mock.patch.dict(os.environ,environment,clear=True);patch.start();self.addCleanup(patch.stop)
+         self.build=self.base/'build';self.build.mkdir()
+         (self.build/'compile_commands.json').write_text('[]');(self.build/'CMakeCache.txt').write_text('synthetic test cache')
+         self.args.executable.write_text('synthetic worker, never executed');self.args.input_tool.write_text('synthetic input, never executed')
+@@ -408,6 +420,7 @@
+             return dict(complete=complete,measured=dict(successful=1200 if complete else 0,failed=0,interrupted=0,missing=0 if complete else 1200),
+                         warmups=dict(successful=240 if complete else 0,failed=0,interrupted=0,missing=0 if complete else 240))
+         with mock.patch.object(runner,'validate_prerequisites',return_value={'explicit_fixture':True}),\
++             mock.patch.object(runner,'verify_source_extension',return_value=self.historical_source),\
+              mock.patch.object(runner,'snapshot',return_value={'explicit_fixture':'not hardware metadata'}),\
+              mock.patch.object(runner,'environment_gate'),mock.patch.object(runner,'invoke',side_effect=self.invoke),\
+              mock.patch.object(runner,'analyze',side_effect=report):
+@@ -423,6 +436,19 @@
+         self.assertEqual(len(plan['trials']),1440);self.assertEqual([r['global_trial_index'] for r in plan['trials']],list(range(1440)))
+         self.assertEqual(json.loads((self.args.output/'run.json').read_text())['matrix_part'],'study')
+         self.assertTrue((self.args.output/'RAW_SHA256.json').exists())
++    def test_real_legacy_provenance_still_rejects_current_framework(self):
++        from cpu_gpu_protocol import verify_source_extension
++        with self.assertRaisesRegex(ValueError,'protected source/pin changed'):
++            verify_source_extension(self.model)
++    def test_explicit_ctest_override_still_rejected_before_discovery(self):
++        from ctest_fixture import write_fixture
++        from non_timing_tests import selected_ctest
++        fixture=self.base/'inert_build';write_fixture(fixture)
++        callback=mock.Mock(side_effect=AssertionError('discovery forbidden'))
++        with mock.patch.dict(os.environ,{'CTEST_TEST_ARGS':'unreviewed'}),\
++             self.assertRaisesRegex(ValueError,'unreviewed CTEST environment override'):
++            selected_ctest(callback,self.base,'inert',fixture)
++        callback.assert_not_called()
+     def test_failure_stops_and_preserves_plan_and_partial_accounting(self):
+         self.failure=RuntimeError('explicit injected worker failure');self.assertEqual(self.execute(),1)
+         self.assertEqual(len([c for c in self.calls if c[0].startswith('dataset_')]),1)

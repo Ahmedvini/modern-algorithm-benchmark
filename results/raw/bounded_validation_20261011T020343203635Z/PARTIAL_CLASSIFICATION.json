@@ -1,0 +1,10 @@
+{
+  "actual_partial_bundle_accepted": false,
+  "reason": "failed/incomplete/interrupted validation",
+  "policy": "cpu_gpu_validation_v2",
+  "protected_sources_verified": true,
+  "bounded_validation_ready": false,
+  "study_eligible": false,
+  "execution_authorized": false,
+  "note": "Offline classification of current explicitly incomplete coverage; no execution or fabricated passed records."
+}

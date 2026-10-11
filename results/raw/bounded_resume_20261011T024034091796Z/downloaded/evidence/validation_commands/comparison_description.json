@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/cpu_gpu_comparison",
+    "--describe"
+  ],
+  "cwd": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source",
+  "started_utc": "2026-10-11T03:02:29.085979+00:00",
+  "exit_code": 0,
+  "status": "completed",
+  "stdout": "{\"architecture\":\"x86_64\",\"binary_dir\":\"/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release\",\"build_type\":\"Release\",\"compiler_id\":\"GNU\",\"compiler_path\":\"/usr/bin/c++\",\"compiler_version\":\"13.3.0\",\"configuration_flags\":\"-O3 -DNDEBUG\",\"cub_version\":300001,\"cuda_architectures\":\"75\",\"cuda_compiler_version\":\"13.0.88\",\"cuda_flags\":\"\",\"cuda_release_flags\":\"-O3 -DNDEBUG\",\"cuda_toolkit_version\":\"13.0.88\",\"cxx_standard\":17,\"global_flags\":\"\",\"implementation_version\":\"cpu_gpu_comparison_driver_v1\",\"openmp_flags\":\"-fopenmp\",\"openmp_libraries\":\"/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so;/usr/lib/x86_64-linux-gnu/libpthread.a\",\"openmp_version\":\"4.5\",\"platform\":\"Linux\",\"sanitizers\":false,\"source_dir\":\"/content/mab_bounded_resume_20261011T024034091796Z_revision2/source\"}\n",
+  "stderr": "",
+  "omp_environment": {
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_MAX_ACTIVE_LEVELS": "1",
+    "OMP_PROC_BIND": "FALSE",
+    "OMP_THREAD_LIMIT": "2",
+    "OMP_WAIT_POLICY": "PASSIVE"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "session_id": "gpu-t4-s-kkb-usw1b1-zafww0nxdtgf",
+  "source_identity": "6ff286745f06b66c91d25d0ca93affcee43d238e0858f42797fe078a85e39379",
+  "build_identity": "f7470b3ae84fdd23a5976b8b92ca08d88d780c3562c6078a3d70872ac3eee02d",
+  "binary_identity": "d3416ec4fb1e6d3b3536350ae6c7340fa1cfa9831d4460bf4027421897318835",
+  "freeze_sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+  "record_sha256": {
+    "cpu_release": "aa58f9e399510de56f959939b8367771d3c8ab88fb59b82673f8c6842af90a45",
+    "cpu_sanitize": "c5a99b99de3bbb4faf5246562d4f3f1ce647c8812d3919c243d4ab49d46a8134",
+    "gpu_prepared": "84b721a6d9b3e275eeeb64bb74435e0371aa418325b59d81ddb920ab4525829d",
+    "workspace": "35348c2bf010096ff7a5c5b7ef1da113620ad0b158e867ee9858f33aad7f91a9",
+    "workers": "bbc232eb3c356bcb205490a71e837446de6f6720218f57db4a3f045a36706ac2"
+  }
+}

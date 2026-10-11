@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nE=Path(\"results/raw/bounded_resume_20261011T024034091796Z\")\ns=(E/'remote_seal.py').read_text()\ns=s.replace(\"assert (e/'BOUNDED_COMPLETE.json').is_file() and json.loads((e/'BOUNDED_COMPLETE.json').read_text())['complete'] is True\",\"assert json.loads((e/'validation_commands/cpu_release_ctest.json').read_text())['exit_code'] == 8\")\ns=s.replace('all_validation_complete=True','all_validation_complete=False').replace(\"root/'validation_evidence.tar.gz'\",\"root/'validation_evidence_failed.tar.gz'\")\nwith (E/'remote_seal_failed.py').open('x') as f:f.write(s)\nprint('Failure-only evidence sealer; no tests/workloads')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:53:00.893456+00:00",
+  "exit_code": 0,
+  "stdout": "Failure-only evidence sealer; no tests/workloads\n",
+  "stderr": "",
+  "scope": "Evidence-only script assembly; original failure/source/build retained"
+}

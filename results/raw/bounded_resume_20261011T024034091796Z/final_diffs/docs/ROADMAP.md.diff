@@ -1,0 +1,50 @@
+--- before/docs/ROADMAP.md
++++ docs/ROADMAP.md
+@@ -492,26 +492,24 @@
+ approved19 CPU plan, frozen inputs, production adapters and CUB3.0.1 remain unchanged.
+ See [repair audit](../results/raw/ctest_path_repair_20261010T234224414430Z/FINAL_AUDIT.md).
+ Exact next gate: separate independent review only. Study launch remains **NO-GO**.
+-# Bounded validation preparation — current status: NO-GO
+-
+-The separately authorized untimed prepared-CUB and OpenMP worker diagnostics
+-are implemented. An additive v2 evidence-classification policy distinguishes
+-correctness, timing smoke, pilot and full prerequisites; legacy study gates and
+-frozen inputs remain unchanged. The original 19 CPU selections remain exact,
+-with new diagnostics requiring explicit opt-in.
+-
+-A replacement Tesla T4 session built fresh CPU Release, CPU sanitizer and CUDA
+-Release configurations. Direct GPU correctness passed163 inputs/489 oracle
+-checks; all three frozen-size resource diagnostics and12 worker checks passed.
+-The CPU regression/sanitizer suites have **not executed**: the static guard
+-rejected CMake3.31 Dart TLS keys and discovered memory-check configuration.
+-No discovery, benchmark, smoke/pilot measurement or study ran.
+-
+-Next smallest milestone: independently review retained generated Dart metadata
+-and an exact safe policy extension, then rerun the guarded CPU Release and
+-ASan/UBSan correctness selections under explicit bounded scope. Do not relax
+-unknown-configuration rejection. Untimed diagnostics do not establish timing
+-framework validity or authorize the full study. See
+-[the current audit](../results/raw/bounded_validation_20261011T020343203635Z/FINAL_AUDIT.md)
+-and [policy](CPU_GPU_VALIDATION_POLICY_v2.md).
+-
++# Bounded validation — passed; full-study authorization remains absent
++
++The approved untimed prepared-CUB/worker diagnostics and additive v2 classification
++policy now have current replacement-T4 evidence. An independently inspected,
++strict CMake3.31 metadata alternative preserves exact19 base CPU names and two
++opt-in correctness diagnostics, canonical build paths and all discovery guards.
++
++Fresh isolated Release/Debug ASan/UBSan suites passed21/21 each, with leak detection
++enabled. Prepared correctness passed163 inputs/489 output checks/489 invalid-operation
++rejections; all three frozen-size bounded workspace checks passed;12 public/registry
++worker calls verified actual team1 below32,768 and2 at/above. Two GPU timing Python
++methods intentionally skipped in each host-only suite; no CTest group skipped.
++Failed synthetic-fixture checks and corrective attempts are retained, not erased.
++
++No timing smoke, pilot, warm-up, measured trial or full study ran. Current-session
++resource values are snapshots; team size is not task participation or race proof.
++Legacy analyzer/launch eligibility remains unchanged and rejects the extended framework.
++Next gate: independent review of this consolidated evidence and compatibility limits,
++then separately authorized policy/integration work if required. Do not launch a study
++from correctness classification. See [current audit](../results/raw/bounded_resume_20261011T024034091796Z/FINAL_AUDIT.md),
++[metadata review](CTEST_COLAB_METADATA_v2.md) and [classification policy](CPU_GPU_VALIDATION_POLICY_v2.md).

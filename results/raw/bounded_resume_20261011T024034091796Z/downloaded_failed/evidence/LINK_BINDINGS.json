@@ -1,0 +1,8 @@
+{
+  "commands": {
+    "cpu_gpu_comparison.dir": "/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/cpu_gpu_comparison.dir/link.d CMakeFiles/cpu_gpu_comparison.dir/src/benchmark/cpu_gpu_main.cpp.o -o cpu_gpu_comparison   -L/usr/local/cuda/targets/x86_64-linux/lib  -Wl,-rpath,/usr/local/cuda-13.0/targets/x86_64-linux/lib libmab_comparison.a libmab_parallel.a libmab_cuda_sort.a libmab_cuda_timing.a libmab_cuda_comparison.a libmab_metrics.a libmab_timing.a /usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so /usr/lib/x86_64-linux-gnu/libpthread.a /usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so -ldl /usr/lib/x86_64-linux-gnu/librt.a libmab_core.a -lcudadevrt -lcudart_static -lrt -lpthread -ldl\n",
+    "test_parallel_workers.dir": "/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_parallel_workers.dir/link.d CMakeFiles/test_parallel_workers.dir/tests/test_parallel_workers.cpp.o -o test_parallel_workers  libmab_parallel.a libmab_diagnostic_output.a /usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so /usr/lib/x86_64-linux-gnu/libpthread.a libmab_core.a\n",
+    "test_cuda_prepared_correctness.dir": "/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_cuda_prepared_correctness.dir/link.d CMakeFiles/test_cuda_prepared_correctness.dir/tests/test_cuda_prepared_correctness.cpp.o -o test_cuda_prepared_correctness   -L/usr/local/cuda/targets/x86_64-linux/lib  -Wl,-rpath,/usr/local/cuda-13.0/targets/x86_64-linux/lib libmab_cuda_timing.a libmab_diagnostic_output.a /usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so -ldl /usr/lib/x86_64-linux-gnu/librt.a libmab_core.a -lcudadevrt -lcudart_static -lrt -lpthread -ldl\n"
+  },
+  "shared_parallel_library_sha256": "5a316a67182a9375f39376a5b7fefd80e71985809e7f7d2c6a58b94de76381b2"
+}

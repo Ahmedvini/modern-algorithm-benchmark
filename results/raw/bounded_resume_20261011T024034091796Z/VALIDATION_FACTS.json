@@ -1,0 +1,312 @@
+{
+  "benchmark_trials": 0,
+  "classification": {
+    "artifact_kind": "correctness_validation",
+    "bounded_validation_ready": true,
+    "classification_valid": true,
+    "execution_authorized": false,
+    "launch_review_candidate": false,
+    "policy": "cpu_gpu_validation_v2",
+    "reasons": [
+      "Explicit evidence kind and current independently supplied identities verified.",
+      "Legacy launch policy unchanged; no performance or execution permission inferred."
+    ],
+    "study_eligible": false
+  },
+  "cpu_release_passed": 21,
+  "cpu_sanitize_passed": 21,
+  "ctest_group_skips": 0,
+  "full_study_executed": false,
+  "host_gpu_timing_method_skips_each_suite": 2,
+  "leak_detection_disabled": false,
+  "local_focused_passed_methods": 66,
+  "pilot_runs": 0,
+  "prepared_gpu": {
+    "artifact_kind": "correctness_validation",
+    "failures": 0,
+    "inputs": 163,
+    "invalid_operations_rejected": 489,
+    "output_checks": 489,
+    "schema_version": 1,
+    "scope": "prepared_cuda_untimed_v1",
+    "status": "passed",
+    "study_eligible": false
+  },
+  "stage_status": {
+    "0": "PASS",
+    "1": "PASS",
+    "2": "PASS",
+    "3": "PASS",
+    "4": "PASS",
+    "5": "PASS"
+  },
+  "warmups": 0,
+  "warnings": {
+    "initial": {
+      "cpu-release_build": {
+        "categories": {},
+        "count": 0
+      },
+      "cpu-release_configure": {
+        "categories": {},
+        "count": 0
+      },
+      "cpu-sanitize_build": {
+        "categories": {},
+        "count": 0
+      },
+      "cpu-sanitize_configure": {
+        "categories": {},
+        "count": 0
+      },
+      "gpu-release_build": {
+        "categories": {
+          "style of line directive is a GCC extension": 367
+        },
+        "count": 367
+      },
+      "gpu-release_configure": {
+        "categories": {},
+        "count": 0
+      }
+    },
+    "revision2": {
+      "cpu-release_build": {
+        "categories": {},
+        "count": 0
+      },
+      "cpu-release_configure": {
+        "categories": {},
+        "count": 0
+      },
+      "cpu-sanitize_build": {
+        "categories": {},
+        "count": 0
+      },
+      "cpu-sanitize_configure": {
+        "categories": {},
+        "count": 0
+      },
+      "gpu-release_build": {
+        "categories": {
+          "style of line directive is a GCC extension": 367
+        },
+        "count": 367
+      },
+      "gpu-release_configure": {
+        "categories": {},
+        "count": 0
+      }
+    }
+  },
+  "workers": {
+    "artifact_kind": "correctness_validation",
+    "build_type": "Release",
+    "calls": [
+      {
+        "actual_team_size": 1,
+        "correctness": true,
+        "parallel_region": false,
+        "registry": false,
+        "size": 0
+      },
+      {
+        "actual_team_size": 1,
+        "correctness": true,
+        "parallel_region": false,
+        "registry": true,
+        "size": 0
+      },
+      {
+        "actual_team_size": 1,
+        "correctness": true,
+        "parallel_region": false,
+        "registry": false,
+        "size": 1
+      },
+      {
+        "actual_team_size": 1,
+        "correctness": true,
+        "parallel_region": false,
+        "registry": true,
+        "size": 1
+      },
+      {
+        "actual_team_size": 1,
+        "correctness": true,
+        "parallel_region": false,
+        "registry": false,
+        "size": 32767
+      },
+      {
+        "actual_team_size": 1,
+        "correctness": true,
+        "parallel_region": false,
+        "registry": true,
+        "size": 32767
+      },
+      {
+        "actual_team_size": 2,
+        "correctness": true,
+        "parallel_region": true,
+        "registry": false,
+        "size": 32768
+      },
+      {
+        "actual_team_size": 2,
+        "correctness": true,
+        "parallel_region": true,
+        "registry": true,
+        "size": 32768
+      },
+      {
+        "actual_team_size": 2,
+        "correctness": true,
+        "parallel_region": true,
+        "registry": false,
+        "size": 32769
+      },
+      {
+        "actual_team_size": 2,
+        "correctness": true,
+        "parallel_region": true,
+        "registry": true,
+        "size": 32769
+      },
+      {
+        "actual_team_size": 2,
+        "correctness": true,
+        "parallel_region": true,
+        "registry": false,
+        "size": 65537
+      },
+      {
+        "actual_team_size": 2,
+        "correctness": true,
+        "parallel_region": true,
+        "registry": true,
+        "size": 65537
+      }
+    ],
+    "compiler": "13.3.0",
+    "environment": {
+      "OMP_DYNAMIC": "FALSE",
+      "OMP_MAX_ACTIVE_LEVELS": "1",
+      "OMP_NUM_THREADS": null,
+      "OMP_PROC_BIND": "FALSE",
+      "OMP_THREAD_LIMIT": "2",
+      "OMP_WAIT_POLICY": "PASSIVE"
+    },
+    "executable": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_parallel_workers",
+    "flags": "-O3 -DNDEBUG",
+    "openmp_flags": "-fopenmp",
+    "openmp_version": "4.5",
+    "output_checks": 12,
+    "requested_threads": 2,
+    "runtime_dynamic": 0,
+    "runtime_thread_limit": 2,
+    "sanitizers": false,
+    "schema_version": 1,
+    "scope": "openmp_workers_untimed_v1",
+    "status": "passed",
+    "study_eligible": false,
+    "team_size_is_task_participation": false
+  },
+  "workspace": {
+    "all_limits_passed": true,
+    "rows": [
+      {
+        "calculated_full_study_host_payload_bytes": 24600,
+        "disk_free_bytes": 75135385600,
+        "explicit_key_cudaMalloc_requested_bytes": 8200,
+        "explicit_workspace_cudaMalloc_requested_bytes": 2,
+        "host_available_bytes": 12493795328,
+        "physical_gpu_allocation": "not measured",
+        "query": {
+          "adapter_diagnostic_cudaMalloc_requested_bytes": 1,
+          "adapter_query_bytes": 1,
+          "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+          "combined_device_payload_bytes": 16402,
+          "compute_major": 7,
+          "compute_minor": 5,
+          "driver_api_version": 13000,
+          "free_device_bytes_before_buffers": 15527116800,
+          "gpu_name": "Tesla T4",
+          "known_host_peak_payload_bytes": 24600,
+          "prepared_diagnostic_cudaMalloc_requested_bytes": 1,
+          "prepared_query_bytes": 1,
+          "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+          "runtime_api_version": 13000,
+          "size": 1025,
+          "total_device_bytes": 15637086208,
+          "workspace_policy_cap_each_bytes": 67108864
+        },
+        "size": 1025,
+        "sorting_executed": false
+      },
+      {
+        "calculated_full_study_host_payload_bytes": 1572888,
+        "disk_free_bytes": 75135385600,
+        "explicit_key_cudaMalloc_requested_bytes": 524296,
+        "explicit_workspace_cudaMalloc_requested_bytes": 558590,
+        "host_available_bytes": 12493795328,
+        "physical_gpu_allocation": "not measured",
+        "query": {
+          "adapter_diagnostic_cudaMalloc_requested_bytes": 279295,
+          "adapter_query_bytes": 279295,
+          "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+          "combined_device_payload_bytes": 1607182,
+          "compute_major": 7,
+          "compute_minor": 5,
+          "driver_api_version": 13000,
+          "free_device_bytes_before_buffers": 15527116800,
+          "gpu_name": "Tesla T4",
+          "known_host_peak_payload_bytes": 1572888,
+          "prepared_diagnostic_cudaMalloc_requested_bytes": 279295,
+          "prepared_query_bytes": 279295,
+          "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+          "runtime_api_version": 13000,
+          "size": 65537,
+          "total_device_bytes": 15637086208,
+          "workspace_policy_cap_each_bytes": 67108864
+        },
+        "size": 65537,
+        "sorting_executed": false
+      },
+      {
+        "calculated_full_study_host_payload_bytes": 24000000,
+        "disk_free_bytes": 75135385600,
+        "explicit_key_cudaMalloc_requested_bytes": 8000000,
+        "explicit_workspace_cudaMalloc_requested_bytes": 8357374,
+        "host_available_bytes": 12493795328,
+        "physical_gpu_allocation": "not measured",
+        "query": {
+          "adapter_diagnostic_cudaMalloc_requested_bytes": 4178687,
+          "adapter_query_bytes": 4178687,
+          "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+          "combined_device_payload_bytes": 24357374,
+          "compute_major": 7,
+          "compute_minor": 5,
+          "driver_api_version": 13000,
+          "free_device_bytes_before_buffers": 15527116800,
+          "gpu_name": "Tesla T4",
+          "known_host_peak_payload_bytes": 24000000,
+          "prepared_diagnostic_cudaMalloc_requested_bytes": 4178687,
+          "prepared_query_bytes": 4178687,
+          "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+          "runtime_api_version": 13000,
+          "size": 1000000,
+          "total_device_bytes": 15637086208,
+          "workspace_policy_cap_each_bytes": 67108864
+        },
+        "size": 1000000,
+        "sorting_executed": false
+      }
+    ],
+    "sizes": [
+      1025,
+      65537,
+      1000000
+    ]
+  }
+}

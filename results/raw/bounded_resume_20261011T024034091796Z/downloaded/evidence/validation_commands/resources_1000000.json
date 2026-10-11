@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/cpu_gpu_comparison",
+    "--resources",
+    "1000000"
+  ],
+  "cwd": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source",
+  "started_utc": "2026-10-11T03:02:30.476781+00:00",
+  "exit_code": 0,
+  "status": "completed",
+  "stdout": "{\"adapter_diagnostic_cudaMalloc_requested_bytes\":4178687,\"adapter_query_bytes\":4178687,\"allocation_observation\":\"successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured\",\"combined_device_payload_bytes\":24357374,\"compute_major\":7,\"compute_minor\":5,\"driver_api_version\":13000,\"free_device_bytes_before_buffers\":15527116800,\"gpu_name\":\"Tesla T4\",\"known_host_peak_payload_bytes\":24000000,\"prepared_diagnostic_cudaMalloc_requested_bytes\":4178687,\"prepared_query_bytes\":4178687,\"production_workspace_observation\":\"not instrumented; isolated same-parameter sizing query only\",\"runtime_api_version\":13000,\"size\":1000000,\"total_device_bytes\":15637086208,\"workspace_policy_cap_each_bytes\":67108864}\n",
+  "stderr": "",
+  "omp_environment": {
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_MAX_ACTIVE_LEVELS": "1",
+    "OMP_PROC_BIND": "FALSE",
+    "OMP_THREAD_LIMIT": "2",
+    "OMP_WAIT_POLICY": "PASSIVE"
+  }
+}

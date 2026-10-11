@@ -1,0 +1,39 @@
+--- before/scripts/ctest_build_guard.py
++++ scripts/ctest_build_guard.py
+@@ -77,7 +77,21 @@
+         key, value = line.split(': ', 1)
+         require(key not in values, 'duplicate Dart setting')
+         values[key] = value
+-    expected = policy['dart_defaults']
++    expected = dict(policy['dart_defaults'])
++    if policy['policy'] == 'flat_literal_ctest_v2':
++        # Exact reviewed CMake 3.31 Colab alternative. These are dashboard-only
++        # settings: the selector never constructs a dashboard/MemCheck action.
++        # Never accept an arbitrary tool path, arguments, or nonempty TLS value.
++        require(policy.get('dart_compatibility_profile') == 'cmake331_colab_t4_v1',
++                'unreviewed Dart compatibility profile')
++        tls = {'TLSVerify', 'TLSVersion'}
++        require(set(values) in [set(expected), set(expected) | tls],
++                'unknown/missing Dart setting')
++        if tls <= set(values):
++            require(all(values[key] == '' for key in tls), 'unreviewed Dart TLS setting')
++            expected.update({key: '' for key in tls})
++        if values.get('MemoryCheckCommand') == '/usr/local/cuda/bin/compute-sanitizer':
++            expected['MemoryCheckCommand'] = '/usr/local/cuda/bin/compute-sanitizer'
+     require(set(values) == set(expected), 'unknown/missing Dart setting')
+     for key, value in values.items():
+         if key in policy['dart_inert_metadata']:
+@@ -109,8 +123,12 @@
+         require(not component.is_symlink(), 'symlinked build directory')
+     require(not any(k.startswith('CTEST_') for k in os.environ), 'unreviewed CTEST environment override')
+     policy = manifest.get('build_metadata')
+-    require(isinstance(policy, dict) and policy.get('policy') == 'flat_literal_ctest_v1',
++    require(isinstance(policy, dict) and policy.get('policy') in
++            ['flat_literal_ctest_v1', 'flat_literal_ctest_v2'],
+             'missing reviewed build-metadata policy')
++    if policy['policy'] == 'flat_literal_ctest_v2':
++        require(policy.get('dart_compatibility_profile') == 'cmake331_colab_t4_v1',
++                'unreviewed Dart compatibility profile')
+     files = {}
+     def onerror(error):
+         raise ValueError('unreadable build tree: ' + str(error)) from error

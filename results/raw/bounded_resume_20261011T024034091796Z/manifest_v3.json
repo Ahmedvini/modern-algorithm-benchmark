@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport hashlib,json,sys\nsys.path.insert(0,str(Path('scripts').resolve()))\nfrom cpu_gpu_protocol import source_manifest\np=Path('docs/NON_TIMING_TEST_SELECTION_v2.json');m=json.loads(p.read_text())\nm['schema_version']=3;m['policy']='non_timing_correctness_v3'\nm['review_method']='Versioned exact CMake3.31 Colab Dart literal alternative, reviewed fixed ordinary CTest commands; all v2 registrations/source safeguards retained.'\nm['build_metadata']['policy']='flat_literal_ctest_v2';m['build_metadata']['dart_compatibility_profile']='cmake331_colab_t4_v1'\nm['reviewed_source_sha256']=source_manifest()\nm['evidence']=\"results/raw/bounded_resume_20261011T024034091796Z\"\ntarget=Path('docs/NON_TIMING_TEST_SELECTION_v3.json')\nwith target.open('x') as out:json.dump(m,out,indent=2,sort_keys=True);out.write('\\n')\nprint('Reviewed source files',len(m['reviewed_source_sha256']))\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:42:45.393432+00:00",
+  "exit_code": 0,
+  "stdout": "Reviewed source files 150\n",
+  "stderr": "",
+  "scope": "Evidence-reviewed source snapshot and new versioned selection manifest only; no workloads"
+}

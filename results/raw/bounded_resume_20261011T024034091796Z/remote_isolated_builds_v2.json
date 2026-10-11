@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation-v3",
+    "--file",
+    "results/raw/bounded_resume_20261011T024034091796Z/remote_build_v2.py",
+    "--timeout",
+    "1200"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:55:50.912971+00:00",
+  "exit_code": 0,
+  "stdout": "cpu-release_configure exit 0\ncpu-release_build exit 0\ncpu-sanitize_configure exit 0\ncpu-sanitize_build exit 0\ngpu-release_configure exit 0\ngpu-release_build exit 0\nISOLATED_BUILDS_COMPLETE\n",
+  "stderr": "",
+  "scope": "Fresh isolated revision2 CPU Release, sanitizer Debug, GPU Release configure/build; no tests/workloads"
+}

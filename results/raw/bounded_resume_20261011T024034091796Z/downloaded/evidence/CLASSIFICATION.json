@@ -1,0 +1,13 @@
+{
+  "policy": "cpu_gpu_validation_v2",
+  "artifact_kind": "correctness_validation",
+  "classification_valid": true,
+  "bounded_validation_ready": true,
+  "launch_review_candidate": false,
+  "study_eligible": false,
+  "execution_authorized": false,
+  "reasons": [
+    "Explicit evidence kind and current independently supplied identities verified.",
+    "Legacy launch policy unchanged; no performance or execution permission inferred."
+  ]
+}

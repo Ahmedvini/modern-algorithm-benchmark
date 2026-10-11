@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "tests/test_ctest_dart_compatibility.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:42:57.107089+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.937s\n\nOK\n",
+  "scope": "Focused inert regressions; inspected subprocess/shell entry points mocked, no CTest/timing/GPU"
+}

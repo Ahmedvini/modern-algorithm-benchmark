@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "tests/test_cpu_gpu_comparison.py",
+    "StudyOrchestrationTests"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:52:17.673224+00:00",
+  "exit_code": 1,
+  "stdout": "interrupt interrupted exit -15\nfailed completed exit 9\ntimeout timeout exit -15\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nstudy complete:1200 measured/240 warm-ups.\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\n",
+  "stderr": "......E..........fixture stop before preflight\n............................explicit injected worker failure\n...synthetic stop before preflight\n...study total timeout before input\n.\n======================================================================\nERROR: test_input_cli_roundtrip_and_invalid (__main__.FrameworkTests.test_input_cli_roundtrip_and_invalid)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cpu_gpu_comparison.py\", line 175, in test_input_cli_roundtrip_and_invalid\n    result=subprocess.run(args,capture_output=True,text=True);self.assertEqual(result.returncode,0,result.stderr)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/usr/lib/python3.12/subprocess.py\", line 1955, in _execute_child\n    raise child_exception_type(errno_num, err_msg, err_filename)\nFileNotFoundError: [Errno 2] No such file or directory: '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/StudyOrchestrationTests'\n\n----------------------------------------------------------------------\nRan 52 tests in 10.695s\n\nFAILED (errors=1)\n",
+  "scope": "Only synthetic StudyOrchestrationTests; invoke/snapshot/analyze mocked, no measurements/GPU/real CTest"
+}

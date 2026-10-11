@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "colab",
+    "status",
+    "--session",
+    "cpu-gpu-bounded-validation-v3"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:43:08.580899+00:00",
+  "exit_code": 0,
+  "stdout": "[cpu-gpu-bounded-validation-v3] gpu-t4-s-kkb-usw1b1-zafww0nxdtgf | Hardware: T4 | Shape: Standard | Variant: GPU | Status: IDLE\n",
+  "stderr": "",
+  "scope": "Replacement identity/health only; no workloads"
+}

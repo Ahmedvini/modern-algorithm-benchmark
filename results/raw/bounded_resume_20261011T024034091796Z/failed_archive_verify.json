@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/bounded_resume_20261011T024034091796Z/verify_remote_archive.py",
+    "validation_evidence_failed.tar.gz",
+    "7ee768cfb4dd2cad9c97d5f0866176dd1a71c89b7431ad6d0bf561519651d3a7",
+    "downloaded_failed"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:56:20.957067+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive\": \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/bounded_resume_20261011T024034091796Z/validation_evidence_failed.tar.gz\",\n  \"sha256\": \"7ee768cfb4dd2cad9c97d5f0866176dd1a71c89b7431ad6d0bf561519651d3a7\",\n  \"sealed_members\": 37,\n  \"extracted_files\": 38,\n  \"content_and_membership_verified\": true\n}\n",
+  "stderr": "",
+  "scope": "Hash/safe member/content verification of retained failed evidence; no execution"
+}

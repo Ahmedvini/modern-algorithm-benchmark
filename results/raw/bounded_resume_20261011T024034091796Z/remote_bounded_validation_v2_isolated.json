@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation-v3",
+    "--file",
+    "results/raw/bounded_resume_20261011T024034091796Z/remote_validate_v2_isolated.py",
+    "--timeout",
+    "1200"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T03:00:31.830048+00:00",
+  "exit_code": 0,
+  "stdout": "cpu_release_ctest_discovery exit 0\ncpu_release_ctest exit 0\ncpu_sanitize_ctest_discovery exit 0\ncpu_sanitize_ctest exit 0\ncomparison_description exit 0\ngpu_prepared_untimed exit 0\nresources_1025 exit 0\nresources_65537 exit 0\nresources_1000000 exit 0\nactual_workers_untimed exit 0\nBOUNDED_VALIDATION_PASSED; FULL STUDY NOT AUTHORIZED\nFRESH_PROCESS_EXIT 0\n",
+  "stderr": "",
+  "scope": "Bounded guarded CPU Release and ASan/UBSan21, untimed prepared GPU correctness, workspace queries and worker correctness; zero timing trials"
+}

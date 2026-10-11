@@ -1,0 +1,91 @@
+{
+  "schema_version": 2,
+  "policy": "cpu_gpu_validation_v2",
+  "artifact_kind": "correctness_validation",
+  "status": "passed",
+  "study_eligible": false,
+  "execution_authorized": false,
+  "protected_source_sha256": {
+    "CMakeLists.txt": "f18be8635e326e25616a1c0e133ebfd35d5d2244fbe5b3d2aca16ccb4836f30d",
+    "cmake/cuda.cmake": "575474ecb26c0c18e1bed301404425d55206dc47bb9df1ce59cfdcaff98898bd",
+    "docs/CUDA_TIMING_PROTOCOL_v1.md": "02b8ca8714705a76aed360f6a6582edd9c23354b179c5e4c3b944fa365b2c495",
+    "include/algorithms/cuda_sorting.hpp": "a029d6de17ceee746fdb79a295bf4ac48035f94cb0f27726204eccf13c935526",
+    "include/algorithms/detail/mergesort_impl.hpp": "df648ba49007a0e08b0c1b2b7ac61dd2c8d331a316e856d6bf63a3dff6eef390",
+    "include/algorithms/detail/parallel_mergesort_impl.hpp": "62a60391ceaab50db3dac695cabc8b1c653028ca5d0a11f30dc04b7e136bd6c0",
+    "include/algorithms/parallel_mergesort.hpp": "f15b1f5d0b46687f562894b89b9550cfef5eef67df7e47e0ac047dafb172f750",
+    "include/algorithms/sorting.hpp": "b43c28adb1306329b30928e2c2345e87221acf004548b4f3474178efdd1d5cbf",
+    "include/benchmark/cuda_timing.hpp": "f73e9e4ac9681c37a3c71f58bd471dcd638dae08ba12e3257a66650ef4354c87",
+    "include/benchmark/detail/timing_impl.hpp": "5994370fdc6f2a164d2e58d862e2d629ccd04a4f120c6c56deeb19bd93597b83",
+    "include/common/types.hpp": "4b2e378fdb0d49310d300e5cda1afd54ab8c1c8314e32a16ea6ce3b67637d849",
+    "include/datasets/generator.hpp": "b0f1944f3f94a0e5e5b20dfe6dadd26d937a43ca5e619f9de176b46ffe685e8b",
+    "scripts/analyze_cuda_results.py": "e63f2fdcc46b15be9506080509b9eeaf4a2ba0544cf29a516fb5581a1f16eca0",
+    "scripts/analyze_parallel_results.py": "b3a5a4238767359ca5abdb452b2cdfd0e8c9387d92950f1d76dca46b9f857e88",
+    "scripts/analyze_results.py": "742d4eeaff4234ad7572f942dd5f510d45e8b14025e416a960da5933dfe54f24",
+    "src/algorithms/baselines.cpp": "0c93ca1513ff47a9bc9a3e37dbc56d0fded9d98e5a5c94e53c638c0df99e20d1",
+    "src/algorithms/mergesort.cpp": "a97bb2234bf8c70a814797f08c927b782131f0ea0500c96de5c0dcdb4ff42f03",
+    "src/algorithms/parallel_mergesort.cpp": "ad2bdd6210faffe88104806b2effd153b482e390426f621b5a2be0e62dcb2533",
+    "src/benchmark/cuda_main.cpp": "fcf423d6dd68a2003111b3231de82ffdaecfff20b3841c27a3fdef4592fae060",
+    "src/benchmark/parallel_timing.cpp": "7ea9a2f045fe56e996a0ed8ef78a93a7ff59ad76adc67fbe80f29d6f583e1d2c",
+    "src/benchmark/timing.cpp": "1a3d5087cb2b43681ad69fe407d5deeb5d9d2ffa98c36c20a90e1ffd1e3efb9e",
+    "src/cuda/cub_sort.cu": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+    "src/cuda/cub_timing.cu": "230237187a3abbc1246f9604a3a72a0ed477da864f78d89f33422e44e58f1a45",
+    "src/datasets/generator.cpp": "4a5cf9e840592361d77e92d147e544696d05b82b0f4c72a6d4871d8c0c726adf",
+    "third_party/cub/LICENSE": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+    "third_party/cub/UPSTREAM.json": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1"
+  },
+  "records": {
+    "cpu_release": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "passed": 21,
+      "sha256": "aa58f9e399510de56f959939b8367771d3c8ab88fb59b82673f8c6842af90a45"
+    },
+    "cpu_sanitize": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "passed": 21,
+      "sha256": "c5a99b99de3bbb4faf5246562d4f3f1ce647c8812d3919c243d4ab49d46a8134"
+    },
+    "gpu_prepared": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "inputs": 163,
+      "output_checks": 489,
+      "failures": 0,
+      "sha256": "84b721a6d9b3e275eeeb64bb74435e0371aa418325b59d81ddb920ab4525829d"
+    },
+    "workspace": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "sizes": [
+        1025,
+        65537,
+        1000000
+      ],
+      "all_limits_passed": true,
+      "sha256": "35348c2bf010096ff7a5c5b7ef1da113620ad0b158e867ee9858f33aad7f91a9"
+    },
+    "workers": {
+      "status": "passed",
+      "exit_code": 0,
+      "skipped": 0,
+      "missing": 0,
+      "output_checks": 12,
+      "threshold_team_verified": true,
+      "sha256": "bbc232eb3c356bcb205490a71e837446de6f6720218f57db4a3f045a36706ac2"
+    }
+  },
+  "session_id": "gpu-t4-s-kkb-usw1b1-zafww0nxdtgf",
+  "source_identity": "6ff286745f06b66c91d25d0ca93affcee43d238e0858f42797fe078a85e39379",
+  "build_identity": "f7470b3ae84fdd23a5976b8b92ca08d88d780c3562c6078a3d70872ac3eee02d",
+  "binary_identity": "d3416ec4fb1e6d3b3536350ae6c7340fa1cfa9831d4460bf4027421897318835",
+  "freeze_sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6"
+}

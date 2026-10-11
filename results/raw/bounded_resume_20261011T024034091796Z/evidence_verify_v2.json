@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/bounded_resume_20261011T024034091796Z/verify_remote_archive.py",
+    "validation_evidence.tar.gz",
+    "7339833e631df7f5dda203b6a4ef9a42a7714682331ac558d4a25e2a798780a9",
+    "downloaded"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T03:03:31.127919+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive\": \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/bounded_resume_20261011T024034091796Z/validation_evidence.tar.gz\",\n  \"sha256\": \"7339833e631df7f5dda203b6a4ef9a42a7714682331ac558d4a25e2a798780a9\",\n  \"sealed_members\": 52,\n  \"extracted_files\": 53,\n  \"content_and_membership_verified\": true\n}\n",
+  "stderr": "",
+  "scope": "Verify remote archive hash and safe exact-member extraction only"
+}

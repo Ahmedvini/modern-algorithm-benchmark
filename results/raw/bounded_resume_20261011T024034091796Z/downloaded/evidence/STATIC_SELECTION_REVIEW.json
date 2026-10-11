@@ -1,0 +1,951 @@
+{
+  "cpu-release": {
+    "guard": {
+      "policy": "flat_literal_ctest_v2",
+      "build_dir": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release",
+      "files_sha256": {
+        "CTestTestfile.cmake": "a4eae00f89be32c1b3b0fa10979e4abac98070233abeda525fce26f756aee7ed",
+        "DartConfiguration.tcl": "70f5b530ae7301857de93346af255fa3b92a4ccaecfb0e581934265392a184ee"
+      },
+      "test_names": [
+        "baselines",
+        "benchmark_framework",
+        "cli",
+        "comparison_engine",
+        "comparisons",
+        "cpu_gpu_comparison_framework",
+        "cuda_benchmark_analysis",
+        "cuda_preflight",
+        "cuda_sort_handoff",
+        "datasets",
+        "environment_manifest",
+        "experiment_pipeline",
+        "memory",
+        "memory_unsupported",
+        "mergesort",
+        "metrics_cli",
+        "parallel_framework",
+        "parallel_mergesort",
+        "parallel_workers_correctness",
+        "pdqsort",
+        "quicksort",
+        "radixsort",
+        "search_framework",
+        "search_timing",
+        "searching",
+        "structure_framework",
+        "structure_timing",
+        "structures",
+        "timing",
+        "timsort",
+        "validation_policy"
+      ],
+      "commands": {
+        "experiment_pipeline": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_experiments.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release"
+        ],
+        "structures": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_structures"
+        ],
+        "structure_timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_structure_timing"
+        ],
+        "structure_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_structure_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/structure_benchmark"
+        ],
+        "searching": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_searching"
+        ],
+        "search_timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_search_timing"
+        ],
+        "search_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_search_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/search_benchmark",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/search_counts"
+        ],
+        "baselines": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_baselines"
+        ],
+        "environment_manifest": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_environment.py"
+        ],
+        "cuda_preflight": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_preflight.py"
+        ],
+        "cuda_benchmark_analysis": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_benchmark.py"
+        ],
+        "cuda_sort_handoff": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_sort_handoff.py"
+        ],
+        "datasets": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_datasets"
+        ],
+        "cli": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cli.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/algorithm_benchmark"
+        ],
+        "quicksort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_quicksort"
+        ],
+        "pdqsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_pdqsort"
+        ],
+        "timsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_timsort"
+        ],
+        "mergesort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_mergesort"
+        ],
+        "radixsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_radixsort"
+        ],
+        "comparisons": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_comparisons"
+        ],
+        "memory": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_memory"
+        ],
+        "memory_unsupported": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_memory_unsupported"
+        ],
+        "metrics_cli": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_metrics_cli.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/sort_metrics"
+        ],
+        "timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_timing"
+        ],
+        "benchmark_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/sort_benchmark"
+        ],
+        "parallel_mergesort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_parallel_mergesort"
+        ],
+        "parallel_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_parallel_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/parallel_sort_benchmark"
+        ],
+        "comparison_engine": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_comparison"
+        ],
+        "cpu_gpu_comparison_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cpu_gpu_comparison.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/comparison_input"
+        ],
+        "validation_policy": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_validation_policy.py"
+        ],
+        "parallel_workers_correctness": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release/test_parallel_workers"
+        ]
+      },
+      "properties": {
+        "experiment_pipeline": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;86;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structures": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;91;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structure_timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;94;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structure_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;95;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "searching": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;100;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "search_timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;103;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "search_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;104;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "baselines": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;109;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "environment_manifest": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;110;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_preflight": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;112;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_benchmark_analysis": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;114;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_sort_handoff": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;115;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "datasets": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;119;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cli": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;120;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "quicksort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;125;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "pdqsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;128;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "timsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;131;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "mergesort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;134;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "radixsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;137;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "comparisons": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;140;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "memory": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;143;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "memory_unsupported": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;149;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "metrics_cli": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;150;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;155;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "benchmark_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;156;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_mergesort": {
+          "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=8;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;191;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;193;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "comparison_engine": {
+          "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=2;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE;OMP_PROC_BIND=FALSE",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;222;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cpu_gpu_comparison_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;224;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "validation_policy": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;233;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_workers_correctness": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;239;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        }
+      }
+    },
+    "base_approved": [
+      "baselines",
+      "cli",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "searching",
+      "structures",
+      "timsort"
+    ],
+    "selected_cpu_with_diagnostics": [
+      "baselines",
+      "cli",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "parallel_workers_correctness",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "searching",
+      "structures",
+      "timsort",
+      "validation_policy"
+    ],
+    "source_policy": "non_timing_correctness_v3",
+    "tests_executed": false,
+    "ctest_discovery_executed": false
+  },
+  "cpu-sanitize": {
+    "guard": {
+      "policy": "flat_literal_ctest_v2",
+      "build_dir": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize",
+      "files_sha256": {
+        "CTestTestfile.cmake": "1e59816ebc3c013ecf4ed4d6ed3dc83efe5455a2b6a356c9463dd740661eb7f5",
+        "DartConfiguration.tcl": "766516d431e3ce5c74b9aa607a25dbf75f4bf63003ed7eccd7ca86c2dc7a9b35"
+      },
+      "test_names": [
+        "baselines",
+        "benchmark_framework",
+        "cli",
+        "comparison_engine",
+        "comparisons",
+        "cpu_gpu_comparison_framework",
+        "cuda_benchmark_analysis",
+        "cuda_preflight",
+        "cuda_sort_handoff",
+        "datasets",
+        "environment_manifest",
+        "experiment_pipeline",
+        "memory",
+        "memory_unsupported",
+        "mergesort",
+        "metrics_cli",
+        "parallel_framework",
+        "parallel_mergesort",
+        "parallel_workers_correctness",
+        "pdqsort",
+        "quicksort",
+        "radixsort",
+        "search_framework",
+        "search_timing",
+        "searching",
+        "structure_framework",
+        "structure_timing",
+        "structures",
+        "timing",
+        "timsort",
+        "validation_policy"
+      ],
+      "commands": {
+        "experiment_pipeline": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_experiments.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize"
+        ],
+        "structures": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_structures"
+        ],
+        "structure_timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_structure_timing"
+        ],
+        "structure_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_structure_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/structure_benchmark"
+        ],
+        "searching": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_searching"
+        ],
+        "search_timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_search_timing"
+        ],
+        "search_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_search_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/search_benchmark",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/search_counts"
+        ],
+        "baselines": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_baselines"
+        ],
+        "environment_manifest": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_environment.py"
+        ],
+        "cuda_preflight": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_preflight.py"
+        ],
+        "cuda_benchmark_analysis": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_benchmark.py"
+        ],
+        "cuda_sort_handoff": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_sort_handoff.py"
+        ],
+        "datasets": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_datasets"
+        ],
+        "cli": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cli.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/algorithm_benchmark"
+        ],
+        "quicksort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_quicksort"
+        ],
+        "pdqsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_pdqsort"
+        ],
+        "timsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_timsort"
+        ],
+        "mergesort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_mergesort"
+        ],
+        "radixsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_radixsort"
+        ],
+        "comparisons": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_comparisons"
+        ],
+        "memory": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_memory"
+        ],
+        "memory_unsupported": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_memory_unsupported"
+        ],
+        "metrics_cli": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_metrics_cli.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/sort_metrics"
+        ],
+        "timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_timing"
+        ],
+        "benchmark_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/sort_benchmark"
+        ],
+        "parallel_mergesort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_parallel_mergesort"
+        ],
+        "parallel_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_parallel_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/parallel_sort_benchmark"
+        ],
+        "comparison_engine": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_comparison"
+        ],
+        "cpu_gpu_comparison_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cpu_gpu_comparison.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/comparison_input"
+        ],
+        "validation_policy": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_validation_policy.py"
+        ],
+        "parallel_workers_correctness": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize/test_parallel_workers"
+        ]
+      },
+      "properties": {
+        "experiment_pipeline": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;86;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structures": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;91;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structure_timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;94;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structure_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;95;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "searching": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;100;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "search_timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;103;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "search_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;104;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "baselines": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;109;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "environment_manifest": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;110;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_preflight": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;112;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_benchmark_analysis": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;114;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_sort_handoff": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;115;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "datasets": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;119;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cli": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;120;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "quicksort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;125;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "pdqsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;128;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "timsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;131;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "mergesort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;134;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "radixsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;137;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "comparisons": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;140;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "memory": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;143;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "memory_unsupported": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;149;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "metrics_cli": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;150;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;155;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "benchmark_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;156;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_mergesort": {
+          "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=8;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;191;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;193;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "comparison_engine": {
+          "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=2;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE;OMP_PROC_BIND=FALSE",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;222;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cpu_gpu_comparison_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;224;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "validation_policy": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;233;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_workers_correctness": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;239;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        }
+      }
+    },
+    "base_approved": [
+      "baselines",
+      "cli",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "searching",
+      "structures",
+      "timsort"
+    ],
+    "selected_cpu_with_diagnostics": [
+      "baselines",
+      "cli",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "parallel_workers_correctness",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "searching",
+      "structures",
+      "timsort",
+      "validation_policy"
+    ],
+    "source_policy": "non_timing_correctness_v3",
+    "tests_executed": false,
+    "ctest_discovery_executed": false
+  },
+  "gpu-release": {
+    "guard": {
+      "policy": "flat_literal_ctest_v2",
+      "build_dir": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release",
+      "files_sha256": {
+        "CTestTestfile.cmake": "aceedf63d79dd4ce9eb88f8222d947d0cead4a6f823f1909e0fac3674ce285d5",
+        "DartConfiguration.tcl": "ac266785c30d8182a862b4ef2215e40bfbecd99825fb755a6f9c2ec71c8b0627"
+      },
+      "test_names": [
+        "baselines",
+        "benchmark_framework",
+        "cli",
+        "comparison_engine",
+        "comparisons",
+        "cpu_gpu_comparison_framework",
+        "cuda_benchmark_analysis",
+        "cuda_benchmark_gpu_framework",
+        "cuda_preflight",
+        "cuda_prepared_correctness",
+        "cuda_runtime_smoke",
+        "cuda_sort_handoff",
+        "cuda_sorting",
+        "datasets",
+        "environment_manifest",
+        "experiment_pipeline",
+        "memory",
+        "memory_unsupported",
+        "mergesort",
+        "metrics_cli",
+        "parallel_framework",
+        "parallel_mergesort",
+        "parallel_workers_correctness",
+        "pdqsort",
+        "quicksort",
+        "radixsort",
+        "search_framework",
+        "search_timing",
+        "searching",
+        "structure_framework",
+        "structure_timing",
+        "structures",
+        "timing",
+        "timsort",
+        "validation_policy"
+      ],
+      "commands": {
+        "experiment_pipeline": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_experiments.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release"
+        ],
+        "structures": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_structures"
+        ],
+        "structure_timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_structure_timing"
+        ],
+        "structure_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_structure_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/structure_benchmark"
+        ],
+        "searching": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_searching"
+        ],
+        "search_timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_search_timing"
+        ],
+        "search_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_search_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/search_benchmark",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/search_counts"
+        ],
+        "baselines": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_baselines"
+        ],
+        "environment_manifest": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_environment.py"
+        ],
+        "cuda_preflight": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_preflight.py"
+        ],
+        "cuda_benchmark_analysis": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_benchmark.py"
+        ],
+        "cuda_sort_handoff": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_sort_handoff.py"
+        ],
+        "datasets": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_datasets"
+        ],
+        "cli": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cli.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/algorithm_benchmark"
+        ],
+        "quicksort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_quicksort"
+        ],
+        "pdqsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_pdqsort"
+        ],
+        "timsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_timsort"
+        ],
+        "mergesort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_mergesort"
+        ],
+        "radixsort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_radixsort"
+        ],
+        "comparisons": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_comparisons"
+        ],
+        "memory": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_memory"
+        ],
+        "memory_unsupported": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_memory_unsupported"
+        ],
+        "metrics_cli": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_metrics_cli.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/sort_metrics"
+        ],
+        "timing": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_timing"
+        ],
+        "benchmark_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/sort_benchmark"
+        ],
+        "cuda_runtime_smoke": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/cuda_runtime_probe"
+        ],
+        "cuda_benchmark_gpu_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cuda_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/cuda_sort_benchmark"
+        ],
+        "cuda_sorting": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_cuda_sorting"
+        ],
+        "parallel_mergesort": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_parallel_mergesort"
+        ],
+        "parallel_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_parallel_benchmark.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/parallel_sort_benchmark"
+        ],
+        "comparison_engine": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_comparison"
+        ],
+        "cpu_gpu_comparison_framework": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_cpu_gpu_comparison.py",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/comparison_input"
+        ],
+        "validation_policy": [
+          "/usr/bin/python3.13",
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/tests/test_validation_policy.py"
+        ],
+        "parallel_workers_correctness": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_parallel_workers"
+        ],
+        "cuda_prepared_correctness": [
+          "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_cuda_prepared_correctness"
+        ]
+      },
+      "properties": {
+        "experiment_pipeline": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;86;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structures": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;91;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structure_timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;94;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "structure_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;95;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "searching": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;100;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "search_timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;103;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "search_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;104;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "baselines": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;109;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "environment_manifest": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;110;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_preflight": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;112;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_benchmark_analysis": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;114;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_sort_handoff": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;115;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "datasets": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;119;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cli": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;120;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "quicksort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;125;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "pdqsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;128;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "timsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;131;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "mergesort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;134;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "radixsort": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;137;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "comparisons": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;140;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "memory": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;143;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "memory_unsupported": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;149;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "metrics_cli": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;150;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "timing": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;155;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "benchmark_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;156;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_runtime_smoke": {
+          "SKIP_RETURN_CODE": "77",
+          "TIMEOUT": "60",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/cmake/cuda.cmake;23;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/cmake/cuda.cmake;0;;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;162;include;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_benchmark_gpu_framework": {
+          "TIMEOUT": "180",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/cmake/cuda.cmake;78;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/cmake/cuda.cmake;0;;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;162;include;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_sorting": {
+          "SKIP_RETURN_CODE": "77",
+          "TIMEOUT": "240",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/cmake/cuda.cmake;83;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/cmake/cuda.cmake;0;;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;162;include;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_mergesort": {
+          "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=8;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;191;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;193;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "comparison_engine": {
+          "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=2;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE;OMP_PROC_BIND=FALSE",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;222;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cpu_gpu_comparison_framework": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;224;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "validation_policy": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;233;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "parallel_workers_correctness": {
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;239;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        },
+        "cuda_prepared_correctness": {
+          "SKIP_RETURN_CODE": "77",
+          "TIMEOUT": "240",
+          "_BACKTRACE_TRIPLES": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;244;add_test;/content/mab_bounded_resume_20261011T024034091796Z_revision2/source/CMakeLists.txt;0;"
+        }
+      }
+    },
+    "base_approved": [
+      "baselines",
+      "cli",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "searching",
+      "structures",
+      "timsort"
+    ],
+    "selected_cpu_with_diagnostics": [
+      "baselines",
+      "cli",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "parallel_workers_correctness",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "searching",
+      "structures",
+      "timsort",
+      "validation_policy"
+    ],
+    "source_policy": "non_timing_correctness_v3",
+    "tests_executed": false,
+    "ctest_discovery_executed": false
+  }
+}

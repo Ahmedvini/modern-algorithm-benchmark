@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport json,sys\nsys.path.insert(0,str(Path('scripts').resolve()))\nfrom cpu_gpu_protocol import source_manifest\np=Path('docs/NON_TIMING_TEST_SELECTION_v3.json');m=json.loads(p.read_text());m['reviewed_source_sha256']=source_manifest()\np.write_text(json.dumps(m,indent=2,sort_keys=True)+'\\n')\nprint(Path('tests/test_cpu_gpu_comparison.py').read_text().split('ROOT=')[0][:1200])\nprint('New reviewed source snapshot retained; initial manifest remains in source archive and before/')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:52:17.581627+00:00",
+  "exit_code": 0,
+  "stdout": "#!/usr/bin/env python3\n\"\"\"Synthetic parser/scheduler fixtures are NOT GPU observations.\"\"\"\nimport copy\nimport csv\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport shutil\nimport subprocess\nimport sys\nimport tempfile\nimport unittest\nfrom unittest import mock\n\n\nNew reviewed source snapshot retained; initial manifest remains in source archive and before/\n",
+  "stderr": "",
+  "scope": "Current unsealed v3 review snapshot only; original transferred revision preserved; no production/policy changes"
+}

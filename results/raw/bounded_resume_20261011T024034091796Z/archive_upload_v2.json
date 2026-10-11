@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "upload",
+    "results/raw/bounded_resume_20261011T024034091796Z/reviewed_source_v2.tar.gz",
+    "/content/mab_bounded_resume_20261011T024034091796Z_revision2/source.tar.gz",
+    "--session",
+    "cpu-gpu-bounded-validation-v3"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:54:33.323772+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Uploaded 'results/raw/bounded_resume_20261011T024034091796Z/reviewed_source_v2.tar.gz' to '/content/mab_bounded_resume_20261011T024034091796Z_revision2/source.tar.gz'\n",
+  "stderr": "",
+  "scope": "Transfer revised reviewed source only to new root; original source/bundle immutable"
+}
