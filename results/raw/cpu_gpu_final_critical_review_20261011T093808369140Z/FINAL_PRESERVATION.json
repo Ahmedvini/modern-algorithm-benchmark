@@ -1,0 +1,23 @@
+{
+  "all_unchanged": true,
+  "anchors_count": 26,
+  "build_metadata_count": 65,
+  "candidate_activated": false,
+  "candidate_unchanged": true,
+  "cub_version": 300001,
+  "frozen_count": 4,
+  "historical_added": [],
+  "historical_after": 12535,
+  "historical_before": 12535,
+  "historical_exact_path_sha256_match": true,
+  "historical_modified": [],
+  "historical_removed": [],
+  "production_adapter_unchanged": true,
+  "project_after": 199,
+  "project_before": 199,
+  "project_exact_match": true,
+  "protected_count": 80,
+  "source_files": 157,
+  "source_identity": "bf41a2b935634e2b3591887dbf08b987144a781846989195ec85345ff5adf120",
+  "v3_unchanged": true
+}

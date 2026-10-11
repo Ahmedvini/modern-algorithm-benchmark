@@ -1,0 +1,308 @@
+{
+  "build_complete_fields": [
+    "builds",
+    "source_verified",
+    "identities"
+  ],
+  "build_identities": {
+    "cpu-release": {
+      "CMakeCache.txt": "9027445f029af2f4db48368240e3f51a0d7f6153f5198ee82370ce7721c6551c",
+      "CTestTestfile.cmake": "a4eae00f89be32c1b3b0fa10979e4abac98070233abeda525fce26f756aee7ed",
+      "compile_commands.json": "7da0cb11f59af3fc92fbb0dbfc83e871813edce6c15ca49874b135d0151766db",
+      "libmab_parallel.a": "5a316a67182a9375f39376a5b7fefd80e71985809e7f7d2c6a58b94de76381b2",
+      "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6"
+    },
+    "cpu-sanitize": {
+      "CMakeCache.txt": "99943f804b81a3b5a75e83d1396365362f682495155eeefc5a17833300303822",
+      "CTestTestfile.cmake": "1e59816ebc3c013ecf4ed4d6ed3dc83efe5455a2b6a356c9463dd740661eb7f5",
+      "compile_commands.json": "da093b08219ed3b31a1701ffb07f6bac06a215e71c1efde4a6d5d3ec3c25f17b",
+      "libmab_parallel.a": "3be13a1ecdd60318fc9457c217bdc40c2624718fb382014f32d48d6ed36a37d8",
+      "test_parallel_workers": "2a4363cbfc26b1afc389c4e3764df43beee00ba2a6b16eb49c728d3115566b33"
+    },
+    "gpu-release": {
+      "CMakeCache.txt": "f52ae62662eba59034f6ca20b5fd0ec818c74266308473edc59000766f97822f",
+      "CTestTestfile.cmake": "aceedf63d79dd4ce9eb88f8222d947d0cead4a6f823f1909e0fac3674ce285d5",
+      "compile_commands.json": "932965ab6968503892f82b35b861fd92b652234232b3f51b3253c92fb7c9d39b",
+      "cpu_gpu_comparison": "d3416ec4fb1e6d3b3536350ae6c7340fa1cfa9831d4460bf4027421897318835",
+      "libmab_cuda_timing.a": "d2f8e7fff13ded945f6b7016a73cb528082ee6626ffdd705247381c75030049d",
+      "libmab_parallel.a": "5a316a67182a9375f39376a5b7fefd80e71985809e7f7d2c6a58b94de76381b2",
+      "test_cuda_prepared_correctness": "37d4f4ea6b3e0c136efce5c688127bae7bdbd6de15f5b5cb5e31d4e06b4158f7",
+      "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6"
+    }
+  },
+  "cpu_release": {
+    "build_dir": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-release",
+    "command_file": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/cpu_release_ctest.json",
+    "exit_code": 0,
+    "failed": 0,
+    "identity_applicable": false,
+    "passed": 21,
+    "reason": "Historical source snapshot/build differs; no current build provenance",
+    "selection_digest": "fef39034b063c36dabc3eccf9dc6a162ebcf6a4e5cb44abeda83e93fbcf1a434",
+    "skipped": 0
+  },
+  "cpu_sanitize": {
+    "build_dir": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/cpu-sanitize",
+    "command_file": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/cpu_sanitize_ctest.json",
+    "exit_code": 0,
+    "failed": 0,
+    "identity_applicable": false,
+    "passed": 21,
+    "reason": "Historical source snapshot/build differs; no current build provenance",
+    "selection_digest": "fef39034b063c36dabc3eccf9dc6a162ebcf6a4e5cb44abeda83e93fbcf1a434",
+    "skipped": 0
+  },
+  "focused_execution_records": [
+    {
+      "cmd": "python3 -B tests/test_evidence_enforcement.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_reviewed.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+    },
+    {
+      "cmd": "python3 -B tests/test_framework_compatibility.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_reviewed.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+    },
+    {
+      "cmd": "python3 -B tests/test_validation_policy.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_reviewed.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport ast,difflib,json,re\nfrom pathlib import Path\nr=Path.cwd();e=r/'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z';inv=json.loads((e/'CHANGE_INVENTORY.json').read_text());changes=[];methods={}\nfor n in sorted(inv['modified']+inv['added']):\n old=e/'before_sources'/n;after=r/n\n changes.extend(difflib.unified_diff(old.read_text().splitlines(True) if old.exists() else [],after.read_text().splitlines(True),fromfile='before/'+n,tofile='after/'+n))\n if after.suffix=='.py':ast.parse(after.read_text(),filename=n)\nwith (e/'CHANGES_VERIFIED.diff').open('x') as f:f.writelines(changes)\nlogs=['evidence_tests_reviewed.log','compatibility_reviewed.log','validation_policy_reviewed.log']\nexpected=[39,26,9]\nfor name,count in zip(logs,expected):\n text=(e/name).read_text();names=re.findall(r'^test_[^ ]+ .* \\.\\.\\. ok$',text,re.M)\n assert len(names)==count and re.search(r'Ran '+str(count)+r' tests? in [0-9.]+s\\n\\nOK\\s*$',text)\n methods[name]=dict(executed=count,passed=count,failed=0,errors=0,skipped=0,exit_code=0,scope='inert Python fixtures only')\ninitial=(e/'evidence_tests_attempt1.log').read_text()\nassert 'Ran 28 tests' in initial and 'FAILED (errors=1)' in initial\nwith (e/'TEST_RESULTS.json').open('x') as f:json.dump(dict(final=methods,final_distinct_total=sum(expected),initial_error=dict(executed=28,passed=27,errors=1,exit_code=1,reason='duplicate missing keyword in synthetic fixture constructor'),native_or_gpu_tests_run=0),f,indent=2,sort_keys=True);f.write('\\n')\nprint('Reviewed final diff',len(changes),'lines; 74 final focused tests passed, no skips; initial error retained')\nPY",
+      "exit_code": 0,
+      "scope": "Read-only final current diff/AST/log verification; writes new review artifacts only, no test invocation."
+    }
+  ],
+  "historical_source_manifests": [
+    {
+      "additions": [
+        "scripts/cpu_gpu_build_identity.py",
+        "scripts/cpu_gpu_build_provenance.py",
+        "scripts/cpu_gpu_evidence.py",
+        "scripts/cpu_gpu_evidence_io.py",
+        "scripts/cpu_gpu_framework_compatibility.py",
+        "tests/test_evidence_enforcement.py",
+        "tests/test_framework_compatibility.py"
+      ],
+      "count": 188,
+      "current_count": 157,
+      "identical": false,
+      "modified": [
+        "scripts/analyze_cpu_gpu.py",
+        "scripts/cpu_gpu_protocol.py",
+        "scripts/cpu_gpu_provenance.py",
+        "scripts/run_cpu_gpu_pilot.py",
+        "scripts/run_cpu_gpu_study.py",
+        "tests/test_cpu_gpu_comparison.py"
+      ],
+      "path": "results/raw/bounded_resume_20261011T024034091796Z/SOURCE_MANIFEST.json"
+    }
+  ],
+  "prepared": {
+    "command_file": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/gpu_prepared_untimed.json",
+    "exit_code": 0,
+    "identity_applicable": false,
+    "result": {
+      "artifact_kind": "correctness_validation",
+      "failures": 0,
+      "inputs": 163,
+      "invalid_operations_rejected": 489,
+      "output_checks": 489,
+      "schema_version": 1,
+      "scope": "prepared_cuda_untimed_v1",
+      "status": "passed",
+      "study_eligible": false
+    }
+  },
+  "workers": {
+    "command_file": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/actual_workers_untimed.json",
+    "exit_code": 0,
+    "identity_applicable": false,
+    "result": {
+      "artifact_kind": "correctness_validation",
+      "build_type": "Release",
+      "calls": [
+        {
+          "actual_team_size": 1,
+          "correctness": true,
+          "parallel_region": false,
+          "registry": false,
+          "size": 0
+        },
+        {
+          "actual_team_size": 1,
+          "correctness": true,
+          "parallel_region": false,
+          "registry": true,
+          "size": 0
+        },
+        {
+          "actual_team_size": 1,
+          "correctness": true,
+          "parallel_region": false,
+          "registry": false,
+          "size": 1
+        },
+        {
+          "actual_team_size": 1,
+          "correctness": true,
+          "parallel_region": false,
+          "registry": true,
+          "size": 1
+        },
+        {
+          "actual_team_size": 1,
+          "correctness": true,
+          "parallel_region": false,
+          "registry": false,
+          "size": 32767
+        },
+        {
+          "actual_team_size": 1,
+          "correctness": true,
+          "parallel_region": false,
+          "registry": true,
+          "size": 32767
+        },
+        {
+          "actual_team_size": 2,
+          "correctness": true,
+          "parallel_region": true,
+          "registry": false,
+          "size": 32768
+        },
+        {
+          "actual_team_size": 2,
+          "correctness": true,
+          "parallel_region": true,
+          "registry": true,
+          "size": 32768
+        },
+        {
+          "actual_team_size": 2,
+          "correctness": true,
+          "parallel_region": true,
+          "registry": false,
+          "size": 32769
+        },
+        {
+          "actual_team_size": 2,
+          "correctness": true,
+          "parallel_region": true,
+          "registry": true,
+          "size": 32769
+        },
+        {
+          "actual_team_size": 2,
+          "correctness": true,
+          "parallel_region": true,
+          "registry": false,
+          "size": 65537
+        },
+        {
+          "actual_team_size": 2,
+          "correctness": true,
+          "parallel_region": true,
+          "registry": true,
+          "size": 65537
+        }
+      ],
+      "compiler": "13.3.0",
+      "environment": {
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_MAX_ACTIVE_LEVELS": "1",
+        "OMP_NUM_THREADS": null,
+        "OMP_PROC_BIND": "FALSE",
+        "OMP_THREAD_LIMIT": "2",
+        "OMP_WAIT_POLICY": "PASSIVE"
+      },
+      "executable": "/content/mab_bounded_resume_20261011T024034091796Z_revision2/gpu-release/test_parallel_workers",
+      "flags": "-O3 -DNDEBUG",
+      "openmp_flags": "-fopenmp",
+      "openmp_version": "4.5",
+      "output_checks": 12,
+      "requested_threads": 2,
+      "runtime_dynamic": 0,
+      "runtime_thread_limit": 2,
+      "sanitizers": false,
+      "schema_version": 1,
+      "scope": "openmp_workers_untimed_v1",
+      "status": "passed",
+      "study_eligible": false,
+      "team_size_is_task_participation": false
+    }
+  },
+  "workspace_1000000": {
+    "command_file": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/resources_1000000.json",
+    "exit_code": 0,
+    "identity_applicable": false,
+    "result": {
+      "adapter_diagnostic_cudaMalloc_requested_bytes": 4178687,
+      "adapter_query_bytes": 4178687,
+      "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+      "combined_device_payload_bytes": 24357374,
+      "compute_major": 7,
+      "compute_minor": 5,
+      "driver_api_version": 13000,
+      "free_device_bytes_before_buffers": 15527116800,
+      "gpu_name": "Tesla T4",
+      "known_host_peak_payload_bytes": 24000000,
+      "prepared_diagnostic_cudaMalloc_requested_bytes": 4178687,
+      "prepared_query_bytes": 4178687,
+      "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+      "runtime_api_version": 13000,
+      "size": 1000000,
+      "total_device_bytes": 15637086208,
+      "workspace_policy_cap_each_bytes": 67108864
+    }
+  },
+  "workspace_1025": {
+    "command_file": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/resources_1025.json",
+    "exit_code": 0,
+    "identity_applicable": false,
+    "result": {
+      "adapter_diagnostic_cudaMalloc_requested_bytes": 1,
+      "adapter_query_bytes": 1,
+      "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+      "combined_device_payload_bytes": 16402,
+      "compute_major": 7,
+      "compute_minor": 5,
+      "driver_api_version": 13000,
+      "free_device_bytes_before_buffers": 15527116800,
+      "gpu_name": "Tesla T4",
+      "known_host_peak_payload_bytes": 24600,
+      "prepared_diagnostic_cudaMalloc_requested_bytes": 1,
+      "prepared_query_bytes": 1,
+      "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+      "runtime_api_version": 13000,
+      "size": 1025,
+      "total_device_bytes": 15637086208,
+      "workspace_policy_cap_each_bytes": 67108864
+    }
+  },
+  "workspace_65537": {
+    "command_file": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/resources_65537.json",
+    "exit_code": 0,
+    "identity_applicable": false,
+    "result": {
+      "adapter_diagnostic_cudaMalloc_requested_bytes": 279295,
+      "adapter_query_bytes": 279295,
+      "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+      "combined_device_payload_bytes": 1607182,
+      "compute_major": 7,
+      "compute_minor": 5,
+      "driver_api_version": 13000,
+      "free_device_bytes_before_buffers": 15527116800,
+      "gpu_name": "Tesla T4",
+      "known_host_peak_payload_bytes": 1572888,
+      "prepared_diagnostic_cudaMalloc_requested_bytes": 279295,
+      "prepared_query_bytes": 279295,
+      "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+      "runtime_api_version": 13000,
+      "size": 65537,
+      "total_device_bytes": 15637086208,
+      "workspace_policy_cap_each_bytes": 67108864
+    }
+  }
+}

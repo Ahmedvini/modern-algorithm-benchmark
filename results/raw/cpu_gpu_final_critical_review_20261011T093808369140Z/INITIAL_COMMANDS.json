@@ -1,0 +1,26 @@
+[
+  {
+    "command": "pwd\ncat AGENTS.md\ncat results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/FINAL_AUDIT.md\ncat results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/COMMANDS.md\ncat results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/FINAL_INTEGRITY.json",
+    "exit_code": 0,
+    "purpose": "Initial read-only governing instructions/audit/commands/integrity read; observed tool output truncated.",
+    "output_retention": "Tool transcript; full stdout not independently retained in new evidence."
+  },
+  {
+    "command": "pwd\nrg --files results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z scripts docs tests | rg '(cpu_gpu_evidence|cpu_gpu_build|framework_compatibility|NON_TIMING_TEST_SELECTION|CPU_GPU_EVIDENCE|FINAL_AUDIT|COMMANDS|FINAL_INTEGRITY|CHANGES_VERIFIED|reviewed.log|TEST_RESULTS)'",
+    "exit_code": 0,
+    "purpose": "Read-only path listing; observed output truncated.",
+    "output_retention": "Tool transcript."
+  },
+  {
+    "command": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\np=Path('results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z')\nfor name in ['FINAL_INTEGRITY.json','BEFORE.json','FINAL_PRESERVATION.json']:\n d=json.loads((p/name).read_text()); print(name, [(k,type(v).__name__,len(v) if isinstance(v,(list,dict)) else v) for k,v in d.items()])\nprint((p/'FINAL_AUDIT.md').read_text())\nprint((p/'COMMANDS.md').read_text()[-7000:])\nPY",
+    "exit_code": 0,
+    "purpose": "Read-only audit and manifest layout; no project import/execution.",
+    "output_retention": "Tool transcript."
+  },
+  {
+    "command": "python3 -B - <<'PY'\nfrom pathlib import Path\nfrom datetime import datetime,timezone\nimport json\nr=Path.cwd();e=r/'results/raw'/('cpu_gpu_final_critical_review_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'));e.mkdir()\nscript='''import sys,json,subprocess,datetime\nfrom pathlib import Path\ne=Path(__file__).resolve().parent\npurpose,cmd=sys.argv[1:]\nt=datetime.datetime.now(datetime.timezone.utc).isoformat()\np=subprocess.run(cmd,shell=True,cwd=e.parents[2],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)\nn=len(list(e.glob('command_*.json')))+1\nrecord=dict(command=cmd,purpose=purpose,working_directory=str(e.parents[2]),started_utc=t,exit_code=p.returncode,stdout=p.stdout,stderr=p.stderr)\nwith (e/f'command_{n:03d}.json').open('x') as f:json.dump(record,f,indent=2)\nprint(p.stdout,end='');print(p.stderr,end='',file=sys.stderr);print('RECORDED EXIT:',p.returncode)\nsys.exit(p.returncode)\n'''\n(e/'record.py').write_text(script)\nprint(e)\nPY",
+    "exit_code": 0,
+    "purpose": "Create unique new evidence directory and command recorder only.",
+    "output_retention": "Observed exact new evidence path retained."
+  }
+]

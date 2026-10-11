@@ -1,0 +1,14 @@
+test_correctness_cannot_be_promoted_by_claims (__main__.PolicyTests.test_correctness_cannot_be_promoted_by_claims) ... ok
+test_current_protected_sources_match_approved_exceptions (__main__.PolicyTests.test_current_protected_sources_match_approved_exceptions) ... ok
+test_failed_interrupted_skipped_and_missing_records_rejected (__main__.PolicyTests.test_failed_interrupted_skipped_and_missing_records_rejected) ... ok
+test_four_kinds_are_distinct_and_never_authorize_execution (__main__.PolicyTests.test_four_kinds_are_distinct_and_never_authorize_execution) ... ok
+test_missing_unknown_or_ambiguous_fields_rejected (__main__.PolicyTests.test_missing_unknown_or_ambiguous_fields_rejected) ... ok
+test_record_hash_and_counts_must_match (__main__.PolicyTests.test_record_hash_and_counts_must_match) ... ok
+test_stale_context_and_mutually_consistent_adapter_maps_rejected (__main__.PolicyTests.test_stale_context_and_mutually_consistent_adapter_maps_rejected) ... ok
+test_trusted_policy_missing_malformed_or_changed_fails_closed (__main__.PolicyTests.test_trusted_policy_missing_malformed_or_changed_fails_closed) ... ok
+test_untimed_gpu_and_worker_paths_have_no_measurement_calls (__main__.PolicyTests.test_untimed_gpu_and_worker_paths_have_no_measurement_calls) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.118s
+
+OK

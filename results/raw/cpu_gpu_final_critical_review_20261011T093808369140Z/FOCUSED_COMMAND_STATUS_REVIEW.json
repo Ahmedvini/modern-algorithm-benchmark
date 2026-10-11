@@ -1,0 +1,17 @@
+[
+  {
+    "cmd": "python3 -B tests/test_evidence_enforcement.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_reviewed.log'\nexit \"$repair_test_status\"",
+    "exit_code": 0,
+    "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+  },
+  {
+    "cmd": "python3 -B tests/test_framework_compatibility.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_reviewed.log'\nexit \"$repair_test_status\"",
+    "exit_code": 0,
+    "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+  },
+  {
+    "cmd": "python3 -B tests/test_validation_policy.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_reviewed.log'\nexit \"$repair_test_status\"",
+    "exit_code": 0,
+    "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+  }
+]

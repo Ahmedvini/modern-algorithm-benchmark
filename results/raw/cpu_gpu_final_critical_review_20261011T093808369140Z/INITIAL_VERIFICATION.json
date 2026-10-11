@@ -1,0 +1,33 @@
+{
+  "build_metadata": {
+    "count": 65,
+    "differences": []
+  },
+  "freeze_matches": true,
+  "frozen": {
+    "count": 4,
+    "differences": []
+  },
+  "historical_membership": {
+    "actual": 12535,
+    "expected": 12535,
+    "extra": [],
+    "missing": []
+  },
+  "historical_pre_repair": {
+    "count": 12307,
+    "differences": []
+  },
+  "project": {
+    "count": 199,
+    "differences": []
+  },
+  "protected": {
+    "count": 80,
+    "differences": []
+  },
+  "repair_members": {
+    "count": 227,
+    "differences": []
+  }
+}

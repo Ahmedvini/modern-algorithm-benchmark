@@ -1,0 +1,64 @@
+{
+  "activated": false,
+  "approved": false,
+  "base_sha256": "fef39034b063c36dabc3eccf9dc6a162ebcf6a4e5cb44abeda83e93fbcf1a434",
+  "base_source_count": 150,
+  "candidate_sha256": "9d39e00b3910975f56b6c2eb0c08a7f57a23ab0762fc789c261a936e82aa0a71",
+  "candidate_status": "pending_independent_review",
+  "classification_unchanged": true,
+  "current_source_count": 157,
+  "default19": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort"
+  ],
+  "reasons": {
+    "scripts/analyze_cpu_gpu.py": "Prior recovery: explicit opt-in compatibility validation in independent analyzer; unchanged in this repair.",
+    "scripts/cpu_gpu_build_identity.py": "Prior recovery addition; repair now requires compiler/linker proof in addition to snapshots.",
+    "scripts/cpu_gpu_build_provenance.py": "New offline compiler/linker graph validation; not a build or execution collector.",
+    "scripts/cpu_gpu_evidence.py": "New strict record, CPU plan, build and independent review checks; trust pin remains unset.",
+    "scripts/cpu_gpu_evidence_io.py": "New verified-byte snapshot reader with strict references and JSON parsing.",
+    "scripts/cpu_gpu_framework_compatibility.py": "Prior recovery addition; repair adds strict independently pinned evidence-content validation.",
+    "scripts/cpu_gpu_protocol.py": "Prior recovery: explicit policy dispatch; unchanged in this repair.",
+    "scripts/cpu_gpu_provenance.py": "Prior recovery: protected compatibility source review dispatch; unchanged in this repair.",
+    "scripts/run_cpu_gpu_pilot.py": "Prior recovery: shared prerequisite validator and binary verification; unchanged in this repair.",
+    "scripts/run_cpu_gpu_study.py": "Prior recovery: explicit study-only compatibility option; unchanged in this repair.",
+    "tests/test_evidence_enforcement.py": "New inert adversarial parser regressions; not implicitly approved for CTest selection.",
+    "tests/test_framework_compatibility.py": "Prior recovery addition; unsafe positive fixture is now rejected; prior protections retained."
+  },
+  "source_delta": {
+    "added": [
+      "scripts/cpu_gpu_build_identity.py",
+      "scripts/cpu_gpu_build_provenance.py",
+      "scripts/cpu_gpu_evidence.py",
+      "scripts/cpu_gpu_evidence_io.py",
+      "scripts/cpu_gpu_framework_compatibility.py",
+      "tests/test_evidence_enforcement.py",
+      "tests/test_framework_compatibility.py"
+    ],
+    "modified": [
+      "scripts/analyze_cpu_gpu.py",
+      "scripts/cpu_gpu_protocol.py",
+      "scripts/cpu_gpu_provenance.py",
+      "scripts/run_cpu_gpu_pilot.py",
+      "scripts/run_cpu_gpu_study.py"
+    ],
+    "removed": []
+  }
+}

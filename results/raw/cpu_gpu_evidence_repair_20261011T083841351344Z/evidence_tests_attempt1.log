@@ -1,0 +1,42 @@
+test_alias_and_path_substitution_rejected (__main__.EvidenceTests.test_alias_and_path_substitution_rejected) ... ok
+test_arbitrary_empty_or_fabricated_compile_list_rejected (__main__.EvidenceTests.test_arbitrary_empty_or_fabricated_compile_list_rejected) ... ok
+test_candidate_cannot_establish_approved_selection (__main__.EvidenceTests.test_candidate_cannot_establish_approved_selection) ... ok
+test_candidate_unreviewed_add_remove_path_or_hash_changes_rejected (__main__.EvidenceTests.test_candidate_unreviewed_add_remove_path_or_hash_changes_rejected) ... ok
+test_cpu_command_and_plan_tampering_rejected (__main__.EvidenceTests.test_cpu_command_and_plan_tampering_rejected) ... ok
+test_cpu_missing_duplicate_conflicting_or_failed_tests_rejected (__main__.EvidenceTests.test_cpu_missing_duplicate_conflicting_or_failed_tests_rejected) ... ok
+test_discovery_includes_fixtures_or_modified_commands_rejected (__main__.EvidenceTests.test_discovery_includes_fixtures_or_modified_commands_rejected) ... ok
+test_duplicate_json_keys_rejected_with_correct_hash (__main__.EvidenceTests.test_duplicate_json_keys_rejected_with_correct_hash) ... ok
+test_full_validator_rejects_internally_consistent_unsupported_assertion (__main__.EvidenceTests.test_full_validator_rejects_internally_consistent_unsupported_assertion) ... ERROR
+test_hash_and_parser_share_immutable_bytes (__main__.EvidenceTests.test_hash_and_parser_share_immutable_bytes) ... ok
+test_hash_consistent_failed_incomplete_prepared_records_rejected (__main__.EvidenceTests.test_hash_consistent_failed_incomplete_prepared_records_rejected) ... ok
+test_hash_consistent_incorrect_exit_status_rejected (__main__.EvidenceTests.test_hash_consistent_incorrect_exit_status_rejected) ... ok
+test_hash_consistent_placeholder_and_malformed_schema_rejected (__main__.EvidenceTests.test_hash_consistent_placeholder_and_malformed_schema_rejected) ... ok
+test_hash_consistent_wrong_context_build_and_command_rejected (__main__.EvidenceTests.test_hash_consistent_wrong_context_build_and_command_rejected) ... ok
+test_inactive_candidate_preserves_default_19_and_classifications (__main__.EvidenceTests.test_inactive_candidate_preserves_default_19_and_classifications) ... ok
+test_independent_review_failed_decision_rejected_with_correct_hash (__main__.EvidenceTests.test_independent_review_failed_decision_rejected_with_correct_hash) ... ok
+test_malformed_missing_or_mutated_independent_anchor_rejected (__main__.EvidenceTests.test_malformed_missing_or_mutated_independent_anchor_rejected) ... ok
+test_missing_compiler_linker_or_failed_exit_evidence_rejected (__main__.EvidenceTests.test_missing_compiler_linker_or_failed_exit_evidence_rejected) ... ok
+test_missing_trusted_review_is_not_trust_on_first_use (__main__.EvidenceTests.test_missing_trusted_review_is_not_trust_on_first_use) ... ok
+test_stale_build_source_outputs_and_other_build_rejected (__main__.EvidenceTests.test_stale_build_source_outputs_and_other_build_rejected) ... ok
+test_synthetic_timing_bundle_cannot_qualify_as_performance (__main__.EvidenceTests.test_synthetic_timing_bundle_cannot_qualify_as_performance) ... ok
+test_tampered_and_stale_hash_rejected (__main__.EvidenceTests.test_tampered_and_stale_hash_rejected) ... ok
+test_valid_build_graph_is_not_empty_compile_list (__main__.EvidenceTests.test_valid_build_graph_is_not_empty_compile_list) ... ok
+test_valid_cpu_release_record_bound_to_plan_commands_and_build (__main__.EvidenceTests.test_valid_cpu_release_record_bound_to_plan_commands_and_build) ... ok
+test_valid_cpu_sanitizer_record (__main__.EvidenceTests.test_valid_cpu_sanitizer_record) ... ok
+test_valid_prepared_record_is_derived (__main__.EvidenceTests.test_valid_prepared_record_is_derived) ... ok
+test_workspace_missing_or_duplicate_size_is_rejected (__main__.EvidenceTests.test_workspace_missing_or_duplicate_size_is_rejected) ... ok
+test_wrong_selection_manifest_rejected_with_consistent_hash (__main__.EvidenceTests.test_wrong_selection_manifest_rejected_with_consistent_hash) ... ok
+
+======================================================================
+ERROR: test_full_validator_rejects_internally_consistent_unsupported_assertion (__main__.EvidenceTests.test_full_validator_rejects_internally_consistent_unsupported_assertion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_evidence_enforcement.py", line 312, in test_full_validator_rejects_internally_consistent_unsupported_assertion
+    records={n:dict(status='passed',exit_code=0,skipped=0,missing=0,sha256=refs[n]['sha256'],**parent['coverage'][n]) for n in names}
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'missing'
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.606s
+
+FAILED (errors=1)

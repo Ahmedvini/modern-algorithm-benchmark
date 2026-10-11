@@ -1,0 +1,22 @@
+{
+  "added": [
+    "scripts/cpu_gpu_build_identity.py",
+    "scripts/cpu_gpu_build_provenance.py",
+    "scripts/cpu_gpu_evidence.py",
+    "scripts/cpu_gpu_evidence_io.py",
+    "scripts/cpu_gpu_framework_compatibility.py",
+    "tests/test_evidence_enforcement.py",
+    "tests/test_framework_compatibility.py"
+  ],
+  "current_source_files": 157,
+  "historical_source_files": 150,
+  "modified": [
+    "scripts/analyze_cpu_gpu.py",
+    "scripts/cpu_gpu_protocol.py",
+    "scripts/cpu_gpu_provenance.py",
+    "scripts/run_cpu_gpu_pilot.py",
+    "scripts/run_cpu_gpu_study.py",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "removed": []
+}
