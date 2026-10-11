@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "90",
+    "colab",
+    "sessions"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:18:12.735088+00:00"
+}

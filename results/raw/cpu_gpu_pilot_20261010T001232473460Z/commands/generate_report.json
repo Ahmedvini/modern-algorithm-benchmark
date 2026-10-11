@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/write_report.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:42:56.497619+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_pilot_20261010T001232473460Z/write_report.py\", line 24\n    b3cbd1f7053a22. Independent retained-row calculations verified48 metric groups and18 host-call ratios.','', 'Regenerate to a new filename:', '', '```sh', 'python3 scripts/analyze_cpu_gpu.py \\', '  results/raw/cpu_gpu_pilot_20261010T001232473460Z/remote_v3/modern-algorithm-benchmark/results/raw/pilot_v3 \\', '  --output results/processed/NEW_PILOT_SUMMARY.json', '```','', 'Next: review pilot quality/resource observations and authorize a separate full frozen comparison study if acceptable. Query N65537 in its fresh environment, retain all confounders and distinguish primary/diagnostic scopes. No full study,100M run, performance superiority or phase-wide research completion is claimed.','']\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^\nSyntaxError: unexpected character after line continuation character\n",
+  "wall_seconds": 0.09131124200030172,
+  "ended_utc": "2026-10-10T04:42:56.589058+00:00"
+}

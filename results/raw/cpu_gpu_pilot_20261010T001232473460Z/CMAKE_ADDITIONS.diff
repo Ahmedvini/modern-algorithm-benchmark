@@ -1,0 +1,48 @@
+--- frozen/CMakeLists.txt
++++ CMakeLists.txt
+@@ -46,6 +46,10 @@
+ 
+ add_library(mab_timing src/benchmark/timing.cpp src/benchmark/output.cpp)
+ target_link_libraries(mab_timing PUBLIC mab_core)
++add_library(mab_comparison src/benchmark/comparison.cpp)
++target_link_libraries(mab_comparison PUBLIC mab_timing)
++add_executable(comparison_input src/benchmark/comparison_input_main.cpp)
++target_link_libraries(comparison_input PRIVATE mab_comparison)
+ include(cmake/benchmark_metadata.cmake)
+ add_executable(sort_benchmark src/benchmark/timing_main.cpp)
+ target_include_directories(sort_benchmark PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
+@@ -190,3 +194,34 @@
+             ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_parallel_benchmark.py $<TARGET_FILE:parallel_sort_benchmark>)
+     endif()
+ endif()
++
++# Isolated comparison opt-in; existing CUDA-only and CPU builds remain supported.
++option(MAB_ENABLE_CPU_GPU_COMPARISON "Build the frozen-protocol CPU/GPU comparison worker" OFF)
++if(MAB_ENABLE_CPU_GPU_COMPARISON)
++    if(NOT MAB_ENABLE_CUDA_SORT OR NOT MAB_ENABLE_OPENMP)
++        message(FATAL_ERROR "CPU/GPU comparison requires CUDA, CUDA_SORT and OpenMP enabled")
++    endif()
++    add_library(mab_cuda_comparison src/cuda/comparison_resources.cu)
++    target_include_directories(mab_cuda_comparison PUBLIC include)
++    target_include_directories(mab_cuda_comparison SYSTEM PRIVATE "${MAB_CUB_INCLUDE_DIR}")
++    target_compile_options(mab_cuda_comparison PRIVATE "-Xcompiler=-Wall,-Wextra,-Wpedantic")
++    target_link_libraries(mab_cuda_comparison PUBLIC CUDA::cudart)
++    set_target_properties(mab_cuda_comparison PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON
++                          CUDA_EXTENSIONS OFF CUDA_RUNTIME_LIBRARY Shared)
++    add_executable(cpu_gpu_comparison src/benchmark/cpu_gpu_main.cpp)
++    target_include_directories(cpu_gpu_comparison PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
++    target_link_libraries(cpu_gpu_comparison PRIVATE mab_comparison mab_parallel mab_cuda_sort mab_cuda_timing mab_cuda_comparison mab_metrics)
++endif()
++if(BUILD_TESTING)
++    add_executable(test_comparison tests/test_comparison.cpp)
++    target_link_libraries(test_comparison PRIVATE mab_comparison)
++    if(MAB_ENABLE_OPENMP)
++        target_link_libraries(test_comparison PRIVATE mab_parallel)
++        target_compile_definitions(test_comparison PRIVATE MAB_TEST_COMPARISON_OPENMP=1)
++    endif()
++    add_test(NAME comparison_engine COMMAND test_comparison)
++    set_tests_properties(comparison_engine PROPERTIES ENVIRONMENT "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=2;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE;OMP_PROC_BIND=FALSE")
++    add_test(NAME cpu_gpu_comparison_framework COMMAND ${Python3_EXECUTABLE}
++             ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cpu_gpu_comparison.py $<TARGET_FILE:comparison_input>)
++endif()
++

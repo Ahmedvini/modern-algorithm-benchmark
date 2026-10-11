@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release",
+    "--output",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/local_environment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:30:22.797632+00:00"
+}

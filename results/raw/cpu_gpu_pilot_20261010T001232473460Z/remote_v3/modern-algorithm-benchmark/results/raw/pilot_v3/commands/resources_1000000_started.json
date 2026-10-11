@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release/cpu_gpu_comparison",
+    "--resources",
+    "1000000"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "omp_environment": {
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_MAX_ACTIVE_LEVELS": "1",
+    "OMP_PROC_BIND": "FALSE",
+    "OMP_THREAD_LIMIT": "2",
+    "OMP_WAIT_POLICY": "PASSIVE"
+  },
+  "started_utc": "2026-10-10T04:38:42.173897+00:00"
+}

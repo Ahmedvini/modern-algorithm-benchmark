@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "2900",
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-pilot-reconnect",
+    "--file",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/extract_and_validate_v2.py",
+    "--timeout",
+    "2800"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:46:56.911830+00:00",
+  "exit_code": -15,
+  "stdout": "Remote source SHA256: a923e54fb4d8323496c2e49342775d481b12af6b84bbafb4f2611614cb777510\nReviewed archive members: 166\nExecuting fresh prerequisites; pilot is gated: ['/usr/bin/python3', 'scripts/validate_cpu_gpu_pilot.py', '--output', 'results/raw/validation_v2', '--pilot-output', 'results/raw/pilot_v2', '--processed', 'results/processed/pilot_v2']\n",
+  "stderr": "",
+  "wall_seconds": 2112.8499313089997,
+  "ended_utc": "2026-10-10T04:28:51.979995+00:00"
+}

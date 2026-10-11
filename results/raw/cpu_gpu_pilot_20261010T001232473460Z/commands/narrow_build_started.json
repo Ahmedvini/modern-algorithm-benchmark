@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release",
+    "--target",
+    "test_comparison",
+    "comparison_input",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:30:13.147155+00:00"
+}

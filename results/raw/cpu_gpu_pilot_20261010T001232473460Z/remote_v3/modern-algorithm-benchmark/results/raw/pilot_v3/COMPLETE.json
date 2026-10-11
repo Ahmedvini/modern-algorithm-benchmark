@@ -1,0 +1,15 @@
+{
+  "complete": true,
+  "measured": {
+    "failed": 0,
+    "interrupted": 0,
+    "missing": 0,
+    "successful": 150
+  },
+  "warmups": {
+    "failed": 0,
+    "interrupted": 0,
+    "missing": 0,
+    "successful": 30
+  }
+}

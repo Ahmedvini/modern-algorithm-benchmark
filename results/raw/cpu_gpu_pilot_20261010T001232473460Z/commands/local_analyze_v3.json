@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "python3",
+    "scripts/analyze_cpu_gpu.py",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/remote_v3/modern-algorithm-benchmark/results/raw/pilot_v3",
+    "--output",
+    "results/processed/cpu_gpu_pilot_20261010T001232473460Z/summary.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:40:14.741936+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "wall_seconds": 0.08033892799903697,
+  "ended_utc": "2026-10-10T04:40:14.822446+00:00"
+}

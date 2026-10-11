@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cpu_gpu_comparison.py",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release/comparison_input"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:46:01.143015+00:00"
+}

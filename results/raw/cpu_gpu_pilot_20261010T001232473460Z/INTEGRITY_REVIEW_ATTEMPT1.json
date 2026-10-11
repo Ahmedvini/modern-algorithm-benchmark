@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/final_integrity.py"
+  ],
+  "exit_code": 1,
+  "reason": "Diff assertion used the post-integration source bundle rather than the frozen pre-integration CMake baseline; actual sources/earlier artifacts passed checks up to that assertion",
+  "corrected_script": "final_integrity_v2.py"
+}

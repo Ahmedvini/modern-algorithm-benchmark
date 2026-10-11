@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/sanitize",
+    "-DCMAKE_BUILD_TYPE=Debug",
+    "-DMAB_ENABLE_SANITIZERS=ON",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_CPU_GPU_COMPARISON=OFF",
+    "-DMAB_ENABLE_OPENMP=ON"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:33:04.639816+00:00"
+}

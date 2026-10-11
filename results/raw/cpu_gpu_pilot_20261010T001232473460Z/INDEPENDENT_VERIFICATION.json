@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "primary_rows": 144,
+  "prepared_rows": 36,
+  "independently_recomputed_metric_groups": 48,
+  "paired_ratios_checked": 18,
+  "raw_manifest_files": 118,
+  "all_raw_hashes_matched": true,
+  "local_source_matches_gpu_tested_source": true,
+  "cloud_local_regeneration_identical": true,
+  "summary_sha256": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22"
+}

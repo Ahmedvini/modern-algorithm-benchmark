@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/write_report_v4.py",
+    "results/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:44:12.707907+00:00"
+}

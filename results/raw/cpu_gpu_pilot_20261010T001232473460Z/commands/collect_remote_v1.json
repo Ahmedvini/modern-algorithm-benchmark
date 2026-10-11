@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "90",
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-pilot-reconnect",
+    "--file",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/collect_remote_v1.py",
+    "--timeout",
+    "60"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:46:18.732445+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"path\": \"/content/cpu_gpu_pilot_20261010T001232473460Z_evidence_v1.tar.gz\",\n  \"sha256\": \"ac8f9675fe9680345f9820ecfd546c1c35e9e538efc6d3f0a81dc1d240c26247\",\n  \"files\": 7\n}\n",
+  "stderr": "",
+  "wall_seconds": 2.9831454889999804,
+  "ended_utc": "2026-10-10T00:46:21.715707+00:00"
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^(comparison_engine|cpu_gpu_comparison_framework)$"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:31:41.606977+00:00",
+  "exit_code": 0,
+  "stdout": "Internal ctest changing into directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release/DartConfiguration.tcl\nTest project /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 28\n    Start 28: comparison_engine\n\n28: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release/test_comparison\n28: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release\n28: Environment variables: \n28:  OMP_DYNAMIC=FALSE\n28:  OMP_THREAD_LIMIT=2\n28:  OMP_MAX_ACTIVE_LEVELS=1\n28:  OMP_WAIT_POLICY=PASSIVE\n28:  OMP_PROC_BIND=FALSE\n28: Test timeout computed to be: 1500\n28: Passed 60 inputs, 3600 trial checks, repeated isolation, portable input I/O and failure fixtures\n1/2 Test #28: comparison_engine ................   Passed    1.12 sec\ntest 29\n    Start 29: cpu_gpu_comparison_framework\n\n29: Test command: /usr/bin/python3 \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cpu_gpu_comparison.py\" \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release/comparison_input\"\n29: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_pilot_20261010T001232473460Z/release\n29: Test timeout computed to be: 1500\n29: ..........failed completed exit 9\n29: timeout timeout exit -15\n29: .....\n29: ----------------------------------------------------------------------\n29: Ran 15 tests in 0.584s\n29: \n29: OK\n2/2 Test #29: cpu_gpu_comparison_framework .....   Passed    0.65 sec\n\nThe following tests passed:\n\tcomparison_engine\n\tcpu_gpu_comparison_framework\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   1.77 sec\n",
+  "stderr": "",
+  "wall_seconds": 1.7786616099992898,
+  "ended_utc": "2026-10-10T00:31:43.385757+00:00"
+}

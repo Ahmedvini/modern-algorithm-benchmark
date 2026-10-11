@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cpu_gpu_comparison.py",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release/comparison_input"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:36:27.710812+00:00",
+  "exit_code": 0,
+  "stdout": "interrupt interrupted exit -15\nfailed completed exit 9\ntimeout timeout exit -15\n",
+  "stderr": ".....................\n----------------------------------------------------------------------\nRan 21 tests in 0.826s\n\nOK\n",
+  "wall_seconds": 0.9134848789999523,
+  "ended_utc": "2026-10-10T00:36:28.624432+00:00"
+}

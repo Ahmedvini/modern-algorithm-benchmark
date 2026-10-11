@@ -1,0 +1,6 @@
+{
+  "complete": false,
+  "reason": "Session expired/disappeared before final result and evidence retrieval; retained progress ends at successful sanitizer build",
+  "observed_at": "2026-10-10T04:28:51.974895+00:00",
+  "pilot_status": "unknown; no success claimed"
+}

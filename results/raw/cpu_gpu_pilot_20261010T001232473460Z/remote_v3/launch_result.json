@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "scripts/validate_cpu_gpu_pilot.py",
+    "--output",
+    "results/raw/validation_v3",
+    "--pilot-output",
+    "results/raw/pilot_v3",
+    "--processed",
+    "results/processed/pilot_v3"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "source_archive_sha256": "a923e54fb4d8323496c2e49342775d481b12af6b84bbafb4f2611614cb777510",
+  "started": 1791606587.8169174,
+  "exit_code": 0,
+  "status": "completed",
+  "wall_seconds": 541.0734062194824
+}

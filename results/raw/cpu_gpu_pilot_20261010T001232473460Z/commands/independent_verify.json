@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/independent_verify.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:41:39.841911+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"primary_rows\": 144,\n  \"prepared_rows\": 36,\n  \"independently_recomputed_metric_groups\": 48,\n  \"paired_ratios_checked\": 18,\n  \"raw_manifest_files\": 118,\n  \"all_raw_hashes_matched\": true,\n  \"local_source_matches_gpu_tested_source\": true,\n  \"cloud_local_regeneration_identical\": true,\n  \"summary_sha256\": \"07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.05809474400120962,
+  "ended_utc": "2026-10-10T04:41:39.900131+00:00"
+}

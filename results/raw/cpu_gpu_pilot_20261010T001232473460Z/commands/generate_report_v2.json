@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/write_report_v2.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:43:09.866944+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_pilot_20261010T001232473460Z/write_report_v2.py\", line 25\n    with (P/'REPORT.md').open('x') as f:f.write('\\n'.join(lines).replace('\\n','\n                                                                              ^\nSyntaxError: unterminated string literal (detected at line 25)\n",
+  "wall_seconds": 0.08448712700010219,
+  "ended_utc": "2026-10-10T04:43:09.951550+00:00"
+}

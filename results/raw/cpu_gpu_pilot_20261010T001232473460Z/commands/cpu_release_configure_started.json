@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_CPU_GPU_COMPARISON=OFF",
+    "-DMAB_ENABLE_OPENMP=ON"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:30:12.493587+00:00"
+}

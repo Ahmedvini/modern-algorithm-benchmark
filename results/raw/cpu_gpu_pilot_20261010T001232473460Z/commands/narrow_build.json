@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release",
+    "--target",
+    "test_comparison",
+    "comparison_input",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:30:13.147155+00:00",
+  "exit_code": 0,
+  "stdout": "[ 11%] Building CXX object CMakeFiles/mab_core.dir/src/datasets/generator.cpp.o\n[ 11%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/baselines.cpp.o\n[ 16%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o\n[ 22%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/sorting.cpp.o\n[ 27%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/pdqsort.cpp.o\n[ 33%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/timsort.cpp.o\n[ 38%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/mergesort.cpp.o\n[ 44%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/radixsort.cpp.o\n[ 50%] Linking CXX static library libmab_core.a\n[ 50%] Built target mab_core\n[ 61%] Building CXX object CMakeFiles/mab_timing.dir/src/benchmark/timing.cpp.o\n[ 61%] Building CXX object CMakeFiles/mab_parallel.dir/src/algorithms/parallel_mergesort.cpp.o\n[ 66%] Linking CXX static library libmab_parallel.a\n[ 66%] Built target mab_parallel\n[ 72%] Building CXX object CMakeFiles/mab_timing.dir/src/benchmark/output.cpp.o\n[ 77%] Linking CXX static library libmab_timing.a\n[ 77%] Built target mab_timing\n[ 83%] Building CXX object CMakeFiles/mab_comparison.dir/src/benchmark/comparison.cpp.o\n[ 88%] Linking CXX static library libmab_comparison.a\n[ 88%] Built target mab_comparison\n[ 94%] Building CXX object CMakeFiles/test_comparison.dir/tests/test_comparison.cpp.o\n[100%] Linking CXX executable test_comparison\n[100%] Built target test_comparison\n[ 56%] Built target mab_core\n[ 75%] Built target mab_timing\n[ 87%] Built target mab_comparison\n[ 93%] Building CXX object CMakeFiles/comparison_input.dir/src/benchmark/comparison_input_main.cpp.o\n[100%] Linking CXX executable comparison_input\n[100%] Built target comparison_input\n",
+  "stderr": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparison.cpp: In function \u2018int main()\u2019:\n/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparison.cpp:49:24: warning: loop variable \u2018text\u2019 creates a copy from type \u2018const std::__cxx11::basic_string<char>\u2019 [-Wrange-loop-construct]\n   49 |         for(const auto text:{std::string(\"\\0\",1),std::string(9,'\\0')}) {\n      |                        ^~~~\n/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparison.cpp:49:24: note: use reference type to prevent copying\n   49 |         for(const auto text:{std::string(\"\\0\",1),std::string(9,'\\0')}) {\n      |                        ^~~~\n      |                        &\n",
+  "wall_seconds": 5.047965804999876,
+  "ended_utc": "2026-10-10T00:30:18.195278+00:00"
+}

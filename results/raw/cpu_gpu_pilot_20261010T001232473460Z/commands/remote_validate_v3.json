@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "2900",
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-pilot-reconnect-v3",
+    "--file",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/extract_and_validate_v3.py",
+    "--timeout",
+    "2800"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:29:46.153526+00:00",
+  "exit_code": 0,
+  "stdout": "Remote source SHA256: a923e54fb4d8323496c2e49342775d481b12af6b84bbafb4f2611614cb777510\nReviewed archive members: 166\nExecuting fresh prerequisites; pilot is gated: ['/usr/bin/python3', 'scripts/validate_cpu_gpu_pilot.py', '--output', 'results/raw/validation_v3', '--pilot-output', 'results/raw/pilot_v3', '--processed', 'results/processed/pilot_v3']\n{\n  \"argv\": [\n    \"/usr/bin/python3\",\n    \"scripts/validate_cpu_gpu_pilot.py\",\n    \"--output\",\n    \"results/raw/validation_v3\",\n    \"--pilot-output\",\n    \"results/raw/pilot_v3\",\n    \"--processed\",\n    \"results/processed/pilot_v3\"\n  ],\n  \"cwd\": \"/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark\",\n  \"source_archive_sha256\": \"a923e54fb4d8323496c2e49342775d481b12af6b84bbafb4f2611614cb777510\",\n  \"started\": 1791606587.8169174,\n  \"exit_code\": 0,\n  \"status\": \"completed\",\n  \"wall_seconds\": 541.0734062194824\n}\npreflight completed exit 0\ncpu_release_configure completed exit 0\ncpu_release_build completed exit 0\ncpu_release_ctest completed exit 0\ncpu_sanitize_configure completed exit 0\ncpu_sanitize_build completed exit 0\ncpu_sanitize_ctest completed exit 0\ncuda_configure completed exit 0\ncuda_build completed exit 0\ncuda_correctness completed exit 0\ncuda_ctest completed exit 0\npilot completed exit 0\nanalyze completed exit 0\nregenerate completed exit 0\n\nEVIDENCE_ARCHIVE {\"path\": \"/content/cpu_gpu_pilot_20261010T001232473460Z_evidence_v3.tar.gz\", \"sha256\": \"eafcccf97c9f2077d01e8d819bb377161f5c6e8d6402072d242861ffe518285a\", \"files\": 174}\n",
+  "stderr": "\n",
+  "wall_seconds": 548.2864265899998,
+  "ended_utc": "2026-10-10T04:38:54.440086+00:00"
+}

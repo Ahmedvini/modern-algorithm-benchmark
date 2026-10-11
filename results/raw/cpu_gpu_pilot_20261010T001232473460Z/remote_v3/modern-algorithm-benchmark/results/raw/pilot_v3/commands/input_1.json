@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release/comparison_input",
+    "--output",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/results/raw/pilot_v3/data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+    "--size",
+    "1000000",
+    "--seed",
+    "1729",
+    "--distribution",
+    "uniform",
+    "--swaps",
+    "0",
+    "--distinct",
+    "16"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "omp_environment": {
+    "OMP_DYNAMIC": "FALSE",
+    "OMP_MAX_ACTIVE_LEVELS": "1",
+    "OMP_PROC_BIND": "FALSE",
+    "OMP_THREAD_LIMIT": "2",
+    "OMP_WAIT_POLICY": "PASSIVE"
+  },
+  "started_utc": "2026-10-10T04:38:43.526508+00:00",
+  "status": "completed",
+  "stderr": "",
+  "stdout": "",
+  "wall_seconds": 0.045041566999998395
+}

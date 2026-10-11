@@ -1,0 +1,30 @@
+{
+  "binary_sha256": "df88672d04b64427523bbd4e0a7b1271c3113315bf645cdff4e490ad875c611c",
+  "compile_commands_sha256": "1397674407d93a6f6ea916ea44d7c339a36ef41b9f8a2cff0e88676f101c7059",
+  "description": {
+    "architecture": "x86_64",
+    "binary_dir": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release",
+    "build_type": "Release",
+    "compiler_id": "GNU",
+    "compiler_path": "/usr/bin/c++",
+    "compiler_version": "13.3.0",
+    "configuration_flags": "-O3 -DNDEBUG",
+    "cub_version": 300001,
+    "cuda_architectures": "75",
+    "cuda_compiler_version": "13.0.88",
+    "cuda_flags": "",
+    "cuda_release_flags": "-O3 -DNDEBUG",
+    "cuda_toolkit_version": "13.0.88",
+    "cxx_standard": 17,
+    "global_flags": "",
+    "implementation_version": "cpu_gpu_comparison_driver_v1",
+    "openmp_flags": "-fopenmp",
+    "openmp_libraries": "/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so;/usr/lib/x86_64-linux-gnu/libpthread.a",
+    "openmp_version": "4.5",
+    "platform": "Linux",
+    "sanitizers": false,
+    "source_dir": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark"
+  },
+  "input_tool_sha256": "52d1fe3a6b3b5c1e575891480d4a654a45b44e963a672a031af6a33d3b84b04a",
+  "source_review_sha256": "1d11128a9901509e9372b043ba9b6f630f29b56f06625ed958008298f1533550"
+}

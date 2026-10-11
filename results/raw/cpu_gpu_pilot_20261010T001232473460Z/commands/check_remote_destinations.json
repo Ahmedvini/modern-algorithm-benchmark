@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "120",
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-pilot",
+    "--file",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/check_remote_destinations.py",
+    "--timeout",
+    "90"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:38:28.481079+00:00",
+  "exit_code": 1,
+  "stdout": "[colab] Session 'cpu-gpu-pilot' appears to be lost (404/401). Cleaning up.\n",
+  "stderr": "",
+  "wall_seconds": 1.7992970180002885,
+  "ended_utc": "2026-10-10T00:38:30.280546+00:00"
+}

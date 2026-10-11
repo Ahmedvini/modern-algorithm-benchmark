@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "build/cpu_gpu_pilot_20261010T001232473460Z/release",
+    "--output-on-failure",
+    "-V"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:34:08.030979+00:00"
+}

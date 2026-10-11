@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/write_report_v3.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:43:18.108890+00:00",
+  "exit_code": 0,
+  "stdout": "Wrote report,48-row statistics CSV and2-row resource observations; frozen planning artifacts unchanged\n",
+  "stderr": "",
+  "wall_seconds": 0.026764259999254136,
+  "ended_utc": "2026-10-10T04:43:18.135768+00:00"
+}

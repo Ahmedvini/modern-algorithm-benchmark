@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "90",
+    "colab",
+    "download",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/launch_stdout.log",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/remote_progress_v3_3.log",
+    "--session",
+    "cpu-gpu-pilot-reconnect-v3"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T04:32:38.858704+00:00"
+}
