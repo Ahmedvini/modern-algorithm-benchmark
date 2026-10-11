@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cub-workspace-65537-20261010T110457Z",
+    "--file",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cub_workspace_65537_20261010T110457531249Z/remote_resource_check.py",
+    "--timeout",
+    "900"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T11:06:52.387435+00:00"
+}

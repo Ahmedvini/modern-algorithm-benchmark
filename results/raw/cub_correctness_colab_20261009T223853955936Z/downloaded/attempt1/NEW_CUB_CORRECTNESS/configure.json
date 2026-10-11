@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+    "-B",
+    "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=ON",
+    "-DMAB_ENABLE_CUDA_SORT=ON",
+    "-DMAB_ENABLE_OPENMP=OFF",
+    "-DMAB_ENABLE_SANITIZERS=OFF",
+    "-DBUILD_TESTING=ON",
+    "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc",
+    "-DCMAKE_CUDA_ARCHITECTURES=75"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+  "exit_code": 1,
+  "status": "completed",
+  "stderr": "CMake Error at cmake/cuda.cmake:41 (message):\n  Installed CUB differs from reviewed v3.0.0 headers\n  (version=316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124,\n  SortKeys=7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be);\n  preserve diagnostics and review the dependency before changing the pin\nCall Stack (most recent call first):\n  CMakeLists.txt:157 (include)\n\n\n",
+  "stdout": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Found Python3: /usr/local/bin/python (found version \"3.13.15\") found components: Interpreter\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found suitable version \"13.0.88\", minimum required is \"11.0\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- Configuring incomplete, errors occurred!\n",
+  "wall_seconds": 3.9766605939994406
+}

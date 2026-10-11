@@ -1,0 +1,14 @@
+{
+  "device_radix_sort.cuh": {
+    "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh",
+    "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+  },
+  "LICENSE": {
+    "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE",
+    "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+  },
+  "cub_version.cuh": {
+    "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh",
+    "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69"
+  }
+}

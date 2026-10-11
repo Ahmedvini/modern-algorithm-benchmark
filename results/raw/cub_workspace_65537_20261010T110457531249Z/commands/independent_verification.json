@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cub_workspace_65537_20261010T110457531249Z/verify_download.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T11:08:52.598783+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"adapter_diagnostic_cudaMalloc_requested_bytes\": 279295,\n  \"adapter_query_bytes\": 279295,\n  \"allocation_observation\": \"successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured\",\n  \"combined_device_payload_bytes\": 1607182,\n  \"compute_major\": 7,\n  \"compute_minor\": 5,\n  \"driver_api_version\": 13000,\n  \"free_device_bytes_before_buffers\": 15527116800,\n  \"gpu_name\": \"Tesla T4\",\n  \"known_host_peak_payload_bytes\": 1572888,\n  \"prepared_diagnostic_cudaMalloc_requested_bytes\": 279295,\n  \"prepared_query_bytes\": 279295,\n  \"production_workspace_observation\": \"not instrumented; isolated same-parameter sizing query only\",\n  \"runtime_api_version\": 13000,\n  \"size\": 65537,\n  \"total_device_bytes\": 15637086208,\n  \"workspace_policy_cap_each_bytes\": 67108864\n}\nIndependent verification passed; warnings 341 dependency files 1688\n",
+  "stderr": "",
+  "wall_seconds": 0.06318866400033585,
+  "ended_utc": "2026-10-10T11:08:52.662142+00:00"
+}

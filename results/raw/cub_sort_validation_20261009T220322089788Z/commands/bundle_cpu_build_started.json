@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/cub_source_relocation_20261009T220322089788Z/cpu_build",
+    "--target",
+    "sort_benchmark",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:21:03.919115+00:00"
+}

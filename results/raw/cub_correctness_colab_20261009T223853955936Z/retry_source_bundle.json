@@ -1,0 +1,8 @@
+{
+  "archive": "results/raw/cub_correctness_colab_20261009T223853955936Z/cub_sort_source_v3.tar.gz",
+  "archive_sha256": "e4a5e21c02c6f5611b5577caac88abaa35856270af61b335bcf57a923e73dee1",
+  "source_files": 140,
+  "remote_parent": "/content/mab_cub_20261009T223853955936Z_retry1",
+  "remote_archive": "/content/cub_sort_source_v3_20261009T223853955936Z.tar.gz",
+  "protocol": "cuda_sort_correctness_v2"
+}

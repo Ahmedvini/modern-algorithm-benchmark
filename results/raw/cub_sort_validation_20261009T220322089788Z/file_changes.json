@@ -1,0 +1,24 @@
+{
+  "added": [
+    "docs/CUDA_SORT_PROTOCOL_v1.md",
+    "docs/CUDA_SORT_VALIDATION_GUIDE_v1.md",
+    "include/algorithms/cuda_sorting.hpp",
+    "scripts/validate_cuda_sort.py",
+    "src/cuda/cub_sort.cu",
+    "tests/test_cuda_sort_handoff.py",
+    "tests/test_cuda_sorting.cpp",
+    "third_party/cub/LICENSE",
+    "third_party/cub/README.md",
+    "third_party/cub/UPSTREAM.json"
+  ],
+  "modified": [
+    "CMakeLists.txt",
+    "README.md",
+    "cmake/cuda.cmake",
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/ROADMAP.md"
+  ]
+}

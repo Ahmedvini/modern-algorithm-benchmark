@@ -1,0 +1,24 @@
+{
+  "result": {
+    "algorithm": "cub_radix_sort",
+    "cases": 475,
+    "compute_major": 7,
+    "compute_minor": 5,
+    "cub_version": 300001,
+    "device": 0,
+    "driver_api_version": 13000,
+    "implementation_version": "cub_radix_sort_v1",
+    "output_checks": 1900,
+    "protocol": "cuda_sort_correctness_v2",
+    "runtime_api_version": 13000,
+    "schema_version": 1,
+    "status": "ok"
+  },
+  "sorter_built_and_executed": true,
+  "warnings_count": 100,
+  "warning_class": "nvcc-generated GCC line directives under host -Wpedantic",
+  "direct_exit": 0,
+  "ctest_exit": 0,
+  "configure_exit": 0,
+  "build_exit": 0
+}

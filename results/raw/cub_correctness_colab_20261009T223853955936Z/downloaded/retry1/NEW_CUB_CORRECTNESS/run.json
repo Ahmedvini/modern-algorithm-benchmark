@@ -1,0 +1,8 @@
+{
+  "cloud_location": "not inferred; inspect recorded environment",
+  "output": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS",
+  "primary_timing": false,
+  "protocol": "cuda_sort_correctness_v2",
+  "source": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:51:54.645168+00:00"
+}

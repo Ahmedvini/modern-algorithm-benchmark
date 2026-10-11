@@ -1,0 +1,1659 @@
+--- before/CMakeLists.txt
++++ after/CMakeLists.txt
+@@ -3,6 +3,10 @@
+ 
+ option(MAB_ENABLE_SANITIZERS "Enable address and undefined-behavior sanitizers" OFF)
+ option(MAB_ENABLE_CUDA "Build the optional CUDA readiness probe (no GPU algorithms)" OFF)
++option(MAB_ENABLE_CUDA_SORT "Build the separately opted-in CUB correctness adapter" OFF)
++if(MAB_ENABLE_CUDA_SORT AND NOT MAB_ENABLE_CUDA)
++    message(FATAL_ERROR "MAB_ENABLE_CUDA_SORT requires MAB_ENABLE_CUDA=ON")
++endif()
+ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+@@ -103,6 +107,8 @@
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_environment.py)
+     add_test(NAME cuda_preflight
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cuda_preflight.py)
++    add_test(NAME cuda_sort_handoff
++             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cuda_sort_handoff.py)
+     add_executable(test_datasets tests/test_datasets.cpp)
+     target_link_libraries(test_datasets PRIVATE mab_core)
+     add_test(NAME datasets COMMAND test_datasets)
+--- before/README.md
++++ after/README.md
+@@ -588,3 +588,39 @@
+ verify the archive and run the existing guide/preflight there. Require actual
+ enumeration and checked kernel before Gate 2. This follow-up remains blocked;
+ original roadmap Phase 8 learned-index/AlphaDev retains its pending status.
++
++## Post-cloud validation: first CUB correctness slice
++
++The retained archive at results/evidence/cloud_validation_evidence.tar.gz
++matches SHA256 48b3e78360e7c0c1721c21a3879bc975b902f5b3603fa25a0c92230c695c0810.
++Its reports show Tesla T4/compute7.5, driver580.82.07, nvcc13.0.88/runtime13000,
++checked device0 kernel, 1/1 runtime CTest and23/23 cloud CPU tests (OpenMP OFF).
++These are historical environment results, not new GPU sorting evidence. Earlier
++blocked entries remain history; the roadmap table/latest entry is current.
++
++The new correctness-only adapter cub_radix_sort sorts full-domain signed int32
++via genuine CUB DeviceRadixSort::SortKeys. It uses per-call owned host/device
++buffers, checked transfer/launch/synchronization/cleanup, a separate GPU registry,
++and no CPU substitution. CPU sorters/defaults and timing schemas are unchanged.
++CUB reference v3.0.0, commit e944297b0b51a8e9c0f1b30425370c31c1c0e0a0, BSD-3-Clause,
++is identified in third_party/cub (upstream source unmodified, toolkit headers used).
++The initial version/header hashes are checked; installed cloud CUB compatibility
++is not known from the old runtime archive.
++
++Build opt-in: MAB_ENABLE_CUDA=ON and MAB_ENABLE_CUDA_SORT=ON. Both default OFF;
++readiness-only CUDA remains separate. cuda_sorting CTest/validate_cuda_sort.py
++exercise public/registry/repeated paths against std::sort, including non-power-of-
++two sizes and signed extrema. Missing hardware is explicit, never a passing sort.
++The expected475 cases/1900 output checks have **not run on a GPU**. Local CUDA
++configuration failed because no CUDA compiler is installed; no local driver change.
++No new GPU sorting build/execution, timing/smoke study or full study is claimed.
++
++Follow [the correctness contract](docs/CUDA_SORT_PROTOCOL_v1.md) and
++[the cloud validation handoff](docs/CUDA_SORT_VALIDATION_GUIDE_v1.md).
++Next milestone: compile/run this exact source on the validated cloud GPU, retain
++and review the new sorter evidence, then define separate GPU timing methodology.
++Original learned-index/AlphaDev, scaling and final research phases remain pending.
++
++Final local CPU regression:26/26 Release and26/26 ASan/UBSan, leaks enabled;11 handoff methods pass. New GPU sorting remains uncompiled/unexecuted. Evidence: results/raw/cub_sort_validation_20261009T220322089788Z/FINAL_AUDIT.md.
++
++Latest CUB handoff revision2: dangling-symlink safety fixed;12 host methods and26/26 Release/ASan/UBSan groups pass, leaks enabled. GPU sorting still uncompiled/unexecuted. Use [v2 guide](docs/CUDA_SORT_VALIDATION_GUIDE_v2.md), cub_sort_source_v2.tar.gz and evidence at results/raw/cub_sort_final_review_20261009T222209607981Z/FINAL_AUDIT.md. Earlier candidate archive remains unchanged.
+--- before/cmake/cuda.cmake
++++ after/cmake/cuda.cmake
+@@ -23,3 +23,36 @@
+     add_test(NAME cuda_runtime_smoke COMMAND cuda_runtime_probe)
+     set_tests_properties(cuda_runtime_smoke PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 60)
+ endif()
++
++if(MAB_ENABLE_CUDA_SORT)
++    if(CUDAToolkit_VERSION VERSION_LESS 13.0)
++        message(FATAL_ERROR "The reviewed CUB correctness adapter requires toolkit >=13.0")
++    endif()
++    find_path(MAB_CUB_INCLUDE_DIR cub/version.cuh
++              HINTS ${CUDAToolkit_INCLUDE_DIRS}
++              PATH_SUFFIXES cccl NO_DEFAULT_PATH)
++    if(NOT MAB_CUB_INCLUDE_DIR)
++        message(FATAL_ERROR "Toolkit CUB headers unavailable")
++    endif()
++    file(SHA256 "${MAB_CUB_INCLUDE_DIR}/cub/version.cuh" cub_version_hash)
++    file(SHA256 "${MAB_CUB_INCLUDE_DIR}/cub/device/device_radix_sort.cuh" cub_sort_hash)
++    if(NOT cub_version_hash STREQUAL "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69"
++       OR NOT cub_sort_hash STREQUAL "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be")
++        message(FATAL_ERROR "Installed CUB differs from reviewed v3.0.0 headers (version=${cub_version_hash}, SortKeys=${cub_sort_hash}); preserve diagnostics and review the dependency before changing the pin")
++    endif()
++    add_library(mab_cuda_sort src/cuda/cub_sort.cu)
++    target_include_directories(mab_cuda_sort SYSTEM PRIVATE "${MAB_CUB_INCLUDE_DIR}")
++    # Do not inherit mab_core's host-only warning switches into nvcc.
++    target_include_directories(mab_cuda_sort PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
++    target_compile_features(mab_cuda_sort PUBLIC cxx_std_17)
++    target_compile_options(mab_cuda_sort PRIVATE "-Xcompiler=-Wall,-Wextra,-Wpedantic")
++    target_link_libraries(mab_cuda_sort PUBLIC CUDA::cudart)
++    set_target_properties(mab_cuda_sort PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON
++                          CUDA_EXTENSIONS OFF CUDA_RUNTIME_LIBRARY Shared)
++    if(BUILD_TESTING)
++        add_executable(test_cuda_sorting tests/test_cuda_sorting.cpp)
++        target_link_libraries(test_cuda_sorting PRIVATE mab_cuda_sort mab_core)
++        add_test(NAME cuda_sorting COMMAND test_cuda_sorting)
++        set_tests_properties(cuda_sorting PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 240)
++    endif()
++endif()
+--- before/docs/ALGORITHMS.md
++++ after/docs/ALGORITHMS.md
+@@ -335,3 +335,35 @@
+ CPU implementations/defaults are unchanged; the readiness .cu target remains
+ uncompiled/unrun locally. No GPU correctness/performance claim is supported.
+ [Gate evidence](../results/raw/gpu_cloud_gate1_20261009T211734154323Z/FINAL_AUDIT.md).
++
++## Post-cloud validation: first CUB correctness slice
++
++The retained archive at ../results/evidence/cloud_validation_evidence.tar.gz
++matches SHA256 48b3e78360e7c0c1721c21a3879bc975b902f5b3603fa25a0c92230c695c0810.
++Its reports show Tesla T4/compute7.5, driver580.82.07, nvcc13.0.88/runtime13000,
++checked device0 kernel, 1/1 runtime CTest and23/23 cloud CPU tests (OpenMP OFF).
++These are historical environment results, not new GPU sorting evidence. Earlier
++blocked entries remain history; the roadmap table/latest entry is current.
++
++The new correctness-only adapter cub_radix_sort sorts full-domain signed int32
++via genuine CUB DeviceRadixSort::SortKeys. It uses per-call owned host/device
++buffers, checked transfer/launch/synchronization/cleanup, a separate GPU registry,
++and no CPU substitution. CPU sorters/defaults and timing schemas are unchanged.
++CUB reference v3.0.0, commit e944297b0b51a8e9c0f1b30425370c31c1c0e0a0, BSD-3-Clause,
++is identified in third_party/cub (upstream source unmodified, toolkit headers used).
++The initial version/header hashes are checked; installed cloud CUB compatibility
++is not known from the old runtime archive.
++
++Build opt-in: MAB_ENABLE_CUDA=ON and MAB_ENABLE_CUDA_SORT=ON. Both default OFF;
++readiness-only CUDA remains separate. cuda_sorting CTest/validate_cuda_sort.py
++exercise public/registry/repeated paths against std::sort, including non-power-of-
++two sizes and signed extrema. Missing hardware is explicit, never a passing sort.
++The expected475 cases/1900 output checks have **not run on a GPU**. Local CUDA
++configuration failed because no CUDA compiler is installed; no local driver change.
++No new GPU sorting build/execution, timing/smoke study or full study is claimed.
++
++Follow [the correctness contract](CUDA_SORT_PROTOCOL_v1.md) and
++[the cloud validation handoff](CUDA_SORT_VALIDATION_GUIDE_v1.md).
++Next milestone: compile/run this exact source on the validated cloud GPU, retain
++and review the new sorter evidence, then define separate GPU timing methodology.
++Original learned-index/AlphaDev, scaling and final research phases remain pending.
+--- before/docs/AUDIT.md
++++ after/docs/AUDIT.md
+@@ -2135,3 +2135,159 @@
+ new GPU sorting contract, pin/license CUB, and implement signed-int32 differential
+ checks with separate synchronized transfer/device/end-to-end metrics. Cloud guide
+ execution remains unvalidated here because no cloud runtime was available.
++
++## Post-cloud validation — first CUB correctness slice, hardware validation pending
++
++Inspected AGENTS.md, README/roadmap/audit/protocols, CMake/CUDA isolation, existing
++CPU and parallel sorter interfaces/registries/implementations, differential tests,
++preflight and runner conventions, Phase7/blocked-gate records and new cloud archive.
++Git status/branches/log each exit128: no Git metadata, branches/commits/uncommitted
++status unavailable; no Git initialization/commit/push. Anonymous temporary-file
++write verified access. Source before: 127 files including .gitignore,
++backup under build/cub_sort_review_20261009T220322089788Z; all 8,709 earlier results/evidence files
++hashed before edits. No existing user source was discarded.
++
++Initial root-level cloud archive lookup failed (ls2, sha256sum1, tar2), resolved by
++file search to results/evidence/cloud_validation_evidence.tar.gz before extraction.
++Archive SHA256 matches 48b3e78360e7c0c1721c21a3879bc975b902f5b3603fa25a0c92230c695c0810.
++Listed members first; safely extracted to new results/raw/cub_sort_validation_20261009T220322089788Z/cloud_evidence. Preflight marker
++hashes and four reported source hashes match the starting code. Historical Colab
++report: Tesla T4, compute7.5, driver580.82.07, nvcc13.0.88, runtime/driver API13000,
++CMake3.31.10, host GNU13.3.0, device0 checked kernel success. Actual preflight
++configure/build/runtime return0; retained LastTest logs have23 CPU passes/0 failures
++(OpenMP OFF) and1 CUDA-runtime pass/0 failures. The CUDA log's24/24 ordinal is a
++filtered test index, not24 GPU tests. External full command transcript/exit statuses
++for the cloud CPU build/CTest are not in the archive; LastTest.log and the CPU cache
++support successful tests/Release configuration, not invented missing commands.
++This proves historical readiness, not new CUB sorting or a currently connected GPU.
++cloud_evidence_review.json records precisely that scope. Prior extracted cloud
++evidence and original archive are unchanged.
++
++Baseline fresh Release configure/build/CTest: exit0/0/0,25/25 groups,27.49s.
++No baseline correctness defect found. CUDA_SORT_PROTOCOL_v1.md was saved/hash-frozen
++before implementation. Separate cub_radix_sort_v1 adapter: signed-int32 full-width
++CUB SortKeys, per-call device input/output/scratch and host output, checked API/
++launch/sync/copy/cleanup, caller host mutation only after successful cleanup. Empty/
++singleton require an available device then no-op; no CPU fallback. Length/byte
++bounds checked; no abs/signed overflow. Existing Sorter shape reused in a separate
++GPU registry; CPU six-entry registry/std_sort and all timing implementations stay
++unchanged. No performance timing or CUB comparison metric implemented.
++
++Dependency reference: NVIDIA CCCL v3.0.0, resolved commit
++ e944297b0b51a8e9c0f1b30425370c31c1c0e0a0. Revision-qualified SortKeys/version/license
++bytes verified against reviewed tag downloads. CUB is BSD-3-Clause, unchanged
++aggregate LICENSE/attribution/provenance retained in third_party/cub. Toolkit
++headers used without network fetching or upstream modification. Sorting opt-in
++MAB_ENABLE_CUDA_SORT=OFF by default requires CUDA ON/toolkit>=13.0; readiness-only
++CUDA path/minimum remains unchanged. CUB_VERSION300000 and two reviewed header
++hashes are enforced. Actual installed cloud CUB identity is absent from the old
++archive: a mismatch is an explicit dependency-review blocker, not a hidden bypass.
++Cloud runner records transitive cub/thrust/cuda header hashes when configure passes.
++
++GPU-only test source includes475 expected inputs/1900 output checks through public,
++registry, interleaved/repeated calls, extrema/mixed signs/duplicates/sorted/random/
++all generator distributions and lengths0..65537 including non-power-of-two and
++boundary neighbors. These counts are **planned, not executed GPU results**. Default
++CPU suites do not register GPU sorting. The cloud runner demands actual direct
++sort-test success and a genuinely selected/passed CTest; skip77, empty selection,
++malformed/incomplete output, failed subprocess, source changes or unavailable
++preflight prevent COMPLETE. Exclusive paths, manifests/command diagnostics and
++FAILED/INTERRUPTED markers preserve incomplete attempts. No resume/overwrite.
++
++Local affected CUDA configure: exit1, CUDA compiler NOTFOUND (no nvcc); sorter
++compilation and execution **not run**. Fresh local preflight exit2 remains
++gpu_driver_unavailable. No driver/package/system changes and no live Colab endpoint
++available to this agent. A versioned handoff guide and new source archive are
++provided for user-run GPU validation, not represented as a tested cloud sorter.
++
++Final reviewed fresh Release configure/build/CTest exit0/0/0:26/26 groups,
++27.97s. Debug ASan/UBSan configure/build/CTest exit0/0/0:
++26/26,82.91s, leaks enabled. No ptrace limitation or
++detect_leaks=0 retry. Eleven new host tooling methods pass standalone and in both
++final suites: schema/count validation, skip/empty CTest rejection, unavailable/
++timeout/interruption diagnostics, output/symlink collisions, redaction, invalid
++CLI and CUDA-SORT-with-CUDA-OFF rejection. These are host/synthetic record tests,
++not mocked evidence of actual GPU sorting. Existing CPU sort/search/structure/
++OpenMP tests remain passing; all22 preflight methods pass. Earlier intermediate
++26/26 runs precede the final CTest-result-validator test and are retained separately.
++CPU environment capture exit0. Captured CPU configure/build output has no compiler
++warnings; new GPU compiler warnings cannot be reviewed before a CUDA build.
++
++Exact argv/cwd/timestamps/exit/stdout/stderr: results/raw/cub_sort_validation_20261009T220322089788Z/COMMANDS.md,
++commands_index.json and commands/*.json. Nonzero commands are the explained Git
++metadata errors128, unavailable CUDA configure1 and readiness2; initial misplaced
++archive lookup is recorded in initial_lookup_diagnostics.json. No failed check is
++silently treated as successful. Local full suites:26 passed/0 failed/0 skipped each.
++New GPU sorting test:0 executed,1 group unexecuted (not registered in CPU-OFF tests).
++Historical cloud runtime smoke:1 passed; historical cloud CPU:23 passed.
++
++Files added: include/algorithms/cuda_sorting.hpp, src/cuda/cub_sort.cu,
++tests/test_cuda_sorting.cpp, scripts/validate_cuda_sort.py,
++tests/test_cuda_sort_handoff.py, docs/CUDA_SORT_PROTOCOL_v1.md,
++docs/CUDA_SORT_VALIDATION_GUIDE_v1.md, third_party/cub/README.md/LICENSE/UPSTREAM.json.
++Modified: CMakeLists.txt, cmake/cuda.cmake, README.md and docs/ROADMAP.md/AUDIT.md/
++ALGORITHMS.md/BENCHMARKING.md/EXPERIMENT_PROTOCOL.md. Existing CPU algorithms/tests,
++vendors/licenses and old versioned protocols/studies/results stay unchanged.
++Final manifests/change patch/integrity audit retained under results/raw/cub_sort_validation_20261009T220322089788Z.
++
++Current phase: original roadmap Phase7 CUDA, requested post-cloud GPU continuation;
++original Phase8 learned-index/AlphaDev remains pending. Runtime readiness validated
++historically; first sorter source/build/tests/docs delivered but GPU compilation/
++correctness **pending**. GPU timing/smoke/full study **not started**. No acceleration,
++GPU benchmark measurements, significance or100M claim. The repository is ready
++for cloud correctness handoff, not for the next research phase or timing study.
++
++Exact next step: use the new cub_sort_source.tar.gz (source_bundle.json has its hash)
++and docs/CUDA_SORT_VALIDATION_GUIDE_v1.md on an allocated supported cloud GPU.
++After source verification, run:
++```sh
++python3 scripts/validate_cuda_sort.py --output results/raw/NEW_CUB_CORRECTNESS
++```
++Retain/persist COMPLETE or failed-attempt evidence and return the archive/hash for
++review. Only observed build/475-case/1900-check success permits the separate GPU
++timing contract/engine. If installed CUB mismatches the pin, retain actual hashes
++and review that version explicitly before changing the frozen design.
++
++## CUB handoff final review revision2 — GPU correctness still pending
++
++Final output-safety review found that resolving the requested path before mkdir
++could follow a dangling symlink. Corrected to preserve the final path component
++with Path.absolute(), so exclusive mkdir rejects existing and dangling symlinks.
++New regression verifies no subprocess or target creation. Twelve host handoff
++methods now pass. This is a host runner fix, not a CUDA algorithm change.
++The initial source bundle/audit and all earlier validation evidence remain intact.
++Use CUDA_SORT_VALIDATION_GUIDE_v2.md and cub_sort_source_v2.tar.gz for the corrected
++handoff; v1 is retained history. Frozen CUDA_SORT_PROTOCOL_v1.md is unchanged.
++
++Fresh narrow tests and Release configure/build/CTest all exited0:26/26 groups,
++28.88s. Fresh Debug ASan/UBSan configure/build/CTest exited0:
++26/26 groups,80.80s, leak detection enabled, no ptrace retry.
++Zero failed/skipped CPU groups;12 host methods pass standalone and in each suite.
++GPU sorting remains uncompiled/unexecuted:1 GPU test group unexecuted,475 expected
++inputs/1900 expected output checks, not passes. Earlier local CUDA configure1
++(no compiler), preflight2(unavailable), Git128(no metadata) and historical T4
++runtime/cloud-CPU evidence remain exactly as recorded in the initial audit.
++
++The first candidate bundle's137 files were also independently extracted/hash
++verified, relocated CUDA/CUDA-SORT/OpenMP/testing OFF configure/build/registry
++returned0/0/0 and six CPU sorters; that fallback had testing OFF. Correction changes
++only host handoff/script/test/docs; CUDA adapter/CMake are unchanged. The corrected
++bundle is separately source-hash verified and preserves every original result.
++All 8,709 pre-task artifacts and all 8,798 pre-correction artifacts
++(including first candidate archive and its relocation evidence) remain unchanged.
++Current source differences/patch/manifest and final_review.json are retained here.
++
++Evidence: results/raw/cub_sort_final_review_20261009T222209607981Z/COMMANDS.md, commands/*.json and FINAL_AUDIT.md.
++Initial audit/evidence: results/raw/cub_sort_validation_20261009T220322089788Z/FINAL_AUDIT.md and COMMANDS.md.
++No CUDA implementation validation, GPU smoke, full study, timing values or100M run
++is claimed. No system configuration, driver change, commit or push. Current
++roadmap CUDA work is incomplete; ready for corrected cloud handoff only.
++
++Next: transfer the corrected v2 archive using source_bundle.json's SHA256, verify
++its source manifest, follow docs/CUDA_SORT_VALIDATION_GUIDE_v2.md and run:
++```sh
++python3 scripts/validate_cuda_sort.py --output results/raw/NEW_CUB_CORRECTNESS
++```
++Preserve/return full success/failure evidence. Actual installed CUB must match the
++reviewed version/header pin or be deliberately reviewed before any pin update.
++Only observed GPU sorting success permits the separate timing milestone.
+--- before/docs/BENCHMARKING.md
++++ after/docs/BENCHMARKING.md
+@@ -441,3 +441,35 @@
+ [the cloud guide](CUDA_EXECUTION_GUIDE_v1.md), verify the archive and require
+ actual enumeration/kernel success before defining a new sorting protocol.
+ [Gate evidence](../results/raw/gpu_cloud_gate1_20261009T211734154323Z/FINAL_AUDIT.md).
++
++## Post-cloud validation: first CUB correctness slice
++
++The retained archive at ../results/evidence/cloud_validation_evidence.tar.gz
++matches SHA256 48b3e78360e7c0c1721c21a3879bc975b902f5b3603fa25a0c92230c695c0810.
++Its reports show Tesla T4/compute7.5, driver580.82.07, nvcc13.0.88/runtime13000,
++checked device0 kernel, 1/1 runtime CTest and23/23 cloud CPU tests (OpenMP OFF).
++These are historical environment results, not new GPU sorting evidence. Earlier
++blocked entries remain history; the roadmap table/latest entry is current.
++
++The new correctness-only adapter cub_radix_sort sorts full-domain signed int32
++via genuine CUB DeviceRadixSort::SortKeys. It uses per-call owned host/device
++buffers, checked transfer/launch/synchronization/cleanup, a separate GPU registry,
++and no CPU substitution. CPU sorters/defaults and timing schemas are unchanged.
++CUB reference v3.0.0, commit e944297b0b51a8e9c0f1b30425370c31c1c0e0a0, BSD-3-Clause,
++is identified in third_party/cub (upstream source unmodified, toolkit headers used).
++The initial version/header hashes are checked; installed cloud CUB compatibility
++is not known from the old runtime archive.
++
++Build opt-in: MAB_ENABLE_CUDA=ON and MAB_ENABLE_CUDA_SORT=ON. Both default OFF;
++readiness-only CUDA remains separate. cuda_sorting CTest/validate_cuda_sort.py
++exercise public/registry/repeated paths against std::sort, including non-power-of-
++two sizes and signed extrema. Missing hardware is explicit, never a passing sort.
++The expected475 cases/1900 output checks have **not run on a GPU**. Local CUDA
++configuration failed because no CUDA compiler is installed; no local driver change.
++No new GPU sorting build/execution, timing/smoke study or full study is claimed.
++
++Follow [the correctness contract](CUDA_SORT_PROTOCOL_v1.md) and
++[the cloud validation handoff](CUDA_SORT_VALIDATION_GUIDE_v1.md).
++Next milestone: compile/run this exact source on the validated cloud GPU, retain
++and review the new sorter evidence, then define separate GPU timing methodology.
++Original learned-index/AlphaDev, scaling and final research phases remain pending.
+--- /dev/null
++++ after/docs/CUDA_SORT_PROTOCOL_v1.md
+@@ -0,0 +1,81 @@
++# CUDA sorting correctness contract v1
++
++Status: source implementation and cloud validation handoff; GPU compilation and
++sorting validation are pending. Historical Colab runtime evidence is sufficient
++to begin implementation, not proof the new sorter works. No timing experiment is
++authorized by this correctness slice. Original roadmap CUDA milestone remains open.
++
++## Dependency and build isolation
++
++NVIDIA CUB DeviceRadixSort::SortKeys, reviewed against CCCL v3.0.0:
++https://github.com/NVIDIA/cccl/tree/v3.0.0/cub . CUB is BSD-3-Clause; the complete
++upstream aggregate LICENSE is retained in third_party/cub/LICENSE, with attribution
++and reference hashes. No upstream algorithm is copied/modified in project source.
++Use the CUDA toolkit's installed headers, not a network fetch during CMake.
++This initial adapter pins CUB_VERSION=300000 (3.0.0), and the reviewed SortKeys and
++version header SHA256 values at configure time. Other toolkit/CUB combinations
++must fail explicitly until separately reviewed; do not bypass the checks. The cloud
++archive records CUDA 13.0.88, but does not record CUB headers: compatibility with
++this exact pin still requires a cloud build. Transitive toolkit headers are recorded
++in the cloud run's dependency manifest, not asserted to match an unobserved revision.
++
++MAB_ENABLE_CUDA remains OFF by default. MAB_ENABLE_CUDA_SORT is a separate OFF
++opt-in requiring CUDA ON. Readiness-only CUDA builds retain their existing toolkit
++minimum and probe behavior. Sorting requires CUDA toolkit >=13.0, CMake>=3.18,
++C++17/nvcc and a compatible host compiler. No CUDA dependency or GPU test is added
++to CPU-only builds. Separate GPU registry uses the existing Sorter function-pointer
++shape; CPU registry/defaults/timing schemas stay unchanged.
++
++## Public contract and ownership
++
++mab::cub_radix_sort(Values&) sorts signed int32 keys ascending, preserving the full
++multiset including INT32_MIN/MAX, negatives and duplicates. Operates on the current
++CUDA device in the calling host thread (default device0); no automatic CPU fallback.
++Every call checks device properties, even empty/singleton calls, which then do no
++sorting work. Inputs larger than INT_MAX or whose byte count cannot fit size_t are
++rejected before allocation. No shared mutable buffers, caches or counters.
++
++For nontrivial input, allocate an independent host output, two N-key device buffers,
++and CUB-requested device temporary storage per call. Submit H2D, full-bit-range
++[0,32) CUB SortKeys, stream0 synchronization, and D2H. Check all API/launch/sync/
++copy results. Checked cleanup on success precedes swapping host output into the
++caller. Thus a reported exception leaves the original host vector unchanged.
++RAII cleanup during unwinding cannot throw; secondary cudaFree errors are printed
++to stderr rather than hiding the primary exception. No device reset or global
++runtime policy changes. Concurrent host callers are not a performance contract;
++stream0 scheduling/runtime allocator behavior can serialize work.
++
++CUB handles signed ordering by its documented sign-bit transform; the adapter does
++not use abs, signed overflow, truncated bits or a comparison-sort fallback. Upstream
++SortKeys is stable; equal-key stability is not observable in this keys-only API and
++no key/payload stability test is claimed. Expected device workspace O(N) plus CUB
++scratch; host output O(N). These are theoretical/allocated shapes, not measured RSS.
++
++## Correctness and evidence
++
++GPU-only cuda_sorting CTest compares full vectors with std::sort through public,
++GPU-registry and repeated-call paths. Cases include empty/singleton/two keys,
++negative/positive/mixed/extreme values, duplicates/all equal, sorted/reverse,
++seeded generator distributions, non-power-of-two and boundary-adjacent sizes through
++65537. No specific CUB tile size or internal branch coverage is inferred. Missing
++runtime/device at test startup returns77/CTest skip; failures after availability
++returns1. A skip is never a GPU pass. JSON output records case/output-check totals,
++algorithm/version, actual CUB/runtime API versions and current device identity.
++
++scripts/validate_cuda_sort.py requires a new output directory and captures exact
++argv/cwd/exit/stdout/stderr. A fresh operational preflight must pass before configure,
++then build the sorter/test and run the test directly plus targeted CTest. Direct
++exit77 fails the validation handoff, even if CTest would consider it a skip. Capture
++CMake/compile commands and installed cub/thrust/cuda header hashes/licenses.
++Exclusive build/output locations, source manifest and terminal COMPLETE/FAILED/
++INTERRUPTED markers preserve incomplete runs. COMPLETE requires actual successful
++sorter output, not only runtime smoke. No live Colab connection is assumed.
++
++## Deferred benchmark contract
++
++No GPU performance numbers or primary timing rows in this milestone. After observed
++GPU correctness success, freeze a separate benchmark version defining datasets,
++seeds, warmups/repetitions, memory planning and reuse, CUDA-event H2D/device/D2H
++measurements and host steady_clock end-to-end boundaries (including allocation
++scope). Compare equivalent CPU data and retain dataset-level repetitions/outliers;
++keep kernel-only versus CPU end-to-end comparisons explicitly distinct. No100M.
+--- /dev/null
++++ after/docs/CUDA_SORT_VALIDATION_GUIDE_v1.md
+@@ -0,0 +1,84 @@
++# CUB correctness validation on Colab v1
++
++The retained cloud runtime archive proves Tesla T4 readiness on its recorded date.
++It does not prove this new sorter compiles or works, nor that the current session
++still has a GPU. Local validation cannot run CUDA. This guide has not yet been run
++on the new sorter in Colab. No benchmark timing is collected.
++
++Use the new `cub_sort_source.tar.gz` and its independent SHA256 from the current
++local final audit, not the old Phase 7 archive (which lacks the sorter). Upload it
++to a connected GPU runtime and run from the upload directory. The output directory
++and extracted source must not already exist:
++
++```sh
++# Set this to the new archive hash retained in the local audit:
++export MAB_CUB_ARCHIVE_SHA256='REPLACE_WITH_NEW_CUB_SOURCE_ARCHIVE_HASH'
++python3 - <<'PY'
++import hashlib, os
++from pathlib import Path
++assert hashlib.sha256(Path('cub_sort_source.tar.gz').read_bytes()).hexdigest()==os.environ['MAB_CUB_ARCHIVE_SHA256']
++PY
++test ! -e modern-algorithm-benchmark || exit 1
++tar -xzf cub_sort_source.tar.gz
++cd modern-algorithm-benchmark
++python3 - <<'PY'
++import hashlib,json
++from pathlib import Path
++manifest=json.loads(Path('SOURCE_SHA256.json').read_text())
++assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in manifest.items())
++print('Verified',len(manifest),'source files')
++PY
++mkdir -p results/raw results/processed results/figures
++python3 - <<'PY'
++import datetime, subprocess, sys
++stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
++output='results/raw/cub_correctness_'+stamp
++r=subprocess.run([sys.executable,'scripts/validate_cuda_sort.py','--output',output])
++print('exit:',r.returncode,'evidence:',output)
++assert r.returncode==0,'Not validated: preserve FAILED/INTERRUPTED and command diagnostics'
++PY
++```
++
++An existing source checkout must not be overwritten: use a new empty upload/work
++location. Use the existing Python environment; this narrow target does not need
++Matplotlib. If a host compiler/CMake/toolkit is missing, use a supported development
++image; do not replace hosted drivers. Existing readiness guide describes CPU-only
++fallback and persistence, unchanged.
++
++The runner records a fresh operational preflight, derives architecture from actual
++device0, and executes the equivalent commands below with unique absolute paths:
++
++```sh
++cmake -S . -B NEW_BUILD -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_CUDA=ON -DMAB_ENABLE_CUDA_SORT=ON -DMAB_ENABLE_OPENMP=OFF -DMAB_ENABLE_SANITIZERS=OFF -DBUILD_TESTING=ON -DCMAKE_CUDA_ARCHITECTURES=75
++cmake --build NEW_BUILD --target test_cuda_sorting --parallel 2
++NEW_BUILD/test_cuda_sorting
++ctest --test-dir NEW_BUILD --output-on-failure -V -R '^cuda_sorting$'
++```
++
++`75` above applies only to an actually observed T4/7.5. The automated runner uses
++the current preflight, never a guessed architecture. Direct tests require 475
++complete input cases and 1900 full-vector output checks. These are expected counts,
++not observed GPU passes yet. Empty/singleton cases require a usable device but skip
++sorting. Missing device returns77 (CTest skip), which the runner rejects as an
++incomplete correctness validation. No CPU fallback for requested GPU sorting.
++
++Initial dependency pin: CUB 3.0.0, two revision-verified header hashes from
++third_party/cub/UPSTREAM.json. The old cloud archive did not capture CUB identity.
++If the installed toolkit differs, configure fails with actual hashes. Preserve
++those diagnostics and report the mismatch for deliberate version review; do not
++edit hashes or pretend the test passed. No dependency downloads during configure.
++
++A successful run contains source_sha256.json, preflight/report.json, exact command
++records, build/CMakeCache.txt, build/compile_commands.json, dependency_sha256.json,
++sorting.json, ctest.json and COMPLETE.json. Failed/interrupted runs retain their
++own marker; no overwrite/resume. COMPLETE means new correctness validation, not
++GPU timing or a full study. Keep the build/cache and all diagnostics with the run.
++
++Before the ephemeral runtime ends, archive the entire run to a new destination
++outside the source tree, hash it, and persist/download it using your own Drive or
++cloud storage. Follow section6 of CUDA_EXECUTION_GUIDE_v1.md; authorization/mounting
++is a separate user operation. Return the archive/hash for local evidence review.
++The local agent cannot infer a live Colab connection from historical artifacts.
++
++Only after observing sorter build and differential-test success should a separate
++GPU timing protocol/engine be implemented. No100M and no performance claims here.
+--- /dev/null
++++ after/docs/CUDA_SORT_VALIDATION_GUIDE_v2.md
+@@ -0,0 +1,86 @@
++# CUB correctness validation on Colab v2
++
++The retained cloud runtime archive proves Tesla T4 readiness on its recorded date.
++It does not prove this new sorter compiles or works, nor that the current session
++still has a GPU. Local validation cannot run CUDA. This guide has not yet been run
++on the new sorter in Colab. No benchmark timing is collected.
++
++Use the new `cub_sort_source_v2.tar.gz` and its independent SHA256 from the current
++local final audit, not the old Phase 7 archive (which lacks the sorter). Upload it
++to a connected GPU runtime and run from the upload directory. The output directory
++and extracted source must not already exist:
++
++```sh
++# Set this to the new archive hash retained in the local audit:
++export MAB_CUB_ARCHIVE_SHA256='REPLACE_WITH_NEW_CUB_SOURCE_ARCHIVE_HASH'
++python3 - <<'PY'
++import hashlib, os
++from pathlib import Path
++assert hashlib.sha256(Path('cub_sort_source_v2.tar.gz').read_bytes()).hexdigest()==os.environ['MAB_CUB_ARCHIVE_SHA256']
++PY
++test ! -e modern-algorithm-benchmark || exit 1
++tar -xzf cub_sort_source_v2.tar.gz
++cd modern-algorithm-benchmark
++python3 - <<'PY'
++import hashlib,json
++from pathlib import Path
++manifest=json.loads(Path('SOURCE_SHA256.json').read_text())
++assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in manifest.items())
++print('Verified',len(manifest),'source files')
++PY
++mkdir -p results/raw results/processed results/figures
++python3 - <<'PY'
++import datetime, subprocess, sys
++stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
++output='results/raw/cub_correctness_'+stamp
++r=subprocess.run([sys.executable,'scripts/validate_cuda_sort.py','--output',output])
++print('exit:',r.returncode,'evidence:',output)
++assert r.returncode==0,'Not validated: preserve FAILED/INTERRUPTED and command diagnostics'
++PY
++```
++
++An existing source checkout must not be overwritten: use a new empty upload/work
++location. Use the existing Python environment; this narrow target does not need
++Matplotlib. If a host compiler/CMake/toolkit is missing, use a supported development
++image; do not replace hosted drivers. Existing readiness guide describes CPU-only
++fallback and persistence, unchanged.
++
++The runner records a fresh operational preflight, derives architecture from actual
++device0, and executes the equivalent commands below with unique absolute paths:
++
++```sh
++cmake -S . -B NEW_BUILD -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_CUDA=ON -DMAB_ENABLE_CUDA_SORT=ON -DMAB_ENABLE_OPENMP=OFF -DMAB_ENABLE_SANITIZERS=OFF -DBUILD_TESTING=ON -DCMAKE_CUDA_ARCHITECTURES=75
++cmake --build NEW_BUILD --target test_cuda_sorting --parallel 2
++NEW_BUILD/test_cuda_sorting
++ctest --test-dir NEW_BUILD --output-on-failure -V -R '^cuda_sorting$'
++```
++
++`75` above applies only to an actually observed T4/7.5. The automated runner uses
++the current preflight, never a guessed architecture. Direct tests require 475
++complete input cases and 1900 full-vector output checks. These are expected counts,
++not observed GPU passes yet. Empty/singleton cases require a usable device but skip
++sorting. Missing device returns77 (CTest skip), which the runner rejects as an
++incomplete correctness validation. No CPU fallback for requested GPU sorting.
++
++Initial dependency pin: CUB 3.0.0, two revision-verified header hashes from
++third_party/cub/UPSTREAM.json. The old cloud archive did not capture CUB identity.
++If the installed toolkit differs, configure fails with actual hashes. Preserve
++those diagnostics and report the mismatch for deliberate version review; do not
++edit hashes or pretend the test passed. No dependency downloads during configure.
++
++A successful run contains source_sha256.json, preflight/report.json, exact command
++records, build/CMakeCache.txt, build/compile_commands.json, dependency_sha256.json,
++sorting.json, ctest.json and COMPLETE.json. Failed/interrupted runs retain their
++own marker; no overwrite/resume. COMPLETE means new correctness validation, not
++GPU timing or a full study. Keep the build/cache and all diagnostics with the run.
++
++Before the ephemeral runtime ends, archive the entire run to a new destination
++outside the source tree, hash it, and persist/download it using your own Drive or
++cloud storage. Follow section6 of CUDA_EXECUTION_GUIDE_v1.md; authorization/mounting
++is a separate user operation. Return the archive/hash for local evidence review.
++The local agent cannot infer a live Colab connection from historical artifacts.
++
++Only after observing sorter build and differential-test success should a separate
++GPU timing protocol/engine be implemented. No100M and no performance claims here.
++
++Revision2 handoff includes the dangling-symlink output safety fix and its regression. Use the v2 source bundle; the first candidate archive/guide remain retained history. GPU sorting build/tests remain pending.
+--- before/docs/EXPERIMENT_PROTOCOL.md
++++ after/docs/EXPERIMENT_PROTOCOL.md
+@@ -176,3 +176,35 @@
+ device enumeration and a checked kernel. Existing frozen protocols and studies
+ remain unchanged. CPU regression checks are not cloud validation.
+ [Gate evidence](../results/raw/gpu_cloud_gate1_20261009T211734154323Z/FINAL_AUDIT.md).
++
++## Post-cloud validation: first CUB correctness slice
++
++The retained archive at ../results/evidence/cloud_validation_evidence.tar.gz
++matches SHA256 48b3e78360e7c0c1721c21a3879bc975b902f5b3603fa25a0c92230c695c0810.
++Its reports show Tesla T4/compute7.5, driver580.82.07, nvcc13.0.88/runtime13000,
++checked device0 kernel, 1/1 runtime CTest and23/23 cloud CPU tests (OpenMP OFF).
++These are historical environment results, not new GPU sorting evidence. Earlier
++blocked entries remain history; the roadmap table/latest entry is current.
++
++The new correctness-only adapter cub_radix_sort sorts full-domain signed int32
++via genuine CUB DeviceRadixSort::SortKeys. It uses per-call owned host/device
++buffers, checked transfer/launch/synchronization/cleanup, a separate GPU registry,
++and no CPU substitution. CPU sorters/defaults and timing schemas are unchanged.
++CUB reference v3.0.0, commit e944297b0b51a8e9c0f1b30425370c31c1c0e0a0, BSD-3-Clause,
++is identified in third_party/cub (upstream source unmodified, toolkit headers used).
++The initial version/header hashes are checked; installed cloud CUB compatibility
++is not known from the old runtime archive.
++
++Build opt-in: MAB_ENABLE_CUDA=ON and MAB_ENABLE_CUDA_SORT=ON. Both default OFF;
++readiness-only CUDA remains separate. cuda_sorting CTest/validate_cuda_sort.py
++exercise public/registry/repeated paths against std::sort, including non-power-of-
++two sizes and signed extrema. Missing hardware is explicit, never a passing sort.
++The expected475 cases/1900 output checks have **not run on a GPU**. Local CUDA
++configuration failed because no CUDA compiler is installed; no local driver change.
++No new GPU sorting build/execution, timing/smoke study or full study is claimed.
++
++Follow [the correctness contract](CUDA_SORT_PROTOCOL_v1.md) and
++[the cloud validation handoff](CUDA_SORT_VALIDATION_GUIDE_v1.md).
++Next milestone: compile/run this exact source on the validated cloud GPU, retain
++and review the new sorter evidence, then define separate GPU timing methodology.
++Original learned-index/AlphaDev, scaling and final research phases remain pending.
+--- before/docs/ROADMAP.md
++++ after/docs/ROADMAP.md
+@@ -12,7 +12,7 @@
+ | 4 — search data structures | Complete: Skip List and B-tree orders 10/16/32/64, differential/invariant tests, separate build/lookup smoke and verified immutable evidence |
+ | 5 — orchestration and analysis | Complete for CPU timing: strict all-family orchestration, hierarchical statistics, SVG/PDF variability plots/report, validated smoke and full multi-size study |
+ | 6 — OpenMP | Complete: stable task Merge Sort, team metadata, fresh 24/24 Release/sanitizer groups and validated 1/2/4/8-thread scaling study; TSan startup limitation retained |
+-| 7 — CUDA | Preflight/guide milestone complete: 25/25 CPU Release/sanitizer groups; local GPU detected but driver/toolkit unavailable; CUDA target/GPU sorting/timing and Colab execution not run |
++| 7 — CUDA | Cloud T4 runtime/probe evidence verified; CUB correctness adapter/tests and cloud handoff added, new sorter compilation/execution pending; GPU timing/study not started |
+ | 8 — learned index and AlphaDev study | Pending |
+ | 9 — 100M scale | Pending; not run |
+ | 10 — report and presentation | Pending |
+@@ -226,3 +226,39 @@
+ verify the archive and run the existing guide/preflight there. Require actual
+ enumeration and checked kernel before Gate 2. This follow-up remains blocked;
+ original roadmap Phase 8 learned-index/AlphaDev retains its pending status.
++
++## Post-cloud validation: first CUB correctness slice
++
++The retained archive at ../results/evidence/cloud_validation_evidence.tar.gz
++matches SHA256 48b3e78360e7c0c1721c21a3879bc975b902f5b3603fa25a0c92230c695c0810.
++Its reports show Tesla T4/compute7.5, driver580.82.07, nvcc13.0.88/runtime13000,
++checked device0 kernel, 1/1 runtime CTest and23/23 cloud CPU tests (OpenMP OFF).
++These are historical environment results, not new GPU sorting evidence. Earlier
++blocked entries remain history; the roadmap table/latest entry is current.
++
++The new correctness-only adapter cub_radix_sort sorts full-domain signed int32
++via genuine CUB DeviceRadixSort::SortKeys. It uses per-call owned host/device
++buffers, checked transfer/launch/synchronization/cleanup, a separate GPU registry,
++and no CPU substitution. CPU sorters/defaults and timing schemas are unchanged.
++CUB reference v3.0.0, commit e944297b0b51a8e9c0f1b30425370c31c1c0e0a0, BSD-3-Clause,
++is identified in third_party/cub (upstream source unmodified, toolkit headers used).
++The initial version/header hashes are checked; installed cloud CUB compatibility
++is not known from the old runtime archive.
++
++Build opt-in: MAB_ENABLE_CUDA=ON and MAB_ENABLE_CUDA_SORT=ON. Both default OFF;
++readiness-only CUDA remains separate. cuda_sorting CTest/validate_cuda_sort.py
++exercise public/registry/repeated paths against std::sort, including non-power-of-
++two sizes and signed extrema. Missing hardware is explicit, never a passing sort.
++The expected475 cases/1900 output checks have **not run on a GPU**. Local CUDA
++configuration failed because no CUDA compiler is installed; no local driver change.
++No new GPU sorting build/execution, timing/smoke study or full study is claimed.
++
++Follow [the correctness contract](CUDA_SORT_PROTOCOL_v1.md) and
++[the cloud validation handoff](CUDA_SORT_VALIDATION_GUIDE_v1.md).
++Next milestone: compile/run this exact source on the validated cloud GPU, retain
++and review the new sorter evidence, then define separate GPU timing methodology.
++Original learned-index/AlphaDev, scaling and final research phases remain pending.
++
++Final local CPU regression:26/26 Release and26/26 ASan/UBSan, leaks enabled;11 handoff methods pass. New GPU sorting remains uncompiled/unexecuted. Evidence: results/raw/cub_sort_validation_20261009T220322089788Z/FINAL_AUDIT.md.
++
++Latest CUB handoff revision2: dangling-symlink safety fixed;12 host methods and26/26 Release/ASan/UBSan groups pass, leaks enabled. GPU sorting still uncompiled/unexecuted. Use [v2 guide](CUDA_SORT_VALIDATION_GUIDE_v2.md), cub_sort_source_v2.tar.gz and evidence at results/raw/cub_sort_final_review_20261009T222209607981Z/FINAL_AUDIT.md. Earlier candidate archive remains unchanged.
+--- /dev/null
++++ after/include/algorithms/cuda_sorting.hpp
+@@ -0,0 +1,13 @@
++#pragma once
++#include "algorithms/sorting.hpp"
++
++namespace mab {
++inline constexpr std::string_view cuda_sort_version = "cub_radix_sort_v1";
++// Requires a usable current CUDA device, including for empty/singleton input.
++// Full signed-int32 ascending order. Throws on CUDA errors; no CPU fallback.
++// Successful checked cleanup precedes host mutation.
++void cub_radix_sort(Values& values);
++const std::array<Sorter, 1>& cuda_sorters() noexcept;
++const Sorter& find_cuda_sorter(std::string_view name);
++int cuda_sort_cub_version() noexcept;
++} // namespace mab
+--- /dev/null
++++ after/scripts/validate_cuda_sort.py
+@@ -0,0 +1,138 @@
++#!/usr/bin/env python3
++"""Exclusive cloud correctness handoff. No timing or CPU substitution."""
++import argparse
++import datetime
++import hashlib
++import json
++import os
++import re
++from pathlib import Path
++import subprocess
++import sys
++import time
++
++import cuda_preflight
++ROOT = Path(__file__).resolve().parents[1]
++PROTOCOL = 'cuda_sort_correctness_v1'
++EXPECTED_CASES = 475
++EXPECTED_CHECKS = 1900
++
++
++def digest(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def write_json(path, value):
++    def clean(x):
++        if isinstance(x, str): return cuda_preflight.scrub(x, dict(os.environ))
++        if isinstance(x, list): return [clean(v) for v in x]
++        if isinstance(x, dict): return {clean(k): clean(v) for k, v in x.items()}
++        return x
++    with Path(path).open('x', encoding='utf-8') as f:
++        json.dump(clean(value), f, indent=2, sort_keys=True, allow_nan=False)
++        f.write('\n')
++
++
++def verify_result(value):
++    if not isinstance(value, dict): raise ValueError('sort result must be an object')
++    required = dict(schema_version=1, protocol=PROTOCOL, algorithm='cub_radix_sort',
++                    implementation_version='cub_radix_sort_v1', status='ok',
++                    cases=EXPECTED_CASES, output_checks=EXPECTED_CHECKS, cub_version=300000)
++    for key, expected in required.items():
++        if type(value.get(key)) is not type(expected) or value[key] != expected:
++            raise ValueError('incorrect or incomplete sort result: ' + key)
++    for key in ['runtime_api_version', 'driver_api_version', 'compute_major', 'compute_minor', 'device']:
++        if type(value.get(key)) is not int or value[key] < 0: raise ValueError('invalid ' + key)
++    if value['runtime_api_version'] < 13000: raise ValueError('unsupported runtime')
++    if value['compute_major'] < 1: raise ValueError('invalid compute capability')
++    return value
++
++
++def verify_ctest(text):
++    if 'Skipped' in text or not re.search(r'1/1 Test\s+#\d+: cuda_sorting .*Passed',text):
++        raise ValueError('cuda_sorting CTest must actually pass, not skip or select no tests')
++
++
++def run(output, runner=subprocess.run):
++    # Preserve the final path component so mkdir rejects even dangling symlinks.
++    output = Path(output).absolute()
++    output.mkdir()  # Atomic claim: never touch existing paths, including symlinks.
++    try:
++        sources = {str(p.relative_to(ROOT)): digest(p)
++                   for base in ['include', 'src', 'tests', 'scripts', 'cmake', 'docs', 'third_party']
++                   for p in sorted((ROOT / base).rglob('*'))
++                   if p.is_file() and '__pycache__' not in p.parts}
++        for name in ['CMakeLists.txt', 'AGENTS.md', 'README.md']:
++            sources[name] = digest(ROOT / name)
++        write_json(output / 'source_sha256.json', sources)
++        write_json(output / 'run.json', dict(protocol=PROTOCOL, source=str(ROOT), output=str(output),
++                   started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++                   primary_timing=False, cloud_location='not inferred; inspect recorded environment'))
++        def invoke(name, argv, timeout=600):
++            write_json(output / (name + '_started.json'), dict(argv=argv, cwd=str(ROOT)))
++            start=time.monotonic()
++            try:
++                result = runner(argv, cwd=ROOT, capture_output=True, text=True, timeout=timeout, check=False)
++            except subprocess.TimeoutExpired as error:
++                def text(s): return s.decode(errors='replace') if isinstance(s, bytes) else s or ''
++                write_json(output / (name + '.json'), dict(argv=argv, status='timeout', exit_code=None,
++                           stdout=text(error.stdout), stderr=text(error.stderr)))
++                raise RuntimeError(name + ' timed out') from error
++            write_json(output / (name + '.json'), dict(argv=argv, cwd=str(ROOT), status='completed',
++                       exit_code=result.returncode, stdout=result.stdout, stderr=result.stderr,
++                       wall_seconds=time.monotonic()-start))
++            if result.returncode != 0:
++                raise RuntimeError(name + ' exit ' + str(result.returncode) + '; inspect retained diagnostics')
++            return result
++        invoke('preflight', [sys.executable, str(ROOT/'scripts/cuda_preflight.py'),
++                            '--output', str(output/'preflight'), '--timeout-seconds', '180'])
++        preflight=json.loads((output/'preflight/report.json').read_text())
++        if not preflight['classification']['device0_kernel_verified'] or preflight['classification']['state']!='operational':
++            raise ValueError('operational runtime required')
++        device=next(d for d in preflight['runtime_probe']['devices'] if d['ordinal']==0)
++        architecture=str(device['compute_major'])+str(device['compute_minor'])
++        build=output/'build'
++        invoke('configure', ['cmake','-S',str(ROOT),'-B',str(build),'-DCMAKE_BUILD_TYPE=Release',
++              '-DMAB_ENABLE_CUDA=ON','-DMAB_ENABLE_CUDA_SORT=ON','-DMAB_ENABLE_OPENMP=OFF',
++              '-DMAB_ENABLE_SANITIZERS=OFF','-DBUILD_TESTING=ON',
++              '-DCMAKE_CUDA_COMPILER='+preflight['discovery']['tools']['nvcc'],
++              '-DCMAKE_CUDA_ARCHITECTURES='+architecture])
++        # Record all installed dependency files, not just a version claim.
++        cache=(build/'CMakeCache.txt').read_text()
++        include=Path(next(line.split('=',1)[1] for line in cache.splitlines()
++                          if line.startswith('MAB_CUB_INCLUDE_DIR:PATH=')))
++        dependency={str(p.relative_to(include)):digest(p) for name in ['cub','thrust','cuda']
++                    for p in sorted((include/name).rglob('*')) if p.is_file()}
++        if not dependency: raise ValueError('dependency snapshot empty')
++        write_json(output/'dependency_sha256.json',dict(include_root=str(include),files=dependency,
++                   absent_trees=[n for n in ['cub','thrust','cuda'] if not (include/n).is_dir()]))
++        invoke('build', ['cmake','--build',str(build),'--target','test_cuda_sorting','--parallel','2'])
++        result=verify_result(json.loads(invoke('sorting', [str(build/'test_cuda_sorting')],timeout=240).stdout))
++        if result['device']!=0 or (result['compute_major'],result['compute_minor'])!=(device['compute_major'],device['compute_minor']):
++            raise ValueError('sorter device differs from preflight')
++        ctest=invoke('ctest', ['ctest','--test-dir',str(build),'--output-on-failure','-V','-R','^cuda_sorting$'])
++        verify_ctest(ctest.stdout)
++        if any(digest(ROOT/name)!=sha for name,sha in sources.items()): raise ValueError('source changed during validation')
++        write_json(output/'COMPLETE.json', dict(protocol=PROTOCOL,sorting_validated=True,
++                   result=result,source_manifest_sha256=digest(output/'source_sha256.json'),
++                   dependency_manifest_sha256=digest(output/'dependency_sha256.json'),
++                   preflight_sha256=digest(output/'preflight/report.json')))
++        return 0
++    except KeyboardInterrupt:
++        write_json(output/'INTERRUPTED.json', dict(complete=False,sorting_validated=False))
++        return 130
++    except Exception as error:
++        write_json(output/'FAILED.json',dict(complete=False,sorting_validated=False,error=str(error)))
++        print(cuda_preflight.scrub(str(error),dict(os.environ)),file=sys.stderr)
++        return 1
++
++
++def main():
++    parser=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
++    parser.add_argument('--output',required=True,type=Path)
++    args=parser.parse_args()
++    try: return run(args.output)
++    except OSError as error:
++        print(cuda_preflight.scrub(str(error),dict(os.environ)),file=sys.stderr)
++        return 1
++if __name__=='__main__': sys.exit(main())
+--- /dev/null
++++ after/src/cuda/cub_sort.cu
+@@ -0,0 +1,91 @@
++#include "algorithms/cuda_sorting.hpp"
++#include <cub/device/device_radix_sort.cuh>
++#include <cub/version.cuh>
++#include <cuda_runtime.h>
++
++#include <climits>
++#include <cstdio>
++#include <limits>
++#include <stdexcept>
++#include <string>
++
++namespace mab {
++namespace {
++static_assert(sizeof(Key) * CHAR_BIT == 32 && std::numeric_limits<Key>::is_signed,
++              "CUB adapter requires signed 32-bit keys");
++static_assert(CUB_VERSION == 300000, "Review a new CUB version before changing the pin");
++
++void checked(cudaError_t status, const char* operation) {
++    if (status != cudaSuccess)
++        throw std::runtime_error(std::string(operation) + ": " + cudaGetErrorString(status)
++                                 + " (CUDA " + std::to_string(static_cast<int>(status)) + ")");
++}
++class DeviceBuffer {
++public:
++    explicit DeviceBuffer(std::size_t bytes) {
++        // A non-null buffer distinguishes execution from CUB's sizing query.
++        checked(cudaMalloc(&pointer_, bytes ? bytes : 1), "cudaMalloc");
++    }
++    DeviceBuffer(const DeviceBuffer&) = delete;
++    DeviceBuffer& operator=(const DeviceBuffer&) = delete;
++    ~DeviceBuffer() noexcept {
++        if (pointer_) {
++            const auto status = cudaFree(pointer_);
++            if (status != cudaSuccess)
++                std::fprintf(stderr, "CUDA cleanup during unwinding: %s\n", cudaGetErrorString(status));
++        }
++    }
++    void* get() const noexcept { return pointer_; }
++    void close() {
++        void* allocation = pointer_;
++        pointer_ = nullptr; // One free attempt, including when the runtime reports an error.
++        checked(cudaFree(allocation), "cudaFree");
++    }
++private:
++    void* pointer_ = nullptr;
++};
++} // namespace
++
++void cub_radix_sort(Values& values) {
++    if (values.size() > static_cast<std::size_t>(INT_MAX) ||
++        values.size() > std::numeric_limits<std::size_t>::max() / sizeof(Key))
++        throw std::length_error("cub_radix_sort size exceeds supported item/byte count");
++    int device = 0;
++    cudaDeviceProp properties{};
++    checked(cudaGetDevice(&device), "cudaGetDevice");
++    checked(cudaGetDeviceProperties(&properties, device), "cudaGetDeviceProperties");
++    if (values.size() < 2) return;
++
++    Values output(values.size());
++    const auto bytes = values.size() * sizeof(Key);
++    const int count = static_cast<int>(values.size());
++    DeviceBuffer input(bytes), sorted(bytes);
++    auto* in = static_cast<Key*>(input.get());
++    auto* out = static_cast<Key*>(sorted.get());
++    std::size_t workspace_bytes = 0;
++    checked(cub::DeviceRadixSort::SortKeys(nullptr, workspace_bytes, in, out, count, 0, 32),
++            "CUB SortKeys workspace query");
++    DeviceBuffer workspace(workspace_bytes);
++    checked(cudaMemcpy(in, values.data(), bytes, cudaMemcpyHostToDevice), "H2D cudaMemcpy");
++    checked(cub::DeviceRadixSort::SortKeys(workspace.get(), workspace_bytes, in, out, count, 0, 32),
++            "CUB SortKeys");
++    checked(cudaGetLastError(), "CUB launch status");
++    checked(cudaStreamSynchronize(nullptr), "CUB stream synchronize");
++    checked(cudaMemcpy(output.data(), out, bytes, cudaMemcpyDeviceToHost), "D2H cudaMemcpy");
++    workspace.close();
++    sorted.close();
++    input.close();
++    values.swap(output);
++}
++
++const std::array<Sorter, 1>& cuda_sorters() noexcept {
++    static const std::array<Sorter, 1> registry{{{"cub_radix_sort", cub_radix_sort}}};
++    return registry;
++}
++const Sorter& find_cuda_sorter(std::string_view name) {
++    for (const auto& sorter : cuda_sorters())
++        if (sorter.name == name) return sorter;
++    throw std::invalid_argument("unknown CUDA sorter: " + std::string(name));
++}
++int cuda_sort_cub_version() noexcept { return CUB_VERSION; }
++} // namespace mab
+--- /dev/null
++++ after/tests/test_cuda_sort_handoff.py
+@@ -0,0 +1,85 @@
++#!/usr/bin/env python3
++"""Host tooling tests; no GPU sorting success is simulated or claimed."""
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++ROOT=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT/'scripts'))
++import validate_cuda_sort as handoff
++
++
++def record():
++    return dict(schema_version=1,protocol=handoff.PROTOCOL,algorithm='cub_radix_sort',
++                implementation_version='cub_radix_sort_v1',status='ok',cases=475,
++                output_checks=1900,cub_version=300000,runtime_api_version=13000,
++                driver_api_version=13000,compute_major=7,compute_minor=5,device=0)
++
++
++class HandoffTests(unittest.TestCase):
++    def test_ctest_must_select_and_pass(self):
++        handoff.verify_ctest('1/1 Test #26: cuda_sorting ........ Passed  1.0 sec')
++        for text in ['No tests were found', '1/1 Test #26: cuda_sorting ... ***Skipped',
++                     '1/1 Test #26: cuda_sorting ... ***Failed', '1/1 Test #26: other ... Passed']:
++            with self.subTest(text=text),self.assertRaises(ValueError):handoff.verify_ctest(text)
++    def test_schema(self):
++        self.assertEqual(handoff.verify_result(record())['cases'],475)
++    def test_bad_records(self):
++        for key,value in [('cases',0),('cases',True),('output_checks',1899),('status','unavailable'),
++                          ('protocol','other'),('cub_version',300001),('runtime_api_version',12000),
++                          ('device',-1),('compute_major',0)]:
++            r=record();r[key]=value
++            with self.subTest(key=key,value=value),self.assertRaises(ValueError):handoff.verify_result(r)
++        with self.assertRaises(ValueError):handoff.verify_result([])
++    def test_existing_output(self):
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'old';p.mkdir();sentinel=p/'sentinel';sentinel.write_text('preserved')
++            with self.assertRaises(FileExistsError):handoff.run(p,runner=lambda *a,**k:self.fail('executed'))
++            self.assertEqual(sentinel.read_text(),'preserved')
++    def test_symlink_collision(self):
++        with tempfile.TemporaryDirectory() as d:
++            target=Path(d)/'target';target.mkdir();link=Path(d)/'link';link.symlink_to(target)
++            with self.assertRaises(FileExistsError):handoff.run(link)
++            self.assertEqual(list(target.iterdir()),[])
++    def test_dangling_symlink_collision(self):
++        with tempfile.TemporaryDirectory() as d:
++            target=Path(d)/'absent';link=Path(d)/'link';link.symlink_to(target)
++            with self.assertRaises(FileExistsError):
++                handoff.run(link,runner=lambda *a,**k:self.fail('executed'))
++            self.assertFalse(target.exists())
++            self.assertTrue(link.is_symlink())
++    def test_unavailable_is_failure_not_complete(self):
++        with tempfile.TemporaryDirectory() as d:
++            def unavailable(argv,**kwargs):return subprocess.CompletedProcess(argv,2,'unavailable','no GPU')
++            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=unavailable),1)
++            self.assertTrue((p/'FAILED.json').exists());self.assertFalse((p/'COMPLETE.json').exists())
++            self.assertEqual(json.loads((p/'preflight.json').read_text())['exit_code'],2)
++    def test_timeout_diagnostics(self):
++        with tempfile.TemporaryDirectory() as d:
++            def timeout(argv,**kwargs):raise subprocess.TimeoutExpired(argv,1,output=b'partial',stderr=b'detail')
++            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=timeout),1)
++            r=json.loads((p/'preflight.json').read_text());self.assertEqual(r['stdout'],'partial')
++            self.assertEqual(r['status'],'timeout');self.assertTrue((p/'FAILED.json').exists())
++    def test_interrupted(self):
++        with tempfile.TemporaryDirectory() as d:
++            def stop(*a,**k):raise KeyboardInterrupt()
++            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=stop),130)
++            self.assertTrue((p/'INTERRUPTED.json').exists());self.assertFalse((p/'COMPLETE.json').exists())
++    def test_redaction(self):
++        with tempfile.TemporaryDirectory() as d,patch.dict('os.environ',{'API_TOKEN':'secret_fixture_value'}):
++            p=Path(d)/'record.json';handoff.write_json(p,dict(text='secret_fixture_value',count=475))
++            self.assertEqual(json.loads(p.read_text()),dict(text='<redacted>',count=475))
++    def test_sort_option_requires_cuda(self):
++        with tempfile.TemporaryDirectory() as d:
++            r=subprocess.run(['cmake','-S',str(ROOT),'-B',d,'-DMAB_ENABLE_CUDA=OFF',
++                              '-DMAB_ENABLE_CUDA_SORT=ON'],capture_output=True,text=True)
++            self.assertNotEqual(r.returncode,0)
++            self.assertIn('MAB_ENABLE_CUDA_SORT requires MAB_ENABLE_CUDA=ON',r.stdout+r.stderr)
++    def test_invalid_cli(self):
++        r=subprocess.run([sys.executable,str(ROOT/'scripts/validate_cuda_sort.py'),'--bad'],capture_output=True,text=True)
++        self.assertEqual(r.returncode,2)
++
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ after/tests/test_cuda_sorting.cpp
+@@ -0,0 +1,100 @@
++#include "algorithms/cuda_sorting.hpp"
++#include "datasets/generator.hpp"
++#include "test_support.hpp"
++#include <cuda_runtime_api.h>
++#include <algorithm>
++#include <iostream>
++#include <limits>
++#include <stdexcept>
++
++int main() {
++    int count = 0;
++    const auto available = cudaGetDeviceCount(&count);
++    if (available != cudaSuccess || count == 0) {
++        std::cerr << "CUDA sorting unavailable: " << cudaGetErrorString(available) << '\n';
++        return 77;
++    }
++    std::size_t cases = 0, checks = 0;
++    try {
++        const auto check = [&](const mab::Values& input) {
++            auto expected = input;
++            std::sort(expected.begin(), expected.end());
++            auto actual = input;
++            mab::cub_radix_sort(actual);
++            require(actual == expected, "public CUB sorter differs from std::sort");
++            ++checks;
++            actual = input;
++            mab::find_cuda_sorter("cub_radix_sort").sort(actual);
++            require(actual == expected, "registered CUB sorter differs from std::sort");
++            ++checks;
++            // A different-size invocation between repetitions checks workspace isolation.
++            mab::Values other{4, -1, 0, 4, -2};
++            mab::cub_radix_sort(other);
++            require(other == mab::Values({-2, -1, 0, 4, 4}), "interleaved CUB call failed");
++            ++checks;
++            actual = input;
++            mab::cub_radix_sort(actual);
++            require(actual == expected, "repeated CUB sort differs from std::sort");
++            ++checks;
++            ++cases;
++        };
++        const auto low = std::numeric_limits<mab::Key>::min();
++        const auto high = std::numeric_limits<mab::Key>::max();
++        for (const auto& input : std::vector<mab::Values>{
++                 {}, {0}, {-1}, {low}, {high}, {1, 2}, {2, 1}, {1, 1},
++                 {high, low, 0, -1, 1, low + 1, high - 1, low, high},
++                 {-9, -1, -5, low}, {high, 9, 1, 5}, {0, 0, 0, 0}})
++            check(input);
++        std::size_t combinations = 1;
++        for (std::size_t n = 0; n <= 4; ++n) {
++            for (std::size_t code = 0; code < combinations; ++code) {
++                auto remaining = code;
++                mab::Values input(n);
++                for (auto& key : input) {
++                    key = static_cast<mab::Key>(remaining % 3) - 1;
++                    remaining /= 3;
++                }
++                check(input);
++            }
++            combinations *= 3;
++        }
++        for (const auto distribution : {mab::Distribution::uniform, mab::Distribution::nearly_sorted,
++                                       mab::Distribution::reverse_sorted, mab::Distribution::duplicate_heavy})
++            for (const std::uint64_t seed : {0ULL, 42ULL, 1729ULL})
++                for (const std::size_t n : {0, 1, 2, 3, 31, 32, 33, 255, 256, 257,
++                                           1023, 1024, 1025, 4095, 4096, 4097, 65535, 65536, 65537}) {
++                    mab::DatasetConfig config;
++                    config.size = n; config.seed = seed; config.distribution = distribution;
++                    const auto input = mab::generate_dataset(config);
++                    check(input);
++                    if (distribution == mab::Distribution::uniform) {
++                        auto ascending = input;
++                        std::sort(ascending.begin(), ascending.end());
++                        check(ascending);
++                        check(mab::Values(n, -7));
++                    }
++                }
++        bool rejected = false;
++        try { (void)mab::find_cuda_sorter("std_sort"); }
++        catch (const std::invalid_argument&) { rejected = true; }
++        require(rejected, "CUDA registry silently accepts a CPU algorithm");
++        int runtime = 0, driver = 0, device = 0;
++        require(cudaRuntimeGetVersion(&runtime) == cudaSuccess, "runtime version failed");
++        require(cudaDriverGetVersion(&driver) == cudaSuccess, "driver version failed");
++        require(cudaGetDevice(&device) == cudaSuccess, "current device failed");
++        cudaDeviceProp prop{};
++        require(cudaGetDeviceProperties(&prop, device) == cudaSuccess, "device properties failed");
++        // GPU names are emitted by the preflight JSON; keep this record free of unchecked strings.
++        std::cout << "{\"schema_version\":1,\"protocol\":\"cuda_sort_correctness_v1\","
++                     "\"algorithm\":\"cub_radix_sort\",\"implementation_version\":\""
++                  << mab::cuda_sort_version << "\",\"status\":\"ok\",\"cases\":" << cases
++                  << ",\"output_checks\":" << checks << ",\"cub_version\":" << mab::cuda_sort_cub_version()
++                  << ",\"runtime_api_version\":" << runtime << ",\"driver_api_version\":" << driver
++                  << ",\"device\":" << device << ",\"compute_major\":" << prop.major
++                  << ",\"compute_minor\":" << prop.minor << "}\n";
++        return 0;
++    } catch (const std::exception& error) {
++        std::cerr << "CUDA sorting failed after " << cases << " complete cases: " << error.what() << '\n';
++        return 1;
++    }
++}
+--- /dev/null
++++ after/third_party/cub/LICENSE
+@@ -0,0 +1,466 @@
++==============================================================================
++Thrust is under the Apache Licence v2.0, with some specific exceptions listed below
++libcu++ is under the Apache License v2.0 with LLVM Exceptions:
++==============================================================================
++                                Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
++
++    TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
++
++    1. Definitions.
++
++      "License" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      "Licensor" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      "Legal Entity" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      "control" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      "You" (or "Your") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      "Source" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      "Object" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      "Work" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      "Derivative Works" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      "Contribution" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, "submitted"
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as "Not a Contribution."
++
++      "Contributor" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++    2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++    3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++    4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a "NOTICE" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++    5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++    6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++    7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an "AS IS" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++    8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++    9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++    END OF TERMS AND CONDITIONS
++
++    APPENDIX: How to apply the Apache License to your work.
++
++      To apply the Apache License to your work, attach the following
++      boilerplate notice, with the fields enclosed by brackets "[]"
++      replaced with your own identifying information. (Don't include
++      the brackets!)  The text should be enclosed in the appropriate
++      comment syntax for the file format. We also recommend that a
++      file or class name and description of purpose be included on the
++      same "printed page" as the copyright notice for easier
++      identification within third-party archives.
++
++    Copyright [yyyy] [name of copyright owner]
++
++    Licensed under the Apache License, Version 2.0 (the "License");
++    you may not use this file except in compliance with the License.
++    You may obtain a copy of the License at
++
++       http://www.apache.org/licenses/LICENSE-2.0
++
++    Unless required by applicable law or agreed to in writing, software
++    distributed under the License is distributed on an "AS IS" BASIS,
++    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++    See the License for the specific language governing permissions and
++    limitations under the License.
++
++
++==============================================================================
++Legacy LLVM License (https://llvm.org/docs/DeveloperPolicy.html#legacy):
++==============================================================================
++---- LLVM Exceptions to the Apache 2.0 License ----
++
++As an exception, if, as a result of your compiling your source code, portions
++of this Software are embedded into an Object form of such source code, you
++may redistribute such embedded portions in such Object form without complying
++with the conditions of Sections 4(a), 4(b) and 4(d) of the License.
++
++In addition, if you combine or link compiled forms of this Software with
++software that is licensed under the GPLv2 ("Combined Software") and if a
++court of competent jurisdiction determines that the patent provision (Section
++3), the indemnity provision (Section 9) or other Section of the License
++conflicts with the conditions of the GPLv2, you may retroactively and
++prospectively choose to deem waived or otherwise exclude such Section(s) of
++the License, but only in their entirety and only with respect to the Combined
++Software.
++
++==============================================================================
++Software from third parties included in the LLVM Project:
++==============================================================================
++The LLVM Project contains third party software which is under different license
++terms. All such code will be identified clearly using at least one of two
++mechanisms:
++1) It will be in a separate directory tree with its own `LICENSE.txt` or
++   `LICENSE` file at the top containing the specific license and restrictions
++   which apply to that software, or
++2) It will contain specific license and restriction terms at the top of every
++   file.
++
++==============================================================================
++Legacy LLVM License (https://llvm.org/docs/DeveloperPolicy.html#legacy):
++==============================================================================
++
++The libc++ library is dual licensed under both the University of Illinois
++"BSD-Like" license and the MIT license.  As a user of this code you may choose
++to use it under either license.  As a contributor, you agree to allow your code
++to be used under both.
++
++Full text of the relevant licenses is included below.
++
++==============================================================================
++
++University of Illinois/NCSA
++Open Source License
++
++Copyright (c) 2009-2019 by the contributors listed in CREDITS.TXT
++
++All rights reserved.
++
++Developed by:
++
++    LLVM Team
++
++    University of Illinois at Urbana-Champaign
++
++    http://llvm.org
++
++Permission is hereby granted, free of charge, to any person obtaining a copy of
++this software and associated documentation files (the "Software"), to deal with
++the Software without restriction, including without limitation the rights to
++use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
++of the Software, and to permit persons to whom the Software is furnished to do
++so, subject to the following conditions:
++
++    * Redistributions of source code must retain the above copyright notice,
++      this list of conditions and the following disclaimers.
++
++    * Redistributions in binary form must reproduce the above copyright notice,
++      this list of conditions and the following disclaimers in the
++      documentation and/or other materials provided with the distribution.
++
++    * Neither the names of the LLVM Team, University of Illinois at
++      Urbana-Champaign, nor the names of its contributors may be used to
++      endorse or promote products derived from this Software without specific
++      prior written permission.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
++FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
++CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE
++SOFTWARE.
++
++==============================================================================
++
++Copyright (c) 2009-2014 by the contributors listed in CREDITS.TXT
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in
++all copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++THE SOFTWARE.
++
++==============================================================================
++
++Some libcudacxx components are covered by the below license. Each source file
++indicates which license it is under.
++
++==============================================================================
++
++NVIDIA SOFTWARE LICENSE
++
++This license is a legal agreement between you and NVIDIA Corporation ("NVIDIA") and governs your use of the NVIDIA/CUDA C++ Library software and materials provided hereunder (“SOFTWARE”).
++
++This license can be accepted only by an adult of legal age of majority in the country in which the SOFTWARE is used. If you are under the legal age of majority, you must ask your parent or legal guardian to consent to this license. By taking delivery of the SOFTWARE, you affirm that you have reached the legal age of majority, you accept the terms of this license, and you take legal and financial responsibility for the actions of your permitted users.
++
++You agree to use the SOFTWARE only for purposes that are permitted by (a) this license, and (b) any applicable law, regulation or generally accepted practices or guidelines in the relevant jurisdictions.
++
++1. LICENSE. Subject to the terms of this license, NVIDIA grants you a non-exclusive limited license to: (a) install and use the SOFTWARE, and (b) distribute the SOFTWARE subject to the distribution requirements described in this license. NVIDIA reserves all rights, title and interest in and to the SOFTWARE not expressly granted to you under this license.
++
++2. DISTRIBUTION REQUIREMENTS. These are the distribution requirements for you to exercise the distribution grant:
++a.	The terms under which you distribute the SOFTWARE must be consistent with the terms of this license, including (without limitation) terms relating to the license grant and license restrictions and protection of NVIDIA’s intellectual property rights.
++b.	You agree to notify NVIDIA in writing of any known or suspected distribution or use of the SOFTWARE not in compliance with the requirements of this license, and to enforce the terms of your agreements with respect to distributed SOFTWARE.
++
++3. LIMITATIONS. Your license to use the SOFTWARE is restricted as follows:
++a.	The SOFTWARE is licensed for you to develop applications only for use in systems with NVIDIA GPUs.
++b.	You may not reverse engineer, decompile or disassemble, or remove copyright or other proprietary notices from any portion of the SOFTWARE or copies of the SOFTWARE.
++c.	You may not modify or create derivative works of any portion of the SOFTWARE.
++d.	You may not bypass, disable, or circumvent any technical measure, encryption, security, digital rights management or authentication mechanism in the SOFTWARE.
++e.	You may not use the SOFTWARE in any manner that would cause it to become subject to an open source software license. As examples, licenses that require as a condition of use, modification, and/or distribution that the SOFTWARE be (i) disclosed or distributed in source code form; (ii) licensed for the purpose of making derivative works; or (iii) redistributable at no charge.
++f.	Unless you have an agreement with NVIDIA for this purpose, you may not use the SOFTWARE with any system or application where the use or failure of the system or application can reasonably be expected to threaten or result in personal injury, death, or catastrophic loss. Examples include use in avionics, navigation, military, medical, life support or other life critical applications. NVIDIA does not design, test or manufacture the SOFTWARE for these critical uses and NVIDIA shall not be liable to you or any third party, in whole or in part, for any claims or damages arising from such uses.
++g.	You agree to defend, indemnify and hold harmless NVIDIA and its affiliates, and their respective employees, contractors, agents, officers and directors, from and against any and all claims, damages, obligations, losses, liabilities, costs or debt, fines, restitutions and expenses (including but not limited to attorney’s fees and costs incident to establishing the right of indemnification) arising out of or related to use of the SOFTWARE outside of the scope of this Agreement, or not in compliance with its terms.
++
++4. PRE-RELEASE. SOFTWARE versions identified as alpha, beta, preview, early access or otherwise as pre-release may not be fully functional, may contain errors or design flaws, and may have reduced or different security, privacy, availability, and reliability standards relative to commercial versions of NVIDIA software and materials. You may use a pre-release SOFTWARE version at your own risk, understanding that these versions are not intended for use in production or business-critical systems.
++
++5. OWNERSHIP. The SOFTWARE and the related intellectual property rights therein are and will remain the sole and exclusive property of NVIDIA or its licensors. The SOFTWARE is copyrighted and protected by the laws of the United States and other countries, and international treaty provisions. NVIDIA may make changes to the SOFTWARE, at any time without notice, but is not obligated to support or update the SOFTWARE.
++
++6. COMPONENTS UNDER OTHER LICENSES. The SOFTWARE may include NVIDIA or third-party components with separate legal notices or terms as may be described in proprietary notices accompanying the SOFTWARE. If and to the extent there is a conflict between the terms in this license and the license terms associated with a component, the license terms associated with the components control only to the extent necessary to resolve the conflict.
++
++7. FEEDBACK. You may, but don’t have to, provide to NVIDIA any Feedback. “Feedback” means any suggestions, bug fixes, enhancements, modifications, feature requests or other feedback regarding the SOFTWARE. For any Feedback that you voluntarily provide, you hereby grant NVIDIA and its affiliates a perpetual, non-exclusive, worldwide, irrevocable license to use, reproduce, modify, license, sublicense (through multiple tiers of sublicensees), and distribute (through multiple tiers of distributors) the Feedback without the payment of any royalties or fees to you. NVIDIA will use Feedback at its choice.
++
++8. NO WARRANTIES. THE SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY EXPRESS OR IMPLIED WARRANTY OF ANY KIND INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF MERCHANTABILITY, NONINFRINGEMENT, OR FITNESS FOR A PARTICULAR PURPOSE. NVIDIA DOES NOT WARRANT THAT THE SOFTWARE WILL MEET YOUR REQUIREMENTS OR THAT THE OPERATION THEREOF WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ALL ERRORS WILL BE CORRECTED.
++
++9. LIMITATIONS OF LIABILITY. TO THE MAXIMUM EXTENT PERMITTED BY LAW, NVIDIA AND ITS AFFILIATES SHALL NOT BE LIABLE FOR ANY SPECIAL, INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAMAGES, OR ANY LOST PROFITS, PROJECT DELAYS, LOSS OF USE, LOSS OF DATA OR LOSS OF GOODWILL, OR THE COSTS OF PROCURING SUBSTITUTE PRODUCTS, ARISING OUT OF OR IN CONNECTION WITH THIS LICENSE OR THE USE OR PERFORMANCE OF THE SOFTWARE, WHETHER SUCH LIABILITY ARISES FROM ANY CLAIM BASED UPON BREACH OF CONTRACT, BREACH OF WARRANTY, TORT (INCLUDING NEGLIGENCE), PRODUCT LIABILITY OR ANY OTHER CAUSE OF ACTION OR THEORY OF LIABILITY, EVEN IF NVIDIA HAS PREVIOUSLY BEEN ADVISED OF, OR COULD REASONABLY HAVE FORESEEN, THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT WILL NVIDIA’S AND ITS AFFILIATES TOTAL CUMULATIVE LIABILITY UNDER OR ARISING OUT OF THIS LICENSE EXCEED US$10.00. THE NATURE OF THE LIABILITY OR THE NUMBER OF CLAIMS OR SUITS SHALL NOT ENLARGE OR EXTEND THIS LIMIT.
++
++10. TERMINATION. Your rights under this license will terminate automatically without notice from NVIDIA if you fail to comply with any term and condition of this license or if you commence or participate in any legal proceeding against NVIDIA with respect to the SOFTWARE. NVIDIA may terminate this license with advance written notice to you if NVIDIA decides to no longer provide the SOFTWARE in a country or, in NVIDIA’s sole discretion, the continued use of it is no longer commercially viable. Upon any termination of this license, you agree to promptly discontinue use of the SOFTWARE and destroy all copies in your possession or control. Your prior distributions in accordance with this license are not affected by the termination of this license. All provisions of this license will survive termination, except for the license granted to you.
++
++11. APPLICABLE LAW. This license will be governed in all respects by the laws of the United States and of the State of Delaware as those laws are applied to contracts entered into and performed entirely within Delaware by Delaware residents, without regard to the conflicts of laws principles. The United Nations Convention on Contracts for the International Sale of Goods is specifically disclaimed. You agree to all terms of this Agreement in the English language. The state or federal courts residing in Santa Clara County, California shall have exclusive jurisdiction over any dispute or claim arising out of this license. Notwithstanding this, you agree that NVIDIA shall still be allowed to apply for injunctive remedies or an equivalent type of urgent legal relief in any jurisdiction.
++
++12. NO ASSIGNMENT. This license and your rights and obligations thereunder may not be assigned by you by any means or operation of law without NVIDIA’s permission. Any attempted assignment not approved by NVIDIA in writing shall be void and of no effect.
++
++13. EXPORT. The SOFTWARE is subject to United States export laws and regulations. You agree that you will not ship, transfer or export the SOFTWARE into any country, or use the SOFTWARE in any manner, prohibited by the United States Bureau of Industry and Security or economic sanctions regulations administered by the U.S. Department of Treasury’s Office of Foreign Assets Control (OFAC), or any applicable export laws, restrictions or regulations. These laws include restrictions on destinations, end users and end use. By accepting this license, you confirm that you are not a resident or citizen of any country currently embargoed by the U.S. and that you are not otherwise prohibited from receiving the SOFTWARE.
++
++14. GOVERNMENT USE. The SOFTWARE has been developed entirely at private expense and is “commercial items” consisting of “commercial computer software” and “commercial computer software documentation” provided with RESTRICTED RIGHTS. Use, duplication or disclosure by the U.S. Government or a U.S. Government subcontractor is subject to the restrictions in this license pursuant to DFARS 227.7202-3(a) or as set forth in subparagraphs (b)(1) and (2) of the Commercial Computer Software - Restricted Rights clause at FAR 52.227-19, as applicable. Contractor/manufacturer is NVIDIA, 2788 San Tomas Expressway, Santa Clara, CA 95051.
++
++15. ENTIRE AGREEMENT. This license is the final, complete and exclusive agreement between the parties relating to the subject matter of this license and supersedes all prior or contemporaneous understandings and agreements relating to this subject matter, whether oral or written. If any court of competent jurisdiction determines that any provision of this license is illegal, invalid or unenforceable, the remaining provisions will remain in full force and effect. This license may only be modified in a writing signed by an authorized representative of each party.
++
++(v. August 20, 2021)
++
++================================================================================
++Some portions of Thrust may be licensed under other compatible open-source
++licenses. Any divergence from the Apache 2 license will be noted in the source
++code where applicable.
++Portions under other terms include, but are not limited to:
++================================================================================
++
++Various C++ utility classes in Thrust are based on the Boost Iterator, Tuple,
++System, and Random Number libraries, which are provided under the Boost Software
++License:
++
++    Boost Software License - Version 1.0 - August 17th, 2003
++
++    Permission is hereby granted, free of charge, to any person or organization
++    obtaining a copy of the software and accompanying documentation covered by
++    this license (the "Software") to use, reproduce, display, distribute,
++    execute, and transmit the Software, and to prepare derivative works of the
++    Software, and to permit third-parties to whom the Software is furnished to
++    do so, all subject to the following:
++
++    The copyright notices in the Software and this entire statement, including
++    the above license grant, this restriction and the following disclaimer,
++    must be included in all copies of the Software, in whole or in part, and
++    all derivative works of the Software, unless such copies or derivative
++    works are solely in the form of machine-executable object code generated by
++    a source language processor.
++
++    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++    FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
++    SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
++    FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
++    ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++    DEALINGS IN THE SOFTWARE.
++
++================================================================================
++
++Portions of the thrust::complex implementation are derived from FreeBSD with the
++following terms:
++
++================================================================================
++
++
++    Redistribution and use in source and binary forms, with or without
++    modification, are permitted provided that the following conditions
++    are met:
++
++    1. Redistributions of source code must retain the above copyright
++       notice[1] unmodified, this list of conditions, and the following
++       disclaimer.
++    2. Redistributions in binary form must reproduce the above copyright
++       notice, this list of conditions and the following disclaimer in the
++       documentation and/or other materials provided with the distribution.
++
++    THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
++    IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
++    OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
++    IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
++    INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
++    NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
++    THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++
++[1] Individual copyright notices from the original authors are included in
++    the relevant source files.
++
++==============================================================================
++CUB's source code is released under the BSD 3-Clause license:
++==============================================================================
++Copyright (c) 2010-2011, Duane Merrill.  All rights reserved.
++Copyright (c) 2011-2023, NVIDIA CORPORATION.  All rights reserved.
++
++Redistribution and use in source and binary forms, with or without
++modification, are permitted provided that the following conditions are met:
++   *  Redistributions of source code must retain the above copyright
++      notice, this list of conditions and the following disclaimer.
++   *  Redistributions in binary form must reproduce the above copyright
++      notice, this list of conditions and the following disclaimer in the
++      documentation and/or other materials provided with the distribution.
++   *  Neither the name of the NVIDIA CORPORATION nor the
++      names of its contributors may be used to endorse or promote products
++      derived from this software without specific prior written permission.
++
++THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
++ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
++WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++DISCLAIMED. IN NO EVENT SHALL NVIDIA CORPORATION BE LIABLE FOR ANY
++DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
++(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
++LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
++ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+--- /dev/null
++++ after/third_party/cub/README.md
+@@ -0,0 +1,25 @@
++# CUB dependency reference
++
++Canonical upstream: https://github.com/NVIDIA/cccl . API reference release:
++[v3.0.0](https://github.com/NVIDIA/cccl/tree/v3.0.0), CUB_VERSION=300000.
++CUB license: BSD 3-Clause, copyright NVIDIA Corporation and Duane Merrill.
++LICENSE is the unchanged aggregate upstream license file, also covering CCCL's
++other components. No algorithm/header is vendored or modified here; CUDA builds
++use toolkit headers. Do not infer installed CUB identity from toolkit version.
++
++Reviewed raw files at https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/:
++
++| Path | SHA256 |
++| --- | --- |
++| cub/cub/device/device_radix_sort.cuh | 7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be |
++| cub/cub/version.cuh | ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69 |
++| LICENSE | 01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b |
++
++Configure checks the two installed CUB headers against these hashes. Cloud
++validation additionally records the dependency tree hashes, compiled CUB_VERSION
++and CUDA versions. Installation-specific transitive files remain part of the
++recorded toolkit environment; a successful cloud sorter build is still pending.
++The adapter and tests are project code; preserve this license with redistributed
++CUB-containing binaries. See docs/CUDA_SORT_PROTOCOL_v1.md.
++
++Release tag resolved to commit e944297b0b51a8e9c0f1b30425370c31c1c0e0a0. Revision-qualified downloads match all three reference hashes; see UPSTREAM.json.
+--- /dev/null
++++ after/third_party/cub/UPSTREAM.json
+@@ -0,0 +1,27 @@
++{
++  "upstream": "https://github.com/NVIDIA/cccl",
++  "reference_release": "v3.0.0",
++  "commit": "e944297b0b51a8e9c0f1b30425370c31c1c0e0a0",
++  "cub_version": 300000,
++  "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
++  "files": {
++    "device_radix_sort.cuh": {
++      "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh",
++      "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be",
++      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/device/device_radix_sort.cuh"
++    },
++    "LICENSE": {
++      "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE",
++      "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
++      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/LICENSE"
++    },
++    "cub_version.cuh": {
++      "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh",
++      "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69",
++      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/version.cuh"
++    }
++  },
++  "vendored_algorithm_sources": false,
++  "local_modifications_to_upstream": "none",
++  "installed_toolkit_identity": "not yet observed for GPU sorting; configure-time header hashes enforced"
++}

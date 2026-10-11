@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    "build/cub_source_relocation_20261009T220322089788Z/modern-algorithm-benchmark",
+    "-B",
+    "build/cub_source_relocation_20261009T220322089788Z/cpu_build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_CUDA_SORT=OFF",
+    "-DMAB_ENABLE_OPENMP=OFF",
+    "-DBUILD_TESTING=OFF"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:21:03.744892+00:00"
+}

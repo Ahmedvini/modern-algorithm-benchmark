@@ -1,0 +1,231 @@
+{
+  "captured_at_utc": "2026-10-09T22:52:00.267359+00:00",
+  "classification": {
+    "device0_kernel_verified": true,
+    "driver_operational_evidence": true,
+    "gpu_detected": true,
+    "management_devices": [
+      {
+        "driver_version": "580.82.07",
+        "index": "0",
+        "model": "Tesla T4"
+      }
+    ],
+    "nvcc_answers": true,
+    "project_cuda_target_built": true,
+    "runtime_device_count": 1,
+    "scope": "Visible to this process/container; absence of detection does not prove host GPU absence.",
+    "state": "operational"
+  },
+  "cmake_selected_cache": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "CMAKE_CUDA_COMPILER": "/usr/local/cuda/bin/nvcc",
+    "CMAKE_CUDA_FLAGS": "",
+    "CUDA_cudart_LIBRARY": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so"
+  },
+  "cuda_path_entries": [
+    "/usr/local/nvidia/bin",
+    "/usr/local/cuda/bin"
+  ],
+  "discovery": {
+    "device_nodes": {
+      "/dev/nvidia0": true,
+      "/dev/nvidiactl": true
+    },
+    "driver_file": {
+      "available": true,
+      "path": "/proc/driver/nvidia/version",
+      "text": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  580.82.07  Release Build  (builder@28e54e79972f)  Thu Apr 30 18:50:30 UTC 2026\nGCC version:  Selected multilib: .;@m64\n"
+    },
+    "driver_library": "libcuda.so.1",
+    "nvidia_module_visible": true,
+    "pci_errors": [],
+    "pci_gpus": [
+      {
+        "device": "0x1eb8",
+        "device_class": "0x030200",
+        "kernel_driver": "nvidia",
+        "pci_address": "0000:00:04.0",
+        "vendor": "0x10de"
+      }
+    ],
+    "pci_scan_available": true,
+    "runtime_library": "libcudart.so.13",
+    "toolkit_files": {
+      "/usr/local/cuda-13.0/targets/x86_64-linux/include/cuda_runtime.h": {
+        "kind": "header",
+        "sha256": null
+      },
+      "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96": {
+        "kind": "runtime_library",
+        "sha256": null
+      }
+    },
+    "tools": {
+      "cmake": "/usr/local/bin/cmake",
+      "lspci": null,
+      "nvcc": "/usr/local/cuda/bin/nvcc",
+      "nvidia_smi": "/opt/bin/nvidia-smi"
+    }
+  },
+  "environment": {
+    "CUDACXX": null,
+    "CUDAHOSTCXX": null,
+    "CUDAToolkit_ROOT": null,
+    "CUDA_HOME": null,
+    "CUDA_PATH": null,
+    "CUDA_VISIBLE_DEVICES": null,
+    "LD_LIBRARY_PATH": "/usr/lib64-nvidia",
+    "NVIDIA_VISIBLE_DEVICES": "all"
+  },
+  "limitations": [
+    "No installation/system changes; no sorting/performance experiment.",
+    "Only device0 kernel execution is checked; other enumerated devices untested.",
+    "Toolkit/Colab GPU path unvalidated unless operational evidence is present."
+  ],
+  "platform": {
+    "architecture": "x86_64",
+    "cpu": "x86_64",
+    "kernel": "#1 SMP Thu Apr 30 18:17:14 UTC 2026",
+    "logical_cpu_count": 2,
+    "os": "Linux",
+    "python": "3.13.15 (main, Aug  6 2026, 11:06:22) [GCC 13.3.0]",
+    "release": "6.6.122+"
+  },
+  "probes": {
+    "build": {
+      "command": [
+        "/usr/local/bin/cmake",
+        "--build",
+        "/tmp/mab_cuda_preflight_a69xi_u8/build",
+        "--target",
+        "cuda_runtime_probe",
+        "--config",
+        "Release",
+        "--parallel",
+        "2"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "[ 50%] Building CUDA object CMakeFiles/cuda_runtime_probe.dir/src/cuda/runtime_probe.cu.o\n[100%] Linking CUDA executable cuda_runtime_probe\n[100%] Built target cuda_runtime_probe\n"
+    },
+    "cmake": {
+      "command": [
+        "/usr/local/bin/cmake",
+        "--version"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "cmake version 3.31.10\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n"
+    },
+    "cmake_cuda_property": {
+      "command": [
+        "/usr/local/bin/cmake",
+        "--help-property",
+        "CUDA_STANDARD"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "CUDA_STANDARD\n-------------\n\n.. versionadded:: 3.8\n\nThe CUDA/C++ standard whose features are requested to build this target.\n\nThis property specifies the CUDA/C++ standard whose features are requested\nto build this target.  For some compilers, this results in adding a\nflag such as ``-std=gnu++11`` to the compile line.\n\nSupported values are:\n\n``98``\n  CUDA C++98. Note that this maps to the same as ``03`` internally.\n\n``03``\n  CUDA C++03\n\n``11``\n  CUDA C++11\n\n``14``\n  CUDA C++14. While CMake 3.8 and later *recognize* ``14`` as a valid value,\n  CMake 3.9 was the first version to include support for any compiler.\n\n``17``\n  CUDA C++17. While CMake 3.8 and later *recognize* ``17`` as a valid value,\n  CMake 3.18 was the first version to include support for any compiler.\n\n``20``\n  .. versionadded:: 3.12\n\n  CUDA C++20. While CMake 3.12 and later *recognize* ``20`` as a valid value,\n  CMake 3.18 was the first version to include support for any compiler.\n\n``23``\n  .. versionadded:: 3.20\n\n  CUDA C++23\n\n``26``\n  .. versionadded:: 3.25\n\n  CUDA C++26. CMake 3.25 and later *recognize* ``26`` as a valid value,\n  no version has support for any compiler.\n\nIf the value requested does not result in a compile flag being added for\nthe compiler in use, a previous standard flag will be added instead.  This\nmeans that using:\n\n set_property(TARGET tgt PROPERTY CUDA_STANDARD 11)\n\nwith a compiler which does not support ``-std=gnu++11`` or an equivalent\nflag will not result in an error or warning, but will instead add the\n``-std=gnu++03`` flag if supported.  This \"decay\" behavior may be controlled\nwith the ``CUDA_STANDARD_REQUIRED`` target property.\nAdditionally, the ``CUDA_EXTENSIONS`` target property may be used to\ncontrol whether compiler-specific extensions are enabled on a per-target basis.\n\nSee the ``cmake-compile-features(7)`` manual for information on\ncompile features and a list of supported compilers.\n\nThis property is initialized by the value of\nthe ``CMAKE_CUDA_STANDARD`` variable if it is set when a target\nis created.\n"
+    },
+    "configure": {
+      "command": [
+        "/usr/local/bin/cmake",
+        "-S",
+        "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+        "-B",
+        "/tmp/mab_cuda_preflight_a69xi_u8/build",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_TESTING=OFF",
+        "-DMAB_ENABLE_CUDA=ON",
+        "-DMAB_ENABLE_OPENMP=OFF",
+        "-DMAB_ENABLE_SANITIZERS=OFF",
+        "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "CMake Warning (dev) in CMakeLists.txt:\n  Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,\n  empty CUDA_ARCHITECTURES not allowed.  Run \"cmake --help-policy CMP0104\"\n  for policy details.  Use the cmake_policy command to set the policy and\n  suppress this warning.\n\n  CUDA_ARCHITECTURES is empty for target \"cuda_runtime_probe\".\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) in CMakeLists.txt:\n  Policy CMP0104 is not set: CMAKE_CUDA_ARCHITECTURES now detected for NVCC,\n  empty CUDA_ARCHITECTURES not allowed.  Run \"cmake --help-policy CMP0104\"\n  for policy details.  Use the cmake_policy command to set the policy and\n  suppress this warning.\n\n  CUDA_ARCHITECTURES is empty for target \"cuda_runtime_probe\".\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\n",
+      "stdout": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\n-- Detecting CUDA compiler ABI info\n-- Detecting CUDA compiler ABI info - done\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\n-- Detecting CUDA compile features\n-- Detecting CUDA compile features - done\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found suitable version \"13.0.88\", minimum required is \"11.0\")\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- Configuring done (2.5s)\n-- Generating done (0.0s)\n-- Build files have been written to: /tmp/mab_cuda_preflight_a69xi_u8/build\n"
+    },
+    "lspci": {
+      "command": [
+        "lspci",
+        "-nn",
+        "-d",
+        "10de:"
+      ],
+      "error": "[Errno 2] No such file or directory: 'lspci'",
+      "returncode": null,
+      "status": "unavailable",
+      "stderr": "",
+      "stdout": ""
+    },
+    "nvcc": {
+      "command": [
+        "/usr/local/cuda/bin/nvcc",
+        "--version"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\nCuda compilation tools, release 13.0, V13.0.88\nBuild cuda_13.0.r13.0/compiler.36424714_0\n"
+    },
+    "nvidia_smi": {
+      "command": [
+        "/opt/bin/nvidia-smi",
+        "--query-gpu=index,name,driver_version",
+        "--format=csv,noheader,nounits"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "0, Tesla T4, 580.82.07\n"
+    },
+    "runtime": {
+      "command": [
+        "/tmp/mab_cuda_preflight_a69xi_u8/build/cuda_runtime_probe"
+      ],
+      "returncode": 0,
+      "status": "completed",
+      "stderr": "",
+      "stdout": "{\"schema_version\":1,\"record_kind\":\"cuda_runtime_probe\",\"status\":\"ok\",\"stage\":\"complete\",\"cuda_error_code\":0,\"cuda_error\":\"no error\",\"driver_api_version\":13000,\"driver_version_status\":0,\"runtime_api_version\":13000,\"runtime_version_status\":0,\"device_count\":1,\"tested_device\":0,\"kernel_result\":1729,\"devices\":[{\"ordinal\":0,\"name\":\"Tesla T4\",\"compute_major\":7,\"compute_minor\":5,\"total_global_memory_bytes\":15637086208}]}\n"
+    }
+  },
+  "protocol": "cuda_preflight_v1",
+  "record_kind": "cuda_readiness",
+  "runtime_probe": {
+    "cuda_error": "no error",
+    "cuda_error_code": 0,
+    "device_count": 1,
+    "devices": [
+      {
+        "compute_major": 7,
+        "compute_minor": 5,
+        "name": "Tesla T4",
+        "ordinal": 0,
+        "total_global_memory_bytes": 15637086208
+      }
+    ],
+    "driver_api_version": 13000,
+    "driver_version_status": 0,
+    "kernel_result": 1729,
+    "record_kind": "cuda_runtime_probe",
+    "runtime_api_version": 13000,
+    "runtime_version_status": 0,
+    "schema_version": 1,
+    "stage": "complete",
+    "status": "ok",
+    "tested_device": 0
+  },
+  "schema_version": 1,
+  "source_sha256": {
+    "CMakeLists.txt": "ec38274338e8ecf79aa0bc0bded063683055aa849ef46e26f35c64c90c397403",
+    "cmake/cuda.cmake": "958fe632d0b03e26e420403692c65cbc1e9f0d0bfc5ee85f83a56940a73349f4",
+    "scripts/cuda_preflight.py": "6338c3ef5ad73c3c13eadc9d765a8480b4377e6b8da5909eabdca55ffed44cd8",
+    "src/cuda/runtime_probe.cu": "313d37414ae36529c4eab5cf5def9443bdec3b859eeff9b2e7b78e66a0aad73b"
+  },
+  "timeout_seconds": 180
+}

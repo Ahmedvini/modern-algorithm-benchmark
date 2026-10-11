@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "python3",
+    "scripts/validate_cuda_sort.py",
+    "--output",
+    "results/raw/NEW_CUB_CORRECTNESS"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:51:54.497770+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cub_sort_validation_20261009T220322089788Z/check_bundle.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:21:03.667224+00:00",
+  "exit_code": 0,
+  "stdout": "Verified extracted source files: 137\n",
+  "stderr": "",
+  "wall_seconds": 0.05222263299947372,
+  "ended_utc": "2026-10-09T22:21:03.719570+00:00"
+}

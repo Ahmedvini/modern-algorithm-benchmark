@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^cuda_sorting$"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark"
+}

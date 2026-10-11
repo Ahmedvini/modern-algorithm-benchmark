@@ -1,0 +1,87 @@
+{
+  "archive_members": 21,
+  "archive_sha256": "880a55d64834c59f0a461eb558b9527583aef0d5a61a7d77e76e997527f83872",
+  "benchmark_trials": 0,
+  "commands": {
+    "build": {
+      "argv": [
+        "cmake",
+        "--build",
+        "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh",
+        "--target",
+        "cpu_gpu_comparison",
+        "--parallel",
+        "2"
+      ],
+      "exit_code": 0
+    },
+    "configure": {
+      "argv": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DBUILD_TESTING=OFF",
+        "-DMAB_ENABLE_SANITIZERS=OFF",
+        "-DMAB_ENABLE_CUDA=ON",
+        "-DMAB_ENABLE_CUDA_SORT=ON",
+        "-DMAB_ENABLE_OPENMP=ON",
+        "-DMAB_ENABLE_CPU_GPU_COMPARISON=ON",
+        "-DCMAKE_CUDA_ARCHITECTURES=75",
+        "-DCMAKE_CXX_FLAGS=",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+        "-DCMAKE_CUDA_FLAGS=",
+        "-DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG"
+      ],
+      "exit_code": 0
+    },
+    "describe": {
+      "argv": [
+        "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh/cpu_gpu_comparison",
+        "--describe"
+      ],
+      "exit_code": 0
+    },
+    "gpu_after": {
+      "argv": [
+        "nvidia-smi",
+        "--query-gpu=name,uuid,driver_version,memory.total,memory.free,temperature.gpu,clocks.sm,clocks.mem,power.limit",
+        "--format=csv,noheader,nounits"
+      ],
+      "exit_code": 0
+    },
+    "gpu_initial": {
+      "argv": [
+        "nvidia-smi"
+      ],
+      "exit_code": 0
+    },
+    "gpu_processes_initial": {
+      "argv": [
+        "nvidia-smi",
+        "--query-compute-apps=pid,process_name,used_memory",
+        "--format=csv,noheader,nounits"
+      ],
+      "exit_code": 0
+    },
+    "resources_65537": {
+      "argv": [
+        "/content/cub_workspace_65537_20261010T110457531249Z/modern-algorithm-benchmark/build/resource_fresh/cpu_gpu_comparison",
+        "--resources",
+        "65537"
+      ],
+      "exit_code": 0
+    }
+  },
+  "complete": true,
+  "dependency_tree_matches_pilot": true,
+  "frozen_files_match": true,
+  "hashed_evidence_files": 19,
+  "installed_dependency_files": 1688,
+  "production_source_unchanged": true,
+  "resource_gate_passed": true,
+  "warning_category": "nvcc generated GCC line-directive extension only",
+  "warning_count": 341
+}

@@ -1,0 +1,6 @@
+{
+  "existing_assignment": "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+  "created_gpu_session": false,
+  "isolated_config": "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+  "credentials_retained_only_in_private_build_state": true
+}

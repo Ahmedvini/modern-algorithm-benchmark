@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "colab",
+    "download",
+    "/content/cub_workspace_65537_20261010T110457531249Z/workspace_evidence.tar.gz",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cub_workspace_65537_20261010T110457531249Z/workspace_evidence.tar.gz",
+    "--session",
+    "cub-workspace-65537-20261010T110457Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T11:08:17.077011+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Downloaded '/content/cub_workspace_65537_20261010T110457531249Z/workspace_evidence.tar.gz' to '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cub_workspace_65537_20261010T110457531249Z/workspace_evidence.tar.gz'\n",
+  "stderr": "",
+  "wall_seconds": 1.638530202999391,
+  "ended_utc": "2026-10-10T11:08:18.715664+00:00"
+}

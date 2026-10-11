@@ -1,0 +1,51 @@
+{
+  "added": [
+    "docs/CUDA_SORT_PROTOCOL_v1.md",
+    "docs/CUDA_SORT_VALIDATION_GUIDE_v1.md",
+    "docs/CUDA_SORT_VALIDATION_GUIDE_v2.md",
+    "include/algorithms/cuda_sorting.hpp",
+    "scripts/validate_cuda_sort.py",
+    "src/cuda/cub_sort.cu",
+    "tests/test_cuda_sort_handoff.py",
+    "tests/test_cuda_sorting.cpp",
+    "third_party/cub/LICENSE",
+    "third_party/cub/README.md",
+    "third_party/cub/UPSTREAM.json"
+  ],
+  "archive": {
+    "archive": "results/raw/cub_sort_final_review_20261009T222209607981Z/cub_sort_source_v2.tar.gz",
+    "bytes": 288335,
+    "earlier_candidate_preserved": true,
+    "member_hashes_verified": true,
+    "members": 139,
+    "sha256": "e155579bf9f9847ae1ced84c07f6e179d98215962076d1c0aea8133de00a190f",
+    "source_files": 138
+  },
+  "audit_sha256": "fc9e2a79993e62f9cf0232b31f152fae7a689f40c1ef3d87e1e74e1fd27abee2",
+  "cloud_runtime_historical_verified": true,
+  "failed_groups": 0,
+  "gpu_milestone_complete": false,
+  "gpu_test_groups_unexecuted": 1,
+  "handoff_methods": 12,
+  "leak_detection_enabled": true,
+  "modified": [
+    "CMakeLists.txt",
+    "README.md",
+    "cmake/cuda.cmake",
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/ROADMAP.md"
+  ],
+  "new_gpu_sort_compiled": false,
+  "new_gpu_sort_executed": false,
+  "original_source_files_unchanged": 119,
+  "pre_task_artifacts_unchanged": 8709,
+  "prior_artifacts_unchanged": 8798,
+  "protocol_unchanged": true,
+  "release_groups": 26,
+  "sanitizer_groups": 26,
+  "skipped_groups": 0,
+  "source_files": 138
+}

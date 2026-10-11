@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cub-workspace-65537-20261010T110457Z",
+    "--file",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cub_workspace_65537_20261010T110457531249Z/remote_resource_check.py",
+    "--timeout",
+    "900"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T11:06:52.387435+00:00",
+  "exit_code": 0,
+  "stdout": "gpu_initial exit 0\ngpu_processes_initial exit 0\nconfigure exit 0\nbuild exit 0\ndescribe exit 0\nresources_65537 exit 0\ngpu_after exit 0\nREMOTE_RESULT {\"exit_code\": 0, \"archive\": \"/content/cub_workspace_65537_20261010T110457531249Z/workspace_evidence.tar.gz\", \"sha256\": \"880a55d64834c59f0a461eb558b9527583aef0d5a61a7d77e76e997527f83872\"}\n",
+  "stderr": "",
+  "wall_seconds": 50.01804240800084,
+  "ended_utc": "2026-10-10T11:07:42.405593+00:00"
+}

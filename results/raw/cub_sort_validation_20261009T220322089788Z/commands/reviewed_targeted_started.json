@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cuda_sort_handoff.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:11:39.492383+00:00"
+}

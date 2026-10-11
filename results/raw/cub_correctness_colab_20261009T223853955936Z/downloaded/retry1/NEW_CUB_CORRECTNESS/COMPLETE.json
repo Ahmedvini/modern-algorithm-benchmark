@@ -1,0 +1,22 @@
+{
+  "dependency_manifest_sha256": "0cb479933ea8edd5b63c711cb43fc358d99785820c6ea59a9f650c5961c1dba4",
+  "preflight_sha256": "563b583debbf938120fbf21fb1617e49dda65c66cca5a68350bdcb91d72159d3",
+  "protocol": "cuda_sort_correctness_v2",
+  "result": {
+    "algorithm": "cub_radix_sort",
+    "cases": 475,
+    "compute_major": 7,
+    "compute_minor": 5,
+    "cub_version": 300001,
+    "device": 0,
+    "driver_api_version": 13000,
+    "implementation_version": "cub_radix_sort_v1",
+    "output_checks": 1900,
+    "protocol": "cuda_sort_correctness_v2",
+    "runtime_api_version": 13000,
+    "schema_version": 1,
+    "status": "ok"
+  },
+  "sorting_validated": true,
+  "source_manifest_sha256": "e16cbaa3fba4866f192d7d4748d61513e63998d6ff16cc5f8704b3645f23e223"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "python3",
+    "scripts/validate_cuda_sort.py",
+    "--output",
+    "results/raw/NEW_CUB_CORRECTNESS"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:43:47.228795+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "configure exit 1; inspect retained diagnostics\n",
+  "status": "completed",
+  "wall_seconds": 9.827122386000156,
+  "ended_utc": "2026-10-09T22:43:57.056255+00:00"
+}

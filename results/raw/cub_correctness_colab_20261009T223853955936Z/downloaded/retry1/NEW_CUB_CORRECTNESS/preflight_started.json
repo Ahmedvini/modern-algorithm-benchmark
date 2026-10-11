@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/scripts/cuda_preflight.py",
+    "--output",
+    "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/preflight",
+    "--timeout-seconds",
+    "180"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark"
+}

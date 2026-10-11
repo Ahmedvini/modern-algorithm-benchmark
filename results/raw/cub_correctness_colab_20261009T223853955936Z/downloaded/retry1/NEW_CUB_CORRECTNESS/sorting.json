@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build/test_cuda_sorting"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "status": "completed",
+  "stderr": "",
+  "stdout": "{\"schema_version\":1,\"protocol\":\"cuda_sort_correctness_v2\",\"algorithm\":\"cub_radix_sort\",\"implementation_version\":\"cub_radix_sort_v1\",\"status\":\"ok\",\"cases\":475,\"output_checks\":1900,\"cub_version\":300001,\"runtime_api_version\":13000,\"driver_api_version\":13000,\"device\":0,\"compute_major\":7,\"compute_minor\":5}\n",
+  "wall_seconds": 0.8821315919994959
+}

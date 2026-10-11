@@ -1,0 +1,18 @@
+CUDA readiness: operational
+Device0 kernel verified: True
+NVIDIA nvcc answers: True
+Project CUDA target built: True
+CPU project: unaffected by unavailable CUDA; use MAB_ENABLE_CUDA=OFF.
+Visible to this process/container; absence of detection does not prove host GPU absence.
+nvidia_smi: completed; exit=0
+lspci: unavailable; exit=None
+nvcc: completed; exit=0
+cmake: completed; exit=0
+cmake_cuda_property: completed; exit=0
+configure: completed; exit=0
+build: completed; exit=0
+runtime: completed; exit=0
+NVIDIA GPU: Tesla T4; driver=580.82.07
+No installation/system changes; no sorting/performance experiment.
+Only device0 kernel execution is checked; other enumerated devices untested.
+Toolkit/Colab GPU path unvalidated unless operational evidence is present.

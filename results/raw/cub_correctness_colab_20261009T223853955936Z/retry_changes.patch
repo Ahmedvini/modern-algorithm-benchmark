@@ -1,0 +1,679 @@
+--- a/cmake/cuda.cmake
++++ b/cmake/cuda.cmake
+@@ -0,0 +1,58 @@
++# This file is included only on explicit opt-in; no CUDA discovery for CPU users.
++if(CMAKE_VERSION VERSION_LESS 3.18)
++    message(FATAL_ERROR "MAB_ENABLE_CUDA requires CMake >= 3.18; CPU builds require only 3.16")
++endif()
++if(MAB_ENABLE_SANITIZERS)
++    message(FATAL_ERROR "Use separate CPU sanitizer and CUDA build directories")
++endif()
++include(CheckLanguage)
++check_language(CUDA)
++if(NOT CMAKE_CUDA_COMPILER)
++    message(FATAL_ERROR "CUDA compiler unavailable; use MAB_ENABLE_CUDA=OFF and scripts/cuda_preflight.py")
++endif()
++enable_language(CUDA)
++if(NOT CMAKE_CUDA_COMPILER_ID STREQUAL "NVIDIA")
++    message(FATAL_ERROR "This CUDA readiness target currently supports NVIDIA nvcc only")
++endif()
++find_package(CUDAToolkit 11.0 REQUIRED)
++add_executable(cuda_runtime_probe src/cuda/runtime_probe.cu)
++set_target_properties(cuda_runtime_probe PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON
++                      CUDA_EXTENSIONS OFF CUDA_RUNTIME_LIBRARY Shared)
++target_link_libraries(cuda_runtime_probe PRIVATE CUDA::cudart)
++if(BUILD_TESTING)
++    add_test(NAME cuda_runtime_smoke COMMAND cuda_runtime_probe)
++    set_tests_properties(cuda_runtime_smoke PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 60)
++endif()
++
++if(MAB_ENABLE_CUDA_SORT)
++    if(CUDAToolkit_VERSION VERSION_LESS 13.0)
++        message(FATAL_ERROR "The reviewed CUB correctness adapter requires toolkit >=13.0")
++    endif()
++    find_path(MAB_CUB_INCLUDE_DIR cub/version.cuh
++              HINTS ${CUDAToolkit_INCLUDE_DIRS}
++              PATH_SUFFIXES cccl NO_DEFAULT_PATH)
++    if(NOT MAB_CUB_INCLUDE_DIR)
++        message(FATAL_ERROR "Toolkit CUB headers unavailable")
++    endif()
++    file(SHA256 "${MAB_CUB_INCLUDE_DIR}/cub/version.cuh" cub_version_hash)
++    file(SHA256 "${MAB_CUB_INCLUDE_DIR}/cub/device/device_radix_sort.cuh" cub_sort_hash)
++    if(NOT cub_version_hash STREQUAL "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
++       OR NOT cub_sort_hash STREQUAL "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be")
++        message(FATAL_ERROR "Installed CUB differs from reviewed v3.0.1 headers (version=${cub_version_hash}, SortKeys=${cub_sort_hash}); preserve diagnostics and review the dependency before changing the pin")
++    endif()
++    add_library(mab_cuda_sort src/cuda/cub_sort.cu)
++    target_include_directories(mab_cuda_sort SYSTEM PRIVATE "${MAB_CUB_INCLUDE_DIR}")
++    # Do not inherit mab_core's host-only warning switches into nvcc.
++    target_include_directories(mab_cuda_sort PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
++    target_compile_features(mab_cuda_sort PUBLIC cxx_std_17)
++    target_compile_options(mab_cuda_sort PRIVATE "-Xcompiler=-Wall,-Wextra,-Wpedantic")
++    target_link_libraries(mab_cuda_sort PUBLIC CUDA::cudart)
++    set_target_properties(mab_cuda_sort PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON
++                          CUDA_EXTENSIONS OFF CUDA_RUNTIME_LIBRARY Shared)
++    if(BUILD_TESTING)
++        add_executable(test_cuda_sorting tests/test_cuda_sorting.cpp)
++        target_link_libraries(test_cuda_sorting PRIVATE mab_cuda_sort mab_core)
++        add_test(NAME cuda_sorting COMMAND test_cuda_sorting)
++        set_tests_properties(cuda_sorting PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 240)
++    endif()
++endif()
+--- a/docs/CUDA_SORT_PROTOCOL_v2.md
++++ b/docs/CUDA_SORT_PROTOCOL_v2.md
+@@ -0,0 +1,57 @@
++# CUDA sorting correctness contract v2
++
++This revision supersedes the dependency pin and result protocol identity in
++[v1](CUDA_SORT_PROTOCOL_v1.md); v1 and its source bundles remain immutable history.
++The first v2-bundle validation on Colab stopped at configure: installed
++`cub/version.cuh` was CUB 3.0.1, not the initial 3.0.0 pin. No sorter ran in that
++attempt. Evidence and the independent upstream review are under
++`results/raw/cub_correctness_colab_20261009T223853955936Z/`.
++
++## Reviewed dependency change
++
++Use the CUDA toolkit's installed CUB 3.0.1, reviewed against canonical
++[NVIDIA CCCL commit f19d875da0d8bfb2e38c109b2b40522b8abbbbc3](https://github.com/NVIDIA/cccl/tree/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3)
++(release v3.0.1). The installed version header matches this immutable revision;
++its only difference from the previously reviewed version header is
++`CUB_VERSION 300000` becoming `300001`. The SortKeys header hash is unchanged.
++The aggregate license is byte-identical; CUB remains BSD-3-Clause. Upstream headers
++and licenses are not edited. No dependencies are downloaded during configure.
++
++| Revision-qualified file | SHA-256 |
++| --- | --- |
++| cub/cub/version.cuh | 316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124 |
++| cub/cub/device/device_radix_sort.cuh | 7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be |
++| LICENSE | 01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b |
++
++Configure still rejects mismatching header hashes; compilation requires
++`CUB_VERSION == 300001`. This is a reviewed pin update, not an unchecked version
++range. Full installed cub/thrust/cuda tree hashes are recorded per validation;
++two matching reference headers do not prove the entire installation equals an
++upstream release. CUDA toolkit >=13.0, CMake >=3.18, C++17/nvcc, explicit CUDA and
++CUDA-SORT opt-ins, and CPU-only defaults remain as defined in v1.
++
++## Unchanged algorithm and validation contract
++
++The public adapter remains `cub_radix_sort_v1`: full-domain signed int32 ascending
++sort using CUB `DeviceRadixSort::SortKeys` over all 32 bits. Per-call RAII buffers,
++checked CUDA operations, current-device/stream0 use, allocation and exception
++semantics, and no CPU fallback are unchanged. Equal-key stability remains
++unobservable in the keys-only API. Input above INT_MAX is unsupported.
++
++The result identity is now `cuda_sort_correctness_v2`, schema 1, CUB version
++300001. The unchanged 475 input fixtures and four full-vector comparisons per
++fixture require 1,900 checks per execution. Run directly and again through CTest;
++report these as two executions of the same cases, not 950 distinct inputs.
++All v1 edge, random, signed-boundary, non-power-of-two, repeated-call and registry
++checks remain required. Missing hardware/exit77 is not a pass. The runner rejects
++old/incompatible protocol versions and CUB identities.
++
++Use an exclusive fresh checkout/output for retry; preserve the failed original
++attempt, source archives and diagnostics. A fresh operational kernel preflight,
++successful sorter build, direct test, non-skipped CTest and unchanged source
++manifest are required for COMPLETE. This document freezes requirements before
++the retry; observed results belong in the audit, not an assumed completion here.
++
++No GPU timing, comparison instrumentation or performance experiment is added.
++After observed correctness success, the next milestone is a separate synchronized
++H2D/device/D2H/host end-to-end timing protocol and engine. No100M experiment.
+--- a/docs/CUDA_SORT_VALIDATION_GUIDE_v3.md
++++ b/docs/CUDA_SORT_VALIDATION_GUIDE_v3.md
+@@ -0,0 +1,46 @@
++# CUB correctness validation on Colab v3
++
++Use the new retry bundle recorded in
++`results/raw/cub_correctness_colab_20261009T223853955936Z/retry_source_bundle.json`.
++The original corrected v2 bundle remains retained with its original hash; its first
++Colab attempt exposed the CUB 3.0.0 versus 3.0.1 dependency mismatch. This retry
++implements [correctness protocol v2](CUDA_SORT_PROTOCOL_v2.md) with verified CUB
++3.0.1 hashes. The sorter implementation and all 475 fixtures are unchanged.
++
++Follow v2's archive SHA-256, member safety and source-manifest verification steps,
++using a new empty extraction directory. Preserve any existing remote checkout.
++From the new source root, run:
++
++```sh
++python3 scripts/validate_cuda_sort.py --output results/raw/NEW_CUB_CORRECTNESS
++```
++
++The output must be absent. The runner performs fresh kernel preflight, derives
++the architecture from device0, configures/builds `test_cuda_sorting`, runs the
++475-input/1,900-check executable and repeats it through targeted `cuda_sorting`
++CTest. It rejects skips, mismatching protocol/dependency identities and incomplete
++results. COMPLETE is correctness evidence only. Preserve failed/timeout/interrupt
++markers, command records, preflight, dependency/source manifests and build cache.
++
++The installed local Colab CLI 0.7.4 accepts these commands (session must already
++be registered in the selected local configuration):
++
++```sh
++colab sessions
++colab status --session SESSION
++colab upload LOCAL_ARCHIVE /content/UNUSED_ARCHIVE.tar.gz --session SESSION
++colab exec --session SESSION --file LOCAL_PYTHON_PAYLOAD --timeout 2500
++colab download REMOTE_EVIDENCE_ARCHIVE LOCAL_UNUSED_PATH --session SESSION
++```
++
++Use `colab --config PRIVATE_CONFIG ...` when the assignment needs an isolated local
++alias. Keep runtime proxy credentials in private CLI state, outside evidence.
++`sessions` can list an assignment that `status` cannot resolve locally; CLI 0.7.4
++may return0 for that logical error. Inspect output, remote subprocess exit status
++and terminal markers, not just the CLI exit code. Do not allocate a new GPU merely
++to fix a missing local alias. Uploaded bytes must independently match the expected
++hash remotely before extraction. Downloaded evidence must also be hash-verified.
++
++Export to unique paths before the ephemeral session ends. No driver installation,
++CPU substitution, GPU timing or full study is part of this command. The current
++audit records observed execution status separately from these instructions.
+--- a/scripts/validate_cuda_sort.py
++++ b/scripts/validate_cuda_sort.py
+@@ -0,0 +1,138 @@
++#!/usr/bin/env python3
++"""Exclusive cloud correctness handoff. No timing or CPU substitution."""
++import argparse
++import datetime
++import hashlib
++import json
++import os
++import re
++from pathlib import Path
++import subprocess
++import sys
++import time
++
++import cuda_preflight
++ROOT = Path(__file__).resolve().parents[1]
++PROTOCOL = 'cuda_sort_correctness_v2'
++EXPECTED_CASES = 475
++EXPECTED_CHECKS = 1900
++
++
++def digest(path):
++    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
++
++
++def write_json(path, value):
++    def clean(x):
++        if isinstance(x, str): return cuda_preflight.scrub(x, dict(os.environ))
++        if isinstance(x, list): return [clean(v) for v in x]
++        if isinstance(x, dict): return {clean(k): clean(v) for k, v in x.items()}
++        return x
++    with Path(path).open('x', encoding='utf-8') as f:
++        json.dump(clean(value), f, indent=2, sort_keys=True, allow_nan=False)
++        f.write('\n')
++
++
++def verify_result(value):
++    if not isinstance(value, dict): raise ValueError('sort result must be an object')
++    required = dict(schema_version=1, protocol=PROTOCOL, algorithm='cub_radix_sort',
++                    implementation_version='cub_radix_sort_v1', status='ok',
++                    cases=EXPECTED_CASES, output_checks=EXPECTED_CHECKS, cub_version=300001)
++    for key, expected in required.items():
++        if type(value.get(key)) is not type(expected) or value[key] != expected:
++            raise ValueError('incorrect or incomplete sort result: ' + key)
++    for key in ['runtime_api_version', 'driver_api_version', 'compute_major', 'compute_minor', 'device']:
++        if type(value.get(key)) is not int or value[key] < 0: raise ValueError('invalid ' + key)
++    if value['runtime_api_version'] < 13000: raise ValueError('unsupported runtime')
++    if value['compute_major'] < 1: raise ValueError('invalid compute capability')
++    return value
++
++
++def verify_ctest(text):
++    if 'Skipped' in text or not re.search(r'1/1 Test\s+#\d+: cuda_sorting .*Passed',text):
++        raise ValueError('cuda_sorting CTest must actually pass, not skip or select no tests')
++
++
++def run(output, runner=subprocess.run):
++    # Preserve the final path component so mkdir rejects even dangling symlinks.
++    output = Path(output).absolute()
++    output.mkdir()  # Atomic claim: never touch existing paths, including symlinks.
++    try:
++        sources = {str(p.relative_to(ROOT)): digest(p)
++                   for base in ['include', 'src', 'tests', 'scripts', 'cmake', 'docs', 'third_party']
++                   for p in sorted((ROOT / base).rglob('*'))
++                   if p.is_file() and '__pycache__' not in p.parts}
++        for name in ['CMakeLists.txt', 'AGENTS.md', 'README.md']:
++            sources[name] = digest(ROOT / name)
++        write_json(output / 'source_sha256.json', sources)
++        write_json(output / 'run.json', dict(protocol=PROTOCOL, source=str(ROOT), output=str(output),
++                   started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++                   primary_timing=False, cloud_location='not inferred; inspect recorded environment'))
++        def invoke(name, argv, timeout=600):
++            write_json(output / (name + '_started.json'), dict(argv=argv, cwd=str(ROOT)))
++            start=time.monotonic()
++            try:
++                result = runner(argv, cwd=ROOT, capture_output=True, text=True, timeout=timeout, check=False)
++            except subprocess.TimeoutExpired as error:
++                def text(s): return s.decode(errors='replace') if isinstance(s, bytes) else s or ''
++                write_json(output / (name + '.json'), dict(argv=argv, status='timeout', exit_code=None,
++                           stdout=text(error.stdout), stderr=text(error.stderr)))
++                raise RuntimeError(name + ' timed out') from error
++            write_json(output / (name + '.json'), dict(argv=argv, cwd=str(ROOT), status='completed',
++                       exit_code=result.returncode, stdout=result.stdout, stderr=result.stderr,
++                       wall_seconds=time.monotonic()-start))
++            if result.returncode != 0:
++                raise RuntimeError(name + ' exit ' + str(result.returncode) + '; inspect retained diagnostics')
++            return result
++        invoke('preflight', [sys.executable, str(ROOT/'scripts/cuda_preflight.py'),
++                            '--output', str(output/'preflight'), '--timeout-seconds', '180'])
++        preflight=json.loads((output/'preflight/report.json').read_text())
++        if not preflight['classification']['device0_kernel_verified'] or preflight['classification']['state']!='operational':
++            raise ValueError('operational runtime required')
++        device=next(d for d in preflight['runtime_probe']['devices'] if d['ordinal']==0)
++        architecture=str(device['compute_major'])+str(device['compute_minor'])
++        build=output/'build'
++        invoke('configure', ['cmake','-S',str(ROOT),'-B',str(build),'-DCMAKE_BUILD_TYPE=Release',
++              '-DMAB_ENABLE_CUDA=ON','-DMAB_ENABLE_CUDA_SORT=ON','-DMAB_ENABLE_OPENMP=OFF',
++              '-DMAB_ENABLE_SANITIZERS=OFF','-DBUILD_TESTING=ON',
++              '-DCMAKE_CUDA_COMPILER='+preflight['discovery']['tools']['nvcc'],
++              '-DCMAKE_CUDA_ARCHITECTURES='+architecture])
++        # Record all installed dependency files, not just a version claim.
++        cache=(build/'CMakeCache.txt').read_text()
++        include=Path(next(line.split('=',1)[1] for line in cache.splitlines()
++                          if line.startswith('MAB_CUB_INCLUDE_DIR:PATH=')))
++        dependency={str(p.relative_to(include)):digest(p) for name in ['cub','thrust','cuda']
++                    for p in sorted((include/name).rglob('*')) if p.is_file()}
++        if not dependency: raise ValueError('dependency snapshot empty')
++        write_json(output/'dependency_sha256.json',dict(include_root=str(include),files=dependency,
++                   absent_trees=[n for n in ['cub','thrust','cuda'] if not (include/n).is_dir()]))
++        invoke('build', ['cmake','--build',str(build),'--target','test_cuda_sorting','--parallel','2'])
++        result=verify_result(json.loads(invoke('sorting', [str(build/'test_cuda_sorting')],timeout=240).stdout))
++        if result['device']!=0 or (result['compute_major'],result['compute_minor'])!=(device['compute_major'],device['compute_minor']):
++            raise ValueError('sorter device differs from preflight')
++        ctest=invoke('ctest', ['ctest','--test-dir',str(build),'--output-on-failure','-V','-R','^cuda_sorting$'])
++        verify_ctest(ctest.stdout)
++        if any(digest(ROOT/name)!=sha for name,sha in sources.items()): raise ValueError('source changed during validation')
++        write_json(output/'COMPLETE.json', dict(protocol=PROTOCOL,sorting_validated=True,
++                   result=result,source_manifest_sha256=digest(output/'source_sha256.json'),
++                   dependency_manifest_sha256=digest(output/'dependency_sha256.json'),
++                   preflight_sha256=digest(output/'preflight/report.json')))
++        return 0
++    except KeyboardInterrupt:
++        write_json(output/'INTERRUPTED.json', dict(complete=False,sorting_validated=False))
++        return 130
++    except Exception as error:
++        write_json(output/'FAILED.json',dict(complete=False,sorting_validated=False,error=str(error)))
++        print(cuda_preflight.scrub(str(error),dict(os.environ)),file=sys.stderr)
++        return 1
++
++
++def main():
++    parser=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
++    parser.add_argument('--output',required=True,type=Path)
++    args=parser.parse_args()
++    try: return run(args.output)
++    except OSError as error:
++        print(cuda_preflight.scrub(str(error),dict(os.environ)),file=sys.stderr)
++        return 1
++if __name__=='__main__': sys.exit(main())
+--- a/src/cuda/cub_sort.cu
++++ b/src/cuda/cub_sort.cu
+@@ -0,0 +1,91 @@
++#include "algorithms/cuda_sorting.hpp"
++#include <cub/device/device_radix_sort.cuh>
++#include <cub/version.cuh>
++#include <cuda_runtime.h>
++
++#include <climits>
++#include <cstdio>
++#include <limits>
++#include <stdexcept>
++#include <string>
++
++namespace mab {
++namespace {
++static_assert(sizeof(Key) * CHAR_BIT == 32 && std::numeric_limits<Key>::is_signed,
++              "CUB adapter requires signed 32-bit keys");
++static_assert(CUB_VERSION == 300001, "Review a new CUB version before changing the pin");
++
++void checked(cudaError_t status, const char* operation) {
++    if (status != cudaSuccess)
++        throw std::runtime_error(std::string(operation) + ": " + cudaGetErrorString(status)
++                                 + " (CUDA " + std::to_string(static_cast<int>(status)) + ")");
++}
++class DeviceBuffer {
++public:
++    explicit DeviceBuffer(std::size_t bytes) {
++        // A non-null buffer distinguishes execution from CUB's sizing query.
++        checked(cudaMalloc(&pointer_, bytes ? bytes : 1), "cudaMalloc");
++    }
++    DeviceBuffer(const DeviceBuffer&) = delete;
++    DeviceBuffer& operator=(const DeviceBuffer&) = delete;
++    ~DeviceBuffer() noexcept {
++        if (pointer_) {
++            const auto status = cudaFree(pointer_);
++            if (status != cudaSuccess)
++                std::fprintf(stderr, "CUDA cleanup during unwinding: %s\n", cudaGetErrorString(status));
++        }
++    }
++    void* get() const noexcept { return pointer_; }
++    void close() {
++        void* allocation = pointer_;
++        pointer_ = nullptr; // One free attempt, including when the runtime reports an error.
++        checked(cudaFree(allocation), "cudaFree");
++    }
++private:
++    void* pointer_ = nullptr;
++};
++} // namespace
++
++void cub_radix_sort(Values& values) {
++    if (values.size() > static_cast<std::size_t>(INT_MAX) ||
++        values.size() > std::numeric_limits<std::size_t>::max() / sizeof(Key))
++        throw std::length_error("cub_radix_sort size exceeds supported item/byte count");
++    int device = 0;
++    cudaDeviceProp properties{};
++    checked(cudaGetDevice(&device), "cudaGetDevice");
++    checked(cudaGetDeviceProperties(&properties, device), "cudaGetDeviceProperties");
++    if (values.size() < 2) return;
++
++    Values output(values.size());
++    const auto bytes = values.size() * sizeof(Key);
++    const int count = static_cast<int>(values.size());
++    DeviceBuffer input(bytes), sorted(bytes);
++    auto* in = static_cast<Key*>(input.get());
++    auto* out = static_cast<Key*>(sorted.get());
++    std::size_t workspace_bytes = 0;
++    checked(cub::DeviceRadixSort::SortKeys(nullptr, workspace_bytes, in, out, count, 0, 32),
++            "CUB SortKeys workspace query");
++    DeviceBuffer workspace(workspace_bytes);
++    checked(cudaMemcpy(in, values.data(), bytes, cudaMemcpyHostToDevice), "H2D cudaMemcpy");
++    checked(cub::DeviceRadixSort::SortKeys(workspace.get(), workspace_bytes, in, out, count, 0, 32),
++            "CUB SortKeys");
++    checked(cudaGetLastError(), "CUB launch status");
++    checked(cudaStreamSynchronize(nullptr), "CUB stream synchronize");
++    checked(cudaMemcpy(output.data(), out, bytes, cudaMemcpyDeviceToHost), "D2H cudaMemcpy");
++    workspace.close();
++    sorted.close();
++    input.close();
++    values.swap(output);
++}
++
++const std::array<Sorter, 1>& cuda_sorters() noexcept {
++    static const std::array<Sorter, 1> registry{{{"cub_radix_sort", cub_radix_sort}}};
++    return registry;
++}
++const Sorter& find_cuda_sorter(std::string_view name) {
++    for (const auto& sorter : cuda_sorters())
++        if (sorter.name == name) return sorter;
++    throw std::invalid_argument("unknown CUDA sorter: " + std::string(name));
++}
++int cuda_sort_cub_version() noexcept { return CUB_VERSION; }
++} // namespace mab
+--- a/tests/test_cuda_sort_handoff.py
++++ b/tests/test_cuda_sort_handoff.py
+@@ -0,0 +1,86 @@
++#!/usr/bin/env python3
++"""Host tooling tests; no GPU sorting success is simulated or claimed."""
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++ROOT=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT/'scripts'))
++import validate_cuda_sort as handoff
++
++
++def record():
++    return dict(schema_version=1,protocol=handoff.PROTOCOL,algorithm='cub_radix_sort',
++                implementation_version='cub_radix_sort_v1',status='ok',cases=475,
++                output_checks=1900,cub_version=300001,runtime_api_version=13000,
++                driver_api_version=13000,compute_major=7,compute_minor=5,device=0)
++
++
++class HandoffTests(unittest.TestCase):
++    def test_ctest_must_select_and_pass(self):
++        handoff.verify_ctest('1/1 Test #26: cuda_sorting ........ Passed  1.0 sec')
++        for text in ['No tests were found', '1/1 Test #26: cuda_sorting ... ***Skipped',
++                     '1/1 Test #26: cuda_sorting ... ***Failed', '1/1 Test #26: other ... Passed']:
++            with self.subTest(text=text),self.assertRaises(ValueError):handoff.verify_ctest(text)
++    def test_schema(self):
++        self.assertEqual(handoff.verify_result(record())['cases'],475)
++    def test_bad_records(self):
++        for key,value in [('cases',0),('cases',True),('output_checks',1899),('status','unavailable'),
++                          ('protocol','other'),('protocol','cuda_sort_correctness_v1'),
++                          ('cub_version',300000),('cub_version',300002),('runtime_api_version',12000),
++                          ('device',-1),('compute_major',0)]:
++            r=record();r[key]=value
++            with self.subTest(key=key,value=value),self.assertRaises(ValueError):handoff.verify_result(r)
++        with self.assertRaises(ValueError):handoff.verify_result([])
++    def test_existing_output(self):
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'old';p.mkdir();sentinel=p/'sentinel';sentinel.write_text('preserved')
++            with self.assertRaises(FileExistsError):handoff.run(p,runner=lambda *a,**k:self.fail('executed'))
++            self.assertEqual(sentinel.read_text(),'preserved')
++    def test_symlink_collision(self):
++        with tempfile.TemporaryDirectory() as d:
++            target=Path(d)/'target';target.mkdir();link=Path(d)/'link';link.symlink_to(target)
++            with self.assertRaises(FileExistsError):handoff.run(link)
++            self.assertEqual(list(target.iterdir()),[])
++    def test_dangling_symlink_collision(self):
++        with tempfile.TemporaryDirectory() as d:
++            target=Path(d)/'absent';link=Path(d)/'link';link.symlink_to(target)
++            with self.assertRaises(FileExistsError):
++                handoff.run(link,runner=lambda *a,**k:self.fail('executed'))
++            self.assertFalse(target.exists())
++            self.assertTrue(link.is_symlink())
++    def test_unavailable_is_failure_not_complete(self):
++        with tempfile.TemporaryDirectory() as d:
++            def unavailable(argv,**kwargs):return subprocess.CompletedProcess(argv,2,'unavailable','no GPU')
++            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=unavailable),1)
++            self.assertTrue((p/'FAILED.json').exists());self.assertFalse((p/'COMPLETE.json').exists())
++            self.assertEqual(json.loads((p/'preflight.json').read_text())['exit_code'],2)
++    def test_timeout_diagnostics(self):
++        with tempfile.TemporaryDirectory() as d:
++            def timeout(argv,**kwargs):raise subprocess.TimeoutExpired(argv,1,output=b'partial',stderr=b'detail')
++            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=timeout),1)
++            r=json.loads((p/'preflight.json').read_text());self.assertEqual(r['stdout'],'partial')
++            self.assertEqual(r['status'],'timeout');self.assertTrue((p/'FAILED.json').exists())
++    def test_interrupted(self):
++        with tempfile.TemporaryDirectory() as d:
++            def stop(*a,**k):raise KeyboardInterrupt()
++            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=stop),130)
++            self.assertTrue((p/'INTERRUPTED.json').exists());self.assertFalse((p/'COMPLETE.json').exists())
++    def test_redaction(self):
++        with tempfile.TemporaryDirectory() as d,patch.dict('os.environ',{'API_TOKEN':'secret_fixture_value'}):
++            p=Path(d)/'record.json';handoff.write_json(p,dict(text='secret_fixture_value',count=475))
++            self.assertEqual(json.loads(p.read_text()),dict(text='<redacted>',count=475))
++    def test_sort_option_requires_cuda(self):
++        with tempfile.TemporaryDirectory() as d:
++            r=subprocess.run(['cmake','-S',str(ROOT),'-B',d,'-DMAB_ENABLE_CUDA=OFF',
++                              '-DMAB_ENABLE_CUDA_SORT=ON'],capture_output=True,text=True)
++            self.assertNotEqual(r.returncode,0)
++            self.assertIn('MAB_ENABLE_CUDA_SORT requires MAB_ENABLE_CUDA=ON',r.stdout+r.stderr)
++    def test_invalid_cli(self):
++        r=subprocess.run([sys.executable,str(ROOT/'scripts/validate_cuda_sort.py'),'--bad'],capture_output=True,text=True)
++        self.assertEqual(r.returncode,2)
++
++if __name__=='__main__':unittest.main()
+--- a/tests/test_cuda_sorting.cpp
++++ b/tests/test_cuda_sorting.cpp
+@@ -0,0 +1,100 @@
++#include "algorithms/cuda_sorting.hpp"
++#include "datasets/generator.hpp"
++#include "test_support.hpp"
++#include <cuda_runtime_api.h>
++#include <algorithm>
++#include <iostream>
++#include <limits>
++#include <stdexcept>
++
++int main() {
++    int count = 0;
++    const auto available = cudaGetDeviceCount(&count);
++    if (available != cudaSuccess || count == 0) {
++        std::cerr << "CUDA sorting unavailable: " << cudaGetErrorString(available) << '\n';
++        return 77;
++    }
++    std::size_t cases = 0, checks = 0;
++    try {
++        const auto check = [&](const mab::Values& input) {
++            auto expected = input;
++            std::sort(expected.begin(), expected.end());
++            auto actual = input;
++            mab::cub_radix_sort(actual);
++            require(actual == expected, "public CUB sorter differs from std::sort");
++            ++checks;
++            actual = input;
++            mab::find_cuda_sorter("cub_radix_sort").sort(actual);
++            require(actual == expected, "registered CUB sorter differs from std::sort");
++            ++checks;
++            // A different-size invocation between repetitions checks workspace isolation.
++            mab::Values other{4, -1, 0, 4, -2};
++            mab::cub_radix_sort(other);
++            require(other == mab::Values({-2, -1, 0, 4, 4}), "interleaved CUB call failed");
++            ++checks;
++            actual = input;
++            mab::cub_radix_sort(actual);
++            require(actual == expected, "repeated CUB sort differs from std::sort");
++            ++checks;
++            ++cases;
++        };
++        const auto low = std::numeric_limits<mab::Key>::min();
++        const auto high = std::numeric_limits<mab::Key>::max();
++        for (const auto& input : std::vector<mab::Values>{
++                 {}, {0}, {-1}, {low}, {high}, {1, 2}, {2, 1}, {1, 1},
++                 {high, low, 0, -1, 1, low + 1, high - 1, low, high},
++                 {-9, -1, -5, low}, {high, 9, 1, 5}, {0, 0, 0, 0}})
++            check(input);
++        std::size_t combinations = 1;
++        for (std::size_t n = 0; n <= 4; ++n) {
++            for (std::size_t code = 0; code < combinations; ++code) {
++                auto remaining = code;
++                mab::Values input(n);
++                for (auto& key : input) {
++                    key = static_cast<mab::Key>(remaining % 3) - 1;
++                    remaining /= 3;
++                }
++                check(input);
++            }
++            combinations *= 3;
++        }
++        for (const auto distribution : {mab::Distribution::uniform, mab::Distribution::nearly_sorted,
++                                       mab::Distribution::reverse_sorted, mab::Distribution::duplicate_heavy})
++            for (const std::uint64_t seed : {0ULL, 42ULL, 1729ULL})
++                for (const std::size_t n : {0, 1, 2, 3, 31, 32, 33, 255, 256, 257,
++                                           1023, 1024, 1025, 4095, 4096, 4097, 65535, 65536, 65537}) {
++                    mab::DatasetConfig config;
++                    config.size = n; config.seed = seed; config.distribution = distribution;
++                    const auto input = mab::generate_dataset(config);
++                    check(input);
++                    if (distribution == mab::Distribution::uniform) {
++                        auto ascending = input;
++                        std::sort(ascending.begin(), ascending.end());
++                        check(ascending);
++                        check(mab::Values(n, -7));
++                    }
++                }
++        bool rejected = false;
++        try { (void)mab::find_cuda_sorter("std_sort"); }
++        catch (const std::invalid_argument&) { rejected = true; }
++        require(rejected, "CUDA registry silently accepts a CPU algorithm");
++        int runtime = 0, driver = 0, device = 0;
++        require(cudaRuntimeGetVersion(&runtime) == cudaSuccess, "runtime version failed");
++        require(cudaDriverGetVersion(&driver) == cudaSuccess, "driver version failed");
++        require(cudaGetDevice(&device) == cudaSuccess, "current device failed");
++        cudaDeviceProp prop{};
++        require(cudaGetDeviceProperties(&prop, device) == cudaSuccess, "device properties failed");
++        // GPU names are emitted by the preflight JSON; keep this record free of unchecked strings.
++        std::cout << "{\"schema_version\":1,\"protocol\":\"cuda_sort_correctness_v2\","
++                     "\"algorithm\":\"cub_radix_sort\",\"implementation_version\":\""
++                  << mab::cuda_sort_version << "\",\"status\":\"ok\",\"cases\":" << cases
++                  << ",\"output_checks\":" << checks << ",\"cub_version\":" << mab::cuda_sort_cub_version()
++                  << ",\"runtime_api_version\":" << runtime << ",\"driver_api_version\":" << driver
++                  << ",\"device\":" << device << ",\"compute_major\":" << prop.major
++                  << ",\"compute_minor\":" << prop.minor << "}\n";
++        return 0;
++    } catch (const std::exception& error) {
++        std::cerr << "CUDA sorting failed after " << cases << " complete cases: " << error.what() << '\n';
++        return 1;
++    }
++}
+--- a/third_party/cub/README.md
++++ b/third_party/cub/README.md
+@@ -0,0 +1,30 @@
++# CUB dependency reference
++
++Canonical upstream: https://github.com/NVIDIA/cccl . API reference release:
++[v3.0.1](https://github.com/NVIDIA/cccl/tree/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3), CUB_VERSION=300001.
++CUB license: BSD 3-Clause, copyright NVIDIA Corporation and Duane Merrill.
++LICENSE is the unchanged aggregate upstream license file, also covering CCCL's
++other components. No algorithm/header is vendored or modified here; CUDA builds
++use toolkit headers. Do not infer installed CUB identity from toolkit version.
++
++Reviewed raw files at https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/:
++
++| Path | SHA256 |
++| --- | --- |
++| cub/cub/device/device_radix_sort.cuh | 7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be |
++| cub/cub/version.cuh | 316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124 |
++| LICENSE | 01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b |
++
++Configure checks the two installed CUB headers against these hashes. Cloud
++validation additionally records the dependency tree hashes, compiled CUB_VERSION
++and CUDA versions. Installation-specific transitive files remain part of the
++recorded toolkit environment; actual sorter validation is recorded in the latest audit.
++The adapter and tests are project code; preserve this license with redistributed
++CUB-containing binaries. See docs/CUDA_SORT_PROTOCOL_v2.md.
++
++Release tag resolved to commit f19d875da0d8bfb2e38c109b2b40522b8abbbbc3.
++Revision-qualified downloads match all three reference hashes; see UPSTREAM.json.
++The initial v3.0.0 reference and its hashes remain in previous_reference there.
++Colab CUDA13.0.88 supplies v3.0.1: the first configure correctly rejected the old
++pin. Independent upstream review found only the version macro changed in that
++header; SortKeys and LICENSE hashes are unchanged. No upstream file was modified.
+--- a/third_party/cub/UPSTREAM.json
++++ b/third_party/cub/UPSTREAM.json
+@@ -0,0 +1,46 @@
++{
++  "upstream": "https://github.com/NVIDIA/cccl",
++  "reference_release": "v3.0.1",
++  "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
++  "cub_version": 300001,
++  "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
++  "files": {
++    "cub_version.cuh": {
++      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
++      "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
++    },
++    "device_radix_sort.cuh": {
++      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
++      "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
++    },
++    "LICENSE": {
++      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
++      "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
++    }
++  },
++  "vendored_algorithm_sources": false,
++  "local_modifications_to_upstream": "none",
++  "installed_toolkit_identity": "Colab CUDA 13.0.88: reviewed version and SortKeys headers match v3.0.1; full tree hashes recorded by validation runner",
++  "previous_reference": {
++    "reference_release": "v3.0.0",
++    "commit": "e944297b0b51a8e9c0f1b30425370c31c1c0e0a0",
++    "cub_version": 300000,
++    "files": {
++      "device_radix_sort.cuh": {
++        "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh",
++        "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be",
++        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/device/device_radix_sort.cuh"
++      },
++      "LICENSE": {
++        "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE",
++        "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
++        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/LICENSE"
++      },
++      "cub_version.cuh": {
++        "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh",
++        "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69",
++        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/version.cuh"
++      }
++    }
++  }
++}

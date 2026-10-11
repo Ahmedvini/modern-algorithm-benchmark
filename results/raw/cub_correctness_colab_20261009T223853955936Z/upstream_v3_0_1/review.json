@@ -1,0 +1,82 @@
+{
+  "upstream": "https://github.com/NVIDIA/cccl",
+  "reference_release": "v3.0.1",
+  "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+  "tag_resolution": [
+    {
+      "ref": "refs/tags/v3.0.1",
+      "node_id": "MDM6UmVmMjk2NDE2NzYxOnJlZnMvdGFncy92My4wLjE=",
+      "url": "https://api.github.com/repos/NVIDIA/cccl/git/refs/tags/v3.0.1",
+      "object": {
+        "sha": "0099c7796d38f0a942c1e70e2565f0560d39694b",
+        "type": "tag",
+        "url": "https://api.github.com/repos/NVIDIA/cccl/git/tags/0099c7796d38f0a942c1e70e2565f0560d39694b"
+      }
+    },
+    {
+      "node_id": "TA_kwDOEar1-doAKDAwOTljNzc5NmQzOGYwYTk0MmMxZTcwZTI1NjVmMDU2MGQzOTY5NGI",
+      "sha": "0099c7796d38f0a942c1e70e2565f0560d39694b",
+      "url": "https://api.github.com/repos/NVIDIA/cccl/git/tags/0099c7796d38f0a942c1e70e2565f0560d39694b",
+      "tagger": {
+        "name": "github-actions[bot]",
+        "email": "41898282+github-actions[bot]@users.noreply.github.com",
+        "date": "2025-07-23T17:26:44Z"
+      },
+      "object": {
+        "sha": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+        "type": "commit",
+        "url": "https://api.github.com/repos/NVIDIA/cccl/git/commits/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3"
+      },
+      "tag": "v3.0.1",
+      "message": "CCCL Release v3.0.1\n",
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    }
+  ],
+  "files": {
+    "cub_version.cuh": {
+      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+      "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+    },
+    "device_radix_sort.cuh": {
+      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+      "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+    },
+    "LICENSE": {
+      "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+      "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+    }
+  },
+  "requests": [
+    {
+      "url": "https://api.github.com/repos/NVIDIA/cccl/git/ref/tags/v3.0.1",
+      "http_status": 200,
+      "sha256": "d2e8ce3ebfad49aa7cec0c92abcf8d1ce4c29778fc049615b8f39510a7fadf58"
+    },
+    {
+      "url": "https://api.github.com/repos/NVIDIA/cccl/git/tags/0099c7796d38f0a942c1e70e2565f0560d39694b",
+      "http_status": 200,
+      "sha256": "b53693bc2d5150d3319e0d3fc52dded0fc529af6e4d7b39bd89068191f6c0a88"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+      "http_status": 200,
+      "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+      "http_status": 200,
+      "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+      "http_status": 200,
+      "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+    }
+  ]
+}

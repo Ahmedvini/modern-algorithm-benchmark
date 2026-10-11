@@ -1,0 +1,9 @@
+{
+  "initial_expected_root_archive": "cloud_validation_evidence.tar.gz",
+  "resolved_archive": "results/evidence/cloud_validation_evidence.tar.gz",
+  "initial_ls_exit": 2,
+  "initial_sha256sum_exit": 1,
+  "initial_tar_exit": 2,
+  "reason": "Archive was under results/evidence rather than repository root; resolved before extraction.",
+  "git_metadata": "absent; branch/commit/uncommitted status unavailable; file manifests used instead"
+}

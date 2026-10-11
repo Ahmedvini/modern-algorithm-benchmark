@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "build/cub_source_relocation_20261009T220322089788Z/cpu_build/sort_benchmark",
+    "--list-sorts"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:21:07.015614+00:00",
+  "exit_code": 0,
+  "stdout": "std_sort\nquick_sort\npdq_sort\ntim_sort\nmerge_sort\nradix_sort\n",
+  "stderr": "",
+  "wall_seconds": 0.0012001479990431108,
+  "ended_utc": "2026-10-09T22:21:07.016934+00:00"
+}

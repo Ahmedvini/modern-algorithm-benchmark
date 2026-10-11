@@ -1,0 +1,68 @@
+{
+  "archive": "results/evidence/cloud_validation_evidence.tar.gz",
+  "archive_sha256": "48b3e78360e7c0c1721c21a3879bc975b902f5b3603fa25a0c92230c695c0810",
+  "report": "results/raw/cub_sort_validation_20261009T220322089788Z/cloud_evidence/results/raw/cloud_cuda_preflight_20261009T214717153394Z/report.json",
+  "classification": {
+    "device0_kernel_verified": true,
+    "driver_operational_evidence": true,
+    "gpu_detected": true,
+    "management_devices": [
+      {
+        "driver_version": "580.82.07",
+        "index": "0",
+        "model": "Tesla T4"
+      }
+    ],
+    "nvcc_answers": true,
+    "project_cuda_target_built": true,
+    "runtime_device_count": 1,
+    "scope": "Visible to this process/container; absence of detection does not prove host GPU absence.",
+    "state": "operational"
+  },
+  "runtime_probe": {
+    "cuda_error": "no error",
+    "cuda_error_code": 0,
+    "device_count": 1,
+    "devices": [
+      {
+        "compute_major": 7,
+        "compute_minor": 5,
+        "name": "Tesla T4",
+        "ordinal": 0,
+        "total_global_memory_bytes": 15637086208
+      }
+    ],
+    "driver_api_version": 13000,
+    "driver_version_status": 0,
+    "kernel_result": 1729,
+    "record_kind": "cuda_runtime_probe",
+    "runtime_api_version": 13000,
+    "runtime_version_status": 0,
+    "schema_version": 1,
+    "stage": "complete",
+    "status": "ok",
+    "tested_device": 0
+  },
+  "prior_source_hashes_match": true,
+  "preflight_command_exits": {
+    "build": 0,
+    "cmake": 0,
+    "cmake_cuda_property": 0,
+    "configure": 0,
+    "lspci": null,
+    "nvcc": 0,
+    "nvidia_smi": 0,
+    "runtime": 0
+  },
+  "ctest_logs": {
+    "build/cloud_cuda/Testing/Temporary/LastTest.log": {
+      "passed": 1,
+      "failed": 0
+    },
+    "build/cloud_cpu/Testing/Temporary/LastTest.log": {
+      "passed": 23,
+      "failed": 0
+    }
+  },
+  "limitation": "Historical Colab runtime evidence; no live remote GPU connection or GPU sorting evidence."
+}

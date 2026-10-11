@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "env",
+    "-u",
+    "ASAN_OPTIONS",
+    "-u",
+    "LSAN_OPTIONS",
+    "UBSAN_OPTIONS=halt_on_error=1",
+    "ctest",
+    "--test-dir",
+    "build/sanitize",
+    "--output-on-failure",
+    "-V"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:12:22.008557+00:00"
+}

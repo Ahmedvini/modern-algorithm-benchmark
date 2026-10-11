@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "python3",
+    "scripts/cuda_preflight.py",
+    "--output",
+    "results/raw/cub_sort_validation_20261009T220322089788Z/local_preflight"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:09:21.657852+00:00",
+  "exit_code": 2,
+  "stdout": "CUDA readiness: gpu_driver_unavailable\nDevice0 kernel verified: False\nNVIDIA nvcc answers: False\nProject CUDA target built: False\nCPU project: unaffected by unavailable CUDA; use MAB_ENABLE_CUDA=OFF.\nVisible to this process/container; absence of detection does not prove host GPU absence.\nnvidia_smi: unavailable; exit=None\nlspci: completed; exit=0\nnvcc: unavailable; exit=None\ncmake: completed; exit=0\ncmake_cuda_property: completed; exit=0\nconfigure: skipped; exit=None; Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.\nbuild: skipped; exit=None; Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.\nruntime: skipped; exit=None; Requires successful previous step, working NVIDIA nvcc and CMake>=3.18.\nPCI GPU evidence: 0000:01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GA107M [GeForce RTX 3050 Ti Mobile] [10de:25a0] (rev a1)\nNo installation/system changes; no sorting/performance experiment.\nOnly device0 kernel execution is checked; other enumerated devices untested.\nToolkit/Colab GPU path unvalidated unless operational evidence is present.\n",
+  "stderr": "",
+  "wall_seconds": 0.0791701189991727,
+  "ended_utc": "2026-10-09T22:09:21.737133+00:00"
+}

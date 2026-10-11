@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "colab",
+    "upload",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/cpu_gpu_pilot_source_v2.tar.gz",
+    "/content/cub_workspace_source_65537.tar.gz",
+    "--session",
+    "cub-workspace-65537-20261010T110457Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T11:06:35.985438+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Uploaded 'results/raw/cpu_gpu_pilot_20261010T001232473460Z/cpu_gpu_pilot_source_v2.tar.gz' to '/content/cub_workspace_source_65537.tar.gz'\n",
+  "stderr": "",
+  "wall_seconds": 2.323731910000788,
+  "ended_utc": "2026-10-10T11:06:38.309288+00:00"
+}

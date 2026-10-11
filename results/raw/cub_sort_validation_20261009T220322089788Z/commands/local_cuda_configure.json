@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/cub_sort_unavailable",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=ON",
+    "-DMAB_ENABLE_CUDA_SORT=ON",
+    "-DMAB_ENABLE_OPENMP=OFF"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:09:21.396479+00:00",
+  "exit_code": 1,
+  "stdout": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Found Python3: /usr/bin/python3 (found version \"3.12.3\") found components: Interpreter \n-- Looking for a CUDA compiler\n-- Looking for a CUDA compiler - NOTFOUND\n-- Configuring incomplete, errors occurred!\n",
+  "stderr": "CMake Error at cmake/cuda.cmake:11 (message):\n  CUDA compiler unavailable; use MAB_ENABLE_CUDA=OFF and\n  scripts/cuda_preflight.py\nCall Stack (most recent call first):\n  CMakeLists.txt:157 (include)\n\n\n",
+  "wall_seconds": 0.23703009000018938,
+  "ended_utc": "2026-10-09T22:09:21.633627+00:00"
+}

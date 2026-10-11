@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/scripts/cuda_preflight.py",
+    "--output",
+    "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/preflight",
+    "--timeout-seconds",
+    "180"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "status": "completed",
+  "stderr": "",
+  "stdout": "CUDA readiness: operational\nDevice0 kernel verified: True\nNVIDIA nvcc answers: True\nProject CUDA target built: True\nCPU project: unaffected by unavailable CUDA; use MAB_ENABLE_CUDA=OFF.\nVisible to this process/container; absence of detection does not prove host GPU absence.\nnvidia_smi: completed; exit=0\nlspci: unavailable; exit=None\nnvcc: completed; exit=0\ncmake: completed; exit=0\ncmake_cuda_property: completed; exit=0\nconfigure: completed; exit=0\nbuild: completed; exit=0\nruntime: completed; exit=0\nNVIDIA GPU: Tesla T4; driver=580.82.07\nNo installation/system changes; no sorting/performance experiment.\nOnly device0 kernel execution is checked; other enumerated devices untested.\nToolkit/Colab GPU path unvalidated unless operational evidence is present.\n",
+  "wall_seconds": 5.652443339999991
+}

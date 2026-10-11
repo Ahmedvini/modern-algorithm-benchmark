@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "colab",
+    "new",
+    "--session",
+    "cub-workspace-65537-20261010T110457Z",
+    "--gpu",
+    "T4"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T11:05:12.580001+00:00"
+}

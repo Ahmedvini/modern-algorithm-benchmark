@@ -1,0 +1,53 @@
+{
+  "added": [
+    "docs/CUDA_SORT_PROTOCOL_v1.md",
+    "docs/CUDA_SORT_VALIDATION_GUIDE_v1.md",
+    "include/algorithms/cuda_sorting.hpp",
+    "scripts/validate_cuda_sort.py",
+    "src/cuda/cub_sort.cu",
+    "tests/test_cuda_sort_handoff.py",
+    "tests/test_cuda_sorting.cpp",
+    "third_party/cub/LICENSE",
+    "third_party/cub/README.md",
+    "third_party/cub/UPSTREAM.json"
+  ],
+  "archive": {
+    "all_member_hashes_verified": true,
+    "archive": "results/raw/cub_sort_validation_20261009T220322089788Z/cub_sort_source.tar.gz",
+    "bytes": 286683,
+    "includes_historical_results": false,
+    "members": 138,
+    "sha256": "4907bd41d9443e457e01edb7fed5ba2bd0e035cdf2b2c5affb85795620bf8f8c",
+    "source_files": 137
+  },
+  "audit_sha256": "516e484d38a6a775c59a6a87c340fb2471efc3aba4e965eac6d6831f81e540fe",
+  "baseline_groups": 25,
+  "cloud_runtime_historical_verified": true,
+  "compiler_warnings": [],
+  "complete_gpu_milestone": false,
+  "failed_ctest_groups": 0,
+  "full_gpu_study": "not run",
+  "handoff_methods": 11,
+  "leak_detection_enabled": true,
+  "modified": [
+    "CMakeLists.txt",
+    "README.md",
+    "cmake/cuda.cmake",
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/ROADMAP.md"
+  ],
+  "new_gpu_smoke": "not run",
+  "new_gpu_sort_compiled": false,
+  "new_gpu_sort_executed": false,
+  "new_gpu_sort_test_groups_unexecuted": 1,
+  "prior_artifacts_unchanged": 8709,
+  "protected_original_files_unchanged": 119,
+  "protocol_sha256": "bc2500fc2265c94e7022d524732c8085a4e1eee896ce77840811e100f19647c5",
+  "release_groups": 26,
+  "sanitizer_groups": 26,
+  "skipped_ctest_groups": 0,
+  "source_files": 137
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cuda_sort_handoff.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:11:39.492383+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ".........preflight timed out\n.preflight exit 2; inspect retained diagnostics\n.\n----------------------------------------------------------------------\nRan 11 tests in 0.264s\n\nOK\n",
+  "wall_seconds": 0.33607623300122214,
+  "ended_utc": "2026-10-09T22:11:39.828584+00:00"
+}

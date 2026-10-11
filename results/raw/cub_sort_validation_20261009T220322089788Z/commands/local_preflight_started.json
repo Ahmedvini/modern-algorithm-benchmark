@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "python3",
+    "scripts/cuda_preflight.py",
+    "--output",
+    "results/raw/cub_sort_validation_20261009T220322089788Z/local_preflight"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:09:21.657852+00:00"
+}

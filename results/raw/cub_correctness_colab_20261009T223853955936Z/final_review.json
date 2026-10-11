@@ -1,0 +1,40 @@
+{
+  "source_files": 140,
+  "modified": [
+    "README.md",
+    "cmake/cuda.cmake",
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/ROADMAP.md",
+    "scripts/validate_cuda_sort.py",
+    "src/cuda/cub_sort.cu",
+    "tests/test_cuda_sort_handoff.py",
+    "tests/test_cuda_sorting.cpp",
+    "third_party/cub/README.md",
+    "third_party/cub/UPSTREAM.json"
+  ],
+  "added": [
+    "docs/CUDA_SORT_PROTOCOL_v2.md",
+    "docs/CUDA_SORT_VALIDATION_GUIDE_v3.md"
+  ],
+  "removed": [],
+  "changes_after_gpu_execution": [
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/ROADMAP.md",
+    "README.md"
+  ],
+  "post_gpu_code_changes": false,
+  "test_fixtures_unchanged": true,
+  "adapter_behavior_unchanged": true,
+  "previous_artifacts_verified": 8825,
+  "previous_artifacts_changed": [],
+  "gpu_sort_correctness_milestone_complete": true,
+  "gpu_timing_or_study_complete": false,
+  "warnings_retained": 100,
+  "downloaded_evidence_files_verified": 611
+}

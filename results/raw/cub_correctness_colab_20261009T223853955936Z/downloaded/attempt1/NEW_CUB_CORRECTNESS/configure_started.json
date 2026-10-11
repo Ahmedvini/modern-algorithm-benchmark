@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+    "-B",
+    "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=ON",
+    "-DMAB_ENABLE_CUDA_SORT=ON",
+    "-DMAB_ENABLE_OPENMP=OFF",
+    "-DMAB_ENABLE_SANITIZERS=OFF",
+    "-DBUILD_TESTING=ON",
+    "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc",
+    "-DCMAKE_CUDA_ARCHITECTURES=75"
+  ],
+  "cwd": "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark"
+}
