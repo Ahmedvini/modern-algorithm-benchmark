@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_sanitize",
+    "-N",
+    "--show-only=json-v1"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "omp_environment": {
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "started_utc": "2026-10-11T10:21:19.017717+00:00"
+}

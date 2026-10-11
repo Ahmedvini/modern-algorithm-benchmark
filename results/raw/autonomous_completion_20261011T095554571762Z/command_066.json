@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B report/collect_metrics.py collect --binary build/autonomous_cpu_release/sort_metrics --output '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/count_memory'",
+  "purpose": "Separate count/RSS study: 240 non-timing metrics invocations, five counted adapters, four sizes/distributions, three seeds",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:46:48.988665+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/report/collect_metrics.py\", line 113, in <module>\n    if args.mode=='collect':collect(args.binary,args.output)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/report/collect_metrics.py\", line 39, in collect\n    parse(record, n, distribution, seed, algorithm)\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/report/collect_metrics.py\", line 54, in parse\n    if memory['status'] == 'ok': require(type(memory['peak_rss_bytes']) is int and memory['peak_rss_bytes'] >= 0, 'invalid RSS')\n                                              ~~~~~~^^^^^^^^^^^^^^^^^^\nKeyError: 'peak_rss_bytes'\n"
+}

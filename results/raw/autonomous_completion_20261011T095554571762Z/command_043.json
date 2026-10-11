@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/guarded_validate.py' sanitize",
+  "purpose": "Guarded CPU ASan/UBSan 19 plus two untimed diagnostics; default leak detection retained",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:21:18.929857+00:00",
+  "exit_code": 0,
+  "stdout": "Static guard passed: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_sanitize\ncpu_sanitize_discovery completed exit 0\ncpu_sanitize completed exit 0\n",
+  "stderr": ""
+}

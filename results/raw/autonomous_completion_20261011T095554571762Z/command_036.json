@@ -1,0 +1,9 @@
+{
+  "command": "env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 build/autonomous_learned_sanitize/test_learned_index",
+  "purpose": "Learned-index ASan/UBSan correctness with default leak checking; no timing",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:19:42.385661+00:00",
+  "exit_code": 0,
+  "stdout": "learned index: 153 datasets, 45201 oracle checks, 12468 observed fallbacks; unsorted rejection passed\n",
+  "stderr": ""
+}

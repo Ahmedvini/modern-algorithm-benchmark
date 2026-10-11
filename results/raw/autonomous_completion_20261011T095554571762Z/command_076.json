@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B scripts/analyze_results.py '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m' --output '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m_regenerated.json'\npython3 -B scripts/analyze_results.py '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m' --output '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m_regenerated.json'",
+  "purpose": "Regenerate both scale-study summaries from retained raw CSV; no sorting execution",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:52:51.924848+00:00",
+  "exit_code": 0,
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m_regenerated.json\n/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m_regenerated.json\n",
+  "stderr": ""
+}

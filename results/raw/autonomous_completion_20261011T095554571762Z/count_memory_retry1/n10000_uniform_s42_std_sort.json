@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/sort_metrics",
+    "--size",
+    "10000",
+    "--seed",
+    "42",
+    "--distribution",
+    "uniform",
+    "--sort",
+    "std_sort"
+  ],
+  "exit_code": 0,
+  "stderr": "",
+  "stdout": "{\"schema_version\":1,\"mode\":\"sort_metrics\",\"status\":\"ok\",\"sort_algorithm\":\"std_sort\",\"instrumented_implementation\":\"std_sort_counting_less\",\"comparison_convention\":\"key_less_than_v1\",\"key_comparisons\":159427,\"dataset_generator\":\"mt19937_64_v1\",\"size\":10000,\"seed\":42,\"distribution\":\"uniform\",\"nearly_sorted_swaps\":100,\"duplicate_cardinality\":16,\"memory_sample_point\":\"after_instrumented_sort_before_validation\",\"process_memory\":{\"status\":\"ok\",\"metric\":\"peak_rss\",\"scope\":\"process_lifetime\",\"unit\":\"bytes\",\"method\":\"getrusage_ru_maxrss\",\"value\":19202048,\"error_code\":null}}\n"
+}

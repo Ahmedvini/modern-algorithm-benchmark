@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c 'import csv,json;from pathlib import Path;r=Path(\"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m\");print(\"completed configs\",len(list(r.glob(\"run_*/COMPLETE.json\"))));p=sorted(r.glob(\"run_*/trials.csv\"));print([(str(f.parent.name),sum(1 for _ in csv.DictReader(f.open()))) for f in p]);print(\"all records remain in isolated output\")'",
+  "purpose": "Read-only scale progress: retained completed configurations and current trial rows; no additional sorting launched",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:38:53.229428+00:00",
+  "exit_code": 0,
+  "stdout": "completed configs 0\n[('run_000000', 29)]\nall records remain in isolated output\n",
+  "stderr": ""
+}

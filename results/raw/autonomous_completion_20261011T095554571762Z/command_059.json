@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c 'import csv;from pathlib import Path;r=Path(\"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m\");print(\"completed\",len(list(r.glob(\"run_*/COMPLETE.json\"))),\"of5\");print([(p.parent.name,sum(1 for _ in csv.DictReader(p.open()))) for p in sorted(r.glob(\"run_*/trials.csv\"))])'",
+  "purpose": "Read-only 100M progress; no new workloads",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:42:05.221911+00:00",
+  "exit_code": 0,
+  "stdout": "completed 2 of5\n[('run_000000', 36), ('run_000001', 36), ('run_000002', 11)]\n",
+  "stderr": ""
+}

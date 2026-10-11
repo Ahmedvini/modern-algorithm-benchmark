@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B tests/test_learned_study.py",
+  "purpose": "Focused learned-study analyzer tests on synthetic records only",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:15:51.976636+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.031s\n\nOK\n"
+}

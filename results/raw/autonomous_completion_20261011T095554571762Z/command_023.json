@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -m unittest discover -s tests -p 'test_ctest_build_guard.py'\npython3 -B -m unittest discover -s tests -p 'test_validation_selection.py'\npython3 -B -m unittest discover -s tests -p 'test_selection_activation.py'",
+  "purpose": "Inert guard/path/selection/activation regressions; all discovery and workload callbacks mocked",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:18:00.017391+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "....................................\n----------------------------------------------------------------------\nRan 36 tests in 2.227s\n\nOK\n...\n----------------------------------------------------------------------\nRan 3 tests in 0.140s\n\nOK\n...\n----------------------------------------------------------------------\nRan 3 tests in 0.051s\n\nOK\n"
+}

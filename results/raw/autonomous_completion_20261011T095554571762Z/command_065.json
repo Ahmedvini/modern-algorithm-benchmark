@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B scripts/analyze_results.py '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m' --output '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m_summary.json'",
+  "purpose": "Strict 100M raw CSV/order/oracle/completeness analysis; no timings launched",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:46:48.895803+00:00",
+  "exit_code": 0,
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m_summary.json\n",
+  "stderr": ""
+}

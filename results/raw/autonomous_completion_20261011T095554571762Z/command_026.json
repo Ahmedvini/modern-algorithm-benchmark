@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B tests/test_evidence_enforcement.py",
+  "purpose": "Focused evidence-enforcement regressions; no commands or workloads can execute",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:18:36.580327+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": ".........F.............................\n======================================================================\nFAIL: test_default_guard_still_rejects_changed_source_and_inactive_candidate (__main__.EvidenceTests.test_default_guard_still_rejects_changed_source_and_inactive_candidate)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_evidence_enforcement.py\", line 425, in test_default_guard_still_rejects_changed_source_and_inactive_candidate\n    with self.assertRaisesRegex(ValueError,'source snapshot changed'):selector.load_manifest()\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 39 tests in 1.172s\n\nFAILED (failures=1)\n"
+}

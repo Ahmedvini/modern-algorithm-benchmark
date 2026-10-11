@@ -1,0 +1,9 @@
+{
+  "command": "build/autonomous_learned_release/test_learned_index",
+  "purpose": "Run only learned-index deterministic correctness; no timing loops",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:13:32.524622+00:00",
+  "exit_code": 0,
+  "stdout": "learned index: 153 datasets, 45201 oracle checks, 12468 observed fallbacks; unsorted rejection passed\n",
+  "stderr": ""
+}

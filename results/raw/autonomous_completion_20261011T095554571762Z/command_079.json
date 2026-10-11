@@ -1,0 +1,9 @@
+{
+  "command": "pdftoppm -f 10 -singlefile -scale-to 1400 -png report/autonomous_20261011T095554571762Z/PRESENTATION.pdf '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/presentation_page10'\npdftoppm -f 12 -singlefile -scale-to 1400 -png report/autonomous_20261011T095554571762Z/PRESENTATION.pdf '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/presentation_page12'",
+  "purpose": "Render presentation page for visual review; read existing PDFs, no benchmark workloads",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:53:57.996750+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ""
+}

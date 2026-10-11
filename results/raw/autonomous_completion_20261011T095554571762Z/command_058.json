@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c 'import sys;sys.path.insert(0,\"scripts\");from cpu_gpu_evidence import approval;approval()'",
+  "purpose": "Read-only real trust-root gate; expected fail-closed, no discovery/resources/workloads",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:40:15.202581+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/cpu_gpu_evidence.py\", line 25, in approval\n    require(TRUSTED_APPROVAL_SHA256 is not None, 'independent evidence/selection review not installed')\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/cpu_gpu_protocol.py\", line 26, in require\n    raise ValueError(message)\nValueError: independent evidence/selection review not installed\n"
+}

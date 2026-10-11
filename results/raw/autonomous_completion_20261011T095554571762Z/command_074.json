@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B report/generate.py --evidence '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z' --learned results/processed/learned_rank_20261011T095554571762Z --metrics results/processed/count_memory_20261011T095554571762Z --output report/autonomous_20261011T095554571762Z",
+  "purpose": "Generate final research report, machine-readable plot manifests, and 12-slide presentation from retained validated summaries",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:52:29.547767+00:00",
+  "exit_code": 0,
+  "stdout": "Generated evidence report,12-slide PDF and4 figures: report/autonomous_20261011T095554571762Z\n",
+  "stderr": ""
+}

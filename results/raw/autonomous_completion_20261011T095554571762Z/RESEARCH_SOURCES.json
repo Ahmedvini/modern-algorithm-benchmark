@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "retrieval_date": "2026-10-11",
+  "method": "web search/open of primary research and official repositories; not terminal execution",
+  "sources": [
+    {"url": "https://www.nature.com/articles/s41586-023-06004-9", "status": "Primary paper search result inspected; direct opening returned an authentication redirect/server error. No full-text retrieval claimed."},
+    {"url": "https://github.com/google-deepmind/alphadev", "status": "Official archived source and README inspected; this project did not reproduce training."},
+    {"url": "https://arxiv.org/abs/1712.01208v3", "status": "Primary learned-index paper abstract/version inspected."},
+    {"url": "https://research.google/pubs/the-case-for-learned-index-structures/", "status": "Primary publisher research record inspected."}
+  ],
+  "exit_codes": "not applicable to web tool calls",
+  "output": "docs/ALPHADEV_STUDY.md"
+}

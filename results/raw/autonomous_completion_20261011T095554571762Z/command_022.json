@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/prepare_cpu_studies.py'",
+  "purpose": "Freeze separate held-out learned study and activate reviewed v5 local correctness source snapshot; preserve v3/v4/frozen GPU study",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:17:59.918582+00:00",
+  "exit_code": 0,
+  "stdout": "Frozen CPU/GPU matrix verified: 48 datasets\nv5 local correctness snapshot: 167 files; exact default19 preserved; full study NOT eligible\n{\n  \"added\": [\n    \"cmake/learned_index_standalone/CMakeLists.txt\",\n    \"include/indexes/learned_index.hpp\",\n    \"scripts/cpu_gpu_build_identity.py\",\n    \"scripts/cpu_gpu_build_provenance.py\",\n    \"scripts/cpu_gpu_evidence.py\",\n    \"scripts/cpu_gpu_evidence_io.py\",\n    \"scripts/cpu_gpu_framework_compatibility.py\",\n    \"scripts/cpu_gpu_retention.py\",\n    \"scripts/learned_study.py\",\n    \"src/benchmark/learned_main.cpp\",\n    \"src/indexes/learned_index.cpp\",\n    \"tests/test_evidence_enforcement.py\",\n    \"tests/test_evidence_retention.py\",\n    \"tests/test_framework_compatibility.py\",\n    \"tests/test_learned_index.cpp\",\n    \"tests/test_learned_study.py\",\n    \"tests/test_selection_activation.py\"\n  ],\n  \"removed\": [],\n  \"modified\": [\n    \"scripts/analyze_cpu_gpu.py\",\n    \"scripts/cpu_gpu_protocol.py\",\n    \"scripts/cpu_gpu_provenance.py\",\n    \"scripts/non_timing_tests.py\",\n    \"scripts/run_cpu_gpu_pilot.py\",\n    \"scripts/run_cpu_gpu_study.py\"\n  ]\n}\n",
+  "stderr": ""
+}

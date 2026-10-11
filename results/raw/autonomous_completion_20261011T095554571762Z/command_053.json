@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B scripts/run_matrix.py --binary build/autonomous_cpu_release/sort_benchmark --output '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m' --sizes 10000000 --seeds 1729,42,2718 --distributions uniform,sorted,reverse_sorted,duplicate_heavy,nearly_sorted --sorts all --repetitions 5 --warmups 1 --memory-limit-mib 512",
+  "purpose": "Execute separate CPU scale extension: 10M, five distributions, three seeds, six sequential sorts, W1/R5",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:23:39.279129+00:00",
+  "exit_code": 0,
+  "stdout": "Completed 15 configurations: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m\n",
+  "stderr": ""
+}

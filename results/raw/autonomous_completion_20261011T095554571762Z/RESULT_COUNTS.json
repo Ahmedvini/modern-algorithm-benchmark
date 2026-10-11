@@ -1,0 +1,54 @@
+{
+  "actual_gpu_sorting_calls": 0,
+  "cpu_release": {
+    "ctest_skipped": 0,
+    "failed": 0,
+    "internal_gpu_methods_skipped": 2,
+    "passed": 21
+  },
+  "cpu_sanitize": {
+    "ctest_skipped": 0,
+    "failed": 0,
+    "internal_gpu_methods_skipped": 2,
+    "leak_detection": true,
+    "passed": 21
+  },
+  "frozen_cpu_gpu_study_measured": 0,
+  "learned_correctness": {
+    "datasets": 153,
+    "observed_fallbacks": 12468,
+    "oracle_checks": 45201,
+    "release_exit": 0,
+    "sanitize_exit": 0
+  },
+  "learned_study": {
+    "configurations": 48,
+    "diagnostic_queries": 48000,
+    "distinct_sorted_inputs": 24,
+    "failed": 0,
+    "measured_builds": 240,
+    "measured_lookup_batches": 480,
+    "missing": 0,
+    "warmup_builds": 48,
+    "warmup_lookup_batches": 96
+  },
+  "separate_metrics": {
+    "completed": 240,
+    "failed_collector_attempts": 1,
+    "first_partial_native_calls": 1
+  },
+  "sorting_100m": {
+    "datasets": 5,
+    "failed": 0,
+    "measured": 150,
+    "missing": 0,
+    "warmups": 30
+  },
+  "sorting_10m": {
+    "datasets": 15,
+    "failed": 0,
+    "measured": 450,
+    "missing": 0,
+    "warmups": 90
+  }
+}

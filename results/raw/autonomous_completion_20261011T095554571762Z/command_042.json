@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c 'import sys,json,hashlib;from pathlib import Path;sys.path.insert(0,\"scripts\");from cpu_gpu_protocol import source_manifest,load_protocol;e=Path(\"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z\");p=e/\"cpu_sanitize.json\";print(json.loads(p.read_text())[\"stdout\"][-2200:]) if p.exists() else print(\"sanitizer pending\");paths=[\"docs/CPU_SCALING_PROTOCOL_v1.md\",\"docs/LEARNED_INDEX_PROTOCOL_v1.md\",\"docs/studies/learned_rank_v1.matrix.json\",\"docs/NON_TIMING_TEST_SELECTION_v5.json\",\"build/autonomous_cpu_release/sort_benchmark\",\"build/autonomous_cpu_release/comparison_input\",\"build/autonomous_learned_release/learned_index_benchmark\",\"build/autonomous_cpu_release/compile_commands.json\",\"build/autonomous_learned_release/compile_commands.json\"];v={\"source_sha256\":source_manifest(),\"artifacts_sha256\":{p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths},\"frozen_gpu_matrix_verified\":len(load_protocol()[\"study\"][\"cells\"])};f=(e/\"CPU_STUDY_IDENTITIES.json\").open(\"x\");json.dump(v,f,indent=2,sort_keys=True);f.close();print(\"Identity snapshot saved\")'",
+  "purpose": "Verify sanitizer outcomes and freeze new CPU study/build/source identities before timing",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:21:56.189981+00:00",
+  "exit_code": 0,
+  "stdout": "sanitizer pending\nIdentity snapshot saved\n",
+  "stderr": ""
+}

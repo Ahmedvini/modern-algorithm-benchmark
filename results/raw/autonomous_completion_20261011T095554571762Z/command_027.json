@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B tests/test_framework_compatibility.py",
+  "purpose": "Focused framework compatibility adversarial regressions; mock-only",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:18:37.896629+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 3.067s\n\nOK\n"
+}

@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B scripts/learned_study.py analyze --raw '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/learned_study' --output results/processed/learned_rank_20261011T095554571762Z",
+  "purpose": "Validate all learned-study raw records; generate hierarchical summaries and four variability figures",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:23:29.938385+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ""
+}

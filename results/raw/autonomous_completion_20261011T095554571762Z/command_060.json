@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c 'from pathlib import Path;print(Path(\"/proc/self/cgroup\").read_text());print(\"cgroup mount lines\");print(\"\\n\".join(l for l in Path(\"/proc/self/mountinfo\").read_text().splitlines() if \"cgroup\" in l));paths=[\"/sys/fs/cgroup/memory/memory.limit_in_bytes\",\"/sys/fs/cgroup/memory/memory.usage_in_bytes\"];print({p:Path(p).read_text().strip() if Path(p).exists() else None for p in paths});print(\"\\n\".join(l for l in Path(\"/proc/meminfo\").read_text().splitlines() if l.startswith((\"MemAvailable:\",\"SwapFree:\"))))'",
+  "purpose": "Read-only cgroup/memory observations during resource monitoring; no allocation or workload",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:43:40.436878+00:00",
+  "exit_code": 0,
+  "stdout": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-7038.scope\n\ncgroup mount lines\n38 27 0:32 / /sys/fs/cgroup rw,nosuid,nodev,noexec,relatime shared:10 - cgroup2 cgroup2 rw,nsdelegate,memory_recursiveprot\n{'/sys/fs/cgroup/memory/memory.limit_in_bytes': None, '/sys/fs/cgroup/memory/memory.usage_in_bytes': None}\nMemAvailable:    5377364 kB\nSwapFree:       38055180 kB\n",
+  "stderr": ""
+}

@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c 'import sys,json,hashlib;from pathlib import Path;r=Path.cwd();e=r/\"results/raw/autonomous_completion_20261011T095554571762Z\";p=r/'\\''docs/NON_TIMING_TEST_SELECTION_v5.json'\\'';old=p.read_bytes();(e/'\\''SELECTION_v5_INITIAL.json'\\'').write_bytes(old);m=json.loads(old);sys.path.insert(0,str(r/'\\''scripts'\\''));from cpu_gpu_protocol import source_manifest;m['\\''reviewed_source_sha256'\\'']=source_manifest();p.write_text(json.dumps(m,sort_keys=True,indent=2)+'\\''\\n'\\'');print('\\''v5 source refresh: one historical-v3 expectation clarified; initial snapshot retained'\\'',hashlib.sha256(old).hexdigest())'",
+  "purpose": "Retain initial v5 then bind final reviewed source; clarify historical-v3 regression expectation without weakening checks",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:19:15.513815+00:00",
+  "exit_code": 0,
+  "stdout": "v5 source refresh: one historical-v3 expectation clarified; initial snapshot retained 1a9702534d906dfe916fe38f8f1b9ddc4a00fce4e354e2d54a5d3282df0f96e8\n",
+  "stderr": ""
+}

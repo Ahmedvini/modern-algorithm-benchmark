@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B - <<'PY'\nimport ast,json,pathlib\np=pathlib.Path(\"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z\")\nast.parse((p/'finalize.py').read_text())\nfor f in ['LEARNED_FREEZE.json','CPU_STUDY_IDENTITIES.json']:\n d=json.loads((p/f).read_text()); print(f,{k:(list(v)[:4] if isinstance(v,dict) else v) for k,v in d.items()})\nprint('finalizer syntax parsed; no finalizer execution yet')\nPY",
+  "purpose": "Static review of final audit script and small metadata schemas before one consolidated offline seal",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T10:59:53.545393+00:00",
+  "exit_code": 0,
+  "stdout": "LEARNED_FREEZE.json {'expected_measured_builds': 240, 'expected_measured_lookup_batches': 480, 'expected_warmup_builds': 48, 'expected_warmup_lookup_batches': 96, 'files_sha256': ['docs/LEARNED_INDEX_PROTOCOL_v1.md', 'docs/studies/learned_rank_v1.matrix.json']}\nCPU_STUDY_IDENTITIES.json {'artifacts_sha256': ['build/autonomous_cpu_release/comparison_input', 'build/autonomous_cpu_release/compile_commands.json', 'build/autonomous_cpu_release/sort_benchmark', 'build/autonomous_learned_release/compile_commands.json'], 'frozen_gpu_matrix_verified': 48, 'source_sha256': ['CMakeLists.txt', 'cmake/benchmark_metadata.cmake', 'cmake/cuda.cmake', 'cmake/learned_index_standalone/CMakeLists.txt']}\nfinalizer syntax parsed; no finalizer execution yet\n",
+  "stderr": ""
+}

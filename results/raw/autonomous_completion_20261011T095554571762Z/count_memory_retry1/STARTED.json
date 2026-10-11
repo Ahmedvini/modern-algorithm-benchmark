@@ -1,0 +1,7 @@
+{
+  "binary": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/sort_metrics",
+  "binary_sha256": "6ccd56e9af7b6f32b58b8b90e5524263b4d96e936b3c00cbf9197fbd07342a78",
+  "configurations": 240,
+  "protocol": "count_memory_v1",
+  "protocol_sha256": "483d1d5cd02b2aa769636d831370e276c6334c9525c133f741f4663add5ce849"
+}

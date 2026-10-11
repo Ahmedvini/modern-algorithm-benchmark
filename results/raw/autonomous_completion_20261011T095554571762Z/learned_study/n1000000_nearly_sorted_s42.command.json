@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_learned_release/learned_index_benchmark",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/learned_study/n1000000_nearly_sorted_s42",
+    "--size",
+    "1000000",
+    "--seed",
+    "42",
+    "--distribution",
+    "nearly_sorted"
+  ],
+  "exit_code": 0,
+  "stderr": "",
+  "stdout": "Completed 18 rows (15 measured, 3 warmup), 1000 untimed query diagnostics: \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/learned_study/n1000000_nearly_sorted_s42\"\n"
+}

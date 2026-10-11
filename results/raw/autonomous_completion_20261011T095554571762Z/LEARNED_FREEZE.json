@@ -1,0 +1,10 @@
+{
+  "expected_measured_builds": 240,
+  "expected_measured_lookup_batches": 480,
+  "expected_warmup_builds": 48,
+  "expected_warmup_lookup_batches": 96,
+  "files_sha256": {
+    "docs/LEARNED_INDEX_PROTOCOL_v1.md": "5d230489ab9e94870d0d726b25e523b31c95421989e3da736593f7e86b98e625",
+    "docs/studies/learned_rank_v1.matrix.json": "79e00ed88874a72147248ee09ba4e59313a224335d3394c3cb52930ad07a5855"
+  }
+}
