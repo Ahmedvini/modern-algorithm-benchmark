@@ -1,0 +1,8 @@
+{
+  "archive": "results/raw/cuda_preflight_validation_20261009T205410772326Z/phase7_source.tar.gz",
+  "archive_sha256": "f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5",
+  "backup": "build/gpu_cloud_review_20261009T211734154323Z",
+  "evidence": "results/raw/gpu_cloud_gate1_20261009T211734154323Z",
+  "extracted": "build/gpu_cloud_archive_20261009T211734154323Z",
+  "stamp": "20261009T211734154323Z"
+}

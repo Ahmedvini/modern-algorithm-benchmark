@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/run_command.py",
+    "sanitize_environment",
+    "python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/sanitize",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/sanitize_environment.json"
+  ],
+  "wrapper_exit_code": 1,
+  "error": "FileExistsError: exclusive command-record filename collided with the newly created environment snapshot /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/sanitize_environment.json",
+  "snapshot_preserved": true,
+  "note": "Tool-observed wrapper failure; child exit status was not saved by that wrapper. Retried with distinct command and snapshot filenames."
+}

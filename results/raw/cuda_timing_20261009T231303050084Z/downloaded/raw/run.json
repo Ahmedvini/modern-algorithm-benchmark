@@ -1,0 +1,10 @@
+{
+  "matrix_configurations": 48,
+  "measured_trials": 240,
+  "processed": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/processed/NEW_GPU_TIMING",
+  "protocol": "cuda_sort_timing_v1",
+  "size_cap": 65537,
+  "source": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:25:36.967274+00:00",
+  "warmup_trials": 48
+}

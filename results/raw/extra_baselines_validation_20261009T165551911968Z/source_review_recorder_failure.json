@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/run_command.py",
+    "source_review",
+    "python3",
+    "results/raw/extra_baselines_validation_20261009T165551911968Z/review_sources.py"
+  ],
+  "wrapper_exit_code": 1,
+  "error": "FileExistsError: command-record name source_review.json collided with the review script output",
+  "note": "The review artifacts were created and preserved. Child exit status was not saved. A distinct read-only final verification will validate the retained artifacts with a recorded exit."
+}

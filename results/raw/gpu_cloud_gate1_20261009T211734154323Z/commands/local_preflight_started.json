@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "python3",
+    "build/gpu_cloud_archive_20261009T211734154323Z/modern-algorithm-benchmark/scripts/cuda_preflight.py",
+    "--output",
+    "results/raw/gpu_cloud_gate1_20261009T211734154323Z/local_preflight"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:18:02.663877+00:00"
+}

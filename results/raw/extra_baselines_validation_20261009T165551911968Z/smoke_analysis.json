@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "scripts/analyze_results.py",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/smoke_matrix",
+    "--output",
+    "results/processed/extra_baselines_smoke_20261009T165551911968Z.json"
+  ],
+  "exit_code": 0,
+  "started_utc": "2026-10-09T17:01:02.851630+00:00",
+  "stdout": "results/processed/extra_baselines_smoke_20261009T165551911968Z.json\n",
+  "stderr": ""
+}

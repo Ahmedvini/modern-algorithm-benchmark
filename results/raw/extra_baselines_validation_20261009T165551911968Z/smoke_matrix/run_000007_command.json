@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/sort_benchmark",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/smoke_matrix/run_000007",
+    "--sort",
+    "std_sort,quick_sort,pdq_sort,tim_sort,merge_sort,radix_sort",
+    "--size",
+    "10000",
+    "--seed",
+    "1729",
+    "--distribution",
+    "reverse_sorted",
+    "--repetitions",
+    "5",
+    "--warmups",
+    "1",
+    "--memory-limit-mib",
+    "256",
+    "--distinct",
+    "16",
+    "--run-id",
+    "smoke_matrix:run_000007"
+  ],
+  "exit_code": 0,
+  "stdout": "Completed 30 measured trials; raw data: \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/smoke_matrix/run_000007/trials.csv\"\n",
+  "stderr": ""
+}

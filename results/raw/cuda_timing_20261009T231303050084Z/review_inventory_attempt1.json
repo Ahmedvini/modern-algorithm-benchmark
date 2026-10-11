@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "operation": "Inline Python source-change inventory review",
+  "error": "AssertionError: ['.gitignore']",
+  "reason": "Inventory collector omitted existing .gitignore; file was not deleted. Corrected collector includes .gitignore. No source/algorithm/test change required."
+}

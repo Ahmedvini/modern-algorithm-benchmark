@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "build/gpu_cloud_archive_20261009T211734154323Z/cpu_build/sort_benchmark",
+    "--list-sorts"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:18:06.117142+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "command": [
+    "python3",
+    "scripts/run_matrix.py",
+    "--binary",
+    "build/release/sort_benchmark",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/smoke_matrix",
+    "--sizes",
+    "1000,10000",
+    "--seeds",
+    "1729",
+    "--repetitions",
+    "5",
+    "--warmups",
+    "1"
+  ],
+  "exit_code": 0,
+  "started_utc": "2026-10-09T17:00:57.298698+00:00",
+  "stdout": "Completed 10 configurations: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/smoke_matrix\n",
+  "stderr": ""
+}

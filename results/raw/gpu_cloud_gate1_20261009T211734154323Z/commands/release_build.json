@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/release",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:18:06.299997+00:00",
+  "exit_code": 0,
+  "stdout": "[ 11%] Built target mab_core\n[ 18%] Built target mab_metrics\n[ 15%] Built target algorithm_benchmark\n[ 25%] Built target mab_timing\n[ 22%] Built target mab_search\n[ 27%] Built target test_baselines\n[ 32%] Built target mab_structures\n[ 35%] Built target test_quicksort\n[ 37%] Built target test_datasets\n[ 42%] Built target test_pdqsort\n[ 42%] Built target test_timsort\n[ 47%] Built target test_mergesort\n[ 47%] Built target test_radixsort\n[ 52%] Built target test_memory\n[ 52%] Built target test_comparisons\n[ 57%] Built target test_timing\n[ 60%] Built target test_memory_unsupported\n[ 65%] Built target mab_parallel\n[ 65%] Built target sort_metrics\n[ 70%] Built target sort_benchmark\n[ 70%] Built target mab_search_metrics\n[ 75%] Built target mab_search_timing\n[ 75%] Built target test_structures\n[ 80%] Built target test_searching\n[ 80%] Built target mab_parallel_timing\n[ 85%] Built target search_counts\n[ 82%] Built target search_benchmark\n[ 90%] Built target test_search_timing\n[ 90%] Built target mab_structure_timing\n[ 95%] Built target parallel_sort_benchmark\n[ 95%] Built target test_parallel_mergesort\n[100%] Built target structure_benchmark\n[100%] Built target test_structure_timing\n",
+  "stderr": "",
+  "wall_seconds": 0.2805496969995147,
+  "ended_utc": "2026-10-09T21:18:06.580667+00:00"
+}

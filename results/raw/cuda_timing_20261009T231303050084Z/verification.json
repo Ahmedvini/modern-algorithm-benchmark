@@ -1,0 +1,19 @@
+{
+  "complete": true,
+  "matrix_configurations": 48,
+  "matrix_measured_trials": 240,
+  "matrix_warmups": 48,
+  "smallest_measured_trials": 5,
+  "smallest_warmups": 1,
+  "failed_trials": 0,
+  "missing_trials": 0,
+  "raw_metrics_checked": 980,
+  "independent_statistics_checked": 196,
+  "remote_summary_byte_regeneration": true,
+  "local_summary_byte_regeneration": true,
+  "remote_local_groups_equal": true,
+  "provenance_note": "Absolute source path differs between local and remote summaries; groups and all statistics identical.",
+  "earlier_artifacts_verified": 9568,
+  "earlier_artifacts_changed": [],
+  "downloaded_files_reverified": 1115
+}

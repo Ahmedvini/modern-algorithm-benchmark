@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/gpu_cloud_gate1_20261009T211734154323Z/validate_archive.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:18:02.591111+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive_sha256\": \"f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5\",\n  \"archive_members\": 127,\n  \"source_files_verified\": 126,\n  \"all_source_matches_current_baseline\": true,\n  \"extraction\": \"build/gpu_cloud_archive_20261009T211734154323Z/modern-algorithm-benchmark\",\n  \"cloud_execution\": false\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.048863691998121794,
+  "ended_utc": "2026-10-09T21:18:02.640086+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/scripts/analyze_cuda_results.py",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/smallest",
+    "--output",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/processed/NEW_GPU_TIMING/smallest_regenerated.json"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark"
+}

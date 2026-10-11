@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/release",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/release_environment_verified.json"
+  ],
+  "exit_code": 0,
+  "started_utc": "2026-10-09T17:02:42.771128+00:00",
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/extra_baselines_validation_20261009T165551911968Z/release_environment_verified.json\n",
+  "stderr": ""
+}

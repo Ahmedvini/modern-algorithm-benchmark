@@ -1,0 +1,152 @@
+Internal ctest changing into directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+UpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/DartConfiguration.tcl
+Parse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/DartConfiguration.tcl
+Parse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/DartConfiguration.tcl
+Test project /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 1
+      Start  1: baselines
+
+1: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_baselines
+1: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+1: Test timeout computed to be: 1500
+1: Passed 3590 full-vector differential sort cases and 98508 linear-oracle search checks
+ 1/15 Test  #1: baselines ........................   Passed    0.61 sec
+test 2
+      Start  2: environment_manifest
+
+2: Test command: /usr/bin/python3 "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_environment.py"
+2: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+2: Test timeout computed to be: 1500
+2: ...
+2: ----------------------------------------------------------------------
+2: Ran 3 tests in 0.001s
+2: 
+2: OK
+ 2/15 Test  #2: environment_manifest .............   Passed    0.04 sec
+test 3
+      Start  3: datasets
+
+3: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_datasets
+3: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+3: Test timeout computed to be: 1500
+3: Passed 220 distribution/size/seed cases, five exact one-swap fixtures, one five-swap fixture, empty/singleton swap checks, and existing fixtures/validation
+ 3/15 Test  #3: datasets .........................   Passed    0.17 sec
+test 4
+      Start  4: cli
+
+4: Test command: /usr/bin/python3 "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cli.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/algorithm_benchmark"
+4: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+4: Test timeout computed to be: 1500
+4: ...........
+4: ----------------------------------------------------------------------
+4: Ran 11 tests in 1.193s
+4: 
+4: OK
+ 4/15 Test  #4: cli ..............................   Passed    1.24 sec
+test 5
+      Start  5: quicksort
+
+5: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_quicksort
+5: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+5: Test timeout computed to be: 1500
+5: Passed 3718 QuickSort differential cases through public and observed paths; forced zero-budget fallback=1, one-budget fallback=1, balanced-child fallbacks=2, sentinel-range fallback=1, default-budget adversarial fallbacks=618
+ 5/15 Test  #5: quicksort ........................   Passed    1.47 sec
+test 6
+      Start  6: pdqsort
+
+6: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_pdqsort
+6: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+6: Test timeout computed to be: 1500
+6: Passed 4027 PDQSort differential cases through public and registry paths
+ 6/15 Test  #6: pdqsort ..........................   Passed    0.91 sec
+test 7
+      Start  7: timsort
+
+7: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_timsort
+7: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+7: Test timeout computed to be: 1500
+7: Passed 4149 Timsort differential cases through public and registry paths
+ 7/15 Test  #7: timsort ..........................   Passed    1.84 sec
+test 8
+      Start  8: mergesort
+
+8: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_mergesort
+8: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+8: Test timeout computed to be: 1500
+8: Passed 4015 Merge Sort differential cases through public/registry/repeated paths; stable merge fixture passed
+ 8/15 Test  #8: mergesort ........................   Passed    1.05 sec
+test 9
+      Start  9: radixsort
+
+9: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_radixsort
+9: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+9: Test timeout computed to be: 1500
+9: Passed 4015 Signed Radix Sort differential cases through public/registry/repeated paths
+ 9/15 Test  #9: radixsort ........................   Passed    1.02 sec
+test 10
+      Start 10: comparisons
+
+10: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_comparisons
+10: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+10: Test timeout computed to be: 1500
+10: Passed 1404 comparison differential/reset/repetition inputs across 5 sorters; six exact QuickSort and eleven exact Merge Sort fixtures, radix unsupported, comparator isolation/overflow and counted heapsort fallback passed
+10/15 Test #10: comparisons ......................   Passed    2.16 sec
+test 11
+      Start 11: memory
+
+11: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_memory
+11: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+11: Test timeout computed to be: 1500
+11: Passed memory JSON supported/zero/error/unsupported fixtures, four invalid reports, and repeated platform probes
+11/15 Test #11: memory ...........................   Passed    0.01 sec
+test 12
+      Start 12: memory_unsupported
+
+12: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_memory_unsupported
+12: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+12: Test timeout computed to be: 1500
+12: Passed memory JSON supported/zero/error/unsupported fixtures, four invalid reports, and repeated platform probes
+12/15 Test #12: memory_unsupported ...............   Passed    0.01 sec
+test 13
+      Start 13: metrics_cli
+
+13: Test command: /usr/bin/python3 "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_metrics_cli.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/sort_metrics"
+13: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+13: Test timeout computed to be: 1500
+13: .........
+13: ----------------------------------------------------------------------
+13: Ran 9 tests in 1.438s
+13: 
+13: OK
+13/15 Test #13: metrics_cli ......................   Passed    1.48 sec
+test 14
+      Start 14: timing
+
+14: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_timing
+14: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+14: Test timeout computed to be: 1500
+14: Passed 72 reproducible distribution/seed/size inputs and 1296 validated registry trials; sorted aliases, exact input restoration/order, failures, bounds and escaping passed
+14/15 Test #14: timing ...........................   Passed    0.05 sec
+test 15
+      Start 15: benchmark_framework
+
+15: Test command: /usr/bin/python3 "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_benchmark.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/sort_benchmark"
+15: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+15: Test timeout computed to be: 1500
+15: ............
+15: ----------------------------------------------------------------------
+15: Ran 12 tests in 1.436s
+15: 
+15: OK
+15/15 Test #15: benchmark_framework ..............   Passed    1.48 sec
+
+100% tests passed, 0 tests failed out of 15
+
+Total Test time (real) =  13.54 sec

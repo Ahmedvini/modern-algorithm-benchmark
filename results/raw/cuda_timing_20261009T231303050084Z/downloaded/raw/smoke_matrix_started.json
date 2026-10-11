@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/scripts/run_cuda_matrix.py",
+    "--executable",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/cuda_sort_benchmark",
+    "--output",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/matrix",
+    "--sizes",
+    "0,1,1025,65537",
+    "--seeds",
+    "1729,42",
+    "--distributions",
+    "uniform,sorted,reverse_sorted,duplicate_heavy,nearly_sorted,signed_edges",
+    "--warmups",
+    "1",
+    "--repetitions",
+    "5"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark"
+}

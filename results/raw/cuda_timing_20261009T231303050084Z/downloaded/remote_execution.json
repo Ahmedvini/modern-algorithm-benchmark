@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "scripts/validate_cuda_timing.py",
+    "--output",
+    "results/raw/NEW_GPU_TIMING",
+    "--processed",
+    "results/processed/NEW_GPU_TIMING"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "wall_seconds": 66.30959019200009
+}

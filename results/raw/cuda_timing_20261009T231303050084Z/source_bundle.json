@@ -1,0 +1,7 @@
+{
+  "archive": "results/raw/cuda_timing_20261009T231303050084Z/cuda_timing_source_v1.tar.gz",
+  "sha256": "fa7c1d2fc131ba832a5c357498a6c1523c3eeeea99d6c7c4478df30d04ab0f73",
+  "files": 147,
+  "remote_archive": "/content/cuda_timing_20261009T231303050084Z_source.tar.gz",
+  "remote_parent": "/content/cuda_timing_20261009T231303050084Z"
+}

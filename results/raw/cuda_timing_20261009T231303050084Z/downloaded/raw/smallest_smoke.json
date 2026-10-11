@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/cuda_sort_benchmark",
+    "--output",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/smallest",
+    "--size",
+    "1025",
+    "--distribution",
+    "uniform",
+    "--seed",
+    "1729",
+    "--warmups",
+    "1",
+    "--repetitions",
+    "5"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "status": "completed",
+  "stderr": "",
+  "stdout": "Completed 5 measured and 1 warmup trials\n",
+  "wall_seconds": 0.4449792279999656
+}

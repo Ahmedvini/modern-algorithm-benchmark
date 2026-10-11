@@ -1,0 +1,13 @@
+{
+  "audit": "FINAL_AUDIT.md",
+  "audit_sha256": "a57967cd10b6afb4c3988bc5aa98aaaccf22c9da9d2fa60cc740f2d688985c94",
+  "cloud_execution": false,
+  "full_gpu_study": false,
+  "gate": 1,
+  "gpu_smoke": false,
+  "gpu_sorting": false,
+  "reason": "No connected cloud GPU runtime or remote endpoint; local CUDA driver/toolkit unavailable.",
+  "review": "final_review.json",
+  "review_sha256": "6381f32ed1411c15402a691bf6cec66f64a44a0353b10ff6076ee6c6f5c87e6b",
+  "status": "blocked"
+}

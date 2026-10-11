@@ -1,0 +1,43 @@
+{
+  "archive_sha256": "f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5",
+  "archive_unchanged": true,
+  "audit_sha256": "a57967cd10b6afb4c3988bc5aa98aaaccf22c9da9d2fa60cc740f2d688985c94",
+  "cloud_validated": false,
+  "compiler_warning_lines": [],
+  "editing_helper_failure_recorded": true,
+  "frozen_protocols_unchanged": true,
+  "full_gpu_study": "not run",
+  "gate1": "blocked",
+  "gpu_correctness": "not run",
+  "gpu_smoke": "not run",
+  "gpu_sort_implemented": false,
+  "leak_detection_enabled": true,
+  "local_preflight_exit": 2,
+  "local_readiness": "gpu_driver_unavailable",
+  "modified_files": [
+    "README.md",
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/ROADMAP.md"
+  ],
+  "preflight_methods_per_suite": 22,
+  "prior_artifacts_unchanged": 8656,
+  "protected_source_files_unchanged": 120,
+  "release": {
+    "exit_code": 0,
+    "failed_groups": 0,
+    "passed_groups": 25,
+    "seconds": 28.61
+  },
+  "sanitizer": {
+    "exit_code": 0,
+    "failed_groups": 0,
+    "passed_groups": 25,
+    "seconds": 83.81
+  },
+  "source_files": 126,
+  "task_complete": false,
+  "validation_commands": 12
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "cmake",
+    "--build",
+    "build/release",
+    "--parallel",
+    "2"
+  ],
+  "exit_code": 0,
+  "started_utc": "2026-10-09T16:55:57.172484+00:00",
+  "stdout": "[ 17%] Built target mab_core\n[ 22%] Built target algorithm_benchmark\n[ 32%] Built target mab_metrics\n[ 45%] Built target test_baselines\n[ 45%] Built target mab_timing\n[ 50%] Built target test_datasets\n[ 55%] Built target test_quicksort\n[ 65%] Built target test_timsort\n[ 65%] Built target test_pdqsort\n[ 75%] Built target test_comparisons\n[ 75%] Built target test_memory\n[ 90%] Built target test_timing\n[ 90%] Built target test_memory_unsupported\n[100%] Built target sort_benchmark\n[100%] Built target sort_metrics\n",
+  "stderr": ""
+}

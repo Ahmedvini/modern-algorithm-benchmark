@@ -1,0 +1,6 @@
+{
+  "command": "python3 heredoc generating finalize_gate1.py",
+  "exit_code": 1,
+  "failure": "SyntaxError: unexpected character after line continuation character; conflicting nested triple-quote delimiters in helper-generation code",
+  "effect": "Python parse failed before execution; no helper or project documentation was written. Replaced with a direct literal heredoc."
+}

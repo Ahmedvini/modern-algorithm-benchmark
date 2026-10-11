@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/release",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_OPENMP=ON",
+    "-DMAB_ENABLE_SANITIZERS=OFF"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:18:06.141502+00:00",
+  "exit_code": 0,
+  "stdout": "-- Configuring done (0.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n",
+  "stderr": "",
+  "wall_seconds": 0.13298117099839146,
+  "ended_utc": "2026-10-09T21:18:06.274595+00:00"
+}

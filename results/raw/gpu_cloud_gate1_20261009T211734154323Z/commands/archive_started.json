@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/gpu_cloud_gate1_20261009T211734154323Z/validate_archive.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T21:18:02.591111+00:00"
+}

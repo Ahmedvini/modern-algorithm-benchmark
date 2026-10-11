@@ -1,0 +1,8 @@
+{
+  "archive_sha256": "f20581a4cb9b74ee8967485c259999f797fac0bbd44309ca1552aaaa2418c9f5",
+  "archive_members": 127,
+  "source_files_verified": 126,
+  "all_source_matches_current_baseline": true,
+  "extraction": "build/gpu_cloud_archive_20261009T211734154323Z/modern-algorithm-benchmark",
+  "cloud_execution": false
+}

@@ -1,0 +1,1328 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -107,6 +107,7 @@
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_environment.py)
+     add_test(NAME cuda_preflight
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cuda_preflight.py)
++    add_test(NAME cuda_benchmark_analysis COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cuda_benchmark.py)
+     add_test(NAME cuda_sort_handoff
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cuda_sort_handoff.py)
+     add_executable(test_datasets tests/test_datasets.cpp)
+--- a/README.md
++++ b/README.md
+@@ -654,3 +654,66 @@
+ **The CUDA sorting correctness milestone is complete.** Original roadmap Phase7
+ remains open for the separate GPU timing contract/engine, transfer/device/end-to-end
+ smoke and study. No GPU benchmark, acceleration claim or100M run was performed.
++
++
++## Prepared CUB GPU performance benchmark
++
++The separate `cuda_sort_benchmark` target uses the unchanged CUB3.0.1 dependency
++pin and requires both CUDA options. It does not time the allocation-per-call
++production adapter. [Timing protocol v1](docs/CUDA_TIMING_PROTOCOL_v1.md) defines
++H2D, device-sort and D2H CUDA-event intervals plus host `steady_clock` prepared
++end-to-end latency. Buffers are reused; allocation, staging and oracle checks are
++excluded. CUDA-event units are converted to ns without claiming ns resolution.
++
++On a verified GPU (Release, no sanitizers):
++
++```bash
++cmake -S . -B build/cuda-performance -DCMAKE_BUILD_TYPE=Release \
++  -DMAB_ENABLE_CUDA=ON -DMAB_ENABLE_CUDA_SORT=ON -DCMAKE_CUDA_ARCHITECTURES=75
++cmake --build build/cuda-performance --target cuda_sort_benchmark --parallel 2
++build/cuda-performance/cuda_sort_benchmark --output results/raw/NEW_GPU_SAMPLE \
++  --size 1025 --distribution uniform --seed 1729 --warmups 1 --repetitions 5
++python3 scripts/analyze_cuda_results.py results/raw/NEW_GPU_SAMPLE \
++  --output results/processed/NEW_GPU_SAMPLE.json
++```
++
++Output directories/files must not exist; parents must exist. The sequential
++`run_cuda_matrix.py` defaults to sizes0,1,1025,65537, six distributions (including
++`signed_edges`) and seeds1729,42, W1/R5:48 configurations/240 measured/48 warmups.
++`validate_cuda_timing.py --output results/raw/NEW_GPU_TIMING --processed
++results/processed/NEW_GPU_TIMING` first reruns GPU correctness, then builds/runs
++the smallest smoke, GPU framework tests, matrix and exact summary regeneration.
++Strict analysis rejects incomplete runs by default; `--allow-incomplete` preserves
++failure/missing counts and returns1. Raw observations and warmups are retained;
++per-dataset summaries give median, mean, sample stdev, min/max for each metric.
++CPU-only builds remain independent. GPU acceptance/evidence is recorded separately
++below when actually executed; no broad performance study is implied by these commands.
++
++
++## Prepared CUB timing milestone validated
++
++[Timing protocol v1](docs/CUDA_TIMING_PROTOCOL_v1.md) and `cuda_sort_benchmark` now
++provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock
++prepared end-to-end latency. Production adapter, CUB3.0.1 pin and CPU defaults are
++unchanged. Allocations/context/setup, input staging, output-vector copy and oracle
++validation are excluded; event units ns preserve float-ms API precision. This is
++not allocation-inclusive production-adapter timing or isolated kernel active time.
++
++Actual Colab T4 Release execution: smallest smoke5 measured/1 warmup, then48
++configurations (N0/1/1025/65537, six workloads, two seeds, W1/R5),240 measured/48
++warmups; zero failed/missing. Full outputs equal std::sort outside timing. GPU
++framework14/14 methods pass (60 validation-only configurations), and production
++correctness repeats475 inputs/1900 checks directly and through1/1 CTest. Local
++CPU Release27/27 and ASan/UBSan27/27 pass with leaks enabled; GPU methods are
++explicitly skipped only in host-only analysis tests. CPU sanitizers do not validate
++device code. Known nvcc generated-line warnings are retained (100+161); no other
++warning category or pin modification. No full GPU comparison study is claimed.
++
++[Raw evidence/audit](results/raw/cuda_timing_20261009T231303050084Z/FINAL_AUDIT.md),
++[processed report](results/processed/cuda_timing_20261009T231303050084Z/REPORT.md),
++and [matrix statistics](results/processed/cuda_timing_20261009T231303050084Z/matrix.json)
++retain every observation, exact commands, hashes and per-dataset median/mean/sample
++SD/min/max. Summary regeneration passes in both environments; local/cloud statistic
++groups match, with relocated absolute provenance paths. All9,568 earlier result
++files remain unchanged. Clock/thermal/background controls are unverified; post-run
++probes are not timing controls. See audit for resource/timing limitations.
+--- a/cmake/cuda.cmake
++++ b/cmake/cuda.cmake
+@@ -49,7 +49,35 @@
+     target_link_libraries(mab_cuda_sort PUBLIC CUDA::cudart)
+     set_target_properties(mab_cuda_sort PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON
+                           CUDA_EXTENSIONS OFF CUDA_RUNTIME_LIBRARY Shared)
++    # Benchmark-only prepared execution, separate from the production adapter.
++    add_library(mab_cuda_timing src/cuda/cub_timing.cu)
++    target_include_directories(mab_cuda_timing PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
++    target_include_directories(mab_cuda_timing SYSTEM PRIVATE "${MAB_CUB_INCLUDE_DIR}")
++    target_compile_options(mab_cuda_timing PRIVATE "-Xcompiler=-Wall,-Wextra,-Wpedantic")
++    target_link_libraries(mab_cuda_timing PUBLIC CUDA::cudart)
++    set_target_properties(mab_cuda_timing PROPERTIES CUDA_STANDARD 17 CUDA_STANDARD_REQUIRED ON
++                          CUDA_EXTENSIONS OFF CUDA_RUNTIME_LIBRARY Shared)
++    foreach(pair IN ITEMS CMAKE_CUDA_COMPILER_VERSION CUDAToolkit_VERSION CMAKE_CUDA_FLAGS
++                          CMAKE_CUDA_FLAGS_RELEASE CMAKE_CUDA_ARCHITECTURES)
++        mab_cxx_literal(${pair}_LITERAL "${${pair}}")
++    endforeach()
++    file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/generated/$<CONFIG>/cuda_benchmark_build.hpp" CONTENT
++"#pragma once
++namespace mab::cuda_build {
++inline constexpr const char* compiler_version = ${CMAKE_CUDA_COMPILER_VERSION_LITERAL};
++inline constexpr const char* toolkit_version = ${CUDAToolkit_VERSION_LITERAL};
++inline constexpr const char* flags = ${CMAKE_CUDA_FLAGS_LITERAL};
++inline constexpr const char* release_flags = ${CMAKE_CUDA_FLAGS_RELEASE_LITERAL};
++inline constexpr const char* architectures = ${CMAKE_CUDA_ARCHITECTURES_LITERAL};
++}
++")
++    add_executable(cuda_sort_benchmark src/benchmark/cuda_main.cpp)
++    target_include_directories(cuda_sort_benchmark PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
++    target_link_libraries(cuda_sort_benchmark PRIVATE mab_cuda_timing mab_cuda_sort mab_timing)
+     if(BUILD_TESTING)
++        add_test(NAME cuda_benchmark_gpu_framework COMMAND ${Python3_EXECUTABLE}
++                 ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_cuda_benchmark.py $<TARGET_FILE:cuda_sort_benchmark>)
++        set_tests_properties(cuda_benchmark_gpu_framework PROPERTIES TIMEOUT 180)
+         add_executable(test_cuda_sorting tests/test_cuda_sorting.cpp)
+         target_link_libraries(test_cuda_sorting PRIVATE mab_cuda_sort mab_core)
+         add_test(NAME cuda_sorting COMMAND test_cuda_sorting)
+--- a/docs/ALGORITHMS.md
++++ b/docs/ALGORITHMS.md
+@@ -383,3 +383,32 @@
+ [observed result](../results/raw/cub_correctness_colab_20261009T223853955936Z/downloaded/retry1/NEW_CUB_CORRECTNESS/COMPLETE.json)
+ and [audit](../results/raw/cub_correctness_colab_20261009T223853955936Z/FINAL_AUDIT.md). GPU timing remains unimplemented; there is
+ no measured speedup. Host sanitizers validate CPU regressions, not device memory.
++
++
++## Prepared CUB timing milestone validated
++
++[Timing protocol v1](CUDA_TIMING_PROTOCOL_v1.md) and `cuda_sort_benchmark` now
++provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock
++prepared end-to-end latency. Production adapter, CUB3.0.1 pin and CPU defaults are
++unchanged. Allocations/context/setup, input staging, output-vector copy and oracle
++validation are excluded; event units ns preserve float-ms API precision. This is
++not allocation-inclusive production-adapter timing or isolated kernel active time.
++
++Actual Colab T4 Release execution: smallest smoke5 measured/1 warmup, then48
++configurations (N0/1/1025/65537, six workloads, two seeds, W1/R5),240 measured/48
++warmups; zero failed/missing. Full outputs equal std::sort outside timing. GPU
++framework14/14 methods pass (60 validation-only configurations), and production
++correctness repeats475 inputs/1900 checks directly and through1/1 CTest. Local
++CPU Release27/27 and ASan/UBSan27/27 pass with leaks enabled; GPU methods are
++explicitly skipped only in host-only analysis tests. CPU sanitizers do not validate
++device code. Known nvcc generated-line warnings are retained (100+161); no other
++warning category or pin modification. No full GPU comparison study is claimed.
++
++[Raw evidence/audit](../results/raw/cuda_timing_20261009T231303050084Z/FINAL_AUDIT.md),
++[processed report](../results/processed/cuda_timing_20261009T231303050084Z/REPORT.md),
++and [matrix statistics](../results/processed/cuda_timing_20261009T231303050084Z/matrix.json)
++retain every observation, exact commands, hashes and per-dataset median/mean/sample
++SD/min/max. Summary regeneration passes in both environments; local/cloud statistic
++groups match, with relocated absolute provenance paths. All9,568 earlier result
++files remain unchanged. Clock/thermal/background controls are unverified; post-run
++probes are not timing controls. See audit for resource/timing limitations.
+--- a/docs/AUDIT.md
++++ b/docs/AUDIT.md
+@@ -2325,3 +2325,54 @@
+ Correctness milestone complete; full CUDA phase remains open. Next freeze/implement
+ separate H2D/device/D2H/host end-to-end timing and validate a small GPU benchmark
+ smoke. No performance measurement/study, speedup or100M claim.
++
++
++## Separate CUB GPU timing milestone — validated 2026-10-09 UTC
++
++Protocol CUDA_TIMING_PROTOCOL_v1.md was saved before implementation/execution.
++Separate prepared timing library/executable leaves production adapter, reviewed
++CUB3.0.1 pin, all vendors, CPU algorithms and defaults unchanged. CUDA-event
++H2D/device-sort/D2H and host steady_clock end-to-end are separately labelled;
++allocations/setup, staging, output-vector copy and correctness checks are excluded.
++End-to-end includes enqueue/dispatch/check/wait/transfers/sort. Details, exact
++commands/statuses and files changed: [FINAL_AUDIT](../results/raw/cuda_timing_20261009T231303050084Z/FINAL_AUDIT.md),
++[COMMANDS](../results/raw/cuda_timing_20261009T231303050084Z/COMMANDS.md), [CHANGES](../results/raw/cuda_timing_20261009T231303050084Z/CHANGES.md).
++
++Fresh exclusive CPU Release configure/build/CTest passed27/27 groups; fresh Debug
++ASan/UBSan configure/build/CTest passed27/27, ASAN_OPTIONS/LSAN_OPTIONS unset and
++UBSAN_OPTIONS=halt_on_error=1, leak detection enabled. No CPU compiler warnings.
++The new analysis group passes12 host methods and explicitly skips2 GPU methods.
++No CTest group was skipped. The previous Colab session was expired; one replacement
++T4 was created, with driver580.82.07, nvcc/toolkit13.0.88, runtime13000, compute7.5,
++GCC13.3.0, CMake3.31.10. Actual checked kernel/preflight passed. Correctness rerun
++passed475 inputs/1900 outputs directly and again through1/1 CTest. New benchmark
++compiled and executed; actual GPU framework passed14/14 methods,1/1 targetedCTest,
++including60 validation-only size/workload configurations. No CPU substitution.
++
++Smallest primary smoke:1025/uniform/1729,W1/R5,5 measured/1 warmup. Matrix:
++N0/1/1025/65537,six distributions,two seeds,W1/R5,48 complete configurations,
++240 measured/48 warmups. Overall245 measured/49 warmups, zero failed/missing;
++all outputs equal std::sort outside timers. Raw four-field schema/nonnegative
++values and all196 metric-statistic groups independently verified. Cloud summaries
++regenerate byte-for-byte; two local regenerations match byte-for-byte, with all
++local/cloud statistics identical (absolute source paths correctly relocate).
++
++New evidence: [results/raw/cuda_timing_20261009T231303050084Z](../results/raw/cuda_timing_20261009T231303050084Z); downloaded raw at `downloaded/raw`, processed
++summaries/report at [results/processed/cuda_timing_20261009T231303050084Z](../results/processed/cuda_timing_20261009T231303050084Z).
++Source bundle SHA256 fa7c1d2fc131ba832a5c357498a6c1523c3eeeea99d6c7c4478df30d04ab0f73
++matched locally/remotely; retrieved archive SHA256
++236b32018d74ac5be6252df130038eadcbc95169509107bd6d3e7ea323290c41 matched;
++1115 packaged files verified. All9568 prior result files match starting hashes.
++Exact pin, production adapter and frozen protocols are protected by source review.
++No Git metadata exists (`git status`128); no Git initialization/commit/push.
++
++GPU warnings:100 production and161 prepared translation-unit generated GCC
++line-directive extension diagnostics under existing -Wpedantic; no other warning
++category, suppression, CUB incompatibility or pin change. Fixture exit9/timeouts/
++collisions are intentional tested failures; no actual benchmark/build failure.
++CPU sanitizers do not instrument device code; Compute Sanitizer was not run.
++Clock/thermal/background control unverified; post-run probes are labelled after
++measurements. API float-ms precision limits small event intervals. No GPU speedup,
++full GPU study, allocation-inclusive adapter measurement or100M run is claimed.
++The smoke performance infrastructure milestone passes; next freeze a <=1M
++controlled GPU/CPU study with explicit matching timing scopes/resource estimates.
+--- a/docs/BENCHMARKING.md
++++ b/docs/BENCHMARKING.md
+@@ -489,3 +489,32 @@
+ H2D/device/D2H/host end-to-end protocol with explicit allocation/reuse boundaries,
+ then implement a benchmark target and validate a small smoke before a study.
+ No GPU kernel-only/CPU end-to-end comparison, speedup or full GPU study exists yet.
++
++
++## Prepared CUB timing milestone validated
++
++[Timing protocol v1](CUDA_TIMING_PROTOCOL_v1.md) and `cuda_sort_benchmark` now
++provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock
++prepared end-to-end latency. Production adapter, CUB3.0.1 pin and CPU defaults are
++unchanged. Allocations/context/setup, input staging, output-vector copy and oracle
++validation are excluded; event units ns preserve float-ms API precision. This is
++not allocation-inclusive production-adapter timing or isolated kernel active time.
++
++Actual Colab T4 Release execution: smallest smoke5 measured/1 warmup, then48
++configurations (N0/1/1025/65537, six workloads, two seeds, W1/R5),240 measured/48
++warmups; zero failed/missing. Full outputs equal std::sort outside timing. GPU
++framework14/14 methods pass (60 validation-only configurations), and production
++correctness repeats475 inputs/1900 checks directly and through1/1 CTest. Local
++CPU Release27/27 and ASan/UBSan27/27 pass with leaks enabled; GPU methods are
++explicitly skipped only in host-only analysis tests. CPU sanitizers do not validate
++device code. Known nvcc generated-line warnings are retained (100+161); no other
++warning category or pin modification. No full GPU comparison study is claimed.
++
++[Raw evidence/audit](../results/raw/cuda_timing_20261009T231303050084Z/FINAL_AUDIT.md),
++[processed report](../results/processed/cuda_timing_20261009T231303050084Z/REPORT.md),
++and [matrix statistics](../results/processed/cuda_timing_20261009T231303050084Z/matrix.json)
++retain every observation, exact commands, hashes and per-dataset median/mean/sample
++SD/min/max. Summary regeneration passes in both environments; local/cloud statistic
++groups match, with relocated absolute provenance paths. All9,568 earlier result
++files remain unchanged. Clock/thermal/background controls are unverified; post-run
++probes are not timing controls. See audit for resource/timing limitations.
+--- a/docs/EXPERIMENT_PROTOCOL.md
++++ b/docs/EXPERIMENT_PROTOCOL.md
+@@ -219,3 +219,32 @@
+ See [results/raw/cub_correctness_colab_20261009T223853955936Z/FINAL_AUDIT.md](../results/raw/cub_correctness_colab_20261009T223853955936Z/FINAL_AUDIT.md).
+ This establishes correctness only. Separate transfer/device/end-to-end timing,
+ allocation/reuse rules, matrix resource review and GPU experiments remain pending.
++
++
++## Prepared CUB timing milestone validated
++
++[Timing protocol v1](CUDA_TIMING_PROTOCOL_v1.md) and `cuda_sort_benchmark` now
++provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock
++prepared end-to-end latency. Production adapter, CUB3.0.1 pin and CPU defaults are
++unchanged. Allocations/context/setup, input staging, output-vector copy and oracle
++validation are excluded; event units ns preserve float-ms API precision. This is
++not allocation-inclusive production-adapter timing or isolated kernel active time.
++
++Actual Colab T4 Release execution: smallest smoke5 measured/1 warmup, then48
++configurations (N0/1/1025/65537, six workloads, two seeds, W1/R5),240 measured/48
++warmups; zero failed/missing. Full outputs equal std::sort outside timing. GPU
++framework14/14 methods pass (60 validation-only configurations), and production
++correctness repeats475 inputs/1900 checks directly and through1/1 CTest. Local
++CPU Release27/27 and ASan/UBSan27/27 pass with leaks enabled; GPU methods are
++explicitly skipped only in host-only analysis tests. CPU sanitizers do not validate
++device code. Known nvcc generated-line warnings are retained (100+161); no other
++warning category or pin modification. No full GPU comparison study is claimed.
++
++[Raw evidence/audit](../results/raw/cuda_timing_20261009T231303050084Z/FINAL_AUDIT.md),
++[processed report](../results/processed/cuda_timing_20261009T231303050084Z/REPORT.md),
++and [matrix statistics](../results/processed/cuda_timing_20261009T231303050084Z/matrix.json)
++retain every observation, exact commands, hashes and per-dataset median/mean/sample
++SD/min/max. Summary regeneration passes in both environments; local/cloud statistic
++groups match, with relocated absolute provenance paths. All9,568 earlier result
++files remain unchanged. Clock/thermal/background controls are unverified; post-run
++probes are not timing controls. See audit for resource/timing limitations.
+--- a/docs/METRICS.md
++++ b/docs/METRICS.md
+@@ -232,3 +232,24 @@
+ equally weighted distinct-input ratios with sample SD/min/max. These are descriptive
+ ratios, not significance or a promise of linear scaling. No parallel counted adapter,
+ isolated buffer tracking or measured OpenMP runtime memory is implemented.
++
++
++## Prepared GPU timing metrics
++
++`cuda_sort_timing_v1` records H2D/device-sort/D2H event intervals in ns converted
++from CUDA float milliseconds, plus host steady_clock end_to_end_ns. Event intervals
++can include dispatch gaps; these are GPU timeline measurements, not isolated kernel
++active time or host allocation measurements. Prepared buffers/workspace/events are
++reused. The host interval includes submission/checking/wait/transfers/sort, excludes
++allocation/context setup, staging, output-vector copy, oracle/verification and I/O.
++Three event durations need not sum to host elapsed. Empty/singleton skip GPU work
++and record three zeros. Full correctness is verified outside all timers.
++
++Warmups remain in raw CSV but are excluded from per-dataset median/mean/sample SD
++(ddof1)/min/max. Four metrics from a trial are not four independent observations.
++No cross-seed pooling or confidence interval; signed_edges ignores seed. Failed
++metrics are blank, never zero-filled. Strict analysis retains failed/missing counts
++and rejects incomplete runs by default. No comparison count, isolated measured
++memory, allocation-inclusive latency or speedup is inferred. Payload budgets are
++planning only, excluding runtime/allocator overhead. See CUDA_TIMING_PROTOCOL_v1.md
++and the latest audit for the validated smoke and API-resolution/cloud limitations.
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -12,7 +12,7 @@
+ | 4 — search data structures | Complete: Skip List and B-tree orders 10/16/32/64, differential/invariant tests, separate build/lookup smoke and verified immutable evidence |
+ | 5 — orchestration and analysis | Complete for CPU timing: strict all-family orchestration, hierarchical statistics, SVG/PDF variability plots/report, validated smoke and full multi-size study |
+ | 6 — OpenMP | Complete: stable task Merge Sort, team metadata, fresh 24/24 Release/sanitizer groups and validated 1/2/4/8-thread scaling study; TSan startup limitation retained |
+-| 7 — CUDA | CUB 3.0.1 sorter compiled/executed on cloud T4: 475 inputs/1900 checks, repeated through passing CTest; correctness complete, GPU timing/study still pending |
++| 7 — CUDA | Correctness and prepared four-metric timing smoke validated on T4; 48 configurations/240 measured trials plus smallest5; full comparative GPU study remains pending |
+ | 8 — learned index and AlphaDev study | Pending |
+ | 9 — 100M scale | Pending; not run |
+ | 10 — report and presentation | Pending |
+@@ -284,3 +284,47 @@
+ end-to-end timing, then implement/test an isolated benchmark and run a small smoke
+ matrix. GPU timing/full study, learned-index/AlphaDev,100M and final research
+ deliverables remain pending. No performance conclusion follows from correctness.
++
++
++## Prepared GPU timing milestone — implementation under validation
++
++New `cuda_sort_timing_v1` contract is frozen in CUDA_TIMING_PROTOCOL_v1.md.
++Benchmark-only prepared CUB session, four timing fields, strict CSV summaries,
++exclusive sequential matrix and staged cloud validation are implemented; actual
++GPU build/execution and final integrity audit are still required before acceptance.
++The reviewed CUB3.0.1 pin, production adapter and CPU protocols/defaults remain
++unchanged. This is the separate smoke performance milestone, not a full GPU study.
++
++
++## Prepared CUB timing milestone validated
++
++[Timing protocol v1](CUDA_TIMING_PROTOCOL_v1.md) and `cuda_sort_benchmark` now
++provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock
++prepared end-to-end latency. Production adapter, CUB3.0.1 pin and CPU defaults are
++unchanged. Allocations/context/setup, input staging, output-vector copy and oracle
++validation are excluded; event units ns preserve float-ms API precision. This is
++not allocation-inclusive production-adapter timing or isolated kernel active time.
++
++Actual Colab T4 Release execution: smallest smoke5 measured/1 warmup, then48
++configurations (N0/1/1025/65537, six workloads, two seeds, W1/R5),240 measured/48
++warmups; zero failed/missing. Full outputs equal std::sort outside timing. GPU
++framework14/14 methods pass (60 validation-only configurations), and production
++correctness repeats475 inputs/1900 checks directly and through1/1 CTest. Local
++CPU Release27/27 and ASan/UBSan27/27 pass with leaks enabled; GPU methods are
++explicitly skipped only in host-only analysis tests. CPU sanitizers do not validate
++device code. Known nvcc generated-line warnings are retained (100+161); no other
++warning category or pin modification. No full GPU comparison study is claimed.
++
++[Raw evidence/audit](../results/raw/cuda_timing_20261009T231303050084Z/FINAL_AUDIT.md),
++[processed report](../results/processed/cuda_timing_20261009T231303050084Z/REPORT.md),
++and [matrix statistics](../results/processed/cuda_timing_20261009T231303050084Z/matrix.json)
++retain every observation, exact commands, hashes and per-dataset median/mean/sample
++SD/min/max. Summary regeneration passes in both environments; local/cloud statistic
++groups match, with relocated absolute provenance paths. All9,568 earlier result
++files remain unchanged. Clock/thermal/background controls are unverified; post-run
++probes are not timing controls. See audit for resource/timing limitations.
++
++Exact next CUDA milestone: a separately frozen <=1M controlled CPU/GPU comparison
++study, with matched/explicit timing scopes and resource estimates. No full GPU
++study or100M run has completed. Learned-index/AlphaDev and final research phases
++remain pending. Earlier pending entries are historical, superseded by this audit.
+--- /dev/null
++++ b/docs/CUDA_TIMING_PROTOCOL_v1.md
+@@ -0,0 +1,106 @@
++# CUB GPU timing protocol v1
++
++Frozen before implementation/execution for the first performance smoke milestone.
++Protocol/result identity: cuda_sort_timing_v1, schema1. CUB3.0.1 exact reviewed
++header pin/commit/license and correctness contract cuda_sort_correctness_v2 remain
++unchanged. Production cub_radix_sort_v1 remains allocation-per-call, stream0 and
++uninstrumented. No existing CPU protocol/result is changed.
++
++## Prepared execution and timing boundaries
++
++A separate benchmark-only prepared session invokes the same genuine CUB
++DeviceRadixSort::SortKeys on full-domain signed int32 over all32 bits. This is
++not timing the public adapter's allocation-per-call contract. No CPU fallback.
++Allocate two pinned host buffers, two device key buffers, CUB-sized workspace,
++one nonblocking CUDA stream and four timing-enabled events once per dataset.
++Copy the identical original input into pinned input before each trial, outside
++all timers. Build std::sort oracle and output storage before trials.
++
++For each nontrivial trial, synchronize the private stream before timing. On that
++stream enqueue event0, async H2D, event1, SortKeys, event2, async D2H, event3.
++Check CUDA/CUB return codes and launch status. Synchronize event3 before reading
++output or event durations. No concurrent operations are submitted by this runner.
++
++| Metric/CSV column | Timer and exact interval | Unit |
++| --- | --- | --- |
++| h2d_ns | CUDA elapsed event0->event1: pinned host input to device | ns |
++| device_sort_ns | CUDA elapsed event1->event2: CUB GPU timeline interval, potentially including launch/dispatch-induced idle gaps | ns |
++| d2h_ns | CUDA elapsed event2->event3: device output to pinned host output | ns |
++| end_to_end_ns | host steady_clock immediately before event0 record until event3 synchronization returns | ns |
++
++End-to-end includes event enqueue/checking, transfer submission, CUB host dispatch,
++GPU work/transfers and completion wait. Excludes prior synchronization, context/
++stream/event creation, host/device allocation, workspace sizing, input staging,
++output copying to a vector, event-duration queries, CPU oracle/validation and I/O.
++Buffers/events/workspace are reused. End-to-end is a prepared pipeline latency,
++not allocation-inclusive adapter latency. The three event intervals need not sum
++to host end-to-end. They do not measure host allocation or isolated kernel active
++time. Event API float milliseconds are converted to double nanoseconds (x1e6),
++retaining API precision rather than asserting nanosecond resolution. NVIDIA
++[documents approximately0.5us resolution and stream/interference limitations](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__EVENT.html).
++No negative/nonfinite timings accepted. Zero allowed at timer resolution.
++
++Empty/singleton require a real usable device but skip transfers/CUB; three event
++metrics are exactly0 and host elapsed measures the trivial prepared call. A keys-only
++API cannot observe equal-key payload stability. Current device fixed at session
++construction; external concurrent/multi-device use is outside this contract.
++All buffers use RAII; cleanup synchronizes before freeing pending storage, logs
++secondary errors, and explicit successful close checks every resource release.
++Exceptions never cause CPU substitution. A failing trial records status/error,
++blank metrics and correctness not_checked/failed; stop and preserve partial rows.
++
++## Workloads, limits and output
++
++Single-run CLI cuda_sort_benchmark defaults N1000, seed1729, uniform, one warmup,
++five measured repetitions. Existing generator/make_timing_input/FNV fingerprint
++reused for uniform, sorted, reverse_sorted, duplicate_heavy and nearly_sorted;
++existing --swaps/--distinct definitions preserved. Extra signed_edges workload
++cycles INT32_MIN, INT32_MAX,-1,0,1,MIN+1,MAX-1,0 (seed recorded, not used).
++Warmups use identical paths and are recorded/validated but excluded from summaries.
++Validate full output against oracle after every trial, outside alltimers.
++
++Initial smallest smoke: N1025/uniform/seed1729, one warmup/five measures. Only after
++it passes, matrix N0/1/1025/65537, six workloads above, seeds1729/42, W1/R5:
++48 configurations,240 measured and48 warmup rows. No size above65537 in this smoke.
++An explicit configured run is capped at1M keys in this milestone. Host payload
++planning reserves five N-key arrays, device planning two N-key arrays plus exact
++CUB workspace; each is bounded by --memory-limit-mib (default256). Also require
++device request <=half current free CUDA memory. These are allocation planning,
++not RSS/isolation claims; driver/runtime/allocator overhead is not isolated.
++
++Require Release without sanitizers for primary timing. Separate executable and
++CUDA timing library exist only on explicit MAB_ENABLE_CUDA/SORT opt-in. CPU-only
++builds remain independent. Output directory atomically claimed, never overwritten,
++including symlink collisions. Per-run run.json, trials.csv and COMPLETE.json or
++FAILED.json; crash/interruption without COMPLETE is incomplete. Python orchestrator
++retains exact subprocess logs and FAILED/INTERRUPTED markers; fail-fast, no resume.
++
++CSV columns: schema_version,protocol,run_id,algorithm,implementation_version,
++distribution,size,seed,nearly_sorted_swaps,duplicate_cardinality,dataset_generator,
++input_hash_fnv1a64,phase,trial_index,h2d_ns,device_sort_ns,d2h_ns,end_to_end_ns,
++elapsed_unit,status,correctness,error. Four metrics per trial, not four independent
++trials. Metadata required in run.json: all shared dataset/run fields, repetitions,
++warmups, expected_rows, requested/actual device ordinal, GPU name/capability/memory,
++runtime/driver API versions,CUB version,C++ compiler/build/platform,CUDA compiler/
++toolkit/build flags, allocation/stream/clock policy, exact invocation. Copy CMake
++cache/compile commands/source manifests/CUB attribution to each bundle; cloud
++runner captures source/dependency/binary hashes, fresh preflight/driver/nvcc and
++CPU/RAM/OS environment. Unknown environment/control values are not invented.
++
++## Analysis and acceptance
++
++Strict analyzer rejects malformed schema, identity/protocol mismatch, duplicate/
++misordered/missing trials, nonfinite/negative timings and contradictory completion.
++Default rejects incomplete runs; --allow-incomplete retains failed/missing counts
++and never marks them complete. Summaries separately aggregate each metric within
++each dataset: successes/failures/missing, median/mean/sample stdev (null if<2),
++min/max; retain every outlier. Matrix summaries retain dataset/seed identity;
++no pooled cross-seed independence or significance/speedup claim. Derived summaries
++live separately, regenerate byte-for-byte from identical retained raw inputs.
++
++Acceptance: host fixtures/regressions, fresh Release and ASan/UBSan, real GPU
++correctness rerun, smallest smoke then complete matrix, strict raw/schema/count
++validation and deterministic summary regeneration, original artifact hashes intact.
++Expired/missing GPU is a blocker to GPU acceptance, not a CPU test failure. Preserve
++all failed attempts. This is a smoke performance infrastructure milestone, not a
++full study, leaderboard,100M experiment or allocation-inclusive CPU comparison.
+--- /dev/null
++++ b/include/benchmark/cuda_timing.hpp
+@@ -0,0 +1,36 @@
++#pragma once
++#include "common/types.hpp"
++#include <cstddef>
++#include <cstdint>
++#include <memory>
++#include <string>
++
++namespace mab {
++struct CudaTimingSample {
++    double h2d_ns = 0, device_sort_ns = 0, d2h_ns = 0;
++    std::uint64_t end_to_end_ns = 0;
++};
++struct CudaTimingInfo {
++    int device = 0, compute_major = 0, compute_minor = 0;
++    int runtime_version = 0, driver_version = 0;
++    std::string device_name;
++    std::size_t device_memory_bytes = 0, workspace_bytes = 0;
++};
++// Benchmark-only prepared execution. Does not change cub_radix_sort's contract.
++// Owns pinned/device buffers, stream/events; no copy/move or shared state.
++class CudaTimingSession {
++public:
++    CudaTimingSession(std::size_t size, std::size_t memory_limit_mib);
++    ~CudaTimingSession();
++    CudaTimingSession(const CudaTimingSession&) = delete;
++    CudaTimingSession& operator=(const CudaTimingSession&) = delete;
++    CudaTimingSession(CudaTimingSession&&) = delete;
++    CudaTimingSession& operator=(CudaTimingSession&&) = delete;
++    CudaTimingSample sample(const Values& input, Values& output);
++    const CudaTimingInfo& info() const noexcept;
++    void close(); // Checked release before a successful run's completion marker.
++private:
++    struct Impl;
++    std::unique_ptr<Impl> impl_;
++};
++} // namespace mab
+--- /dev/null
++++ b/scripts/analyze_cuda_results.py
+@@ -0,0 +1,153 @@
++#!/usr/bin/env python3
++"""Strict prepared CUB timing summaries; retain failures and every outlier."""
++import argparse
++import csv
++import json
++import math
++from pathlib import Path
++from analyze_results import integer, summarize_samples
++
++PROTOCOL = 'cuda_sort_timing_v1'
++METRICS = ['h2d_ns', 'device_sort_ns', 'd2h_ns', 'end_to_end_ns']
++SHARED = ['schema_version', 'protocol', 'run_id', 'algorithm', 'implementation_version',
++          'distribution', 'size', 'seed', 'nearly_sorted_swaps', 'duplicate_cardinality',
++          'dataset_generator', 'input_hash_fnv1a64']
++FIELDS = SHARED + ['phase', 'trial_index'] + METRICS + ['elapsed_unit', 'status', 'correctness', 'error']
++DISTRIBUTIONS = ['uniform', 'sorted', 'reverse_sorted', 'duplicate_heavy', 'nearly_sorted', 'signed_edges']
++
++
++def require(condition, message):
++    if not condition:
++        raise ValueError(message)
++
++
++def uint_meta(meta, key, low, high):
++    value = meta.get(key)
++    require(type(value) is int and low <= value <= high, 'invalid metadata ' + key)
++    return value
++
++
++def read_bundle(path, allow_incomplete=False):
++    meta = json.loads((path / 'run.json').read_text())
++    require(type(meta.get('schema_version')) is int and meta['schema_version'] == 1 and
++            meta.get('protocol') == PROTOCOL and meta.get('algorithm') == 'cub_radix_sort' and
++            meta.get('implementation_version') == 'cub_radix_sort_v1', 'incompatible identity')
++    require(meta.get('elapsed_unit') == 'ns' and meta.get('allocation_policy') == 'prepared_pinned_reuse_v1' and
++            meta.get('stream_policy') == 'private_nonblocking_serial' and
++            meta.get('end_to_end_clock') == 'steady_clock' and
++            meta.get('phase_clock') == 'cuda_event_float_ms_to_ns', 'incompatible timing semantics')
++    require(meta.get('distribution') in DISTRIBUTIONS, 'unknown distribution')
++    require(meta.get('dataset_generator') == ('signed_edges_v1' if meta['distribution'] == 'signed_edges'
++                                            else 'mt19937_64_v1'), 'generator mismatch')
++    uint_meta(meta, 'size', 0, 1000000); uint_meta(meta, 'seed', 0, 2**64-1)
++    uint_meta(meta, 'nearly_sorted_swaps', 0, 10000000); uint_meta(meta, 'duplicate_cardinality', 1, 2**32)
++    repetitions = uint_meta(meta, 'repetitions', 1, 10000)
++    warmups = uint_meta(meta, 'warmups', 0, 1000)
++    require(uint_meta(meta, 'expected_rows', 1, 11000) == warmups + repetitions, 'row plan mismatch')
++    require(meta.get('cub_version') == 300001 and type(meta['cub_version']) is int, 'unreviewed CUB')
++    require(meta.get('run_kind') in ['validation', 'performance'], 'invalid run kind')
++    require(meta.get('sanitizers') is False, 'CUDA sanitizer build unsupported')
++    if meta['run_kind'] == 'performance':
++        require(meta.get('build_type') == 'Release', 'performance must be Release')
++    for key in ['compiler_id', 'compiler_version', 'build_type', 'platform', 'architecture', 'gpu_name',
++                'cuda_compiler_version', 'cuda_toolkit_version', 'run_id']:
++        require(isinstance(meta.get(key), str) and bool(meta[key]), 'missing metadata ' + key)
++    for key in ['runtime_api_version', 'driver_api_version']:
++        uint_meta(meta, key, 13000, 2**31-1)
++    require(uint_meta(meta, 'requested_device', 0, 2**31-1) == uint_meta(meta, 'actual_device', 0, 2**31-1),
++            'device mismatch')
++    uint_meta(meta, 'compute_major', 1, 100); uint_meta(meta, 'compute_minor', 0, 100)
++    uint_meta(meta, 'device_memory_bytes', 1, 2**64-1)
++    uint_meta(meta, 'workspace_bytes', 0, 2**64-1)
++    require(isinstance(meta.get('input_hash_fnv1a64'), str), 'invalid fingerprint')
++    integer(meta['input_hash_fnv1a64'])
++    rows = []
++    with (path / 'trials.csv').open(newline='') as stream:
++        reader = csv.DictReader(stream, strict=True)
++        require(reader.fieldnames == FIELDS, 'CSV schema mismatch')
++        for row in reader:
++            require(set(row) == set(FIELDS) and all(x is not None for x in row.values()), 'malformed row')
++            require(all(row[k] == str(meta[k]) for k in SHARED), 'CSV metadata mismatch')
++            require(row['elapsed_unit'] == 'ns', 'invalid unit')
++            phase = 'warmup' if len(rows) < warmups else 'measure'
++            trial = len(rows) if phase == 'warmup' else len(rows) - warmups
++            require(row['phase'] == phase and integer(row['trial_index']) == trial and
++                    trial < (warmups if phase == 'warmup' else repetitions), 'duplicate/misordered/excess trial')
++            if row['status'] == 'ok':
++                require(row['correctness'] == 'passed' and not row['error'], 'contradictory correctness')
++                for key in METRICS:
++                    value = float(row[key])
++                    require(math.isfinite(value) and value >= 0, 'invalid timing')
++                    if meta['size'] < 2 and key != 'end_to_end_ns':
++                        require(value == 0, 'trivial input should skip GPU phases')
++            else:
++                require(row['status'] == 'error' and row['correctness'] in ['failed', 'not_checked'] and
++                        bool(row['error']) and all(row[k] == '' for k in METRICS), 'invalid failure row')
++            require(not rows or rows[-1]['status'] == 'ok', 'rows after failure')
++            rows.append(row)
++    complete = (path / 'COMPLETE.json').exists()
++    if complete:
++        done = json.loads((path / 'COMPLETE.json').read_text())
++        require(done.get('schema_version') == 1 and done.get('complete') is True and
++                done.get('rows') == meta['expected_rows'] and len(rows) == meta['expected_rows'] and
++                all(r['status'] == 'ok' for r in rows) and not (path / 'FAILED.json').exists() and
++                not (path / 'INTERRUPTED.json').exists(), 'contradictory completion')
++    require(complete or allow_incomplete, 'incomplete/failed bundle')
++    measured = [r for r in rows if r['phase'] == 'measure']
++    successes = [r for r in measured if r['status'] == 'ok']
++    group = {key: meta[key] for key in SHARED + ['repetitions', 'warmups', 'gpu_name', 'cub_version',
++                                                'build_type', 'run_kind']}
++    group.update(complete=complete, successful_trials=len(successes), failed_trials=len(measured)-len(successes),
++                 missing_trials=repetitions-len(measured), warmup_rows=len(rows)-len(measured),
++                 failed_warmups=sum(r['phase'] == 'warmup' and r['status'] != 'ok' for r in rows),
++                 missing_warmups=warmups-sum(r['phase'] == 'warmup' for r in rows),
++                 metrics={key: summarize_samples([float(r[key]) for r in successes]) for key in METRICS})
++    return meta, group
++
++
++def analyze(source, allow_incomplete=False):
++    source = Path(source)
++    groups = []; missing = []; complete = True
++    if (source / 'matrix.json').exists():
++        matrix = json.loads((source / 'matrix.json').read_text())
++        require(matrix.get('schema_version') == 1 and matrix.get('protocol') == PROTOCOL, 'invalid matrix')
++        configs = matrix['configurations']
++        require(isinstance(configs, list) and bool(configs), 'empty matrix')
++        names = [c['name'] for c in configs]
++        identities = [(c['size'], c['distribution'], c['seed']) for c in configs]
++        require(len(set(names)) == len(names) and len(set(identities)) == len(identities) and
++                all(Path(n).name == n and n not in ['.', '..'] for n in names), 'invalid/duplicate configuration')
++        complete = (source / 'COMPLETE.json').exists()
++        if complete:
++            marker = json.loads((source / 'COMPLETE.json').read_text())
++            require(marker.get('complete') is True and marker.get('runs') == len(configs) and
++                    not (source / 'FAILED.json').exists() and not (source / 'INTERRUPTED.json').exists(), 'invalid matrix completion')
++        require(complete or allow_incomplete, 'incomplete matrix')
++        for c in configs:
++            path = source / c['name']
++            if not (path / 'run.json').is_file():
++                require(allow_incomplete, 'missing configuration')
++                missing.append(c); complete = False; continue
++            meta, group = read_bundle(path, allow_incomplete)
++            require(all(meta[k] == c[k] for k in ['size', 'distribution', 'seed', 'warmups', 'repetitions']) and
++                    meta['run_id'] == c['name'], 'configuration differs from plan')
++            complete = complete and group['complete']; groups.append(group)
++    else:
++        _, group = read_bundle(source, allow_incomplete); groups.append(group); complete = group['complete']
++    require(complete or allow_incomplete, 'incomplete experiment')
++    return dict(schema_version=1, protocol=PROTOCOL, source=str(source.resolve()), complete=complete,
++                elapsed_unit='ns', aggregation='within_dataset; sample stdev ddof1; retain all outliers',
++                groups=groups, missing_configurations=missing)
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
++    parser.add_argument('source', type=Path); parser.add_argument('--output', type=Path, required=True)
++    parser.add_argument('--allow-incomplete', action='store_true'); args = parser.parse_args()
++    try:
++        result = analyze(args.source, args.allow_incomplete)
++        with args.output.open('x') as stream:json.dump(result, stream, indent=2, allow_nan=False);stream.write('\n')
++        return 0 if result['complete'] else 1
++    except (OSError, ValueError, KeyError, TypeError, csv.Error) as error:
++        print('CUDA analysis failed: ' + str(error)); return 1
++if __name__ == '__main__': raise SystemExit(main())
+--- /dev/null
++++ b/scripts/run_cuda_matrix.py
+@@ -0,0 +1,88 @@
++#!/usr/bin/env python3
++"""Exclusive sequential prepared-CUB smoke matrix; no resume or CPU fallback."""
++import argparse
++import datetime
++import itertools
++import json
++from pathlib import Path
++import subprocess
++import sys
++import time
++from analyze_cuda_results import DISTRIBUTIONS, PROTOCOL, read_bundle
++
++
++def write(path, value):
++    with path.open('x') as stream:json.dump(value, stream, indent=2, allow_nan=False);stream.write('\n')
++
++
++def numbers(text, maximum):
++    values = text.split(',')
++    if not values or any(not v or any(c not in '0123456789' for c in v) for v in values):
++        raise ValueError('expected comma-separated unsigned decimals')
++    result = [int(v) for v in values]
++    if len(set(result)) != len(result) or any(v > maximum for v in result):
++        raise ValueError('duplicate or out-of-range integer')
++    return result
++
++
++def plan(sizes, distributions, seeds, warmups, repetitions):
++    if any(type(n) is not int or n < 0 or n > 1000000 for n in sizes) or any(type(s) is not int or s < 0 or s > 2**64-1 for s in seeds) or len(set(sizes)) != len(sizes) or len(set(seeds)) != len(seeds):
++        raise ValueError('invalid matrix sizes/seeds')
++    if not sizes or not seeds or not distributions or len(set(distributions)) != len(distributions) or \
++            any(d not in DISTRIBUTIONS for d in distributions) or not 0 <= warmups <= 1000 or not 1 <= repetitions <= 10000:
++        raise ValueError('invalid CUDA matrix configuration')
++    if len(sizes) * len(distributions) * len(seeds) > 1000:
++        raise ValueError('matrix exceeds1000 configurations')
++    return [dict(name=f'run_{i:04d}', size=n, distribution=d, seed=s, warmups=warmups, repetitions=repetitions)
++            for i, (n, d, s) in enumerate(itertools.product(sizes, distributions, seeds))]
++
++
++def run(executable, output, configurations, runner=subprocess.run):
++    executable = str(Path(executable).resolve()); output = Path(output).absolute()
++    output.mkdir()  # Must not exist, including dangling symlinks.
++    (output / 'commands').mkdir()
++    write(output / 'matrix.json', dict(schema_version=1, protocol=PROTOCOL,
++          started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), executable=executable,
++          order='size_distribution_seed_product_sequential', configurations=configurations))
++    try:
++        for c in configurations:
++            argv = [executable, '--output', str(output/c['name']), '--run-id', c['name'],
++                    '--size', str(c['size']), '--distribution', c['distribution'], '--seed', str(c['seed']),
++                    '--warmups', str(c['warmups']), '--repetitions', str(c['repetitions'])]
++            write(output/'commands'/(c['name']+'_started.json'), dict(argv=argv, cwd=str(Path.cwd())))
++            start = time.monotonic()
++            try:
++                r = runner(argv, capture_output=True, text=True, timeout=180, check=False)
++                record = dict(argv=argv, exit_code=r.returncode, stdout=r.stdout, stderr=r.stderr,
++                              wall_seconds=time.monotonic()-start, status='completed')
++            except subprocess.TimeoutExpired as error:
++                def text(v):return v.decode(errors='replace') if isinstance(v, bytes) else v or ''
++                record = dict(argv=argv, exit_code=None, stdout=text(error.stdout), stderr=text(error.stderr), status='timeout')
++                write(output/'commands'/(c['name']+'.json'), record)
++                raise RuntimeError(c['name']+' timed out') from error
++            write(output/'commands'/(c['name']+'.json'), record)
++            if r.returncode != 0:raise RuntimeError(c['name']+' exit '+str(r.returncode))
++            meta, result = read_bundle(output/c['name'])
++            if any(meta[k] != c[k] for k in ['size','distribution','seed','warmups','repetitions']) or meta['run_id'] != c['name']:
++                raise ValueError('subprocess configuration mismatch')
++            assert result['complete']
++        write(output/'COMPLETE.json', dict(complete=True, runs=len(configurations)))
++        return 0
++    except KeyboardInterrupt:
++        write(output/'INTERRUPTED.json', dict(complete=False)); return 130
++    except Exception as error:
++        write(output/'FAILED.json', dict(complete=False, error=str(error))); print(str(error), file=sys.stderr); return 1
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
++    p.add_argument('--executable',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
++    p.add_argument('--sizes',default='0,1,1025,65537');p.add_argument('--seeds',default='1729,42')
++    p.add_argument('--distributions',default=','.join(DISTRIBUTIONS))
++    p.add_argument('--warmups',type=int,default=1);p.add_argument('--repetitions',type=int,default=5)
++    args=p.parse_args()
++    try:
++        configs=plan(numbers(args.sizes,1000000),args.distributions.split(','),numbers(args.seeds,2**64-1),args.warmups,args.repetitions)
++        return run(args.executable,args.output,configs)
++    except (OSError,ValueError) as error:print(str(error),file=sys.stderr);return 1
++if __name__=='__main__':raise SystemExit(main())
+--- /dev/null
++++ b/scripts/validate_cuda_timing.py
+@@ -0,0 +1,85 @@
++#!/usr/bin/env python3
++"""Exclusive real-GPU correctness -> smallest smoke -> matrix and regeneration."""
++import argparse
++import datetime
++import json
++from pathlib import Path
++import subprocess
++import sys
++import time
++import capture_environment
++from validate_cuda_sort import ROOT, digest, write_json
++
++
++def run(output, processed):
++    output=Path(output).absolute();processed=Path(processed).absolute()
++    output.mkdir()
++    try:
++        processed.mkdir()
++        sources={str(p.relative_to(ROOT)):digest(p) for base in ['include','src','tests','scripts','cmake','docs','third_party']
++                 for p in sorted((ROOT/base).rglob('*')) if p.is_file() and '__pycache__' not in p.parts}
++        for name in ['CMakeLists.txt','README.md','AGENTS.md']:sources[name]=digest(ROOT/name)
++        write_json(output/'source_sha256.json',sources)
++        write_json(output/'run.json',dict(protocol='cuda_sort_timing_v1',started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
++                   source=str(ROOT),processed=str(processed),size_cap=65537,matrix_configurations=48,measured_trials=240,warmup_trials=48))
++        def invoke(name,argv,timeout=600):
++            write_json(output/(name+'_started.json'),dict(argv=argv,cwd=str(ROOT)))
++            start=time.monotonic()
++            try:r=subprocess.run(argv,cwd=ROOT,capture_output=True,text=True,timeout=timeout,check=False)
++            except subprocess.TimeoutExpired as error:
++                def text(v):return v.decode(errors='replace') if isinstance(v,bytes) else v or ''
++                write_json(output/(name+'.json'),dict(argv=argv,status='timeout',exit_code=None,stdout=text(error.stdout),stderr=text(error.stderr)))
++                raise RuntimeError(name+' timeout') from error
++            write_json(output/(name+'.json'),dict(argv=argv,cwd=str(ROOT),status='completed',exit_code=r.returncode,
++                       stdout=r.stdout,stderr=r.stderr,wall_seconds=time.monotonic()-start))
++            if r.returncode:raise RuntimeError(name+' exit '+str(r.returncode))
++        invoke('correctness',[sys.executable,str(ROOT/'scripts/validate_cuda_sort.py'),'--output',str(output/'correctness')],900)
++        build=output/'correctness/build'
++        invoke('build_benchmark',['cmake','--build',str(build),'--target','cuda_sort_benchmark','--parallel','2'])
++        executable=build/'cuda_sort_benchmark'
++        env=capture_environment.capture(build,'validate_cuda_timing.py')
++        env.update(record_kind='cuda_timing_environment',gpu_status='see fresh correctness/preflight/report.json',
++                   workload_note='prepared GPU timing smoke only; exact per-run CSV/metadata retained')
++        write_json(output/'environment.json',env)
++        write_json(output/'binary_sha256.json',dict(executable=str(executable),sha256=digest(executable)))
++        invoke('smallest_smoke',[str(executable),'--output',str(output/'smallest'),'--size','1025',
++               '--distribution','uniform','--seed','1729','--warmups','1','--repetitions','5'])
++        analyze=ROOT/'scripts/analyze_cuda_results.py'
++        invoke('analyze_smallest',[sys.executable,str(analyze),str(output/'smallest'),'--output',str(processed/'smallest.json')])
++        invoke('gpu_framework',['ctest','--test-dir',str(build),'--output-on-failure','-V','-R','^cuda_benchmark_gpu_framework$'])
++        invoke('smoke_matrix',[sys.executable,str(ROOT/'scripts/run_cuda_matrix.py'),'--executable',str(executable),
++               '--output',str(output/'matrix'),'--sizes','0,1,1025,65537','--seeds','1729,42',
++               '--distributions','uniform,sorted,reverse_sorted,duplicate_heavy,nearly_sorted,signed_edges',
++               '--warmups','1','--repetitions','5'])
++        raw_hashes={str(p.relative_to(output)):digest(p) for base in ['smallest','matrix']
++                    for p in sorted((output/base).rglob('*')) if p.is_file()}
++        write_json(output/'timing_raw_sha256.json',raw_hashes)
++        invoke('analyze_matrix',[sys.executable,str(analyze),str(output/'matrix'),'--output',str(processed/'matrix.json')])
++        for name in ['smallest','matrix']:
++            invoke('regenerate_'+name,[sys.executable,str(analyze),str(output/name),'--output',str(processed/(name+'_regenerated.json'))])
++            if (processed/(name+'.json')).read_bytes()!=(processed/(name+'_regenerated.json')).read_bytes():
++                raise ValueError('summary regeneration mismatch')
++        if any(digest(output/name)!=sha for name,sha in raw_hashes.items()):raise ValueError('raw changed during analysis')
++        if any(digest(ROOT/name)!=sha for name,sha in sources.items()):raise ValueError('source changed during run')
++        summary=json.loads((processed/'matrix.json').read_text());groups=summary['groups']
++        if not summary['complete'] or len(groups)!=48 or sum(g['successful_trials'] for g in groups)!=240 or \
++                sum(g['warmup_rows'] for g in groups)!=48 or any(g['failed_trials'] or g['missing_trials'] or
++                g['failed_warmups'] or g['missing_warmups'] for g in groups):raise ValueError('incomplete smoke matrix')
++        write_json(output/'COMPLETE.json',dict(protocol='cuda_sort_timing_v1',complete=True,configurations=48,
++                   measured_trials=240,warmups=48,smallest_measured_trials=5,smallest_warmups=1,
++                   failed_trials=0,missing_trials=0,summary_regeneration_identical=True,
++                   summaries_sha256={p.name:digest(p) for p in sorted(processed.glob('*.json'))},
++                   source_manifest_sha256=digest(output/'source_sha256.json')))
++        return 0
++    except KeyboardInterrupt:
++        write_json(output/'INTERRUPTED.json',dict(complete=False));return 130
++    except Exception as error:
++        write_json(output/'FAILED.json',dict(complete=False,error=str(error)));print(str(error),file=sys.stderr);return 1
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
++    p.add_argument('--output',type=Path,required=True);p.add_argument('--processed',type=Path,required=True);args=p.parse_args()
++    try:return run(args.output,args.processed)
++    except OSError as error:print(str(error),file=sys.stderr);return 1
++if __name__=='__main__':raise SystemExit(main())
+--- /dev/null
++++ b/src/benchmark/cuda_main.cpp
+@@ -0,0 +1,167 @@
++#include "algorithms/cuda_sorting.hpp"
++#include "benchmark/cuda_timing.hpp"
++#include "benchmark/timing.hpp"
++#include "benchmark/output.hpp"
++#include "benchmark_build.hpp"
++#include "cuda_benchmark_build.hpp"
++#include <algorithm>
++#include <charconv>
++#include <filesystem>
++#include <fstream>
++#include <iomanip>
++#include <iostream>
++#include <limits>
++#include <locale>
++#include <sstream>
++#include <stdexcept>
++namespace fs = std::filesystem;
++namespace {
++template<class T> T number(std::string_view text) {
++    T n{}; const auto r = std::from_chars(text.data(), text.data() + text.size(), n);
++    if (text.empty() || r.ec != std::errc{} || r.ptr != text.data() + text.size())
++        throw std::invalid_argument("expected unsigned decimal: " + std::string(text));
++    return n;
++}
++std::ofstream file(const fs::path& p) {
++    std::ofstream out; out.exceptions(std::ios::badbit | std::ios::failbit);
++    out.imbue(std::locale::classic()); out.open(p, std::ios::binary); return out;
++}
++void json(const fs::path& p, const std::string& value) { auto f = file(p); f << value << '\n'; f.close(); }
++std::string decimal(double value) {
++    std::ostringstream s; s.imbue(std::locale::classic());
++    s << std::setprecision(std::numeric_limits<double>::max_digits10) << value; return s.str();
++}
++}
++int main(int argc, char** argv) {
++    fs::path output; bool owns = false;
++    try {
++        mab::TimingConfig config; std::string distribution = "uniform", run_id;
++        bool validation_only = false;
++        std::vector<std::string> invocation;
++        for (int i = 0; i < argc; ++i) invocation.emplace_back(argv[i]);
++        for (int i = 1; i < argc; ++i) {
++            const std::string_view option(argv[i]);
++            if (option == "--help") {
++                std::cout << "cuda_sort_benchmark --output NEW_DIRECTORY [--size N] [--seed S]\n"
++                    "[--distribution uniform|sorted|reverse_sorted|duplicate_heavy|nearly_sorted|signed_edges]\n"
++                    "[--sort cub_radix_sort] [--swaps K] [--distinct K] [--warmups W] [--repetitions R]\n"
++                    "[--memory-limit-mib M] [--run-id ID] [--validation-only] [--list-sorts]\n"
++                    "Defaults N1000/S1729/uniform/W1/R5/M256; size capped at1M. Prepared-buffer timing.\n";
++                return 0;
++            }
++            if (option == "--list-sorts") { std::cout << "cub_radix_sort\n"; return 0; }
++            if (option == "--validation-only") { validation_only = true; continue; }
++            if (option != "--output" && option != "--size" && option != "--seed" &&
++                option != "--distribution" && option != "--swaps" && option != "--distinct" &&
++                option != "--warmups" && option != "--repetitions" && option != "--memory-limit-mib" &&
++                option != "--run-id" && option != "--sort") throw std::invalid_argument("unknown option");
++            if (++i == argc) throw std::invalid_argument("missing option value");
++            const std::string_view value(argv[i]);
++            if (option == "--output") output = std::string(value);
++            else if (option == "--size") config.dataset.size = number<std::size_t>(value);
++            else if (option == "--seed") config.dataset.seed = number<std::uint64_t>(value);
++            else if (option == "--distribution") distribution = value;
++            else if (option == "--swaps") config.dataset.nearly_sorted_swaps = number<std::size_t>(value);
++            else if (option == "--distinct") config.dataset.duplicate_cardinality = number<std::uint64_t>(value);
++            else if (option == "--warmups") config.warmups = number<std::size_t>(value);
++            else if (option == "--repetitions") config.repetitions = number<std::size_t>(value);
++            else if (option == "--memory-limit-mib") config.memory_limit_mib = number<std::size_t>(value);
++            else if (option == "--run-id") run_id = value;
++            else (void)mab::find_cuda_sorter(value);
++        }
++        config.sorted_input = distribution == "sorted";
++        if (!config.sorted_input && distribution != "signed_edges")
++            config.dataset.distribution = mab::parse_distribution(distribution);
++        mab::validate_timing_config(config);
++        if (config.dataset.size > (static_cast<std::uint64_t>(config.memory_limit_mib) * 1024 * 1024) / (5 * sizeof(mab::Key)))
++            throw std::invalid_argument("host payload budget exceeded");
++        if (config.dataset.size > 1000000) throw std::invalid_argument("milestone size cap is1000000");
++        if (output.empty()) throw std::invalid_argument("--output is required");
++        if (!validation_only && (std::string_view(mab::build::configuration) != "Release" || mab::build::sanitizers))
++            throw std::invalid_argument("performance requires unsanitized Release");
++        if (run_id.empty()) run_id = output.filename().string();
++        if (run_id.empty()) throw std::invalid_argument("empty run identifier");
++        if (!fs::create_directory(output)) throw std::runtime_error("output already exists");
++        owns = true;
++        auto original = mab::make_timing_input(config);
++        if (distribution == "signed_edges") {
++            const mab::Key lo = std::numeric_limits<mab::Key>::min(), hi = std::numeric_limits<mab::Key>::max();
++            const mab::Key pattern[]{lo, hi, -1, 0, 1, lo + 1, hi - 1, 0};
++            for (std::size_t i = 0; i < original.size(); ++i) original[i] = pattern[i % 8];
++        }
++        auto expected = original; std::sort(expected.begin(), expected.end());
++        mab::Values working(original.size());
++        mab::CudaTimingSession session(original.size(), config.memory_limit_mib);
++        const auto& info = session.info();
++        const auto hash = std::to_string(mab::input_fingerprint(original));
++        const auto swaps = distribution == "signed_edges" ? 0 : mab::timing_swaps(config);
++        std::ostringstream meta; meta.imbue(std::locale::classic()); meta << '{';
++        bool first = true;
++        auto field = [&](const std::string& key, const std::string& value) {
++            if (!first) meta << ',';
++            first = false; meta << mab::json_string(key) << ':' << value;
++        };
++        auto text = [&](const std::string& key, const std::string& value) { field(key, mab::json_string(value)); };
++        auto integer = [&](const std::string& key, std::uint64_t value) { field(key, std::to_string(value)); };
++        integer("schema_version", 1); text("protocol", "cuda_sort_timing_v1"); text("run_id", run_id);
++        text("algorithm", "cub_radix_sort"); text("implementation_version", "cub_radix_sort_v1");
++        text("run_kind", validation_only ? "validation" : "performance");
++        text("distribution", distribution); integer("size", original.size()); integer("seed", config.dataset.seed);
++        integer("nearly_sorted_swaps", swaps); integer("duplicate_cardinality", config.dataset.duplicate_cardinality);
++        text("dataset_generator", distribution == "signed_edges" ? "signed_edges_v1" : "mt19937_64_v1");
++        text("input_hash_fnv1a64", hash); integer("warmups", config.warmups); integer("repetitions", config.repetitions);
++        integer("expected_rows", config.warmups + config.repetitions); text("elapsed_unit", "ns");
++        text("allocation_policy", "prepared_pinned_reuse_v1"); text("stream_policy", "private_nonblocking_serial");
++        text("end_to_end_clock", "steady_clock"); text("phase_clock", "cuda_event_float_ms_to_ns");
++        integer("memory_limit_mib", config.memory_limit_mib); integer("workspace_bytes", info.workspace_bytes);
++        integer("requested_device", info.device); integer("actual_device", info.device); text("gpu_name", info.device_name);
++        integer("compute_major", info.compute_major); integer("compute_minor", info.compute_minor);
++        integer("device_memory_bytes", info.device_memory_bytes); integer("runtime_api_version", info.runtime_version);
++        integer("driver_api_version", info.driver_version); integer("cub_version", mab::cuda_sort_cub_version());
++        text("compiler_id", mab::build::compiler_id); text("compiler_version", mab::build::compiler_version);
++        text("build_type", mab::build::configuration); field("sanitizers", mab::build::sanitizers ? "true" : "false");
++        text("platform", mab::build::platform); text("architecture", mab::build::architecture);
++        text("cuda_compiler_version", mab::cuda_build::compiler_version); text("cuda_toolkit_version", mab::cuda_build::toolkit_version);
++        text("cuda_flags", mab::cuda_build::flags); text("cuda_release_flags", mab::cuda_build::release_flags);
++        text("cuda_architectures", mab::cuda_build::architectures);
++        std::ostringstream args; args << '[';
++        for (std::size_t i = 0; i < invocation.size(); ++i) { if (i) args << ','; args << mab::json_string(invocation[i]); }
++        args << ']'; field("invocation", args.str()); meta << '}'; json(output / "run.json", meta.str());
++        for (const auto name : {"CMakeCache.txt", "compile_commands.json"})
++            fs::copy_file(fs::path(mab::build::binary_dir) / name, output / name);
++        fs::copy_file(fs::path(mab::build::source_dir) / "third_party/cub/UPSTREAM.json", output / "cub_upstream.json");
++        fs::copy_file(fs::path(mab::build::source_dir) / "third_party/cub/LICENSE", output / "cub_LICENSE");
++        fs::copy_file(fs::path(mab::build::binary_dir) / "generated" / mab::build::configuration / "source_hashes.json",
++                      output / "cpu_source_hashes.json");
++        auto csv = file(output / "trials.csv");
++        mab::write_csv_row(csv, {"schema_version","protocol","run_id","algorithm","implementation_version",
++            "distribution","size","seed","nearly_sorted_swaps","duplicate_cardinality","dataset_generator",
++            "input_hash_fnv1a64","phase","trial_index","h2d_ns","device_sort_ns","d2h_ns","end_to_end_ns",
++            "elapsed_unit","status","correctness","error"});
++        std::size_t rows = 0;
++        for (const std::string phase : {"warmup", "measure"}) {
++            const auto count = phase == "warmup" ? config.warmups : config.repetitions;
++            for (std::size_t i = 0; i < count; ++i) {
++                mab::CudaTimingSample sample; std::string error, status = "ok", correctness = "passed";
++                try { sample = session.sample(original, working); }
++                catch (const std::exception& failure) { error = failure.what(); status = "error"; correctness = "not_checked"; }
++                if (status == "ok" && working != expected) { status = "error"; correctness = "failed"; error = "output differs from std::sort"; }
++                const bool ok = status == "ok";
++                mab::write_csv_row(csv, {"1","cuda_sort_timing_v1",run_id,"cub_radix_sort","cub_radix_sort_v1",
++                    distribution,std::to_string(original.size()),std::to_string(config.dataset.seed),std::to_string(swaps),
++                    std::to_string(config.dataset.duplicate_cardinality),distribution == "signed_edges" ? "signed_edges_v1" : "mt19937_64_v1",
++                    hash,phase,std::to_string(i),ok ? decimal(sample.h2d_ns) : "",ok ? decimal(sample.device_sort_ns) : "",
++                    ok ? decimal(sample.d2h_ns) : "",ok ? std::to_string(sample.end_to_end_ns) : "","ns",status,correctness,error});
++                csv.flush(); ++rows;
++                if (!ok) throw std::runtime_error(error);
++            }
++        }
++        csv.close(); session.close();
++        json(output / "COMPLETE.json", "{\"schema_version\":1,\"complete\":true,\"rows\":" + std::to_string(rows) + "}");
++        std::cout << "Completed " << config.repetitions << " measured and " << config.warmups << " warmup trials\n";
++        return 0;
++    } catch (const std::exception& error) {
++        if (owns) { try { json(output / "FAILED.json", "{\"complete\":false,\"error\":" + mab::json_string(error.what()) + "}"); } catch (...) {} }
++        std::cerr << "error: " << error.what() << '\n'; return 1;
++    }
++}
+--- /dev/null
++++ b/src/cuda/cub_timing.cu
+@@ -0,0 +1,136 @@
++#include "benchmark/cuda_timing.hpp"
++#include <cub/device/device_radix_sort.cuh>
++#include <cub/version.cuh>
++#include <cuda_runtime.h>
++#include <algorithm>
++#include <array>
++#include <chrono>
++#include <cmath>
++#include <cstdio>
++#include <limits>
++#include <stdexcept>
++
++namespace mab {
++namespace {
++static_assert(CUB_VERSION == 300001, "Keep the reviewed CUB dependency pin");
++static_assert(sizeof(Key) == 4 && std::numeric_limits<Key>::is_signed, "signed int32 required");
++void checked(cudaError_t status, const char* operation) {
++    if (status != cudaSuccess)
++        throw std::runtime_error(std::string(operation) + ": " + cudaGetErrorString(status));
++}
++void secondary(cudaError_t status) noexcept {
++    if (status != cudaSuccess) std::fprintf(stderr, "CUDA timing cleanup: %s\n", cudaGetErrorString(status));
++}
++}
++struct CudaTimingSession::Impl {
++    CudaTimingInfo info;
++    std::size_t size = 0, bytes = 0;
++    Key *host_input = nullptr, *host_output = nullptr, *input = nullptr, *output = nullptr;
++    void* workspace = nullptr;
++    cudaStream_t stream = nullptr;
++    std::array<cudaEvent_t, 4> events{};
++    bool closed = false;
++    ~Impl() noexcept {
++        if (stream) secondary(cudaStreamSynchronize(stream));
++        for (auto e : events) if (e) secondary(cudaEventDestroy(e));
++        if (workspace) secondary(cudaFree(workspace));
++        if (output) secondary(cudaFree(output));
++        if (input) secondary(cudaFree(input));
++        if (host_output) secondary(cudaFreeHost(host_output));
++        if (host_input) secondary(cudaFreeHost(host_input));
++        if (stream) secondary(cudaStreamDestroy(stream));
++    }
++    void init(std::size_t n, std::size_t memory_limit_mib) {
++        if (n > 1000000 || memory_limit_mib == 0 || memory_limit_mib > 65536)
++            throw std::invalid_argument("CUDA timing size/limit outside milestone bounds");
++        size = n; bytes = n * sizeof(Key);
++        const auto limit = static_cast<std::uint64_t>(memory_limit_mib) * 1024 * 1024;
++        if (bytes > limit / 5) throw std::invalid_argument("host payload budget exceeded");
++        checked(cudaGetDevice(&info.device), "get device");
++        cudaDeviceProp prop{};
++        checked(cudaGetDeviceProperties(&prop, info.device), "device properties");
++        info.device_name = prop.name; info.compute_major = prop.major; info.compute_minor = prop.minor;
++        info.device_memory_bytes = prop.totalGlobalMem;
++        checked(cudaRuntimeGetVersion(&info.runtime_version), "runtime version");
++        checked(cudaDriverGetVersion(&info.driver_version), "driver version");
++        if (size < 2) return;
++        std::size_t available = 0, total = 0;
++        checked(cudaMemGetInfo(&available, &total), "device free memory");
++        if (bytes > available / 4) throw std::runtime_error("device keys exceed half free memory");
++        checked(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking), "create private stream");
++        for (auto& event : events) checked(cudaEventCreate(&event), "create timing event");
++        checked(cudaMallocHost(reinterpret_cast<void**>(&host_input), bytes), "allocate pinned input");
++        checked(cudaMallocHost(reinterpret_cast<void**>(&host_output), bytes), "allocate pinned output");
++        checked(cudaMalloc(reinterpret_cast<void**>(&input), bytes), "allocate device input");
++        checked(cudaMalloc(reinterpret_cast<void**>(&output), bytes), "allocate device output");
++        checked(cub::DeviceRadixSort::SortKeys(nullptr, info.workspace_bytes, input, output,
++                static_cast<int>(size), 0, 32, stream), "workspace sizing");
++        if (2 * bytes > limit || info.workspace_bytes > limit - 2 * bytes ||
++            2 * bytes > available / 2 || info.workspace_bytes > available / 2 - 2 * bytes)
++            throw std::runtime_error("CUDA workspace exceeds device budget");
++        checked(cudaMalloc(&workspace, info.workspace_bytes ? info.workspace_bytes : 1), "allocate workspace");
++    }
++};
++CudaTimingSession::CudaTimingSession(std::size_t n, std::size_t limit)
++    : impl_(std::make_unique<Impl>()) { impl_->init(n, limit); }
++CudaTimingSession::~CudaTimingSession() = default;
++const CudaTimingInfo& CudaTimingSession::info() const noexcept { return impl_->info; }
++CudaTimingSample CudaTimingSession::sample(const Values& input, Values& output) {
++    auto& s = *impl_;
++    if (s.closed || input.size() != s.size || output.size() != s.size || &input == &output)
++        throw std::invalid_argument("invalid prepared CUDA timing buffers/session");
++    using Clock = std::chrono::steady_clock;
++    static_assert(Clock::is_steady, "monotonic host timer required");
++    CudaTimingSample result;
++    if (s.size < 2) {
++        const auto start = Clock::now();
++        if (s.size) output[0] = input[0];
++        const auto stop = Clock::now();
++        result.end_to_end_ns = static_cast<std::uint64_t>(
++            std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count());
++        return result;
++    }
++    std::copy(input.begin(), input.end(), s.host_input);
++    checked(cudaStreamSynchronize(s.stream), "prior stream synchronize");
++    const auto start = Clock::now();
++    checked(cudaEventRecord(s.events[0], s.stream), "record H2D start");
++    checked(cudaMemcpyAsync(s.input, s.host_input, s.bytes, cudaMemcpyHostToDevice, s.stream), "H2D");
++    checked(cudaEventRecord(s.events[1], s.stream), "record sort start");
++    checked(cub::DeviceRadixSort::SortKeys(s.workspace, s.info.workspace_bytes, s.input, s.output,
++            static_cast<int>(s.size), 0, 32, s.stream), "CUB SortKeys");
++    checked(cudaGetLastError(), "CUB launch status");
++    checked(cudaEventRecord(s.events[2], s.stream), "record D2H start");
++    checked(cudaMemcpyAsync(s.host_output, s.output, s.bytes, cudaMemcpyDeviceToHost, s.stream), "D2H");
++    checked(cudaEventRecord(s.events[3], s.stream), "record D2H stop");
++    checked(cudaEventSynchronize(s.events[3]), "pipeline completion");
++    const auto stop = Clock::now();
++    const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
++    if (elapsed < 0) throw std::runtime_error("negative host duration");
++    result.end_to_end_ns = static_cast<std::uint64_t>(elapsed);
++    std::array<double*, 3> metrics{{&result.h2d_ns, &result.device_sort_ns, &result.d2h_ns}};
++    for (std::size_t i = 0; i < metrics.size(); ++i) {
++        float ms = 0;
++        checked(cudaEventElapsedTime(&ms, s.events[i], s.events[i + 1]), "event elapsed time");
++        if (!std::isfinite(ms) || ms < 0) throw std::runtime_error("invalid event duration");
++        *metrics[i] = static_cast<double>(ms) * 1000000.0;
++    }
++    std::copy(s.host_output, s.host_output + s.size, output.begin());
++    return result;
++}
++void CudaTimingSession::close() {
++    auto& s = *impl_;
++    if (s.closed) return;
++    if (s.stream) checked(cudaStreamSynchronize(s.stream), "close synchronize");
++    for (auto& event : s.events) if (event) {
++        const auto e = event; event = nullptr; checked(cudaEventDestroy(e), "destroy event");
++    }
++    auto release_device = [](auto*& pointer) {
++        if (pointer) { auto* value = pointer; pointer = nullptr; checked(cudaFree(value), "free device buffer"); }
++    };
++    release_device(s.workspace); release_device(s.output); release_device(s.input);
++    for (auto** p : {&s.host_output, &s.host_input})
++        if (*p) { auto* value = *p; *p = nullptr; checked(cudaFreeHost(value), "free pinned buffer"); }
++    if (s.stream) { const auto stream = s.stream; s.stream = nullptr; checked(cudaStreamDestroy(stream), "destroy stream"); }
++    s.closed = true;
++}
++} // namespace mab
+--- /dev/null
++++ b/tests/test_cuda_benchmark.py
+@@ -0,0 +1,168 @@
++#!/usr/bin/env python3
++"""Host schema/statistics/safety tests; optional real CUDA CLI integration."""
++import copy
++import csv
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++ROOT=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT/'scripts'))
++import analyze_cuda_results as analysis
++import run_cuda_matrix as matrix
++import validate_cuda_timing as validation
++EXE=Path(sys.argv.pop(1)).resolve() if len(sys.argv)>1 else None
++
++
++def fixture(path):
++    path.mkdir()
++    meta=dict(schema_version=1,protocol=analysis.PROTOCOL,run_id='fixture',algorithm='cub_radix_sort',
++        implementation_version='cub_radix_sort_v1',distribution='uniform',size=8,seed=42,
++        nearly_sorted_swaps=0,duplicate_cardinality=16,dataset_generator='mt19937_64_v1',input_hash_fnv1a64='123',
++        repetitions=3,warmups=1,expected_rows=4,elapsed_unit='ns',allocation_policy='prepared_pinned_reuse_v1',
++        stream_policy='private_nonblocking_serial',end_to_end_clock='steady_clock',phase_clock='cuda_event_float_ms_to_ns',
++        cub_version=300001,run_kind='performance',build_type='Release',sanitizers=False,compiler_id='GNU',
++        compiler_version='13.3',platform='synthetic',architecture='synthetic',gpu_name='synthetic fixture only',
++        cuda_compiler_version='13.0',cuda_toolkit_version='13.0',runtime_api_version=13000,driver_api_version=13000,
++        requested_device=0,actual_device=0,compute_major=7,compute_minor=5,device_memory_bytes=1024,workspace_bytes=1)
++    (path/'run.json').write_text(json.dumps(meta))
++    rows=[]
++    for phase,trial,value in [('warmup',0,999),('measure',0,10),('measure',1,20),('measure',2,30)]:
++        row={k:str(meta[k]) for k in analysis.SHARED}
++        row.update(phase=phase,trial_index=str(trial),elapsed_unit='ns',status='ok',correctness='passed',error='')
++        row.update({k:str(value*(i+1)) for i,k in enumerate(analysis.METRICS)});rows.append(row)
++    save_rows(path,rows)
++    (path/'COMPLETE.json').write_text(json.dumps(dict(schema_version=1,complete=True,rows=4)))
++    return meta,rows
++
++
++def save_rows(path,rows):
++    with (path/'trials.csv').open('w',newline='') as f:
++        w=csv.DictWriter(f,analysis.FIELDS);w.writeheader();w.writerows(rows)
++
++
++class HostTests(unittest.TestCase):
++    def test_exact_statistics_and_warmup_exclusion(self):
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'run';fixture(p);g=analysis.analyze(p)['groups'][0]
++            for i,key in enumerate(analysis.METRICS):
++                s=g['metrics'][key];self.assertEqual(s['median_ns'],20*(i+1));self.assertEqual(s['mean_ns'],20*(i+1))
++                self.assertEqual(s['stdev_ns'],10*(i+1));self.assertEqual(s['min_ns'],10*(i+1));self.assertEqual(s['max_ns'],30*(i+1))
++            self.assertEqual(g['successful_trials'],3);self.assertEqual(g['warmup_rows'],1)
++    def test_invalid_rows(self):
++        for field,value in [('h2d_ns','nan'),('device_sort_ns','inf'),('d2h_ns','-1'),('end_to_end_ns',''),
++                            ('protocol','other'),('elapsed_unit','us'),('trial_index','0'),('correctness','failed')]:
++            with self.subTest(field=field,value=value),tempfile.TemporaryDirectory() as d:
++                p=Path(d)/'run';_,rows=fixture(p);rows[-1][field]=value;save_rows(p,rows)
++                with self.assertRaises(ValueError):analysis.analyze(p)
++    def test_duplicate_excess_and_missing(self):
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'run';_,rows=fixture(p);save_rows(p,rows+[rows[-1]])
++            with self.assertRaises(ValueError):analysis.analyze(p)
++            save_rows(p,rows[:-1])
++            with self.assertRaises(ValueError):analysis.analyze(p,True)  # COMPLETE contradicts data.
++            (p/'COMPLETE.json').unlink()
++            with self.assertRaises(ValueError):analysis.analyze(p)
++            g=analysis.analyze(p,True)['groups'][0];self.assertEqual(g['missing_trials'],1);self.assertFalse(g['complete'])
++    def test_failure_with_csv_escaping(self):
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'run';_,rows=fixture(p);(p/'COMPLETE.json').unlink()
++            row=rows[2];row.update(status='error',correctness='not_checked',error='failure,"quoted"\nline')
++            row.update({k:'' for k in analysis.METRICS});save_rows(p,rows[:3])
++            (p/'FAILED.json').write_text('{}');g=analysis.analyze(p,True)['groups'][0]
++            self.assertEqual(g['successful_trials'],1);self.assertEqual(g['failed_trials'],1);self.assertEqual(g['missing_trials'],1)
++    def test_protocol_and_metadata(self):
++        for key,value in [('cub_version',300000),('size',True),('repetitions',0),('sanitizers',True),
++                          ('build_type','Debug'),('allocation_policy','unknown'),('actual_device',1)]:
++            with self.subTest(key=key),tempfile.TemporaryDirectory() as d:
++                p=Path(d)/'run';meta,_=fixture(p);meta[key]=value;(p/'run.json').write_text(json.dumps(meta))
++                with self.assertRaises(ValueError):analysis.analyze(p)
++    def test_plan_and_invalid_configs(self):
++        self.assertEqual(len(matrix.plan([0,1,1025,65537],analysis.DISTRIBUTIONS,[1729,42],1,5)),48)
++        for text in ['-1','+1','1,1','x','1,','1000001']:
++            with self.assertRaises(ValueError):matrix.numbers(text,1000000)
++        with self.assertRaises(ValueError):matrix.plan([1],['unknown'],[1],1,5)
++        with self.assertRaises(ValueError):matrix.plan([1],['uniform'],[1],1,0)
++    def test_failed_timeout_interrupted_subprocess(self):
++        for kind,code in [('failed',1),('timeout',1),('interrupted',130)]:
++            with self.subTest(kind=kind),tempfile.TemporaryDirectory() as d:
++                def run(argv,**kwargs):
++                    if kind=='timeout':raise subprocess.TimeoutExpired(argv,1,b'partial',b'detail')
++                    if kind=='interrupted':raise KeyboardInterrupt()
++                    return subprocess.CompletedProcess(argv,9,'out','error')
++                p=Path(d)/'run';self.assertEqual(matrix.run('unused',p,matrix.plan([1],['uniform'],[1],1,5),run),code)
++                self.assertFalse((p/'COMPLETE.json').exists())
++                self.assertTrue((p/('INTERRUPTED.json' if code==130 else 'FAILED.json')).exists())
++                summary=analysis.analyze(p,True);self.assertFalse(summary['complete']);self.assertEqual(len(summary['missing_configurations']),1)
++    def test_output_collision(self):
++        with tempfile.TemporaryDirectory() as d:
++            for name in ['existing','link']:
++                p=Path(d)/name
++                if name=='existing':p.mkdir()
++                else:p.symlink_to(Path(d)/'absent')
++                with self.assertRaises(FileExistsError):matrix.run('unused',p,[],lambda *a,**k:self.fail('executed'))
++            self.assertFalse((Path(d)/'absent').exists())
++    def test_deterministic_regeneration_and_exclusive_summary(self):
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'run';fixture(p);outputs=[Path(d)/'a.json',Path(d)/'b.json']
++            for output in outputs:
++                r=subprocess.run([sys.executable,str(ROOT/'scripts/analyze_cuda_results.py'),str(p),'--output',str(output)],capture_output=True)
++                self.assertEqual(r.returncode,0,r.stderr)
++            self.assertEqual(outputs[0].read_bytes(),outputs[1].read_bytes())
++            r=subprocess.run([sys.executable,str(ROOT/'scripts/analyze_cuda_results.py'),str(p),'--output',str(outputs[0])],capture_output=True)
++            self.assertEqual(r.returncode,1)
++    def test_trivial_phase_metrics(self):
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'run';meta,rows=fixture(p);meta['size']=1;(p/'run.json').write_text(json.dumps(meta))
++            for r in rows:
++                r['size']='1'
++                for k in analysis.METRICS[:-1]:r[k]='0'
++            save_rows(p,rows);self.assertTrue(analysis.analyze(p)['complete'])
++            rows[0]['h2d_ns']='1';save_rows(p,rows)
++            with self.assertRaises(ValueError):analysis.analyze(p)
++    def test_validation_runner_collision(self):
++        with tempfile.TemporaryDirectory() as d:
++            raw=Path(d)/'raw';processed=Path(d)/'processed';raw.mkdir()
++            with patch.object(validation.subprocess,'run') as command:
++                with self.assertRaises(FileExistsError):validation.run(raw,processed)
++                command.assert_not_called()
++            self.assertFalse(processed.exists())
++            fresh=Path(d)/'fresh';processed.mkdir();sentinel=processed/'keep';sentinel.write_text('old')
++            with patch.object(validation.subprocess,'run') as command:
++                self.assertEqual(validation.run(fresh,processed),1);command.assert_not_called()
++            self.assertEqual(sentinel.read_text(),'old');self.assertTrue((fresh/'FAILED.json').exists())
++    def test_validation_runner_failure_diagnostics(self):
++        with tempfile.TemporaryDirectory() as d:
++            raw=Path(d)/'raw';processed=Path(d)/'processed'
++            with patch.object(validation.subprocess,'run',return_value=subprocess.CompletedProcess(['fixture'],9,'diagnostic','failure')):
++                self.assertEqual(validation.run(raw,processed),1)
++            record=json.loads((raw/'correctness.json').read_text())
++            self.assertEqual(record['exit_code'],9);self.assertEqual(record['stderr'],'failure')
++            self.assertTrue((raw/'FAILED.json').exists());self.assertFalse((raw/'COMPLETE.json').exists())
++
++
++@unittest.skipUnless(EXE,'real CUDA executable not supplied; host tests only')
++class GpuCliTests(unittest.TestCase):
++    def test_invalid_cli_and_safety(self):
++        for args in [['--size','-1'],['--repetitions','0'],['--seed','18446744073709551616'],
++                     ['--sort','std_sort'],['--distribution','unknown'],['--size','1000001'],['--size'],['--unknown']]:
++            with self.subTest(args=args),tempfile.TemporaryDirectory() as d:
++                p=Path(d)/'run';r=subprocess.run([str(EXE),'--output',str(p)]+args,capture_output=True)
++                self.assertEqual(r.returncode,1);self.assertFalse(p.exists())
++        with tempfile.TemporaryDirectory() as d:
++            p=Path(d)/'old';p.mkdir();sentinel=p/'keep';sentinel.write_text('keep')
++            r=subprocess.run([str(EXE),'--output',str(p)],capture_output=True);self.assertEqual(r.returncode,1)
++            self.assertEqual(sentinel.read_text(),'keep')
++    def test_real_small_edge_and_distribution_runs(self):
++        with tempfile.TemporaryDirectory() as d:
++            for n in [0,1,2,31,32,33,1023,1024,1025,65537]:
++                for dist in analysis.DISTRIBUTIONS:
++                    p=Path(d)/(str(n)+dist)
++                    r=subprocess.run([str(EXE),'--output',str(p),'--size',str(n),'--distribution',dist,
++                                      '--warmups','1','--repetitions','2','--seed','42','--validation-only'],capture_output=True,timeout=60)
++                    self.assertEqual(r.returncode,0,r.stderr)
++                    summary=analysis.analyze(p);self.assertEqual(summary['groups'][0]['successful_trials'],2)
++if __name__=='__main__':unittest.main()
