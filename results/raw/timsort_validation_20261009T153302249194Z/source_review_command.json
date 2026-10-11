@@ -1,0 +1,8 @@
+{
+  "command": "python3 results/raw/timsort_validation_20261009T153302249194Z/review_sources.py",
+  "chunk_id": "9aebe9",
+  "wall_time_seconds": 0.000012917,
+  "exit_code": 0,
+  "original_token_count": 84,
+  "output": "Verified pinned source hashes and preserved existing algorithms/tests.\nModified existing files: CMakeLists.txt, README.md, docs/ALGORITHMS.md, docs/AUDIT.md, docs/ROADMAP.md, include/algorithms/sorting.hpp, src/algorithms/sorting.cpp, src/main.cpp, tests/test_cli.py\nSaved final CTest logs, provenance, source hashes and review diff.\n"
+}

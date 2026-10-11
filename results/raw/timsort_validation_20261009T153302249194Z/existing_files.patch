@@ -1,0 +1,433 @@
+--- before/CMakeLists.txt
++++ after/CMakeLists.txt
+@@ -7,9 +7,10 @@
+ 
+ add_library(mab_core src/algorithms/baselines.cpp src/datasets/generator.cpp
+                      src/algorithms/quicksort.cpp src/algorithms/sorting.cpp
+-                     src/algorithms/pdqsort.cpp)
++                     src/algorithms/pdqsort.cpp src/algorithms/timsort.cpp)
+ target_include_directories(mab_core PUBLIC include)
+ target_include_directories(mab_core PRIVATE third_party/pdqsort)
++target_include_directories(mab_core PRIVATE third_party/timsort/include)
+ target_compile_features(mab_core PUBLIC cxx_std_17)
+ set_target_properties(mab_core PROPERTIES CXX_EXTENSIONS OFF)
+ if(MSVC)
+@@ -49,4 +50,7 @@
+     add_executable(test_pdqsort tests/test_pdqsort.cpp)
+     target_link_libraries(test_pdqsort PRIVATE mab_core)
+     add_test(NAME pdqsort COMMAND test_pdqsort)
++    add_executable(test_timsort tests/test_timsort.cpp)
++    target_link_libraries(test_timsort PRIVATE mab_core)
++    add_test(NAME timsort COMMAND test_timsort)
+ endif()
+--- before/README.md
++++ after/README.md
+@@ -4,8 +4,8 @@
+ is validated; required algorithms and measurement infrastructure are still being
+ developed. Benchmark measurements do not exist yet.
+ 
+-The implemented sorting adapter invokes the installed standard library's
+-`std::sort`. It is not identified as PDQSort, Timsort, or project QuickSort.
++The default sorting adapter invokes the installed standard library's `std::sort`.
++Project QuickSort, upstream PDQSort and upstream Timsort have separate named adapters.
+ 
+ Build and test in Release mode:
+ 
+@@ -16,7 +16,7 @@
+ ```
+ 
+ Tests use explicit checks that remain enabled under `NDEBUG` and compare the
+-entire output with `std::stable_sort`, including integer boundaries, duplicates,
++entire output with `std::stable_sort` or `std::sort`, including integer boundaries, duplicates,
+ empty input, and seeded randomized inputs. No external test library is needed.
+ 
+ See [roadmap](docs/ROADMAP.md) and [experiment protocol](docs/EXPERIMENT_PROTOCOL.md).
+@@ -46,7 +46,7 @@
+ | Option | Default | Accepted values |
+ | --- | --- | --- |
+ | `--size N` | `1000` | Unsigned decimal fitting size_t; zero allowed |
+-| `--sort NAME` | `std_sort` | std_sort, quick_sort or pdq_sort; selects the sorting registry entry |
++| `--sort NAME` | `std_sort` | std_sort, quick_sort, pdq_sort or tim_sort; selects the sorting registry entry |
+ | `--seed S` | `1729` | Unsigned decimal fitting uint64_t |
+ | `--distribution NAME` | `uniform` | uniform, nearly_sorted, reverse_sorted, duplicate_heavy |
+ | `--swaps K` | floor(N/100) | Unsigned decimal fitting size_t; applied only to nearly_sorted |
+@@ -129,5 +129,31 @@
+ CTest groups each), with leak detection enabled and no compiler warnings. Its
+ 4,027 dedicated differential input cases passed through the public interface
+ and registry; shared sorting/dataset tests also cover it. No performance
+-comparison has run. Phase 2 remains incomplete: genuine Timsort, additional
+-sorters and comparison/memory/timing infrastructure are still pending.
++comparison has run. These 6/6 results precede the Timsort integration below.
++
++## Upstream Timsort
++
++`--sort tim_sort` selects genuine [cpp-TimSort](https://github.com/timsort/cpp-TimSort),
++pinned to commit `99b612d9826e8387a30008f2b21be206181ad890` from its C++11-compatible
++2.x.y branch. The current upstream 3.x branch requires C++20. The selected older
++branch is not actively maintained; its exact revision is recorded rather than
++claimed to be the v2.1.0 release tag. The MIT license and all header attribution
++notices are preserved; upstream code is unchanged. See
++[source hashes and attribution](third_party/timsort/README.md), machine-readable
++[provenance](third_party/timsort/UPSTREAM.json) and [algorithm details](docs/ALGORITHMS.md).
++
++```sh
++build/release/algorithm_benchmark --sort tim_sort --size 1000 --seed 1729 --distribution nearly_sorted
++```
++
++The adapter sorts signed int32 keys ascending and accepts empty/singleton inputs.
++std_sort remains the default and the eleven-field correctness JSON schema is
++unchanged. Builds use the vendored header with no network dependency.
++
++Fresh Release and Debug ASan/UBSan suites passed 7/7 CTest groups each, including
++4,149 dedicated Timsort differential inputs through both public and registry
++paths, and ten CLI test methods. Leak detection remained enabled and no compiler
++warnings were emitted. Exact commands and immutable logs are recorded in
++[the audit](docs/AUDIT.md). Timsort integration is complete; Phase 2 remains in
++progress because additional sorters and comparison/memory/timing infrastructure
++are pending. No benchmark, CUDA or 100-million-element run was performed.
+--- before/docs/ALGORITHMS.md
++++ after/docs/ALGORITHMS.md
+@@ -75,6 +75,55 @@
+ Threshold-adjacent sizes include 23/24/25, 63/64/65 and 127/128/129. These tests
+ do not claim internal PDQSort fallback coverage or measured performance.
+ 
++## tim_sort: upstream cpp-TimSort
++
++Source: [timsort/cpp-TimSort](https://github.com/timsort/cpp-TimSort), formerly
++gfx/cpp-TimSort, pinned to
++[`99b612d9826e8387a30008f2b21be206181ad890`](https://github.com/timsort/cpp-TimSort/commit/99b612d9826e8387a30008f2b21be206181ad890).
++The selected 2.x.y branch supports C++11 and this project's C++17 configuration;
++current upstream 3.x requires C++20. Upstream describes the older branches as
++not actively maintained. Header version macros say 2.1.0, but the exact commit
++is distinct from the v2.1.0 tag. License: MIT, preserved in the standalone LICENSE
++and complete header notice (Fuji, Goro/gfx, Morwenn and Igor Kushnir).
++See third_party/timsort/README.md and UPSTREAM.json for URLs and SHA-256 hashes.
++
++The public function `mab::tim_sort(Values&)` calls `gfx::timsort(begin,end)` on
++vector<int32_t>. The registry and CLI name is `tim_sort`; ascending std::less
++comparison is the upstream default. The adapter introduces no custom comparator,
++diagnostic macro overrides or algorithm changes. Upstream source and license
++bytes match the pinned Git objects and revision-qualified raw downloads.
++
++This is genuine stable Timsort, ported from Python/OpenJDK: it detects natural
++ascending/strictly descending runs, reverses descending runs, extends short runs
++with binary insertion sorting, and merges a pending-run stack using collapse
++invariants and galloping searches. MIN_MERGE is 32; minrun rounding shifts while
++N >= 64. The merge-collapse policy includes the deeper pending-run invariant.
++The merge workspace and pending-run stack are std::vector storage managed by
++RAII. Worst-case auxiliary space is O(N); this is an algorithm description,
++not a measured memory result. Allocation exceptions propagate through the
++adapter into the CLI's existing exception handling.
++
++Source review covered the N < 2 early return, half-open ranges, partial final
++runs, merge cursor updates (including backward merging), run-length sums and
++signed iterator offsets used by galloping. Keys are only compared/moved, so no
++signed key arithmetic is introduced by the sorter. No defect requiring local
++source modification was demonstrated. Validation applies to the project's
++int32 vector interface and tested sizes, not every generic upstream instantiation
++or extreme allocation size. Equal int32 keys have no distinguishable payload;
++these tests verify full value sequences, not decorated-record stability.
++
++Release and Debug ASan/UBSan both passed 4,149 dedicated differential inputs
++against std::sort through the public adapter and registry: 15 explicit edges,
++3,280 exhaustive arrays of lengths 0..7 over {-2,0,2}, 600 distribution/seed/size
++combinations, 132 general patterns, 24 varied natural-run patterns and 98
++unequal/overlapping two-run patterns. Cases include cutoff-adjacent lengths,
++short tails, negative values, extrema, descending duplicates, long winner blocks,
++and many short runs. These inputs target run/merge behavior without asserting
++specific internal branch coverage. Shared baseline/dataset tests also use the
++registry entry. Ten CLI methods include 36 Timsort distribution/size selections,
++repeated sorting options, help and invalid names. Full suites passed 7/7 groups
++each, with leak detection enabled and no compiler warnings.
++
+ ## std_lower_bound
+ 
+ The reference search adapter requires ascending sorted input and returns the
+@@ -83,5 +132,5 @@
+ Tests use an independent linear std::find oracle. The project linear, binary and
+ exponential algorithms remain pending.
+ 
+-Genuine Timsort, Merge Sort, Radix Sort and all advanced structures are
++Merge Sort, Radix Sort and all advanced structures are
+ pending. No measured algorithm-performance claims are made here.
+--- before/docs/AUDIT.md
++++ after/docs/AUDIT.md
+@@ -247,3 +247,172 @@
+ Timsort, extra sorters and comparison/memory/timing CSV metrics remain pending.
+ Next step: integrate a genuine, pinned upstream Timsort with license/attribution
+ and the same correctness validation. No benchmarking, CUDA or 100M run occurred.
++
++## Timsort integration — 2026-10-09
++
++### Workspace and baseline
++
++Before editing, pwd, file inventory, AGENTS.md, README, protocol, this audit,
++roadmap, algorithm documentation, CMake, sorting registry, CLI and tests were
++reviewed. An anonymous temporary-file write/read/delete check passed. Project
++Git metadata is absent: git status --short exited 128 with "not a git repository".
++No permissions or access controls were changed. Existing sources were backed up
++under build/timsort_review for comparison; earlier CTest logs were copied with
++exclusive creation into the new evidence directory. Historical logs are not
++used as proof that the new integration passes.
++
++Before integrating Timsort, these commands each exited 0:
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++```
++
++The existing suite passed 6/6 groups: 3,590 sorting inputs, 98,508 search checks,
++220 dataset combinations plus fixtures, three environment tests, nine CLI
++methods, 3,718 QuickSort cases (618 normal-budget adversarial fallbacks) and
++4,027 PDQSort cases. No baseline defect or compiler warning was found.
++
++### Source selection, license and verification
++
++Canonical repository: https://github.com/timsort/cpp-TimSort, formerly gfx/cpp-TimSort.
++Selected exact commit: 99b612d9826e8387a30008f2b21be206181ad890 on the C++11-compatible
++2.x.y branch. Current upstream 3.x requires C++20; upstream states that older
++branches are not actively maintained. This choice preserves the project's
++C++17 interface. Header macros say 2.1.0, but this commit is distinct from the
++v2.1.0 tag; the commit identity is the dependency pin.
++
++Commands executed successfully (exit 0):
++
++```sh
++git clone https://github.com/timsort/cpp-TimSort.git build/timsort-upstream
++git -C build/timsort-upstream checkout --detach 99b612d9826e8387a30008f2b21be206181ad890
++```
++
++Revision and committed contents were verified using rev-parse HEAD and git show
++at the selected commit. An inline python3 verification/vendoring script fetched
++the revision-qualified raw HTTPS URLs recorded in UPSTREAM.json, asserted that
++download bytes, Git blobs and checkout files were identical, computed SHA-256,
++and exclusively created the vendor files. It exited 0. The standalone LICENSE
++and complete header license/attribution were reviewed and retained unchanged.
++
++| Vendored file | SHA-256 |
++| --- | --- |
++| third_party/timsort/include/gfx/timsort.hpp | a5cf0f0f61d92a62cf14528d1969a236db587b95678b088b5e38833d9865e9c9 |
++| third_party/timsort/LICENSE | 210f3341e9e04dc3004f416ae0e28dc7e8eaa84528c5966661186a1b512f34c3 |
++
++License: MIT. Copyright notices for Fuji, Goro/gfx, Morwenn and Igor Kushnir
++remain in the header; the standalone license retains the original author notice.
++Local upstream modifications: none. The local adapter is separate and calls
++gfx::timsort(begin,end); no diagnostics or comparison counters were added.
++No build-time network access, Catch2 or other upstream development dependencies
++are required. The vendored include is private and uses normal warning flags.
++
++Browser attempts to open an alternative repository (tvanslyke/timsort) and the
++selected revision's tree URL returned tool fetch errors. Canonical repository,
++commit and license pages were accessible, and Git/raw-HTTPS retrieval succeeded;
++these browser failures did not block or substitute for provenance verification.
++An exploratory rg command with no matches exited 1; this was a search result,
++not a failed build or test.
++
++### Saved changes and review
++
++- include/algorithms/timsort.hpp and src/algorithms/timsort.cpp: public int32
++  adapter to genuine upstream Timsort, including empty/singleton ranges.
++- include/algorithms/sorting.hpp and src/algorithms/sorting.cpp: fourth registry
++  entry tim_sort; std_sort remains first and the default.
++- src/main.cpp: help advertises --sort tim_sort; existing registry dispatch,
++  unknown-name errors and eleven-field JSON schema are preserved.
++- CMakeLists.txt: new adapter, private vendor include and timsort CTest group.
++- tests/test_timsort.cpp: deterministic full-vector differential checks through
++  public and registry paths, including natural-run/merge-oriented patterns.
++- tests/test_cli.py: Timsort selections, help/repeated options, and invalid names;
++  all earlier methods are retained.
++- third_party/timsort: unchanged header and LICENSE, plus local README.md and
++  UPSTREAM.json with provenance/hashes and adapter details.
++- README.md, docs/ALGORITHMS.md, docs/ROADMAP.md and this audit: source identities,
++  interface, actual validation and remaining milestones.
++
++Review compared files against the initial backup because project Git metadata
++is unavailable. Existing QuickSort, PDQSort, generator, baseline/dataset tests,
++and dedicated QuickSort/PDQSort tests are byte-for-byte unchanged. PDQSort's
++original recorded source/license hashes also still match.
++
++Source review covered early exits, half-open ranges, minrun rounding, partial
++tails, forward/backward merge cursors, galloping offsets, run-length arithmetic,
++and the deeper merge-stack invariant. Sort keys are compared/moved without key
++arithmetic. No demonstrated defect required patching upstream. The current
++compiler uses a C++17 default dialect; CMake requires at least C++17 and disables
++extensions. Actual compile commands/manifests include the private include path,
++Release -O3 -DNDEBUG, -Wall -Wextra -Wpedantic, and sanitizer flags where enabled.
++
++An explicit strict-C++17 syntax check also exited 0 without warnings (this check
++is separate from the compiled/executed full suites):
++
++```sh
++c++ -std=c++17 -Wall -Wextra -Wpedantic -Iinclude -Ithird_party/timsort/include -fsyntax-only src/algorithms/timsort.cpp
++```
++
++### Fresh integration validation
++
++After source/test changes, all six commands below exited 0:
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DMAB_ENABLE_SANITIZERS=ON
++cmake --build build/sanitize --parallel 2
++env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V
++```
++
++Both full suites passed 7/7 CTest groups; no compiler warnings were emitted.
++
++| CTest group | Actual result in both configurations |
++| --- | --- |
++| baselines | 3,590 full-vector inputs across all four registry sorters; 98,508 linear-oracle search checks passed |
++| environment_manifest | Three Python tests passed |
++| datasets | 220 distribution/size/seed combinations across all four sorters, exact swap and other fixtures passed |
++| cli | Ten Python methods passed, including 36 Timsort distribution/size selections and invalid algorithm names |
++| quicksort | Existing 3,718 cases and all fallback checks passed; normal-budget adversarial fallback total 618 |
++| pdqsort | Existing 4,027 full-vector cases passed through public/registry paths |
++| timsort | 4,149 inputs passed through both public and registry paths against std::sort |
++
++Timsort's dedicated count comprises 15 explicit edges, 3,280 exhaustive small
++arrays, 600 distribution/seed/size combinations, 132 general patterns, 24 varied
++run layouts and 98 unequal/overlapping two-run patterns. Largest dedicated input
++size is 10,000. Tests target natural runs, short tails and merge behavior without
++claiming specific internal branch coverage. Tests remain active in Release.
++Stability of decorated records is outside the public signed-int32 API.
++
++ASan/UBSan and LeakSanitizer passed with leak detection enabled. The previously
++reported ptrace limitation did not recur; no leak-disabled retry was executed.
++No fresh configure/build/test failures or unresolved correctness errors occurred.
++Validation covers this GNU/Linux environment; Windows, macOS and other toolchains
++were not run. The unmaintained older upstream branch is a documented dependency
++limitation, not a hidden upgrade to C++20.
++
++Evidence is exclusively saved under
++results/raw/timsort_validation_20261009T153302249194Z: per-command output/exit status,
++separate historical logs, final CTest logs, provenance/source review, and these
++environment snapshots (both commands exited 0):
++
++```sh
++python3 scripts/capture_environment.py --build-dir build/release --output results/raw/timsort_validation_20261009T153302249194Z/release_environment.json
++python3 scripts/capture_environment.py --build-dir build/sanitize --output results/raw/timsort_validation_20261009T153302249194Z/sanitize_environment.json
++```
++
++The final source-preservation/provenance review command exited 0 and exclusively
++saved the existing-file diff, final source hashes, provenance and CTest log copies:
++
++```sh
++python3 results/raw/timsort_validation_20261009T153302249194Z/review_sources.py
++```
++
++Timsort integration is complete with saved code/tests/documentation and passing
++fresh full suites. Phase 2 overall remains in progress: additional Merge/Radix
++baselines, separate comparison counting, memory reporting and repeatable timing
++CSV infrastructure are unfinished. Next milestone: separate comparison-count
++instrumentation and documented memory reporting, before performance experiments.
++No benchmark measurements, CUDA execution or 100-million-element runs occurred.
+--- before/docs/ROADMAP.md
++++ after/docs/ROADMAP.md
+@@ -7,7 +7,7 @@
+ | --- | --- |
+ | 0 — audit and baseline | Complete: Release build, differential tests, immutable environment manifest |
+ | 1 — correctness-first core | Complete: saved CLI/generator docs and swap regressions; fresh Release and sanitizer suites passed 4/4 |
+-| 2 — required sorting algorithms and metrics | In progress: bounded QuickSort and pinned upstream PDQSort validated; Timsort/extra sorters/metrics pending |
++| 2 — required sorting algorithms and metrics | In progress: bounded QuickSort, pinned PDQSort and genuine pinned Timsort validated; extra sorters/metrics pending |
+ | 3 — search benchmarks | Pending |
+ | 4 — search data structures | Pending |
+ | 5 — orchestration and analysis | Pending |
+@@ -24,7 +24,13 @@
+ step was bounded project QuickSort. It now passes fresh 5/5 Release and sanitizer
+ suites, including observed forced/default-budget heapsort fallback. Phase 2
+ remains incomplete. Upstream PDQSort is now pinned with retained license and
+-attribution and passes fresh 6/6 Release/sanitizer suites. Next: integrate genuine
+-Timsort with pinned source, license/attribution and differential tests. Sorting
+-comparison instrumentation, memory metrics and timing/CSV infrastructure remain
+-pending. No performance benchmarking was started during these integrations.
++attribution and passed fresh 6/6 Release/sanitizer suites before Timsort integration.
++Timsort is now integrated from a pinned C++17-compatible upstream commit with
++unchanged MIT-licensed source, hashes and attribution. Fresh full Release and
++Debug ASan/UBSan suites pass 7/7 groups, including 4,149 dedicated Timsort inputs
++through public/registry paths and ten CLI methods. Leak detection was enabled.
++Phase 2 is not complete: optional Merge/Radix baselines, separate comparison
++instrumentation, memory metrics and repeatable timing/CSV infrastructure remain
++pending. The next unfinished milestone is separate comparison-count instrumentation
++and documented memory reporting, before performance experiments. No performance
++benchmarking was started during these integrations; CUDA and 100M remain not run.
+--- before/include/algorithms/sorting.hpp
++++ after/include/algorithms/sorting.hpp
+@@ -11,6 +11,6 @@
+     void (*sort)(Values&);
+ };
+ 
+-const std::array<Sorter, 3>& sorters() noexcept;
++const std::array<Sorter, 4>& sorters() noexcept;
+ const Sorter& find_sorter(std::string_view name);
+ }  // namespace mab
+--- before/src/algorithms/sorting.cpp
++++ after/src/algorithms/sorting.cpp
+@@ -2,14 +2,16 @@
+ #include "algorithms/baselines.hpp"
+ #include "algorithms/quicksort.hpp"
+ #include "algorithms/pdqsort.hpp"
++#include "algorithms/timsort.hpp"
+ 
+ #include <stdexcept>
+ #include <string>
+ 
+ namespace mab {
+-const std::array<Sorter, 3>& sorters() noexcept {
+-    static const std::array<Sorter, 3> registry{{
+-        {"std_sort", std_sort}, {"quick_sort", quick_sort}, {"pdq_sort", pdq_sort}}};
++const std::array<Sorter, 4>& sorters() noexcept {
++    static const std::array<Sorter, 4> registry{{
++        {"std_sort", std_sort}, {"quick_sort", quick_sort}, {"pdq_sort", pdq_sort},
++        {"tim_sort", tim_sort}}};
+     return registry;
+ }
+ 
+--- before/src/main.cpp
++++ after/src/main.cpp
+@@ -24,7 +24,7 @@
+ 
+ void usage() {
+     std::cout << "Usage: algorithm_benchmark [--size N] [--seed S]\n"
+-                 "  [--sort std_sort|quick_sort|pdq_sort]\n"
++                 "  [--sort std_sort|quick_sort|pdq_sort|tim_sort]\n"
+                  "  [--distribution uniform|nearly_sorted|reverse_sorted|duplicate_heavy]\n"
+                  "  [--swaps K] [--distinct K] [--help]\n"
+                  "Correctness-only sorting and std_lower_bound checks; no timing.\n";
+--- before/tests/test_cli.py
++++ after/tests/test_cli.py
+@@ -110,13 +110,30 @@
+         self.assertIn("pdq_sort", self.run_cli("--help").stdout)
+ 
+     def test_invalid_sorter_names(self):
+-        for name in ("", "pdqsort", "PDQSort", "pdq_sort_typo", "timsort"):
++        for name in ("", "pdqsort", "PDQSort", "pdq_sort_typo", "timsort", "TimSort", "tim_sort_typo"):
+             with self.subTest(name=name):
+                 result = self.run_cli("--sort", name)
+                 self.assertEqual(result.returncode, 1)
+                 self.assertEqual(result.stdout, "")
+                 self.assertTrue(result.stderr.startswith("error: unknown sorter:"), result.stderr)
+ 
++    def test_timsort_selection(self):
++        for distribution in ("uniform", "nearly_sorted", "reverse_sorted", "duplicate_heavy"):
++            for size in (0, 1, 2, 31, 32, 33, 64, 65, 1000):
++                with self.subTest(distribution=distribution, size=size):
++                    result = self.run_cli("--sort", "tim_sort", "--distribution", distribution,
++                                          "--size", str(size), "--seed", "42")
++                    self.assertEqual(result.returncode, 0, result.stderr)
++                    self.assertEqual(result.stderr, "")
++                    record = json.loads(result.stdout)
++                    self.assertEqual(record["sort_algorithm"], "tim_sort")
++                    self.assertEqual(record["status"], "ok")
++                    self.assertEqual(record["size"], size)
++        result = self.run_cli("--sort", "tim_sort", "--sort", "std_sort", "--size", "0")
++        self.assertEqual(result.returncode, 0, result.stderr)
++        self.assertEqual(json.loads(result.stdout)["sort_algorithm"], "std_sort")
++        self.assertIn("tim_sort", self.run_cli("--help").stdout)
++
+ 
+ if __name__ == "__main__":
+     unittest.main()

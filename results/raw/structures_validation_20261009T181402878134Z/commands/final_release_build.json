@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/release",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:28:33.561458+00:00",
+  "exit_code": 0,
+  "stdout": "[ 12%] Built target mab_core\n[ 15%] Built target algorithm_benchmark\n[ 20%] Built target mab_metrics\n[ 27%] Built target mab_timing\n[ 27%] Built target mab_search\n[ 30%] Built target test_baselines\n[ 36%] Built target mab_structures\n[ 41%] Built target test_datasets\n[ 40%] Built target test_quicksort\n[ 47%] Built target test_pdqsort\n[ 44%] Built target test_timsort\n[ 52%] Built target test_radixsort\n[ 52%] Built target test_mergesort\n[ 58%] Built target test_memory\n[ 58%] Built target test_comparisons\n[ 66%] Built target test_memory_unsupported\n[ 65%] Built target test_timing\n[ 69%] Built target sort_metrics\n[ 72%] Built target sort_benchmark\n[ 75%] Built target mab_search_metrics\n[ 77%] Built target mab_search_timing\n[ 79%] Building CXX object CMakeFiles/test_structures.dir/tests/test_structures.cpp.o\n[ 81%] Built target test_searching\n[ 84%] Built target test_search_timing\n[ 87%] Built target search_benchmark\n[ 90%] Built target search_counts\n[ 93%] Built target mab_structure_timing\n[ 95%] Built target structure_benchmark\n[ 98%] Built target test_structure_timing\n[100%] Linking CXX executable test_structures\n[100%] Built target test_structures\n",
+  "stderr": "",
+  "wall_seconds": 1.2358199549998972,
+  "ended_utc": "2026-10-09T18:28:34.797407+00:00"
+}

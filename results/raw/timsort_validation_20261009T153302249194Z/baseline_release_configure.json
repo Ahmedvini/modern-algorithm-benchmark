@@ -1,0 +1,8 @@
+{
+  "command": "cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release",
+  "chunk_id": "311529",
+  "wall_time_seconds": 0.000012336,
+  "exit_code": 0,
+  "original_token_count": 42,
+  "output": "-- Configuring done (0.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n"
+}

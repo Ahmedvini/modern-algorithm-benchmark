@@ -1,0 +1,10 @@
+{
+  "stamp": "20261009T181402878134Z",
+  "evidence": "results/raw/structures_validation_20261009T181402878134Z",
+  "backup": "build/structures_review_20261009T181402878134Z",
+  "summary": "results/processed/structures_smoke_20261009T181402878134Z.json",
+  "writable": true,
+  "git_metadata": false,
+  "prior_artifacts": 696,
+  "project_files": 84
+}

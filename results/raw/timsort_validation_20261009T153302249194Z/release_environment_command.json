@@ -1,0 +1,8 @@
+{
+  "command": "python3 scripts/capture_environment.py --build-dir build/release --output results/raw/timsort_validation_20261009T153302249194Z/release_environment.json",
+  "chunk_id": "683cb8",
+  "wall_time_seconds": 0.000014927,
+  "exit_code": 0,
+  "original_token_count": 20,
+  "output": "results/raw/timsort_validation_20261009T153302249194Z/release_environment.json\n"
+}

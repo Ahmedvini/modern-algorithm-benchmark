@@ -1,0 +1,20 @@
+{
+  "output": "results/raw/structures_validation_20261009T181402878134Z/smoke_matrix",
+  "output_absent": true,
+  "maximum_input_size": 1000,
+  "estimated_maximum_bytes": 585728,
+  "mem_available_reported": "4255592 kB",
+  "disk_free_bytes": 134350553088,
+  "os": "Linux-6.18.7-76061807-generic-x86_64-with-glibc2.39",
+  "logical_cpus": 12,
+  "load_average": [
+    1.9228515625,
+    1.77734375,
+    1.58154296875
+  ],
+  "address_space_limit": [
+    -1,
+    -1
+  ],
+  "note": "Small serial development smoke; no CPU/cache/frequency/background control; planning estimate is not RSS."
+}

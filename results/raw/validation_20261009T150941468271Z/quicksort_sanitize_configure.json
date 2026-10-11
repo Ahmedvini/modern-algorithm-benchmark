@@ -1,0 +1,9 @@
+{
+  "record_kind": "correctness_validation",
+  "command": "cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DMAB_ENABLE_SANITIZERS=ON",
+  "chunk_id": "6f3d86",
+  "wall_time_seconds": 0.000011022,
+  "exit_code": 0,
+  "original_token_count": 43,
+  "output": "-- Configuring done (0.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize\n"
+}

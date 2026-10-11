@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "review_utc": "2026-10-09T19:06:06.203555+00:00",
+  "modified_files": 8,
+  "added_files": 15,
+  "preserved_existing_files": 76,
+  "prior_artifacts_unchanged": 696,
+  "raw_smoke_files_unchanged": 83,
+  "protocol_unchanged": true,
+  "source_matches_validated_build": true,
+  "old_sort_executable_unchanged": true,
+  "release_ctest_passed": 21,
+  "sanitize_ctest_passed": 21,
+  "leak_detection_disabled": false,
+  "final_compiler_warnings": 0,
+  "summary_sha256": "c22d56201b6197632a2a692dd2f7fb34e3fc16da2df7722eeee5dbf468bc8b54",
+  "protocol_sha256": "c2b414fb1322dbbcc56cff65adeae4c2a8da5743de26c6ecd26905d70bd0a61f",
+  "milestone": "Phase 4 insertion/lookup and development smoke complete",
+  "next": "Phase 5 full experiment orchestration and reproducible plots with variability"
+}

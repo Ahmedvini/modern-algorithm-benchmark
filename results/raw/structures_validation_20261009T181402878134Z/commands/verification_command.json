@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/structures_validation_20261009T181402878134Z/verify.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:03:48.986737+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"prior_artifacts_unchanged\": 696,\n  \"protected_existing_project_files_unchanged\": 76,\n  \"protocol_sha256\": \"c2b414fb1322dbbcc56cff65adeae4c2a8da5743de26c6ecd26905d70bd0a61f\",\n  \"protocol_unchanged\": true,\n  \"frozen_sorting_study_unchanged\": true,\n  \"source_manifest_matches\": true,\n  \"sort_executable_unchanged\": true,\n  \"uncounted_timing_link\": true,\n  \"configurations\": 8,\n  \"build_measured_successes\": 200,\n  \"lookup_measured_successes\": 1175,\n  \"warmup_successes\": 275,\n  \"total_rows\": 1650,\n  \"failed_trials\": 0,\n  \"missing_trials\": 0,\n  \"summary_groups\": 275,\n  \"query_rows\": 3008,\n  \"eligible_category_config_pairs\": 47,\n  \"unavailable_category_config_pairs\": 25,\n  \"timed_query_answers_including_warmups\": 90240,\n  \"summary_regenerated_byte_identical\": true,\n  \"raw_files_unchanged\": 83,\n  \"regeneration_command\": [\n    \"/usr/bin/python3\",\n    \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/analyze_structure_results.py\",\n    \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/structures_validation_20261009T181402878134Z/smoke_matrix\",\n    \"--output\",\n    \"/tmp/tmp8jysx47e/summary.json\"\n  ],\n  \"regeneration_exit_code\": 0\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.2798695780002163,
+  "ended_utc": "2026-10-09T19:03:49.266733+00:00"
+}

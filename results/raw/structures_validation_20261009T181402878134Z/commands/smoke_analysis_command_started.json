@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "python3",
+    "scripts/analyze_structure_results.py",
+    "results/raw/structures_validation_20261009T181402878134Z/smoke_matrix",
+    "--output",
+    "results/processed/structures_smoke_20261009T181402878134Z.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:03:48.806258+00:00"
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "study": "sorting_1m_20261009T172003802655Z",
+  "complete": true,
+  "configurations": 15,
+  "algorithm_dataset_groups": 90,
+  "successful_measured_trials": 450,
+  "failed_measured_trials": 0,
+  "successful_warmups": 90,
+  "failed_warmups": 0,
+  "missing_configurations": [],
+  "missing_trials": 0,
+  "all_required_combinations_present": true,
+  "full_output_correctness_passed_on_every_row": true,
+  "schema_fields": 28,
+  "order_validated_by_strict_parser": true,
+  "same_input_fingerprint_across_algorithms_per_configuration": true,
+  "input_fingerprints": {
+    "(1000000, 1729, 'uniform')": "12963997089183458962",
+    "(1000000, 1729, 'sorted')": "13088004318524651022",
+    "(1000000, 1729, 'reverse_sorted')": "18340969263499775602",
+    "(1000000, 1729, 'duplicate_heavy')": "5009479449751836040",
+    "(1000000, 1729, 'nearly_sorted')": "5227077393268129290",
+    "(1000000, 42, 'uniform')": "9919004772653647973",
+    "(1000000, 42, 'sorted')": "13722030013515332321",
+    "(1000000, 42, 'reverse_sorted')": "14612097697388627277",
+    "(1000000, 42, 'duplicate_heavy')": "1393709421096420861",
+    "(1000000, 42, 'nearly_sorted')": "16579600201140227217",
+    "(1000000, 2718, 'uniform')": "16983852977234575333",
+    "(1000000, 2718, 'sorted')": "3863707414789519733",
+    "(1000000, 2718, 'reverse_sorted')": "16514497564035337865",
+    "(1000000, 2718, 'duplicate_heavy')": "13021618451543737489",
+    "(1000000, 2718, 'nearly_sorted')": "9075238758464494249"
+  },
+  "source_and_executable_manifests_match": true,
+  "comparison_metrics_not_linked_verified_preflight": true,
+  "all_child_exit_codes": 0,
+  "all_processed_files_regenerated_byte_for_byte": true,
+  "regeneration_commands": [
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/analyze_results.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/sorting_1m_20261009T172003802655Z/matrix",
+        "--output",
+        "/tmp/mab_1m_regeneration_l8u4u050/processed/per_seed.json"
+      ],
+      "exit_code": 0,
+      "stdout": "/tmp/mab_1m_regeneration_l8u4u050/processed/per_seed.json\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/sorting_1m_20261009T172003802655Z/analyze_study.py",
+        "--study",
+        "/tmp/mab_1m_regeneration_l8u4u050"
+      ],
+      "exit_code": 0,
+      "stdout": "Regenerated per-seed summary exactly; wrote 90 per-seed and 30 cross-seed groups, retained all observations.\n",
+      "stderr": ""
+    }
+  ],
+  "raw_matrix_files_unchanged": 138,
+  "frozen_inputs_and_protocol_unchanged": true,
+  "prior_raw_files_unchanged": 334,
+  "processed_sha256": {
+    "RESULTS.md": "7d2d808e333df775fc036da0ee0b69b503dc1db5f9d066e9ecc87a2d690a9eed",
+    "cross_seed.csv": "af10381607ff898d7ed62a468df20124ce2960ad2e4c9fa6c340e39f2a5f01f4",
+    "cross_seed.json": "c7ea0489d0756439b6bc5a77ba6eeb5d8b46be5351866a53497c145c9b6dde58",
+    "per_seed.csv": "5b99468b5a626983f150cc11ab2e3b86b3e5442e3e03daef746b490ee79476bd",
+    "per_seed.json": "4221e1b99a3384e9360721b64ef1555290f896c4dc40d4649474a8e1a4bd8f80"
+  },
+  "protocol_sha256": "5a684928f809f8aa373c9275697676e061595a31617bf03ea6f952f4d3a11b9b",
+  "observed_protocol_deviations": []
+}

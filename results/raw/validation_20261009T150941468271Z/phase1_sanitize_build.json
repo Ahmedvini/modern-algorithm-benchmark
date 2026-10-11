@@ -1,0 +1,9 @@
+{
+  "record_kind": "correctness_validation",
+  "command": "cmake --build build/sanitize --parallel 2",
+  "chunk_id": "74ed85",
+  "wall_time_seconds": 0.765492059,
+  "exit_code": 0,
+  "original_token_count": 66,
+  "output": "[ 33%] Built target mab_core\n[ 77%] Built target algorithm_benchmark\n[ 77%] Built target test_baselines\n[ 88%] Building CXX object CMakeFiles/test_datasets.dir/tests/test_datasets.cpp.o\n[100%] Linking CXX executable test_datasets\n[100%] Built target test_datasets\n"
+}

@@ -1,0 +1,13 @@
+{
+  "reviewed_utc": "2026-10-09T17:25:43.288274+00:00",
+  "parameters_match_user_request": true,
+  "expected_counts_checked": true,
+  "resource_gates_passed": true,
+  "normal_production_path_verified": true,
+  "out_of_timing_full_validation_verified": true,
+  "documented_control_limitations": true,
+  "analysis_method_frozen": true,
+  "matrix_output_absent": true,
+  "protocol_sha256": "5a684928f809f8aa373c9275697676e061595a31617bf03ea6f952f4d3a11b9b",
+  "reviewer": "Codex source/preflight review"
+}

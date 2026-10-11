@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/release",
+    "--output",
+    "results/raw/structures_validation_20261009T181402878134Z/release_environment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:27:35.378402+00:00"
+}

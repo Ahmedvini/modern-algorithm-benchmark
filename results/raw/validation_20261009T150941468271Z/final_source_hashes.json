@@ -1,0 +1,29 @@
+{
+  "record_kind": "validated_source_hashes",
+  "sha256": {
+    "CMakeLists.txt": "245931f490591fca0fcfb6190fa1702f94708b2a39dbd645ac8d2fc6b1614680",
+    "README.md": "79b25030a44b466eec2f43f3d3d4c5ba4e87179f0063af08de6cf4c38996456e",
+    "docs/ALGORITHMS.md": "079409ef0bbacb1123837ce162e9b821109c3d3d487c0b199724d9ff911f2c0e",
+    "docs/AUDIT.md": "c324c866a19444970444875e5610269b6ab68a13c01c2812a0106ae00fcfdc1d",
+    "docs/EXPERIMENT_PROTOCOL.md": "3e68a2bb171e3704e1473c26b4762b734b293b819edc8833d22043baa9cfef34",
+    "docs/ROADMAP.md": "f62de8370964bd48ad5be23cb244e2223ae50d6724f631a71eb1e4a2c285a065",
+    "include/algorithms/baselines.hpp": "cbf56227eac5b0a8cfc325b51a66ec60ffb1a9bfa4bfccaf722cbc5af265ba6b",
+    "include/algorithms/detail/quicksort_impl.hpp": "f297cc8a49f43c3268c84dfe2323944720e1811209b6afdfc114e014b0a3301e",
+    "include/algorithms/quicksort.hpp": "72d768105d49ee1f234b66cc5986b08fcde7cbbf2ebd6650df7885e5b9fb564a",
+    "include/algorithms/sorting.hpp": "b2bf399184767313e82adc3888ce29501c94535812645a6273134094b03a73ee",
+    "include/common/types.hpp": "4b2e378fdb0d49310d300e5cda1afd54ab8c1c8314e32a16ea6ce3b67637d849",
+    "include/datasets/generator.hpp": "b0f1944f3f94a0e5e5b20dfe6dadd26d937a43ca5e619f9de176b46ffe685e8b",
+    "scripts/capture_environment.py": "1d49b0ac22c91ddf8e904232d41525a482d37f2c812c28da012449625e645210",
+    "src/algorithms/baselines.cpp": "0c93ca1513ff47a9bc9a3e37dbc56d0fded9d98e5a5c94e53c638c0df99e20d1",
+    "src/algorithms/quicksort.cpp": "3a56801c6bb56020b39a0aa017eefc043c0a654666da73c7a6a603ec43a83505",
+    "src/algorithms/sorting.cpp": "627b729d4d644dead1be4d3a14113257571a19828f2f5eed1fbe39e29e2d1568",
+    "src/datasets/generator.cpp": "4a5cf9e840592361d77e92d147e544696d05b82b0f4c72a6d4871d8c0c726adf",
+    "src/main.cpp": "a30f3367558f15171b3e6a5a8b82f1765b3bd1c2ea2092b5e80a1c2a41982fd0",
+    "tests/test_baselines.cpp": "6cc9b36024aba24f8b5054de19b1ade4fe559975afd55437fe85233999c95776",
+    "tests/test_cli.py": "6de31b8a595a6a9183f869fb18462fd9f1442811a62b7c59048365fa9fde9a0f",
+    "tests/test_datasets.cpp": "d9feb87d30949c54905d3f862187df434f85b03bc3fccbc7acbe01541043449d",
+    "tests/test_environment.py": "9689cb6d191590a8e4cc6f915156c6e426418a2bcc3ca659bc9f1206ddb9bb9a",
+    "tests/test_quicksort.cpp": "6686b5a94951cb19e9178b9f769a277f68e3158dfb88072d50b7a26a010175d1",
+    "tests/test_support.hpp": "c8c307258004449c4dd8217b016611b0cd3b9c8d64e93a5f12789f6aff99c7ea"
+  }
+}

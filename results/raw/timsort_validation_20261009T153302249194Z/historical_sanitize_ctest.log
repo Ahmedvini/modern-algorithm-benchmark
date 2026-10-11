@@ -1,0 +1,107 @@
+Start testing: Oct 09 18:28 EEST
+----------------------------------------------------------
+1/6 Testing: baselines
+1/6 Test: baselines
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_baselines"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"baselines" start time: Oct 09 18:28 EEST
+Output:
+----------------------------------------------------------
+Passed 3590 full-vector differential sort cases and 98508 linear-oracle search checks
+<end of output>
+Test time =   0.47 sec
+----------------------------------------------------------
+Test Passed.
+"baselines" end time: Oct 09 18:28 EEST
+"baselines" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/6 Testing: environment_manifest
+2/6 Test: environment_manifest
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_environment.py"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"environment_manifest" start time: Oct 09 18:28 EEST
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"environment_manifest" end time: Oct 09 18:28 EEST
+"environment_manifest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/6 Testing: datasets
+3/6 Test: datasets
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_datasets"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"datasets" start time: Oct 09 18:28 EEST
+Output:
+----------------------------------------------------------
+Passed 220 distribution/size/seed cases, five exact one-swap fixtures, one five-swap fixture, empty/singleton swap checks, and existing fixtures/validation
+<end of output>
+Test time =   0.11 sec
+----------------------------------------------------------
+Test Passed.
+"datasets" end time: Oct 09 18:28 EEST
+"datasets" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/6 Testing: cli
+4/6 Test: cli
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cli.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/algorithm_benchmark"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"cli" start time: Oct 09 18:28 EEST
+Output:
+----------------------------------------------------------
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 0.426s
+
+OK
+<end of output>
+Test time =   0.47 sec
+----------------------------------------------------------
+Test Passed.
+"cli" end time: Oct 09 18:28 EEST
+"cli" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/6 Testing: quicksort
+5/6 Test: quicksort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_quicksort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"quicksort" start time: Oct 09 18:28 EEST
+Output:
+----------------------------------------------------------
+Passed 3718 QuickSort differential cases through public and observed paths; forced zero-budget fallback=1, one-budget fallback=1, balanced-child fallbacks=2, sentinel-range fallback=1, default-budget adversarial fallbacks=618
+<end of output>
+Test time =   1.43 sec
+----------------------------------------------------------
+Test Passed.
+"quicksort" end time: Oct 09 18:28 EEST
+"quicksort" time elapsed: 00:00:01
+----------------------------------------------------------
+
+6/6 Testing: pdqsort
+6/6 Test: pdqsort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_pdqsort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"pdqsort" start time: Oct 09 18:28 EEST
+Output:
+----------------------------------------------------------
+Passed 4027 PDQSort differential cases through public and registry paths
+<end of output>
+Test time =   0.89 sec
+----------------------------------------------------------
+Test Passed.
+"pdqsort" end time: Oct 09 18:28 EEST
+"pdqsort" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 09 18:28 EEST

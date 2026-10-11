@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "build/release",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^structure"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:24:11.814091+00:00",
+  "exit_code": 0,
+  "stdout": "Internal ctest changing into directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nTest project /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 1\n    Start 1: structures\n\n1: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_structures\n1: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n1: Test timeout computed to be: 1500\n1: Passed 6635 structure/input cases, 1239680 differential insertion attempts, 3218705 map-oracle lookups, 75665 invariant validations; public fixtures: skip levels=14, B-tree splits=14875\n1/3 Test #1: structures .......................   Passed    0.73 sec\ntest 2\n    Start 2: structure_timing\n\n2: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_structure_timing\n2: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n2: Test timeout computed to be: 1500\n2: Passed 72 reproducible structure workloads and 8190 validated build/lookup rows, rank/query tamper, failure, extrema and resource checks\n2/3 Test #2: structure_timing .................   Passed    0.01 sec\ntest 3\n    Start 3: structure_framework\n\n3: Test command: /usr/bin/python3 \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_structure_benchmark.py\" \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/structure_benchmark\"\n3: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n3: Test timeout computed to be: 1500\n3: ..........\n3: ----------------------------------------------------------------------\n3: Ran 10 tests in 0.450s\n3: \n3: OK\n3/3 Test #3: structure_framework ..............   Passed    0.50 sec\n\nThe following tests passed:\n\tstructures\n\tstructure_timing\n\tstructure_framework\n\n100% tests passed, 0 tests failed out of 3\n\nTotal Test time (real) =   1.24 sec\n",
+  "stderr": "",
+  "wall_seconds": 1.250548839001567,
+  "ended_utc": "2026-10-09T18:24:13.064765+00:00"
+}

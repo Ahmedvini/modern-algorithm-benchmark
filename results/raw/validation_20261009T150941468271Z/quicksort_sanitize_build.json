@@ -1,0 +1,9 @@
+{
+  "record_kind": "correctness_validation",
+  "command": "cmake --build build/sanitize --parallel 2",
+  "chunk_id": "1018f6",
+  "wall_time_seconds": 1.908948588,
+  "exit_code": 0,
+  "original_token_count": 224,
+  "output": "[  7%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/sorting.cpp.o\n[ 15%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o\n[ 23%] Linking CXX static library libmab_core.a\n[ 38%] Built target mab_core\n[ 53%] Building CXX object CMakeFiles/test_baselines.dir/tests/test_baselines.cpp.o\n[ 53%] Building CXX object CMakeFiles/algorithm_benchmark.dir/src/main.cpp.o\n[ 61%] Linking CXX executable algorithm_benchmark\n[ 61%] Built target algorithm_benchmark\n[ 69%] Building CXX object CMakeFiles/test_datasets.dir/tests/test_datasets.cpp.o\n[ 76%] Linking CXX executable test_baselines\n[ 76%] Built target test_baselines\n[ 84%] Building CXX object CMakeFiles/test_quicksort.dir/tests/test_quicksort.cpp.o\n[ 92%] Linking CXX executable test_datasets\n[100%] Linking CXX executable test_quicksort\n[100%] Built target test_datasets\n[100%] Built target test_quicksort\n"
+}

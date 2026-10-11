@@ -1,0 +1,33 @@
+{
+  "complete": true,
+  "prior_artifacts_unchanged": 696,
+  "protected_existing_project_files_unchanged": 76,
+  "protocol_sha256": "c2b414fb1322dbbcc56cff65adeae4c2a8da5743de26c6ecd26905d70bd0a61f",
+  "protocol_unchanged": true,
+  "frozen_sorting_study_unchanged": true,
+  "source_manifest_matches": true,
+  "sort_executable_unchanged": true,
+  "uncounted_timing_link": true,
+  "configurations": 8,
+  "build_measured_successes": 200,
+  "lookup_measured_successes": 1175,
+  "warmup_successes": 275,
+  "total_rows": 1650,
+  "failed_trials": 0,
+  "missing_trials": 0,
+  "summary_groups": 275,
+  "query_rows": 3008,
+  "eligible_category_config_pairs": 47,
+  "unavailable_category_config_pairs": 25,
+  "timed_query_answers_including_warmups": 90240,
+  "summary_regenerated_byte_identical": true,
+  "raw_files_unchanged": 83,
+  "regeneration_command": [
+    "/usr/bin/python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/analyze_structure_results.py",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/structures_validation_20261009T181402878134Z/smoke_matrix",
+    "--output",
+    "/tmp/tmp8jysx47e/summary.json"
+  ],
+  "regeneration_exit_code": 0
+}

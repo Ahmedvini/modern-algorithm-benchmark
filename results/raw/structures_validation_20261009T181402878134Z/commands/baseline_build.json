@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/release",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:14:10.229111+00:00",
+  "exit_code": 0,
+  "stdout": "[ 15%] Built target mab_core\n[ 25%] Built target mab_metrics\n[ 25%] Built target algorithm_benchmark\n[ 28%] Built target mab_search\n[ 33%] Built target mab_timing\n[ 36%] Built target test_baselines\n[ 40%] Built target test_datasets\n[ 43%] Built target test_quicksort\n[ 46%] Built target test_pdqsort\n[ 50%] Built target test_timsort\n[ 53%] Built target test_mergesort\n[ 56%] Built target test_radixsort\n[ 60%] Built target test_comparisons\n[ 66%] Built target test_memory_unsupported\n[ 70%] Built target test_memory\n[ 73%] Built target sort_metrics\n[ 76%] Built target test_timing\n[ 83%] Built target sort_benchmark\n[ 83%] Built target mab_search_metrics\n[ 86%] Built target mab_search_timing\n[ 90%] Built target test_searching\n[ 93%] Built target search_counts\n[ 96%] Built target search_benchmark\n[100%] Built target test_search_timing\n",
+  "stderr": "",
+  "wall_seconds": 0.2840242070014938,
+  "ended_utc": "2026-10-09T18:14:10.513251+00:00"
+}
