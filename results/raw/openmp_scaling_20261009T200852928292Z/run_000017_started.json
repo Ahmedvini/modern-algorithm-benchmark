@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/parallel_sort_benchmark",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_scaling_20261009T200852928292Z/run_000017",
+    "--sort",
+    "all",
+    "--size",
+    "32768",
+    "--seed",
+    "1729",
+    "--distribution",
+    "nearly_sorted",
+    "--threads",
+    "2",
+    "--repetitions",
+    "5",
+    "--warmups",
+    "1",
+    "--distinct",
+    "16",
+    "--memory-limit-mib",
+    "256",
+    "--run-id",
+    "openmp_scaling_20261009T200852928292Z:run_000017"
+  ]
+}
