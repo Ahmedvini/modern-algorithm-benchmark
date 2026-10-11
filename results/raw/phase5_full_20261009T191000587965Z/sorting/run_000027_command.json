@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/sort_benchmark",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/sorting/run_000027",
+    "--sort",
+    "std_sort,quick_sort,pdq_sort,tim_sort,merge_sort,radix_sort",
+    "--size",
+    "10000",
+    "--seed",
+    "2718",
+    "--distribution",
+    "reverse_sorted",
+    "--repetitions",
+    "5",
+    "--warmups",
+    "1",
+    "--memory-limit-mib",
+    "1024",
+    "--distinct",
+    "16",
+    "--run-id",
+    "sorting:run_000027"
+  ],
+  "exit_code": 0,
+  "stdout": "Completed 30 measured trials; raw data: \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/sorting/run_000027/trials.csv\"\n",
+  "stderr": ""
+}
