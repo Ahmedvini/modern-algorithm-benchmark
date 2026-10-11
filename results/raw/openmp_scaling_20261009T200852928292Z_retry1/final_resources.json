@@ -1,0 +1,95 @@
+{
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "available_memory_bytes": 6737031168,
+  "cgroups": [
+    {
+      "headroom_bytes": null,
+      "memory_current": 1986830336,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/cosmic-files-applet.scope"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 8000053248,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 8055582720,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 8413782016,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 8437387264,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice"
+    }
+  ],
+  "controls": "No affinity/frequency/cache/thermal/background changes; shared machine.",
+  "disk_free_bytes": 134532980736,
+  "frequency_policy": {
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy10/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy11/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy5/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy6/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy7/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy8/scaling_governor": "performance",
+    "/sys/devices/system/cpu/cpufreq/policy9/scaling_governor": "performance"
+  },
+  "load_average": [
+    3.52294921875,
+    2.701171875,
+    2.03955078125
+  ],
+  "logical_cpu_count": 12,
+  "platform": "linux",
+  "resource_limits": {
+    "AS": [
+      -1,
+      -1
+    ],
+    "CPU": [
+      -1,
+      -1
+    ],
+    "DATA": [
+      -1,
+      -1
+    ],
+    "FSIZE": [
+      -1,
+      -1
+    ],
+    "STACK": [
+      8388608,
+      -1
+    ]
+  },
+  "total_memory_bytes": 16475164672
+}

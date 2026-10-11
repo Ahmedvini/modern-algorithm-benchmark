@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/analyze_parallel_results.py",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_scaling_20261009T200852928292Z_retry1",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/openmp_scaling_20261009T200852928292Z_retry1",
+    "--figures",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/figures/openmp_scaling_20261009T200852928292Z_retry1"
+  ],
+  "exit_code": 0,
+  "finished_utc": "2026-10-09T20:38:22.227109+00:00",
+  "started_utc": "2026-10-09T20:38:15.014154+00:00",
+  "status": "successful",
+  "stderr": "",
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/openmp_scaling_20261009T200852928292Z_retry1\n",
+  "wall_seconds": 7.212955582999712
+}
