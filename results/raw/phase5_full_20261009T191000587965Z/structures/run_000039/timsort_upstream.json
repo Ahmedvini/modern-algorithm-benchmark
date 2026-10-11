@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/timsort/cpp-TimSort",
+  "revision": "99b612d9826e8387a30008f2b21be206181ad890",
+  "branch_at_selection": "2.x.y",
+  "header_version_macros": "2.1.0",
+  "license": "MIT",
+  "copyright_holders": [
+    "Fuji, Goro (gfx)",
+    "Morwenn",
+    "Igor Kushnir"
+  ],
+  "local_modifications": [],
+  "retrieved_at": "2026-10-09T15:36:55.848140+00:00",
+  "files": {
+    "include/gfx/timsort.hpp": {
+      "url": "https://raw.githubusercontent.com/timsort/cpp-TimSort/99b612d9826e8387a30008f2b21be206181ad890/include/gfx/timsort.hpp",
+      "sha256": "a5cf0f0f61d92a62cf14528d1969a236db587b95678b088b5e38833d9865e9c9"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/timsort/cpp-TimSort/99b612d9826e8387a30008f2b21be206181ad890/LICENSE",
+      "sha256": "210f3341e9e04dc3004f416ae0e28dc7e8eaa84528c5966661186a1b512f34c3"
+    }
+  }
+}
