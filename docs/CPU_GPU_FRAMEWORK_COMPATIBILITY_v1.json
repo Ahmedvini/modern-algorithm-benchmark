@@ -1,0 +1,28 @@
+{
+  "authorized_framework_exceptions": {
+    "CMakeLists.txt": {
+      "after_sha256": "f18be8635e326e25616a1c0e133ebfd35d5d2244fbe5b3d2aca16ccb4836f30d",
+      "before_sha256": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
+      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
+    },
+    "include/benchmark/cuda_timing.hpp": {
+      "after_sha256": "f73e9e4ac9681c37a3c71f58bd471dcd638dae08ba12e3257a66650ef4354c87",
+      "before_sha256": "79235f844f9d79094c8b973fa83e1f53782997848ab929bda4f7e183a97aef07",
+      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
+    },
+    "src/cuda/cub_timing.cu": {
+      "after_sha256": "230237187a3abbc1246f9604a3a72a0ed477da864f78d89f33422e44e58f1a45",
+      "before_sha256": "8a49e5b2dcbde91a49f97ada15adf7e610ca0de8865dc6f703ec2af19bc9f3f7",
+      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
+    }
+  },
+  "changes_frozen_protocol": false,
+  "grants_execution_authorization": false,
+  "parent_validation_policy_sha256": "084664cad16ee6540323cf6a0514e3ff3420c4d4d1204a5d571d947cd445a32b",
+  "policy": "cpu_gpu_framework_compatibility_v1",
+  "protocol": "cpu_gpu_comparison_v1",
+  "required_evidence_kind": "full_study_prerequisites",
+  "required_gpu_framework_methods": 14,
+  "requires_current_build_identity": true,
+  "schema_version": 1
+}

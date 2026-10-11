@@ -1,0 +1,91 @@
+{
+  "authorized_framework_exceptions": {
+    "CMakeLists.txt": {
+      "after_sha256": "f18be8635e326e25616a1c0e133ebfd35d5d2244fbe5b3d2aca16ccb4836f30d",
+      "before_sha256": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
+      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
+    },
+    "include/benchmark/cuda_timing.hpp": {
+      "after_sha256": "f73e9e4ac9681c37a3c71f58bd471dcd638dae08ba12e3257a66650ef4354c87",
+      "before_sha256": "79235f844f9d79094c8b973fa83e1f53782997848ab929bda4f7e183a97aef07",
+      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
+    },
+    "src/cuda/cub_timing.cu": {
+      "after_sha256": "230237187a3abbc1246f9604a3a72a0ed477da864f78d89f33422e44e58f1a45",
+      "before_sha256": "8a49e5b2dcbde91a49f97ada15adf7e610ca0de8865dc6f703ec2af19bc9f3f7",
+      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
+    }
+  },
+  "coverage": {
+    "cpu_release": {
+      "passed": 21
+    },
+    "cpu_sanitize": {
+      "passed": 21
+    },
+    "gpu_prepared": {
+      "failures": 0,
+      "inputs": 163,
+      "output_checks": 489
+    },
+    "independent_review": {
+      "accepted": true
+    },
+    "pilot": {
+      "failed": 0,
+      "measured": 150,
+      "missing": 0,
+      "warmups": 30
+    },
+    "production_gpu": {
+      "inputs": 475,
+      "output_checks": 1900
+    },
+    "timing_smoke": {
+      "complete": true,
+      "correctness": true
+    },
+    "workers": {
+      "output_checks": 12,
+      "threshold_team_verified": true
+    },
+    "workspace": {
+      "all_limits_passed": true,
+      "sizes": [
+        1025,
+        65537,
+        1000000
+      ]
+    }
+  },
+  "legacy_study_eligibility": false,
+  "policy": "cpu_gpu_validation_v2",
+  "required_records": {
+    "correctness_validation": [
+      "cpu_release",
+      "cpu_sanitize",
+      "gpu_prepared",
+      "workspace",
+      "workers"
+    ],
+    "full_study_prerequisites": [
+      "cpu_release",
+      "cpu_sanitize",
+      "gpu_prepared",
+      "workspace",
+      "workers",
+      "production_gpu",
+      "timing_smoke",
+      "pilot",
+      "independent_review"
+    ],
+    "pilot_measurements": [
+      "pilot"
+    ],
+    "timing_smoke": [
+      "timing_smoke"
+    ]
+  },
+  "schema_version": 2,
+  "study_execution_authorized": false
+}
