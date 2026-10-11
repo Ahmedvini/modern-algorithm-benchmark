@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport json,hashlib,tarfile\nr=Path.cwd();e=r/'results/raw/bounded_validation_20261011T020343203635Z'\nmanifest=json.loads((r/'docs/NON_TIMING_TEST_SELECTION_v2.json').read_text())\nentries=manifest['reviewed_source_sha256']\nassert all(hashlib.sha256((r/p).read_bytes()).hexdigest()==h for p,h in entries.items())\ninventory=[dict(name=n,classification=a['classification'],diagnostic_only=a.get('diagnostic_only',False),\ncommand=a['command'],reason=a['reason'],sanitizer_compatible=a['classification']=='cpu_correctness')\nfor n,a in sorted(manifest['tests'].items())]\n(e/'TEST_INVENTORY.json').write_text(json.dumps({'tests':inventory,'resource_diagnostic':{'command':['cpu_gpu_comparison','--resources','N'],'classification':'resource_diagnostic','sort_execution':False,'allocation':'bounded two key buffers and two workspace requests; not complete study workload'}},indent=2)+'\\n')\npaths=[r/'CMakeLists.txt',r/'AGENTS.md',r/'README.md']\nfor folder in ['include','src','scripts','tests','cmake','third_party','docs']:\n paths.extend(p for p in (r/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts and not p.name.startswith('.'))\nfiles={str(p.relative_to(r)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(paths))}\nassert all(not (r/p).is_symlink() for p in files)\n(e/'SOURCE_MANIFEST.json').write_text(json.dumps(files,indent=2,sort_keys=True)+'\\n')\nwith tarfile.open(e/'reviewed_source.tar.gz','x:gz') as archive:\n for p in files:archive.add(r/p,arcname=p,recursive=False)\narchivehash=hashlib.sha256((e/'reviewed_source.tar.gz').read_bytes()).hexdigest()\n(e/'ARCHIVE_SHA256.txt').write_text(archivehash+'\\n')\nprint('SOURCE_FILES',len(files),'ARCHIVE_SHA256',archivehash,'BYTES',(e/'reviewed_source.tar.gz').stat().st_size)\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:17:17.882077+00:00",
+  "exit_code": 0,
+  "stdout": "SOURCE_FILES 185 ARCHIVE_SHA256 03de3a45743206244c480195de4629b8d440139f0fc5e236981f1f9cecac7fa5 BYTES 443898\n",
+  "stderr": "",
+  "scope": "Reviewed source packaging only; excludes build/results/credentials"
+}

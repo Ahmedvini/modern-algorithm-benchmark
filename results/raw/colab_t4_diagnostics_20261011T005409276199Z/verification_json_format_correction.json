@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import json;from pathlib import Path\ne=Path('results/raw/colab_t4_diagnostics_20261011T005409276199Z');raw=(e/'VERIFIED_BEFORE.json').read_text();data=json.loads((e/'verify_before.json').read_text());clean=json.loads(data['stdout'])\nwith (e/'VERIFIED_BEFORE_V2.json').open('x') as f: print(json.dumps(clean,indent=2),file=f)\nprint('Retained initial file with literal backslash-n footer; corrected evidence JSON from retained verification stdout, no checks rerun or weakened.')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T00:56:13.291044+00:00",
+  "exit_code": 0,
+  "stdout": "Retained initial file with literal backslash-n footer; corrected evidence JSON from retained verification stdout, no checks rerun or weakened.\n",
+  "stderr": "",
+  "scope": "Own evidence formatting only; original retained"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--help"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:04:49.937538+00:00",
+  "exit_code": 0,
+  "stdout": "                                                                                \n Usage: colab exec [OPTIONS]                                                    \n                                                                                \n Execute code in a session                                                      \n                                                                                \n\u256d\u2500 Options \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256e\n\u2502 --session       -s      <str>    Session name                                \u2502\n\u2502 --file          -f      <str>    File to execute                             \u2502\n\u2502 --output-image          <str>    Path to save plot                           \u2502\n\u2502 --timeout               <float>  Timeout in seconds for code execution       \u2502\n\u2502                                  [default: 30.0]                             \u2502\n\u2502 --env                   <str>    Set an environment variable in the remote   \u2502\n\u2502                                  kernel as KEY=VALUE. Repeat for multiple    \u2502\n\u2502                                  variables.                                  \u2502\n\u2502 --help          -h               Show this message and exit.                 \u2502\n\u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u256f\n\n",
+  "stderr": "",
+  "scope": "CLI help only"
+}

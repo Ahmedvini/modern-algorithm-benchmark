@@ -1,0 +1,44 @@
+{
+  "modified_existing": [
+    "CMakeLists.txt",
+    "include/benchmark/cuda_timing.hpp",
+    "scripts/non_timing_tests.py",
+    "src/cuda/cub_timing.cu",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "timed_sample_expansion_equals_original": true,
+  "approved_19": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort"
+  ],
+  "timing_targets_excluded": [
+    "benchmark_framework",
+    "comparison_engine",
+    "cuda_benchmark_gpu_framework",
+    "experiment_pipeline",
+    "parallel_framework",
+    "parallel_mergesort",
+    "search_framework",
+    "search_timing",
+    "structure_framework",
+    "structure_timing",
+    "timing"
+  ]
+}

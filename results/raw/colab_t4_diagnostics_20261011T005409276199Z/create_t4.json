@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "new",
+    "--session",
+    "cpu-gpu-validation",
+    "--gpu",
+    "T4"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T00:55:04.109593+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Creating session 'cpu-gpu-validation'...\n[colab] Session READY.\n",
+  "stderr": "",
+  "scope": "Explicitly authorized T4 session provisioning only; no workload script"
+}

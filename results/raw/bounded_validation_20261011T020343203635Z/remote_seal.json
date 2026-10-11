@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation",
+    "--file",
+    "results/raw/bounded_validation_20261011T020343203635Z/remote_seal.py",
+    "--timeout",
+    "150"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:26:58.902275+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive\": \"/content/mab_bounded_20261011T020343203635Z/validation_evidence.tar.gz\",\n  \"sha256\": \"46dc7fc6bd00b95125995f1e8427a07dc714750976e5ae373462f6cfc059989e\",\n  \"members\": 44,\n  \"source_files_verified\": 185,\n  \"build_identities_verified\": true,\n  \"all_validation_complete\": false,\n  \"full_study_authorized\": false\n}\nREMOTE_EVIDENCE_SEALED\n",
+  "stderr": "",
+  "scope": "Read-only source/build verification, dependency snapshot and exclusive evidence export; no workloads"
+}

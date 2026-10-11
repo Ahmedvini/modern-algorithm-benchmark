@@ -1,0 +1,388 @@
+{
+  "tests": [
+    {
+      "name": "baselines",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_baselines"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "benchmark_framework",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_benchmark.py",
+        "@build/sort_benchmark"
+      ],
+      "reason": "Launches sort_benchmark.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "cli",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_cli.py",
+        "@build/algorithm_benchmark"
+      ],
+      "reason": "Correctness-only algorithm_benchmark CLI; no timer or performance output.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "comparison_engine",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_comparison"
+      ],
+      "reason": "Calls comparison trial timing engine.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "comparisons",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_comparisons"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "cpu_gpu_comparison_framework",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_cpu_gpu_comparison.py",
+        "@build/comparison_input"
+      ],
+      "reason": "Synthetic CSV/matrix analysis and mocked orchestration/prerequisites; small untimed input generation only.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "cuda_benchmark_analysis",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_cuda_benchmark.py"
+      ],
+      "reason": "Only the two-argument Python command is safe; no benchmark executable supplied; GPU timing methods skip.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "cuda_benchmark_gpu_framework",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_cuda_benchmark.py",
+        "@build/cuda_sort_benchmark"
+      ],
+      "reason": "Executable argument enables actual GPU timing methods; never select.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "cuda_preflight",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_cuda_preflight.py"
+      ],
+      "reason": "Mocks driver/runtime collection; real CMake option probes explicitly disable CUDA; no runtime/kernel execution.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "cuda_prepared_correctness",
+      "classification": "gpu_correctness",
+      "diagnostic_only": true,
+      "command": [
+        "@build/test_cuda_prepared_correctness"
+      ],
+      "reason": "Explicit opt-in untimed correctness diagnostic; source reviewed separately",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "cuda_runtime_smoke",
+      "classification": "gpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/cuda_runtime_probe"
+      ],
+      "reason": "Actual device enumeration and tiny correctness kernel; explicit GPU correctness opt-in only.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "cuda_sort_handoff",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_cuda_sort_handoff.py"
+      ],
+      "reason": "Injected unavailable/timeout/interruption handlers; invalid CLI and CUDA-OFF option checks; no actual GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "cuda_sorting",
+      "classification": "gpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_cuda_sorting"
+      ],
+      "reason": "Actual475-input/1900-output CUB correctness suite without benchmark timing; explicit GPU correctness opt-in only.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "datasets",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_datasets"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "environment_manifest",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_environment.py"
+      ],
+      "reason": "Manifest formatting, unavailable-command and invalid-cache tests; no timing or GPU probe.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "experiment_pipeline",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_experiments.py",
+        "@build"
+      ],
+      "reason": "End-to-end experiment tests invoke benchmark processes.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "memory",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_memory"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "memory_unsupported",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_memory_unsupported"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "mergesort",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_mergesort"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "metrics_cli",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_metrics_cli.py",
+        "@build/sort_metrics"
+      ],
+      "reason": "Counting-comparator/RSS CLI, no timing measurement or GPU sorter.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "parallel_framework",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_parallel_benchmark.py",
+        "@build/parallel_sort_benchmark"
+      ],
+      "reason": "Launches parallel_sort_benchmark.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "parallel_mergesort",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_parallel_mergesort"
+      ],
+      "reason": "Embedded N32768, W1/R2, sequential and parallel sort timing: six actual rows.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "parallel_workers_correctness",
+      "classification": "cpu_correctness",
+      "diagnostic_only": true,
+      "command": [
+        "@build/test_parallel_workers"
+      ],
+      "reason": "Explicit opt-in untimed correctness diagnostic; source reviewed separately",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "pdqsort",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_pdqsort"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "quicksort",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_quicksort"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "radixsort",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_radixsort"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "search_framework",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_search_benchmark.py",
+        "@build/search_benchmark",
+        "@build/search_counts"
+      ],
+      "reason": "Launches search_benchmark.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "search_timing",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_search_timing"
+      ],
+      "reason": "Calls real search batch timing engine.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "searching",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_searching"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "structure_framework",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@python",
+        "@source/tests/test_structure_benchmark.py",
+        "@build/structure_benchmark"
+      ],
+      "reason": "Launches structure_benchmark.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "structure_timing",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_structure_timing"
+      ],
+      "reason": "Calls real construction and lookup timing engines.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "structures",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_structures"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "timing",
+      "classification": "timing",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_timing"
+      ],
+      "reason": "Calls real sorting timing engine.",
+      "sanitizer_compatible": false
+    },
+    {
+      "name": "timsort",
+      "classification": "cpu_correctness",
+      "diagnostic_only": false,
+      "command": [
+        "@build/test_timsort"
+      ],
+      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call.",
+      "sanitizer_compatible": true
+    },
+    {
+      "name": "validation_policy",
+      "classification": "cpu_correctness",
+      "diagnostic_only": true,
+      "command": [
+        "@python",
+        "@source/tests/test_validation_policy.py"
+      ],
+      "reason": "Explicit opt-in untimed correctness diagnostic; source reviewed separately",
+      "sanitizer_compatible": true
+    }
+  ],
+  "resource_diagnostic": {
+    "command": [
+      "cpu_gpu_comparison",
+      "--resources",
+      "N"
+    ],
+    "classification": "resource_diagnostic",
+    "sort_execution": false,
+    "allocation": "bounded two key buffers and two workspace requests; not complete study workload"
+  }
+}

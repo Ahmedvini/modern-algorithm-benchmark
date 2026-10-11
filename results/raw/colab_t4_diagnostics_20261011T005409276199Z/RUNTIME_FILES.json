@@ -1,0 +1,87 @@
+{
+  "cuda_api_executed": false,
+  "cuda_library_loaded": false,
+  "device_nodes": {
+    "/dev/nvidia0": true,
+    "/dev/nvidiactl": true
+  },
+  "driver_version_file": "NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  580.82.07  Release Build  (builder@28e54e79972f)  Thu Apr 30 18:50:30 UTC 2026\nGCC version:  Selected multilib: .;@m64\n",
+  "libraries": [
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda/lib64/libcudart.so",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda/lib64/libcudart.so.13",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda/lib64/libcudart.so.13.0.96",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda/targets/x86_64-linux/lib/libcudart.so",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda/targets/x86_64-linux/lib/libcudart.so.13",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda/targets/x86_64-linux/lib/libcudart.so.13.0.96",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda-13.0/lib64/libcudart.so",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda-13.0/lib64/libcudart.so.13",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda-13.0/lib64/libcudart.so.13.0.96",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    },
+    {
+      "bytes": 704288,
+      "path": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96",
+      "resolved": "/usr/local/cuda-13.0/targets/x86_64-linux/lib/libcudart.so.13.0.96"
+    }
+  ],
+  "version_header_macros": {
+    "/usr/local/cuda-13.0/include/cuda.h": [
+      "#define CUDA_VERSION 13000"
+    ],
+    "/usr/local/cuda-13.0/include/cuda_runtime_api.h": [
+      "#define CUDART_VERSION  13000"
+    ],
+    "/usr/local/cuda-13.0/include/driver_types.h": [],
+    "/usr/local/cuda/include/cuda.h": [
+      "#define CUDA_VERSION 13000"
+    ],
+    "/usr/local/cuda/include/cuda_runtime_api.h": [
+      "#define CUDART_VERSION  13000"
+    ],
+    "/usr/local/cuda/include/driver_types.h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "states": {
+    "cpu_release": "BLOCKED: pre-discovery Dart metadata mismatch; no discovery/test executed",
+    "cpu_sanitize": "BLOCKED: same pre-discovery policy mismatch; no sanitizer test executed",
+    "gpu_prepared": {
+      "status": "PASS",
+      "inputs": 163,
+      "output_checks": 489,
+      "rejected_invalid_operations": 489,
+      "failed": 0,
+      "skipped": 0
+    },
+    "workspace": {
+      "status": "PASS",
+      "sizes": [
+        1025,
+        65537,
+        1000000
+      ],
+      "all_limits_passed": true
+    },
+    "workers": {
+      "status": "PASS",
+      "output_checks": 12,
+      "threshold_team_verified": true,
+      "task_participation": "not measured"
+    }
+  },
+  "study_eligible": false,
+  "execution_authorized": false,
+  "session_id": "gpu-t4-s-kkb-usw4b1-2i9q6dkvjw07d",
+  "executable_sha256": {
+    "cpu_gpu_comparison": "8e51c1579de53686c8105bab80a03a09fca3edae704a494c415126db781ffd77",
+    "test_cuda_prepared_correctness": "e3c97a139000fdb7869410afb860a76a934567587dbf0a2b4f7acb37cde99335",
+    "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6"
+  },
+  "full_validation_complete": false,
+  "benchmark_trials": 0,
+  "warmups": 0,
+  "source_unchanged": true
+}

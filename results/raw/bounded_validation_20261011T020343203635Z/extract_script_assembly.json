@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport hashlib,json,tarfile\ne=Path('results/raw/bounded_validation_20261011T020343203635Z'); mh=hashlib.sha256((e/'SOURCE_MANIFEST.json').read_bytes()).hexdigest()\nah=(e/'ARCHIVE_SHA256.txt').read_text().strip()\nscript=\"\"\"from pathlib import Path\nimport hashlib,json,tarfile,sys\nroot=Path('/content/mab_bounded_20261011T020343203635Z')\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nassert sha(root/'source.tar.gz')==ARCHIVE_HASH\nassert sha(root/'source_manifest.json')==MANIFEST_HASH\nfiles=json.loads((root/'source_manifest.json').read_text())\ndest=root/'source';assert not dest.exists()\nwith tarfile.open(root/'source.tar.gz','r:gz') as t:\n members=t.getmembers()\n assert len(members)==len(files) and len({m.name for m in members})==len(members)\n for m in members:\n  p=Path(m.name)\n  assert m.isfile() and not p.is_absolute() and '..' not in p.parts and m.name in files\n dest.mkdir()\n t.extractall(dest,filter='data')\nassert all(sha(dest/p)==h for p,h in files.items())\nsys.path.insert(0,str(dest/'scripts'))\nfrom cpu_gpu_validation_policy import verify_current_sources\nfrom non_timing_tests import load_manifest\nverify_current_sources();manifest=load_manifest()\nassert len([n for n,a in manifest['tests'].items() if a['classification']=='cpu_correctness' and not a.get('diagnostic_only')])==19\nevidence=root/'evidence';evidence.mkdir()\n(evidence/'transfer.json').write_text(json.dumps(dict(verified=True,files=len(files),archive_sha256=ARCHIVE_HASH,manifest_sha256=MANIFEST_HASH,source=str(dest),source_sha256=files),indent=2)+'\\\\n')\nprint('TRANSFER_VERIFIED',len(files),ARCHIVE_HASH)\n\"\"\".replace('ARCHIVE_HASH',repr(ah)).replace('MANIFEST_HASH',repr(mh))\n(e/'remote_extract.py').write_text(script)\nprint('Prepared explicit archive/member/hash checks; no execution')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:18:23.053976+00:00",
+  "exit_code": 0,
+  "stdout": "Prepared explicit archive/member/hash checks; no execution\n",
+  "stderr": "",
+  "scope": "Evidence-only transfer verification script assembly"
+}

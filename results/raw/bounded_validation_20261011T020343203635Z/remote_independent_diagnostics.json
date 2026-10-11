@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation",
+    "--file",
+    "results/raw/bounded_validation_20261011T020343203635Z/remote_independent_diagnostics.py",
+    "--timeout",
+    "840"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:25:21.520804+00:00",
+  "exit_code": 0,
+  "stdout": "comparison_description exit 0\ngpu_prepared_untimed exit 0\nresources_1025 exit 0\nresources_65537 exit 0\nresources_1000000 exit 0\nactual_workers_untimed exit 0\n{\n  \"cpu_release\": \"BLOCKED: pre-discovery Dart metadata mismatch; no discovery/test executed\",\n  \"cpu_sanitize\": \"BLOCKED: same pre-discovery policy mismatch; no sanitizer test executed\",\n  \"gpu_prepared\": {\n    \"status\": \"PASS\",\n    \"inputs\": 163,\n    \"output_checks\": 489,\n    \"rejected_invalid_operations\": 489,\n    \"failed\": 0,\n    \"skipped\": 0\n  },\n  \"workspace\": {\n    \"status\": \"PASS\",\n    \"sizes\": [\n      1025,\n      65537,\n      1000000\n    ],\n    \"all_limits_passed\": true\n  },\n  \"workers\": {\n    \"status\": \"PASS\",\n    \"output_checks\": 12,\n    \"threshold_team_verified\": true,\n    \"task_participation\": \"not measured\"\n  }\n}\nINDEPENDENT_DIRECT_DIAGNOSTICS_PASSED; CPU SUITES BLOCKED; NO STUDY AUTHORIZATION\n",
+  "stderr": "",
+  "scope": "Authorized untimed GPU oracle/worker checks and bounded workspace diagnostics only; CPU CTest suites remain stopped"
+}

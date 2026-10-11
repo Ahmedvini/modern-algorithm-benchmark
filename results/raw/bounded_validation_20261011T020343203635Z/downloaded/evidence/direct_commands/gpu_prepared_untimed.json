@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/content/mab_bounded_20261011T020343203635Z/gpu-release/test_cuda_prepared_correctness"
+  ],
+  "cwd": "/content/mab_bounded_20261011T020343203635Z/source",
+  "finished_utc": "2026-10-11T02:25:24.477703+00:00",
+  "exit_code": 0,
+  "stdout": "{\"schema_version\":1,\"artifact_kind\":\"correctness_validation\",\"scope\":\"prepared_cuda_untimed_v1\",\"study_eligible\":false,\"status\":\"passed\",\"inputs\":163,\"output_checks\":489,\"invalid_operations_rejected\":489,\"failures\":0}\n",
+  "stderr": "",
+  "binary_sha256_before": "e3c97a139000fdb7869410afb860a76a934567587dbf0a2b4f7acb37cde99335",
+  "binary_sha256_after": "e3c97a139000fdb7869410afb860a76a934567587dbf0a2b4f7acb37cde99335",
+  "classification": "untimed correctness or bounded resource diagnostic; no benchmarks"
+}

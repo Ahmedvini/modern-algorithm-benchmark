@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "download",
+    "/content/mab_bounded_20261011T020343203635Z/validation_evidence.tar.gz",
+    "results/raw/bounded_validation_20261011T020343203635Z/validation_evidence.tar.gz",
+    "--session",
+    "cpu-gpu-bounded-validation"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:27:47.790652+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Downloaded '/content/mab_bounded_20261011T020343203635Z/validation_evidence.tar.gz' to 'results/raw/bounded_validation_20261011T020343203635Z/validation_evidence.tar.gz'\n",
+  "stderr": "",
+  "scope": "Download sealed current validation evidence only; no workloads"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "upload",
+    "results/raw/bounded_validation_20261011T020343203635Z/SOURCE_MANIFEST.json",
+    "/content/mab_bounded_20261011T020343203635Z/source_manifest.json",
+    "--session",
+    "cpu-gpu-bounded-validation"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:18:06.669837+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Uploaded 'results/raw/bounded_validation_20261011T020343203635Z/SOURCE_MANIFEST.json' to '/content/mab_bounded_20261011T020343203635Z/source_manifest.json'\n",
+  "stderr": "",
+  "scope": "Authorized reviewed source transfer only; no execution"
+}

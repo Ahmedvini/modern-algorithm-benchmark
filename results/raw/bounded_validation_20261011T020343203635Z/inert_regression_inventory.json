@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "-c",
+    "rg --files tests | rg \"ctest|path_identity|non_timing|safety\"; rg -n \"subprocess|selected_ctest|selector.main|class |patch|unittest.main\" tests/test_ctest_guard.py tests/test_ctest_path_identity.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:22:22.095739+00:00",
+  "exit_code": 2,
+  "stdout": "tests/test_ctest_build_guard.py\ntests/ctest_fixture.py\ntests/test_cpu_gpu_safety.py\n",
+  "stderr": "rg: tests/test_ctest_guard.py: No such file or directory (os error 2)\nrg: tests/test_ctest_path_identity.py: No such file or directory (os error 2)\n",
+  "scope": "Read-only inventory of guard/path test sources"
+}

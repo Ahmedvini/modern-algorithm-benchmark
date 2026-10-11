@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "colab",
+    "sessions"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T00:54:32.238013+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] No active sessions found on server.\n",
+  "stderr": "",
+  "scope": "CLI metadata/session inventory only"
+}

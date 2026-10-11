@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/bounded_validation_20261011T020343203635Z/assemble_final.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:35:28.809012+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"historical_files_before\": 11910,\n  \"historical_files_after_excluding_new_evidence\": 11910,\n  \"trusted_anchors_count\": 26,\n  \"reviewed_source_files\": 149,\n  \"remote_sealed_members\": 43\n}\n",
+  "stderr": "",
+  "scope": "Evidence-only hashing and report assembly; no subprocess/CTest/GPU/workload execution inside assembler"
+}

@@ -1,0 +1,60 @@
+--- before/src/cuda/cub_timing.cu
++++ src/cuda/cub_timing.cu
+@@ -30,6 +30,17 @@
+     cudaStream_t stream = nullptr;
+     std::array<cudaEvent_t, 4> events{};
+     bool closed = false;
++    void h2d() {
++        checked(cudaMemcpyAsync(input, host_input, bytes, cudaMemcpyHostToDevice, stream), "H2D");
++    }
++    void sort() {
++        checked(cub::DeviceRadixSort::SortKeys(workspace, info.workspace_bytes, input, output,
++                static_cast<int>(size), 0, 32, stream), "CUB SortKeys");
++        checked(cudaGetLastError(), "CUB launch status");
++    }
++    void d2h() {
++        checked(cudaMemcpyAsync(host_output, output, bytes, cudaMemcpyDeviceToHost, stream), "D2H");
++    }
+     ~Impl() noexcept {
+         if (stream) secondary(cudaStreamSynchronize(stream));
+         for (auto e : events) if (e) secondary(cudaEventDestroy(e));
+@@ -94,13 +105,11 @@
+     checked(cudaStreamSynchronize(s.stream), "prior stream synchronize");
+     const auto start = Clock::now();
+     checked(cudaEventRecord(s.events[0], s.stream), "record H2D start");
+-    checked(cudaMemcpyAsync(s.input, s.host_input, s.bytes, cudaMemcpyHostToDevice, s.stream), "H2D");
++    s.h2d();
+     checked(cudaEventRecord(s.events[1], s.stream), "record sort start");
+-    checked(cub::DeviceRadixSort::SortKeys(s.workspace, s.info.workspace_bytes, s.input, s.output,
+-            static_cast<int>(s.size), 0, 32, s.stream), "CUB SortKeys");
+-    checked(cudaGetLastError(), "CUB launch status");
++    s.sort();
+     checked(cudaEventRecord(s.events[2], s.stream), "record D2H start");
+-    checked(cudaMemcpyAsync(s.host_output, s.output, s.bytes, cudaMemcpyDeviceToHost, s.stream), "D2H");
++    s.d2h();
+     checked(cudaEventRecord(s.events[3], s.stream), "record D2H stop");
+     checked(cudaEventSynchronize(s.events[3]), "pipeline completion");
+     const auto stop = Clock::now();
+@@ -116,6 +125,22 @@
+     }
+     std::copy(s.host_output, s.host_output + s.size, output.begin());
+     return result;
++}
++void CudaTimingSession::execute_untimed(const Values& input, Values& output) {
++    auto& s = *impl_;
++    if (s.closed || input.size() != s.size || output.size() != s.size || &input == &output)
++        throw std::invalid_argument("invalid prepared CUDA timing buffers/session");
++    if (s.size < 2) {
++        if (s.size) output[0] = input[0];
++        return;
++    }
++    std::copy(input.begin(), input.end(), s.host_input);
++    checked(cudaStreamSynchronize(s.stream), "prior stream synchronize");
++    s.h2d();
++    s.sort();
++    s.d2h();
++    checked(cudaStreamSynchronize(s.stream), "untimed pipeline completion");
++    std::copy(s.host_output, s.host_output + s.size, output.begin());
+ }
+ void CudaTimingSession::close() {
+     auto& s = *impl_;

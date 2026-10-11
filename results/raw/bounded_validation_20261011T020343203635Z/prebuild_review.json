@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport difflib,json,re\nr=Path.cwd();e=r/'results/raw/bounded_validation_20261011T020343203635Z'\ninventory=[]\nfor before in sorted((e/'before').rglob('*')):\n if not before.is_file():continue\n rel=before.relative_to(e/'before');after=r/rel\n diff=''.join(difflib.unified_diff(before.read_text().splitlines(True),after.read_text().splitlines(True),fromfile='before/'+str(rel),tofile='after/'+str(rel)))\n (e/(str(rel).replace('/','_')+'.diff')).write_text(diff)\n inventory.append(str(rel))\nbefore=(e/'before/src/cuda/cub_timing.cu').read_text()\nafter=(r/'src/cuda/cub_timing.cu').read_text()\ndef body(text):return text.split('CudaTimingSample CudaTimingSession::sample(',1)[1].split('void CudaTimingSession::',1)[0]\nexpanded=body(after)\nfor method in ['h2d','sort','d2h']:\n block=after.split('    void '+method+'() {',1)[1].split('\\n    }',1)[0]\n block='\\n'.join(line[4:] for line in block.strip('\\n').splitlines()).replace('input, host_input','s.input, s.host_input').replace('host_output, output','s.host_output, s.output')\n # Exact comparison via fixed original operation blocks, validated helper bodies separately.\n originals={'h2d':'    checked(cudaMemcpyAsync(s.input, s.host_input, s.bytes, cudaMemcpyHostToDevice, s.stream), \"H2D\");',\n 'sort':'    checked(cub::DeviceRadixSort::SortKeys(s.workspace, s.info.workspace_bytes, s.input, s.output,\\n            static_cast<int>(s.size), 0, 32, s.stream), \"CUB SortKeys\");\\n    checked(cudaGetLastError(), \"CUB launch status\");',\n 'd2h':'    checked(cudaMemcpyAsync(s.host_output, s.output, s.bytes, cudaMemcpyDeviceToHost, s.stream), \"D2H\");'}\n expanded=expanded.replace('    s.'+method+'();',originals[method])\nassert expanded==body(before)\nv1=json.loads((r/'docs/NON_TIMING_TEST_SELECTION_v1.json').read_text())\nv2=json.loads((r/'docs/NON_TIMING_TEST_SELECTION_v2.json').read_text())\nsafe=lambda d:sorted(n for n,a in d['tests'].items() if a['classification']=='cpu_correctness' and not a.get('diagnostic_only'))\nassert safe(v1)==safe(v2) and len(safe(v2))==19\n(e/'STATIC_REVIEW.json').write_text(json.dumps({'modified_existing':inventory,'timed_sample_expansion_equals_original':True,'approved_19':safe(v2),'timing_targets_excluded':[n for n,a in v2['tests'].items() if a['classification']=='timing']},indent=2)+'\\n')\nprint('Sample boundaries unchanged; original exact 19 preserved; diffs retained')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:16:29.223278+00:00",
+  "exit_code": 0,
+  "stdout": "Sample boundaries unchanged; original exact 19 preserved; diffs retained\n",
+  "stderr": "",
+  "scope": "Static complete source diff and metadata review; no workloads"
+}

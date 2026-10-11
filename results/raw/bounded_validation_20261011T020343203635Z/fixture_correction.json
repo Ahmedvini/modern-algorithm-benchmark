@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport json,hashlib\np=Path('docs/NON_TIMING_TEST_SELECTION_v2.json');d=json.loads(p.read_text())\nd['reviewed_source_sha256']['tests/test_validation_policy.py']=hashlib.sha256(Path('tests/test_validation_policy.py').read_bytes()).hexdigest()\np.write_text(json.dumps(d,indent=2,sort_keys=True)+'\\n')\nprint('Corrected fixture keyword collision; updated reviewed test digest only')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:15:07.041965+00:00",
+  "exit_code": 0,
+  "stdout": "Corrected fixture keyword collision; updated reviewed test digest only\n",
+  "stderr": "",
+  "scope": "Focused synthetic fixture correction; no validation requirement weakened"
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-bounded-validation",
+    "--file",
+    "results/raw/bounded_validation_20261011T020343203635Z/remote_metadata_inspection.py",
+    "--timeout",
+    "90"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:24:09.477541+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"cpu-release\": {\n    \"extra_keys\": [\n      \"TLSVerify\",\n      \"TLSVersion\"\n    ],\n    \"missing_keys\": [],\n    \"differing_values\": {\n      \"Site\": {\n        \"expected\": \"pop-os\",\n        \"actual\": \"cacf46058c07\"\n      },\n      \"ConfigureCommand\": {\n        \"expected\": \"\\\"/usr/bin/cmake\\\" \\\"@source\\\"\",\n        \"actual\": \"\\\"/usr/local/lib/python3.13/dist-packages/cmake/data/bin/cmake\\\" \\\"/content/mab_bounded_20261011T020343203635Z/source\\\"\"\n      },\n      \"MakeCommand\": {\n        \"expected\": \"/usr/bin/cmake --build . --config \\\"${CTEST_CONFIGURATION_TYPE}\\\"\",\n        \"actual\": \"/usr/local/lib/python3.13/dist-packages/cmake/data/bin/cmake --build . --config \\\"${CTEST_CONFIGURATION_TYPE}\\\"\"\n      },\n      \"MemoryCheckCommand\": {\n        \"expected\": \"MEMORYCHECK_COMMAND-NOTFOUND\",\n        \"actual\": \"/usr/local/cuda/bin/compute-sanitizer\"\n      }\n    },\n    \"dart_sha256\": \"52a1074777d91de85ff0c75620d5ba8eb2bf5360f797ecf0e5c94712ad57ed1e\"\n  },\n  \"cpu-sanitize\": {\n    \"extra_keys\": [\n      \"TLSVerify\",\n      \"TLSVersion\"\n    ],\n    \"missing_keys\": [],\n    \"differing_values\": {\n      \"Site\": {\n        \"expected\": \"pop-os\",\n        \"actual\": \"cacf46058c07\"\n      },\n      \"ConfigureCommand\": {\n        \"expected\": \"\\\"/usr/bin/cmake\\\" \\\"@source\\\"\",\n        \"actual\": \"\\\"/usr/local/lib/python3.13/dist-packages/cmake/data/bin/cmake\\\" \\\"/content/mab_bounded_20261011T020343203635Z/source\\\"\"\n      },\n      \"MakeCommand\": {\n        \"expected\": \"/usr/bin/cmake --build . --config \\\"${CTEST_CONFIGURATION_TYPE}\\\"\",\n        \"actual\": \"/usr/local/lib/python3.13/dist-packages/cmake/data/bin/cmake --build . --config \\\"${CTEST_CONFIGURATION_TYPE}\\\"\"\n      },\n      \"MemoryCheckCommand\": {\n        \"expected\": \"MEMORYCHECK_COMMAND-NOTFOUND\",\n        \"actual\": \"/usr/local/cuda/bin/compute-sanitizer\"\n      }\n    },\n    \"dart_sha256\": \"c6a23adc99d195bc6f28c1beb4fcf046ea215480ded05b4ba42371d962d15a4c\"\n  },\n  \"gpu-release\": {\n    \"extra_keys\": [\n      \"TLSVerify\",\n      \"TLSVersion\"\n    ],\n    \"missing_keys\": [],\n    \"differing_values\": {\n      \"Site\": {\n        \"expected\": \"pop-os\",\n        \"actual\": \"cacf46058c07\"\n      },\n      \"ConfigureCommand\": {\n        \"expected\": \"\\\"/usr/bin/cmake\\\" \\\"@source\\\"\",\n        \"actual\": \"\\\"/usr/local/lib/python3.13/dist-packages/cmake/data/bin/cmake\\\" \\\"/content/mab_bounded_20261011T020343203635Z/source\\\"\"\n      },\n      \"MakeCommand\": {\n        \"expected\": \"/usr/bin/cmake --build . --config \\\"${CTEST_CONFIGURATION_TYPE}\\\"\",\n        \"actual\": \"/usr/local/lib/python3.13/dist-packages/cmake/data/bin/cmake --build . --config \\\"${CTEST_CONFIGURATION_TYPE}\\\"\"\n      },\n      \"MemoryCheckCommand\": {\n        \"expected\": \"MEMORYCHECK_COMMAND-NOTFOUND\",\n        \"actual\": \"/usr/local/cuda/bin/compute-sanitizer\"\n      }\n    },\n    \"dart_sha256\": \"ce3030ca735556e9dfe0cf1bce24644f8bf5c1a70b4b6131b90868bd47584ff0\"\n  }\n}\nREAD_ONLY_METADATA_INSPECTION_COMPLETE; NO CTEST EXECUTED\n",
+  "stderr": "",
+  "scope": "Read-only generated metadata inspection after guard rejection; no discovery/tests"
+}

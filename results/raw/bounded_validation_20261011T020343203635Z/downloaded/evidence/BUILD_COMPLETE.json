@@ -1,0 +1,34 @@
+{
+  "builds": {
+    "cpu-release": "/content/mab_bounded_20261011T020343203635Z/cpu-release",
+    "cpu-sanitize": "/content/mab_bounded_20261011T020343203635Z/cpu-sanitize",
+    "gpu-release": "/content/mab_bounded_20261011T020343203635Z/gpu-release"
+  },
+  "source_verified": true,
+  "identities": {
+    "cpu-release": {
+      "CMakeCache.txt": "2ad0b9d7306df9d9b422b27dc14f8767885ade2a962205bae62fa77bf76f2086",
+      "compile_commands.json": "df3980dce769255185c4139f680a504eb6d93bfa7cd36d3b4da2fe34ab4411c9",
+      "CTestTestfile.cmake": "edd158aad6cbcfc651ffb53f1ddc7c8050774ef63396ac2606b2fe021fa5a43f",
+      "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6",
+      "libmab_parallel.a": "5a316a67182a9375f39376a5b7fefd80e71985809e7f7d2c6a58b94de76381b2"
+    },
+    "cpu-sanitize": {
+      "CMakeCache.txt": "13f7c45ad6ce1c5aff2d772be24ddd857852b32a89bca29682f4922eaf4e4de2",
+      "compile_commands.json": "b6e4228f684f72736148e089cb6e784c1342664d7bb2ae6c7b675db0ca716ad4",
+      "CTestTestfile.cmake": "40e587e89a8c029d5b673d13ba78c8ce6b74c5c1541fa0e83ad63e57c8303caa",
+      "test_parallel_workers": "fdf3941395ae96016b6dd043b2e6a76ac771e7411d45ded39727e562b80a0752",
+      "libmab_parallel.a": "44226c1d57dfff5724db0b56b4c6fe4e895e615b4b8daf754325ea24f2f4ab90"
+    },
+    "gpu-release": {
+      "CMakeCache.txt": "f4f32a955828bf4a484c5771d84c1eab783d11e8514c09ca90c082116f2f1958",
+      "compile_commands.json": "8423dde8ba46949b8bb953ea134ebf714874085338dd2ea99e091ee8c839b93a",
+      "CTestTestfile.cmake": "4630dd5b5c92271a9e67341617342f42ef89360a31cf70f80dd6b7cda33ccca8",
+      "test_parallel_workers": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6",
+      "libmab_parallel.a": "5a316a67182a9375f39376a5b7fefd80e71985809e7f7d2c6a58b94de76381b2",
+      "cpu_gpu_comparison": "8e51c1579de53686c8105bab80a03a09fca3edae704a494c415126db781ffd77",
+      "test_cuda_prepared_correctness": "e3c97a139000fdb7869410afb860a76a934567587dbf0a2b4f7acb37cde99335",
+      "libmab_cuda_timing.a": "f1f8772b665798eb3701ec94dcc1e667281fab3f35189992a1f598bbdcc71cd0"
+    }
+  }
+}

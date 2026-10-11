@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "tests/test_validation_policy.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:14:47.035989+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "...E.....\n======================================================================\nERROR: test_four_kinds_are_distinct_and_never_authorize_execution (__main__.PolicyTests.test_four_kinds_are_distinct_and_never_authorize_execution)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_validation_policy.py\", line 34, in test_four_kinds_are_distinct_and_never_authorize_execution\n    a,c=self.fixture(kind); r=p.classify(a,c)\n        ^^^^^^^^^^^^^^^^^^\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_validation_policy.py\", line 23, in fixture\n    records = {name: dict(status='passed',exit_code=0,skipped=0,missing=0,sha256='d'*64,\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: dict() got multiple values for keyword argument 'missing'\n\n----------------------------------------------------------------------\nRan 9 tests in 0.094s\n\nFAILED (errors=1)\n",
+  "scope": "Focused synthetic unit tests; inspected no subprocess workloads, CTest or GPU execution"
+}

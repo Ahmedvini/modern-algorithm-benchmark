@@ -1,0 +1,26 @@
+--- before/README.md
++++ README.md
+@@ -809,3 +809,23 @@
+ All47 focused inert regressions pass; no CTest, build, prerequisite, resource or
+ GPU command ran. The approved19 CPU selection and supported layouts are unchanged.
+ This repair still requires separate independent review; study launch remains NO-GO.
++# Bounded CPU/GPU validation extension — incomplete
++
++The explicitly opted-in `MAB_ENABLE_VALIDATION_DIAGNOSTICS=ON` targets provide
++prepared-CUB correctness without timing and an OpenMP runtime-team diagnostic.
++The [v2 validation policy](docs/CPU_GPU_VALIDATION_POLICY_v2.md) preserves the
++original 19-test CPU selection and keeps diagnostics separate from timing tests.
++Historical study protocols, production CUB sorting and CUB3.0.1 are unchanged.
++
++Fresh replacement-T4 builds passed. Direct prepared-GPU correctness passed
++163 inputs/489 output checks, three frozen-size workspace checks passed, and
++12 public/registry worker checks verified actual team sizes. **CPU regression and
++ASan/UBSan execution remain blocked**: the pre-discovery guard rejects the new
++CMake3.31 Dart metadata. No CTest discovery or suite execution occurred, and no
++benchmark, pilot, warm-up or measured trial ran.
++
++See [the bounded-validation audit](results/raw/bounded_validation_20261011T020343203635Z/FINAL_AUDIT.md).
++Next: review the exact Dart metadata differences and an appropriately bounded
++policy extension before rerunning guarded correctness suites. Full-study
++execution remains unauthorized; correctness evidence is not timing validation.
++

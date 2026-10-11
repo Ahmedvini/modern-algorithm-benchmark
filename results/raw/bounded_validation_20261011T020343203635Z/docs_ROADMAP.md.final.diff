@@ -1,0 +1,29 @@
+--- before/docs/ROADMAP.md
++++ docs/ROADMAP.md
+@@ -492,3 +492,26 @@
+ approved19 CPU plan, frozen inputs, production adapters and CUB3.0.1 remain unchanged.
+ See [repair audit](../results/raw/ctest_path_repair_20261010T234224414430Z/FINAL_AUDIT.md).
+ Exact next gate: separate independent review only. Study launch remains **NO-GO**.
++# Bounded validation preparation — current status: NO-GO
++
++The separately authorized untimed prepared-CUB and OpenMP worker diagnostics
++are implemented. An additive v2 evidence-classification policy distinguishes
++correctness, timing smoke, pilot and full prerequisites; legacy study gates and
++frozen inputs remain unchanged. The original 19 CPU selections remain exact,
++with new diagnostics requiring explicit opt-in.
++
++A replacement Tesla T4 session built fresh CPU Release, CPU sanitizer and CUDA
++Release configurations. Direct GPU correctness passed163 inputs/489 oracle
++checks; all three frozen-size resource diagnostics and12 worker checks passed.
++The CPU regression/sanitizer suites have **not executed**: the static guard
++rejected CMake3.31 Dart TLS keys and discovered memory-check configuration.
++No discovery, benchmark, smoke/pilot measurement or study ran.
++
++Next smallest milestone: independently review retained generated Dart metadata
++and an exact safe policy extension, then rerun the guarded CPU Release and
++ASan/UBSan correctness selections under explicit bounded scope. Do not relax
++unknown-configuration rejection. Untimed diagnostics do not establish timing
++framework validity or authorize the full study. See
++[the current audit](../results/raw/bounded_validation_20261011T020343203635Z/FINAL_AUDIT.md)
++and [policy](CPU_GPU_VALIDATION_POLICY_v2.md).
++

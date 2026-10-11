@@ -1,0 +1,42 @@
+{
+  "blockers": [
+    "Project source and cpu_gpu_comparison executable absent in inspected remote workspace"
+  ],
+  "comparison_executable_present_in_inspected_scope": false,
+  "cuda_execution_verified": false,
+  "disk": {
+    "free_bytes": 75467313152,
+    "path": "/content",
+    "total_bytes": 120942624768
+  },
+  "gpu": [
+    "Tesla T4",
+    "GPU-c51b969a-fbb1-a810-8346-93e2f6fc1849",
+    "580.82.07",
+    "15360",
+    "14913",
+    "37",
+    "300",
+    "405",
+    "70.00"
+  ],
+  "installed_reviewed_headers_sha256": {
+    "cub_version.cuh": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124",
+    "device_radix_sort.cuh": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+  },
+  "limits": [
+    "No builds, tests or CUDA execution authorized",
+    "No remote project frozen-input verification possible without source",
+    "Header checks do not verify the entire transitive CCCL tree",
+    "Resource observations are snapshots, not reservations"
+  ],
+  "logical_cpu_count": 2,
+  "project_present_in_inspected_scope": false,
+  "ram_available_bytes": 12546945024,
+  "ram_total_bytes": 13605822464,
+  "runtime_library_loaded": false,
+  "scope": "/content, depth<=8, pruned Drive/results/private and dependency directories; no files outside scope assumed absent",
+  "session_alias": "cpu-gpu-validation",
+  "session_id": "gpu-t4-s-kkb-usw4b0-21qggbdn9iask",
+  "status": "BLOCKED"
+}

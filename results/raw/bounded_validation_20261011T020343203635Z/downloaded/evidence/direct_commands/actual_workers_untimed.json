@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/content/mab_bounded_20261011T020343203635Z/gpu-release/test_parallel_workers"
+  ],
+  "cwd": "/content/mab_bounded_20261011T020343203635Z/source",
+  "finished_utc": "2026-10-11T02:25:25.510474+00:00",
+  "exit_code": 0,
+  "stdout": "{\"schema_version\":1,\"artifact_kind\":\"correctness_validation\",\"scope\":\"openmp_workers_untimed_v1\",\"study_eligible\":false,\"executable\":\"/content/mab_bounded_20261011T020343203635Z/gpu-release/test_parallel_workers\",\"build_type\":\"Release\",\"compiler\":\"13.3.0\",\"flags\":\"-O3 -DNDEBUG\",\"sanitizers\":false,\"openmp_version\":\"4.5\",\"openmp_flags\":\"-fopenmp\",\"runtime_dynamic\":0,\"runtime_thread_limit\":2,\"requested_threads\":2,\"team_size_is_task_participation\":false,\"environment\":{\"OMP_NUM_THREADS\":null,\"OMP_DYNAMIC\":\"FALSE\",\"OMP_THREAD_LIMIT\":\"2\",\"OMP_MAX_ACTIVE_LEVELS\":\"1\",\"OMP_PROC_BIND\":\"FALSE\",\"OMP_WAIT_POLICY\":\"PASSIVE\"},\"calls\":[{\"size\":0,\"registry\":false,\"actual_team_size\":1,\"parallel_region\":false,\"correctness\":true},{\"size\":0,\"registry\":true,\"actual_team_size\":1,\"parallel_region\":false,\"correctness\":true},{\"size\":1,\"registry\":false,\"actual_team_size\":1,\"parallel_region\":false,\"correctness\":true},{\"size\":1,\"registry\":true,\"actual_team_size\":1,\"parallel_region\":false,\"correctness\":true},{\"size\":32767,\"registry\":false,\"actual_team_size\":1,\"parallel_region\":false,\"correctness\":true},{\"size\":32767,\"registry\":true,\"actual_team_size\":1,\"parallel_region\":false,\"correctness\":true},{\"size\":32768,\"registry\":false,\"actual_team_size\":2,\"parallel_region\":true,\"correctness\":true},{\"size\":32768,\"registry\":true,\"actual_team_size\":2,\"parallel_region\":true,\"correctness\":true},{\"size\":32769,\"registry\":false,\"actual_team_size\":2,\"parallel_region\":true,\"correctness\":true},{\"size\":32769,\"registry\":true,\"actual_team_size\":2,\"parallel_region\":true,\"correctness\":true},{\"size\":65537,\"registry\":false,\"actual_team_size\":2,\"parallel_region\":true,\"correctness\":true},{\"size\":65537,\"registry\":true,\"actual_team_size\":2,\"parallel_region\":true,\"correctness\":true}],\"output_checks\":12,\"status\":\"passed\"}\n",
+  "stderr": "",
+  "binary_sha256_before": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6",
+  "binary_sha256_after": "b68258082395578568615407281fa3437e60b3f898de616a1a9575dbf517b0c6",
+  "classification": "untimed correctness or bounded resource diagnostic; no benchmarks"
+}

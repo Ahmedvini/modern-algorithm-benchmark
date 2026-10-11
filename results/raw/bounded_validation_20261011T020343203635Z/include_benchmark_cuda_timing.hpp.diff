@@ -1,0 +1,12 @@
+--- before/include/benchmark/cuda_timing.hpp
++++ after/include/benchmark/cuda_timing.hpp
+@@ -27,6 +27,9 @@
+     CudaTimingSession(CudaTimingSession&&) = delete;
+     CudaTimingSession& operator=(CudaTimingSession&&) = delete;
+     CudaTimingSample sample(const Values& input, Values& output);
++    // Correctness diagnostic only: same prepared pipeline, no clock/event samples.
++    // Produces no performance result and never implies study eligibility.
++    void execute_untimed(const Values& input, Values& output);
+     const CudaTimingInfo& info() const noexcept;
+     void close(); // Checked release before a successful run's completion marker.
+ private:

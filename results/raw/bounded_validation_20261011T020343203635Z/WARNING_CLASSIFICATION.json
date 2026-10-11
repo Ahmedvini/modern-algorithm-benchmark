@@ -1,0 +1,38 @@
+{
+  "current_warnings": 367,
+  "historical_known_count": 341,
+  "category": "style of line directive is a GCC extension",
+  "source_prefix_counts": {
+    "/tmp/tmpxft_000023e0_00000000-6_cub_sort.cudafe1.cpp": 1,
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu": 78,
+    "/content/mab_bounded_20261011T020343203635Z/source/include/common/types.hpp": 8,
+    "/content/mab_bounded_20261011T020343203635Z/source/include/algorithms/sorting.hpp": 8,
+    "/content/mab_bounded_20261011T020343203635Z/source/include/algorithms/cuda_sorting.hpp": 7,
+    "tmpxft_000023e0_00000000-6_cub_sort.cudafe1.stub.c": 2,
+    "/tmp/tmpxft_00002414_00000000-6_cub_timing.cudafe1.cpp": 1,
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_timing.cu": 154,
+    "/content/mab_bounded_20261011T020343203635Z/source/include/benchmark/cuda_timing.hpp": 26,
+    "tmpxft_00002414_00000000-6_cub_timing.cudafe1.stub.c": 2,
+    "/tmp/tmpxft_00002493_00000000-6_comparison_resources.cudafe1.cpp": 1,
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/comparison_resources.cu": 66,
+    "/content/mab_bounded_20261011T020343203635Z/source/include/benchmark/cuda_comparison.hpp": 11,
+    "tmpxft_00002493_00000000-6_comparison_resources.cudafe1.stub.c": 2
+  },
+  "examples": [
+    "/tmp/tmpxft_000023e0_00000000-6_cub_sort.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:4:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:3:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:7:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/src/cuda/cub_sort.cu:1:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/include/common/types.hpp:7:3: warning: style of line directive is a GCC extension",
+    "/content/mab_bounded_20261011T020343203635Z/source/include/common/types.hpp:8:3: warning: style of line directive is a GCC extension"
+  ],
+  "suppression_applied": false,
+  "other_warning_categories": [],
+  "note": "Count367 is freshly observed; historical341 is not reused as current count. No inference about numerical/performance equivalence."
+}

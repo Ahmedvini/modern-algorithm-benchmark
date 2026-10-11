@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import json,hashlib;from pathlib import Path\nr=Path.cwd();e=r/'results/raw/colab_t4_diagnostics_20261011T005409276199Z'\ndef sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()\nseal=json.loads((r/'results/raw/cpu_gpu_readiness_20261011T004018152238Z/FINAL_INTEGRITY.json').read_text())\nfreeze=r/'docs/studies/cpu_gpu_comparison_v1.freeze.json'\nassert sha(freeze)=='518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6'\nmaps={'readiness_evidence':seal['evidence_sha256'],'frozen_members':json.loads(freeze.read_text())['files_sha256'],'reviewed_source':json.loads((r/'docs/NON_TIMING_TEST_SELECTION_v1.json').read_text())['reviewed_source_sha256']}\nreport={}\nfor name,m in maps.items():\n changed=[p for p,h in m.items() if not(r/p).is_file() or sha(r/p)!=h];report[name]={'files':len(m),'differences':changed};assert not changed,name\nassert sha(r/'src/cuda/cub_sort.cu')==seal['production_adapter_sha256']\nassert sha(r/'third_party/cub/UPSTREAM.json')==seal['cub_pin_sha256']\nwith (e/'VERIFIED_BEFORE.json').open('x') as f:json.dump(report,f,indent=2);f.write('\\n')\nprint(json.dumps(report,indent=2))"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T00:54:47.213628+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"readiness_evidence\": {\n    \"files\": 35,\n    \"differences\": []\n  },\n  \"frozen_members\": {\n    \"files\": 3,\n    \"differences\": []\n  },\n  \"reviewed_source\": {\n    \"files\": 144,\n    \"differences\": []\n  }\n}\n",
+  "stderr": "",
+  "scope": "Static integrity only"
+}

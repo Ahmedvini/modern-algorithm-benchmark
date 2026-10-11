@@ -1,0 +1,44 @@
+{
+  "build_metadata": {
+    "changed": [],
+    "count": 65,
+    "missing": [],
+    "unexpected": []
+  },
+  "frozen_members": {
+    "changed": [],
+    "count": 3,
+    "missing": [],
+    "unexpected": []
+  },
+  "historical_results": {
+    "changed": [],
+    "count": 11668,
+    "missing": [],
+    "unexpected": []
+  },
+  "production_headers_dependencies": {
+    "changed": [],
+    "count": 80,
+    "missing": [],
+    "unexpected": []
+  },
+  "project": {
+    "changed": [],
+    "count": 177,
+    "missing": [],
+    "unexpected": []
+  },
+  "protected_anchors": {
+    "changed": [],
+    "count": 26,
+    "missing": [],
+    "unexpected": []
+  },
+  "reviewed_source": {
+    "changed": [],
+    "count": 144,
+    "missing": [],
+    "unexpected": []
+  }
+}

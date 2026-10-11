@@ -1,0 +1,14 @@
+{
+  "readiness_evidence": {
+    "files": 35,
+    "differences": []
+  },
+  "frozen_members": {
+    "files": 3,
+    "differences": []
+  },
+  "reviewed_source": {
+    "files": 144,
+    "differences": []
+  }
+}

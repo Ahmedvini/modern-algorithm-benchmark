@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import sys,json\nfrom pathlib import Path\nsys.path.insert(0,str(Path('scripts').resolve()))\nfrom cpu_gpu_validation_policy import verify_current_sources,classify\nE=Path(\"results/raw/bounded_validation_20261011T020343203635Z\")\np=verify_current_sources()\nartifact={'schema_version':2,'policy':p['policy'],'artifact_kind':'correctness_validation','status':'incomplete','study_eligible':False,'execution_authorized':False,'evidence':'downloaded/evidence/DIRECT_DIAGNOSTICS_COMPLETE.json'}\ntry:\n classify(artifact,{})\nexcept ValueError as error:\n assert str(error)=='failed/incomplete/interrupted validation',str(error)\n result={'actual_partial_bundle_accepted':False,'reason':str(error),'policy':p['policy'],'protected_sources_verified':True,'bounded_validation_ready':False,'study_eligible':False,'execution_authorized':False,'note':'Offline classification of current explicitly incomplete coverage; no execution or fabricated passed records.'}\n with (E/'PARTIAL_CLASSIFICATION.json').open('x') as f:json.dump(result,f,indent=2);f.write('\\n')\n print(json.dumps(result,indent=2))\nelse:\n raise AssertionError('incomplete validation accepted')\n"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T02:32:04.565466+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"actual_partial_bundle_accepted\": false,\n  \"reason\": \"failed/incomplete/interrupted validation\",\n  \"policy\": \"cpu_gpu_validation_v2\",\n  \"protected_sources_verified\": true,\n  \"bounded_validation_ready\": false,\n  \"study_eligible\": false,\n  \"execution_authorized\": false,\n  \"note\": \"Offline classification of current explicitly incomplete coverage; no execution or fabricated passed records.\"\n}\n",
+  "stderr": "",
+  "scope": "Offline provenance and classification only; imports inspected stdlib modules, no subprocess/CTest/GPU/timers"
+}

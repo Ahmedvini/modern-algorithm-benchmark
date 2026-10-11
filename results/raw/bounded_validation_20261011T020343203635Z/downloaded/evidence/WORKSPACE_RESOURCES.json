@@ -1,0 +1,114 @@
+{
+  "rows": [
+    {
+      "size": 1025,
+      "query": {
+        "adapter_diagnostic_cudaMalloc_requested_bytes": 1,
+        "adapter_query_bytes": 1,
+        "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+        "combined_device_payload_bytes": 16402,
+        "compute_major": 7,
+        "compute_minor": 5,
+        "driver_api_version": 13000,
+        "free_device_bytes_before_buffers": 15527116800,
+        "gpu_name": "Tesla T4",
+        "known_host_peak_payload_bytes": 24600,
+        "prepared_diagnostic_cudaMalloc_requested_bytes": 1,
+        "prepared_query_bytes": 1,
+        "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+        "runtime_api_version": 13000,
+        "size": 1025,
+        "total_device_bytes": 15637086208,
+        "workspace_policy_cap_each_bytes": 67108864
+      },
+      "explicit_key_cudaMalloc_requested_bytes": 8200,
+      "explicit_workspace_cudaMalloc_requested_bytes": 2,
+      "calculated_full_study_host_payload_bytes": 24600,
+      "host_available_bytes": 12503564288,
+      "disk_free_bytes": 75301515264,
+      "physical_gpu_allocation": "not measured",
+      "sorting_executed": false
+    },
+    {
+      "size": 65537,
+      "query": {
+        "adapter_diagnostic_cudaMalloc_requested_bytes": 279295,
+        "adapter_query_bytes": 279295,
+        "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+        "combined_device_payload_bytes": 1607182,
+        "compute_major": 7,
+        "compute_minor": 5,
+        "driver_api_version": 13000,
+        "free_device_bytes_before_buffers": 15527116800,
+        "gpu_name": "Tesla T4",
+        "known_host_peak_payload_bytes": 1572888,
+        "prepared_diagnostic_cudaMalloc_requested_bytes": 279295,
+        "prepared_query_bytes": 279295,
+        "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+        "runtime_api_version": 13000,
+        "size": 65537,
+        "total_device_bytes": 15637086208,
+        "workspace_policy_cap_each_bytes": 67108864
+      },
+      "explicit_key_cudaMalloc_requested_bytes": 524296,
+      "explicit_workspace_cudaMalloc_requested_bytes": 558590,
+      "calculated_full_study_host_payload_bytes": 1572888,
+      "host_available_bytes": 12503564288,
+      "disk_free_bytes": 75301515264,
+      "physical_gpu_allocation": "not measured",
+      "sorting_executed": false
+    },
+    {
+      "size": 1000000,
+      "query": {
+        "adapter_diagnostic_cudaMalloc_requested_bytes": 4178687,
+        "adapter_query_bytes": 4178687,
+        "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+        "combined_device_payload_bytes": 24357374,
+        "compute_major": 7,
+        "compute_minor": 5,
+        "driver_api_version": 13000,
+        "free_device_bytes_before_buffers": 15527116800,
+        "gpu_name": "Tesla T4",
+        "known_host_peak_payload_bytes": 24000000,
+        "prepared_diagnostic_cudaMalloc_requested_bytes": 4178687,
+        "prepared_query_bytes": 4178687,
+        "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+        "runtime_api_version": 13000,
+        "size": 1000000,
+        "total_device_bytes": 15637086208,
+        "workspace_policy_cap_each_bytes": 67108864
+      },
+      "explicit_key_cudaMalloc_requested_bytes": 8000000,
+      "explicit_workspace_cudaMalloc_requested_bytes": 8357374,
+      "calculated_full_study_host_payload_bytes": 24000000,
+      "host_available_bytes": 12503564288,
+      "disk_free_bytes": 75301515264,
+      "physical_gpu_allocation": "not measured",
+      "sorting_executed": false
+    }
+  ],
+  "sizes": [
+    1025,
+    65537,
+    1000000
+  ],
+  "all_limits_passed": true,
+  "resource_snapshot_only": true,
+  "linux_meminfo": "MemTotal:       13286936 kB\nMemFree:         7856292 kB\nMemAvailable:   12210512 kB\nBuffers:          159848 kB\nCached:          4372408 kB\nSwapCached:            0 kB\nActive:           753132 kB\nInactive:        4315436 kB\nActive(anon):       1548 kB\nInactive(anon):   537208 kB\nActive(file):     751584 kB\nInactive(file):  3778228 kB\nUnevictable:           8 kB\nMlocked:               8 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:               408 kB\nWriteback:             0 kB\nAnonPages:        536508 kB\nMapped:           447176 kB\nShmem:              2436 kB\nKReclaimable:     131268 kB\nSlab:             178640 kB\nSReclaimable:     131268 kB\nSUnreclaim:        47372 kB\nKernelStack:        5304 kB\nPageTables:         7380 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     6643468 kB\nCommitted_AS:    2691632 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       57428 kB\nVmallocChunk:          0 kB\nPercpu:             1096 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      185116 kB\nDirectMap2M:     8200192 kB\nDirectMap1G:     7340032 kB\n",
+  "cgroup": {
+    "/sys/fs/cgroup/cpu.max": "max 100000",
+    "/sys/fs/cgroup/memory.max": "max",
+    "/sys/fs/cgroup/memory.current": "2802995200",
+    "/sys/fs/cgroup/cpu/cpu.cfs_quota_us": null,
+    "/sys/fs/cgroup/cpu/cpu.cfs_period_us": null,
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us": null,
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_period_us": null,
+    "/sys/fs/cgroup/memory/memory.limit_in_bytes": null,
+    "/sys/fs/cgroup/memory/memory.usage_in_bytes": null
+  },
+  "cpu_affinity": [
+    0,
+    1
+  ]
+}

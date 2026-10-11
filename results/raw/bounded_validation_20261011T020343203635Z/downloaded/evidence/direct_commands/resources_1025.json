@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/content/mab_bounded_20261011T020343203635Z/gpu-release/cpu_gpu_comparison",
+    "--resources",
+    "1025"
+  ],
+  "cwd": "/content/mab_bounded_20261011T020343203635Z/source",
+  "finished_utc": "2026-10-11T02:25:24.871148+00:00",
+  "exit_code": 0,
+  "stdout": "{\"adapter_diagnostic_cudaMalloc_requested_bytes\":1,\"adapter_query_bytes\":1,\"allocation_observation\":\"successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured\",\"combined_device_payload_bytes\":16402,\"compute_major\":7,\"compute_minor\":5,\"driver_api_version\":13000,\"free_device_bytes_before_buffers\":15527116800,\"gpu_name\":\"Tesla T4\",\"known_host_peak_payload_bytes\":24600,\"prepared_diagnostic_cudaMalloc_requested_bytes\":1,\"prepared_query_bytes\":1,\"production_workspace_observation\":\"not instrumented; isolated same-parameter sizing query only\",\"runtime_api_version\":13000,\"size\":1025,\"total_device_bytes\":15637086208,\"workspace_policy_cap_each_bytes\":67108864}\n",
+  "stderr": "",
+  "binary_sha256_before": "8e51c1579de53686c8105bab80a03a09fca3edae704a494c415126db781ffd77",
+  "binary_sha256_after": "8e51c1579de53686c8105bab80a03a09fca3edae704a494c415126db781ffd77",
+  "classification": "untimed correctness or bounded resource diagnostic; no benchmarks"
+}

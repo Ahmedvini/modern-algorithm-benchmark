@@ -1,0 +1,88 @@
+{
+  "benchmarks": 0,
+  "builds_run": 0,
+  "ctest_discoveries": 0,
+  "cub_pin_sha256": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+  "cuda_api_calls": 0,
+  "cuda_kernels": 0,
+  "evidence_sha256": {
+    "BEFORE.json": "5e7617183dd888e45925698c6b023e25999ce2c0dfe66d0c800efd4e379a91c0",
+    "COMMANDS.md": "2245f9b025d9306aed02310986b139d759e019c0e965e1995d0a1935d9d2ed0d",
+    "DIAGNOSTIC_ASSESSMENT.json": "c7a05377601ee692685978087bca5ca3fbc6f6df45af38a4f871fb1421ac91ef",
+    "EARLY_COMMANDS.json": "969841f8096e2da08ac07a7d80f7bb5ad49456149cb0feee5fc8460c0815f8f9",
+    "FINAL_AUDIT.md": "e030850e96dc3124bb1627b7bfc65289dd03e56f9dea07f545fbb19e840e9fc1",
+    "PRESERVATION.json": "06100ae22c005a1f7c867d08b5236422e9a2ad8839bf73441da5725e64df533e",
+    "REMOTE_DIAGNOSTICS.json": "21655ae15353c2d84a41801a0c791b7fb8085142b2f3484729c1072ee79ce4df",
+    "RUNTIME_FILES.json": "a199381044529934face4d4500dc5389123c6abb58752218fdc8543c743fac61",
+    "VERIFIED_BEFORE.json": "d1c480a52e460a3293a546801a74ff53e18a08fd4cefc3bc4d8384f72da0e62d",
+    "VERIFIED_BEFORE_V2.json": "d1c480a52e460a3293a546801a74ff53e18a08fd4cefc3bc4d8384f72da0e62d",
+    "cli_exec_help.json": "d468dc2ec8990d24140dccf793ee8434b295cbf65a8a96e912f4f7d2b903c5bd",
+    "cli_new_help.json": "88b9bd9190ce9e6e56d905284812acd98afb4f5ceaef8b72b2a05a17a1a39dc9",
+    "cli_sessions.json": "7e04f8bba19b854758f698c0231d412169df8b63e2f87fed87749bf9297b792f",
+    "cli_usage_docs.json": "fc0ff88726b94cb13102ca39a4538a02fdc20a6d0a6169b8e7c578ad15b40e7b",
+    "cli_version.json": "de5a8c394a3c8ae5b78921cb91e1debc28d65445108373b1c8861df6c9ca1a8b",
+    "create_t4.json": "49e93c0f25073af53c2c89f93a0874b0a34e755d20680e066aead7cf40fe3a3c",
+    "finalize_evidence.py": "8434db92fe7d77be54f54e8f5036a9d102dd0f6b259d8b2f170cf8a1f63f4f32",
+    "record.py": "dff18d0092155e59e106d8628d6ba587666ab5717ede88b6fe9db389ee3a6fe2",
+    "remote_diagnostic_run.json": "45094ccc26e3efd9ed17136acfe677c2bee5a831ab85c562fc609d5cd3197543",
+    "remote_diagnostics.py": "ff3b4e960d93a0a64ea0b52ca97e78af48e7d644c3a64642ea2c9b365b940593",
+    "runtime_files_diagnostic.py": "8a4af1a4114758801f41594c439d35e22dfbd8630bb65e13a49d49ad18f69851",
+    "runtime_files_run.json": "20d1b5946c787f02d0a43ec1b6399f87fe047e89c181e9a5c9a563f33bb608e7",
+    "session_status.json": "e463f4fa735d6d1f1b0dc1215b53572a86aa4dc76d74534cc64fd097aa40b43a",
+    "session_status_final.json": "1d7c1843cdbad7cc4895008231e9cd8ccd66685d89073884338ec08b0d5a4289",
+    "sessions_after_create.json": "20223b18149d5c99217d59b27a66d9edd6512beb0884509328b4243f4f062f3a",
+    "verification_json_format_correction.json": "9a59948a8f310308ae0572a75415d262ca857b14cb3eb585a4f3fbde1f53fcd7",
+    "verify_before.json": "9980728e678d88359a0ce147b72792625931f4d1612629555b4edad0f51a96b5"
+  },
+  "freeze_sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+  "preservation": {
+    "build_metadata": {
+      "changed": [],
+      "count": 65,
+      "missing": [],
+      "unexpected": []
+    },
+    "frozen_members": {
+      "changed": [],
+      "count": 3,
+      "missing": [],
+      "unexpected": []
+    },
+    "historical_results": {
+      "changed": [],
+      "count": 11668,
+      "missing": [],
+      "unexpected": []
+    },
+    "production_headers_dependencies": {
+      "changed": [],
+      "count": 80,
+      "missing": [],
+      "unexpected": []
+    },
+    "project": {
+      "changed": [],
+      "count": 177,
+      "missing": [],
+      "unexpected": []
+    },
+    "protected_anchors": {
+      "changed": [],
+      "count": 26,
+      "missing": [],
+      "unexpected": []
+    },
+    "reviewed_source": {
+      "changed": [],
+      "count": 144,
+      "missing": [],
+      "unexpected": []
+    }
+  },
+  "production_adapter_sha256": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+  "seal_excludes_itself": true,
+  "session_created": true,
+  "status": "BLOCKED",
+  "study_authorized": false,
+  "tests_run": 0
+}
