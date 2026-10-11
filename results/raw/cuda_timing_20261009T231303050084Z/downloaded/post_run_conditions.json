@@ -1,0 +1,36 @@
+{
+  "captured_utc": "2026-10-09T23:27:33.081916+00:00",
+  "timing": "after benchmark, not controlled during measurements",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "probes": [
+    {
+      "argv": [
+        "nvidia-smi",
+        "--query-gpu=name,driver_version,compute_cap,memory.total,temperature.gpu,clocks.current.sm,clocks.current.memory",
+        "--format=csv,noheader"
+      ],
+      "exit_code": 0,
+      "stdout": "Tesla T4, 580.82.07, 7.5, 15360 MiB, 42, 300 MHz, 405 MHz\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "uptime"
+      ],
+      "exit_code": 0,
+      "stdout": " 23:27:33 up 27 min,  0 user,  load average: 0.71, 0.49, 0.30\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "df",
+        "-h",
+        "/content"
+      ],
+      "exit_code": 0,
+      "stdout": "Filesystem      Size  Used Avail Use% Mounted on\noverlay         113G   43G   71G  38% /\n",
+      "stderr": ""
+    }
+  ],
+  "governors": {}
+}

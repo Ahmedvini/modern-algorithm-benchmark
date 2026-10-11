@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/cuda_sort_benchmark",
+    "--output",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/matrix/run_0019",
+    "--run-id",
+    "run_0019",
+    "--size",
+    "1",
+    "--distribution",
+    "duplicate_heavy",
+    "--seed",
+    "42",
+    "--warmups",
+    "1",
+    "--repetitions",
+    "5"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark"
+}

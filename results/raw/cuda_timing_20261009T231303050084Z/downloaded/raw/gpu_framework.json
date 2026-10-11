@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^cuda_benchmark_gpu_framework$"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "status": "completed",
+  "stderr": "",
+  "stdout": "Internal ctest changing into directory: /content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build\nUpdateCTestConfiguration  from :/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nParse Config file:/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nParse Config file:/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nTest project /content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 27\n    Start 27: cuda_benchmark_gpu_framework\n\n27: Test command: /usr/local/bin/python \"/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/tests/test_cuda_benchmark.py\" \"/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/cuda_sort_benchmark\"\n27: Working Directory: /content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build\n27: Test timeout computed to be: 180\n27: .....run_0000 exit 9\n27: run_0000 timed out\n27: .......[Errno 17] File exists: '/tmp/tmp93_99j11/processed'\n27: .correctness exit 9\n27: .\n27: ----------------------------------------------------------------------\n27: Ran 14 tests in 14.037s\n27: \n27: OK\n1/1 Test #27: cuda_benchmark_gpu_framework .....   Passed   14.23 sec\n\nThe following tests passed:\n\tcuda_benchmark_gpu_framework\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =  14.23 sec\n",
+  "wall_seconds": 14.426509711000108
+}

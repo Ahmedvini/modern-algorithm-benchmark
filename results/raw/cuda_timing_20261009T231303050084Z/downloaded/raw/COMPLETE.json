@@ -1,0 +1,19 @@
+{
+  "complete": true,
+  "configurations": 48,
+  "failed_trials": 0,
+  "measured_trials": 240,
+  "missing_trials": 0,
+  "protocol": "cuda_sort_timing_v1",
+  "smallest_measured_trials": 5,
+  "smallest_warmups": 1,
+  "source_manifest_sha256": "a7687df8b0697c6b0009cfcedc908808fa5715d4d5b67d555bc4701d95783d5d",
+  "summaries_sha256": {
+    "matrix.json": "320d3c01028a4472322005c8b6c65bc049e97b18563f38254eb16840d622c335",
+    "matrix_regenerated.json": "320d3c01028a4472322005c8b6c65bc049e97b18563f38254eb16840d622c335",
+    "smallest.json": "17717e524d5299b712f76e1793443fb3acd73e03c83aefbefbbb89224bb887b1",
+    "smallest_regenerated.json": "17717e524d5299b712f76e1793443fb3acd73e03c83aefbefbbb89224bb887b1"
+  },
+  "summary_regeneration_identical": true,
+  "warmups": 48
+}

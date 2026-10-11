@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^cuda_benchmark_gpu_framework$"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark"
+}

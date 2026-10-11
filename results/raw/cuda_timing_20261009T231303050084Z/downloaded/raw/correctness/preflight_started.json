@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/scripts/cuda_preflight.py",
+    "--output",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/preflight",
+    "--timeout-seconds",
+    "180"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark"
+}

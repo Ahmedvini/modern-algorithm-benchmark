@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^cuda_sorting$"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "status": "completed",
+  "stderr": "",
+  "stdout": "Internal ctest changing into directory: /content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build\nUpdateCTestConfiguration  from :/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nParse Config file:/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nParse Config file:/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/DartConfiguration.tcl\nTest project /content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 28\n    Start 28: cuda_sorting\n\n28: Test command: /content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/test_cuda_sorting\n28: Working Directory: /content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build\n28: Test timeout computed to be: 240\n28: {\"schema_version\":1,\"protocol\":\"cuda_sort_correctness_v2\",\"algorithm\":\"cub_radix_sort\",\"implementation_version\":\"cub_radix_sort_v1\",\"status\":\"ok\",\"cases\":475,\"output_checks\":1900,\"cub_version\":300001,\"runtime_api_version\":13000,\"driver_api_version\":13000,\"device\":0,\"compute_major\":7,\"compute_minor\":5}\n1/1 Test #28: cuda_sorting .....................   Passed    0.90 sec\n\nThe following tests passed:\n\tcuda_sorting\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   0.91 sec\n",
+  "wall_seconds": 1.1221068279999145
+}

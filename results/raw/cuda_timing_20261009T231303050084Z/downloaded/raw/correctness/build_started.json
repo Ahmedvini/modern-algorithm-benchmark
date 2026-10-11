@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build",
+    "--target",
+    "test_cuda_sorting",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark"
+}

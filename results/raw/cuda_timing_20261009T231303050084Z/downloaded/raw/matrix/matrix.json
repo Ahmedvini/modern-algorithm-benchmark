@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "protocol": "cuda_sort_timing_v1",
+  "started_utc": "2026-10-09T23:26:34.909778+00:00",
+  "executable": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness/build/cuda_sort_benchmark",
+  "order": "size_distribution_seed_product_sequential",
+  "configurations": [
+    {
+      "name": "run_0000",
+      "size": 0,
+      "distribution": "uniform",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0001",
+      "size": 0,
+      "distribution": "uniform",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0002",
+      "size": 0,
+      "distribution": "sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0003",
+      "size": 0,
+      "distribution": "sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0004",
+      "size": 0,
+      "distribution": "reverse_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0005",
+      "size": 0,
+      "distribution": "reverse_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0006",
+      "size": 0,
+      "distribution": "duplicate_heavy",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0007",
+      "size": 0,
+      "distribution": "duplicate_heavy",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0008",
+      "size": 0,
+      "distribution": "nearly_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0009",
+      "size": 0,
+      "distribution": "nearly_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0010",
+      "size": 0,
+      "distribution": "signed_edges",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0011",
+      "size": 0,
+      "distribution": "signed_edges",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0012",
+      "size": 1,
+      "distribution": "uniform",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0013",
+      "size": 1,
+      "distribution": "uniform",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0014",
+      "size": 1,
+      "distribution": "sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0015",
+      "size": 1,
+      "distribution": "sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0016",
+      "size": 1,
+      "distribution": "reverse_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0017",
+      "size": 1,
+      "distribution": "reverse_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0018",
+      "size": 1,
+      "distribution": "duplicate_heavy",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0019",
+      "size": 1,
+      "distribution": "duplicate_heavy",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0020",
+      "size": 1,
+      "distribution": "nearly_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0021",
+      "size": 1,
+      "distribution": "nearly_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0022",
+      "size": 1,
+      "distribution": "signed_edges",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0023",
+      "size": 1,
+      "distribution": "signed_edges",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0024",
+      "size": 1025,
+      "distribution": "uniform",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0025",
+      "size": 1025,
+      "distribution": "uniform",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0026",
+      "size": 1025,
+      "distribution": "sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0027",
+      "size": 1025,
+      "distribution": "sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0028",
+      "size": 1025,
+      "distribution": "reverse_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0029",
+      "size": 1025,
+      "distribution": "reverse_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0030",
+      "size": 1025,
+      "distribution": "duplicate_heavy",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0031",
+      "size": 1025,
+      "distribution": "duplicate_heavy",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0032",
+      "size": 1025,
+      "distribution": "nearly_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0033",
+      "size": 1025,
+      "distribution": "nearly_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0034",
+      "size": 1025,
+      "distribution": "signed_edges",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0035",
+      "size": 1025,
+      "distribution": "signed_edges",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0036",
+      "size": 65537,
+      "distribution": "uniform",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0037",
+      "size": 65537,
+      "distribution": "uniform",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0038",
+      "size": 65537,
+      "distribution": "sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0039",
+      "size": 65537,
+      "distribution": "sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0040",
+      "size": 65537,
+      "distribution": "reverse_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0041",
+      "size": 65537,
+      "distribution": "reverse_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0042",
+      "size": 65537,
+      "distribution": "duplicate_heavy",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0043",
+      "size": 65537,
+      "distribution": "duplicate_heavy",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0044",
+      "size": 65537,
+      "distribution": "nearly_sorted",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0045",
+      "size": 65537,
+      "distribution": "nearly_sorted",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0046",
+      "size": 65537,
+      "distribution": "signed_edges",
+      "seed": 1729,
+      "warmups": 1,
+      "repetitions": 5
+    },
+    {
+      "name": "run_0047",
+      "size": 65537,
+      "distribution": "signed_edges",
+      "seed": 42,
+      "warmups": 1,
+      "repetitions": 5
+    }
+  ]
+}

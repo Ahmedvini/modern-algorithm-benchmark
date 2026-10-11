@@ -1,0 +1,7 @@
+schema_version,protocol,run_id,algorithm,implementation_version,distribution,size,seed,nearly_sorted_swaps,duplicate_cardinality,dataset_generator,input_hash_fnv1a64,phase,trial_index,h2d_ns,device_sort_ns,d2h_ns,end_to_end_ns,elapsed_unit,status,correctness,error
+1,cuda_sort_timing_v1,run_0035,cub_radix_sort,cub_radix_sort_v1,signed_edges,1025,42,0,16,signed_edges_v1,4643278884434036853,warmup,0,10239.999741315842,63487.999141216278,9631.9997683167458,96877,ns,ok,passed,
+1,cuda_sort_timing_v1,run_0035,cub_radix_sort,cub_radix_sort_v1,signed_edges,1025,42,0,16,signed_edges_v1,4643278884434036853,measure,0,8255.9995353221893,21695.999428629875,4095.9999896585941,41062,ns,ok,passed,
+1,cuda_sort_timing_v1,run_0035,cub_radix_sort,cub_radix_sort_v1,signed_edges,1025,42,0,16,signed_edges_v1,4643278884434036853,measure,1,4800.0002279877663,20447.999238967896,3391.9999841600657,35110,ns,ok,passed,
+1,cuda_sort_timing_v1,run_0035,cub_radix_sort,cub_radix_sort_v1,signed_edges,1025,42,0,16,signed_edges_v1,4643278884434036853,measure,2,4863.9997839927673,20064.00004029274,4127.9997676610947,35621,ns,ok,passed,
+1,cuda_sort_timing_v1,run_0035,cub_radix_sort,cub_radix_sort_v1,signed_edges,1025,42,0,16,signed_edges_v1,4643278884434036853,measure,3,4863.9997839927673,19295.999780297279,4064.0002116560936,34578,ns,ok,passed,
+1,cuda_sort_timing_v1,run_0035,cub_radix_sort,cub_radix_sort_v1,signed_edges,1025,42,0,16,signed_edges_v1,4643278884434036853,measure,4,4991.9998273253441,19743.999466300011,11231.999844312668,42311,ns,ok,passed,

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/scripts/validate_cuda_sort.py",
+    "--output",
+    "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness"
+  ],
+  "cwd": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "status": "completed",
+  "stderr": "",
+  "stdout": "",
+  "wall_seconds": 29.14875639999991
+}

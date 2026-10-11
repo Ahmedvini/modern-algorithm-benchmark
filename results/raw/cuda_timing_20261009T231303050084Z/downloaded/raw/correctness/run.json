@@ -1,0 +1,8 @@
+{
+  "cloud_location": "not inferred; inspect recorded environment",
+  "output": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark/results/raw/NEW_GPU_TIMING/correctness",
+  "primary_timing": false,
+  "protocol": "cuda_sort_correctness_v2",
+  "source": "/content/cuda_timing_20261009T231303050084Z/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:25:37.117595+00:00"
+}
