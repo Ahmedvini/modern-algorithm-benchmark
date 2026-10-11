@@ -1,0 +1,56 @@
+{
+  "approved_cpu_selection": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort"
+  ],
+  "build_metadata_verified": 21,
+  "cub_pin_sha256": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+  "cub_version": 300001,
+  "differences": [],
+  "frozen_members_verified": 3,
+  "new_evidence_files_at_check": 10,
+  "original_historical_files_verified": 11345,
+  "prior_evidence_seals": {
+    "cpu_gpu_repair_review_20261010T185659333607Z": {
+      "actual_files": 57,
+      "sealed_hashes": 56
+    },
+    "cpu_gpu_safety_repair_20261010T140524185993Z": {
+      "actual_files": 46,
+      "sealed_hashes": 45
+    },
+    "ctest_guard_review_20261010T232702450912Z": {
+      "actual_files": 40,
+      "sealed_hashes": 39
+    },
+    "ctest_hook_repair_20261010T223851377458Z": {
+      "actual_files": 68,
+      "sealed_hashes": 67
+    }
+  },
+  "prior_result_files_verified": 11556,
+  "production_adapter_sha256": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+  "production_headers_dependencies_verified": 80,
+  "project_changes": {},
+  "protected_anchors_verified": 26,
+  "reviewed_source_files_verified": 144,
+  "source_pin_changes": [],
+  "stage": "BEFORE_VERIFIED"
+}

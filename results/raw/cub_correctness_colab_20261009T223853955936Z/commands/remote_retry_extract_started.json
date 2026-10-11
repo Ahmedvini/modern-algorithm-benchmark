@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "--config",
+    "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+    "exec",
+    "--session",
+    "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+    "--file",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_retry_extract.py",
+    "--timeout",
+    "120"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:47:03.090086+00:00"
+}

@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "rg",
+    "--files",
+    "third_party/cub"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "stdout": "third_party/cub/LICENSE\nthird_party/cub/UPSTREAM.json\nthird_party/cub/README.md\n",
+  "stderr": "",
+  "classification": "read-only static inspection/hash/JSON/AST; no repository imports, tests, CTest, builds, probes, or benchmarks"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/verify_download.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:53:35.414041+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive\": \"results/raw/cub_correctness_colab_20261009T223853955936Z/colab_evidence.tar.gz\",\n  \"archive_sha256\": \"fda8f0107e04975068a5db5217d5996984c4a6e92a2b267f5910acd8308a7a4b\",\n  \"verified_files\": 611,\n  \"verified_source_files\": 139,\n  \"dependency_files\": 1688,\n  \"result\": {\n    \"algorithm\": \"cub_radix_sort\",\n    \"cases\": 475,\n    \"compute_major\": 7,\n    \"compute_minor\": 5,\n    \"cub_version\": 300001,\n    \"device\": 0,\n    \"driver_api_version\": 13000,\n    \"implementation_version\": \"cub_radix_sort_v1\",\n    \"output_checks\": 1900,\n    \"protocol\": \"cuda_sort_correctness_v2\",\n    \"runtime_api_version\": 13000,\n    \"schema_version\": 1,\n    \"status\": \"ok\"\n  },\n  \"ctest_passed\": 1,\n  \"ctest_failed\": 0,\n  \"ctest_skipped\": 0,\n  \"failed_attempt_preserved\": true,\n  \"preflight_kernel_verified\": true\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.21418956599518424,
+  "ended_utc": "2026-10-09T22:53:35.628364+00:00"
+}

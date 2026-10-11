@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+    "--output-on-failure",
+    "-V"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:43:46.476061+00:00"
+}

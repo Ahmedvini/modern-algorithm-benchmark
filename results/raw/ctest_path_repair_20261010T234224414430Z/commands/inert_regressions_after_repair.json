@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/ctest_path_repair_20261010T234224414430Z/run_inert_tests.py",
+    "new"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "8 inert methods only; all real subprocess launch blocked; no CTest or GPU",
+  "stderr": "test_relative_helper_discovery_and_execution_share_guarded_path_across_cwds (test_ctest_build_guard.BuildGuardTests.test_relative_helper_discovery_and_execution_share_guarded_path_across_cwds) ... ok\ntest_helper_keeps_guarded_path_after_callback_changes_caller_cwd (test_ctest_build_guard.BuildGuardTests.test_helper_keeps_guarded_path_after_callback_changes_caller_cwd) ... ok\ntest_relative_cli_discovery_uses_guarded_identity_after_fake_cwd_change (test_ctest_build_guard.BuildGuardTests.test_relative_cli_discovery_uses_guarded_identity_after_fake_cwd_change) ... ok\ntest_relative_retained_json_cli_uses_guard_return_without_reresolving_input (test_ctest_build_guard.BuildGuardTests.test_relative_retained_json_cli_uses_guard_return_without_reresolving_input) ... ok\ntest_direct_selection_keeps_guard_return_when_cwd_changes_after_gate (test_ctest_build_guard.BuildGuardTests.test_direct_selection_keeps_guard_return_when_cwd_changes_after_gate) ... ok\ntest_relative_unsafe_tree_rejected_before_mixed_cwd_callback (test_ctest_build_guard.BuildGuardTests.test_relative_unsafe_tree_rejected_before_mixed_cwd_callback) ... ok\ntest_relative_symlink_alias_still_rejected_before_callback (test_ctest_build_guard.BuildGuardTests.test_relative_symlink_alias_still_rejected_before_callback) ... ok\ntest_cli_relative_unsafe_tree_rejected_before_mocked_discovery (test_ctest_build_guard.BuildGuardTests.test_cli_relative_unsafe_tree_rejected_before_mocked_discovery) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.404s\n\nOK\n",
+  "stdout": "",
+  "utc": "2026-10-10T23:46:06.235851+00:00"
+}

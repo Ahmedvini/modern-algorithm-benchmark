@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/kernel_status.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:51:19.363233+00:00",
+  "exit_code": 0,
+  "stdout": "{\"http_status\": 200, \"execution_state\": \"idle\", \"last_activity\": \"2026-10-09T22:50:45.904059Z\", \"connections\": 2, \"name\": \"python3\"}\n",
+  "stderr": "",
+  "wall_seconds": 0.7460673739988124,
+  "ended_utc": "2026-10-09T22:51:20.109416+00:00"
+}

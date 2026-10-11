@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "colab",
+    "--config",
+    "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+    "upload",
+    "results/raw/cub_sort_final_review_20261009T222209607981Z/cub_sort_source_v2.tar.gz",
+    "/content/cub_sort_source_v2.tar.gz",
+    "--session",
+    "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:42:09.280860+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Uploaded 'results/raw/cub_sort_final_review_20261009T222209607981Z/cub_sort_source_v2.tar.gz' to '/content/cub_sort_source_v2.tar.gz'\n",
+  "stderr": "",
+  "wall_seconds": 42.718623667999054,
+  "ended_utc": "2026-10-09T22:42:51.999634+00:00"
+}

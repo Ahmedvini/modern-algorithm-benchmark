@@ -1,0 +1,342 @@
+{
+  "alternate_entry_points": {
+    "scripts/non_timing_tests.py": [
+      {
+        "line": 70,
+        "text": "def pre_discovery_gate(build_dir):"
+      },
+      {
+        "line": 76,
+        "text": "def select_tests(discovery, build_dir, allow_gpu=False):"
+      },
+      {
+        "line": 77,
+        "text": "manifest, guard = pre_discovery_gate(build_dir)"
+      },
+      {
+        "line": 133,
+        "text": "def selected_ctest(call, output, name, build_dir, allow_gpu=False, prefix=None):"
+      },
+      {
+        "line": 138,
+        "text": "_, guarded = pre_discovery_gate(build_dir)"
+      },
+      {
+        "line": 141,
+        "text": "discovery = call(name + '_discovery', ['ctest', '--test-dir', str(build_dir), '-N', '--show-only=json-v1'], 60)"
+      },
+      {
+        "line": 143,
+        "text": "plan = select_tests(strict_json(discovery['stdout']), build_dir, allow_gpu)"
+      },
+      {
+        "line": 147,
+        "text": "_, final_guard = pre_discovery_gate(build_dir)"
+      },
+      {
+        "line": 163,
+        "text": "_, guarded = pre_discovery_gate(args.build_dir)"
+      },
+      {
+        "line": 168,
+        "text": "child = subprocess.run(['ctest', '--test-dir', str(build_dir), '-N', '--show-only=json-v1'],"
+      },
+      {
+        "line": 171,
+        "text": "plan = select_tests(discovery, build_dir, args.allow_gpu_correctness)"
+      }
+    ],
+    "scripts/validate_cpu_gpu_pilot.py": [
+      {
+        "line": 47,
+        "text": "result=selected_ctest(call,output,'cpu_release_ctest',cpu)"
+      },
+      {
+        "line": 56,
+        "text": "result=selected_ctest(call,output,'cpu_sanitize_ctest',san,prefix=prefix)"
+      },
+      {
+        "line": 65,
+        "text": "result=selected_ctest(call,output,'cpu_sanitize_ctest_no_leaks',san,prefix=prefix)"
+      },
+      {
+        "line": 83,
+        "text": "ctest=selected_ctest(call,output,'cuda_ctest',gpu,allow_gpu=True)"
+      }
+    ]
+  },
+  "build_metadata": {
+    "differences": [],
+    "entries": 21
+  },
+  "cub_pin": {
+    "content": {
+      "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+      "cub_version": 300001,
+      "files": {
+        "LICENSE": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+          "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+        },
+        "cub_version.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+          "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+        },
+        "device_radix_sort.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+          "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+        }
+      },
+      "installed_toolkit_identity": "Colab CUDA 13.0.88: reviewed version and SortKeys headers match v3.0.1; full tree hashes recorded by validation runner",
+      "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
+      "local_modifications_to_upstream": "none",
+      "previous_reference": {
+        "commit": "e944297b0b51a8e9c0f1b30425370c31c1c0e0a0",
+        "cub_version": 300000,
+        "files": {
+          "LICENSE": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/LICENSE",
+            "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+            "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE"
+          },
+          "cub_version.cuh": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/version.cuh",
+            "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69",
+            "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh"
+          },
+          "device_radix_sort.cuh": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/device/device_radix_sort.cuh",
+            "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be",
+            "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh"
+          }
+        },
+        "reference_release": "v3.0.0"
+      },
+      "reference_release": "v3.0.1",
+      "upstream": "https://github.com/NVIDIA/cccl",
+      "vendored_algorithm_sources": false
+    },
+    "sha256": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+    "unchanged": true
+  },
+  "current_review_build_metadata_preserved": {
+    "differences": [],
+    "entries": 21
+  },
+  "current_review_project_preserved": {
+    "differences": [],
+    "entries": 177
+  },
+  "evidence_seals": {
+    "cpu_gpu_repair_review_20261010T185659333607Z": {
+      "actual_files": 57,
+      "differences": [],
+      "entries": 56,
+      "missing": [],
+      "unexpected": []
+    },
+    "cpu_gpu_safety_repair_20261010T140524185993Z": {
+      "actual_files": 46,
+      "differences": [],
+      "entries": 45,
+      "missing": [],
+      "unexpected": []
+    },
+    "ctest_guard_review_20261010T232702450912Z": {
+      "actual_files": 40,
+      "differences": [],
+      "entries": 39,
+      "missing": [],
+      "unexpected": []
+    },
+    "ctest_hook_repair_20261010T223851377458Z": {
+      "actual_files": 68,
+      "differences": [],
+      "entries": 67,
+      "missing": [],
+      "unexpected": []
+    },
+    "ctest_path_repair_20261010T234224414430Z": {
+      "actual_files": 48,
+      "differences": [],
+      "entries": 47,
+      "missing": [],
+      "unexpected": []
+    }
+  },
+  "frozen_members": {
+    "differences": [],
+    "entries": 3
+  },
+  "independent_literal_pins": {
+    "cmake_review": true,
+    "freeze": true
+  },
+  "initial_snapshot_filter_qualification": {
+    "all_files_count": 11604,
+    "excluded": [
+      "results/raw/cpu_gpu_protocol_20261009T234954580281Z/__pycache__/build_protocol_assets.cpython-312.pyc"
+    ],
+    "excluded_matches_repair_before": {
+      "results/raw/cpu_gpu_protocol_20261009T234954580281Z/__pycache__/build_protocol_assets.cpython-312.pyc": true
+    },
+    "filtered_count": 11603,
+    "filtered_files": {
+      "differences": [],
+      "entries": 11603
+    }
+  },
+  "original_historical_results": {
+    "differences": [],
+    "entries": 11345
+  },
+  "policy": {
+    "changed_source_digests": [
+      "scripts/non_timing_tests.py",
+      "tests/test_ctest_build_guard.py"
+    ],
+    "exact_selection": [
+      "baselines",
+      "cli",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "searching",
+      "structures",
+      "timsort"
+    ],
+    "excluded_cpu": [
+      "benchmark_framework",
+      "comparison_engine",
+      "experiment_pipeline",
+      "parallel_framework",
+      "parallel_mergesort",
+      "search_framework",
+      "search_timing",
+      "structure_framework",
+      "structure_timing",
+      "timing"
+    ],
+    "matches_exact_19": true,
+    "non_source_fields_identical": true,
+    "snapshot": {
+      "differences": [],
+      "entries": 144
+    },
+    "source_key_sets_identical": true
+  },
+  "preserved_reproducer": {
+    "candidate_policy_maps_to_retained_selector": true,
+    "selector_matches_before": true,
+    "tests_match_current": true
+  },
+  "production_adapter": {
+    "sha256": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+    "unchanged": true
+  },
+  "production_headers_dependencies": {
+    "differences": [],
+    "entries": 80
+  },
+  "protected_anchors_existing_reviewed_cmake_exception": {
+    "differences": [],
+    "entries": 26
+  },
+  "recorded_test_logs": {
+    "all_inert_selector_regressions": {
+      "exit_code": 0,
+      "method_count": 47,
+      "method_names_match_source": true,
+      "passes": 47,
+      "summary": [
+        "Ran 47 tests in 2.600s",
+        "OK"
+      ]
+    },
+    "inert_regressions_after_repair": {
+      "exit_code": 0,
+      "method_count": 8,
+      "method_names_match_source": true,
+      "passes": 8,
+      "summary": [
+        "Ran 8 tests in 0.404s",
+        "OK"
+      ]
+    },
+    "inert_reproducer_before_fix": {
+      "exit_code": 1,
+      "method_count": 8,
+      "method_names_match_source": true,
+      "passes": 3,
+      "summary": [
+        "Ran 8 tests in 0.313s",
+        "FAILED (failures=4, errors=1)"
+      ]
+    }
+  },
+  "regression_ast": {
+    "added": {
+      "test_cli_relative_unsafe_tree_rejected_before_mocked_discovery": 169,
+      "test_direct_selection_keeps_guard_return_when_cwd_changes_after_gate": 142,
+      "test_helper_keeps_guarded_path_after_callback_changes_caller_cwd": 95,
+      "test_relative_cli_discovery_uses_guarded_identity_after_fake_cwd_change": 109,
+      "test_relative_helper_discovery_and_execution_share_guarded_path_across_cwds": 67,
+      "test_relative_retained_json_cli_uses_guard_return_without_reresolving_input": 124,
+      "test_relative_symlink_alias_still_rejected_before_callback": 163,
+      "test_relative_unsafe_tree_rejected_before_mixed_cwd_callback": 154
+    },
+    "all_old_bodies_identical": true,
+    "current_methods": 36,
+    "old_methods": 28,
+    "selector_methods": 11
+  },
+  "repair_prior_results": {
+    "differences": [],
+    "entries": 11556
+  },
+  "repair_project_changes": {
+    "copies_match": true,
+    "matches_declared_inventory": true,
+    "modified": {
+      "README.md": {
+        "before": "89fce98a189d94cbdc767fccbeca3548d7923ba2f1ddecfeb656034f7dce24ec",
+        "current": "e939b7fe70c41fc163dfc8eaf2483cb81e08c50cd330878b69c667009af8ecef"
+      },
+      "docs/AUDIT.md": {
+        "before": "72893ad7b0200d790e7de4fab87b746e80d83aeb36e2051cbe1c78327871137a",
+        "current": "f27f5dd5110b6db3720e5f460821a5038a4023d56d5193a54413e4ea78d6aa35"
+      },
+      "docs/CTEST_BUILD_GUARD_v1.md": {
+        "before": "c754cd4d3b79eaed59885994112c5197d7f18324f85463e16add46442faeaf75",
+        "current": "3e16673d8d43de7c818e456d98da88dae4b3a26b5c296e9b5bf5d96ad36653fb"
+      },
+      "docs/NON_TIMING_TEST_SELECTION_v1.json": {
+        "before": "8afd9ff3fb9d50cee284ae15476d8ea16cb2f867e932f7f49a1154473a3bdbaf",
+        "current": "04942aca488f08638e39026cb0ed5f1f8715c8bcbbc38891b8c33b00bdbfb5d0"
+      },
+      "docs/ROADMAP.md": {
+        "before": "d0ed436525d3f285570dd5afd1ffff34ccca29ffde4e4e4e26e1c701bf777afa",
+        "current": "f9a82260eb2befdcd3dad649993847c34172f95ab95f310d4f387a1131f71585"
+      },
+      "scripts/non_timing_tests.py": {
+        "before": "99dd6b2fcc99aa81962a477313f13d178e2f6ae01de12794d9908d3b82d05396",
+        "current": "fee3b207cd6307822736e0565fb955d5c9c26dcb1b489c7cfe291f1530d7fdfe"
+      },
+      "tests/test_ctest_build_guard.py": {
+        "before": "68aa92da813c0c5ad7770649f82d6ccbe51a37009f2d6eae05d1e3295ede1c4f",
+        "current": "74f7c43409aef377f278fffce16b0ed7e97cd7d032b66fea96205178743f343b"
+      }
+    }
+  }
+}

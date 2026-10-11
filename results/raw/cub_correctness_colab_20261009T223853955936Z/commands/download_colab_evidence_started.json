@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "timeout",
+    "--signal=TERM",
+    "180",
+    "colab",
+    "--config",
+    "build/cub_correctness_colab_20261009T223853955936Z/private_cli/reconnect.json",
+    "download",
+    "/content/mab_cub_20261009T223853955936Z_retry1/colab_evidence.tar.gz",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/colab_evidence.tar.gz",
+    "--session",
+    "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:53:13.179680+00:00"
+}

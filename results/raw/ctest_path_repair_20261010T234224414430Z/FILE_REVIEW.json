@@ -1,0 +1,269 @@
+{
+  "README.md": {
+    "after_sha256": "e939b7fe70c41fc163dfc8eaf2483cb81e08c50cd330878b69c667009af8ecef",
+    "before_sha256": "89fce98a189d94cbdc767fccbeca3548d7923ba2f1ddecfeb656034f7dce24ec"
+  },
+  "docs/AUDIT.md": {
+    "after_sha256": "f27f5dd5110b6db3720e5f460821a5038a4023d56d5193a54413e4ea78d6aa35",
+    "before_sha256": "72893ad7b0200d790e7de4fab87b746e80d83aeb36e2051cbe1c78327871137a"
+  },
+  "docs/CTEST_BUILD_GUARD_v1.md": {
+    "after_sha256": "3e16673d8d43de7c818e456d98da88dae4b3a26b5c296e9b5bf5d96ad36653fb",
+    "before_sha256": "c754cd4d3b79eaed59885994112c5197d7f18324f85463e16add46442faeaf75"
+  },
+  "docs/NON_TIMING_TEST_SELECTION_v1.json": {
+    "after_sha256": "04942aca488f08638e39026cb0ed5f1f8715c8bcbbc38891b8c33b00bdbfb5d0",
+    "before_sha256": "8afd9ff3fb9d50cee284ae15476d8ea16cb2f867e932f7f49a1154473a3bdbaf"
+  },
+  "docs/ROADMAP.md": {
+    "after_sha256": "f9a82260eb2befdcd3dad649993847c34172f95ab95f310d4f387a1131f71585",
+    "before_sha256": "d0ed436525d3f285570dd5afd1ffff34ccca29ffde4e4e4e26e1c701bf777afa"
+  },
+  "scripts/non_timing_tests.py": {
+    "after_sha256": "fee3b207cd6307822736e0565fb955d5c9c26dcb1b489c7cfe291f1530d7fdfe",
+    "before_sha256": "99dd6b2fcc99aa81962a477313f13d178e2f6ae01de12794d9908d3b82d05396",
+    "functions": [
+      {
+        "line": 24,
+        "name": "load_manifest"
+      },
+      {
+        "line": 48,
+        "name": "expected_command"
+      },
+      {
+        "line": 70,
+        "name": "pre_discovery_gate"
+      },
+      {
+        "line": 76,
+        "name": "select_tests"
+      },
+      {
+        "line": 133,
+        "name": "selected_ctest"
+      },
+      {
+        "line": 155,
+        "name": "main"
+      }
+    ]
+  },
+  "tests/test_ctest_build_guard.py": {
+    "added_tests": [
+      "test_cli_relative_unsafe_tree_rejected_before_mocked_discovery",
+      "test_direct_selection_keeps_guard_return_when_cwd_changes_after_gate",
+      "test_helper_keeps_guarded_path_after_callback_changes_caller_cwd",
+      "test_relative_cli_discovery_uses_guarded_identity_after_fake_cwd_change",
+      "test_relative_helper_discovery_and_execution_share_guarded_path_across_cwds",
+      "test_relative_retained_json_cli_uses_guard_return_without_reresolving_input",
+      "test_relative_symlink_alias_still_rejected_before_callback",
+      "test_relative_unsafe_tree_rejected_before_mixed_cwd_callback"
+    ],
+    "after_sha256": "74f7c43409aef377f278fffce16b0ed7e97cd7d032b66fea96205178743f343b",
+    "before_sha256": "68aa92da813c0c5ad7770649f82d6ccbe51a37009f2d6eae05d1e3295ede1c4f",
+    "functions": [
+      {
+        "line": 31,
+        "name": "setUp"
+      },
+      {
+        "line": 44,
+        "name": "fake"
+      },
+      {
+        "line": 50,
+        "name": "assert_rejected_before_discovery"
+      },
+      {
+        "line": 55,
+        "name": "test_clean_reviewed_fixture_preserves_exact_19_plan"
+      },
+      {
+        "line": 62,
+        "name": "test_clean_fixture_runner_callbacks_are_only_python_fakes"
+      },
+      {
+        "line": 67,
+        "name": "test_relative_helper_discovery_and_execution_share_guarded_path_across_cwds"
+      },
+      {
+        "line": 95,
+        "name": "test_helper_keeps_guarded_path_after_callback_changes_caller_cwd"
+      },
+      {
+        "line": 109,
+        "name": "test_relative_cli_discovery_uses_guarded_identity_after_fake_cwd_change"
+      },
+      {
+        "line": 124,
+        "name": "test_relative_retained_json_cli_uses_guard_return_without_reresolving_input"
+      },
+      {
+        "line": 142,
+        "name": "test_direct_selection_keeps_guard_return_when_cwd_changes_after_gate"
+      },
+      {
+        "line": 154,
+        "name": "test_relative_unsafe_tree_rejected_before_mixed_cwd_callback"
+      },
+      {
+        "line": 163,
+        "name": "test_relative_symlink_alias_still_rejected_before_callback"
+      },
+      {
+        "line": 169,
+        "name": "test_cli_relative_unsafe_tree_rejected_before_mocked_discovery"
+      },
+      {
+        "line": 176,
+        "name": "test_custom_pre_and_post_hooks_and_ctest_variant_fail_before_discovery"
+      },
+      {
+        "line": 184,
+        "name": "test_unreviewed_include_rejected_without_reading_or_running_included_code"
+      },
+      {
+        "line": 189,
+        "name": "test_exact_prior_review_inert_hook_fixture_is_rejected_before_discovery"
+      },
+      {
+        "line": 195,
+        "name": "test_subdirs_nested_unreviewed_file_fails_closed"
+      },
+      {
+        "line": 202,
+        "name": "test_unreferenced_nested_metadata_and_hooks_also_rejected"
+      },
+      {
+        "line": 208,
+        "name": "test_modified_previously_reviewed_command_rejected"
+      },
+      {
+        "line": 212,
+        "name": "test_modified_reviewed_properties_and_backtrace_rejected"
+      },
+      {
+        "line": 219,
+        "name": "test_unreadable_file_rejected_even_under_privileged_test_user"
+      },
+      {
+        "line": 227,
+        "name": "test_missing_file_and_directory_rejected"
+      },
+      {
+        "line": 231,
+        "name": "test_malformed_ambiguous_and_control_flow_are_rejected"
+      },
+      {
+        "line": 242,
+        "name": "test_duplicates_and_missing_declarations_rejected"
+      },
+      {
+        "line": 248,
+        "name": "test_symlinked_metadata_and_build_rejected"
+      },
+      {
+        "line": 254,
+        "name": "test_ctest_environment_override_and_unreviewed_wrapper_rejected"
+      },
+      {
+        "line": 261,
+        "name": "test_metadata_modified_during_fake_discovery_never_reaches_execution"
+      },
+      {
+        "line": 270,
+        "name": "test_hook_added_during_fake_discovery_never_reaches_execution"
+      },
+      {
+        "line": 277,
+        "name": "test_final_boundary_rechecks_build_metadata"
+      },
+      {
+        "line": 285,
+        "name": "test_source_manifest_mismatch_rejected_before_discovery"
+      },
+      {
+        "line": 288,
+        "name": "test_cli_default_and_retained_json_reject_hooks_before_subprocess"
+      },
+      {
+        "line": 297,
+        "name": "test_cli_clean_retained_json_never_invokes_subprocess"
+      },
+      {
+        "line": 304,
+        "name": "test_cli_clean_default_uses_only_explicit_fake_discovery"
+      },
+      {
+        "line": 311,
+        "name": "test_gpu_metadata_fixture_still_requires_opt_in_never_selects_diagnostics"
+      },
+      {
+        "line": 319,
+        "name": "test_reviewed_cuda_backtrace_matches_retained_generator_stack_shape"
+      },
+      {
+        "line": 329,
+        "name": "test_reviewed_bracket_quoted_generator_format"
+      },
+      {
+        "line": 334,
+        "name": "test_dart_unknown_commands_duplicate_and_malformed_records_rejected"
+      },
+      {
+        "line": 339,
+        "name": "test_reviewed_dart_metadata_and_modified_command"
+      },
+      {
+        "line": 347,
+        "name": "test_discovery_command_properties_and_registry_identity_must_match_guard"
+      },
+      {
+        "line": 97,
+        "name": "callback"
+      },
+      {
+        "line": 111,
+        "name": "fake_run"
+      },
+      {
+        "line": 128,
+        "name": "gate"
+      },
+      {
+        "line": 145,
+        "name": "gate"
+      },
+      {
+        "line": 157,
+        "name": "callback"
+      },
+      {
+        "line": 221,
+        "name": "unreadable"
+      },
+      {
+        "line": 262,
+        "name": "discovery"
+      },
+      {
+        "line": 271,
+        "name": "discovery"
+      },
+      {
+        "line": 279,
+        "name": "save"
+      },
+      {
+        "line": 76,
+        "name": "gate"
+      },
+      {
+        "line": 78,
+        "name": "callback"
+      }
+    ],
+    "unchanged_existing_tests": 28
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "cat",
+    "results/raw/ctest_path_repair_20261010T234224414430Z/run_inert_tests.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "source text only; fake-only test runner inspection",
+  "stderr": "",
+  "stdout": "\"\"\"Only two statically inspected inert classes. All real process launch blocked.\"\"\"\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\nimport unittest\nfrom unittest import mock\nimport contextlib\n\nroot=Path.cwd();sys.path[:0]=[str(root/'tests'),str(root/'scripts')]\nwith contextlib.ExitStack() as stack:\n    for entry in ['run','Popen','call','check_call','check_output']:\n        stack.enter_context(mock.patch.object(subprocess,entry,side_effect=AssertionError('real process forbidden')))\n    stack.enter_context(mock.patch.object(os,'system',side_effect=AssertionError('shell forbidden')))\n    from test_ctest_build_guard import BuildGuardTests\n    from test_cpu_gpu_safety import SelectorTests\n    mode=sys.argv[1]\n    if mode=='new':\n        suite=unittest.TestSuite(BuildGuardTests(name) for name in [\n            'test_relative_helper_discovery_and_execution_share_guarded_path_across_cwds',\n            'test_helper_keeps_guarded_path_after_callback_changes_caller_cwd',\n            'test_relative_cli_discovery_uses_guarded_identity_after_fake_cwd_change',\n            'test_relative_retained_json_cli_uses_guard_return_without_reresolving_input',\n            'test_direct_selection_keeps_guard_return_when_cwd_changes_after_gate',\n            'test_relative_unsafe_tree_rejected_before_mixed_cwd_callback',\n            'test_relative_symlink_alias_still_rejected_before_callback',\n            'test_cli_relative_unsafe_tree_rejected_before_mocked_discovery'])\n        assert suite.countTestCases()==8\n    elif mode=='all':\n        suite=unittest.TestSuite([unittest.defaultTestLoader.loadTestsFromTestCase(BuildGuardTests),\n                                 unittest.defaultTestLoader.loadTestsFromTestCase(SelectorTests)])\n        assert suite.countTestCases()==47\n    else:raise ValueError('unknown inert test scope')\n    result=unittest.TextTestRunner(verbosity=2).run(suite)\nraise SystemExit(0 if result.wasSuccessful() else 1)\n",
+  "utc": "2026-10-10T23:45:42.563078+00:00"
+}

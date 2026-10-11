@@ -1,0 +1,1033 @@
+[
+  {
+    "scope": "local",
+    "name": "attach_existing",
+    "argv": [
+      "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/attach_existing_session.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/attach_existing.json",
+    "started_utc": "2026-10-09T22:39:54.467269+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "check_private_state",
+    "argv": [
+      "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/check_private_state.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/check_private_state.json",
+    "started_utc": "2026-10-09T22:57:03.605432+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cli_version",
+    "argv": [
+      "colab",
+      "version"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cli_version.json",
+    "started_utc": "2026-10-09T22:38:57.892982+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_environment",
+    "argv": [
+      "python3",
+      "scripts/capture_environment.py",
+      "--build-dir",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+      "--output",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/cpu_environment.json"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_environment.json",
+    "started_utc": "2026-10-09T22:55:05.807675+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_final_release_build",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+      "--parallel",
+      "2"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_final_release_build.json",
+    "started_utc": "2026-10-09T22:46:44.788564+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_final_release_configure",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_CUDA=OFF",
+      "-DMAB_ENABLE_CUDA_SORT=OFF"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_final_release_configure.json",
+    "started_utc": "2026-10-09T22:46:44.629914+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_final_release_ctest",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+      "--output-on-failure",
+      "-V"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_final_release_ctest.json",
+    "started_utc": "2026-10-09T22:46:45.105265+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_release_build",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+      "--parallel",
+      "2"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_release_build.json",
+    "started_utc": "2026-10-09T22:43:30.024068+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_release_configure",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_CUDA=OFF",
+      "-DMAB_ENABLE_CUDA_SORT=OFF"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_release_configure.json",
+    "started_utc": "2026-10-09T22:43:29.528835+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_release_ctest",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+      "--output-on-failure",
+      "-V"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_release_ctest.json",
+    "started_utc": "2026-10-09T22:43:46.476061+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_sanitize_build",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-sanitize",
+      "--parallel",
+      "2"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_sanitize_build.json",
+    "started_utc": "2026-10-09T22:47:13.975937+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_sanitize_configure",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-sanitize",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DMAB_ENABLE_SANITIZERS=ON",
+      "-DMAB_ENABLE_CUDA=OFF",
+      "-DMAB_ENABLE_CUDA_SORT=OFF"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_sanitize_configure.json",
+    "started_utc": "2026-10-09T22:47:13.494867+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "cpu_sanitize_ctest",
+    "argv": [
+      "env",
+      "-u",
+      "ASAN_OPTIONS",
+      "-u",
+      "LSAN_OPTIONS",
+      "UBSAN_OPTIONS=halt_on_error=1",
+      "ctest",
+      "--test-dir",
+      "build/cub_correctness_colab_20261009T223853955936Z/cpu-sanitize",
+      "--output-on-failure",
+      "-V"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/cpu_sanitize_ctest.json",
+    "started_utc": "2026-10-09T22:47:32.590282+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "diagnose_connection",
+    "argv": [
+      "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/diagnose_connection.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/diagnose_connection.json",
+    "started_utc": "2026-10-09T22:50:42.506865+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "download_colab_evidence",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "180",
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/reconnect.json",
+      "download",
+      "/content/mab_cub_20261009T223853955936Z_retry1/colab_evidence.tar.gz",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/colab_evidence.tar.gz",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/download_colab_evidence.json",
+    "started_utc": "2026-10-09T22:53:13.179680+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "final_review",
+    "argv": [
+      "python3",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/final_review.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/final_review.json",
+    "started_utc": "2026-10-09T22:57:23.577533+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "git_status",
+    "argv": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 128,
+    "record": "commands/git_status.json",
+    "started_utc": "2026-10-09T22:38:57.866925+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "handoff_after_pin",
+    "argv": [
+      "python3",
+      "tests/test_cuda_sort_handoff.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/handoff_after_pin.json",
+    "started_utc": "2026-10-09T22:46:00.869707+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "kernel_status",
+    "argv": [
+      "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/kernel_status.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/kernel_status.json",
+    "started_utc": "2026-10-09T22:51:19.363233+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_dependency_inspect",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_dependency_inspect.py",
+      "--timeout",
+      "90"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_dependency_inspect.json",
+    "started_utc": "2026-10-09T22:44:14.219488+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_extract",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_extract.py",
+      "--timeout",
+      "120"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_extract.json",
+    "started_utc": "2026-10-09T22:42:59.536628+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_inspect",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_inspect.py",
+      "--timeout",
+      "90"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_inspect.json",
+    "started_utc": "2026-10-09T22:40:09.176599+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_list_root",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "ls",
+      "content",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_list_root.json",
+    "started_utc": "2026-10-09T22:49:38.024936+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_package",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "240",
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/reconnect.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_package.py",
+      "--timeout",
+      "180"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_package.json",
+    "started_utc": "2026-10-09T22:52:47.752068+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_progress_reconnected",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "120",
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/reconnect.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_progress.py",
+      "--timeout",
+      "30"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_progress_reconnected.json",
+    "started_utc": "2026-10-09T22:50:42.678318+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_retry_extract",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_retry_extract.py",
+      "--timeout",
+      "120"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_retry_extract.json",
+    "started_utc": "2026-10-09T22:47:03.090086+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_retry_inspect",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_retry_inspect.py",
+      "--timeout",
+      "90"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_retry_inspect.json",
+    "started_utc": "2026-10-09T22:46:22.576422+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_retry_parent_listing",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "ls",
+      "content/mab_cub_20261009T223853955936Z_retry1",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_retry_parent_listing.json",
+    "started_utc": "2026-10-09T22:49:47.448493+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_retry_progress",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "ls",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 1,
+    "record": "commands/remote_retry_progress.json",
+    "started_utc": "2026-10-09T22:48:39.488579+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_retry_validation",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_retry_validate.py",
+      "--timeout",
+      "2500"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": -15,
+    "record": "commands/remote_retry_validation.json",
+    "started_utc": "2026-10-09T22:47:07.190241+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_retry_validation_reconnected",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "2600",
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/reconnect.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_retry_validate.py",
+      "--timeout",
+      "2500"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_retry_validation_reconnected.json",
+    "started_utc": "2026-10-09T22:51:51.178190+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "remote_validation",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "exec",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+      "--file",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_validate.py",
+      "--timeout",
+      "2500"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/remote_validation.json",
+    "started_utc": "2026-10-09T22:43:18.601611+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "review_upstream_v3_0_1",
+    "argv": [
+      "python3",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/review_upstream.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/review_upstream_v3_0_1.json",
+    "started_utc": "2026-10-09T22:44:42.557929+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "sessions",
+    "argv": [
+      "colab",
+      "sessions"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/sessions.json",
+    "started_utc": "2026-10-09T22:38:58.341885+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "status",
+    "argv": [
+      "colab",
+      "status",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/status.json",
+    "started_utc": "2026-10-09T22:38:59.197934+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "status_attached",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "status",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/status_attached.json",
+    "started_utc": "2026-10-09T22:39:55.306365+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "upload_retry",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "upload",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/cub_sort_source_v3.tar.gz",
+      "/content/cub_sort_source_v3_20261009T223853955936Z.tar.gz",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/upload_retry.json",
+    "started_utc": "2026-10-09T22:46:43.494064+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "upload_v2",
+    "argv": [
+      "colab",
+      "--config",
+      "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+      "upload",
+      "results/raw/cub_sort_final_review_20261009T222209607981Z/cub_sort_source_v2.tar.gz",
+      "/content/cub_sort_source_v2.tar.gz",
+      "--session",
+      "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/upload_v2.json",
+    "started_utc": "2026-10-09T22:42:09.280860+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "verify_download",
+    "argv": [
+      "python3",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/verify_download.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/verify_download.json",
+    "started_utc": "2026-10-09T22:53:35.414041+00:00"
+  },
+  {
+    "scope": "local",
+    "name": "verify_frozen_integrity",
+    "argv": [
+      "python3",
+      "results/raw/cub_correctness_colab_20261009T223853955936Z/verify_integrity.py"
+    ],
+    "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "commands/verify_frozen_integrity.json",
+    "started_utc": "2026-10-09T22:52:07.739238+00:00"
+  },
+  {
+    "scope": "attempt1",
+    "name": "configure",
+    "argv": [
+      "cmake",
+      "-S",
+      "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+      "-B",
+      "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_CUDA=ON",
+      "-DMAB_ENABLE_CUDA_SORT=ON",
+      "-DMAB_ENABLE_OPENMP=OFF",
+      "-DMAB_ENABLE_SANITIZERS=OFF",
+      "-DBUILD_TESTING=ON",
+      "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc",
+      "-DCMAKE_CUDA_ARCHITECTURES=75"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+    "exit_code": 1,
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/configure.json"
+  },
+  {
+    "scope": "attempt1",
+    "name": "preflight",
+    "argv": [
+      "/usr/bin/python3",
+      "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark/scripts/cuda_preflight.py",
+      "--output",
+      "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/preflight",
+      "--timeout-seconds",
+      "180"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight.json"
+  },
+  {
+    "scope": "attempt1",
+    "name": "runner",
+    "argv": [
+      "python3",
+      "scripts/validate_cuda_sort.py",
+      "--output",
+      "results/raw/NEW_CUB_CORRECTNESS"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+    "exit_code": 1,
+    "record": "downloaded/attempt1/runner.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "build",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "--build",
+      "/tmp/mab_cuda_preflight_khqr8ook/build",
+      "--target",
+      "cuda_runtime_probe",
+      "--config",
+      "Release",
+      "--parallel",
+      "2"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "cmake",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "--version"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "cmake_cuda_property",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "--help-property",
+      "CUDA_STANDARD"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "configure",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "-S",
+      "/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark",
+      "-B",
+      "/tmp/mab_cuda_preflight_khqr8ook/build",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DBUILD_TESTING=OFF",
+      "-DMAB_ENABLE_CUDA=ON",
+      "-DMAB_ENABLE_OPENMP=OFF",
+      "-DMAB_ENABLE_SANITIZERS=OFF",
+      "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "lspci",
+    "argv": [
+      "lspci",
+      "-nn",
+      "-d",
+      "10de:"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": null,
+    "status": "unavailable",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "nvcc",
+    "argv": [
+      "/usr/local/cuda/bin/nvcc",
+      "--version"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "nvidia_smi",
+    "argv": [
+      "/opt/bin/nvidia-smi",
+      "--query-gpu=index,name,driver_version",
+      "--format=csv,noheader,nounits"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "attempt1/preflight",
+    "name": "runtime",
+    "argv": [
+      "/tmp/mab_cuda_preflight_khqr8ook/build/cuda_runtime_probe"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/attempt1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1",
+    "name": "build",
+    "argv": [
+      "cmake",
+      "--build",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build",
+      "--target",
+      "test_cuda_sorting",
+      "--parallel",
+      "2"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/build.json"
+  },
+  {
+    "scope": "retry1",
+    "name": "configure",
+    "argv": [
+      "cmake",
+      "-S",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+      "-B",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_CUDA=ON",
+      "-DMAB_ENABLE_CUDA_SORT=ON",
+      "-DMAB_ENABLE_OPENMP=OFF",
+      "-DMAB_ENABLE_SANITIZERS=OFF",
+      "-DBUILD_TESTING=ON",
+      "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc",
+      "-DCMAKE_CUDA_ARCHITECTURES=75"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/configure.json"
+  },
+  {
+    "scope": "retry1",
+    "name": "ctest",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build",
+      "--output-on-failure",
+      "-V",
+      "-R",
+      "^cuda_sorting$"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/ctest.json"
+  },
+  {
+    "scope": "retry1",
+    "name": "preflight",
+    "argv": [
+      "/usr/bin/python3",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/scripts/cuda_preflight.py",
+      "--output",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/preflight",
+      "--timeout-seconds",
+      "180"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight.json"
+  },
+  {
+    "scope": "retry1",
+    "name": "sorting",
+    "argv": [
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build/test_cuda_sorting"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/sorting.json"
+  },
+  {
+    "scope": "retry1",
+    "name": "runner",
+    "argv": [
+      "python3",
+      "scripts/validate_cuda_sort.py",
+      "--output",
+      "results/raw/NEW_CUB_CORRECTNESS"
+    ],
+    "cwd": "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+    "exit_code": 0,
+    "record": "downloaded/retry1/runner.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "build",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "--build",
+      "/tmp/mab_cuda_preflight_a69xi_u8/build",
+      "--target",
+      "cuda_runtime_probe",
+      "--config",
+      "Release",
+      "--parallel",
+      "2"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "cmake",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "--version"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "cmake_cuda_property",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "--help-property",
+      "CUDA_STANDARD"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "configure",
+    "argv": [
+      "/usr/local/bin/cmake",
+      "-S",
+      "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark",
+      "-B",
+      "/tmp/mab_cuda_preflight_a69xi_u8/build",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DBUILD_TESTING=OFF",
+      "-DMAB_ENABLE_CUDA=ON",
+      "-DMAB_ENABLE_OPENMP=OFF",
+      "-DMAB_ENABLE_SANITIZERS=OFF",
+      "-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "lspci",
+    "argv": [
+      "lspci",
+      "-nn",
+      "-d",
+      "10de:"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": null,
+    "status": "unavailable",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "nvcc",
+    "argv": [
+      "/usr/local/cuda/bin/nvcc",
+      "--version"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "nvidia_smi",
+    "argv": [
+      "/opt/bin/nvidia-smi",
+      "--query-gpu=index,name,driver_version",
+      "--format=csv,noheader,nounits"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  },
+  {
+    "scope": "retry1/preflight",
+    "name": "runtime",
+    "argv": [
+      "/tmp/mab_cuda_preflight_a69xi_u8/build/cuda_runtime_probe"
+    ],
+    "cwd": "recorded in preflight/context; not inferred",
+    "exit_code": 0,
+    "status": "completed",
+    "record": "downloaded/retry1/NEW_CUB_CORRECTNESS/preflight/report.json"
+  }
+]

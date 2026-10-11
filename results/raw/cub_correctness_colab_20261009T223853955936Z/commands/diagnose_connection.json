@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/diagnose_connection.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:50:42.506865+00:00",
+  "exit_code": 0,
+  "stdout": "{\"kernel_registered\": true, \"websocket_session_registered\": true, \"cli_running\": null}\n",
+  "stderr": "",
+  "wall_seconds": 0.14655957100330852,
+  "ended_utc": "2026-10-09T22:50:42.653559+00:00"
+}

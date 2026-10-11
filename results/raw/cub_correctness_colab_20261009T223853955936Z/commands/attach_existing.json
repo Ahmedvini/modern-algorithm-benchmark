@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/attach_existing_session.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:39:54.467269+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"existing_assignment\": \"gpu-t4-s-kkb-ass1b1-aq78qx2sgfal\",\n  \"created_gpu_session\": false,\n  \"isolated_config\": \"build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json\",\n  \"credentials_retained_only_in_private_build_state\": true\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.8156256770016626,
+  "ended_utc": "2026-10-09T22:39:55.283007+00:00"
+}

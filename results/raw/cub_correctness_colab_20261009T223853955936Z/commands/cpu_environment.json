@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+    "--output",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/cpu_environment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:55:05.807675+00:00",
+  "exit_code": 0,
+  "stdout": "results/raw/cub_correctness_colab_20261009T223853955936Z/cpu_environment.json\n",
+  "stderr": "",
+  "wall_seconds": 0.040107267996063456,
+  "ended_utc": "2026-10-09T22:55:05.847907+00:00"
+}

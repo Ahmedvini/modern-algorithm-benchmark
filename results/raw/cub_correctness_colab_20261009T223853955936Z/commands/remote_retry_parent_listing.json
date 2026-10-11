@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "--config",
+    "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+    "ls",
+    "content/mab_cub_20261009T223853955936Z_retry1",
+    "--session",
+    "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:49:47.448493+00:00",
+  "exit_code": 0,
+  "stdout": "modern-algorithm-benchmark/\nextraction.json\n",
+  "stderr": "",
+  "wall_seconds": 2.015512670004682,
+  "ended_utc": "2026-10-09T22:49:49.464159+00:00"
+}

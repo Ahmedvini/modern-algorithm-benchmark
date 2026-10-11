@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "colab",
+    "--config",
+    "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+    "exec",
+    "--session",
+    "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal",
+    "--file",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/remote_validate.py",
+    "--timeout",
+    "2500"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:43:18.601611+00:00",
+  "exit_code": 0,
+  "stdout": "MAB_RUNNER_JSON={\"argv\": [\"python3\", \"scripts/validate_cuda_sort.py\", \"--output\", \"results/raw/NEW_CUB_CORRECTNESS\"], \"cwd\": \"/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark\", \"ended_utc\": \"2026-10-09T22:43:57.056255+00:00\", \"exit_code\": 1, \"started_utc\": \"2026-10-09T22:43:47.228795+00:00\", \"status\": \"completed\", \"stderr\": \"configure exit 1; inspect retained diagnostics\\n\", \"stdout\": \"\", \"wall_seconds\": 9.827122386000156}\nMAB_ARTIFACT FAILED.json={\n  \"complete\": false,\n  \"error\": \"configure exit 1; inspect retained diagnostics\",\n  \"sorting_validated\": false\n}\n\nMAB_ARTIFACT configure.json={\n  \"argv\": [\n    \"cmake\",\n    \"-S\",\n    \"/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark\",\n    \"-B\",\n    \"/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS/build\",\n    \"-DCMAKE_BUILD_TYPE=Release\",\n    \"-DMAB_ENABLE_CUDA=ON\",\n    \"-DMAB_ENABLE_CUDA_SORT=ON\",\n    \"-DMAB_ENABLE_OPENMP=OFF\",\n    \"-DMAB_ENABLE_SANITIZERS=OFF\",\n    \"-DBUILD_TESTING=ON\",\n    \"-DCMAKE_CUDA_COMPILER=/usr/local/cuda/bin/nvcc\",\n    \"-DCMAKE_CUDA_ARCHITECTURES=75\"\n  ],\n  \"cwd\": \"/content/mab_cub_20261009T223853955936Z/modern-algorithm-benchmark\",\n  \"exit_code\": 1,\n  \"status\": \"completed\",\n  \"stderr\": \"CMake Error at cmake/cuda.cmake:41 (message):\\n  Installed CUB differs from reviewed v3.0.0 headers\\n  (version=316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124,\\n  SortKeys=7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be);\\n  preserve diagnostics and review the dependency before changing the pin\\nCall Stack (most recent call first):\\n  CMakeLists.txt:157 (include)\\n\\n\\n\",\n  \"stdout\": \"-- The CXX compiler identification is GNU 13.3.0\\n-- Detecting CXX compiler ABI info\\n-- Detecting CXX compiler ABI info - done\\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\\n-- Detecting CXX compile features\\n-- Detecting CXX compile features - done\\n-- Found Python3: /usr/local/bin/python (found version \\\"3.13.15\\\") found components: Interpreter\\n-- The CUDA compiler identification is NVIDIA 13.0.88 with host compiler GNU 13.3.0\\n-- Detecting CUDA compiler ABI info\\n-- Detecting CUDA compiler ABI info - done\\n-- Check for working CUDA compiler: /usr/local/cuda/bin/nvcc - skipped\\n-- Detecting CUDA compile features\\n-- Detecting CUDA compile features - done\\n-- Found CUDAToolkit: /usr/local/cuda/targets/x86_64-linux/include;/usr/local/cuda/targets/x86_64-linux/include/cccl (found suitable version \\\"13.0.88\\\", minimum required is \\\"11.0\\\")\\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\\n-- Found Threads: TRUE\\n-- Configuring incomplete, errors occurred!\\n\",\n  \"wall_seconds\": 3.9766605939994406\n}\n\nMAB_FILES_JSON=[\"FAILED.json\", \"configure.json\", \"configure_started.json\", \"preflight/COMPLETE.json\", \"preflight/SUMMARY.txt\", \"preflight/report.json\", \"preflight.json\", \"preflight_started.json\", \"run.json\", \"source_sha256.json\"]\n",
+  "stderr": "",
+  "wall_seconds": 39.198227513996244,
+  "ended_utc": "2026-10-09T22:43:57.799946+00:00"
+}

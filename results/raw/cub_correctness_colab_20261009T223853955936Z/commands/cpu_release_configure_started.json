@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/cub_correctness_colab_20261009T223853955936Z/cpu-release",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_CUDA_SORT=OFF"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:43:29.528835+00:00"
+}

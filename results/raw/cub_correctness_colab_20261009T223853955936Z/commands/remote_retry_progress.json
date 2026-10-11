@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "--config",
+    "build/cub_correctness_colab_20261009T223853955936Z/private_cli/sessions.json",
+    "ls",
+    "/content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS",
+    "--session",
+    "gpu-t4-s-kkb-ass1b1-aq78qx2sgfal"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:48:39.488579+00:00",
+  "exit_code": 1,
+  "stdout": "[colab] Error: File or directory not found: /content/mab_cub_20261009T223853955936Z_retry1/modern-algorithm-benchmark/results/raw/NEW_CUB_CORRECTNESS\n",
+  "stderr": "",
+  "wall_seconds": 1.1710889890018734,
+  "ended_utc": "2026-10-09T22:48:40.659805+00:00"
+}

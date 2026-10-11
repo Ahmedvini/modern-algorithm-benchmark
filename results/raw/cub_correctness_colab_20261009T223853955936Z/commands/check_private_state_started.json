@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "/home/ahmedelsheikh/.local/share/uv/tools/google-colab-cli/bin/python",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/check_private_state.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:57:03.605432+00:00"
+}

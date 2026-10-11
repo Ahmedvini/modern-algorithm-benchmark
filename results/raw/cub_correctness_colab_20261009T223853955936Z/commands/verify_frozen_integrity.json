@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/verify_integrity.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:52:07.739238+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"previous_artifacts\": 8825,\n  \"changed_or_missing\": [],\n  \"protected_source_files\": 16,\n  \"protected_source_changed\": [],\n  \"original_bundle_sha256\": \"e155579bf9f9847ae1ced84c07f6e179d98215962076d1c0aea8133de00a190f\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.3641357039959985,
+  "ended_utc": "2026-10-09T22:52:08.103491+00:00"
+}

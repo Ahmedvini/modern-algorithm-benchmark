@@ -1,0 +1,27 @@
+{
+  "archive": "results/raw/cub_correctness_colab_20261009T223853955936Z/colab_evidence.tar.gz",
+  "archive_sha256": "fda8f0107e04975068a5db5217d5996984c4a6e92a2b267f5910acd8308a7a4b",
+  "verified_files": 611,
+  "verified_source_files": 139,
+  "dependency_files": 1688,
+  "result": {
+    "algorithm": "cub_radix_sort",
+    "cases": 475,
+    "compute_major": 7,
+    "compute_minor": 5,
+    "cub_version": 300001,
+    "device": 0,
+    "driver_api_version": 13000,
+    "implementation_version": "cub_radix_sort_v1",
+    "output_checks": 1900,
+    "protocol": "cuda_sort_correctness_v2",
+    "runtime_api_version": 13000,
+    "schema_version": 1,
+    "status": "ok"
+  },
+  "ctest_passed": 1,
+  "ctest_failed": 0,
+  "ctest_skipped": 0,
+  "failed_attempt_preserved": true,
+  "preflight_kernel_verified": true
+}

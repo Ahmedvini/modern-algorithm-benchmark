@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/cub_correctness_colab_20261009T223853955936Z/cpu-sanitize",
+    "-DCMAKE_BUILD_TYPE=Debug",
+    "-DMAB_ENABLE_SANITIZERS=ON",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_CUDA_SORT=OFF"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:47:13.494867+00:00",
+  "exit_code": 0,
+  "stdout": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Found Python3: /usr/bin/python3 (found version \"3.12.3\") found components: Interpreter \n-- Found OpenMP_CXX: -fopenmp (found version \"4.5\") \n-- Found OpenMP: TRUE (found version \"4.5\") found components: CXX \n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE  \n-- Configuring done (0.4s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cub_correctness_colab_20261009T223853955936Z/cpu-sanitize\n",
+  "stderr": "",
+  "wall_seconds": 0.4566093569956138,
+  "ended_utc": "2026-10-09T22:47:13.951604+00:00"
+}

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path;b=Path(\"results/raw/ctest_path_repair_20261010T234224414430Z\");\nfor name in [\"scripts/non_timing_tests.py\",\"tests/test_ctest_build_guard.py\",\"docs/NON_TIMING_TEST_SELECTION_v1.json\"]:\n p=b/\"reproducer_before_fix\"/name;p.parent.mkdir(parents=True,exist_ok=True)\n with p.open(\"xb\") as f:f.write(Path(name).read_bytes())"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "copy current candidate bytes to new evidence only; no workloads",
+  "stderr": "",
+  "stdout": "",
+  "utc": "2026-10-10T23:45:42.538100+00:00"
+}

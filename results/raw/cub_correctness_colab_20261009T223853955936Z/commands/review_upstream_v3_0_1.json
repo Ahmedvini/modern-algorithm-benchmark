@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cub_correctness_colab_20261009T223853955936Z/review_upstream.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T22:44:42.557929+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"commit\": \"f19d875da0d8bfb2e38c109b2b40522b8abbbbc3\",\n  \"files\": {\n    \"cub_version.cuh\": {\n      \"commit_url\": \"https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh\",\n      \"sha256\": \"316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124\"\n    },\n    \"device_radix_sort.cuh\": {\n      \"commit_url\": \"https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh\",\n      \"sha256\": \"7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be\"\n    },\n    \"LICENSE\": {\n      \"commit_url\": \"https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE\",\n      \"sha256\": \"01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b\"\n    }\n  },\n  \"installed_matches\": true,\n  \"license_unchanged\": true\n}\n",
+  "stderr": "",
+  "wall_seconds": 2.3190176589996554,
+  "ended_utc": "2026-10-09T22:44:44.877091+00:00"
+}

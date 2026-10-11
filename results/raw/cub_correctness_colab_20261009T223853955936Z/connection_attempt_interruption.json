@@ -1,0 +1,6 @@
+{
+  "local_client_pid": 509174,
+  "signal": "SIGTERM",
+  "remote_kernel_interrupted": false,
+  "reason": "CLI prelude stalled: remote kernel idle and no runner_started/output directory; no CUDA sorting result observed"
+}
