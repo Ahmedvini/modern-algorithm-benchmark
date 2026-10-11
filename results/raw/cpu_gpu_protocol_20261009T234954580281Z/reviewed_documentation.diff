@@ -1,0 +1,147 @@
+--- before/README.md
++++ README.md
+@@ -717,3 +717,23 @@
+ groups match, with relocated absolute provenance paths. All9,568 earlier result
+ files remain unchanged. Clock/thermal/background controls are unverified; post-run
+ probes are not timing controls. See audit for resource/timing limitations.
++
++## Controlled CPU/GPU comparison: protocol frozen for review
++
++The [comparison protocol v1](docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md),
++[exact matrix](docs/studies/cpu_gpu_comparison_v1.matrix.json),
++[resource estimates](docs/studies/cpu_gpu_comparison_v1.resources.csv) and
++[freeze hashes](docs/studies/cpu_gpu_comparison_v1.freeze.json) specify a future
++study at N=1025/65537/1000000. It has 48 datasets, three CPU modes and two distinct
++GPU paths, one warm-up and five measured repetitions: 1200 measured calls and
++240 warm-ups. A separate six-dataset pilot is planned first; neither was run here.
++
++Primary ratios will use allocation-inclusive, warm-context host-vector API calls
++on the same Colab machine. Existing prepared H2D/device/D2H/end-to-end measurements
++remain diagnostics and cannot be used as denominators for CPU host-call speedups.
++The production CUB3.0.1 adapter and all previous protocols remain unchanged.
++The comparison driver, paired analyzer and resource-query helper are still to be
++implemented; no working study command is claimed. Review the protocol before that
++implementation and fresh GPU/resource validation. The
++[planning audit](results/raw/cpu_gpu_protocol_20261009T234954580281Z/FINAL_AUDIT.md)
++distinguishes verified evidence, calculated budgets and unexecuted work.
+--- before/docs/ROADMAP.md
++++ docs/ROADMAP.md
+@@ -12,7 +12,7 @@
+ | 4 — search data structures | Complete: Skip List and B-tree orders 10/16/32/64, differential/invariant tests, separate build/lookup smoke and verified immutable evidence |
+ | 5 — orchestration and analysis | Complete for CPU timing: strict all-family orchestration, hierarchical statistics, SVG/PDF variability plots/report, validated smoke and full multi-size study |
+ | 6 — OpenMP | Complete: stable task Merge Sort, team metadata, fresh 24/24 Release/sanitizer groups and validated 1/2/4/8-thread scaling study; TSan startup limitation retained |
+-| 7 — CUDA | Correctness and prepared four-metric timing smoke validated on T4; 48 configurations/240 measured trials plus smallest5; full comparative GPU study remains pending |
++| 7 — CUDA | Correctness and prepared four-metric timing smoke validated on T4; controlled <=1M CPU/GPU protocol frozen for review; comparison driver, pilot and full comparative study remain pending |
+ | 8 — learned index and AlphaDev study | Pending |
+ | 9 — 100M scale | Pending; not run |
+ | 10 — report and presentation | Pending |
+@@ -328,3 +328,28 @@
+ study, with matched/explicit timing scopes and resource estimates. No full GPU
+ study or100M run has completed. Learned-index/AlphaDev and final research phases
+ remain pending. Earlier pending entries are historical, superseded by this audit.
++
++## Controlled CPU/GPU comparison protocol frozen for review
++
++[Protocol v1](CPU_GPU_COMPARISON_PROTOCOL_v1.md),
++[matrix](studies/cpu_gpu_comparison_v1.matrix.json),
++[resource table](studies/cpu_gpu_comparison_v1.resources.csv) and
++[freeze manifest](studies/cpu_gpu_comparison_v1.freeze.json) now specify 48 datasets
++at 1025/65537/1000000 elements, five modes, 1200 measured calls and 240 warm-ups.
++The separately planned pilot has six datasets, 150 measured calls and 30 warm-ups.
++No pilot or study was executed. Primary CPU/GPU comparisons require matched
++allocation-inclusive host-vector API calls on the same cloud host; the prepared
++four-metric path remains diagnostic only.
++
++The protocol passed 14 static validation methods and byte-for-byte asset
++regeneration. Reused Release binaries passed three relevant CTest groups; fresh
++full builds/sanitizers/GPU execution were not needed for these documentation-only
++changes. All 10755 previous result files were verified before editing; the final
++[planning audit](../results/raw/cpu_gpu_protocol_20261009T234954580281Z/FINAL_AUDIT.md)
++records the final integrity result. The pin and production adapter are unchanged.
++
++Exact next step: review this freeze, then implement the isolated five-mode driver,
++host-call schema/paired analyzer and dual-workspace resource query; validate them
++and run the six-dataset pilot before considering the main study. N1M CUB workspace
++requirements, current cloud readiness and full-call performance remain unknown.
++This is a completed protocol deliverable, not a completed comparative experiment.
+--- before/docs/AUDIT.md
++++ docs/AUDIT.md
+@@ -2376,3 +2376,44 @@
+ full GPU study, allocation-inclusive adapter measurement or100M run is claimed.
+ The smoke performance infrastructure milestone passes; next freeze a <=1M
+ controlled GPU/CPU study with explicit matching timing scopes/resource estimates.
++
++## Controlled CPU/GPU protocol freeze — no experiment executed
++
++Evidence: [results/raw/cpu_gpu_protocol_20261009T234954580281Z/FINAL_AUDIT.md](../results/raw/cpu_gpu_protocol_20261009T234954580281Z/FINAL_AUDIT.md).
++Read the requested previous final audit, changes, final command records, processed
++report, integrity files and timing protocol; inspected CPU/GPU adapter/timer/registry,
++dataset and analysis code. No Git metadata exists (`git status --short` exit128);
++workspace is writable. No implementation or vendored source changed.
++
++Saved [protocol](CPU_GPU_COMPARISON_PROTOCOL_v1.md),
++[matrix](studies/cpu_gpu_comparison_v1.matrix.json),
++[resource estimates](studies/cpu_gpu_comparison_v1.resources.csv) and
++[freeze manifest](studies/cpu_gpu_comparison_v1.freeze.json). Main plan: 48 datasets,
++1200 measured + 240 warm-up calls; pilot: six datasets, 150 + 30. Neither ran.
++Primary ratios require allocation-inclusive host-vector API calls on the same
++cloud machine. Prepared four-metric measurements remain explicitly incompatible
++with that CPU scope. Comparison driver, paired analyzer and workspace-query helper
++remain unimplemented. CUB3.0.1 pin/adapter and old protocols are unchanged.
++
++Fresh targeted CTest using unchanged existing Release binaries passed 3/3 groups
++(`datasets`, `timing`, `cuda_benchmark_analysis`), exit0: 220 distribution/size/seed
++cases plus frozen swap/other fixtures; 72 timing inputs/1296 validated trials;
++14 Python methods ran, 12 passed and two GPU methods explicitly skipped. No fresh
++build, full-suite sanitizer run or GPU execution was performed for these planning
++changes. Previous 27/27 Release/ASan-UBSan evidence and Tesla T4 smoke results were
++verified as historical only. The 14 new host-only protocol validation methods all
++passed, including byte-for-byte regeneration and rejection fixtures.
++
++All 10755 prior result files and the sealed 1186-file previous GPU-smoke manifest
++were verified before changes; final integrity evidence verifies them again plus
++protected source/protocol/license files. Two initial README patch attempts failed
++context matching without modifying files; corrected append succeeded. No build,
++test or experimental failure occurred in this task. Exact validation commands,
++exit statuses and editor diagnostics are retained in the new evidence directory.
++
++Resource numbers are calculated payloads/policy caps; N1M and adapter CUB workspace
++sizes remain unmeasured. Runtime estimates use a different-host CPU proxy and
++explicit unmeasured GPU allowances, not performance observations. Current Colab
++availability was not queried. Next: review freeze, implement/test missing tooling,
++fresh environment/workspace/correctness checks, then authorize the pilot. No full
++comparative GPU study, 100M workload, ranking or phase-wide completion is claimed.
+--- before/docs/BENCHMARKING.md
++++ docs/BENCHMARKING.md
+@@ -518,3 +518,31 @@
+ groups match, with relocated absolute provenance paths. All9,568 earlier result
+ files remain unchanged. Clock/thermal/background controls are unverified; post-run
+ probes are not timing controls. See audit for resource/timing limitations.
++
++## Planned controlled CPU/GPU comparison (not executed)
++
++The frozen-for-review [comparison protocol v1](CPU_GPU_COMPARISON_PROTOCOL_v1.md)
++and [exact matrix](studies/cpu_gpu_comparison_v1.matrix.json) specify 48 datasets
++at N1025/65537/1000000: five seeded distributions with seeds1729/42/2718 plus one
++nonrandom signed-edge dataset per size. Three CPU modes (std_sort, merge_sort,
++two-thread parallel_merge_sort), production CUB and prepared CUB use balanced
++five-round ordering. W1/R5 gives 1200 measured invocations and 240 warm-ups, with
++four diagnostics per prepared invocation. A separate six-dataset pilot is required.
++
++The primary `host_vector_api_call_v1` scope times the unchanged public sorter from
++restored ordinary vector to complete host-visible result. It includes internal
++allocation/free and production CUDA pageable transfers, dispatch and checked
++synchronization; excludes input restoration, context initialization, oracle and
++validation. Existing prepared H2D/device/D2H/end-to-end scopes are preserved and
++cannot supply CPU speedup denominators. CPU and GPU calls must run on the same
++Colab VM/build/input. Cross-seed aggregation weights distinct dataset medians;
++repetitions are not independent datasets. All outliers remain.
++
++[Resource estimates](studies/cpu_gpu_comparison_v1.resources.csv) include simultaneous
++prepared and production buffers. At 1M, known host payload is 24MB; device keys
++are 16MB plus two unknown CUB workspaces. Each has a 64MiB policy allowance, not a
++measured bound. Fresh queries, headroom checks and a pilot replace planning time
++assumptions before execution. The new driver/schema/analyzer are specified but
++not implemented; no runnable comparison command or performance result is claimed.
++See the [freeze hashes](studies/cpu_gpu_comparison_v1.freeze.json) and
++[planning audit](../results/raw/cpu_gpu_protocol_20261009T234954580281Z/FINAL_AUDIT.md).

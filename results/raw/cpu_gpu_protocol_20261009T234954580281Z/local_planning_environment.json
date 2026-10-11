@@ -1,0 +1,41 @@
+{
+  "address_space_limit": [
+    -1,
+    -1
+  ],
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "architecture": "x86_64",
+  "cgroup_cpu_max": null,
+  "cgroup_memory_max": null,
+  "cpu_model": "11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz",
+  "cuda_session_checked": false,
+  "disk_free_bytes": 133841694720,
+  "kernel": "6.18.7-76061807-generic",
+  "kind": "local_planning_host_not_colab",
+  "load_average": [
+    1.9658203125,
+    1.39453125,
+    1.3173828125
+  ],
+  "logical_cpus": 12,
+  "memory": {
+    "MemAvailable": "4136908 kB",
+    "MemTotal": "16089016 kB"
+  },
+  "note": "No GPU/toolchain execution or remote session query; resource estimates target a future fresh T4 preflight",
+  "os": "Linux-6.18.7-76061807-generic-x86_64-with-glibc2.39",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_protocol_20261009T234954580281Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:07:57.968896+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"scope\": \"protocol planning and integrity only; no comparative experiment executed\",\n  \"prior_result_files_verified\": 10755,\n  \"previous_sealed_smoke_files_verified\": 1186,\n  \"original_source_files\": 148,\n  \"unchanged_protected_source_files\": 144,\n  \"changed_existing_files\": {\n    \"README.md\": {\n      \"before\": \"2a3ad7c380b28dd38b41af92c594c638650cd602e62a06ed6780b0f554edd85c\",\n      \"after\": \"319e86746d228790cba7a36e1055fc9d1f1cb37fcd4b7e1467b133f4908b3901\"\n    },\n    \"docs/AUDIT.md\": {\n      \"before\": \"6cd0de79d4d55dcc87d49e20f1fa5b5350787b5f29a3bfd6cb37827a4aee4ed9\",\n      \"after\": \"4d723148b3de19ca1fe602c990cbc323c22d25f61ced603aad4f8e3c46dbdad3\"\n    },\n    \"docs/BENCHMARKING.md\": {\n      \"before\": \"0959b8b42cf64bceaf2d83dba0b9691091ab23f17f78e9bf6f9156b79e15eee0\",\n      \"after\": \"c396c163a08ab3c15d12b581b3ce3d1321d1439bb0010cad1b7b6e9d11f409b2\"\n    },\n    \"docs/ROADMAP.md\": {\n      \"before\": \"e0aae069abe4ad84dbd77301eaeb22c8b39dd8514a9070de6e8f7b827f86bfb5\",\n      \"after\": \"b0d651a498a8558bdaa49567928112396a7a91df1de94b988a96d8f946a42d56\"\n    }\n  },\n  \"source_anchor_files_verified\": 26,\n  \"frozen_assets_verified\": {\n    \"docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md\": \"7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70\",\n    \"docs/studies/cpu_gpu_comparison_v1.matrix.json\": \"29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833\",\n    \"docs/studies/cpu_gpu_comparison_v1.resources.csv\": \"324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab\"\n  },\n  \"freeze_manifest_sha256\": \"518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6\",\n  \"frozen_protocol_unchanged_after_validation\": true,\n  \"production_adapter_and_dependency_pin_unchanged\": true,\n  \"fresh_cpu_ctest_groups_passed\": 3,\n  \"static_protocol_methods_passed\": 14,\n  \"fresh_full_build\": false,\n  \"fresh_full_sanitizers\": false,\n  \"remote_session_queried\": false,\n  \"gpu_pilot_executed\": false,\n  \"main_comparison_executed\": false\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.49623440300001675,
+  "ended_utc": "2026-10-10T00:07:58.465243+00:00"
+}

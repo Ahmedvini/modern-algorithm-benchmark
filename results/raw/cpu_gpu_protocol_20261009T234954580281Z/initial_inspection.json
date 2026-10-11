@@ -1,0 +1,15 @@
+{
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "git_metadata_available": false,
+  "git_status_exit": 128,
+  "git_status_stderr": "fatal: not a git repository (or any of the parent directories): .git",
+  "required_paths": [
+    "results/raw/cuda_timing_20261009T231303050084Z/FINAL_AUDIT.md",
+    "results/raw/cuda_timing_20261009T231303050084Z/CHANGES.md",
+    "results/raw/cuda_timing_20261009T231303050084Z/COMMANDS_FINAL.md",
+    "results/raw/cuda_timing_20261009T231303050084Z/FINAL_INTEGRITY.json",
+    "results/processed/cuda_timing_20261009T231303050084Z/REPORT.md",
+    "docs/CUDA_TIMING_PROTOCOL_v1.md"
+  ],
+  "write_access": true
+}

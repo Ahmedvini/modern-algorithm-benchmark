@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "results/raw/cpu_gpu_protocol_20261009T234954580281Z/build_protocol_assets.py",
+    "--output",
+    "build/cpu_gpu_protocol_20261009T234954580281Z/assets_a"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:54:56.651039+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"study\": {\n    \"datasets\": 48,\n    \"backend_configurations\": 240,\n    \"measured_invocations\": 1200,\n    \"warmup_invocations\": 240,\n    \"primary_measured_rows\": 960,\n    \"primary_warmup_rows\": 192,\n    \"prepared_measured_rows\": 240,\n    \"prepared_warmup_rows\": 48,\n    \"measured_prepared_metric_values\": 960,\n    \"total_invocations\": 1440,\n    \"paired_primary_ratios\": 144\n  },\n  \"pilot\": {\n    \"datasets\": 6,\n    \"backend_configurations\": 30,\n    \"measured_invocations\": 150,\n    \"warmup_invocations\": 30,\n    \"primary_measured_rows\": 120,\n    \"primary_warmup_rows\": 24,\n    \"prepared_measured_rows\": 30,\n    \"prepared_warmup_rows\": 6,\n    \"measured_prepared_metric_values\": 120,\n    \"total_invocations\": 180,\n    \"paired_primary_ratios\": 18\n  },\n  \"runtime_model_study_seconds\": 158.09991629182707,\n  \"runtime_model_pilot_seconds\": 25.960672452000004\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.030756990000099904,
+  "ended_utc": "2026-10-09T23:54:56.681937+00:00"
+}

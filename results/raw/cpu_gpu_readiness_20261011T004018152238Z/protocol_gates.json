@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "sed",
+    "-n",
+    "247,286p",
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "category": "static-read",
+  "started_utc": "2026-10-11T00:40:51.577772+00:00",
+  "exit_code": 0,
+  "stdout": "## 6. Resource estimates and launch gates\n\nThese are calculated payloads and **planning allowances, not measured allocations\nor RSS**. One int32 array is 4N bytes. The future driver holds original, oracle and\nworking vectors (12N); prepared pinned buffers add 8N; either CPU Merge Sort's\nauxiliary vector or production GPU's output vector adds 4N, not both concurrently.\nKnown peak host payload is therefore **24N bytes**. Allocator/runtime, CUDA pageable\nstaging, stack/OpenMP tasks, metadata and context overhead are additional/unmeasured.\n\nWith a retained prepared session, device peak while the production adapter runs is\n**16N + max(W_prepared,1) + max(W_adapter,1)** bytes: both paths' input/output\nbuffers coexist. Workspace sizes are queried separately with the corresponding\nstream/API parameters before allocating performance buffers. Do not assume the\nprivate-stream and default-stream requirements are identical. Query helpers must\nclean up their temporary buffers outside measurement and record actual results.\n\n| N | One array bytes | Known host peak bytes | Both device key pairs bytes | Device planning cap including two 64MiB workspace allowances |\n|---:|---:|---:|---:|---:|\n| 1025 | 4100 | 24600 | 16400 | 134234128 |\n| 65537 | 262148 | 1572888 | 1048592 | 135266320 |\n| 1000000 | 4000000 | 24000000 | 16000000 | 150217728 |\n\nAt 1M this is 22.89MiB known host payload and a 143.26MiB device planning cap.\nThe 64MiB **per workspace** allowance is an acceptance policy, not a proven CUB\nupper bound. Historical prepared allocations were 1 byte at N1025 and 279295\nbytes at N65537; N1M and default-stream adapter requirements are unknown. Query\nboth again. Stop/revise if either exceeds 64MiB, combined device payload exceeds\n256MiB, or it exceeds half of fresh `cudaMemGetInfo` free memory measured before\npersistent allocations. Do not quietly raise the cap. Require at least 1GiB host\nheadroom under both MemAvailable and applicable cgroup limits, and 1GiB free disk.\nOne dataset at a time bounds residency. Record actual workspace/pinned/device\nallocations separately from process peak RSS; RSS never isolates the sorter.\n\nThe machine-readable resource CSV covers every proposed size and explicitly marks\nunknown current workspaces. Planning at 1KiB per raw row gives 1474560 bytes\n(1.41MiB) for 1440 rows. Reserve 512MiB for raw logs/build products, with the 1GiB\ndisk gate above; these are budgets, not measured artifact sizes.\n\n### Execution-time estimate, not a performance prediction\n\n",
+  "stderr": ""
+}

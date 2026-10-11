@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python3",
+    "--version"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "category": "non-benchmark-version-or-read-only-inventory",
+  "started_utc": "2026-10-11T00:42:04.587618+00:00",
+  "exit_code": 0,
+  "stdout": "Python 3.12.3\n",
+  "stderr": ""
+}

@@ -1,0 +1,32 @@
+{
+  "complete": true,
+  "fresh_build_or_gpu_test": false,
+  "historical_cpu_source": "results/processed/sorting_1m_20261009T172003802655Z/per_seed.json",
+  "historical_gpu_cases": 475,
+  "historical_gpu_framework_methods": 14,
+  "historical_gpu_output_checks": 1900,
+  "historical_gpu_prepared_workspace_bytes": {
+    "0": [
+      0
+    ],
+    "1": [
+      0
+    ],
+    "1025": [
+      1
+    ],
+    "65537": [
+      279295
+    ]
+  },
+  "historical_local_cpu_1m_largest_observed_sample_ns": 91878472,
+  "historical_release_groups": 27,
+  "historical_sanitizer_groups": 27,
+  "prior_files_verified": 10755,
+  "required_evidence_present": true,
+  "sealed_smoke_files_verified": 1186,
+  "source_files_verified": 148,
+  "warning": "CPU timing is from a different host; use only a labelled planning proxy, never a CPU/GPU ratio.",
+  "workspace_for_1m": null,
+  "workspace_for_default_stream_adapter": null
+}

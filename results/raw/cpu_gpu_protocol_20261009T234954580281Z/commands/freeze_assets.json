@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_protocol_20261009T234954580281Z/freeze_protocol.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:04:08.823987+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"protocol\": \"cpu_gpu_comparison_v1\",\n  \"status\": \"frozen_for_review\",\n  \"execution_authorized\": false,\n  \"files_sha256\": {\n    \"docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md\": \"7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70\",\n    \"docs/studies/cpu_gpu_comparison_v1.matrix.json\": \"29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833\",\n    \"docs/studies/cpu_gpu_comparison_v1.resources.csv\": \"324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab\"\n  },\n  \"evidence\": \"results/raw/cpu_gpu_protocol_20261009T234954580281Z\",\n  \"note\": \"Specification only; review, missing driver/analyzer, fresh gates and pilot required before study\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.02192857099998946,
+  "ended_utc": "2026-10-10T00:04:08.846094+00:00"
+}

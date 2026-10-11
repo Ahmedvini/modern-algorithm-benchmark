@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_protocol_20261009T234954580281Z/validate_protocol_assets.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:04:08.902439+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "test_balanced_five_rounds (__main__.ProtocolTests.test_balanced_five_rounds) ... ok\ntest_byte_for_byte_regeneration (__main__.ProtocolTests.test_byte_for_byte_regeneration) ... ok\ntest_complete_frozen_matrix (__main__.ProtocolTests.test_complete_frozen_matrix) ... ok\ntest_freeze_hashes_and_schema (__main__.ProtocolTests.test_freeze_hashes_and_schema) ... ok\ntest_manual_totals (__main__.ProtocolTests.test_manual_totals) ... ok\ntest_pilot_is_strict_subset (__main__.ProtocolTests.test_pilot_is_strict_subset) ... ok\ntest_reject_duplicate_or_missing_dataset (__main__.ProtocolTests.test_reject_duplicate_or_missing_dataset) ... ok\ntest_reject_false_completion_or_order (__main__.ProtocolTests.test_reject_false_completion_or_order) ... ok\ntest_reject_oversize_or_wrong_protocol (__main__.ProtocolTests.test_reject_oversize_or_wrong_protocol) ... ok\ntest_reject_scope_or_dependency_change (__main__.ProtocolTests.test_reject_scope_or_dependency_change) ... ok\ntest_resource_formulas_and_unknowns (__main__.ProtocolTests.test_resource_formulas_and_unknowns) ... ok\ntest_runtime_model_is_estimate (__main__.ProtocolTests.test_runtime_model_is_estimate) ... ok\ntest_source_anchors_match (__main__.ProtocolTests.test_source_anchors_match) ... ok\ntest_statistical_units_and_gates (__main__.ProtocolTests.test_statistical_units_and_gates) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.021s\n\nOK\n",
+  "wall_seconds": 0.06686316299965256,
+  "ended_utc": "2026-10-10T00:04:08.969420+00:00"
+}

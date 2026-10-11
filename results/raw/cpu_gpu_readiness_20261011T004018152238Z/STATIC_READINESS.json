@@ -1,0 +1,853 @@
+{
+  "artifacts_executed": false,
+  "build_caches": [
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": true,
+          "sha256": "52d1fe3a6b3b5c1e575891480d4a654a45b44e963a672a031af6a33d3b84b04a"
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "809fefaf156fc45bdce00eb494468dfdb3c8cb7f2e7bd4c8278494437bede8a5"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cpu_gpu_full_tooling_20261010T121208603276Z/release/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CPU_GPU_COMPARISON:BOOL": "OFF",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "c13176c4642bea6e8e3f46a8dc8f646e0eb94653f378bcbce2b97c4ba9c5d9cb"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": true,
+          "sha256": "e6f3f61ca81a8b6cd0552846a496f4bf26e465a6aa3a282b845e19e000a1a85b"
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "b20d05b364f1fbbe7f5f3055b187c8cd22d94ae2abd7269bcb99b16b460bc72c"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CPU_GPU_COMPARISON:BOOL": "OFF",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "ON",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "65c53f9452b9728ae70790e55778c846bd55f7fe6cc3d41809cea2f395adabf2"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": true,
+          "sha256": "52d1fe3a6b3b5c1e575891480d4a654a45b44e963a672a031af6a33d3b84b04a"
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "827062872cb76f3dec86c90fcb884b3adcdaffc3e3d410ff81f1059679681745"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cpu_gpu_pilot_20261010T001232473460Z/release/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CPU_GPU_COMPARISON:BOOL": "OFF",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "78d3c4a693fec4dd749a5b8a367634d0bb59da2f5e72ba10963de631917f1ac7"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": true,
+          "sha256": "7d6a3b46feb92374eaae750d7348aa72e2a3b22f1eec7e6154a32f8cd187f397"
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "aa43c80f3d6ee9dbebcb681e64ee96b6e2b48e870a6b193e02b66f1c6fbb62ec"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cpu_gpu_pilot_20261010T001232473460Z/sanitize/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CPU_GPU_COMPARISON:BOOL": "OFF",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "ON",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "8baf91c27e1788e2e2d676e36df9cb4ba13f2a4555735e5f39d57493c3a1c2f6"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "d0ace80fd6978610b61ad2350fa268bbf8147e520d3e5abee2feb5fe94d6059b"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cub_correctness_colab_20261009T223853955936Z/cpu-release/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "537af939793819df24d0d058714d9ccc8cea6be0c92473752f9d7b1adb8ca5d6"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "35581870ebc2a4556b2493344588a575d3582434078d9c6569bd8bee299cbf5f"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cub_correctness_colab_20261009T223853955936Z/cpu-sanitize/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "ON",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "50e20f311e6f2f1f619256f3dba6dcb2f83682bfc6e2a37adaeda382da0ace52"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cub_sort_unavailable/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CUDA_COMPILER:FILEPATH": "NOTFOUND",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "ON",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "ON",
+        "MAB_ENABLE_OPENMP:UNINITIALIZED": "OFF",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF"
+      },
+      "sha256": "4acb53acd8adb20e7a6b7195115b58a4caa1999c58ad76234987aca180d0b845"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cub_sort_unavailable/CMakeFiles/CheckCUDA/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_CUDA_COMPILER:FILEPATH": "CMAKE_CUDA_COMPILER-NOTFOUND",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cub_sort_unavailable/CMakeFiles/CheckCUDA"
+      },
+      "sha256": "a83c4e387e3164db457485d2dfba1616a77918da4bf60f1df5c0ae93aa845db2"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "1de3caa42b6e4dc152af2c6ae49f6b547a9b8c4513ade94399de9bd21684ca70"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cub_source_relocation_20261009T220322089788Z/cpu_build/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cub_source_relocation_20261009T220322089788Z/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "OFF",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF"
+      },
+      "sha256": "70b65c9487ab28ac4f30181a6bcb5bb0988b4e73fc6b8e02baeffe193841a557"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "54567b8edd38e797604d7cb4a62a827a3ed7f60ae83ec499ee8af8c99f39f6fd"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cuda_cpu_fallback/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "OFF",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF"
+      },
+      "sha256": "a8a74f75a084ffbd0d0c125e5376d9112c7d1cb13883ca234b167184d4471292"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "98685a3cd26e0d545508e6d3b5d1198036801de9d63aca153ade6c99985737e0"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cuda_timing_20261009T231303050084Z/cpu-release/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "6d0167e3c595d98f13f3012cba4b8cf3d24ad33e62642c1ec59046baa5ea809e"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "bbd6791fbad1ccae83abf5340a7f2b8db2739fe34acbe7c591b3bd25b327f013"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/cuda_timing_20261009T231303050084Z/cpu-sanitize/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "ON",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "70c54548ac454ff9576e9f05431a9b7ba9425697c26291481e338060b068c37b"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "5fbd8d392bdc95560b1865c400f39b54e216249ba2e1dd9668f9279fd0506409"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/gpu_cloud_archive_20261009T211734154323Z/cpu_build/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/gpu_cloud_archive_20261009T211734154323Z/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "OFF",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF"
+      },
+      "sha256": "8a553f3def287a3e8b740f3c4688880ff5409944464d992ca23bc928d0b70adb"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "6686d03a226213909101ff96d15f933715b4db312e488888e0274472ee718ef3"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/no_openmp/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_OPENMP:BOOL": "OFF",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF"
+      },
+      "sha256": "70ca890ccb5216703e7ad8571f3558c56da82d6d93eca8e68e3220d2c784196e"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "b09dd543795deffec9e85b4a3d526a15a47f4af021873f8c24e042afc9d8a63f"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/release/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "OFF",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "b4999c884c84af536d5c9c0c101937ad99c8dae6f5e777edda8eb0a4c218b70a"
+    },
+    {
+      "artifacts": {
+        "comparison_input": {
+          "present": false,
+          "sha256": null
+        },
+        "cpu_gpu_comparison": {
+          "present": false,
+          "sha256": null
+        },
+        "cuda_sort_benchmark": {
+          "present": false,
+          "sha256": null
+        },
+        "sort_benchmark": {
+          "present": true,
+          "sha256": "5d631b0dadd0ec9cb0b03ba8cef888231304c51bbe31c88c73a74c2b3c72a75c"
+        },
+        "test_cuda_sorting": {
+          "present": false,
+          "sha256": null
+        }
+      },
+      "cache": "build/sanitize/CMakeCache.txt",
+      "cub_include_present": null,
+      "metadata": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:FILEPATH": "/usr/bin/c++",
+        "CMAKE_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS:STRING": "",
+        "CMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_DEBUG:STRING": "-g",
+        "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_MINSIZEREL:STRING": "-Os -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELEASE:STRING": "-O3 -DNDEBUG",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL": "1",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING": "-O2 -g -DNDEBUG",
+        "CMAKE_HOME_DIRECTORY:INTERNAL": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+        "MAB_ENABLE_CUDA:BOOL": "OFF",
+        "MAB_ENABLE_CUDA_SORT:BOOL": "OFF",
+        "MAB_ENABLE_OPENMP:BOOL": "ON",
+        "MAB_ENABLE_SANITIZERS:BOOL": "ON",
+        "OpenMP_CXX_FLAGS-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_FLAGS:STRING": "-fopenmp",
+        "OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL": "1",
+        "OpenMP_CXX_LIB_NAMES:STRING": "gomp;pthread",
+        "OpenMP_CXX_SPEC_DATE:INTERNAL": "201511"
+      },
+      "sha256": "5013dc1b711a248a2b5741e3803f1cafbb429c5139512b5a99b3f1b8d1c4d6e3"
+    }
+  ],
+  "cub_pin": {
+    "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+    "cub_version": 300001,
+    "files": {
+      "LICENSE": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+        "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+      },
+      "cub_version.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+        "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+      },
+      "device_radix_sort.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+        "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+      }
+    },
+    "installed_toolkit_identity": "Colab CUDA 13.0.88: reviewed version and SortKeys headers match v3.0.1; full tree hashes recorded by validation runner",
+    "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
+    "local_modifications_to_upstream": "none",
+    "previous_reference": {
+      "commit": "e944297b0b51a8e9c0f1b30425370c31c1c0e0a0",
+      "cub_version": 300000,
+      "files": {
+        "LICENSE": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/LICENSE",
+          "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE"
+        },
+        "cub_version.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/version.cuh",
+          "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh"
+        },
+        "device_radix_sort.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/device/device_radix_sort.cuh",
+          "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh"
+        }
+      },
+      "reference_release": "v3.0.0"
+    },
+    "reference_release": "v3.0.1",
+    "upstream": "https://github.com/NVIDIA/cccl",
+    "vendored_algorithm_sources": false
+  },
+  "freeze_sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+  "frozen": {
+    "count": 3,
+    "differences": []
+  },
+  "production_adapter_sha256": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+  "protected_anchors": {
+    "count": 26,
+    "differences": []
+  },
+  "review_seal": {
+    "count": 27,
+    "differences": []
+  },
+  "reviewed_source": {
+    "count": 144,
+    "differences": []
+  },
+  "study_execution_authorized": false,
+  "tools": {
+    "cmake": "/usr/bin/cmake",
+    "colab": "/home/ahmedelsheikh/.local/bin/colab",
+    "g++": "/usr/bin/g++",
+    "gcc": "/usr/bin/gcc",
+    "ldconfig": "/usr/sbin/ldconfig",
+    "lscpu": "/usr/bin/lscpu",
+    "nvcc": null,
+    "nvidia-smi": null,
+    "python3": "/usr/bin/python3"
+  }
+}

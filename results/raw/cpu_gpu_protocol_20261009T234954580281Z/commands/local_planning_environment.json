@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_protocol_20261009T234954580281Z/capture_local_environment.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:05:37.639257+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"kind\": \"local_planning_host_not_colab\",\n  \"os\": \"Linux-6.18.7-76061807-generic-x86_64-with-glibc2.39\",\n  \"kernel\": \"6.18.7-76061807-generic\",\n  \"architecture\": \"x86_64\",\n  \"cpu_model\": \"11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz\",\n  \"logical_cpus\": 12,\n  \"affinity\": [\n    0,\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8,\n    9,\n    10,\n    11\n  ],\n  \"memory\": {\n    \"MemTotal\": \"16089016 kB\",\n    \"MemAvailable\": \"4136908 kB\"\n  },\n  \"cgroup_memory_max\": null,\n  \"cgroup_cpu_max\": null,\n  \"disk_free_bytes\": 133841694720,\n  \"python\": \"3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]\",\n  \"load_average\": [\n    1.9658203125,\n    1.39453125,\n    1.3173828125\n  ],\n  \"address_space_limit\": [\n    -1,\n    -1\n  ],\n  \"cuda_session_checked\": false,\n  \"note\": \"No GPU/toolchain execution or remote session query; resource estimates target a future fresh T4 preflight\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.030343442000230425,
+  "ended_utc": "2026-10-10T00:05:37.669720+00:00"
+}

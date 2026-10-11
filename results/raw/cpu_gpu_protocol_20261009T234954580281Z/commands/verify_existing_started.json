@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "results/raw/cpu_gpu_protocol_20261009T234954580281Z/verify_existing.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:51:12.623991+00:00"
+}

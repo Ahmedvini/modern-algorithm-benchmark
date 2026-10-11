@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/cpu_gpu_protocol_20261009T234954580281Z/build_protocol_assets.py",
+    "--output",
+    "build/cpu_gpu_protocol_20261009T234954580281Z/assets_final"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T00:00:22.282402+00:00"
+}

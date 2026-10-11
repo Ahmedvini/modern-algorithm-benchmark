@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "colab",
+    "version"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "category": "CLI-version-only",
+  "started_utc": "2026-10-11T00:43:01.092538+00:00",
+  "exit_code": 0,
+  "stdout": "Version: 0.7.4\n",
+  "stderr": ""
+}

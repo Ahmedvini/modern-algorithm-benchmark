@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "build/cuda_timing_20261009T231303050084Z/cpu-release",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^(datasets|timing|cuda_benchmark_analysis)$"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T23:53:13.029782+00:00",
+  "exit_code": 0,
+  "stdout": "Internal ctest changing into directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release/DartConfiguration.tcl\nTest project /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 11\n    Start 11: cuda_benchmark_analysis\n\n11: Test command: /usr/bin/python3 \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cuda_benchmark.py\"\n11: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release\n11: Test timeout computed to be: 1500\n11: ss...run_0000 exit 9\n11: run_0000 timed out\n11: .......[Errno 17] File exists: '/tmp/tmpxw30yth9/processed'\n11: .correctness exit 9\n11: .\n11: ----------------------------------------------------------------------\n11: Ran 14 tests in 0.153s\n11: \n11: OK (skipped=2)\n1/3 Test #11: cuda_benchmark_analysis ..........   Passed    0.23 sec\ntest 13\n    Start 13: datasets\n\n13: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release/test_datasets\n13: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release\n13: Test timeout computed to be: 1500\n13: Passed 220 distribution/size/seed cases, five exact one-swap fixtures, one five-swap fixture, empty/singleton swap checks, and existing fixtures/validation\n2/3 Test #13: datasets .........................   Passed    0.01 sec\ntest 24\n    Start 24: timing\n\n24: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release/test_timing\n24: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cuda_timing_20261009T231303050084Z/cpu-release\n24: Test timeout computed to be: 1500\n24: Passed 72 reproducible distribution/seed/size inputs and 1296 validated registry trials; sorted aliases, exact input restoration/order, failures, bounds and escaping passed\n3/3 Test #24: timing ...........................   Passed    0.00 sec\n\nThe following tests passed:\n\tcuda_benchmark_analysis\n\tdatasets\n\ttiming\n\n100% tests passed, 0 tests failed out of 3\n\nTotal Test time (real) =   0.24 sec\n",
+  "stderr": "",
+  "wall_seconds": 0.24826318799978253,
+  "ended_utc": "2026-10-09T23:53:13.278173+00:00"
+}

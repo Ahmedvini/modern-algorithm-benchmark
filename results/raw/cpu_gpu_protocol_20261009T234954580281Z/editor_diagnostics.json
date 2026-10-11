@@ -1,0 +1,18 @@
+[
+  {
+    "tool": "apply_patch",
+    "result": "verification_failed",
+    "file": "README.md",
+    "context": "Clock/thermal/background controls are unverified; post-run\nprobes are not timing controls. See audit for resource/timing limitations.",
+    "reason": "First context line began midway through an existing line",
+    "files_modified": false
+  },
+  {
+    "tool": "apply_patch",
+    "result": "verification_failed",
+    "file": "README.md",
+    "context": "local/cloud statistics identical (absolute source paths correctly relocate).",
+    "reason": "Context did not match current README text",
+    "files_modified": false
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "rg",
+    "-n",
+    "colab sessions|colab status|colab exec|colab run|colab --|nvidia-smi|nvcc --version",
+    "docs/CUDA_EXECUTION_GUIDE_v1.md",
+    "results/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "category": "static-read",
+  "started_utc": "2026-10-11T00:40:51.634986+00:00",
+  "exit_code": 0,
+  "stdout": "results/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:5:- Local `colab --help` \u2014 exit 0; log `commands/colab_help.json`.\nresults/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:6:- Local `colab sessions` \u2014 exit 0; log `commands/colab_sessions.json`.\nresults/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:9:- Local `colab status --session cub-workspace-65537-20261010T110457Z` \u2014 exit 0; log `commands/fresh_session_status.json`.\nresults/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:12:- Local `colab exec --session cub-workspace-65537-20261010T110457Z --file /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cub_workspace_65537_20261010T110457531249Z/inspect_fresh_session.py --timeout 120` \u2014 exit 0; log `commands/inspect_fresh_session.json`.\nresults/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:14:- Local `colab exec --session cub-workspace-65537-20261010T110457Z --file /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cub_workspace_65537_20261010T110457531249Z/remote_resource_check.py --timeout 900` \u2014 exit 0; log `commands/remote_resource_validation.json`.\nresults/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:19:- Remote `nvidia-smi --query-gpu=name,uuid,driver_version,memory.total,memory.free,temperature.gpu,clocks.sm,clocks.mem,power.limit --format=csv,noheader,nounits` \u2014 exit 0; full stdout/stderr `downloaded/evidence/gpu_after.json`.\nresults/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:20:- Remote `nvidia-smi` \u2014 exit 0; full stdout/stderr `downloaded/evidence/gpu_initial.json`.\nresults/raw/cub_workspace_65537_20261010T110457531249Z/COMMANDS.md:21:- Remote `nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader,nounits` \u2014 exit 0; full stdout/stderr `downloaded/evidence/gpu_processes_initial.json`.\ndocs/CUDA_EXECUTION_GUIDE_v1.md:5:nvidia-smi or working CUDA driver evidence. CUDA target compilation, kernel\ndocs/CUDA_EXECUTION_GUIDE_v1.md:24:command -v nvidia-smi || true\ndocs/CUDA_EXECUTION_GUIDE_v1.md:26:nvidia-smi --query-gpu=index,name,driver_version --format=csv,noheader,nounits\ndocs/CUDA_EXECUTION_GUIDE_v1.md:27:nvcc --version\ndocs/CUDA_EXECUTION_GUIDE_v1.md:30:Each command's status matters. Missing nvidia-smi/nvcc is expected on a CPU-only\ndocs/CUDA_EXECUTION_GUIDE_v1.md:31:runtime. `nvcc --version` is not a kernel test. nvidia-smi's displayed CUDA version\ndocs/CUDA_EXECUTION_GUIDE_v1.md:213:  Select a development image; do not infer toolkit from nvidia-smi's CUDA banner.\n",
+  "stderr": ""
+}

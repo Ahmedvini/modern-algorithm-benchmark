@@ -1,0 +1,42 @@
+{
+  "changed_existing_files": {
+    "README.md": {
+      "after": "319e86746d228790cba7a36e1055fc9d1f1cb37fcd4b7e1467b133f4908b3901",
+      "before": "2a3ad7c380b28dd38b41af92c594c638650cd602e62a06ed6780b0f554edd85c"
+    },
+    "docs/AUDIT.md": {
+      "after": "4d723148b3de19ca1fe602c990cbc323c22d25f61ced603aad4f8e3c46dbdad3",
+      "before": "6cd0de79d4d55dcc87d49e20f1fa5b5350787b5f29a3bfd6cb37827a4aee4ed9"
+    },
+    "docs/BENCHMARKING.md": {
+      "after": "c396c163a08ab3c15d12b581b3ce3d1321d1439bb0010cad1b7b6e9d11f409b2",
+      "before": "0959b8b42cf64bceaf2d83dba0b9691091ab23f17f78e9bf6f9156b79e15eee0"
+    },
+    "docs/ROADMAP.md": {
+      "after": "b0d651a498a8558bdaa49567928112396a7a91df1de94b988a96d8f946a42d56",
+      "before": "e0aae069abe4ad84dbd77301eaeb22c8b39dd8514a9070de6e8f7b827f86bfb5"
+    }
+  },
+  "complete": true,
+  "freeze_manifest_sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+  "fresh_cpu_ctest_groups_passed": 3,
+  "fresh_full_build": false,
+  "fresh_full_sanitizers": false,
+  "frozen_assets_verified": {
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+    "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+    "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+  },
+  "frozen_protocol_unchanged_after_validation": true,
+  "gpu_pilot_executed": false,
+  "main_comparison_executed": false,
+  "original_source_files": 148,
+  "previous_sealed_smoke_files_verified": 1186,
+  "prior_result_files_verified": 10755,
+  "production_adapter_and_dependency_pin_unchanged": true,
+  "remote_session_queried": false,
+  "scope": "protocol planning and integrity only; no comparative experiment executed",
+  "source_anchor_files_verified": 26,
+  "static_protocol_methods_passed": 14,
+  "unchanged_protected_source_files": 144
+}

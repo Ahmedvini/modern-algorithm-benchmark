@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import json;from pathlib import Path;e=Path(\"results/raw/cpu_gpu_readiness_20261011T004018152238Z\");d=json.loads((e/\"STATIC_READINESS.json\").read_text());r=json.loads((e/\"LOCAL_OBSERVATIONS.json\").read_text());print(\"cache count\",len(d[\"build_caches\"]));print(\"present comparison binaries\",[str(p) for p in Path(\"build\").rglob(\"cpu_gpu_comparison\") if p.is_file()]);print(\"frozen\",d[\"frozen\"],\"anchors\",d[\"protected_anchors\"],\"source\",d[\"reviewed_source\"]);print(\"governors\",{v.get(\"text\") for v in r[\"governors\"].values()});print(\"cgroup accessible settings\",[(p,k,v[\"text\"]) for p,rows in r[\"cgroup_ancestors\"].items() for k,v in rows.items() if v.get(\"available\")]);print(\"RAM available GiB\",r[\"memory_bytes\"][\"MemAvailable\"]/1024**3,\"disk free GiB\",r[\"disk\"][\"free_bytes\"]/1024**3);print(\"mount entries\",[x for x in json.loads((e/\"cgroup_mounts.json\").read_text())[\"stdout\"].splitlines() if \"cgroup\" in x])"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "category": "static-evidence-summary",
+  "started_utc": "2026-10-11T00:43:27.611706+00:00",
+  "exit_code": 0,
+  "stdout": "cache count 16\npresent comparison binaries []\nfrozen {'count': 3, 'differences': []} anchors {'count': 26, 'differences': []} source {'count': 144, 'differences': []}\ngovernors {'powersave'}\ncgroup accessible settings [('/sys/fs/cgroup/user.slice', 'cpu.max', 'max 100000'), ('/sys/fs/cgroup/user.slice', 'memory.current', '8448245760'), ('/sys/fs/cgroup/user.slice', 'memory.max', 'max'), ('/sys/fs/cgroup/user.slice/user-1000.slice', 'cpu.max', 'max 100000'), ('/sys/fs/cgroup/user.slice/user-1000.slice', 'memory.current', '8311336960'), ('/sys/fs/cgroup/user.slice/user-1000.slice', 'memory.max', 'max'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service', 'cpu.max', 'max 100000'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service', 'memory.current', '7419170816'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service', 'memory.max', 'max'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice', 'cpu.max', 'max 100000'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice', 'memory.current', '7356788736'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice', 'memory.max', 'max'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope', 'memory.current', '1417990144'), ('/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope', 'memory.max', 'max')]\nRAM available GiB 3.6718826293945312 disk free GiB 126.66266632080078\nmount entries ['38 27 0:32 / /sys/fs/cgroup rw,nosuid,nodev,noexec,relatime shared:10 - cgroup2 cgroup2 rw,nsdelegate,memory_recursiveprot']\n",
+  "stderr": ""
+}

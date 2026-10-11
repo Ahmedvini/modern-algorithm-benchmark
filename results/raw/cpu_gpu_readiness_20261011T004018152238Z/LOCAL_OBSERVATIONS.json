@@ -1,0 +1,350 @@
+{
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "cgroup_ancestors": {
+    "/sys/fs/cgroup": {
+      "cpu.max": {
+        "available": false,
+        "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/cpu.max'",
+        "path": "/sys/fs/cgroup/cpu.max"
+      },
+      "memory.current": {
+        "available": false,
+        "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory.current'",
+        "path": "/sys/fs/cgroup/memory.current"
+      },
+      "memory.max": {
+        "available": false,
+        "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory.max'",
+        "path": "/sys/fs/cgroup/memory.max"
+      }
+    },
+    "/sys/fs/cgroup/user.slice": {
+      "cpu.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/cpu.max",
+        "text": "max 100000"
+      },
+      "memory.current": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/memory.current",
+        "text": "8448245760"
+      },
+      "memory.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/memory.max",
+        "text": "max"
+      }
+    },
+    "/sys/fs/cgroup/user.slice/user-1000.slice": {
+      "cpu.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/cpu.max",
+        "text": "max 100000"
+      },
+      "memory.current": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/memory.current",
+        "text": "8311336960"
+      },
+      "memory.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/memory.max",
+        "text": "max"
+      }
+    },
+    "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service": {
+      "cpu.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/cpu.max",
+        "text": "max 100000"
+      },
+      "memory.current": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/memory.current",
+        "text": "7419170816"
+      },
+      "memory.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/memory.max",
+        "text": "max"
+      }
+    },
+    "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice": {
+      "cpu.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/cpu.max",
+        "text": "max 100000"
+      },
+      "memory.current": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/memory.current",
+        "text": "7356788736"
+      },
+      "memory.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/memory.max",
+        "text": "max"
+      }
+    },
+    "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope": {
+      "cpu.max": {
+        "available": false,
+        "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope/cpu.max'",
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope/cpu.max"
+      },
+      "memory.current": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope/memory.current",
+        "text": "1417990144"
+      },
+      "memory.max": {
+        "available": true,
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope/memory.max",
+        "text": "max"
+      }
+    }
+  },
+  "ctest_environment_keys_present": [],
+  "cuda_library_cache_rows": [],
+  "cuda_runtime_executed": false,
+  "cuda_toolkit_locations": [],
+  "disk": {
+    "free_bytes": 136003002368,
+    "path": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_readiness_20261011T004018152238Z",
+    "total_bytes": 499897151488,
+    "used_bytes": 338425552896
+  },
+  "environment": {
+    "ASAN_OPTIONS": null,
+    "CC": null,
+    "CUDACXX": null,
+    "CUDA_HOME": null,
+    "CUDA_PATH": null,
+    "CUDA_VISIBLE_DEVICES": null,
+    "CXX": null,
+    "LSAN_OPTIONS": null,
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_NUM_THREADS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null,
+    "UBSAN_OPTIONS": null
+  },
+  "governors": {
+    "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor",
+      "text": "powersave"
+    },
+    "/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor": {
+      "available": true,
+      "path": "/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor",
+      "text": "powersave"
+    }
+  },
+  "limits": {
+    "RLIMIT_AS": [
+      -1,
+      -1
+    ],
+    "RLIMIT_DATA": [
+      -1,
+      -1
+    ],
+    "RLIMIT_MEMLOCK": [
+      2059395072,
+      2059395072
+    ],
+    "RLIMIT_NOFILE": [
+      4096,
+      1048576
+    ],
+    "RLIMIT_NPROC": [
+      62304,
+      62304
+    ]
+  },
+  "load_average": [
+    0.724609375,
+    0.58056640625,
+    0.4892578125
+  ],
+  "logical_cpus": 12,
+  "memory_bytes": {
+    "MemAvailable": 3942653952,
+    "MemTotal": 16475160576
+  },
+  "nvidia_device_nodes": {
+    "/dev/nvidia0": false,
+    "/dev/nvidiactl": false
+  },
+  "nvidia_driver": {
+    "available": false,
+    "error": "[Errno 2] No such file or directory: '/proc/driver/nvidia/version'",
+    "path": "/proc/driver/nvidia/version"
+  },
+  "nvidia_module_present": false,
+  "nvidia_pci": [
+    {
+      "class": {
+        "available": true,
+        "path": "/sys/bus/pci/devices/0000:01:00.0/class",
+        "text": "0x030000"
+      },
+      "device": {
+        "available": true,
+        "path": "/sys/bus/pci/devices/0000:01:00.0/device",
+        "text": "0x25a0"
+      },
+      "driver": null,
+      "path": "/sys/bus/pci/devices/0000:01:00.0",
+      "vendor": {
+        "available": true,
+        "path": "/sys/bus/pci/devices/0000:01:00.0/vendor",
+        "text": "0x10de"
+      }
+    }
+  ],
+  "observed_utc": "2026-10-11T00:43:01.119263+00:00",
+  "openmp_runtime": {
+    "path": "/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so",
+    "present": true,
+    "sha256": "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1"
+  },
+  "os_release": {
+    "available": true,
+    "path": "/etc/os-release",
+    "text": "NAME=\"Pop!_OS\"\nVERSION=\"24.04 LTS\"\nID=pop\nID_LIKE=\"ubuntu debian\"\nPRETTY_NAME=\"Pop!_OS 24.04 LTS\"\nVERSION_ID=\"24.04\"\nHOME_URL=\"https://pop.system76.com\"\nSUPPORT_URL=\"https://support.system76.com\"\nBUG_REPORT_URL=\"https://github.com/pop-os/pop/issues\"\nPRIVACY_POLICY_URL=\"https://system76.com/privacy\"\nVERSION_CODENAME=noble\nUBUNTU_CODENAME=noble\nLOGO=distributor-logo-pop-os"
+  },
+  "platform": "Linux-6.18.7-76061807-generic-x86_64-with-glibc2.39",
+  "proc_meminfo": {
+    "available": true,
+    "path": "/proc/meminfo",
+    "text": "MemTotal:       16089024 kB\nMemFree:          799364 kB\nMemAvailable:    3850248 kB\nBuffers:          115484 kB\nCached:          4958320 kB\nSwapCached:            0 kB\nActive:          2703820 kB\nInactive:       11039264 kB\nActive(anon):    1678640 kB\nInactive(anon):  8143232 kB\nActive(file):    1025180 kB\nInactive(file):  2896032 kB\nUnevictable:      366900 kB\nMlocked:            7848 kB\nSwapTotal:      42675696 kB\nSwapFree:       42675680 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              1920 kB\nWriteback:             0 kB\nAnonPages:       9036856 kB\nMapped:          2269236 kB\nShmem:           1146696 kB\nKReclaimable:     252936 kB\nSlab:             525428 kB\nSReclaimable:     252936 kB\nSUnreclaim:       272492 kB\nKernelStack:       45680 kB\nPageTables:       105724 kB\nSecPageTables:      5468 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    50720208 kB\nCommitted_AS:   43556896 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      216868 kB\nVmallocChunk:          0 kB\nPercpu:            14016 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:     40960 kB\nShmemHugePages:   571392 kB\nShmemPmdMapped:        0 kB\nFileHugePages:     10240 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\nUnaccepted:            0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      297368 kB\nDirectMap2M:     6758400 kB\nDirectMap1G:    10485760 kB"
+  },
+  "resource_files": {
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_period_us": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_period_us'",
+      "path": "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_period_us"
+    },
+    "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us'",
+      "path": "/sys/fs/cgroup/cpu,cpuacct/cpu.cfs_quota_us"
+    },
+    "/sys/fs/cgroup/cpu.max": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/cpu.max'",
+      "path": "/sys/fs/cgroup/cpu.max"
+    },
+    "/sys/fs/cgroup/cpu/cpu.cfs_period_us": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/cpu/cpu.cfs_period_us'",
+      "path": "/sys/fs/cgroup/cpu/cpu.cfs_period_us"
+    },
+    "/sys/fs/cgroup/cpu/cpu.cfs_quota_us": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/cpu/cpu.cfs_quota_us'",
+      "path": "/sys/fs/cgroup/cpu/cpu.cfs_quota_us"
+    },
+    "/sys/fs/cgroup/memory.current": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory.current'",
+      "path": "/sys/fs/cgroup/memory.current"
+    },
+    "/sys/fs/cgroup/memory.max": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory.max'",
+      "path": "/sys/fs/cgroup/memory.max"
+    },
+    "/sys/fs/cgroup/memory/memory.limit_in_bytes": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory/memory.limit_in_bytes'",
+      "path": "/sys/fs/cgroup/memory/memory.limit_in_bytes"
+    },
+    "/sys/fs/cgroup/memory/memory.usage_in_bytes": {
+      "available": false,
+      "error": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory/memory.usage_in_bytes'",
+      "path": "/sys/fs/cgroup/memory/memory.usage_in_bytes"
+    }
+  },
+  "self_cgroup": {
+    "available": true,
+    "path": "/proc/self/cgroup",
+    "text": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-6916.scope"
+  },
+  "study_authorized": false,
+  "uname": [
+    "Linux",
+    "pop-os",
+    "6.18.7-76061807-generic",
+    "#202601231045~1769703228~24.04~cb87b5b SMP PREEMPT_DYNAMIC Thu J",
+    "x86_64",
+    "x86_64"
+  ]
+}

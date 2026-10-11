@@ -1,0 +1,828 @@
+--- before/README.md
++++ after/README.md
+@@ -834,3 +834,13 @@
+ Next: independent review of the consolidated validation evidence. Legacy full-study
+ provenance gates remain unchanged and reject the deliberately extended framework;
+ current correctness evidence does not establish timing validity or authorize a launch.
++# CPU/GPU recovery: explicit framework compatibility
++
++An opt-in, pinned [framework compatibility policy](docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md)
++now recognizes the three approved test-only framework changes while preserving
++legacy rejection and all full-prerequisite coverage requirements. A read-only
++build-identity snapshot includes `comparison_input` and rejects stale/mismatched
++files. Focused inert regressions pass; current remote identities and full-study
++eligibility remain blocked. No new timing trials ran. See the
++[recovery audit](results/raw/cpu_gpu_recovery_20261011T075800444473Z/FINAL_AUDIT.md).
++
+--- before/docs/ROADMAP.md
++++ after/docs/ROADMAP.md
+@@ -513,3 +513,18 @@
+ then separately authorized policy/integration work if required. Do not launch a study
+ from correctness classification. See [current audit](../results/raw/bounded_resume_20261011T024034091796Z/FINAL_AUDIT.md),
+ [metadata review](CTEST_COLAB_METADATA_v2.md) and [classification policy](CPU_GPU_VALIDATION_POLICY_v2.md).
++# CPU/GPU compatibility recovery — full study remains NO-GO
++
++The explicit [framework compatibility v1](CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md)
++path and comparison-input build identity checks have focused inert regression
++coverage. They preserve original frozen inputs, legacy handling, strict provenance,
++and required full-framework/timing evidence. They do not make correctness-only
++validation eligible or authorize measurements.
++
++Next: independently review this policy/diff and an additive reviewed selector
++snapshot; restore an approved T4 environment; establish current build/input-tool
++identities and applicable missing GPU/full-framework coverage. Fresh resource and
++worker evidence remains necessary before a separate final preflight. No study
++launch, pilot, warm-up or measured trial occurred during recovery.
++See [recovery audit](../results/raw/cpu_gpu_recovery_20261011T075800444473Z/FINAL_AUDIT.md).
++
+--- before/scripts/analyze_cpu_gpu.py
++++ after/scripts/analyze_cpu_gpu.py
+@@ -101,6 +101,12 @@
+         require(prerequisite['binary_sha256']==build['binary_sha256'] and
+                 prerequisite['input_tool_sha256']==build['input_tool_sha256'],'prerequisite binary mismatch')
+         require(prerequisite['source_sha256']==source_review['current_source_sha256'],'prerequisite source mismatch')
++        require(prerequisite.get('framework_compatibility_policy') == source_review.get('framework_compatibility_policy'),
++                'source/prerequisite framework policy mismatch')
++        if source_review.get('framework_compatibility_policy') is not None:
++            from cpu_gpu_framework_compatibility import validate_evidence
++            validate_evidence(prerequisite,root/'prerequisite_commands',model,source_review,
++                              build['binary_sha256'],build['input_tool_sha256'],build['compile_commands_sha256'])
+         for backend,reference in meta['implementations'].items():
+             require(reference==dict(source_review='source_review.json',build='build.json',
+                 cub_pin=model['dependency'] if backend.startswith('gpu_') else None),'implementation provenance mismatch')
+@@ -132,7 +138,11 @@
+     require(set(meta.get('implementations', {})) == set(BACKENDS), 'missing implementation identities')
+     require(meta.get('prerequisites_passed') is True, 'prerequisites not validated')
+     if part=='study':validate_study_metadata(root,meta,model)
+-    elif meta['run_kind']=='performance':validate_retained_source(read_json(root/'source_review.json'),model)
++    elif meta['run_kind']=='performance':
++        review=read_json(root/'source_review.json')
++        require('framework_compatibility_policy' not in review and 'compatibility_policy_sha256' not in review,
++                'framework compatibility is study-only; historical pilot unchanged')
++        validate_retained_source(review,model)
+     queries=read_json(root/'workspace_queries.json')
+     require(set(queries)=={str(c['recipe']['size']) for c in cells},'missing/unexpected workspace queries')
+     for size,query in queries.items():validate_resources(query,int(size))
+--- before/scripts/cpu_gpu_protocol.py
++++ after/scripts/cpu_gpu_protocol.py
+@@ -73,7 +73,11 @@
+         paths.extend(p for p in (ROOT / directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
+     return {str(p.relative_to(ROOT)): sha(p) for p in sorted(set(paths))}
+ 
+-def verify_source_extension(model):
++def verify_source_extension(model, compatibility_policy=None):
++    if compatibility_policy is not None:
++        from cpu_gpu_framework_compatibility import POLICY_ID, current_review
++        require(compatibility_policy == POLICY_ID, 'unknown framework compatibility policy')
++        return current_review(model)
+     # Only reviewed additive CMake integration can change an existing source anchor.
+     # Its exact current hash and the review/diff are captured in run evidence.
+     changed = []
+--- before/scripts/cpu_gpu_provenance.py
++++ after/scripts/cpu_gpu_provenance.py
+@@ -77,6 +77,11 @@
+ 
+ 
+ def validate_retained_source(source_review, model):
++    if isinstance(source_review, dict) and ('framework_compatibility_policy' in source_review or
++                                          'compatibility_policy_sha256' in source_review):
++        from cpu_gpu_framework_compatibility import validate_review
++        validate_review(source_review, model)
++        return
+     expected = trusted_source_anchors(model)
+     require(isinstance(source_review, dict), 'invalid retained source review')
+     actual = source_review.get('current_source_sha256')
+--- before/scripts/run_cpu_gpu_pilot.py
++++ after/scripts/run_cpu_gpu_pilot.py
+@@ -104,12 +104,16 @@
+                 item for key in ['input-sha256','input-fnv','matrix-sha256','build-id','environment-id','run-id']
+                 for item in ['--'+key,identifiers[key]]]
+ 
+-def validate_prerequisites(path, executable, input_tool, model):
+-    p=json.loads(path.read_text())
++def validate_prerequisites(path, executable, input_tool, model, compatibility_policy=None):
++    from cpu_gpu_provenance import strict_json
++    p=strict_json(path.read_text())
++    require(p.get('framework_compatibility_policy') == compatibility_policy,
++            'prerequisite/launch framework compatibility policy mismatch')
+     require(p.get('protocol')==PROTOCOL and p.get('complete') is True,'prerequisite validation incomplete')
+     require(p.get('validation_scope','full_protocol_v1')=='full_protocol_v1' and p.get('study_eligible',True) is True,
+             'non-timing subset is not full study prerequisites')
+-    require(p['source_sha256']==verify_source_extension(model)['current_source_sha256'],'source changed after prerequisite validation')
++    source=verify_source_extension(model, compatibility_policy)
++    require(p['source_sha256']==source['current_source_sha256'],'source changed after prerequisite validation')
+     require(p['binary_sha256']==sha(executable) and p['input_tool_sha256']==sha(input_tool),'binary changed after validation')
+     required={'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'}
+     records=p['records']
+@@ -119,8 +123,13 @@
+         require(not relative.is_absolute() and '..' not in relative.parts,'unsafe prerequisite record path')
+         command_path=path.parent/record['file']
+         require(sha(command_path)==record['sha256'],'prerequisite record changed')
+-        result=json.loads(command_path.read_text())
++        result=strict_json(command_path.read_text())
+         require(result['exit_code']==0 and result.get('status')=='completed','failed prerequisite '+name)
++    if compatibility_policy is not None:
++        from cpu_gpu_framework_compatibility import validate_evidence
++        from cpu_gpu_build_identity import verify
++        validate_evidence(p,path.parent,model,source,sha(executable),sha(input_tool))
++        verify(p['build_identity'],executable,input_tool)
+     return p
+ 
+ def run(args, part='pilot'):
+@@ -147,14 +156,19 @@
+             except Exception as error:dump_new(output/'PARTIAL_ANALYSIS_ERROR.json',dict(error=str(error),
+                 note='Malformed/unavailable raw evidence cannot be summarized; plan and command/attempt logs remain retained.'))
+     try:
+-        source=verify_source_extension(model)
+-        prereq=validate_prerequisites(args.prerequisites,args.executable,args.input_tool,model)
++        compatibility_policy=getattr(args,'framework_compatibility_policy',None)
++        require(compatibility_policy is None or part=='study','framework compatibility is study-only; historical pilot unchanged')
++        source=verify_source_extension(model,compatibility_policy)
++        prereq=validate_prerequisites(args.prerequisites,args.executable,args.input_tool,model,
++                                     compatibility_policy=compatibility_policy)
+         dump_new(output/'prerequisites.json',prereq);dump_new(output/'source_review.json',source)
+         if part=='study':
+-            for record in prereq.get('records',{}).values():
++            for record in list(prereq.get('records',{}).values())+list(prereq.get('framework_records',{}).values()):
+                 destination=output/'prerequisite_commands'/record['file']
+                 destination.parent.mkdir(parents=True,exist_ok=True)
+-                if not destination.exists():shutil.copyfile(args.prerequisites.parent/record['file'],destination)
++                if destination.exists():
++                    require(sha(destination)==record['sha256'],'colliding prerequisite record identities')
++                else:shutil.copyfile(args.prerequisites.parent/record['file'],destination)
+         policy=model['openmp_policy']['environment']
+         os.environ.update(policy)
+         describe=invoke(output/'commands','describe',[args.executable,'--describe'],60)
+@@ -211,7 +225,10 @@
+                          workload_note='After primary host-call timing and separate prepared diagnostics.')
+             environment_gate(after)
+         dump_new(output/'environment_after.json',after)
+-        require(verify_source_extension(model)==source,'source changed during run')
++        require(verify_source_extension(model,compatibility_policy)==source,'source changed during run')
++        if compatibility_policy is not None:
++            from cpu_gpu_build_identity import verify
++            verify(prereq['build_identity'],args.executable,args.input_tool)
+         dump_new(output/'COMPLETE.json',dict(complete=report['complete'],measured=report['measured'],warmups=report['warmups']))
+         dump_new(output/'RAW_SHA256.json',{str(p.relative_to(output)):sha(p) for p in sorted(output.rglob('*')) if p.is_file()})
+         print(part+' complete:'+str(expected['measured_invocations'])+' measured/'+str(expected['warmup_invocations'])+' warm-ups.');return 0
+--- before/scripts/run_cpu_gpu_study.py
++++ after/scripts/run_cpu_gpu_study.py
+@@ -12,6 +12,8 @@
+     parser.add_argument('--input-tool',type=Path,required=True)
+     parser.add_argument('--prerequisites',type=Path)
+     parser.add_argument('--dry-run',action='store_true')
++    parser.add_argument('--framework-compatibility-policy',
++                        help='Explicit pinned framework compatibility; requires complete identity-matched full prerequisites')
+     parser.add_argument('--execute-study',action='store_true',
+                         help='Execution latch; use only after separate study authorization and fresh prerequisites')
+     args=parser.parse_args()
+--- before/docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.json
++++ after/docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.json
+@@ -0,0 +1,28 @@
++{
++  "authorized_framework_exceptions": {
++    "CMakeLists.txt": {
++      "after_sha256": "f18be8635e326e25616a1c0e133ebfd35d5d2244fbe5b3d2aca16ccb4836f30d",
++      "before_sha256": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
++      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
++    },
++    "include/benchmark/cuda_timing.hpp": {
++      "after_sha256": "f73e9e4ac9681c37a3c71f58bd471dcd638dae08ba12e3257a66650ef4354c87",
++      "before_sha256": "79235f844f9d79094c8b973fa83e1f53782997848ab929bda4f7e183a97aef07",
++      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
++    },
++    "src/cuda/cub_timing.cu": {
++      "after_sha256": "230237187a3abbc1246f9604a3a72a0ed477da864f78d89f33422e44e58f1a45",
++      "before_sha256": "8a49e5b2dcbde91a49f97ada15adf7e610ca0de8865dc6f703ec2af19bc9f3f7",
++      "reason": "Explicitly authorized shared untimed correctness path and additive opt-in registration; production sorter unchanged"
++    }
++  },
++  "changes_frozen_protocol": false,
++  "grants_execution_authorization": false,
++  "parent_validation_policy_sha256": "084664cad16ee6540323cf6a0514e3ff3420c4d4d1204a5d571d947cd445a32b",
++  "policy": "cpu_gpu_framework_compatibility_v1",
++  "protocol": "cpu_gpu_comparison_v1",
++  "required_evidence_kind": "full_study_prerequisites",
++  "required_gpu_framework_methods": 14,
++  "requires_current_build_identity": true,
++  "schema_version": 1
++}
+--- before/docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md
++++ after/docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md
+@@ -0,0 +1,93 @@
++# Explicit CPU/GPU framework compatibility v1
++
++This additive policy repairs source compatibility, not missing validation or
++execution permission. The frozen comparison protocol, matrix, resources, CUB
++3.0.1 pin, production sorter and all historical evidence remain unchanged.
++
++The machine policy is `CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.json`, independently
++pinned by SHA256 in `scripts/cpu_gpu_framework_compatibility.py`. It inherits the
++unchanged, pinned validation-v2 policy and original frozen provenance roots.
++Only the exact already approved CMake, prepared header and prepared CUDA source
++digests are exceptions. No caller-supplied digest can redefine those exceptions.
++Unknown policies, altered/missing roots and inconsistent source claims fail closed.
++
++Legacy source reviews and pilot analysis retain their original behavior. The
++full-study runner has an explicit `--framework-compatibility-policy
++cpu_gpu_framework_compatibility_v1` option, which must match the prerequisite
++document and retained source review. **Do not run the study from this document.**
++Compatibility is not applied implicitly and cannot be used for a replacement pilot.
++
++## Required evidence
++
++An opted-in prerequisite document retains all existing full-protocol requirements:
++complete protocol identity, source map, comparison and input-tool hashes, successful
++hashed CPU Release/sanitizer, CUDA CTest, production correctness and preflight records.
++It additionally requires explicit schema 1/full-protocol scope, `build_identity`,
++`framework_validation`, `framework_records`, and `session_id`.
++
++`framework_validation` is a validation-v2 **full_study_prerequisites** artifact.
++All nine original coverage gates remain required: Release21, sanitizer21,
++prepared163/489, all three workspace sizes, worker12, production475/1900,
++timing smoke, pilot150/30 and independent review. Its expected source, binary
++and build identities are recomputed from the checked source and build identity;
++each original record must be retained and match its digest. Correctness-only
++artifacts cannot be promoted by adding an eligibility flag.
++
++In addition, the original CUDA CTest log must show one actual, passed
++`cuda_benchmark_gpu_framework` group with14 methods and no skips in that group.
++The ordinary host-only group's intentional skips do not hide a GPU group failure.
++The production correctness log must parse as475/1900 through the existing
++correctness verifier. Both command paths must identify the declared GPU build.
++The analyzer enforces the same requirements independently of the launcher.
++Prepared diagnostics remain excluded from primary paired speedup calculations.
++
++Evidence assembly and independent review must inspect the underlying command
++outputs; coverage assertions or a content hash alone are not proof of execution.
++This implementation does not generate full prerequisites, authenticate remote
++logs, relabel historical builds, grant user authorization or waive missing timing
++coverage. No currently retained correctness bundle satisfies these full gates.
++
++## Build identity snapshots
++
++`scripts/cpu_gpu_build_identity.py` captures hashes without executing anything:
++
++```sh
++python3 -B scripts/cpu_gpu_build_identity.py --build-dir /absolute/verified/gpu-release --output /new/path/BUILD_IDENTITY.json
++```
++
++Use only an independently validated intended build. The output path must not
++exist. Required entries include the comparison executable, **comparison_input**,
++worker/prepared/production test executables, GPU timing executable, parallel and
++prepared libraries, cache, compile commands and CTest registration metadata.
++The snapshot records the current source map and frozen identity; it rejects
++missing files, path aliases/symlinks and unexpected source/build configuration.
++The launcher rehashes all entries, checks exact executable paths and source
++identity, and verifies the snapshot again before completion. The analyzer checks
++the retained snapshot against source, binary, input-tool and compile identities.
++
++This is content identity, not proof that a freshly captured binary was built
++from those sources. Original configure/build/link logs and independent review
++are still necessary. Updating a stale binary's prerequisite hash alone is
++insufficient: the retained build snapshot and validation context must also match.
++
++## Validation and remaining gates
++
++Focused tests use inert temporary files, block subprocess/runner execution and
++exercise public launch-validation and analyzer paths. Run with:
++
++```sh
++python3 -B tests/test_framework_compatibility.py -v
++python3 -B tests/test_validation_policy.py -v
++```
++
++Current recovery:26 new tests and9 existing policy tests pass. An initial fixture
++construction error is retained in the recovery evidence. No CTest, build, GPU
++workload or timing trial ran. Colab authentication succeeds but reports no active
++sessions; current GPU evidence and the intended input-tool hash remain unavailable.
++
++The unchanged v3 non-timing selector intentionally rejects the changed Python
++source snapshot. A separately reviewed additive selection manifest is required
++before future native-suite execution; never bypass that rejection or rewrite v3.
++Independent policy/diff review, an accessible approved T4, current build identities,
++applicable complete coverage and fresh resource/worker checks remain necessary.
++Recovery audit: `results/raw/cpu_gpu_recovery_20261011T075800444473Z/FINAL_AUDIT.md`.
+--- before/scripts/cpu_gpu_build_identity.py
++++ after/scripts/cpu_gpu_build_identity.py
+@@ -0,0 +1,95 @@
++"""Read-only comparison-build identities. Capturing a hash does not validate a build.
++
++No executable, compiler, CTest, GPU API or timing path is invoked by this module.
++Old manifests are never amended. New snapshots are written exclusively.
++"""
++import argparse
++from pathlib import Path
++
++from cpu_gpu_protocol import ROOT, canonical, dump_new, require, sha, source_manifest
++from cpu_gpu_provenance import TRUSTED_FREEZE_SHA256, strict_json, validate_digest_map
++
++EXECUTABLES = ('cpu_gpu_comparison', 'comparison_input', 'test_parallel_workers',
++               'test_cuda_prepared_correctness', 'test_cuda_sorting', 'cuda_sort_benchmark')
++FILES = EXECUTABLES + ('libmab_parallel.a', 'libmab_cuda_timing.a',
++                       'CMakeCache.txt', 'compile_commands.json', 'CTestTestfile.cmake')
++
++
++def canonical_path(path):
++    path = Path(path).absolute()
++    require(path == path.resolve(strict=True), 'aliased/symlink build identity path')
++    return path
++
++
++def validate_document(document, source, binary_digest, input_digest, compile_digest=None):
++    require(isinstance(document, dict) and document.get('schema_version') == 1 and
++            document.get('kind') == 'cpu_gpu_build_identity_v1', 'missing/wrong build identity')
++    require(document.get('freeze_sha256') == TRUSTED_FREEZE_SHA256, 'build freeze identity mismatch')
++    for key in ['build_dir', 'source_dir']:
++        path = document.get(key)
++        require(isinstance(path, str) and Path(path).is_absolute() and
++                str(Path(path)) == path and '..' not in Path(path).parts,
++                'ambiguous build identity path: ' + key)
++    validate_digest_map(document.get('source_sha256'), 'build source identities')
++    require(document['source_sha256'] == source, 'stale build source identity')
++    files = document.get('files_sha256')
++    validate_digest_map(files, 'build file identities')
++    require(set(files) == set(FILES), 'missing/unexpected build file identity')
++    require(files['cpu_gpu_comparison'] == binary_digest and files['comparison_input'] == input_digest,
++            'comparison/input executable identity mismatch')
++    if compile_digest is not None:
++        require(files['compile_commands.json'] == compile_digest, 'build compile identity mismatch')
++    return document
++
++
++def capture(build_dir):
++    from cpu_gpu_validation_policy import verify_current_sources
++    verify_current_sources()  # Pinned freeze, CUB and exact approved framework exceptions.
++    build = canonical_path(build_dir)
++    require(build.is_dir(), 'build identity requires a directory')
++    files = {}
++    for name in FILES:
++        path = canonical_path(build / name)
++        require(path.is_file(), 'missing build identity file: ' + name)
++        if name in EXECUTABLES:
++            require(path.stat().st_mode & 0o111, 'non-executable build identity file: ' + name)
++        files[name] = sha(path)
++    cache = {}
++    for line in (build / 'CMakeCache.txt').read_text().splitlines():
++        if line and not line.startswith(('#', '//')) and '=' in line and ':' in line.split('=', 1)[0]:
++            field, value = line.split('=', 1); key = field.split(':', 1)[0]
++            require(key not in cache, 'ambiguous build cache key: ' + key)
++            cache[key] = value
++    expected = dict(CMAKE_HOME_DIRECTORY=str(ROOT.resolve()), CMAKE_BUILD_TYPE='Release',
++                    MAB_ENABLE_OPENMP='ON', MAB_ENABLE_CUDA='ON', MAB_ENABLE_CUDA_SORT='ON',
++                    MAB_ENABLE_CPU_GPU_COMPARISON='ON', MAB_ENABLE_SANITIZERS='OFF',
++                    CMAKE_CUDA_ARCHITECTURES='75')
++    require(all(cache.get(k) == v for k, v in expected.items()), 'unexpected source/build configuration')
++    require(isinstance(strict_json((build / 'compile_commands.json').read_text()), list),
++            'malformed compile commands')
++    return dict(schema_version=1, kind='cpu_gpu_build_identity_v1', build_dir=str(build),
++                source_dir=str(ROOT.resolve()), freeze_sha256=TRUSTED_FREEZE_SHA256,
++                source_sha256=source_manifest(), files_sha256=files)
++
++
++def verify(document, executable, input_tool):
++    build = canonical_path(document['build_dir'])
++    require(canonical_path(executable) == build / 'cpu_gpu_comparison' and
++            canonical_path(input_tool) == build / 'comparison_input', 'different comparison build/executable path')
++    require(capture(build) == document, 'stale or mismatched build identity snapshot')
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
++    parser.add_argument('--build-dir', required=True, type=Path)
++    parser.add_argument('--output', required=True, type=Path)
++    args = parser.parse_args()
++    document = capture(args.build_dir)
++    dump_new(args.output, document)
++    # Useful content identifier, not an attestation of execution or eligibility.
++    import hashlib
++    print(hashlib.sha256(canonical(document)).hexdigest())
++
++
++if __name__ == '__main__':
++    main()
+--- before/scripts/cpu_gpu_framework_compatibility.py
++++ after/scripts/cpu_gpu_framework_compatibility.py
+@@ -0,0 +1,147 @@
++"""Explicit, pinned compatibility for three approved framework files only.
++
++Legacy evidence remains legacy. Compatibility never grants execution authority
++or substitutes correctness for timing/framework/pilot coverage.
++"""
++import hashlib
++import re
++
++from cpu_gpu_protocol import ROOT, PROTOCOL, canonical, require, sha, source_manifest
++from cpu_gpu_provenance import (TRUSTED_CMAKE_REVIEW_SHA256, TRUSTED_FREEZE_SHA256,
++                                strict_json, trusted_source_anchors, validate_digest_map)
++from cpu_gpu_validation_policy import trusted_policy, classify, TRUSTED_POLICY_SHA256
++from cpu_gpu_build_identity import validate_document
++
++POLICY_ID = 'cpu_gpu_framework_compatibility_v1'
++POLICY = ROOT / 'docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.json'
++TRUSTED_COMPATIBILITY_SHA256 = 'b6a0ae4fa3e29394daad84419219020ecf7be1434207c6ad20105eb39ccb5627'
++
++
++def approved_anchors(model):
++    require(POLICY.is_file() and not POLICY.is_symlink() and sha(POLICY) == TRUSTED_COMPATIBILITY_SHA256,
++            'framework compatibility trust root missing/changed')
++    policy = strict_json(POLICY.read_text())
++    parent, approved = trusted_policy()
++    expected = trusted_source_anchors(model)
++    require(policy.get('schema_version') == 1 and policy.get('policy') == POLICY_ID and
++            policy.get('protocol') == PROTOCOL and
++            policy.get('parent_validation_policy_sha256') == TRUSTED_POLICY_SHA256 and
++            policy.get('authorized_framework_exceptions') == parent['authorized_framework_exceptions'] and
++            policy.get('required_evidence_kind') == 'full_study_prerequisites' and
++            type(policy.get('required_gpu_framework_methods')) is int and policy['required_gpu_framework_methods'] == 14 and
++            policy.get('requires_current_build_identity') is True and
++            policy.get('changes_frozen_protocol') is False and policy.get('grants_execution_authorization') is False,
++            'inconsistent framework compatibility policy')
++    for path, exception in policy['authorized_framework_exceptions'].items():
++        require(expected[path] == exception['before_sha256'], 'framework exception base changed')
++        expected[path] = exception['after_sha256']
++    require(expected == approved, 'framework policy disagrees with protected validation anchors')
++    return expected
++
++
++def validate_review(review, model):
++    expected = approved_anchors(model)
++    require(isinstance(review, dict) and review.get('framework_compatibility_policy') == POLICY_ID and
++            review.get('compatibility_policy_sha256') == TRUSTED_COMPATIBILITY_SHA256 and
++            review.get('cmake_review_sha256') == TRUSTED_CMAKE_REVIEW_SHA256 and
++            review.get('changed_anchors') == sorted(['CMakeLists.txt', 'include/benchmark/cuda_timing.hpp',
++                                                   'src/cuda/cub_timing.cu']),
++            'missing/inconsistent framework compatibility review')
++    actual = review.get('current_source_sha256')
++    validate_digest_map(actual, 'compatible source review')
++    for path, digest in expected.items():
++        if path.startswith('docs/'):
++            require((ROOT / path).is_file() and not (ROOT / path).is_symlink() and
++                    sha(ROOT / path) == digest and (path not in actual or actual[path] == digest),
++                    'compatible documentation anchor mismatch: ' + path)
++        else:
++            require(actual.get(path) == digest, 'compatible protected source mismatch: ' + path)
++
++
++def current_review(model):
++    expected = approved_anchors(model)
++    for path, digest in expected.items():
++        file = ROOT / path
++        require(file.is_file() and not file.is_symlink() and sha(file) == digest,
++                'compatible current source changed: ' + path)
++    review = dict(framework_compatibility_policy=POLICY_ID,
++                  compatibility_policy_sha256=TRUSTED_COMPATIBILITY_SHA256,
++                  cmake_review_sha256=TRUSTED_CMAKE_REVIEW_SHA256,
++                  changed_anchors=sorted(['CMakeLists.txt', 'include/benchmark/cuda_timing.hpp', 'src/cuda/cub_timing.cu']),
++                  current_source_sha256=source_manifest())
++    validate_review(review, model)
++    return review
++
++
++def validate_evidence(prerequisite, records_root, model, source, binary_digest, input_digest, compile_digest=None):
++    """Shared offline launch/analyzer check; never runs measurements.
++
++    The assembler must independently review original command outputs. A v2 full
++    coverage assessment is required in addition to legacy full-protocol records.
++    Correctness-only bundles cannot be upgraded here. No implicit defaults.
++    """
++    require(prerequisite.get('framework_compatibility_policy') == POLICY_ID,
++            'wrong framework prerequisite policy')
++    require(type(prerequisite.get('schema_version')) is int and prerequisite['schema_version'] == 1 and
++            prerequisite.get('validation_scope') == 'full_protocol_v1' and
++            prerequisite.get('study_eligible') is True,
++            'explicit full prerequisite scope required')
++    validate_review(source, model)
++    identity = validate_document(prerequisite.get('build_identity'), source['current_source_sha256'],
++                                 binary_digest, input_digest, compile_digest)
++    artifact = prerequisite.get('framework_validation')
++    require(isinstance(artifact, dict) and artifact.get('artifact_kind') == 'full_study_prerequisites',
++            'full framework evidence required; correctness is insufficient')
++    references = prerequisite.get('framework_records')
++    require(isinstance(references, dict) and set(references) == set(artifact.get('records', {})),
++            'missing/ambiguous retained framework records')
++    from pathlib import Path
++    hashes = {}
++    for name, reference in references.items():
++        require(isinstance(reference, dict) and isinstance(reference.get('file'), str), 'missing framework record path')
++        relative = Path(reference['file'])
++        require(not relative.is_absolute() and '..' not in relative.parts and str(relative) == reference['file'],
++                'unsafe framework record path')
++        file = records_root / relative
++        require(file.absolute() == file.resolve(strict=True) and file.resolve().is_relative_to(records_root.resolve()),
++                'aliased framework record path')
++        require(file.is_file() and not file.is_symlink() and sha(file) == reference.get('sha256'),
++                'retained framework record changed: ' + name)
++        hashes[name] = sha(file)
++    context = dict(session_id=prerequisite.get('session_id'),
++                   source_identity=hashlib.sha256(canonical(source['current_source_sha256'])).hexdigest(),
++                   build_identity=hashlib.sha256(canonical(identity)).hexdigest(),
++                   binary_identity=binary_digest, freeze_sha256=TRUSTED_FREEZE_SHA256,
++                   record_sha256=hashes)
++    assessment = classify(artifact, context)
++    require(assessment['launch_review_candidate'] is True, 'not a full framework candidate')
++    # The legacy cuda_ctest command must still contain the actual GPU framework
++    # run, not host-only skips or a renamed untimed diagnostic. Timing execution
++    # is NOT performed by this validator; it inspects immutable prior output.
++    reference = prerequisite['records']['cuda_ctest']
++    result = strict_json((records_root / reference['file']).read_text())
++    argv = result.get('argv')
++    require(isinstance(argv, list) and len(argv) >= 3 and argv[0] == 'ctest' and
++            argv.count('--test-dir') == 1 and
++            argv.index('--test-dir') + 1 < len(argv) and
++            argv[argv.index('--test-dir') + 1] == identity['build_dir'],
++            'GPU framework command build identity mismatch')
++    text = result.get('stdout', '') + result.get('stderr', '')
++    groups = re.findall(r'Start\s+\d+: cuda_benchmark_gpu_framework\s*\n(.*?)'
++                        r'\d+/\d+ Test\s+#\d+: cuda_benchmark_gpu_framework[^\n]*Passed[^\n]*',
++                        text, flags=re.DOTALL)
++    require(result.get('exit_code') == 0 and result.get('status') == 'completed' and len(groups) == 1 and
++            len(re.findall(r'Start\s+\d+: cuda_benchmark_gpu_framework\s*\n', text)) == 1 and
++            len(re.findall(r'(?m)^(?:\d+: )?Ran 14 tests(?: in [0-9.]+s)?\s*$', groups[0])) == 1 and
++            len(re.findall(r'(?m)^(?:\d+: )?OK\s*$', groups[0])) == 1 and
++            not any(term in groups[0] for term in ['skipped=', '***Skipped', 'FAILED', 'ERROR']),
++            'current full GPU timing-framework coverage absent')
++    production = strict_json((records_root / prerequisite['records']['cuda_correctness']['file']).read_text())
++    from validate_cuda_sort import verify_result
++    require(production.get('exit_code') == 0 and production.get('status') == 'completed',
++            'current production GPU correctness absent')
++    require(production.get('argv') == [str(Path(identity['build_dir']) / 'test_cuda_sorting')],
++            'production GPU command executable identity mismatch')
++    result = verify_result(strict_json(production.get('stdout', '')))
++    require((result['compute_major'], result['compute_minor']) == (7, 5), 'production correctness device mismatch')
++    return assessment
+--- before/tests/test_framework_compatibility.py
++++ after/tests/test_framework_compatibility.py
+@@ -0,0 +1,272 @@
++"""Inert provenance regressions; fake binaries are hashed, never executed.
++
++All subprocess, shell and runner execution paths are blocked, including imports.
++The positive full-evidence fixtures model metadata, not observed GPU execution.
++"""
++import copy
++import hashlib
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest import mock
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / 'scripts'))
++import cpu_gpu_protocol as protocol
++import cpu_gpu_provenance as provenance
++import cpu_gpu_framework_compatibility as compatibility
++import cpu_gpu_build_identity as identity
++import cpu_gpu_validation_policy as validation
++import run_cpu_gpu_pilot as runner
++import analyze_cpu_gpu as analyzer
++
++
++class CompatibilityTests(unittest.TestCase):
++    def setUp(self):
++        for target in ['subprocess.run', 'subprocess.Popen', 'os.system', 'run_cpu_gpu_pilot.invoke']:
++            patch = mock.patch(target, side_effect=AssertionError('workload/discovery forbidden'))
++            patch.start(); self.addCleanup(patch.stop)
++        self.model = protocol.load_protocol()
++        self.source = protocol.verify_source_extension(self.model, compatibility.POLICY_ID)
++        temporary = tempfile.TemporaryDirectory(); self.addCleanup(temporary.cleanup)
++        self.root = Path(temporary.name)
++        self.build = self.root / 'build'; self.build.mkdir()
++        for name in identity.FILES:
++            (self.build / name).write_text('inert ' + name)
++            if name in identity.EXECUTABLES:
++                (self.build / name).chmod(0o700)
++        settings = dict(CMAKE_HOME_DIRECTORY=str(ROOT), CMAKE_BUILD_TYPE='Release',
++                        MAB_ENABLE_OPENMP='ON', MAB_ENABLE_CUDA='ON', MAB_ENABLE_CUDA_SORT='ON',
++                        MAB_ENABLE_CPU_GPU_COMPARISON='ON', MAB_ENABLE_SANITIZERS='OFF',
++                        CMAKE_CUDA_ARCHITECTURES='75')
++        (self.build / 'CMakeCache.txt').write_text('\n'.join(k + ':STRING=' + v for k, v in settings.items()))
++        (self.build / 'compile_commands.json').write_text('[]')
++        self.document = identity.capture(self.build)
++        self.binary = self.build / 'cpu_gpu_comparison'; self.input = self.build / 'comparison_input'
++
++    def fixture(self):
++        parent, anchors = validation.trusted_policy()
++        records = {}
++        legacy = {}
++        for name in ['cpu_release_ctest', 'cpu_sanitize_ctest', 'cuda_ctest', 'cuda_correctness', 'preflight']:
++            stdout = 'synthetic non-executed fixture'
++            if name == 'cuda_ctest':
++                stdout = ('11: Ran 14 tests in 0.001s\n11: OK (skipped=2)\n'
++                          'Start 27: cuda_benchmark_gpu_framework\n27: Ran 14 tests in 0.001s\n27: OK\n'
++                          '27/32 Test #27: cuda_benchmark_gpu_framework ..... Passed 0.001 sec\n')
++            if name == 'cuda_correctness':
++                stdout = json.dumps(dict(schema_version=1, protocol='cuda_sort_correctness_v2',
++                    algorithm='cub_radix_sort', implementation_version='cub_radix_sort_v1', status='ok',
++                    cases=475, output_checks=1900, cub_version=300001, runtime_api_version=13000,
++                    driver_api_version=13000, compute_major=7, compute_minor=5, device=0))
++            file = self.root / (name + '.json')
++            argv = ['synthetic-not-executed']
++            if name == 'cuda_ctest': argv = ['ctest', '--test-dir', str(self.build), '--output-on-failure', '-V']
++            if name == 'cuda_correctness': argv = [str(self.build / 'test_cuda_sorting')]
++            file.write_text(json.dumps(dict(status='completed', exit_code=0, stdout=stdout, stderr='', argv=argv)))
++            legacy[name] = dict(file=file.name, sha256=protocol.sha(file))
++        for name in parent['required_records']['full_study_prerequisites']:
++            file = self.root / ('framework_' + name + '.json')
++            file.write_text(json.dumps(dict(synthetic_fixture=True, gate=name)))
++            records[name] = dict(file=file.name, sha256=protocol.sha(file))
++        bundle = dict(schema_version=2, policy='cpu_gpu_validation_v2', artifact_kind='full_study_prerequisites',
++                      status='passed', study_eligible=False, execution_authorized=False,
++                      protected_source_sha256=anchors, session_id='synthetic-session',
++                      source_identity=hashlib.sha256(protocol.canonical(self.source['current_source_sha256'])).hexdigest(),
++                      build_identity=hashlib.sha256(protocol.canonical(self.document)).hexdigest(),
++                      binary_identity=protocol.sha(self.binary), freeze_sha256=provenance.TRUSTED_FREEZE_SHA256,
++                      records={n: dict(dict(status='passed', exit_code=0, skipped=0, missing=0,
++                                           sha256=records[n]['sha256']), **parent['coverage'][n]) for n in records})
++        p = dict(schema_version=1, protocol=protocol.PROTOCOL, complete=True, validation_scope='full_protocol_v1', study_eligible=True,
++                 framework_compatibility_policy=compatibility.POLICY_ID, source_sha256=self.source['current_source_sha256'],
++                 binary_sha256=protocol.sha(self.binary), input_tool_sha256=protocol.sha(self.input),
++                 records=legacy, build_identity=self.document, framework_validation=bundle,
++                 framework_records=records, session_id='synthetic-session')
++        return p
++
++    def validate(self, prerequisite):
++        path = self.root / 'prerequisite.json'; path.write_text(json.dumps(prerequisite))
++        return runner.validate_prerequisites(path, self.binary, self.input, self.model,
++                                             compatibility_policy=compatibility.POLICY_ID)
++
++    def test_explicit_exact_approved_sources_accepted(self):
++        provenance.validate_retained_source(self.source, self.model)
++        self.assertEqual(len(self.source['changed_anchors']), 3)
++
++    def test_legacy_default_still_rejects_current_framework(self):
++        with self.assertRaisesRegex(ValueError, 'protected source/pin changed'):
++            protocol.verify_source_extension(self.model)
++
++    def test_unknown_policy_rejected(self):
++        with self.assertRaisesRegex(ValueError, 'unknown framework'):
++            protocol.verify_source_extension(self.model, 'accept-anything')
++
++    def test_original_adapter_pin_and_each_framework_digest_cannot_change(self):
++        for path in ['src/cuda/cub_sort.cu', 'third_party/cub/UPSTREAM.json'] + self.source['changed_anchors']:
++            altered = copy.deepcopy(self.source); altered['current_source_sha256'][path] = '0' * 64
++            with self.subTest(path=path), self.assertRaisesRegex(ValueError, 'protected source mismatch'):
++                provenance.validate_retained_source(altered, self.model)
++
++    def test_mutually_consistent_model_and_map_cannot_redefine_anchor(self):
++        altered = copy.deepcopy(self.source); model = copy.deepcopy(self.model)
++        altered['current_source_sha256']['src/cuda/cub_sort.cu'] = '0' * 64
++        model['source_at_freeze_sha256']['src/cuda/cub_sort.cu'] = '0' * 64
++        with self.assertRaisesRegex(ValueError, 'model differs from trusted'):
++            provenance.validate_retained_source(altered, model)
++
++    def test_missing_changed_or_unreadable_policy_fails_closed(self):
++        for text in [None, '{', '{}', '{"policy":1,"policy":2}']:
++            file = self.root / 'missing_policy.json'
++            if text is not None: file.write_text(text)
++            with self.subTest(text=text), mock.patch.object(compatibility, 'POLICY', file), \
++                 self.assertRaisesRegex(ValueError, 'trust root missing/changed'):
++                compatibility.approved_anchors(self.model)
++
++    def test_missing_or_modified_review_identity_fails_closed(self):
++        for field in ['framework_compatibility_policy', 'compatibility_policy_sha256', 'changed_anchors', 'cmake_review_sha256']:
++            altered = copy.deepcopy(self.source); altered.pop(field)
++            with self.subTest(field=field), self.assertRaises(ValueError):
++                provenance.validate_retained_source(altered, self.model)
++
++    def test_complete_synthetic_launch_metadata_accepted_without_execution(self):
++        p = self.fixture(); self.assertEqual(self.validate(p), p)
++
++    def test_correctness_bundle_cannot_replace_full_evidence(self):
++        p = self.fixture(); p['framework_validation']['artifact_kind'] = 'correctness_validation'
++        with self.assertRaisesRegex(ValueError, 'correctness is insufficient'): self.validate(p)
++
++    def test_missing_framework_coverage_rejected(self):
++        for name in validation.trusted_policy()[0]['required_records']['full_study_prerequisites']:
++            p = self.fixture(); p['framework_validation']['records'].pop(name); p['framework_records'].pop(name)
++            with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'record coverage'): self.validate(p)
++
++    def test_failed_stale_or_incomplete_evidence_rejected(self):
++        for field, value in [('exit_code', 1), ('missing', 1), ('skipped', 1), ('status', 'interrupted')]:
++            p = self.fixture(); p['framework_validation']['records']['gpu_prepared'][field] = value
++            with self.subTest(field=field), self.assertRaises(ValueError): self.validate(p)
++        p = self.fixture(); p['framework_validation']['binary_identity'] = '0' * 64
++        with self.assertRaisesRegex(ValueError, 'stale context'): self.validate(p)
++
++    def test_framework_record_hash_mismatch_rejected(self):
++        p = self.fixture(); (self.root / p['framework_records']['pilot']['file']).write_text('{}')
++        with self.assertRaisesRegex(ValueError, 'record changed'): self.validate(p)
++
++    def test_prepared_or_host_only_output_cannot_replace_gpu_framework(self):
++        for text in ['163 inputs 489 checks', 'Ran 14 tests\nOK (skipped=2)',
++                     'Start 27: cuda_benchmark_gpu_framework\n27: Ran 14 tests in 0.1s\n27: OK (skipped=2)\n'
++                     '27/32 Test #27: cuda_benchmark_gpu_framework ... Passed 0.1 sec']:
++            p = self.fixture(); file = self.root / p['records']['cuda_ctest']['file']
++            d = json.loads(file.read_text()); d['stdout'] = text; file.write_text(json.dumps(d))
++            p['records']['cuda_ctest']['sha256'] = protocol.sha(file)
++            with self.subTest(text=text), self.assertRaisesRegex(ValueError, 'GPU timing-framework coverage absent'):
++                self.validate(p)
++
++    def test_duplicate_framework_group_and_missing_legacy_command_rejected(self):
++        p = self.fixture(); file = self.root / p['records']['cuda_ctest']['file']
++        d = json.loads(file.read_text()); d['stdout'] += d['stdout']; file.write_text(json.dumps(d))
++        p['records']['cuda_ctest']['sha256'] = protocol.sha(file)
++        with self.assertRaisesRegex(ValueError, 'GPU timing-framework coverage absent'): self.validate(p)
++        p = self.fixture(); p['records'].pop('preflight')
++        with self.assertRaisesRegex(ValueError, 'missing prerequisite commands'): self.validate(p)
++
++    def test_legacy_baseline_still_accepted_by_provenance_without_compatibility(self):
++        legacy = dict(current_source_sha256=dict(self.source['current_source_sha256']),
++                      changed_anchors=['CMakeLists.txt'], cmake_review_sha256=provenance.TRUSTED_CMAKE_REVIEW_SHA256)
++        legacy['current_source_sha256'].update({k: v for k, v in provenance.trusted_source_anchors(self.model).items()
++                                                if not k.startswith('docs/')})
++        provenance.validate_retained_source(legacy, self.model)
++
++    def test_incomplete_production_oracle_cannot_be_substituted(self):
++        p = self.fixture(); file = self.root / p['records']['cuda_correctness']['file']
++        d = json.loads(file.read_text()); v = json.loads(d['stdout']); v['cases'] = 163
++        d['stdout'] = json.dumps(v); file.write_text(json.dumps(d)); p['records']['cuda_correctness']['sha256'] = protocol.sha(file)
++        with self.assertRaisesRegex(ValueError, 'incomplete sort result: cases'): self.validate(p)
++
++    def test_stale_gpu_command_paths_rejected_even_when_hashes_updated(self):
++        for name in ['cuda_ctest', 'cuda_correctness']:
++            p = self.fixture(); file = self.root / p['records'][name]['file']
++            d = json.loads(file.read_text()); d['argv'] = [a.replace(str(self.build), '/stale/build') for a in d['argv']]
++            file.write_text(json.dumps(d)); p['records'][name]['sha256'] = protocol.sha(file)
++            with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'identity mismatch'): self.validate(p)
++
++    def test_omitted_or_mismatched_opt_in_rejected(self):
++        p = self.fixture(); p.pop('framework_compatibility_policy')
++        with self.assertRaisesRegex(ValueError, 'policy mismatch'): self.validate(p)
++
++    def test_compatible_prerequisites_require_explicit_full_scope(self):
++        for field in ['schema_version', 'validation_scope', 'study_eligible']:
++            p = self.fixture(); p.pop(field)
++            with self.subTest(field=field), self.assertRaisesRegex(ValueError, 'explicit full prerequisite scope'):
++                self.validate(p)
++
++    def test_stale_input_binary_rejected_even_with_updated_prerequisite_digest(self):
++        p = self.fixture(); self.input.write_text('changed binary bytes')
++        p['input_tool_sha256'] = protocol.sha(self.input)
++        with self.assertRaisesRegex(ValueError, 'executable identity mismatch'): self.validate(p)
++
++    def test_missing_input_identity_and_stale_build_snapshot_rejected(self):
++        p = self.fixture(); p['build_identity']['files_sha256'].pop('comparison_input')
++        with self.assertRaisesRegex(ValueError, 'build file identity'): self.validate(p)
++        self.document = identity.capture(self.build)
++        (self.build / 'comparison_input').write_text('new bytes')
++        with self.assertRaisesRegex(ValueError, 'stale or mismatched'): identity.verify(self.document, self.binary, self.input)
++
++    def test_absent_input_file_cannot_be_captured(self):
++        self.input.unlink()  # Inert temporary fixture only.
++        with self.assertRaises((OSError, ValueError)): identity.capture(self.build)
++
++    def test_symlink_or_different_build_identity_cannot_be_used(self):
++        alias = self.root / 'alias'; alias.symlink_to(self.build, target_is_directory=True)
++        with self.assertRaisesRegex(ValueError, 'aliased/symlink'): identity.capture(alias)
++        other = self.root / 'another_input'; other.write_text(self.input.read_text()); other.chmod(0o700)
++        with self.assertRaisesRegex(ValueError, 'different comparison build'): identity.verify(self.document, self.binary, other)
++
++    def test_wrong_build_configuration_rejected(self):
++        file = self.build / 'CMakeCache.txt'; file.write_text(file.read_text().replace('Release', 'Debug'))
++        with self.assertRaisesRegex(ValueError, 'unexpected source/build'): identity.capture(self.build)
++
++    def test_source_or_compile_manifest_mismatch_rejected(self):
++        with self.assertRaisesRegex(ValueError, 'stale build source'):
++            identity.validate_document(self.document, {'other': '0' * 64}, protocol.sha(self.binary), protocol.sha(self.input))
++        with self.assertRaisesRegex(ValueError, 'compile identity mismatch'):
++            identity.validate_document(self.document, self.source['current_source_sha256'],
++                                       protocol.sha(self.binary), protocol.sha(self.input), '0' * 64)
++
++    def test_analyzer_public_study_path_requires_same_full_evidence(self):
++        p = self.fixture()
++        d = dict(build_type='Release', sanitizers=False, cub_version=300001, cuda_architectures='75', cxx_standard=17,
++                 global_flags='', cuda_flags='', configuration_flags='-O3 -DNDEBUG', cuda_release_flags='-O3 -DNDEBUG')
++        self.write('source_review.json', self.source)
++        build = dict(description=d, binary_sha256=protocol.sha(self.binary), input_tool_sha256=protocol.sha(self.input),
++                     source_review_sha256=protocol.sha(self.root / 'source_review.json'),
++                     compile_commands_sha256=protocol.sha(self.build / 'compile_commands.json'))
++        self.write('build.json', build); self.write('prerequisites.json', p)
++        self.write('environment.json', dict(omp_environment=self.model['openmp_policy']['environment']))
++        (self.root / 'compile_commands.json').write_bytes((self.build / 'compile_commands.json').read_bytes())
++        for file in [protocol.FREEZE, protocol.MATRIX, ROOT / 'docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md']:
++            (self.root / file.name).write_bytes(file.read_bytes())
++        for reference in list(p['records'].values()) + list(p['framework_records'].values()):
++            destination = self.root / 'prerequisite_commands' / reference['file']; destination.parent.mkdir(exist_ok=True)
++            destination.write_bytes((self.root / reference['file']).read_bytes())
++        meta = dict(freeze_sha256=protocol.sha(protocol.FREEZE), run_kind='performance', implementations={
++            b: dict(source_review='source_review.json', build='build.json',
++                    cub_pin=self.model['dependency'] if b.startswith('gpu_') else None) for b in protocol.BACKENDS})
++        with mock.patch.object(runner, 'environment_gate'):
++            analyzer.validate_study_metadata(self.root, meta, self.model)
++            p['framework_validation']['artifact_kind'] = 'correctness_validation'; self.write('prerequisites.json', p)
++            with self.assertRaisesRegex(ValueError, 'correctness is insufficient'):
++                analyzer.validate_study_metadata(self.root, meta, self.model)
++
++    def write(self, name, value):
++        (self.root / name).write_text(json.dumps(value))
++
++
++if __name__ == '__main__':
++    with mock.patch.object(subprocess, 'run', side_effect=AssertionError('subprocess forbidden')), \
++         mock.patch.object(subprocess, 'Popen', side_effect=AssertionError('subprocess forbidden')), \
++         mock.patch.object(os, 'system', side_effect=AssertionError('shell forbidden')):
++        unittest.main()
