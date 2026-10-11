@@ -1,0 +1,152 @@
+[
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/baselines.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/baselines.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/baselines.cpp",
+  "output": "CMakeFiles/mab_core.dir/src/algorithms/baselines.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/datasets/generator.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/datasets/generator.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/datasets/generator.cpp",
+  "output": "CMakeFiles/mab_core.dir/src/datasets/generator.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/quicksort.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/quicksort.cpp",
+  "output": "CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/sorting.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/sorting.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/sorting.cpp",
+  "output": "CMakeFiles/mab_core.dir/src/algorithms/sorting.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/pdqsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/pdqsort.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/pdqsort.cpp",
+  "output": "CMakeFiles/mab_core.dir/src/algorithms/pdqsort.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/timsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/timsort.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/timsort.cpp",
+  "output": "CMakeFiles/mab_core.dir/src/algorithms/timsort.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/algorithm_benchmark.dir/src/main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/main.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/main.cpp",
+  "output": "CMakeFiles/algorithm_benchmark.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_metrics.dir/src/benchmark/comparisons.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparisons.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparisons.cpp",
+  "output": "CMakeFiles/mab_metrics.dir/src/benchmark/comparisons.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_metrics.dir/src/benchmark/memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+  "output": "CMakeFiles/mab_metrics.dir/src/benchmark/memory.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_metrics.dir/src/benchmark/memory_json.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+  "output": "CMakeFiles/mab_metrics.dir/src/benchmark/memory_json.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/sort_metrics.dir/src/benchmark/metrics_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/metrics_main.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/metrics_main.cpp",
+  "output": "CMakeFiles/sort_metrics.dir/src/benchmark/metrics_main.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_timing.dir/src/benchmark/timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing.cpp",
+  "output": "CMakeFiles/mab_timing.dir/src/benchmark/timing.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_timing.dir/src/benchmark/output.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/output.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/output.cpp",
+  "output": "CMakeFiles/mab_timing.dir/src/benchmark/output.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/generated/Release -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/sort_benchmark.dir/src/benchmark/timing_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing_main.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing_main.cpp",
+  "output": "CMakeFiles/sort_benchmark.dir/src/benchmark/timing_main.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_baselines.dir/tests/test_baselines.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_baselines.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_baselines.cpp",
+  "output": "CMakeFiles/test_baselines.dir/tests/test_baselines.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_datasets.dir/tests/test_datasets.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_datasets.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_datasets.cpp",
+  "output": "CMakeFiles/test_datasets.dir/tests/test_datasets.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_quicksort.dir/tests/test_quicksort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_quicksort.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_quicksort.cpp",
+  "output": "CMakeFiles/test_quicksort.dir/tests/test_quicksort.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_pdqsort.dir/tests/test_pdqsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_pdqsort.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_pdqsort.cpp",
+  "output": "CMakeFiles/test_pdqsort.dir/tests/test_pdqsort.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_timsort.dir/tests/test_timsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timsort.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timsort.cpp",
+  "output": "CMakeFiles/test_timsort.dir/tests/test_timsort.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_comparisons.dir/tests/test_comparisons.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparisons.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparisons.cpp",
+  "output": "CMakeFiles/test_comparisons.dir/tests/test_comparisons.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory.dir/tests/test_memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+  "output": "CMakeFiles/test_memory.dir/tests/test_memory.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++ -DMAB_FORCE_UNSUPPORTED_MEMORY=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory_unsupported.dir/tests/test_memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+  "output": "CMakeFiles/test_memory_unsupported.dir/tests/test_memory.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++ -DMAB_FORCE_UNSUPPORTED_MEMORY=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+  "output": "CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++ -DMAB_FORCE_UNSUPPORTED_MEMORY=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory_json.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+  "output": "CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory_json.cpp.o"
+},
+{
+  "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_timing.dir/tests/test_timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timing.cpp",
+  "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timing.cpp",
+  "output": "CMakeFiles/test_timing.dir/tests/test_timing.cpp.o"
+}
+]

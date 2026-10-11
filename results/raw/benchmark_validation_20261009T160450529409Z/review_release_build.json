@@ -1,0 +1,8 @@
+{
+  "command": "cmake --build build/release --parallel 2",
+  "chunk_id": "ec7355",
+  "wall_time_seconds": 1.387796065,
+  "exit_code": 0,
+  "original_token_count": 163,
+  "output": "[ 17%] Built target mab_core\n[ 22%] Built target algorithm_benchmark\n[ 32%] Built target mab_metrics\n[ 45%] Built target mab_timing\n[ 42%] Built target test_baselines\n[ 55%] Built target test_quicksort\n[ 55%] Built target test_datasets\n[ 65%] Built target test_pdqsort\n[ 65%] Built target test_timsort\n[ 70%] Built target test_memory\n[ 75%] Built target test_comparisons\n[ 80%] Built target test_timing\n[ 90%] Built target test_memory_unsupported\n[ 97%] Built target sort_metrics\n[ 97%] Building CXX object CMakeFiles/sort_benchmark.dir/src/benchmark/timing_main.cpp.o\n[100%] Linking CXX executable sort_benchmark\n[100%] Built target sort_benchmark\n"
+}

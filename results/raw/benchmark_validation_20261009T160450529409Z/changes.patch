@@ -1,0 +1,1683 @@
+--- before/CMakeLists.txt
++++ after/CMakeLists.txt
+@@ -38,6 +38,13 @@
+ add_executable(sort_metrics src/benchmark/metrics_main.cpp)
+ target_link_libraries(sort_metrics PRIVATE mab_metrics)
+ 
++add_library(mab_timing src/benchmark/timing.cpp src/benchmark/output.cpp)
++target_link_libraries(mab_timing PUBLIC mab_core)
++include(cmake/benchmark_metadata.cmake)
++add_executable(sort_benchmark src/benchmark/timing_main.cpp)
++target_include_directories(sort_benchmark PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
++target_link_libraries(sort_benchmark PRIVATE mab_timing)
++
+ include(CTest)
+ if(BUILD_TESTING)
+     find_package(Python3 REQUIRED COMPONENTS Interpreter)
+@@ -76,4 +83,10 @@
+     add_test(NAME metrics_cli
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_metrics_cli.py
+                      $<TARGET_FILE:sort_metrics>)
++    add_executable(test_timing tests/test_timing.cpp)
++    target_link_libraries(test_timing PRIVATE mab_timing)
++    add_test(NAME timing COMMAND test_timing)
++    add_test(NAME benchmark_framework
++             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_benchmark.py
++                     $<TARGET_FILE:sort_benchmark>)
+ endif()
+--- before/README.md
++++ after/README.md
+@@ -2,7 +2,8 @@
+ 
+ This directory initially contained only `AGENTS.md`. The C++17 correctness core
+ is validated; required algorithms and measurement infrastructure are still being
+-developed. Benchmark measurements do not exist yet.
++developed. The timing framework supports small reproducible smoke measurements;
++no comparative performance conclusions or large-scale results are established.
+ 
+ The default sorting adapter invokes the installed standard library's `std::sort`.
+ Project QuickSort, upstream PDQSort and upstream Timsort have separate named adapters.
+@@ -191,3 +192,49 @@
+ counted heap fallback, real/unsupported memory paths and seven metrics CLI methods.
+ Leak detection remained enabled; no compiler warnings were emitted. These are
+ metric validation runs, not benchmark performance measurements.
++
++## Reproducible timing engine
++
++```sh
++python3 scripts/run_matrix.py --binary build/release/sort_benchmark --output results/raw/new_smoke_matrix
++mkdir -p results/processed
++python3 scripts/analyze_results.py results/raw/new_smoke_matrix --output results/processed/new_smoke_summary.json
++```
++
++The default smoke matrix uses 1K/10K inputs, seed 1729, all four production
++sorters and uniform/sorted/reverse/duplicate-heavy/nearly-sorted distributions.
++It performs one warmup and five measured repetitions per sorter/configuration.
++steady_clock measures only the normal sorting call, in integer nanoseconds;
++generation, input restoration, reference checks and CSV output are excluded.
++Every result is checked against the full std::sort output outside timing.
++
++For a single run, use sort_benchmark --output NEW_DIRECTORY; std_sort remains
++its default. Existing CLIs and algorithms are unchanged. Performance requires
++Release without sanitizers. Framework trials use --validation-only; a zero-size
++test probe verifies the Release guard. Test artifacts are temporary validation
++data. New directories and derived summary files are exclusively created.
++Failure/partial records are retained and never treated as completed runs.
++
++See [protocol, all options, 28-field CSV schema and summary format](docs/BENCHMARKING.md).
++Separate JSON analysis reports success/failure counts, median, mean, sample
++standard deviation, minimum and maximum; it retains outliers and excludes only
++labeled warmups and unsuccessful timings from successful-trial statistics.
++
++Explicit larger experiment, not executed in this milestone:
++
++```sh
++python3 scripts/run_matrix.py --binary build/release/sort_benchmark --output results/raw/new_cpu_experiment --sizes 1000,10000,100000,1000000 --seeds 1729,42,2718 --repetitions 5 --warmups 1 --memory-limit-mib 256
++```
++
++Metadata includes configuration/argv, input fingerprint, compiler/build/platform,
++source hashes, upstream provenance and available environment/compile commands.
++The memory planning guard is not a measured process-memory cap. CPU frequency,
++affinity, cache state, timer overhead and background load are not controlled.
++Smoke results validate infrastructure and do not establish a performance ranking.
++
++Fresh full Release and ASan/UBSan suites passed 13/13 groups, including 72 timing
++input configurations/864 registry trials and 11 Python framework tests. The actual
++1K/10K Release smoke matrix completed 200 measured trials and 40 warmups across
++ten configurations. Its 40-group [statistical summary](results/processed/benchmark_smoke_20261009T160450529409Z.json)
++is separate from [raw observations](results/raw/benchmark_validation_20261009T160450529409Z/smoke_matrix/matrix.json).
++No larger experiment, CUDA workload or 100-million-element run was performed.
+--- before/docs/ALGORITHMS.md
++++ after/docs/ALGORITHMS.md
+@@ -154,3 +154,14 @@
+ allocator and instrumentation overhead. It does not measure algorithm-specific
+ allocations. Other platforms return unsupported/null. See [METRICS.md](METRICS.md)
+ for definitions, sampling point, schema, inclusion rules and validation limits.
++
++## Production timing adapters
++
++sort_benchmark calls the unchanged normal sorting registry from mab_core, with
++no link to mab_metrics and no counting comparators. The same immutable generator
++input is restored for each trial, including the benchmark-only sorted alias of
++nearly_sorted with zero swaps. Full equality to std::sort is checked outside the
++steady-clock interval. Sort-owned allocation is included; dataset/copy/reference/
++CSV setup is excluded. [BENCHMARKING.md](BENCHMARKING.md) defines warmups, cyclic
++order, repetition/timing units, metadata, failure records and separate statistics.
++Small smoke measurements validate the engine; no performance ranking is asserted.
+--- before/docs/AUDIT.md
++++ after/docs/AUDIT.md
+@@ -590,3 +590,186 @@
+ implement repeatable Release timing/CSV infrastructure with identical inputs,
+ repetitions, environment provenance and checks outside timing. Optional Merge/Radix
+ baselines and measured experiment collection remain pending.
++
++## Reproducible sorting benchmark engine — 2026-10-09
++
++### Inspection and baseline
++
++Read AGENTS.md, roadmap, audit, README, protocol, algorithm documentation, CMake,
++registry, dataset generator, metrics interfaces and existing tests before edits.
++pwd confirmed the project directory. A temporary write/read/delete check passed;
++git status --short exited 128 because project Git metadata is still absent.
++Existing sources/tests/docs/vendors/scripts were copied to build/benchmark_review,
++and earlier CTest logs were exclusively saved as historical evidence. Upstream
++source/license hashes matched their provenance records. No algorithms or generator
++behavior needed baseline repair.
++
++Before adding features, these commands each exited 0 and all 11 existing CTest
++groups passed freshly:
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++```
++
++### Architecture and protocol
++
++Added mab_timing and sort_benchmark, linked only to production mab_core. Neither
++comparison counters nor process-memory probes enter primary timing. Existing
++algorithm_benchmark, sort_metrics, registries, algorithms and dataset generator
++are unchanged. std_sort remains the single-run default; the matrix selects all
++four existing algorithms. The benchmark-only sorted distribution reuses
++nearly_sorted generation with zero swaps, preserving generator-v1 compatibility.
++
++sort_timing_v1 is fully specified in docs/BENCHMARKING.md. One warmup and five
++measured repetitions are default per algorithm/configuration. Immutable original
++input is copied into preallocated working storage before each call. Only the
++normal sort call is bracketed by steady_clock timestamps, converted to integer
++nanoseconds. Generation, copies, reference sorting, full-vector validation,
++metadata and CSV output are outside timing. Sort-owned allocation is included.
++Algorithm order rotates by seed offset and trial, recorded explicitly.
++
++The raw 28-field CSV includes identity/configuration, ordered input fingerprint,
++phase/trial/order, timing/unit, correctness/status/error and compiler/build/platform
++fields. Sidecars record argv, clock period, planning limits, source SHA-256,
++upstream provenance, CMake cache and available compile commands. Matrix metadata
++adds OS/CPU/RAM/tool probes, exact child commands/exit statuses and executable hash.
++Unavailable platform/Git information is not invented. CMake-configured flags are
++labeled as settings; effective options are in compile_commands.json.
++
++Exclusive directory creation prevents overwrites. Raw data is flushed per row;
++COMPLETE.json is written only after all planned observations pass and files close.
++Failures retain rows/diagnostics and no completion marker. Analysis validates raw
++schema, metadata, schedule, totals, statuses and markers. It rejects incomplete
++runs by default. Explicit partial summaries remain complete=false and exit 1,
++with failed/missing counts. Warmups are retained separately; all successful
++measured observations, including outliers, enter statistics.
++
++Separate summary JSON reports successful/failed/missing trials, warmups, median,
++mean, sample standard deviation (n-1), minimum and maximum, grouped by run and
++algorithm. Fewer than two successes yields null standard deviation; zero successes
++yields null statistics. Synthetic fixtures are labeled tests and are not results.
++
++Input planning uses 4*N*sizeof(int32), bounded before allocation by a configurable
++256 MiB default. This is not measured memory or a hard process RSS limit. Matrix
++configuration/row/list limits are checked before constructing its Cartesian
++product. CPU affinity/frequency, machine background load and cache state are not
++controlled; timing units do not imply clock accuracy. No ranking is claimed.
++
++### Files added or changed
++
++- include/benchmark/timing.hpp and src/benchmark/timing.cpp: protocol/configuration,
++  generator reuse, ordered fingerprint, cyclic trials, normal sorting timing,
++  reference validation and failure rows.
++- include/benchmark/output.hpp and src/benchmark/output.cpp: CSV/JSON escaping.
++- src/benchmark/timing_main.cpp: dedicated CLI and exclusive raw bundles/markers.
++- cmake/benchmark_metadata.cmake and CMakeLists.txt: separate targets, configured
++  compiler/build metadata, source hashes/provenance and two new CTest groups.
++- scripts/run_matrix.py: bounded serial matrix with environment/command evidence.
++- scripts/analyze_results.py: strict raw validation and separate JSON statistics.
++- tests/test_timing.cpp: reproducibility, distribution construction, equivalent
++  original input, schedule, full validation, exceptions, bounds and escaping.
++- tests/test_benchmark.py: CLI/schema/escaping/bounds/safety, synthetic statistics,
++  partial/tampered data, matrix completion/failure and build-mode policy.
++- README.md, docs/BENCHMARKING.md, docs/EXPERIMENT_PROTOCOL.md,
++  docs/ALGORITHMS.md, docs/ROADMAP.md and this audit: methodology and actual status.
++
++### Fresh validation
++
++Initial Release configure/build/full tests exited 0 and passed 13/13 groups
++(nine Python framework methods at that point). Review corrected a test command
++that duplicated --output and could pass for the wrong invalid-argument reason,
++bounded matrix-product construction before allocation, tightened uint64 CSV
++validation and added source provenance plus synthetic CSV/child-failure checks.
++No required build/test command failed; reviewed tests now contain 11 methods.
++
++Fresh reviewed build commands, each exit 0:
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DMAB_ENABLE_SANITIZERS=ON
++cmake --build build/sanitize --parallel 2
++env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V
++```
++
++Both full suites passed 13/13 groups. After the final Python numeric-parser
++tightening, the Release CTest command and sanitizer CTest command above were
++repeated; both exited 0 and again passed 13/13. No compiler warnings were emitted.
++ASan/UBSan and LeakSanitizer passed with leak detection enabled; the historical
++ptrace limitation did not recur and no leak-disabled retry was run.
++
++| CTest group | Actual result in each final configuration |
++| --- | --- |
++| baselines | 3,590 sorting input cases and 98,508 linear-oracle search checks passed |
++| environment_manifest | Three Python methods passed |
++| datasets | 220 distribution/size/seed combinations and all existing fixtures passed |
++| cli | Ten existing methods passed |
++| quicksort | 3,718 existing inputs and fallback assertions passed; normal-budget fallback total 618 |
++| pdqsort | 4,027 existing public/registry inputs passed |
++| timsort | 4,149 existing public/registry inputs passed |
++| comparisons | 1,404 inputs across four counted sorters plus exact/reset/isolation/overflow/fallback checks passed |
++| memory, memory_unsupported | Existing format/error/real/unsupported checks passed |
++| metrics_cli | Seven existing methods passed |
++| timing | 72 reproducible distribution/seed/size inputs, 864 validated registry calls including warmups, sorted alias, input restoration/order, errors, bounds and escaping passed |
++| benchmark_framework | 11 Python methods covering actual CSV/statistics/matrix/safety/failure behavior passed |
++
++The timing unit cases use sizes 0,1,2,31,64,257 and seeds 0,1729,UINT64_MAX on the
++four original distributions; sorted aliases are checked against corresponding
++uniform samples. Faulty and throwing test sorters assert fail-fast behavior and
++recorded correctness/exception distinctions. The Python child-failure stub exits
++9 intentionally; the matrix records it and exits 1 as asserted by the passing
++test. These expected negative tests are not failed validation commands or
++benchmark measurements. Synthetic [10,20,30] ns CSV samples verify median/mean=20,
++sample deviation=10, min=10/max=30; they never enter retained experiment output.
++
++### Actual Release smoke matrix and analysis
++
++The documented protocol was saved before running the smoke matrix. Commands
++executed, each exit 0:
++
++```sh
++python3 scripts/run_matrix.py --binary build/release/sort_benchmark --output results/raw/benchmark_validation_20261009T160450529409Z/smoke_matrix --sizes 1000,10000 --seeds 1729 --repetitions 5 --warmups 1
++python3 scripts/analyze_results.py results/raw/benchmark_validation_20261009T160450529409Z/smoke_matrix --output results/processed/benchmark_smoke_20261009T160450529409Z.json
++```
++
++results/processed was created if absent before analysis. Actual outcome: ten
++completed size/distribution/seed configurations, 200 successful measured trials,
++40 successful warmups and zero failed rows. The separate summary contains 40
++algorithm/run groups, five measured observations per group, all outliers retained.
++Largest measured size is 10,000. Raw measured durations are retained verbatim
++and summaries are derived from those rows; no timings or speedups are invented
++or presented as a general performance leaderboard. The larger 1M command in
++documentation is instructions only and was not executed.
++
++### Evidence and limitations
++
++All new command records and historical/final CTest logs are under
++results/raw/benchmark_validation_20261009T160450529409Z. Raw smoke bundles and
++completion records are inside smoke_matrix; the derived summary is exclusively
++saved under results/processed. Earlier evidence/results were not overwritten.
++These environment-capture commands also exited 0:
++
++```sh
++python3 scripts/capture_environment.py --build-dir build/release --output results/raw/benchmark_validation_20261009T160450529409Z/release_environment.json
++python3 scripts/capture_environment.py --build-dir build/sanitize --output results/raw/benchmark_validation_20261009T160450529409Z/sanitize_environment.json
++```
++
++The project Git-status inspection exited 128 due to absent metadata. No required
++configure/build/test/smoke/analysis command failed. Test-only negative exits are
++intentional assertions, not hidden failures. Review verifies unchanged original
++CLI/registry/algorithms/generator/metrics/tests/vendors, effective timing linkage,
++source hashes and exact regeneration of the smoke summary.
++
++Validated on GNU/Linux only. Other OS/toolchains, full large-scale matrices,
++controlled CPU/cache environments, timer-overhead calibration, allocation-level
++memory tracking and plotting are not validated here. Runtime provenance artifacts
++must remain accessible at the configured build path. No CUDA, 100M, or larger-than-
++10K performance experiment ran; no cross-algorithm speed claim is made.
++
++This reproducible timing/CSV/statistics milestone is complete. Phase 2 remains
++open for optional Merge/Radix baselines and larger controlled sorting studies.
++Next implementation milestone: add those CPU baselines with differential tests,
++then Phase 3 deterministic hit/miss query generation and search benchmarking.
+--- before/docs/EXPERIMENT_PROTOCOL.md
++++ after/docs/EXPERIMENT_PROTOCOL.md
+@@ -2,10 +2,11 @@
+ 
+ ## Current baseline
+ 
+-Current executions are correctness/metric validation, not performance experiments.
+-Separate sort_metrics validation can collect key comparisons and process peak
+-RSS under [METRICS.md](METRICS.md). No sorting/search timing series, memory
+-comparison study, speedups or charts have been collected. The std::sort adapter is the installed library's
++The sorting timing engine now follows [sort_timing_v1](BENCHMARKING.md), using
++small smoke workloads before any larger controlled experiment. Separate
++sort_metrics collects key comparisons/process RSS under [METRICS.md](METRICS.md).
++No large-scale timing study, memory comparison study, speedups or charts have
++been established. The std::sort adapter is the installed library's
+ implementation; its precise library/compiler environment must accompany runs.
+ 
+ Release builds use the commands in README.md. Sanitizer tests will use a separate
+@@ -16,17 +17,18 @@
+ 
+ Timing will use a monotonic clock, exclude generation, copying and verification,
+ and use identical input copies for all sorters. Comparison counting must occur
+-separately from timing. Defaults will be five repetitions, 1,000,000 int32 keys,
+-and 1,000 queries with a documented hit/miss ratio. Search construction and
++separately from timing. Sorting smoke defaults are five repetitions, one warmup,
++and 1K/10K int32 matrices; the planned larger research baseline remains 1M keys.
++Future search workloads use 1,000 queries with a documented hit/miss ratio. Search construction and
+ lookup costs must be reported separately. Maximum observed query latency is not
+ the theoretical worst case. Timer overhead must be assessed before reporting
+ individual query latencies.
+ 
+ Every result must retain its exact command, compiler and flags, environment,
+ seed, distribution parameters, input size, repetitions, algorithm identity,
+-status and errors. A separate versioned sort_metrics JSON schema exists; timing
+-CSV/JSON experiment schemas and analysis tools are
+-pending. Failed runs must remain visible. Raw output must never be overwritten;
++status and errors. Separate versioned metric JSON and sort_timing_v1 CSV/summary
++schemas now exist. Sorting analysis retains failures/outliers; search experiment
++schemas and plotting tools remain pending. Failed runs must remain visible. Raw output must never be overwritten;
+ summaries and plots belong under results/processed and results/figures.
+ 
+ CUDA and 100M experiments remain deferred until prerequisite phases are validated.
+--- before/docs/ROADMAP.md
++++ after/docs/ROADMAP.md
+@@ -7,7 +7,7 @@
+ | --- | --- |
+ | 0 — audit and baseline | Complete: Release build, differential tests, immutable environment manifest |
+ | 1 — correctness-first core | Complete: saved CLI/generator docs and swap regressions; fresh Release and sanitizer suites passed 4/4 |
+-| 2 — required sorting algorithms and metrics | In progress: QuickSort/PDQSort/Timsort and separate comparison/process-RSS metrics validated; extra sorters/timing CSV pending |
++| 2 — required sorting algorithms and metrics | In progress: required sorters, separate metrics, timing CSV/statistics and small smoke matrix validated; optional extra baselines/larger studies pending |
+ | 3 — search benchmarks | Pending |
+ | 4 — search data structures | Pending |
+ | 5 — orchestration and analysis | Pending |
+@@ -36,9 +36,20 @@
+ 11/11 groups, including 1,404 comparison inputs and real/forced-unsupported memory
+ paths, with leak detection enabled. See METRICS.md and AUDIT.md for actual evidence.
+ 
+-Phase 2 is not complete: optional Merge/Radix baselines and repeatable timing/CSV
+-infrastructure remain pending. Algorithm-specific temporary allocation tracking
++Repeatable timing/CSV infrastructure and separate statistics are now implemented
++and validated. sort_timing_v1 uses normal registry calls, identical restored input,
++one warmup/five repetitions by default, monotonic nanoseconds, out-of-timing full
++validation, deterministic cyclic ordering, exclusive raw bundles and explicit
++failure/completion records. All 13 CTest groups pass in Release and ASan/UBSan,
++with leak detection enabled. The actual 1K/10K smoke matrix passed ten configurations,
++200 measured trials plus 40 warmups; 40 separate algorithm groups were summarized
++without outlier removal. This is not a general performance ranking.
++
++Phase 2 remains in progress: optional Merge/Radix baselines and larger controlled
++sorting studies remain pending. Algorithm-specific temporary allocation tracking
+ is not implemented; the supported memory metric is process RSS, not isolation.
+-Next milestone: implement the Release timing/CSV harness with identical dataset
+-copies, repetitions, environment provenance and correctness outside timed regions.
+-No performance benchmarking was started; CUDA and 100M remain not run.
++Next implementation milestone: add the optional Merge Sort and signed Radix Sort
++baselines with differential validation, then proceed to Phase 3's deterministic
++hit/miss queries and search algorithms/benchmarking. Timing tests are validation
++runs; only the small documented Release smoke matrix was measured. Larger 1M/10M
++studies, plots, CUDA and 100M remain not run. See BENCHMARKING.md and AUDIT.md.
+--- /dev/null
++++ after/cmake/benchmark_metadata.cmake
+@@ -0,0 +1,53 @@
++# These are CMake-configured values, not guessed effective compiler flags.
++# Full per-translation-unit commands are copied when compile_commands.json exists.
++function(mab_cxx_literal output value)
++    string(REPLACE "\\" "\\\\" escaped "${value}")
++    string(REPLACE "\"" "\\\"" escaped "${escaped}")
++    string(REPLACE "\n" "\\n" escaped "${escaped}")
++    string(REPLACE "\r" "\\r" escaped "${escaped}")
++    set(${output} "\"${escaped}\"" PARENT_SCOPE)
++endfunction()
++foreach(key IN ITEMS CMAKE_CXX_COMPILER_ID CMAKE_CXX_COMPILER_VERSION CMAKE_CXX_COMPILER
++                     CMAKE_SYSTEM_NAME CMAKE_SYSTEM_PROCESSOR CMAKE_CXX_FLAGS
++                     CMAKE_CXX_FLAGS_RELEASE CMAKE_CXX_FLAGS_DEBUG
++                     CMAKE_CXX_FLAGS_RELWITHDEBINFO CMAKE_CXX_FLAGS_MINSIZEREL
++                     CMAKE_BINARY_DIR CMAKE_SOURCE_DIR)
++    mab_cxx_literal(${key}_LITERAL "${${key}}")
++endforeach()
++# A reconfigure is triggered when recorded source contents change.
++file(GLOB_RECURSE mab_recorded_sources CONFIGURE_DEPENDS
++     "${CMAKE_SOURCE_DIR}/include/*.hpp" "${CMAKE_SOURCE_DIR}/src/*.cpp"
++     "${CMAKE_SOURCE_DIR}/third_party/*.h" "${CMAKE_SOURCE_DIR}/third_party/*.hpp"
++     "${CMAKE_SOURCE_DIR}/third_party/UPSTREAM.json")
++set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${mab_recorded_sources})
++set(mab_source_manifest "{\"schema_version\":1,\"hash_algorithm\":\"sha256\",\"files\":[")
++set(mab_separator "")
++foreach(source IN LISTS mab_recorded_sources)
++    file(RELATIVE_PATH relative "${CMAKE_SOURCE_DIR}" "${source}")
++    file(SHA256 "${source}" digest)
++    mab_cxx_literal(relative_json "${relative}")
++    string(APPEND mab_source_manifest "${mab_separator}{\"path\":${relative_json},\"sha256\":\"${digest}\"}")
++    set(mab_separator ",")
++endforeach()
++string(APPEND mab_source_manifest "]}\n")
++file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/generated/$<CONFIG>/source_hashes.json" CONTENT "${mab_source_manifest}")
++configure_file("${CMAKE_SOURCE_DIR}/third_party/pdqsort/UPSTREAM.json"
++               "${CMAKE_BINARY_DIR}/pdqsort_upstream.json" COPYONLY)
++configure_file("${CMAKE_SOURCE_DIR}/third_party/timsort/UPSTREAM.json"
++               "${CMAKE_BINARY_DIR}/timsort_upstream.json" COPYONLY)
++file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/generated/$<CONFIG>/benchmark_build.hpp" CONTENT
++"#pragma once
++namespace mab::build {
++inline constexpr const char* compiler_id = ${CMAKE_CXX_COMPILER_ID_LITERAL};
++inline constexpr const char* compiler_version = ${CMAKE_CXX_COMPILER_VERSION_LITERAL};
++inline constexpr const char* compiler_path = ${CMAKE_CXX_COMPILER_LITERAL};
++inline constexpr const char* platform = ${CMAKE_SYSTEM_NAME_LITERAL};
++inline constexpr const char* architecture = ${CMAKE_SYSTEM_PROCESSOR_LITERAL};
++inline constexpr const char* configuration = \"$<CONFIG>\";
++inline constexpr const char* global_flags = ${CMAKE_CXX_FLAGS_LITERAL};
++inline constexpr const char* configuration_flags = $<$<CONFIG:Release>:${CMAKE_CXX_FLAGS_RELEASE_LITERAL}>$<$<CONFIG:Debug>:${CMAKE_CXX_FLAGS_DEBUG_LITERAL}>$<$<CONFIG:RelWithDebInfo>:${CMAKE_CXX_FLAGS_RELWITHDEBINFO_LITERAL}>$<$<CONFIG:MinSizeRel>:${CMAKE_CXX_FLAGS_MINSIZEREL_LITERAL}>$<$<NOT:$<OR:$<CONFIG:Release>,$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>>:\"\">;
++inline constexpr bool sanitizers = $<IF:$<BOOL:${MAB_ENABLE_SANITIZERS}>,true,false>;
++inline constexpr const char* binary_dir = ${CMAKE_BINARY_DIR_LITERAL};
++inline constexpr const char* source_dir = ${CMAKE_SOURCE_DIR_LITERAL};
++}
++")
+--- /dev/null
++++ after/docs/BENCHMARKING.md
+@@ -0,0 +1,176 @@
++# Reproducible sorting protocol: sort_timing_v1
++
++## Scope and inputs
++
++sort_benchmark calls the existing production registry: std_sort (default),
++quick_sort, pdq_sort and tim_sort. It links mab_timing and mab_core, never
++mab_metrics. The original correctness CLI and sort_metrics remain independent.
++--sort all selects the registry; comma-separated subsets are supported.
++
++The development smoke matrix uses N=1,000 and 10,000, seed 1729, all four sorters
++and five distributions. Explicit larger experiments can use 1K/10K/100K/1M and
++multiple seeds; those larger experiments have not been run for this milestone.
++Default CTest uses tiny inputs, not a large performance matrix.
++
++Existing mt19937_64_v1 generation is unchanged. Uniform, reverse_sorted,
++duplicate_heavy and nearly_sorted retain EXPERIMENT_PROTOCOL.md's exact mapping.
++The benchmark-only distribution sorted means the corresponding uniform sample
++sorted ascending, implemented by the existing nearly_sorted generator with zero
++swaps. It reports zero swaps even if --swaps was supplied. It does not extend the
++original CLI/generator enum. Defaults are swaps floor(N/100), duplicate domain 16.
++
++Each configuration generates one immutable original vector and records its
++ordered FNV-1a64 fingerprint: uint32 key representation, low-to-high four bytes,
++offset 14695981039346656037, multiplier 1099511628211, unsigned wraparound. This
++is an identification aid, not a cryptographic correctness proof. The entire
++sorted vector is compared with a trusted std::sort reference on every trial.
++
++## Execution and timing
++
++Default warmups=1 and measured repetitions=5 **per algorithm and configuration**.
++Warmups may be zero; repetitions must be 1..10,000 and warmups 0..1,000. Warmup
++rows are retained with phase warmup; analysis excludes them from runtime summaries.
++Warmup failures stop the run. No automatic convergence or early statistical stop.
++
++Before warmups, the engine creates the expected sorted vector and a same-sized
++working vector. Before every call it copies the immutable original into the
++already allocated working vector. Generation, reference sorting, input restoration,
++full-vector validation, metadata, CSV writing and flushing are outside timing.
++Only steady_clock::now(), the production sort call, and steady_clock::now() bracket
++the timed interval. Sort-owned allocation/deallocation and function dispatch are
++included. There is no end-to-end/setup metric and no comparison instrumentation.
++
++Elapsed durations are integer nanoseconds from duration_cast<nanoseconds>.
++The clock is statically required to be monotonic; its native period numerator/
++denominator are recorded. Nanosecond units do not imply nanosecond accuracy.
++Clock quantization, timer-call overhead and scheduling affect tiny runs. Zero
++durations are retained. No timer-overhead subtraction, batching or unsupported
++precision claim is made. CTest timings are validation observations, not experiments.
++
++Within each phase/trial, selected algorithm order rotates cyclically. Offset is
++(seed % algorithm_count + trial_index % algorithm_count) % algorithm_count;
++the metadata retains the selected list and each row's execution_order. This
++reduces fixed position bias but is not statistical randomization. Trial indices
++restart at zero for measured trials. Warmups run for all algorithms before
++measured rounds. Copies touch memory before timing: this is a warmed development
++protocol, not a cold-cache study. No CPU pinning, frequency control, exclusive
++machine reservation, cache flushing or background-load control is implemented.
++
++Performance execution requires Release and sanitizers OFF. --validation-only
++permits Debug/sanitizer test runs and explicitly labels records validation.
++Analysis keeps that label/build metadata; such records must not be interpreted
++as production performance or pooled with Release experiments.
++
++## Resource planning and CLI
++
++```sh
++build/release/sort_benchmark --output results/raw/new_single_run --sort all --size 1000 --seed 1729 --distribution uniform --repetitions 5 --warmups 1
++python3 scripts/run_matrix.py --binary build/release/sort_benchmark --output results/raw/new_smoke_matrix
++mkdir -p results/processed
++python3 scripts/analyze_results.py results/raw/new_smoke_matrix --output results/processed/new_smoke_summary.json
++```
++
++Explicit larger experiment (instructions only; not executed here):
++
++```sh
++python3 scripts/run_matrix.py --binary build/release/sort_benchmark --output results/raw/new_cpu_experiment --sizes 1000,10000,100000,1000000 --seeds 1729,42,2718 --repetitions 5 --warmups 1 --memory-limit-mib 256
++python3 scripts/analyze_results.py results/raw/new_cpu_experiment --output results/processed/new_cpu_summary.json
++```
++
++sort_benchmark requires --output NEW_DIRECTORY. Its parent must exist. Other
++options: --sort NAME[,NAME...] or all (default std_sort), --size (1000), --seed
++(1729), --distribution (uniform), --swaps (N/100), --distinct (16), --repetitions
++(5), --warmups (1), --memory-limit-mib (256), --run-id (directory name),
++--validation-only, --list-sorts and --help. Repeated options use the last parsed
++value; invalid values fail immediately. Numeric arguments are unsigned decimals,
++with no signs/whitespace/trailing characters or overflow. Size zero is allowed.
++Sorter subsets cannot be empty/duplicated or contain unknown names. Distinct
++must be 1..2^32. Swaps are bounded at 10,000,000 for this CLI.
++
++The memory planning limit is 1..65,536 MiB. N is checked before allocation using
++4*N*sizeof(int32): original, reference, working and a linear-workspace allowance.
++This is a conservative planning estimate, **not measured memory or a hard RSS
++limit**; allocator/runtime/vector growth overhead and OS overcommit are excluded.
++Actual allocations can still fail. One configuration is resident at a time.
++run_matrix bounds lists to 1,000 entries, configurations to 1,000 and total
++warmup/measured rows to 1,000,000 before constructing its case list. It executes
++configurations serially in size/seed/distribution order, with a new process per
++configuration. Its defaults are two sizes, one seed, five distributions, all
++registry names, one warmup and five measured repetitions. --sizes/--seeds and
++--distributions accept comma-separated lists; --sorts selects a subset or all.
++
++## Raw output and metadata
++
++Directory creation is exclusive and atomic. Existing directories/files/symlinks
++are rejected; no overwrite flag or cleanup removes earlier output. Within the
++new owned directory, run.json describes the plan before timing; trials.csv is
++streamed/flushed per observation. COMPLETE.json is created only after every
++planned row passed and the CSV was closed successfully. Errors retain available
++raw data, write FAILED.json where possible, print stderr and exit 1. Interrupted
++runs lack a completion marker and are incomplete. Disk/write errors cannot be
++made recoverable if the filesystem refuses writes; absent COMPLETE remains
++authoritative. The matrix similarly retains each child's command/stdout/stderr/
++exit code, stops on first failure and writes its completion marker only after all
++children succeed. Partial data never masquerades as a completed matrix.
++
++run.json stores protocol, run_id/kind, exact argv, start Unix seconds, seed,
++distribution/parameters, size, selected algorithms/order policy, warmup/repetition
++counts, expected row totals, input hash, planning limit and clock period. Build
++metadata includes CMake compiler identity/version/path, actual build configuration,
++sanitizer flag, __cplusplus, CMake global/configuration flags, platform/architecture
++and compile-command availability. These flags are labeled CMake settings, not
++guessed full effective flags. compile_commands.json and CMakeCache.txt are copied
++when present; exact per-translation-unit compile options are in that artifact.
++
++CMake records SHA-256 of project include/src and vendored headers/provenance in
++source_hashes.json; recorded source changes trigger reconfiguration. Upstream
++PDQSort/Timsort provenance is copied from configured build artifacts. Runtime
++requires those configured artifacts to remain accessible, and does not fabricate
++missing provenance. Direct CLI records available Linux /proc CPU/memory information
++and a hardware_concurrency hint (zero means unknown). Other platform details may
++be absent; there is no guessed CPU/GPU/RAM value or Git revision. run_matrix also
++uses the existing environment capture for OS/kernel, CPU, RAM, compiler flags,
++tool versions, Git absence and executable SHA-256. All of this is outside timing.
++
++The raw CSV has 28 fields in this order:
++
++```text
++schema_version,protocol,run_id,run_kind,algorithm,distribution,size,seed,nearly_sorted_swaps,duplicate_cardinality,dataset_generator,input_hash_fnv1a64,phase,trial_index,execution_order,elapsed_ns,elapsed_unit,status,correctness,error,repetitions,warmups,compiler_id,compiler_version,build_type,sanitizers,platform,architecture
++```
++
++Schema=1, protocol=sort_timing_v1, generator=mt19937_64_v1, elapsed_unit=ns.
++run_kind is performance/validation. phase is warmup/measure. status is ok/error;
++correctness is passed/failed/not_checked. Indices/order are zero-based. Timing
++exists for successful calls and correctness failures; exceptions have a blank
++elapsed field. Error diagnostics are retained. Build/configuration and dataset
++fields repeat in each row to permit independent grouping. CSV quotes comma,
++quote, CR and LF fields, doubles embedded quotes, and uses LF record separators.
++Consumers must use a CSV parser and preserve large integer seeds/hashes/times.
++
++## Analysis and failure/outlier policy
++
++analyze_results.py validates schema, units, metadata agreement, phase/trial/order,
++unique records, correctness/status/error consistency, planned totals and completion
++markers. It rejects incomplete runs by default before creating an output file.
++--allow-incomplete is explicit: partial summaries retain complete=false, failed
++trials/warmups, missing trials and missing planned runs, and the command still
++exits 1. Invalid/malformed CSV remains an error even in that mode. Failed rows
++are counted but excluded from successful timing statistics, never hidden.
++
++The separate summary JSON uses schema_version=1, summary_kind=sort_timing_summary,
++complete, source, elapsed_unit=ns, outlier_policy=retain_all, stdev_definition,
++missing_runs and groups. Every run/algorithm group includes configuration/build
++identity, successful_trials, failed_trials, missing_measured_trials, warmup_rows,
++failed_warmups, run_complete, median_ns, mean_ns, stdev_ns, min_ns and max_ns.
++Sample standard deviation uses n-1 and is null for fewer than two successes;
++all statistics are null for zero successes. Medians/means may be fractional ns
++as statistical summaries, without implying finer clock precision.
++
++Groups are separated by run and algorithm; distinct seeds/distributions/builds
++are not silently pooled. All successful measured observations, including outliers,
++are retained. There is no rejection/clipping/trimmed-mean policy or ranking.
++Summary output is exclusively created under a separate derived-data path. Raw
++observations are never edited by analysis. One run or a small smoke matrix cannot
++justify a general faster/slower conclusion. Publication-quality controlled
++experiments, uncertainty interpretation and plots remain later work. Comparison
++counts and process RSS use the independent METRICS.md path, not the timing interval.
+--- /dev/null
++++ after/include/benchmark/output.hpp
+@@ -0,0 +1,12 @@
++#pragma once
++
++#include <iosfwd>
++#include <string>
++#include <string_view>
++#include <vector>
++
++namespace mab {
++std::string csv_field(std::string_view value);
++std::string json_string(std::string_view value);
++void write_csv_row(std::ostream& output, const std::vector<std::string>& fields);
++}  // namespace mab
+--- /dev/null
++++ after/include/benchmark/timing.hpp
+@@ -0,0 +1,43 @@
++#pragma once
++
++#include "algorithms/sorting.hpp"
++#include "datasets/generator.hpp"
++
++#include <cstdint>
++#include <functional>
++#include <optional>
++#include <string>
++#include <vector>
++
++namespace mab {
++struct TimingConfig {
++    DatasetConfig dataset;
++    bool sorted_input = false;
++    std::size_t repetitions = 5;
++    std::size_t warmups = 1;
++    std::size_t memory_limit_mib = 256;
++};
++
++void validate_timing_config(const TimingConfig& config);
++Values make_timing_input(const TimingConfig& config);
++std::string_view timing_distribution(const TimingConfig& config);
++std::size_t timing_swaps(const TimingConfig& config);
++std::uint64_t input_fingerprint(const Values& values) noexcept;
++
++struct TimingTrial {
++    std::string_view algorithm;
++    std::string_view phase;
++    std::size_t trial_index;
++    std::size_t execution_order;
++    std::optional<std::uint64_t> elapsed_ns;
++    std::string_view status;
++    std::string_view correctness;
++    std::string error;
++};
++
++// Sink and input restore/verification are outside the timed call. False means
++// the first sort failed; its row was emitted and remaining trials were not run.
++bool run_timing_trials(const Values& original, const TimingConfig& config,
++                       const std::vector<Sorter>& sorters,
++                       const std::function<void(const TimingTrial&)>& sink);
++}  // namespace mab
+--- /dev/null
++++ after/scripts/analyze_results.py
+@@ -0,0 +1,177 @@
++#!/usr/bin/env python3
++"""Summarize validated timing bundles without discarding outliers or failures."""
++import argparse
++import csv
++import json
++from pathlib import Path
++import statistics
++
++FIELDS = ["schema_version", "protocol", "run_id", "run_kind", "algorithm", "distribution",
++          "size", "seed", "nearly_sorted_swaps", "duplicate_cardinality", "dataset_generator",
++          "input_hash_fnv1a64", "phase", "trial_index", "execution_order", "elapsed_ns",
++          "elapsed_unit", "status", "correctness", "error", "repetitions", "warmups",
++          "compiler_id", "compiler_version", "build_type", "sanitizers", "platform", "architecture"]
++
++
++def integer(value):
++    if not isinstance(value, str) or not value or any(c not in "0123456789" for c in value):
++        raise ValueError(f"invalid unsigned CSV integer: {value!r}")
++    result = int(value)
++    if result > 2**64 - 1:
++        raise ValueError("CSV integer exceeds uint64")
++    return result
++
++
++def summarize_samples(samples):
++    return {"successful_trials": len(samples),
++            "median_ns": statistics.median(samples) if samples else None,
++            "mean_ns": statistics.mean(samples) if samples else None,
++            "stdev_ns": statistics.stdev(samples) if len(samples) > 1 else None,
++            "min_ns": min(samples) if samples else None,
++            "max_ns": max(samples) if samples else None}
++
++
++def read_bundle(directory, allow_incomplete=False):
++    meta = json.loads((directory / "run.json").read_text(encoding="utf-8"))
++    if meta["schema_version"] != 1 or meta["protocol"] != "sort_timing_v1":
++        raise ValueError("unsupported timing metadata schema")
++    algorithms = meta["algorithms"]
++    if not algorithms or len(set(algorithms)) != len(algorithms):
++        raise ValueError("invalid algorithm list")
++    rows = []
++    observed = set()
++    with (directory / "trials.csv").open(newline="", encoding="utf-8") as stream:
++        reader = csv.DictReader(stream, strict=True)
++        if reader.fieldnames != FIELDS:
++            raise ValueError("CSV schema does not match sort_timing_v1")
++        for row in reader:
++            if set(row) != set(FIELDS) or any(value is None for value in row.values()):
++                raise ValueError("malformed CSV row")
++            if row["schema_version"] != "1" or row["protocol"] != "sort_timing_v1" or row["elapsed_unit"] != "ns":
++                raise ValueError("unsupported CSV schema/protocol/unit")
++            for field in ["run_id", "run_kind", "distribution", "size", "seed", "nearly_sorted_swaps",
++                          "duplicate_cardinality", "dataset_generator", "input_hash_fnv1a64", "repetitions",
++                          "warmups", "compiler_id", "compiler_version", "build_type", "platform", "architecture"]:
++                if row[field] != str(meta[field]):
++                    raise ValueError(f"CSV metadata mismatch: {field}")
++            if row["sanitizers"] != str(meta["sanitizers"]).lower():
++                raise ValueError("CSV sanitizer metadata mismatch")
++            if row["algorithm"] not in algorithms or row["phase"] not in ("warmup", "measure"):
++                raise ValueError("unknown algorithm or phase")
++            trial = integer(row["trial_index"])
++            order = integer(row["execution_order"])
++            warmup_end = meta["warmups"] * len(algorithms)
++            expected_phase = "warmup" if len(rows) < warmup_end else "measure"
++            phase_row = len(rows) if expected_phase == "warmup" else len(rows) - warmup_end
++            if row["phase"] != expected_phase or trial != phase_row // len(algorithms) or order != phase_row % len(algorithms):
++                raise ValueError("rows violate planned phase/trial sequence")
++            limit = meta["warmups"] if row["phase"] == "warmup" else meta["repetitions"]
++            if trial >= limit or order >= len(algorithms):
++                raise ValueError("trial/order outside planned range")
++            offset = (meta["seed"] % len(algorithms) + trial % len(algorithms)) % len(algorithms)
++            if algorithms[(offset + order) % len(algorithms)] != row["algorithm"]:
++                raise ValueError("execution order differs from protocol")
++            identity = (row["phase"], trial, row["algorithm"])
++            if identity in observed:
++                raise ValueError("duplicate trial")
++            observed.add(identity)
++            if row["status"] == "ok":
++                if row["correctness"] != "passed" or row["error"]:
++                    raise ValueError("successful row has failed correctness/error")
++                integer(row["elapsed_ns"])
++            elif row["status"] == "error":
++                if row["correctness"] not in ("failed", "not_checked") or not row["error"]:
++                    raise ValueError("failed row lacks diagnostic")
++                if row["elapsed_ns"]:
++                    integer(row["elapsed_ns"])
++            else:
++                raise ValueError("unknown trial status")
++            rows.append(row)
++    expected = (meta["warmups"] + meta["repetitions"]) * len(algorithms)
++    if meta["expected_measured_rows"] != meta["repetitions"] * len(algorithms) or \
++            meta["expected_warmup_rows"] != meta["warmups"] * len(algorithms):
++        raise ValueError("invalid planned row totals")
++    complete = False
++    marker = directory / "COMPLETE.json"
++    if marker.exists():
++        done = json.loads(marker.read_text(encoding="utf-8"))
++        complete = done.get("schema_version") == 1 and done.get("complete") is True and done.get("rows") == expected
++        if not complete or len(rows) != expected or any(row["status"] != "ok" for row in rows) or (directory / "FAILED.json").exists():
++            raise ValueError("completion marker contradicts raw data")
++    if not complete and not allow_incomplete:
++        raise ValueError(f"incomplete/failed run: {directory}; raw observations retained")
++    groups = []
++    for algorithm in algorithms:
++        selected = [row for row in rows if row["algorithm"] == algorithm and row["phase"] == "measure"]
++        samples = [integer(row["elapsed_ns"]) for row in selected if row["status"] == "ok"]
++        group = {field: meta[field] for field in ["run_id", "run_kind", "distribution", "size", "seed",
++                 "nearly_sorted_swaps", "duplicate_cardinality", "input_hash_fnv1a64", "compiler_id",
++                 "compiler_version", "build_type", "sanitizers", "platform", "architecture"]}
++        group.update(summarize_samples(samples))
++        group.update({"algorithm": algorithm, "failed_trials": len(selected) - len(samples),
++                      "missing_measured_trials": meta["repetitions"] - len(selected),
++                      "warmup_rows": sum(row["algorithm"] == algorithm and row["phase"] == "warmup" for row in rows),
++                      "failed_warmups": sum(row["algorithm"] == algorithm and row["phase"] == "warmup" and row["status"] != "ok" for row in rows),
++                      "run_complete": complete})
++        groups.append(group)
++    return complete, groups
++
++
++def analyze(source, allow_incomplete=False):
++    matrix_file = source / "matrix.json"
++    if matrix_file.exists():
++        matrix = json.loads(matrix_file.read_text(encoding="utf-8"))
++        names = matrix["runs"]
++        if matrix.get("schema_version") != 1 or not names or len(set(names)) != len(names) or \
++                any(Path(name).name != name or name in (".", "..") for name in names):
++            raise ValueError("invalid matrix manifest")
++        directories = [source / name for name in names]
++        matrix_complete = (source / "COMPLETE.json").exists()
++        if matrix_complete:
++            marker = json.loads((source / "COMPLETE.json").read_text(encoding="utf-8"))
++            if marker.get("complete") is not True or marker.get("runs") != len(names) or (source / "FAILED.json").exists():
++                raise ValueError("invalid matrix completion marker")
++        if not matrix_complete and not allow_incomplete:
++            raise ValueError("incomplete/failed matrix; raw data retained")
++    else:
++        directories = [source]
++        matrix_complete = True
++    groups = []
++    all_complete = matrix_complete
++    missing_runs = []
++    for directory in directories:
++        if not (directory / "run.json").exists():
++            if not allow_incomplete:
++                raise ValueError(f"missing planned run: {directory}")
++            missing_runs.append(str(directory))
++            all_complete = False
++            continue
++        complete, run_groups = read_bundle(directory, allow_incomplete)
++        all_complete = all_complete and complete
++        groups.extend(run_groups)
++    return {"schema_version": 1, "summary_kind": "sort_timing_summary", "source": str(source.resolve()),
++            "complete": all_complete, "elapsed_unit": "ns", "outlier_policy": "retain_all",
++            "stdev_definition": "sample_ddof_1; null for fewer than two successes",
++            "missing_runs": missing_runs, "groups": groups}
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("source", type=Path)
++    parser.add_argument("--output", type=Path, required=True)
++    parser.add_argument("--allow-incomplete", action="store_true")
++    args = parser.parse_args()
++    try:
++        result = analyze(args.source, args.allow_incomplete)
++        serialized = json.dumps(result, indent=2, allow_nan=False) + "\n"
++        with args.output.open("x", encoding="utf-8") as stream:
++            stream.write(serialized)
++    except (OSError, ValueError, KeyError, TypeError, csv.Error) as error:
++        parser.exit(1, f"analysis failed: {error}\n")
++    print(args.output)
++    if not result["complete"]:
++        parser.exit(1, "analysis retained incomplete/failed status\n")
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ after/scripts/run_matrix.py
+@@ -0,0 +1,122 @@
++#!/usr/bin/env python3
++"""Run a bounded deterministic sorting matrix into a new immutable result directory."""
++import argparse
++import datetime
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++import sys
++
++from capture_environment import capture
++
++DISTRIBUTIONS = ("uniform", "sorted", "reverse_sorted", "duplicate_heavy", "nearly_sorted")
++
++
++def unsigned(text):
++    if not text or any(c not in "0123456789" for c in text) or int(text) > 2**64 - 1:
++        raise argparse.ArgumentTypeError("expected unsigned decimal fitting uint64")
++    return int(text)
++
++
++def numbers(text):
++    parts = text.split(",")
++    if len(parts) > 1000:
++        raise argparse.ArgumentTypeError("matrix list exceeds 1000 values")
++    values = [unsigned(part) for part in parts]
++    if len(set(values)) != len(values):
++        raise argparse.ArgumentTypeError("duplicate matrix value")
++    return values
++
++
++def save(path, data):
++    with path.open("x", encoding="utf-8") as stream:
++        json.dump(data, stream, indent=2, allow_nan=False)
++        stream.write("\n")
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--binary", type=Path, default=Path("build/release/sort_benchmark"))
++    parser.add_argument("--output", type=Path, required=True)
++    parser.add_argument("--sizes", type=numbers, default=[1000, 10000])
++    parser.add_argument("--seeds", type=numbers, default=[1729])
++    parser.add_argument("--distributions", default=",".join(DISTRIBUTIONS))
++    parser.add_argument("--sorts", default="all")
++    parser.add_argument("--repetitions", type=unsigned, default=5)
++    parser.add_argument("--warmups", type=unsigned, default=1)
++    parser.add_argument("--memory-limit-mib", type=unsigned, default=256)
++    parser.add_argument("--distinct", type=unsigned, default=16)
++    parser.add_argument("--swaps", type=unsigned)
++    parser.add_argument("--validation-only", action="store_true")
++    args = parser.parse_args()
++    owns_output = False
++    try:
++        binary = args.binary.resolve()
++        available = subprocess.run([str(binary), "--list-sorts"], check=True, capture_output=True, text=True).stdout.splitlines()
++        sorts = available if args.sorts == "all" else args.sorts.split(",")
++        distributions = args.distributions.split(",")
++        if not sorts or len(set(sorts)) != len(sorts) or any(name not in available for name in sorts):
++            raise ValueError("unknown or duplicate sorter")
++        if not distributions or len(set(distributions)) != len(distributions) or any(name not in DISTRIBUTIONS for name in distributions):
++            raise ValueError("unknown or duplicate distribution")
++        if not 1 <= args.repetitions <= 10000 or args.warmups > 1000 or not 1 <= args.memory_limit_mib <= 65536:
++            raise ValueError("invalid repetitions/warmups/memory limit")
++        if not 1 <= args.distinct <= 2**32 or (args.swaps is not None and args.swaps > 10000000):
++            raise ValueError("invalid distinct/swaps")
++        if any(size > args.memory_limit_mib * 1024**2 // 16 for size in args.sizes):
++            raise ValueError("size exceeds planned array/workspace budget")
++        configurations = len(args.sizes) * len(args.seeds) * len(distributions)
++        if configurations > 1000 or configurations * len(sorts) * (args.repetitions + args.warmups) > 1000000:
++            raise ValueError("matrix exceeds 1000 configurations or 1000000 total rows")
++        cases = [(size, seed, distribution) for size in args.sizes for seed in args.seeds for distribution in distributions]
++        args.output.mkdir(exist_ok=False)
++        owns_output = True
++        build_directory = next((parent for parent in [binary.parent, *binary.parent.parents]
++                                if (parent / "CMakeCache.txt").is_file()), None)
++        if build_directory is None:
++            raise ValueError("benchmark binary has no discoverable CMake build cache")
++        environment = capture(build_directory, " ".join(sys.argv))
++        environment.update({"record_kind": "sorting_matrix_environment", "workload": {
++            "sizes": args.sizes, "seeds": args.seeds, "distributions": distributions,
++            "sorts": sorts, "repetitions": args.repetitions, "warmups": args.warmups},
++            "workload_note": "Environment captured before the declared sorting matrix; completion markers determine outcome.",
++            "benchmark_executable_sha256": hashlib.sha256(binary.read_bytes()).hexdigest()})
++        save(args.output / "environment.json", environment)
++        commands = []
++        names = []
++        for index, (size, seed, distribution) in enumerate(cases):
++            name = f"run_{index:06d}"
++            names.append(name)
++            command = [str(binary), "--output", str(args.output / name), "--sort", ",".join(sorts),
++                       "--size", str(size), "--seed", str(seed), "--distribution", distribution,
++                       "--repetitions", str(args.repetitions), "--warmups", str(args.warmups),
++                       "--memory-limit-mib", str(args.memory_limit_mib), "--distinct", str(args.distinct),
++                       "--run-id", args.output.name + ":" + name]
++            if args.swaps is not None:
++                command.extend(["--swaps", str(args.swaps)])
++            if args.validation_only:
++                command.append("--validation-only")
++            commands.append(command)
++        save(args.output / "matrix.json", {"schema_version": 1, "protocol": "sort_timing_v1",
++             "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
++             "invocation": sys.argv, "runs": names, "commands": commands})
++        for name, command in zip(names, commands):
++            result = subprocess.run(command, capture_output=True, text=True)
++            save(args.output / (name + "_command.json"), {"command": command, "exit_code": result.returncode,
++                 "stdout": result.stdout, "stderr": result.stderr})
++            if result.returncode:
++                raise RuntimeError(f"{name} failed with exit {result.returncode}: {result.stderr.strip()}")
++        save(args.output / "COMPLETE.json", {"schema_version": 1, "complete": True, "runs": len(names)})
++    except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as error:
++        if owns_output:
++            try:
++                save(args.output / "FAILED.json", {"complete": False, "error": str(error)})
++            except OSError:
++                pass
++        parser.exit(1, f"matrix failed: {error}\n")
++    print(f"Completed {len(names)} configurations: {args.output}")
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ after/src/benchmark/output.cpp
+@@ -0,0 +1,41 @@
++#include "benchmark/output.hpp"
++
++#include <ostream>
++
++namespace mab {
++std::string csv_field(std::string_view value) {
++    if (value.find_first_of(",\"\r\n") == std::string_view::npos) return std::string(value);
++    std::string escaped = "\"";
++    for (const auto character : value) {
++        escaped += character;
++        if (character == '"') escaped += '"';
++    }
++    return escaped + '"';
++}
++
++std::string json_string(std::string_view value) {
++    constexpr char hex[] = "0123456789abcdef";
++    std::string escaped = "\"";
++    for (const unsigned char character : value) {
++        if (character == '"' || character == '\\') {
++            escaped += '\\';
++            escaped += static_cast<char>(character);
++        } else if (character < 32) {
++            escaped += "\\u00";
++            escaped += hex[character >> 4];
++            escaped += hex[character & 15];
++        } else escaped += static_cast<char>(character);
++    }
++    return escaped + '"';
++}
++
++void write_csv_row(std::ostream& output, const std::vector<std::string>& fields) {
++    bool first = true;
++    for (const auto& field : fields) {
++        if (!first) output << ',';
++        output << csv_field(field);
++        first = false;
++    }
++    output << '\n';
++}
++}  // namespace mab
+--- /dev/null
++++ after/src/benchmark/timing.cpp
+@@ -0,0 +1,111 @@
++#include "benchmark/timing.hpp"
++
++#include <algorithm>
++#include <chrono>
++#include <limits>
++#include <stdexcept>
++
++namespace mab {
++void validate_timing_config(const TimingConfig& config) {
++    if (config.repetitions == 0 || config.repetitions > 10000)
++        throw std::invalid_argument("repetitions must be in [1, 10000]");
++    if (config.warmups > 1000) throw std::invalid_argument("warmups must be in [0, 1000]");
++    if (config.memory_limit_mib == 0 || config.memory_limit_mib > 65536)
++        throw std::invalid_argument("memory limit must be in [1, 65536] MiB");
++    const auto limit = static_cast<std::uint64_t>(config.memory_limit_mib) * 1024 * 1024;
++    // Three retained arrays plus allowance for a linear sort workspace.
++    if (config.dataset.size > limit / (4 * sizeof(Key)) ||
++        config.dataset.size > Values{}.max_size())
++        throw std::invalid_argument("size exceeds planned array/workspace memory budget");
++    if (config.dataset.duplicate_cardinality == 0 || config.dataset.duplicate_cardinality > (std::uint64_t{1} << 32))
++        throw std::invalid_argument("duplicate cardinality must be in [1, 4294967296]");
++    (void)distribution_name(config.dataset.distribution);
++    // Bound generation work as well as allocation; existing generator API is unchanged.
++    if (timing_swaps(config) > 10000000)
++        throw std::invalid_argument("benchmark swap request exceeds 10000000");
++}
++
++std::string_view timing_distribution(const TimingConfig& config) {
++    return config.sorted_input ? "sorted" : distribution_name(config.dataset.distribution);
++}
++
++std::size_t timing_swaps(const TimingConfig& config) {
++    return config.sorted_input ? 0 : swap_count(config.dataset);
++}
++
++Values make_timing_input(const TimingConfig& config) {
++    validate_timing_config(config);
++    auto dataset = config.dataset;
++    if (config.sorted_input) {
++        dataset.distribution = Distribution::nearly_sorted;
++        dataset.nearly_sorted_swaps = 0;
++    }
++    return generate_dataset(dataset);
++}
++
++std::uint64_t input_fingerprint(const Values& values) noexcept {
++    // FNV-1a of low-to-high bytes of uint32 keys, independent of host endian.
++    std::uint64_t hash = 14695981039346656037ULL;
++    for (const auto key : values) {
++        const auto word = static_cast<std::uint32_t>(key);
++        for (unsigned int shift = 0; shift < 32; shift += 8) {
++            hash ^= (word >> shift) & 255U;
++            hash *= 1099511628211ULL;
++        }
++    }
++    return hash;
++}
++
++bool run_timing_trials(const Values& original, const TimingConfig& config,
++                       const std::vector<Sorter>& sorters,
++                       const std::function<void(const TimingTrial&)>& sink) {
++    validate_timing_config(config);
++    if (original.size() != config.dataset.size || sorters.empty() || !sink)
++        throw std::invalid_argument("invalid timing input/sorters/sink");
++    for (std::size_t i = 0; i < sorters.size(); ++i) {
++        if (!sorters[i].sort || sorters[i].name.empty()) throw std::invalid_argument("invalid sorter");
++        for (std::size_t j = 0; j < i; ++j)
++            if (sorters[i].name == sorters[j].name) throw std::invalid_argument("duplicate sorter");
++    }
++    auto expected = original;
++    std::sort(expected.begin(), expected.end());
++    Values working(original.size());
++    using Clock = std::chrono::steady_clock;
++    static_assert(Clock::is_steady, "timing requires a monotonic clock");
++    for (const auto phase : {std::string_view{"warmup"}, std::string_view{"measure"}}) {
++        const auto repetitions = phase == "warmup" ? config.warmups : config.repetitions;
++        for (std::size_t trial = 0; trial < repetitions; ++trial) {
++            const auto offset = (config.dataset.seed % sorters.size() + trial % sorters.size()) % sorters.size();
++            for (std::size_t order = 0; order < sorters.size(); ++order) {
++                const auto& sorter = sorters[(offset + order) % sorters.size()];
++                std::copy(original.begin(), original.end(), working.begin());
++                TimingTrial result{sorter.name, phase, trial, order, std::nullopt, "ok", "passed", {}};
++                try {
++                    const auto start = Clock::now();
++                    sorter.sort(working);
++                    const auto stop = Clock::now();
++                    const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
++                    if (elapsed < 0) throw std::runtime_error("negative steady-clock duration");
++                    result.elapsed_ns = static_cast<std::uint64_t>(elapsed);
++                } catch (const std::exception& error) {
++                    result.status = "error";
++                    result.correctness = "not_checked";
++                    result.error = error.what();
++                } catch (...) {
++                    result.status = "error";
++                    result.correctness = "not_checked";
++                    result.error = "non-standard sorter exception";
++                }
++                if (result.status == "ok" && working != expected) {
++                    result.status = "error";
++                    result.correctness = "failed";
++                    result.error = "full sorted output differs from std::sort reference";
++                }
++                sink(result);
++                if (result.status != "ok") return false;
++            }
++        }
++    }
++    return true;
++}
++}  // namespace mab
+--- /dev/null
++++ after/src/benchmark/timing_main.cpp
+@@ -0,0 +1,210 @@
++#include "benchmark/timing.hpp"
++#include "benchmark/output.hpp"
++#include "benchmark_build.hpp"
++
++#include <charconv>
++#include <chrono>
++#include <exception>
++#include <filesystem>
++#include <fstream>
++#include <iostream>
++#include <locale>
++#include <sstream>
++#include <stdexcept>
++#include <string>
++#include <thread>
++
++namespace fs = std::filesystem;
++namespace {
++template <typename T> T number(std::string_view text) {
++    T result{};
++    const auto parsed = std::from_chars(text.data(), text.data() + text.size(), result);
++    if (text.empty() || parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size())
++        throw std::invalid_argument("expected unsigned decimal integer: " + std::string(text));
++    return result;
++}
++
++std::ofstream new_file(const fs::path& path) {
++    std::ofstream stream;
++    stream.exceptions(std::ios::failbit | std::ios::badbit);
++    stream.imbue(std::locale::classic());
++    stream.open(path, std::ios::binary);
++    return stream;
++}
++
++void json_file(const fs::path& path, const std::string& content) {
++    auto stream = new_file(path);
++    stream << content << '\n';
++    stream.close();
++}
++
++std::string optional_text(const fs::path& path) {
++    std::ifstream stream(path, std::ios::binary);
++    if (!stream) return {};
++    return std::string(std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>());
++}
++
++std::vector<mab::Sorter> selected_sorters(std::string_view names) {
++    if (names == "all") return {mab::sorters().begin(), mab::sorters().end()};
++    std::vector<mab::Sorter> selected;
++    while (true) {
++        const auto comma = names.find(',');
++        const auto& sorter = mab::find_sorter(names.substr(0, comma));
++        for (const auto& prior : selected)
++            if (prior.name == sorter.name) throw std::invalid_argument("duplicate sorter");
++        selected.push_back(sorter);
++        if (comma == std::string_view::npos) break;
++        names.remove_prefix(comma + 1);
++    }
++    return selected;
++}
++
++void usage() {
++    std::cout << "Usage: sort_benchmark --output NEW_DIRECTORY [--sort NAME[,NAME...]|all]\n"
++                 "  [--size N] [--seed S] [--distribution uniform|sorted|reverse_sorted|duplicate_heavy|nearly_sorted]\n"
++                 "  [--swaps K] [--distinct K] [--repetitions R] [--warmups W]\n"
++                 "  [--memory-limit-mib M] [--run-id ID] [--validation-only] [--list-sorts] [--help]\n"
++                 "Defaults: std_sort, size=1000, seed=1729, uniform, R=5, W=1, M=256.\n"
++                 "Performance runs require Release without sanitizers. Output must not exist.\n";
++}
++}  // namespace
++
++int main(int argc, char** argv) {
++    fs::path output;
++    bool owns_output = false;
++    try {
++        mab::TimingConfig config;
++        std::string sorter_names = "std_sort", run_id;
++        bool validation_only = false;
++        std::vector<std::string> invocation;
++        for (int i = 0; i < argc; ++i) invocation.emplace_back(argv[i]);
++        for (int i = 1; i < argc; ++i) {
++            const std::string_view option(argv[i]);
++            if (option == "--help") { usage(); return 0; }
++            if (option == "--list-sorts") {
++                for (const auto& sorter : mab::sorters()) std::cout << sorter.name << '\n';
++                return 0;
++            }
++            if (option == "--validation-only") { validation_only = true; continue; }
++            if (option != "--output" && option != "--sort" && option != "--size" && option != "--seed" &&
++                option != "--distribution" && option != "--swaps" && option != "--distinct" &&
++                option != "--repetitions" && option != "--warmups" && option != "--memory-limit-mib" && option != "--run-id")
++                throw std::invalid_argument("unknown option: " + std::string(option));
++            if (++i == argc) throw std::invalid_argument("missing value for " + std::string(option));
++            const std::string_view value(argv[i]);
++            if (option == "--output") output = std::string(value);
++            else if (option == "--sort") { (void)selected_sorters(value); sorter_names = value; }
++            else if (option == "--size") config.dataset.size = number<std::size_t>(value);
++            else if (option == "--seed") config.dataset.seed = number<std::uint64_t>(value);
++            else if (option == "--distribution") {
++                config.sorted_input = value == "sorted";
++                if (!config.sorted_input) config.dataset.distribution = mab::parse_distribution(value);
++            } else if (option == "--swaps") config.dataset.nearly_sorted_swaps = number<std::size_t>(value);
++            else if (option == "--distinct") config.dataset.duplicate_cardinality = number<std::uint64_t>(value);
++            else if (option == "--repetitions") config.repetitions = number<std::size_t>(value);
++            else if (option == "--warmups") config.warmups = number<std::size_t>(value);
++            else if (option == "--memory-limit-mib") config.memory_limit_mib = number<std::size_t>(value);
++            else run_id = value;
++        }
++        mab::validate_timing_config(config);
++        const auto selected = selected_sorters(sorter_names);
++        if (output.empty()) throw std::invalid_argument("--output NEW_DIRECTORY is required");
++        if (!validation_only && (std::string_view(mab::build::configuration) != "Release" || mab::build::sanitizers))
++            throw std::invalid_argument("performance requires Release without sanitizers; use --validation-only for tests");
++        if (run_id.empty()) run_id = output.filename().string();
++        if (run_id.empty()) throw std::invalid_argument("empty run identifier");
++        // Atomic directory creation provides portable exclusive result ownership.
++        if (!fs::create_directory(output)) throw std::runtime_error("output already exists: " + output.string());
++        owns_output = true;
++        const auto original = mab::make_timing_input(config);
++        const auto hash = std::to_string(mab::input_fingerprint(original));
++        const std::string run_kind = validation_only ? "validation" : "performance";
++        const auto measured_rows = config.repetitions * selected.size();
++        const auto warmup_rows = config.warmups * selected.size();
++        const auto started = std::chrono::duration_cast<std::chrono::seconds>(
++            std::chrono::system_clock::now().time_since_epoch()).count();
++        bool commands_copied = false;
++        const fs::path commands = fs::path(mab::build::binary_dir) / "compile_commands.json";
++        if (fs::exists(commands)) {
++            fs::copy_file(commands, output / "compile_commands.json");
++            commands_copied = true;
++        }
++        for (const auto name : {"pdqsort", "timsort"})
++            fs::copy_file(fs::path(mab::build::binary_dir) / (std::string(name) + "_upstream.json"),
++                          output / (std::string(name) + "_upstream.json"));
++        fs::copy_file(fs::path(mab::build::binary_dir) / "generated" / mab::build::configuration / "source_hashes.json",
++                      output / "source_hashes.json");
++        const auto cache = fs::path(mab::build::binary_dir) / "CMakeCache.txt";
++        if (fs::exists(cache)) fs::copy_file(cache, output / "CMakeCache.txt");
++        std::ostringstream metadata;
++        metadata.imbue(std::locale::classic());
++        metadata << "{\"schema_version\":1,\"protocol\":\"sort_timing_v1\",\"run_id\":" << mab::json_string(run_id)
++                 << ",\"run_kind\":" << mab::json_string(run_kind) << ",\"started_unix_seconds\":" << started
++                 << ",\"size\":" << config.dataset.size << ",\"seed\":" << config.dataset.seed
++                 << ",\"distribution\":" << mab::json_string(mab::timing_distribution(config))
++                 << ",\"nearly_sorted_swaps\":" << mab::timing_swaps(config)
++                 << ",\"duplicate_cardinality\":" << config.dataset.duplicate_cardinality
++                 << ",\"dataset_generator\":\"mt19937_64_v1\",\"input_hash_fnv1a64\":" << mab::json_string(hash)
++                 << ",\"repetitions\":" << config.repetitions << ",\"warmups\":" << config.warmups
++                 << ",\"expected_measured_rows\":" << measured_rows << ",\"expected_warmup_rows\":" << warmup_rows
++                 << ",\"memory_limit_mib\":" << config.memory_limit_mib
++                 << ",\"planned_array_workspace_bytes\":" << static_cast<std::uint64_t>(original.size()) * 4 * sizeof(mab::Key)
++                 << ",\"clock\":\"steady_clock\",\"clock_period_num\":" << std::chrono::steady_clock::period::num
++                 << ",\"clock_period_den\":" << std::chrono::steady_clock::period::den
++                 << ",\"elapsed_unit\":\"ns\",\"order_policy\":\"seed_offset_cyclic_v1\",\"compiler_id\":"
++                 << mab::json_string(mab::build::compiler_id) << ",\"compiler_version\":" << mab::json_string(mab::build::compiler_version)
++                 << ",\"compiler_path\":" << mab::json_string(mab::build::compiler_path)
++                 << ",\"build_type\":" << mab::json_string(mab::build::configuration)
++                 << ",\"sanitizers\":" << (mab::build::sanitizers ? "true" : "false") << ",\"cplusplus\":" << __cplusplus
++                 << ",\"cmake_global_flags\":" << mab::json_string(mab::build::global_flags)
++                 << ",\"cmake_configuration_flags\":" << mab::json_string(mab::build::configuration_flags)
++                 << ",\"compile_commands_available\":" << (commands_copied ? "true" : "false")
++                 << ",\"platform\":" << mab::json_string(mab::build::platform)
++                 << ",\"architecture\":" << mab::json_string(mab::build::architecture)
++                 << ",\"logical_cpu_count_hint\":" << std::thread::hardware_concurrency()
++                 << ",\"linux_cpuinfo\":" << mab::json_string(optional_text("/proc/cpuinfo"))
++                 << ",\"linux_meminfo\":" << mab::json_string(optional_text("/proc/meminfo"))
++                 << ",\"algorithms\":[";
++        for (std::size_t i = 0; i < selected.size(); ++i) {
++            if (i) metadata << ',';
++            metadata << mab::json_string(selected[i].name);
++        }
++        metadata << "],\"invocation\":[";
++        for (std::size_t i = 0; i < invocation.size(); ++i) {
++            if (i) metadata << ',';
++            metadata << mab::json_string(invocation[i]);
++        }
++        metadata << "]}";
++        json_file(output / "run.json", metadata.str());
++        auto csv = new_file(output / "trials.csv");
++        mab::write_csv_row(csv, {"schema_version", "protocol", "run_id", "run_kind", "algorithm", "distribution",
++            "size", "seed", "nearly_sorted_swaps", "duplicate_cardinality", "dataset_generator", "input_hash_fnv1a64",
++            "phase", "trial_index", "execution_order", "elapsed_ns", "elapsed_unit", "status", "correctness", "error",
++            "repetitions", "warmups", "compiler_id", "compiler_version", "build_type", "sanitizers", "platform", "architecture"});
++        std::size_t actual_rows = 0;
++        const auto completed = mab::run_timing_trials(original, config, selected, [&](const mab::TimingTrial& row) {
++            mab::write_csv_row(csv, {"1", "sort_timing_v1", run_id, run_kind, std::string(row.algorithm),
++                std::string(mab::timing_distribution(config)), std::to_string(original.size()), std::to_string(config.dataset.seed),
++                std::to_string(mab::timing_swaps(config)), std::to_string(config.dataset.duplicate_cardinality), "mt19937_64_v1", hash,
++                std::string(row.phase), std::to_string(row.trial_index), std::to_string(row.execution_order),
++                row.elapsed_ns ? std::to_string(*row.elapsed_ns) : "", "ns", std::string(row.status), std::string(row.correctness), row.error,
++                std::to_string(config.repetitions), std::to_string(config.warmups), mab::build::compiler_id, mab::build::compiler_version,
++                mab::build::configuration, mab::build::sanitizers ? "true" : "false", mab::build::platform, mab::build::architecture});
++            csv.flush();
++            ++actual_rows;
++        });
++        csv.close();
++        if (!completed) throw std::runtime_error("sort failed; inspect retained trials.csv");
++        if (actual_rows != measured_rows + warmup_rows) throw std::runtime_error("incomplete trial count");
++        json_file(output / "COMPLETE.json", "{\"schema_version\":1,\"complete\":true,\"rows\":" + std::to_string(actual_rows) + "}");
++        std::cout << "Completed " << measured_rows << " measured trials; raw data: " << (output / "trials.csv") << '\n';
++        return 0;
++    } catch (const std::exception& error) {
++        if (owns_output) {
++            try { json_file(output / "FAILED.json", "{\"complete\":false,\"error\":" + mab::json_string(error.what()) + "}"); }
++            catch (...) { /* The stderr error and absent completion marker remain authoritative. */ }
++        }
++        std::cerr << "error: " << error.what() << '\n';
++        return 1;
++    }
++}
+--- /dev/null
++++ after/tests/test_benchmark.py
+@@ -0,0 +1,222 @@
++import csv
++import importlib.util
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++
++EXECUTABLE = str(Path(sys.argv.pop(1)).resolve())
++ROOT = Path(__file__).resolve().parents[1]
++spec = importlib.util.spec_from_file_location("analysis", ROOT / "scripts/analyze_results.py")
++analysis = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(analysis)
++
++
++class BenchmarkTests(unittest.TestCase):
++    def setUp(self):
++        self.temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temporary.cleanup)
++        self.root = Path(self.temporary.name)
++
++    def run_cli(self, output, *args):
++        return subprocess.run([EXECUTABLE, "--output", str(output), "--validation-only", *args],
++                              capture_output=True, text=True)
++
++    def bundle(self, name="run", *args):
++        directory = self.root / name
++        result = self.run_cli(directory, "--size", "31", "--sort", "all", "--repetitions", "2", "--warmups", "1", *args)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        return directory
++
++    def test_schema_equivalent_input_and_escaping(self):
++        run_id = 'trial, "quoted"\nnext'
++        directory = self.bundle("run", "--run-id", run_id)
++        metadata = json.loads((directory / "run.json").read_text())
++        self.assertEqual(metadata["run_id"], run_id)
++        self.assertEqual(metadata["run_kind"], "validation")
++        self.assertTrue(metadata["compiler_id"])
++        self.assertEqual(len(metadata["algorithms"]), 4)
++        with (directory / "trials.csv").open(newline="") as stream:
++            reader = csv.DictReader(stream)
++            self.assertEqual(reader.fieldnames, analysis.FIELDS)
++            rows = list(reader)
++        self.assertEqual(len(rows), 12)
++        self.assertEqual({row["run_id"] for row in rows}, {run_id})
++        self.assertEqual(len({row["input_hash_fnv1a64"] for row in rows}), 1)
++        self.assertTrue(all(row["correctness"] == "passed" and int(row["elapsed_ns"]) >= 0 for row in rows))
++        self.assertTrue((directory / "COMPLETE.json").exists())
++        result = analysis.analyze(directory)
++        self.assertTrue(result["complete"])
++        self.assertEqual([group["successful_trials"] for group in result["groups"]], [2] * 4)
++        self.assertEqual([group["warmup_rows"] for group in result["groups"]], [1] * 4)
++
++    def test_all_distributions_reproducible_and_boundaries(self):
++        for index, distribution in enumerate(("uniform", "sorted", "reverse_sorted", "duplicate_heavy", "nearly_sorted")):
++            for size in (0, 1, 33):
++                with self.subTest(distribution=distribution, size=size):
++                    params = ("--size", str(size), "--distribution", distribution, "--seed", "18446744073709551615")
++                    first = self.bundle(f"first{index}_{size}", *params)
++                    second = self.bundle(f"second{index}_{size}", *params)
++                    a = json.loads((first / "run.json").read_text())
++                    b = json.loads((second / "run.json").read_text())
++                    self.assertEqual(a["input_hash_fnv1a64"], b["input_hash_fnv1a64"])
++                    self.assertEqual(a["distribution"], distribution)
++                    self.assertEqual(a["nearly_sorted_swaps"], 0 if distribution == "sorted" else size // 100)
++
++    def test_invalid_configuration_before_output_creation(self):
++        for index, args in enumerate([
++                ("--size", "-1"), ("--size", "+1"), ("--size", "18446744073709551616"),
++                ("--size", "999999999", "--memory-limit-mib", "1"), ("--repetitions", "0"),
++                ("--repetitions", "10001"), ("--repetitions", "-1"), ("--warmups", "1001"),
++                ("--seed", "18446744073709551616"), ("--seed", "bad"), ("--sort", "unknown"),
++                ("--sort", "std_sort,std_sort"), ("--sort", "std_sort,"), ("--distribution", "bad"),
++                ("--distinct", "0"), ("--distinct", "4294967297"), ("--memory-limit-mib", "0"),
++                ("--swaps", "10000001"), ("--unknown",), ("--size",)]):
++            path = self.root / f"invalid{index}"
++            result = self.run_cli(path, *args)
++            self.assertEqual(result.returncode, 1, result.stdout)
++            self.assertTrue(result.stderr.startswith("error: "))
++            self.assertFalse(path.exists())
++
++    def test_output_safety(self):
++        path = self.bundle()
++        before = {file.name: file.read_bytes() for file in path.iterdir()}
++        self.assertEqual(self.run_cli(path).returncode, 1)
++        self.assertEqual(before, {file.name: file.read_bytes() for file in path.iterdir()})
++        existing_file = self.root / "file"
++        existing_file.write_text("preserve")
++        self.assertEqual(self.run_cli(existing_file).returncode, 1)
++        self.assertEqual(existing_file.read_text(), "preserve")
++        self.assertEqual(self.run_cli(self.root / "missing" / "child").returncode, 1)
++        link = self.root / "link"
++        try:
++            link.symlink_to(path, target_is_directory=True)
++        except OSError:
++            return  # Symlink support may require privileges on Windows.
++        self.assertEqual(self.run_cli(link).returncode, 1)
++        self.assertEqual(before, {file.name: file.read_bytes() for file in path.iterdir()})
++
++    def test_statistics_synthetic_and_outliers_retained(self):
++        self.assertEqual(analysis.summarize_samples([10, 20, 30]), {
++            "successful_trials": 3, "median_ns": 20, "mean_ns": 20, "stdev_ns": 10.0, "min_ns": 10, "max_ns": 30})
++        self.assertEqual(analysis.summarize_samples([10, 20])["median_ns"], 15)
++        self.assertIsNone(analysis.summarize_samples([10])["stdev_ns"])
++        self.assertIsNone(analysis.summarize_samples([])["mean_ns"])
++        self.assertEqual(analysis.summarize_samples([10, 20, 30, 10000])["max_ns"], 10000)
++        for malformed in ("-1", "+1", "nan", "1.5", "", str(2**64)):
++            with self.assertRaises(ValueError):
++                analysis.integer(malformed)
++
++    def test_statistics_through_synthetic_csv(self):
++        path = self.bundle("synthetic", "--sort", "std_sort", "--repetitions", "3", "--warmups", "0")
++        with (path / "trials.csv").open(newline="") as stream:
++            rows = list(csv.DictReader(stream))
++        for row, synthetic in zip(rows, [10, 20, 30]):
++            row["elapsed_ns"] = str(synthetic)
++        # Deliberately replace observations only in this synthetic temporary test fixture.
++        with (path / "trials.csv").open("w", newline="") as stream:
++            writer = csv.DictWriter(stream, fieldnames=analysis.FIELDS)
++            writer.writeheader()
++            writer.writerows(rows)
++        group = analysis.analyze(path)["groups"][0]
++        for name, expected in {"successful_trials": 3, "median_ns": 20, "mean_ns": 20,
++                               "stdev_ns": 10, "min_ns": 10, "max_ns": 30}.items():
++            self.assertEqual(group[name], expected)
++
++    def test_analysis_fail_closed_and_partial_counts(self):
++        path = self.bundle()
++        (path / "COMPLETE.json").unlink()
++        with self.assertRaises(ValueError):
++            analysis.analyze(path)
++        self.assertFalse(analysis.analyze(path, allow_incomplete=True)["complete"])
++        with (path / "trials.csv").open(newline="") as stream:
++            rows = list(csv.DictReader(stream))
++        rows[-1].update(status="error", correctness="failed", error='bad, "output"\nfailed')
++        with (path / "trials.csv").open("w", newline="") as stream:
++            writer = csv.DictWriter(stream, fieldnames=analysis.FIELDS)
++            writer.writeheader()
++            writer.writerows(rows)
++        partial = analysis.analyze(path, allow_incomplete=True)
++        self.assertEqual(sum(group["failed_trials"] for group in partial["groups"]), 1)
++        summary = self.root / "partial.json"
++        result = subprocess.run([sys.executable, str(ROOT / "scripts/analyze_results.py"), str(path),
++                                 "--output", str(summary), "--allow-incomplete"], capture_output=True, text=True)
++        self.assertEqual(result.returncode, 1)
++        self.assertFalse(json.loads(summary.read_text())["complete"])
++
++    def test_analysis_rejects_schema_tampering_and_protects_output(self):
++        path = self.bundle()
++        summary = self.root / "summary.json"
++        command = [sys.executable, str(ROOT / "scripts/analyze_results.py"), str(path), "--output", str(summary)]
++        self.assertEqual(subprocess.run(command, capture_output=True).returncode, 0)
++        before = summary.read_bytes()
++        self.assertEqual(subprocess.run(command, capture_output=True).returncode, 1)
++        self.assertEqual(summary.read_bytes(), before)
++        raw = (path / "trials.csv").read_text()
++        (path / "trials.csv").write_text(raw.replace("elapsed_ns", "bad_schema", 1))
++        with self.assertRaises(ValueError):
++            analysis.analyze(path)
++
++    def test_default_help_and_build_policy(self):
++        self.assertEqual(subprocess.run([EXECUTABLE, "--help"], capture_output=True).returncode, 0)
++        path = self.root / "default"
++        result = self.run_cli(path, "--size", "2")
++        self.assertEqual(result.returncode, 0, result.stderr)
++        metadata = json.loads((path / "run.json").read_text())
++        self.assertEqual(metadata["algorithms"], ["std_sort"])
++        self.assertEqual(metadata["repetitions"], 5)
++        self.assertEqual(metadata["warmups"], 1)
++        other = self.root / "policy"
++        result = subprocess.run([EXECUTABLE, "--output", str(other), "--size", "0"], capture_output=True)
++        self.assertEqual(result.returncode, 0 if metadata["build_type"] == "Release" and not metadata["sanitizers"] else 1)
++
++    def test_small_matrix_and_validation_failures(self):
++        path = self.root / "matrix"
++        command = [sys.executable, str(ROOT / "scripts/run_matrix.py"), "--binary", EXECUTABLE,
++                   "--output", str(path), "--sizes", "0,16", "--seeds", "0", "--repetitions", "1",
++                   "--warmups", "0", "--validation-only"]
++        result = subprocess.run(command, capture_output=True, text=True)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        summary = analysis.analyze(path)
++        self.assertTrue(summary["complete"])
++        self.assertEqual(len(summary["groups"]), 40)
++        self.assertEqual(subprocess.run(command, capture_output=True).returncode, 1)
++        for args in [("--sizes", "-1"), ("--sizes", "1,1"), ("--repetitions", "0"),
++                     ("--seeds", "bad"), ("--sorts", "unknown"), ("--distributions", "bad")]:
++            invalid = self.root / "invalid_matrix"
++            result = subprocess.run(command[:4] + ["--output", str(invalid), *args], capture_output=True)
++            self.assertNotEqual(result.returncode, 0)
++            self.assertFalse(invalid.exists())
++
++    @unittest.skipIf(os.name == "nt", "test subprocess stub uses POSIX executable scripts")
++    def test_matrix_failure_remains_explicit(self):
++        fake_build = self.root / "fakebuild"
++        fake_build.mkdir()
++        actual_cache = next(parent / "CMakeCache.txt" for parent in Path(EXECUTABLE).parents
++                            if (parent / "CMakeCache.txt").exists())
++        (fake_build / "CMakeCache.txt").write_bytes(actual_cache.read_bytes())
++        binary = fake_build / "injected_failure"
++        binary.write_text('#!/usr/bin/env python3\nimport sys\n'
++                          'if "--list-sorts" in sys.argv:\n    print("std_sort")\n'
++                          'else:\n    sys.stderr.write("injected child failure\\n")\n    sys.exit(9)\n')
++        binary.chmod(0o700)
++        output = self.root / "failed_matrix"
++        command = [sys.executable, str(ROOT / "scripts/run_matrix.py"), "--binary", str(binary),
++                   "--output", str(output), "--sizes", "1", "--distributions", "uniform", "--validation-only"]
++        result = subprocess.run(command, capture_output=True, text=True)
++        self.assertEqual(result.returncode, 1)
++        self.assertFalse((output / "COMPLETE.json").exists())
++        self.assertTrue((output / "FAILED.json").exists())
++        self.assertEqual(json.loads((output / "run_000000_command.json").read_text())["exit_code"], 9)
++        with self.assertRaises(ValueError):
++            analysis.analyze(output)
++        partial = analysis.analyze(output, allow_incomplete=True)
++        self.assertFalse(partial["complete"])
++        self.assertEqual(len(partial["missing_runs"]), 1)
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- /dev/null
++++ after/tests/test_timing.cpp
+@@ -0,0 +1,109 @@
++#include "benchmark/timing.hpp"
++#include "benchmark/output.hpp"
++#include "test_support.hpp"
++
++#include <algorithm>
++#include <exception>
++#include <iostream>
++#include <limits>
++#include <sstream>
++#include <stdexcept>
++
++namespace {
++mab::Values required_input;
++std::size_t restored_calls = 0;
++void checking_sort(mab::Values& values) {
++    require(values == required_input, "sorter did not receive the original ordered input");
++    ++restored_calls;
++    std::sort(values.begin(), values.end());
++}
++void broken_sort(mab::Values&) {}
++void throwing_sort(mab::Values&) { throw std::runtime_error("sort error, \"quoted\"\nline"); }
++}  // namespace
++
++int main() {
++    try {
++        std::size_t inputs = 0, trials = 0;
++        for (const auto distribution : {mab::Distribution::uniform, mab::Distribution::nearly_sorted,
++                mab::Distribution::reverse_sorted, mab::Distribution::duplicate_heavy}) {
++            for (const auto seed : {std::uint64_t{0}, std::uint64_t{1729}, std::numeric_limits<std::uint64_t>::max()}) {
++                for (const std::size_t size : {0, 1, 2, 31, 64, 257}) {
++                    mab::TimingConfig config;
++                    config.dataset.size = size;
++                    config.dataset.seed = seed;
++                    config.dataset.distribution = distribution;
++                    config.repetitions = 2;
++                    config.warmups = 1;
++                    const auto original = mab::make_timing_input(config);
++                    require(original == mab::make_timing_input(config) && original == mab::generate_dataset(config.dataset),
++                            "timing input does not preserve generator v1");
++                    require(mab::input_fingerprint(original) == mab::input_fingerprint(mab::make_timing_input(config)),
++                            "input fingerprint not reproducible");
++                    const std::vector<mab::Sorter> sorters{mab::sorters().begin(), mab::sorters().end()};
++                    require(mab::run_timing_trials(original, config, sorters, [&](const mab::TimingTrial& row) {
++                        require(row.status == "ok" && row.correctness == "passed" && row.elapsed_ns.has_value(),
++                                "registered sorter failed timing validation");
++                        require(row.execution_order < sorters.size(), "invalid execution order");
++                        ++trials;
++                    }), "timing engine failed");
++                    ++inputs;
++                    config.sorted_input = true;
++                    auto expected = original;
++                    // Sorted alias always uses the corresponding uniform sample.
++                    auto uniform = config.dataset;
++                    uniform.distribution = mab::Distribution::uniform;
++                    expected = mab::generate_dataset(uniform);
++                    std::sort(expected.begin(), expected.end());
++                    require(mab::make_timing_input(config) == expected && mab::timing_swaps(config) == 0,
++                            "sorted benchmark distribution constructed incorrectly");
++                }
++            }
++        }
++        mab::TimingConfig config;
++        config.dataset.size = 5;
++        config.repetitions = 3;
++        config.warmups = 2;
++        required_input = {9, -1, 4, 0, -7};
++        const auto saved = required_input;
++        std::vector<mab::TimingTrial> rows;
++        require(mab::run_timing_trials(required_input, config,
++                {{"first", checking_sort}, {"second", checking_sort}},
++                [&](const mab::TimingTrial& row) { rows.push_back(row); }), "restore test failed");
++        require(required_input == saved && restored_calls == 10 && rows.size() == 10, "input mutated or trials omitted");
++        require(rows[0].algorithm == "second" && rows[2].algorithm == "first" && rows[4].phase == "measure",
++                "seed-offset cyclic schedule/warmup separation changed");
++        rows.clear();
++        require(!mab::run_timing_trials(required_input, config, {{"broken", broken_sort}},
++                [&](const mab::TimingTrial& row) { rows.push_back(row); }) && rows.size() == 1 &&
++                rows[0].status == "error" && rows[0].correctness == "failed" && rows[0].elapsed_ns,
++                "incorrect sorting was marked successful or not fail-fast");
++        rows.clear();
++        require(!mab::run_timing_trials(required_input, config, {{"throwing", throwing_sort}},
++                [&](const mab::TimingTrial& row) { rows.push_back(row); }) && rows.size() == 1 &&
++                rows[0].correctness == "not_checked" && !rows[0].elapsed_ns && !rows[0].error.empty(),
++                "sort exception not recorded");
++        for (const auto kind : {0, 1, 2, 3}) {
++            auto invalid = config;
++            if (kind == 0) invalid.repetitions = 0;
++            if (kind == 1) invalid.warmups = 1001;
++            if (kind == 2) invalid.memory_limit_mib = 0;
++            if (kind == 3) invalid.dataset.size = std::numeric_limits<std::size_t>::max();
++            bool rejected = false;
++            try { mab::validate_timing_config(invalid); } catch (const std::invalid_argument&) { rejected = true; }
++            require(rejected, "invalid benchmark config accepted");
++        }
++        require(mab::csv_field("plain") == "plain" && mab::csv_field("a,b") == "\"a,b\"" &&
++                mab::csv_field("a\"b") == "\"a\"\"b\"" && mab::csv_field("a\nb") == "\"a\nb\"",
++                "CSV field escaping changed");
++        require(mab::json_string("a\"\\\n") == "\"a\\\"\\\\\\u000a\"", "JSON escaping changed");
++        std::ostringstream csv;
++        mab::write_csv_row(csv, {"", "a,b", "a\"b", "line\r\nend"});
++        require(csv.str() == ",\"a,b\",\"a\"\"b\",\"line\r\nend\"\n", "CSV row formatting changed");
++        std::cout << "Passed " << inputs << " reproducible distribution/seed/size inputs and " << trials
++                  << " validated registry trials; sorted aliases, exact input restoration/order, failures, bounds and escaping passed\n";
++        return 0;
++    } catch (const std::exception& error) {
++        std::cerr << error.what() << '\n';
++        return 1;
++    }
++}

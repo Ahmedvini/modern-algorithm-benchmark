@@ -1,0 +1,19 @@
+{
+  "modified": [
+    "scripts/ctest_build_guard.py",
+    "scripts/non_timing_tests.py"
+  ],
+  "added": [
+    "docs/CTEST_COLAB_METADATA_v2.md",
+    "docs/NON_TIMING_TEST_SELECTION_v3.json",
+    "tests/test_ctest_dart_compatibility.py"
+  ],
+  "production_CMake_and_protocol_unchanged": true,
+  "tests_registrations_unchanged": true,
+  "default_selected": 19,
+  "diagnostic_selected": 21,
+  "independent_static_review": "metadata_safety_review PASS; focused9+36+3+9 inert tests passed",
+  "source_files": 188,
+  "archive_sha256": "320bc0a2574993efba0609c22d572551184ccafac9b8b3b41cb70d41297a72cc",
+  "manifest_sha256": "2a647c5f37ad1803d4f06e4e322d404236a7434ca99971f03a13aac171f8e49f"
+}

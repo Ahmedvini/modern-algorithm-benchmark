@@ -1,0 +1,1 @@
+Startup read pwd, complete AGENTS.md, latest FINAL_AUDIT.md and COMMANDS.md, and printed seal-map counts: exit0. Bootstrap verified every previous digest map against actual files, captured the historical result baseline and created this exclusive directory: exit0. No tests/builds/benchmarks/GPU commands ran.

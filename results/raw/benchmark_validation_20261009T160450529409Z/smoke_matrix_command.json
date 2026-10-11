@@ -1,0 +1,8 @@
+{
+  "command": "python3 scripts/run_matrix.py --binary build/release/sort_benchmark --output results/raw/benchmark_validation_20261009T160450529409Z/smoke_matrix --sizes 1000,10000 --seeds 1729 --repetitions 5 --warmups 1",
+  "chunk_id": "8eb393",
+  "wall_time_seconds": 0.000010977,
+  "exit_code": 0,
+  "original_token_count": 25,
+  "output": "Completed 10 configurations: results/raw/benchmark_validation_20261009T160450529409Z/smoke_matrix\n"
+}

@@ -1,0 +1,12 @@
+{
+  "source_files": 188,
+  "archive_sha256": "5303683f37e48ab03bcb287b2c560d2100293b68209f63cc354fe0923ab9102f",
+  "manifest_sha256": "e5f16f241a6dd27fd5d4d751aecd06fc9d68f7dc28ae231be2fe4d608132b0c3",
+  "changed_since_attempt1": [
+    "docs/NON_TIMING_TEST_SELECTION_v3.json",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "production_CMake_frozen_policy_unchanged": true,
+  "independent_review": "validation_resume_review PASS test-only fixture fix",
+  "focused_synthetic_methods_passed": 9
+}

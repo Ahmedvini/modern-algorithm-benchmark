@@ -1,0 +1,8 @@
+{
+  "command": "cmake --build build/release --parallel 2",
+  "chunk_id": "49b6cf",
+  "wall_time_seconds": 4.013269183,
+  "exit_code": 0,
+  "original_token_count": 328,
+  "output": "[  3%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o\n[  6%] Linking CXX static library libmab_core.a\n[ 21%] Built target mab_core\n[ 24%] Linking CXX executable algorithm_benchmark\n[ 27%] Building CXX object CMakeFiles/mab_metrics.dir/src/benchmark/comparisons.cpp.o\n[ 30%] Built target algorithm_benchmark\n[ 33%] Linking CXX executable test_baselines\n[ 36%] Built target test_baselines\n[ 39%] Linking CXX executable test_datasets\n[ 42%] Built target test_datasets\n[ 45%] Building CXX object CMakeFiles/test_quicksort.dir/tests/test_quicksort.cpp.o\n[ 48%] Linking CXX static library libmab_metrics.a\n[ 51%] Linking CXX executable test_quicksort\n[ 57%] Built target mab_metrics\n[ 60%] Linking CXX executable test_pdqsort\n[ 60%] Built target test_quicksort\n[ 63%] Linking CXX executable test_timsort\n[ 66%] Built target test_pdqsort\n[ 69%] Built target test_timsort\n[ 72%] Building CXX object CMakeFiles/test_comparisons.dir/tests/test_comparisons.cpp.o\n[ 75%] Linking CXX executable test_memory\n[ 78%] Built target test_memory\n[ 81%] Linking CXX executable test_memory_unsupported\n[ 90%] Built target test_memory_unsupported\n[ 93%] Linking CXX executable sort_metrics\n[ 96%] Built target sort_metrics\n[100%] Linking CXX executable test_comparisons\n[100%] Built target test_comparisons\n"
+}

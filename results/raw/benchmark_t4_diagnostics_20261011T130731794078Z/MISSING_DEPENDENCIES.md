@@ -1,0 +1,7 @@
+# Exact unresolved dependencies
+
+The production guard expects `docs/CPU_GPU_EVIDENCE_REVIEW_v1.json` and an independently protected, non-circular authority. The artifact is absent and `scripts/cpu_gpu_evidence.py:20` retains `TRUSTED_APPROVAL_SHA256=None`. The pure approval check at lines24-56 rejects it before gated execution. User execution authorization is already granted; repeating it would not install technical trust.
+
+The actual accepted artifact is strict schema1, policy `cpu_gpu_evidence_enforcement_v1`, approved=true and execution_authorized=false. It must bind session/source/build/binary/freeze context; canonical source/build/Python paths; approved selection; CPU Release/sanitizer and GPU build provenance; all nine framework-record digests; five legacy record references; and preflight-report digest. See the unchanged [requirements description](../gpu_external_resolution_20261011T121306863461Z/REQUIRED_EXTERNAL_ARTIFACT.json) and `docs/CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md:22-38`. This is not an approval/signature template and no self-created hash is trusted.
+
+The existing T4 account reports1.07 compute units/hour with zero balance. These fields do not prove a monetary charge, nor establish free-use entitlement for this session. A supported billing/entitlement fact establishing free use is missing. The installed consumption display maps the backend rate and balance without a free/paid assignment flag. No remote execution or alternate/metered allocation was used. The existing session is neither stopped nor changed.

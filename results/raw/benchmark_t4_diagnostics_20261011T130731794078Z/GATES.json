@@ -1,0 +1,55 @@
+[
+  {
+    "evidence": "OFFLINE_GATES.json",
+    "gate": "Repository/frozen48-dataset matrix/source bundle",
+    "status": "PASS"
+  },
+  {
+    "evidence": "../gpu_final_resolution_20261011T111957067481Z/REUSED_CPU_EVIDENCE.json",
+    "gate": "CPU Release and ASan/UBSan evidence",
+    "note": "21/21 each, retained and identity-matched; no rerun",
+    "status": "PASS"
+  },
+  {
+    "evidence": "command_002.json",
+    "gate": "Existing benchmark-t4 accessibility and identity",
+    "status": "PASS"
+  },
+  {
+    "evidence": "ENVIRONMENT_STATUS.json",
+    "gate": "Free use of existing assignment",
+    "note": "Account reports1.07CU/hour; free-use entitlement not established. No monetary charge is asserted.",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "ENVIRONMENT_STATUS.json",
+    "gate": "Current actual GPU/Python/CUDA/compiler/CUB environment",
+    "note": "No remote execution while free-use condition unresolved",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "OFFLINE_GATES.json; USER_CONFIGURATION_SEARCH.json",
+    "gate": "Genuine independent approval and trust anchor",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "FINAL_AUDIT.md",
+    "gate": "Intended GPU build/link/binary/comparison_input identity",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "FINAL_AUDIT.md",
+    "gate": "Identity-matched bounded GPU/framework/resource/worker checks",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "FINAL_AUDIT.md",
+    "gate": "Production eligibility and full frozen study",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "FINAL_INTEGRITY.json",
+    "gate": "Historical/source/frozen/build preservation",
+    "status": "PASS"
+  }
+]

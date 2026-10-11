@@ -1,0 +1,8 @@
+{
+  "command": "python3 scripts/analyze_results.py results/raw/benchmark_validation_20261009T160450529409Z/smoke_matrix --output results/processed/benchmark_smoke_20261009T160450529409Z.json",
+  "chunk_id": "f65f5f",
+  "wall_time_seconds": 0.000011294,
+  "exit_code": 0,
+  "original_token_count": 16,
+  "output": "results/processed/benchmark_smoke_20261009T160450529409Z.json\n"
+}

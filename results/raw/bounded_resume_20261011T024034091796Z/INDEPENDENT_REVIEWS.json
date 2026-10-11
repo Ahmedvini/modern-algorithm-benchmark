@@ -1,0 +1,34 @@
+{
+  "metadata_safety_review": {
+    "result": "PASS for exact compatibility extension before real discovery, conditioned on focused inert tests (now passed)",
+    "inspected": [
+      "scripts/ctest_build_guard.py",
+      "scripts/non_timing_tests.py",
+      "tests/test_ctest_dart_compatibility.py",
+      "docs/NON_TIMING_TEST_SELECTION_v3.json",
+      "docs/CTEST_COLAB_METADATA_v2.md"
+    ],
+    "findings": [
+      "Exact old or paired-empty TLS schema only; literal compute-sanitizer path only.",
+      "Old commands/properties/registrations, canonical path and boundary checks unchanged.",
+      "MemoryCheckCommand is dashboard-only, fixed ordinary selector commands never execute it.",
+      "No production code or frozen inputs changed."
+    ],
+    "commands": [
+      "diff -u results/raw/bounded_resume_20261011T024034091796Z/before/scripts/ctest_build_guard.py scripts/ctest_build_guard.py",
+      "diff -u results/raw/bounded_resume_20261011T024034091796Z/before/scripts/non_timing_tests.py scripts/non_timing_tests.py"
+    ],
+    "execution": "Read-only inspections only; no tests/CTest/cloud/GPU/workloads. Agent command batches completed0; diff reports expected content differences."
+  },
+  "validation_resume_review": {
+    "result": "Reuse safe with exact metadata extension and bounded dedicated launcher",
+    "findings": [
+      "Default19 and explicit21 preserved.",
+      "CPU selection includes temporary CUDA-OFF configure-only checks, not workload execution.",
+      "Host-only CUDA analysis intentionally skips two timing integration Python methods; distinguish from CTest skips.",
+      "Old pilot validator default path unsafe; do not invoke.",
+      "Complete source/build/binary digests needed; generated source_hashes alone insufficient."
+    ],
+    "execution": "Read-only inspection; no edits/tests/CTest/cloud/GPU/workloads."
+  }
+}

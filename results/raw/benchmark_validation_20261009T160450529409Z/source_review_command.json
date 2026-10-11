@@ -1,0 +1,8 @@
+{
+  "command": "python3 results/raw/benchmark_validation_20261009T160450529409Z/review_sources.py",
+  "chunk_id": "1872ef",
+  "wall_time_seconds": 0.0000105,
+  "exit_code": 0,
+  "original_token_count": 174,
+  "output": "Preserved original production/metrics/interfaces/tests/vendors/scripts.\nTiming binary links only mab_timing/mab_core, without metric symbols.\nSource hashes match both builds and all measured smoke bundles.\nRegenerated the 40-group/200-measurement/40-warmup summary exactly.\nModified: CMakeLists.txt, README.md, docs/ALGORITHMS.md, docs/AUDIT.md, docs/EXPERIMENT_PROTOCOL.md, docs/ROADMAP.md\nAdded: cmake/benchmark_metadata.cmake, docs/BENCHMARKING.md, include/benchmark/output.hpp, include/benchmark/timing.hpp, scripts/analyze_results.py, scripts/run_matrix.py, src/benchmark/output.cpp, src/benchmark/timing.cpp, src/benchmark/timing_main.cpp, tests/test_benchmark.py, tests/test_timing.cpp\n"
+}
