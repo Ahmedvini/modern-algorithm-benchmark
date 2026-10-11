@@ -1,0 +1,16 @@
+{
+  "changes": {
+    "tests/test_ctest_build_guard.py": {
+      "after": "114e083439829bd56fb659a882d92a8c85738e67bc6eb2ee32fc0c59a459526f",
+      "before": "ce35488030412d4a485191d89bea1cbe8c4dc1e9feee1b8a30e3279404e2893e"
+    }
+  },
+  "syntax_checked": [
+    "scripts/ctest_build_guard.py",
+    "scripts/non_timing_tests.py",
+    "tests/ctest_fixture.py",
+    "tests/test_ctest_build_guard.py",
+    "tests/test_cpu_gpu_safety.py",
+    "tests/test_cpu_gpu_comparison.py"
+  ]
+}

@@ -1,0 +1,900 @@
+--- before/scripts/ctest_build_guard.py
++++ after/scripts/ctest_build_guard.py
+@@ -0,0 +1,157 @@
++"""Static, fail-closed gate for the reviewed flat CTest registry. Never runs CMake.
++
++This is deliberately not a general CMake interpreter. Only literal generated
++add_test/set_tests_properties declarations are supported. Includes, subdirectories,
++hooks, control flow and new generator formats require a separate policy review.
++"""
++import hashlib
++import os
++from pathlib import Path
++import re
++import stat
++
++from cpu_gpu_protocol import ROOT, require
++
++HOOK_NAMES = {'CTestCustom.cmake', 'CTestCustom.ctest', 'CTestConfig.cmake'}
++TOKEN = re.compile(r'"([^"\\\r\n]*)"|\[=\[([^\r\n]*?)\]=\]|([A-Za-z0-9_]+)')
++
++
++def read_regular(path):
++    """Reject symlinks/nonregular/unreadable files rather than interpreting them."""
++    info = path.lstat()
++    require(stat.S_ISREG(info.st_mode) and bool(info.st_mode & 0o444),
++            'unreadable/nonregular build metadata: ' + str(path))
++    require(info.st_size <= 1024*1024, 'oversized build metadata')
++    raw = path.read_bytes()
++    text = raw.decode('utf-8', errors='strict')
++    require(not any(c in text for c in ['\x00', '\r', '${', '$ENV{', '$<']),
++            'ambiguous/expanded build metadata: ' + str(path))
++    return text, hashlib.sha256(raw).hexdigest()
++
++
++def statements(text):
++    """Accept the small literal grammar emitted by the reviewed generators."""
++    result = []
++    for line in text.splitlines():
++        line = line.strip()
++        if not line:
++            continue
++        if line.startswith('#'):
++            require(not line.startswith('#['), 'unreviewed bracket comment')
++            continue
++        match = re.fullmatch(r'(add_test|set_tests_properties)\((.*)\)', line)
++        require(match is not None, 'unreviewed CTest statement (includes/subdirs/hooks forbidden)')
++        tokens, cursor = [], 0
++        arguments = match[2]
++        while cursor < len(arguments):
++            if arguments[cursor].isspace():
++                cursor += 1
++                continue
++            token = TOKEN.match(arguments, cursor)
++            require(token is not None, 'malformed/ambiguous CTest argument')
++            tokens.append(next(group for group in token.groups() if group is not None))
++            cursor = token.end()
++            require(cursor == len(arguments) or arguments[cursor].isspace(),
++                    'ambiguous adjacent CTest arguments')
++        result.append((match[1], tokens))
++    return result
++
++
++def expand(value, build):
++    return value.replace('@source', str(ROOT.resolve())).replace('@build', str(build))
++
++
++def validate_dart(path, build, policy):
++    # DartConfiguration is key/value data, not CMake. Do not evaluate it. These
++    # reviewed dashboard commands are not invoked by our fixed -N/-R commands.
++    require(stat.S_ISREG(path.lstat().st_mode) and bool(path.stat().st_mode & 0o444),
++            'unreadable/nonregular Dart configuration')
++    require(path.stat().st_size <= 1024*1024, 'oversized Dart configuration')
++    raw = path.read_bytes()
++    values = {}
++    for line in raw.decode('utf-8', errors='strict').splitlines():
++        if not line.strip() or line.lstrip().startswith('#'):
++            continue
++        require(re.fullmatch(r'[A-Za-z][A-Za-z0-9]*: [^\x00\r\n]*', line) is not None,
++                'malformed Dart configuration')
++        key, value = line.split(': ', 1)
++        require(key not in values, 'duplicate Dart setting')
++        values[key] = value
++    expected = policy['dart_defaults']
++    require(set(values) == set(expected), 'unknown/missing Dart setting')
++    for key, value in values.items():
++        if key in policy['dart_inert_metadata']:
++            # These values are output-only environment labels, never commands.
++            require(not any(c in value for c in [';', '$', '\\', '"']), 'ambiguous Dart label')
++        elif key in ['ConfigureCommand', 'MakeCommand']:
++            # Only an absolute cmake executable and the exact reviewed arguments.
++            pattern = (r'"/[^";\s]+/cmake" "' + re.escape(str(ROOT.resolve())) + r'"'
++                       if key == 'ConfigureCommand' else
++                       r'/[^";\s]+/cmake --build \. --config "\$\{CTEST_CONFIGURATION_TYPE\}"')
++            require(re.fullmatch(pattern, value) is not None, 'unreviewed Dart command: ' + key)
++        elif key == 'DefaultCTestConfigurationType':
++            require(value in ['Release', 'Debug'], 'unreviewed build configuration')
++        else:
++            require(value == expand(expected[key], build), 'modified Dart setting: ' + key)
++    return hashlib.sha256(raw).hexdigest()
++
++
++def validate_build_tree(build_dir, manifest, expected_command):
++    """Return a fingerprint only after all reachable CTest metadata is classified.
++
++    The project registers all tests at the root. Reject nested test files and all
++    includes/subdirs instead of attempting to evaluate arbitrary CMake programs.
++    Scan the whole tree for directory hooks, including unreachable nested hooks.
++    """
++    build = Path(build_dir).absolute()
++    require(build == build.resolve() and build.is_dir(), 'missing/aliased build directory')
++    for component in [build, *build.parents]:
++        require(not component.is_symlink(), 'symlinked build directory')
++    require(not any(k.startswith('CTEST_') for k in os.environ), 'unreviewed CTEST environment override')
++    policy = manifest.get('build_metadata')
++    require(isinstance(policy, dict) and policy.get('policy') == 'flat_literal_ctest_v1',
++            'missing reviewed build-metadata policy')
++    files = {}
++    def onerror(error):
++        raise ValueError('unreadable build tree: ' + str(error)) from error
++    for directory, dirs, names in os.walk(build, followlinks=False, onerror=onerror):
++        parent = Path(directory)
++        require(bool(parent.stat().st_mode & 0o444) and bool(parent.stat().st_mode & 0o111),
++                'unreadable build directory')
++        for name in dirs + names:
++            path = parent/name
++            require(not path.is_symlink(), 'unreviewed build symlink: ' + str(path))
++            require(name not in HOOK_NAMES and not name.endswith('.ctest'),
++                    'unreviewed CTest hook/configuration: ' + str(path))
++            if name in ['CTestTestfile.cmake', 'DartConfiguration.tcl']:
++                require(parent == build and name in names, 'unreviewed nested CTest metadata: ' + str(path))
++    testfile = build/'CTestTestfile.cmake'
++    text, digest = read_regular(testfile)
++    files['CTestTestfile.cmake'] = digest
++    declarations, properties = {}, {}
++    for command, args in statements(text):
++        require(bool(args), 'empty CTest declaration')
++        name = args[0]
++        require(name in manifest['tests'], 'unreviewed CTest test name')
++        if command == 'add_test':
++            require(name not in declarations and name not in properties, 'duplicate/out-of-order CTest declaration')
++            require([str(Path(a).resolve()) for a in args[1:]] == expected_command(manifest['tests'][name]['command'], build),
++                    'unreviewed generated command: ' + name)
++            declarations[name] = args[1:]
++        else:
++            require(name in declarations and name not in properties and len(args) >= 4 and args[1] == 'PROPERTIES'
++                    and len(args) % 2 == 0, 'malformed/duplicate CTest properties')
++            pairs = dict(zip(args[2::2], args[3::2]))
++            require(len(pairs) == (len(args)-2)//2, 'duplicate CTest property')
++            expected = policy['test_properties'].get(name)
++            require(isinstance(expected, dict) and pairs == {k: expand(v, build) for k,v in expected.items()},
++                    'unreviewed generated properties/hooks/fixtures: ' + name)
++            properties[name] = pairs
++    names = set(declarations)
++    cpu = set(manifest['cpu_build_tests']); gpu = set(manifest['cuda_additional_tests'])
++    require(names in [cpu, cpu | gpu] and set(properties) == names, 'incomplete/unreviewed generated registry')
++    dart = build/'DartConfiguration.tcl'
++    if dart.exists():
++        files[dart.name] = validate_dart(dart, build, policy)
++    return dict(policy=policy['policy'], build_dir=str(build), files_sha256=files,
++                test_names=sorted(names), commands=declarations, properties=properties)
+--- before/scripts/non_timing_tests.py
++++ after/scripts/non_timing_tests.py
+@@ -9,6 +9,7 @@
+ 
+ from cpu_gpu_protocol import ROOT, dump_new, require, sha, source_manifest
+ from cpu_gpu_provenance import strict_json, validate_digest_map
++from ctest_build_guard import validate_build_tree
+ 
+ MANIFEST = ROOT / 'docs/NON_TIMING_TEST_SELECTION_v1.json'
+ SAFE_CLASSES = {'cpu_correctness', 'gpu_correctness'}
+@@ -66,8 +67,14 @@
+     return result
+ 
+ 
++def pre_discovery_gate(build_dir):
++    """Shared static gate; never invokes CTest or evaluates CMake code."""
++    manifest = load_manifest()
++    return manifest, validate_build_tree(build_dir, manifest, expected_command)
++
++
+ def select_tests(discovery, build_dir, allow_gpu=False):
+-    manifest = load_manifest()
++    manifest, guard = pre_discovery_gate(build_dir)
+     require(isinstance(discovery, dict) and discovery.get('kind') == 'ctestInfo' and
+             discovery.get('version') == {'major': 1, 'minor': 0} and isinstance(discovery.get('tests'), list),
+             'invalid CTest JSON discovery')
+@@ -75,12 +82,18 @@
+     require(all(isinstance(n, str) for n in names) and len(set(names)) == len(names), 'duplicate/malformed discovered tests')
+     expected_cpu = set(manifest['cpu_build_tests']); expected_gpu = set(manifest['cuda_additional_tests'])
+     require(set(names) in [expected_cpu, expected_cpu | expected_gpu], 'unknown/missing/unclassified discovered tests')
++    require(set(names) == set(guard['test_names']), 'discovery differs from guarded registry coverage')
+     if allow_gpu:
+         require(set(names) == expected_cpu | expected_gpu, 'GPU correctness requested from non-CUDA build')
+     build_dir = Path(build_dir).resolve()
+     selected, excluded = [], []
+     for test in tests:
+         name = test['name']; entry = manifest['tests'][name]; classification = entry['classification']
++        command = test.get('command')
++        require(isinstance(command, list) and all(isinstance(a, str) for a in command) and
++                [str(Path(a).resolve()) for a in command] ==
++                [str(Path(a).resolve()) for a in guard['commands'][name]],
++                'discovery differs from guarded registry: ' + name)
+         if classification == 'timing' or (classification == 'gpu_correctness' and not allow_gpu):
+             excluded.append(dict(name=name, classification=classification, reason=entry['reason']))
+             continue
+@@ -95,6 +108,17 @@
+         properties = test.get('properties', [])
+         require(isinstance(properties, list) and all(isinstance(p, dict) and p.get('name') in SAFE_PROPERTIES
+                 for p in properties), 'unsafe/unreviewed CTest properties: ' + name)
++        require(len({p['name'] for p in properties}) == len(properties), 'duplicate discovered property: ' + name)
++        expected_properties = guard['properties'][name]
++        for prop in properties:
++            key, value = prop['name'], prop.get('value')
++            if key == 'WORKING_DIRECTORY':
++                require(value == str(build_dir), 'unreviewed discovery working directory: ' + name)
++            elif key in ['TIMEOUT', 'SKIP_RETURN_CODE']:
++                require(key in expected_properties and value == int(expected_properties[key]),
++                        'unreviewed discovery numeric property: ' + name)
++            else:
++                raise ValueError('unreviewed discovered property: ' + key)
+         selected.append(name)
+     require(bool(selected), 'empty non-timing selection')
+     expression = '^(' + '|'.join(re.escape(n) for n in sorted(selected)) + ')$'
+@@ -102,16 +126,24 @@
+     return dict(schema_version=1, policy=manifest['policy'], manifest_sha256=sha(MANIFEST),
+                 allow_gpu_correctness=allow_gpu, selected=sorted(selected), excluded=excluded,
+                 discovered_count=len(tests), selected_count=len(selected), ctest_argv=argv,
++                build_metadata=guard,
+                 tests_executed=False, full_protocol_prerequisites=False)
+ 
+ 
+ def selected_ctest(call, output, name, build_dir, allow_gpu=False, prefix=None):
+     """Discover and save the exact safe selection before the caller executes it."""
++    require(list(prefix or []) in [[],
++        ['env', '-u', 'ASAN_OPTIONS', '-u', 'LSAN_OPTIONS', 'UBSAN_OPTIONS=halt_on_error=1'],
++        ['env', 'ASAN_OPTIONS=detect_leaks=0', 'UBSAN_OPTIONS=halt_on_error=1']], 'unreviewed CTest wrapper')
++    _, guarded = pre_discovery_gate(build_dir)
+     discovery = call(name + '_discovery', ['ctest', '--test-dir', str(build_dir), '-N', '--show-only=json-v1'], 60)
++    require(discovery.get('exit_code', 0) == 0, 'CTest discovery failed')
+     plan = select_tests(strict_json(discovery['stdout']), build_dir, allow_gpu)
++    require(plan['build_metadata'] == guarded, 'build metadata changed during discovery')
+     dump_new(output / (name + '_selection.json'), plan)
+-    # Recheck reviewed source at the execution boundary. Unknown fixtures fail above.
+-    load_manifest()
++    # Repeat source AND generated-metadata checks at the execution boundary.
++    _, final_guard = pre_discovery_gate(build_dir)
++    require(final_guard == guarded, 'build metadata changed before execution')
+     result = call(name, list(prefix or []) + plan['ctest_argv'], 900)
+     require(re.search(r'0 tests failed out of ' + str(plan['selected_count']) + r'(?:\s|$)', result['stdout']) and
+             '***Skipped' not in result['stdout'], 'non-timing correctness coverage failed/skipped')
+@@ -126,6 +158,7 @@
+     parser.add_argument('--output', type=Path)
+     args = parser.parse_args()
+     try:
++        _, guarded = pre_discovery_gate(args.build_dir)
+         if args.discovery_json:
+             discovery = strict_json(args.discovery_json.read_text())
+         else:
+@@ -133,6 +166,7 @@
+                                    capture_output=True, text=True, check=True, timeout=60)
+             discovery = strict_json(child.stdout)
+         plan = select_tests(discovery, args.build_dir, args.allow_gpu_correctness)
++        require(plan['build_metadata'] == guarded, 'build metadata changed during discovery')
+         if args.output:
+             dump_new(args.output, plan)
+         print(json.dumps(plan, indent=2, sort_keys=True))
+--- before/tests/ctest_fixture.py
++++ after/tests/ctest_fixture.py
+@@ -0,0 +1,26 @@
++"""Write inert test metadata. Never invokes CMake, CTest or a test executable."""
++import json
++from pathlib import Path
++
++import non_timing_tests as selector
++
++
++def write_fixture(build, gpu=False):
++    build = Path(build)
++    build.mkdir(parents=True, exist_ok=True)
++    manifest = selector.load_manifest()
++    names = manifest['cpu_build_tests'] + (manifest['cuda_additional_tests'] if gpu else [])
++    declarations, tests = [], []
++    for name in names:
++        command = selector.expected_command(manifest['tests'][name]['command'], build)
++        properties = {k:v.replace('@source', str(selector.ROOT.resolve())).replace('@build', str(build))
++                      for k,v in manifest['build_metadata']['test_properties'][name].items()}
++        declarations.append('add_test(' + name + ' ' + ' '.join(json.dumps(a) for a in command) + ')')
++        declarations.append('set_tests_properties(' + name + ' PROPERTIES ' +
++                            ' '.join(k+' '+json.dumps(v) for k,v in properties.items()) + ')')
++        discovered = [dict(name=k, value=int(v) if k in ['TIMEOUT','SKIP_RETURN_CODE'] else v.split(';'))
++                      for k,v in properties.items() if k != '_BACKTRACE_TRIPLES']
++        discovered.append(dict(name='WORKING_DIRECTORY', value=str(build)))
++        tests.append(dict(name=name, command=command, properties=discovered))
++    (build/'CTestTestfile.cmake').write_text('\n'.join(declarations)+'\n')
++    return dict(kind='ctestInfo', version=dict(major=1, minor=0), tests=tests)
+--- before/tests/test_ctest_build_guard.py
++++ after/tests/test_ctest_build_guard.py
+@@ -0,0 +1,250 @@
++#!/usr/bin/env python3
++"""INERT fixtures only: all real subprocess entry points are blocked in setUp.
++
++No binary is created or executed. The two runner callbacks below only return
++literal JSON/text. Even the CLI's subprocess path is replaced by a Python fake.
++"""
++import contextlib
++import copy
++import io
++import json
++import os
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from unittest import mock
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT/'scripts'))
++import non_timing_tests as selector
++import ctest_build_guard as guard
++from ctest_fixture import write_fixture
++
++EXPECTED = ['baselines','cli','comparisons','cpu_gpu_comparison_framework',
++    'cuda_benchmark_analysis','cuda_preflight','cuda_sort_handoff','datasets',
++    'environment_manifest','memory','memory_unsupported','mergesort','metrics_cli',
++    'pdqsort','quicksort','radixsort','searching','structures','timsort']
++
++
++class BuildGuardTests(unittest.TestCase):
++    def setUp(self):
++        self.stack = contextlib.ExitStack(); self.addCleanup(self.stack.close)
++        for entry in ['run','Popen','call','check_call','check_output']:
++            self.stack.enter_context(mock.patch('subprocess.'+entry,
++                side_effect=AssertionError('real subprocess forbidden')))
++        self.stack.enter_context(mock.patch('os.system', side_effect=AssertionError('shell forbidden')))
++        self.stack.enter_context(mock.patch.dict(os.environ, {}, clear=True))
++        self.temp = self.stack.enter_context(tempfile.TemporaryDirectory())
++        self.build = Path(self.temp)/'build'; self.output = Path(self.temp)/'evidence'; self.output.mkdir()
++        self.discovery = write_fixture(self.build)
++        self.file = self.build/'CTestTestfile.cmake'
++        self.original = self.file.read_text(); self.calls = []
++
++    def fake(self, name, argv, timeout):
++        self.calls.append((name, argv))
++        if name.endswith('_discovery'):
++            return dict(stdout=json.dumps(self.discovery), exit_code=0)
++        return dict(stdout='100% tests passed, 0 tests failed out of 19\n', exit_code=0)
++
++    def assert_rejected_before_discovery(self):
++        with self.assertRaises((ValueError, OSError)):
++            selector.selected_ctest(self.fake, self.output, 'inert', self.build)
++        self.assertEqual(self.calls, [])
++
++    def test_clean_reviewed_fixture_preserves_exact_19_plan(self):
++        plan = selector.select_tests(self.discovery, self.build)
++        self.assertEqual(plan['selected'], EXPECTED)
++        self.assertNotIn('parallel_mergesort', plan['selected'])
++        self.assertNotIn('comparison_engine', plan['selected'])
++        self.assertFalse(plan['tests_executed']); self.assertEqual(self.calls, [])
++
++    def test_clean_fixture_runner_callbacks_are_only_python_fakes(self):
++        selector.selected_ctest(self.fake, self.output, 'inert', self.build)
++        self.assertEqual([x[0] for x in self.calls], ['inert_discovery','inert'])
++        self.assertEqual(json.loads((self.output/'inert_selection.json').read_text())['selected'], EXPECTED)
++
++    def test_custom_pre_and_post_hooks_and_ctest_variant_fail_before_discovery(self):
++        for filename in ['CTestCustom.cmake','CTestCustom.ctest','CTestConfig.cmake']:
++            for value in ['', '# inert\n', 'set(CTEST_CUSTOM_PRE_TEST "/never/executed")\n',
++                          'set(CTEST_CUSTOM_POST_TEST "/never/executed")\n']:
++                with self.subTest(filename=filename, value=value):
++                    p=self.build/filename; p.write_text(value)
++                    self.assert_rejected_before_discovery(); p.unlink()
++
++    def test_unreviewed_include_rejected_without_reading_or_running_included_code(self):
++        included=self.build/'inert.cmake';included.write_text('# inert included metadata\n')
++        self.file.write_text(self.original+'include("'+str(included)+'")\n')
++        self.assert_rejected_before_discovery()
++
++    def test_exact_prior_review_inert_hook_fixture_is_rejected_before_discovery(self):
++        previous=ROOT/'results/raw/cpu_gpu_repair_review_20261010T185659333607Z/UNEXECUTED_MATCHING_CTEST_METADATA'
++        for name in ['CTestTestfile.cmake','CTestCustom.cmake','unreviewed.cmake']:
++            (self.build/name).write_text((previous/name).read_text().replace(str(previous),str(self.build)))
++        self.assert_rejected_before_discovery()
++
++    def test_subdirs_nested_unreviewed_file_fails_closed(self):
++        nested=self.build/'nested';nested.mkdir()
++        (nested/'CTestTestfile.cmake').write_text('include("inert.cmake")\n')
++        (nested/'inert.cmake').write_text('# inert, never interpreted\n')
++        self.file.write_text(self.original+'subdirs("nested")\n')
++        self.assert_rejected_before_discovery()
++
++    def test_unreferenced_nested_metadata_and_hooks_also_rejected(self):
++        nested=self.build/'nested';nested.mkdir()
++        for filename in ['CTestTestfile.cmake','CTestCustom.cmake','DartConfiguration.tcl']:
++            with self.subTest(filename=filename):
++                p=nested/filename;p.write_text('# inert\n');self.assert_rejected_before_discovery();p.unlink()
++
++    def test_modified_previously_reviewed_command_rejected(self):
++        self.file.write_text(self.original.replace('/test_datasets"','/test_parallel_mergesort"'))
++        self.assert_rejected_before_discovery()
++
++    def test_modified_reviewed_properties_and_backtrace_rejected(self):
++        for text in [self.original.replace('PROPERTIES ', 'PROPERTIES FIXTURES_REQUIRED "timing" ',1),
++                     self.original.replace(';86;add_test;', ';999;add_test;',1),
++                     self.original.replace('PROPERTIES ', 'PROPERTIES DEPENDS "parallel_mergesort" ',1)]:
++            with self.subTest(text=text[:100]):
++                self.file.write_text(text); self.assert_rejected_before_discovery()
++
++    def test_unreadable_file_rejected_even_under_privileged_test_user(self):
++        original=Path.read_bytes
++        def unreadable(path):
++            if path==self.file:raise PermissionError('inert unreadable fixture')
++            return original(path)
++        with mock.patch.object(Path,'read_bytes',unreadable):
++            self.assert_rejected_before_discovery()
++
++    def test_missing_file_and_directory_rejected(self):
++        self.file.unlink();self.assert_rejected_before_discovery()
++        with self.assertRaises(ValueError):selector.pre_discovery_gate(self.build/'absent')
++
++    def test_malformed_ambiguous_and_control_flow_are_rejected(self):
++        for line in ['include("unterminated)', 'execute_process(COMMAND "/never/executed")',
++                     'if(TRUE)', 'subdirs(../outside)', 'add_test(datasets "${VARIABLE}")',
++                     'add_test(datasets "$<TARGET_FILE:timing>")',
++                     'add_test(datasets "escaped\\value")', 'add_test(datasets "a""b")',
++                     '#[[\nunknown_command()\n]]', 'add_test(datasets "a")\x00']:
++            with self.subTest(line=line):
++                self.file.write_text(self.original+line+'\n');self.assert_rejected_before_discovery()
++        self.file.write_bytes(b'\xff')
++        self.assert_rejected_before_discovery()
++
++    def test_duplicates_and_missing_declarations_rejected(self):
++        for text in [self.original+self.original.splitlines()[0]+'\n',
++                     '\n'.join(self.original.splitlines()[2:])]:
++            with self.subTest(text=text[:100]):
++                self.file.write_text(text);self.assert_rejected_before_discovery()
++
++    def test_symlinked_metadata_and_build_rejected(self):
++        real=self.build/'inert.txt';self.file.rename(real);self.file.symlink_to(real)
++        self.assert_rejected_before_discovery()
++        alias=Path(self.temp)/'alias';alias.symlink_to(self.build, target_is_directory=True)
++        with self.assertRaises(ValueError):selector.pre_discovery_gate(alias)
++
++    def test_ctest_environment_override_and_unreviewed_wrapper_rejected(self):
++        with mock.patch.dict(os.environ, {'CTEST_TEST_ARGS':'--unreviewed'}):
++            self.assert_rejected_before_discovery()
++        with self.assertRaisesRegex(ValueError,'wrapper'):
++            selector.selected_ctest(self.fake,self.output,'inert',self.build,prefix=['unreviewed-wrapper'])
++        self.assertEqual(self.calls, [])
++
++    def test_metadata_modified_during_fake_discovery_never_reaches_execution(self):
++        def discovery(name, argv, timeout):
++            result=self.fake(name,argv,timeout)
++            self.file.write_text(self.original+'# modified reviewed file bytes\n')
++            return result
++        with self.assertRaisesRegex(ValueError,'changed during discovery'):
++            selector.selected_ctest(discovery,self.output,'inert',self.build)
++        self.assertEqual([n for n,_ in self.calls], ['inert_discovery'])
++
++    def test_hook_added_during_fake_discovery_never_reaches_execution(self):
++        def discovery(name, argv, timeout):
++            result=self.fake(name,argv,timeout);(self.build/'CTestCustom.cmake').write_text('# inert\n');return result
++        with self.assertRaisesRegex(ValueError,'hook/configuration'):
++            selector.selected_ctest(discovery,self.output,'inert',self.build)
++        self.assertEqual([n for n,_ in self.calls], ['inert_discovery'])
++
++    def test_final_boundary_rechecks_build_metadata(self):
++        original=selector.dump_new
++        def save(path, plan):
++            original(path,plan);self.file.write_text(self.original+'# changed after saving plan\n')
++        with mock.patch.object(selector,'dump_new',side_effect=save), self.assertRaisesRegex(ValueError,'before execution'):
++            selector.selected_ctest(self.fake,self.output,'inert',self.build)
++        self.assertEqual([n for n,_ in self.calls], ['inert_discovery'])
++
++    def test_source_manifest_mismatch_rejected_before_discovery(self):
++        with mock.patch.object(selector,'source_manifest',return_value={}):self.assert_rejected_before_discovery()
++
++    def test_cli_default_and_retained_json_reject_hooks_before_subprocess(self):
++        (self.build/'CTestCustom.cmake').write_text('# inert hook\n')
++        retained=Path(self.temp)/'discovery.json';retained.write_text(json.dumps(self.discovery))
++        for extra in [[], ['--discovery-json', str(retained)]]:
++            with self.subTest(extra=extra),mock.patch.object(sys,'argv',['selector','--build-dir',str(self.build)]+extra),\
++                 contextlib.redirect_stderr(io.StringIO()):
++                self.assertEqual(selector.main(),1)
++        self.assertEqual(self.calls, [])
++
++    def test_cli_clean_retained_json_never_invokes_subprocess(self):
++        retained=Path(self.temp)/'discovery.json';retained.write_text(json.dumps(self.discovery))
++        with mock.patch.object(sys,'argv',['selector','--build-dir',str(self.build),'--discovery-json',str(retained)]),\
++             contextlib.redirect_stdout(io.StringIO()) as stdout:
++            self.assertEqual(selector.main(),0)
++        self.assertEqual(json.loads(stdout.getvalue())['selected'],EXPECTED)
++
++    def test_cli_clean_default_uses_only_explicit_fake_discovery(self):
++        fake=mock.Mock(return_value=type('Result',(),{'stdout':json.dumps(self.discovery)})())
++        with mock.patch.object(sys,'argv',['selector','--build-dir',str(self.build)]),\
++             mock.patch.object(selector.subprocess,'run',fake),contextlib.redirect_stdout(io.StringIO()):
++            self.assertEqual(selector.main(),0)
++        fake.assert_called_once();self.assertIn('-N',fake.call_args.args[0])
++
++    def test_gpu_metadata_fixture_still_requires_opt_in_never_selects_diagnostics(self):
++        discovered=write_fixture(self.build,gpu=True)
++        plan=selector.select_tests(discovered,self.build)
++        self.assertEqual(plan['selected'],EXPECTED)
++        plan=selector.select_tests(discovered,self.build,allow_gpu=True)
++        self.assertEqual(plan['selected_count'],21)
++        self.assertNotIn('cuda_benchmark_gpu_framework',plan['selected'])
++
++    def test_reviewed_cuda_backtrace_matches_retained_generator_stack_shape(self):
++        policy=selector.load_manifest()['build_metadata']['test_properties']
++        include_line=next(i+1 for i,line in enumerate((ROOT/'CMakeLists.txt').read_text().splitlines())
++                          if 'include(cmake/cuda.cmake)' in line)
++        for name in ['cuda_runtime_smoke','cuda_sorting','cuda_benchmark_gpu_framework']:
++            number=next(i+1 for i,line in enumerate((ROOT/'cmake/cuda.cmake').read_text().splitlines())
++                        if 'add_test(NAME '+name+' ' in line)
++            expected=f'@source/cmake/cuda.cmake;{number};add_test;@source/cmake/cuda.cmake;0;;@source/CMakeLists.txt;{include_line};include;@source/CMakeLists.txt;0;'
++            self.assertEqual(policy[name]['_BACKTRACE_TRIPLES'],expected)
++
++    def test_reviewed_bracket_quoted_generator_format(self):
++        import re
++        self.file.write_text(re.sub(r'"([^"\n]*)"',r'[=[\1]=]',self.original))
++        self.assertEqual(selector.select_tests(self.discovery,self.build)['selected'],EXPECTED)
++
++    def test_dart_unknown_commands_duplicate_and_malformed_records_rejected(self):
++        dart=self.build/'DartConfiguration.tcl'
++        for value in ['CTEST_CUSTOM_PRE_TEST: /never/executed\n', 'garbage', 'TimeOut: 1\nTimeOut: 2\n']:
++            with self.subTest(value=value):dart.write_text(value);self.assert_rejected_before_discovery()
++
++    def test_reviewed_dart_metadata_and_modified_command(self):
++        policy=selector.load_manifest()['build_metadata'];values=policy['dart_defaults']
++        text=''.join(k+': '+v.replace('@source',str(ROOT)).replace('@build',str(self.build))+'\n' for k,v in values.items())
++        dart=self.build/'DartConfiguration.tcl';dart.write_text(text)
++        self.assertEqual(selector.select_tests(self.discovery,self.build)['selected'],EXPECTED)
++        dart.write_text(text.replace('MakeCommand: ', 'MakeCommand: /unreviewed-command '))
++        self.assert_rejected_before_discovery()
++
++    def test_discovery_command_properties_and_registry_identity_must_match_guard(self):
++        for mutation in ['command','working_directory','duplicate_property','registry']:
++            with self.subTest(mutation=mutation):
++                data=copy.deepcopy(self.discovery);test=next(t for t in data['tests'] if t['name']=='datasets')
++                if mutation=='command':test['command']=['/never/executed']
++                if mutation=='working_directory':test['properties'][0]['value']='/unreviewed'
++                if mutation=='duplicate_property':test['properties']*=2
++                if mutation=='registry':data['tests'].pop()
++                with self.assertRaises(ValueError):selector.select_tests(data,self.build)
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- before/tests/test_cpu_gpu_safety.py
++++ after/tests/test_cpu_gpu_safety.py
+@@ -16,14 +16,11 @@
+ import cpu_gpu_provenance as provenance
+ import non_timing_tests as selector
+ from cpu_gpu_protocol import load_protocol, verify_source_extension
++from ctest_fixture import write_fixture
+ 
+ 
+ def discovery(build, gpu=False):
+-    manifest = selector.load_manifest()
+-    names = manifest['cpu_build_tests'] + (manifest['cuda_additional_tests'] if gpu else [])
+-    return dict(kind='ctestInfo', version=dict(major=1, minor=0), tests=[dict(
+-        name=n, command=selector.expected_command(manifest['tests'][n]['command'], build), properties=[])
+-        for n in names])
++    return write_fixture(build, gpu)
+ 
+ 
+ class ProvenanceTests(unittest.TestCase):
+@@ -122,7 +119,9 @@
+ 
+ class SelectorTests(unittest.TestCase):
+     def setUp(self):
+-        self.build = ROOT/'build/UNEXECUTED_SAFETY_FIXTURE'
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.build = Path(temporary.name)/'UNEXECUTED_SAFETY_FIXTURE'
+         self.discovered = discovery(self.build)
+ 
+     def test_exact_cpu_list_excludes_all_timing_tests_and_known_32768_case(self):
+--- before/tests/test_cpu_gpu_comparison.py
++++ after/tests/test_cpu_gpu_comparison.py
+@@ -448,18 +448,19 @@
+         include=checkout/'synthetic_headers';(include/'cub').mkdir(parents=True);(include/'cub/fake.cuh').write_text('synthetic')
+         def invoke(directory,name,argv,timeout):
+             calls.append(name);text=''
++            if name in ['cpu_release_configure','cpu_sanitize_configure','cuda_configure']:
++                from ctest_fixture import write_fixture
++                write_fixture(Path(argv[argv.index('-B')+1]), gpu=name=='cuda_configure')
+             if name.endswith('_discovery'):
+-                from non_timing_tests import load_manifest,expected_command
+-                manifest=load_manifest();gpu=name.startswith('cuda_')
+-                names=manifest['cpu_build_tests']+(manifest['cuda_additional_tests'] if gpu else [])
++                from ctest_fixture import write_fixture
++                gpu=name.startswith('cuda_')
+                 build=Path(argv[argv.index('--test-dir')+1])
+-                text=json.dumps(dict(kind='ctestInfo',version=dict(major=1,minor=0),tests=[
+-                    dict(name=n,command=expected_command(manifest['tests'][n]['command'],build),properties=[]) for n in names]))
++                text=json.dumps(write_fixture(build,gpu))
+             if name=='preflight':
+                 p=output/'preflight';p.mkdir();dump_new(p/'report.json',dict(classification=dict(device0_kernel_verified=True,state='operational'),
+                     runtime_probe=dict(devices=[dict(ordinal=0,name='Tesla T4',compute_major=7,compute_minor=5)])))
+             if name=='cuda_configure':
+-                gpu=checkout/'build/validation/gpu-release';gpu.mkdir()
++                gpu=checkout/'build/validation/gpu-release';gpu.mkdir(exist_ok=True)
+                 (gpu/'CMakeCache.txt').write_text('MAB_CUB_INCLUDE_DIR:PATH='+str(include))
+                 for executable in ['cpu_gpu_comparison','comparison_input']:(gpu/executable).write_text('synthetic binary, never executed')
+             if name in ['cpu_release_ctest','cpu_sanitize_ctest']:text='0 tests failed out of 19'
+--- before/docs/NON_TIMING_TEST_SELECTION_v1.json
++++ after/docs/NON_TIMING_TEST_SELECTION_v1.json
+@@ -1,4 +1,172 @@
+ {
++  "build_metadata": {
++    "dart_defaults": {
++      "BuildDirectory": "@build",
++      "BuildName": "Linux-c++",
++      "CTestSubmitRetryCount": "3",
++      "CTestSubmitRetryDelay": "5",
++      "CVSCommand": "",
++      "CVSUpdateOptions": "",
++      "Compiler": "/usr/bin/c++",
++      "CompilerVersion": "13.3.0",
++      "ConfigureCommand": "\"/usr/bin/cmake\" \"@source\"",
++      "CostDataFile": "",
++      "CoverageCommand": "/usr/bin/gcov",
++      "CoverageExtraFlags": "-l",
++      "CudaSanitizerCommand": "",
++      "CudaSanitizerCommandOptions": "",
++      "CurlOptions": "",
++      "DefaultCTestConfigurationType": "Release",
++      "DrMemoryCommand": "",
++      "DrMemoryCommandOptions": "",
++      "GITCommand": "",
++      "GITInitSubmodules": "",
++      "GITUpdateCustom": "",
++      "GITUpdateOptions": "",
++      "LabelsForSubprojects": "",
++      "MakeCommand": "/usr/bin/cmake --build . --config \"${CTEST_CONFIGURATION_TYPE}\"",
++      "MemoryCheckCommand": "MEMORYCHECK_COMMAND-NOTFOUND",
++      "MemoryCheckCommandOptions": "",
++      "MemoryCheckSanitizerOptions": "",
++      "MemoryCheckSuppressionFile": "",
++      "MemoryCheckType": "",
++      "NightlyStartTime": "00:00:00 EDT",
++      "P4Client": "",
++      "P4Command": "",
++      "P4Options": "",
++      "P4UpdateCustom": "",
++      "P4UpdateOptions": "",
++      "PurifyCommand": "",
++      "SVNCommand": "",
++      "SVNOptions": "",
++      "SVNUpdateOptions": "",
++      "Site": "pop-os",
++      "SourceDirectory": "@source",
++      "SubmitInactivityTimeout": "",
++      "SubmitURL": "http://",
++      "TestLoad": "",
++      "TimeOut": "1500",
++      "UpdateCommand": "",
++      "UpdateOptions": "",
++      "UpdateType": "",
++      "UpdateVersionOnly": "",
++      "UseLaunchers": "",
++      "ValgrindCommand": "",
++      "ValgrindCommandOptions": ""
++    },
++    "dart_inert_metadata": [
++      "Site",
++      "BuildName",
++      "Compiler",
++      "CompilerVersion"
++    ],
++    "policy": "flat_literal_ctest_v1",
++    "test_properties": {
++      "baselines": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;109;add_test;@source/CMakeLists.txt;0;"
++      },
++      "benchmark_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;156;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cli": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;120;add_test;@source/CMakeLists.txt;0;"
++      },
++      "comparison_engine": {
++        "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=2;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE;OMP_PROC_BIND=FALSE",
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;222;add_test;@source/CMakeLists.txt;0;"
++      },
++      "comparisons": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;140;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cpu_gpu_comparison_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;224;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_benchmark_analysis": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;114;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_benchmark_gpu_framework": {
++        "TIMEOUT": "180",
++        "_BACKTRACE_TRIPLES": "@source/cmake/cuda.cmake;78;add_test;@source/cmake/cuda.cmake;0;;@source/CMakeLists.txt;162;include;@source/CMakeLists.txt;0;"
++      },
++      "cuda_preflight": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;112;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_runtime_smoke": {
++        "SKIP_RETURN_CODE": "77",
++        "TIMEOUT": "60",
++        "_BACKTRACE_TRIPLES": "@source/cmake/cuda.cmake;23;add_test;@source/cmake/cuda.cmake;0;;@source/CMakeLists.txt;162;include;@source/CMakeLists.txt;0;"
++      },
++      "cuda_sort_handoff": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;115;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_sorting": {
++        "SKIP_RETURN_CODE": "77",
++        "TIMEOUT": "240",
++        "_BACKTRACE_TRIPLES": "@source/cmake/cuda.cmake;83;add_test;@source/cmake/cuda.cmake;0;;@source/CMakeLists.txt;162;include;@source/CMakeLists.txt;0;"
++      },
++      "datasets": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;119;add_test;@source/CMakeLists.txt;0;"
++      },
++      "environment_manifest": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;110;add_test;@source/CMakeLists.txt;0;"
++      },
++      "experiment_pipeline": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;86;add_test;@source/CMakeLists.txt;0;"
++      },
++      "memory": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;143;add_test;@source/CMakeLists.txt;0;"
++      },
++      "memory_unsupported": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;149;add_test;@source/CMakeLists.txt;0;"
++      },
++      "mergesort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;134;add_test;@source/CMakeLists.txt;0;"
++      },
++      "metrics_cli": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;150;add_test;@source/CMakeLists.txt;0;"
++      },
++      "parallel_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;193;add_test;@source/CMakeLists.txt;0;"
++      },
++      "parallel_mergesort": {
++        "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=8;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE",
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;191;add_test;@source/CMakeLists.txt;0;"
++      },
++      "pdqsort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;128;add_test;@source/CMakeLists.txt;0;"
++      },
++      "quicksort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;125;add_test;@source/CMakeLists.txt;0;"
++      },
++      "radixsort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;137;add_test;@source/CMakeLists.txt;0;"
++      },
++      "search_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;104;add_test;@source/CMakeLists.txt;0;"
++      },
++      "search_timing": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;103;add_test;@source/CMakeLists.txt;0;"
++      },
++      "searching": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;100;add_test;@source/CMakeLists.txt;0;"
++      },
++      "structure_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;95;add_test;@source/CMakeLists.txt;0;"
++      },
++      "structure_timing": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;94;add_test;@source/CMakeLists.txt;0;"
++      },
++      "structures": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;91;add_test;@source/CMakeLists.txt;0;"
++      },
++      "timing": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;155;add_test;@source/CMakeLists.txt;0;"
++      },
++      "timsort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;131;add_test;@source/CMakeLists.txt;0;"
++      }
++    }
++  },
+   "cpu_build_tests": [
+     "experiment_pipeline",
+     "structures",
+@@ -37,7 +205,7 @@
+   ],
+   "evidence": "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z",
+   "policy": "non_timing_correctness_v1",
+-  "review_method": "No safety CTest labels exist. Reviewed source/call paths and exact command arguments; source changes require explicit re-review/reclassification.",
++  "review_method": "No safety CTest labels exist. Reviewed source/call paths and exact command arguments; source changes require explicit re-review/reclassification. Build metadata: literal flat registry commands/properties matched to protected CMake source; all hooks/includes/subdirs rejected before discovery. Build metadata: literal flat registry commands/properties matched to protected CMake source; all hooks/includes/subdirs rejected before discovery.",
+   "reviewed_source_sha256": {
+     "CMakeLists.txt": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
+     "cmake/benchmark_metadata.cmake": "11979058897acba1ccc54a5d52f54de5d6eb33d7303d9e436bfa175e82b3a50f",
+@@ -85,9 +253,10 @@
+     "scripts/capture_environment.py": "1d49b0ac22c91ddf8e904232d41525a482d37f2c812c28da012449625e645210",
+     "scripts/cpu_gpu_protocol.py": "1c11df990ebe642dfc40271fc0970d0051a9e5c883c2e2bd622cc698ac3d6ea4",
+     "scripts/cpu_gpu_provenance.py": "590735aacd70238c718e3943d7e8de01020ee948e05c0cc17fd6d8d263a11f3f",
++    "scripts/ctest_build_guard.py": "f95928cab03bc9886ef6ae68f3a3b8386d8a86f5ae3f411557eba88e821957c9",
+     "scripts/cuda_preflight.py": "6338c3ef5ad73c3c13eadc9d765a8480b4377e6b8da5909eabdca55ffed44cd8",
+     "scripts/experiment_model.py": "8848f50284dc86dbe77bf6f65025ba68bbf14ccbe6c4820650b0588506060c75",
+-    "scripts/non_timing_tests.py": "c6eb159729a44dd8d12da95e49882d3c66cb78f17484b8e3034f2c1d65fee01e",
++    "scripts/non_timing_tests.py": "99dd6b2fcc99aa81962a477313f13d178e2f6ae01de12794d9908d3b82d05396",
+     "scripts/plot_results.py": "a2f3a5063410f6be318806357a08cd4e5f3d71fc2a856306a9f7432536128f03",
+     "scripts/run_cpu_gpu_pilot.py": "44af462ec585480ffcacbcd62ada99cdc28576abbdbeccdaa5bb8317cd73ba8a",
+     "scripts/run_cpu_gpu_study.py": "f9b05de7a6cd84abfde5442ad782b1fcc44cee51ae91be36933b7f481e824dbd",
+@@ -136,14 +305,16 @@
+     "src/structures/btree.cpp": "0a033ae4bb2d22d8ba08211910da01a12815d713b7423e4d449ce1d562027677",
+     "src/structures/registry.cpp": "5f46245b9cb08c49ba4fbaa167c824d35713538052033b9c2d64c6ef11650610",
+     "src/structures/skip_list.cpp": "dc15fd493b1cf76289ffde424ee1c866e8eb1309c3db20aaf417b9f871366539",
++    "tests/ctest_fixture.py": "a53030aa3bd8f0b43415b37eec8c8df56f3ece0185e854a058ca88b012c4dd56",
+     "tests/fixtures/cpu_gpu_provenance_reproducer.py": "1588c1ce06ded80b91d9806673b883effb7c98b0ace8d1eadb5c04688072142c",
+     "tests/test_baselines.cpp": "6cc9b36024aba24f8b5054de19b1ade4fe559975afd55437fe85233999c95776",
+     "tests/test_benchmark.py": "334d7d94c4d60519638b02a61d062f1a6cc628835d327ffe8ecb7f5767a59938",
+     "tests/test_cli.py": "88774fd13fd8dcbc28de51c0f2d6a26a502393fd765ecd499064e03a9b703019",
+     "tests/test_comparison.cpp": "6559a39dae193c007551ff282d366bf4a8365e21c05148bd969ea14042cfc21a",
+     "tests/test_comparisons.cpp": "6373369f9fde8e58b0144b1df95a1d77df76e3cf4eaa0c4a875c43a28d13703e",
+-    "tests/test_cpu_gpu_comparison.py": "aabee54e413c5efba862880f0f4bff36614089b4fb6d6091b9eae235fc3968c4",
+-    "tests/test_cpu_gpu_safety.py": "832855c4ced18df51ea7f59beb3c888a7f9fbb4654c112717c65f5d6e65ea5dc",
++    "tests/test_cpu_gpu_comparison.py": "ca19c5ead3133d710e49b73dd556dec4d3a119e6c86b6d221927be667cd6e9d5",
++    "tests/test_cpu_gpu_safety.py": "bb56043276c73c4c303bd1f7dc225db5908d6a2d3e06f20494ec4aa589663183",
++    "tests/test_ctest_build_guard.py": "68aa92da813c0c5ad7770649f82d6ccbe51a37009f2d6eae05d1e3295ede1c4f",
+     "tests/test_cuda_benchmark.py": "caa772e61eef60b29adc0c64b02412c4828d4552699b1b5b4f88ad37e906c94e",
+     "tests/test_cuda_preflight.py": "cce76386413ec62c521176dbfd817e9b3513423b6dee641e7caf09214be8a6af",
+     "tests/test_cuda_sort_handoff.py": "ddc7901dc238cce4d36cb583650840a5661c92cf5892049dd09236c7d6762d42",
+--- before/docs/CTEST_BUILD_GUARD_v1.md
++++ after/docs/CTEST_BUILD_GUARD_v1.md
+@@ -0,0 +1,76 @@
++# CTest pre-discovery build guard v1
++
++This repairs the directory-hook finding in
++`results/raw/cpu_gpu_repair_review_20261010T185659333607Z/FINAL_AUDIT.md`.
++Study launch remains **NO-GO**. The next action is a separate independent review;
++this repair does not authorize discovery, prerequisites, resource probes or a study.
++
++## Trust and supported metadata
++
++`non_timing_tests.pre_discovery_gate` first verifies the reviewed complete source
++snapshot, then calls the static `ctest_build_guard.validate_build_tree`. Neither
++function executes CMake/CTest. `NON_TIMING_TEST_SELECTION_v1.json` records exact
++reviewed commands and generated properties, including backtraces tied to unchanged
++CMake sources. This is a reviewed repository policy, not a signed attestation or
++automatic trust-on-first-use enrollment. Only the explicit repair workflow renews
++the source snapshot; production code never renews it.
++
++The current project has a flat registry of 29 CPU or 32 CUDA-enabled tests. Only
++literal single-line `add_test` and `set_tests_properties` statements are supported,
++with ordinary quotes or `[=[...]=]` quotes. Every command, argument, name, property
++and backtrace must match policy, including excluded timing tests. Duplicates and
++missing declarations fail. Expressions, escapes, control flow, arbitrary commands,
++includes and `subdirs` are rejected rather than evaluated. No included CMake
++program or nested registry has been reviewed, so none is allowed.
++
++The whole build tree is inspected for `CTestCustom.cmake`, `CTestCustom.ctest`,
++`CTestConfig.cmake`, other `.ctest` files, nested CTest/Dart registries, symlinks
++and unreadable directories. These are rejected even if unreferenced or empty.
++Unreachable ordinary compiler `.cmake` files are not interpreted. Missing,
++nonregular, oversized, unreadable or unparseable metadata fails closed.
++
++When present, `DartConfiguration.tcl` must match the reviewed key/value schema.
++Source/build paths, command settings and functional defaults are checked. Four
++output-only labels and Release/Debug configuration may vary. Dashboard commands
++are limited to literal reviewed CMake arguments and never invoked by the fixed
++discovery/test commands. Arbitrary `CTEST_*` environment overrides and unreviewed
++wrappers are rejected. Only the existing two sanitizer `env` prefixes are allowed.
++
++## Entry points and boundary checks
++
++- `select_tests`, including supplied discovery JSON, gates the actual tree first.
++- The CLI gates before its discovery subprocess. `--discovery-json` avoids
++  discovery but cannot bypass build validation.
++- `selected_ctest` gates before discovery, checks returned registry/commands,
++  saves a plan, then repeats source/build validation before execution. Metadata
++  fingerprints must agree.
++- All four prerequisite-only call sites (Release, sanitizer, leak retry, CUDA
++  correctness) already use this helper. The legacy full-protocol branch runs
++  timing-framework tests intentionally and is outside this selection policy.
++
++The CPU plan is exactly: baselines, cli, comparisons,
++cpu_gpu_comparison_framework, cuda_benchmark_analysis, cuda_preflight,
++cuda_sort_handoff, datasets, environment_manifest, memory, memory_unsupported,
++mergesort, metrics_cli, pdqsort, quicksort, radixsort, searching, structures, timsort.
++`parallel_mergesort` and its N=32,768 timing path remain excluded. Explicit CUDA
++correctness opt-in adds two tests; GPU timing is always excluded.
++
++## Validation and limitations
++
++Evidence: `results/raw/ctest_hook_repair_20261010T223851377458Z/`. Tests use inert
++temporary files and Python fake callbacks, with real process launch blocked. The
++exact previously accepted hook fixture fails before any discovery callback.
++Coverage includes hooks/includes/nesting, malformed/changed/unreadable files,
++command/property/identity changes, both CLI paths and inter-boundary changes.
++No real discovery, CTest group, prerequisite validator, build, timing or GPU ran.
++
++The grammar is intentionally narrow. Different generator layouts/backtraces,
++multi-configuration trees or dashboard defaults require review and policy changes.
++CUDA stack shape was checked against retained metadata, not a fresh CUDA build.
++Fresh CPU/GPU execution is unvalidated by this repair.
++
++Use exclusively owned, quiescent build trees and trusted tools. Boundary rechecks
++cannot prevent an external concurrent writer changing files between validation
++and CTest opening them. This is not an OS sandbox or executable attestation.
++Fresh build/validation remains a separate decision. Correctness-only prerequisite
++output still has `study_eligible=false` and cannot satisfy the frozen study gate.

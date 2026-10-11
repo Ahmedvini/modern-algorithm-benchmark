@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/ctest_hook_repair_20261010T223851377458Z/offline_plan_proof.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "inert_metadata_only_real_process_launch_blocked",
+  "stderr": "",
+  "stdout": "{\n  \"actual_ctest_calls\": 0,\n  \"actual_gpu_execution\": false,\n  \"actual_test_execution\": false,\n  \"discovery_callback_count\": 0,\n  \"previous_fixture\": \"results/raw/cpu_gpu_repair_review_20261010T185659333607Z/UNEXECUTED_MATCHING_CTEST_METADATA\",\n  \"reason\": \"unreviewed CTest hook/configuration: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_repair_review_20261010T185659333607Z/UNEXECUTED_MATCHING_CTEST_METADATA/CTestCustom.cmake\",\n  \"rejected\": true,\n  \"selected\": [\n    \"baselines\",\n    \"cli\",\n    \"comparisons\",\n    \"cpu_gpu_comparison_framework\",\n    \"cuda_benchmark_analysis\",\n    \"cuda_preflight\",\n    \"cuda_sort_handoff\",\n    \"datasets\",\n    \"environment_manifest\",\n    \"memory\",\n    \"memory_unsupported\",\n    \"mergesort\",\n    \"metrics_cli\",\n    \"pdqsort\",\n    \"quicksort\",\n    \"radixsort\",\n    \"searching\",\n    \"structures\",\n    \"timsort\"\n  ]\n}\n",
+  "utc": "2026-10-10T22:53:02.424761+00:00"
+}

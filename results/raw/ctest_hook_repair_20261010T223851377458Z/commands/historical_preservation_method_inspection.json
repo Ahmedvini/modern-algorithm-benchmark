@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "rg",
+    "-n",
+    "-A",
+    "8",
+    "-B",
+    "5",
+    "production_headers|production =|production=",
+    "results/raw/cpu_gpu_repair_review_20261010T185659333607Z/verify_evidence_v2.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "read_only_hash_verifier_source",
+  "stderr": "",
+  "stdout": "39-assert sha('docs/CPU_GPU_DRIVER_REVIEW_v1.json') == 'b6a63a7e65827970d6b27e872e738052cd5faf94d88ee711dbccd5f77f90ef2a'\n40-assert review['frozen_cmake_sha256'] == matrix['source_at_freeze_sha256']['CMakeLists.txt']\n41-anchors = dict(matrix['source_at_freeze_sha256'])\n42-anchors['CMakeLists.txt'] = review['current_cmake_sha256']\n43-report['protected_anchors_existing_cmake_exception'] = verify(anchors)\n44:production = {p:h for p,h in before['current_source_sha256'].items()\n45-              if p.startswith(('src/','include/','third_party/')) or p == 'CMakeLists.txt'}\n46:report['production_headers_dependencies'] = verify(production)\n47-repair_actual = {str(p):sha(p) for p in REPAIR.rglob('*') if p.is_file()}\n48-assert {Path(p).resolve() for p in repair_actual} == {Path(p).resolve() for p in seal['evidence_sha256']} | {(REPAIR/'FINAL_INTEGRITY.json').resolve()}\n49-assert not set(repair_actual) & set(before['prior_results_sha256'])\n50-assert len(repair_actual) == 46\n51-start = read(BASE/'START_SNAPSHOT.json')\n52-assert set(start['prior_results_sha256']) == set(before['prior_results_sha256']) | set(repair_actual)\n53-report['additive_repair_evidence_files'] = len(repair_actual)\n54-report['results_at_review_start'] = start['prior_result_count']\n",
+  "utc": "2026-10-10T22:49:35.454215+00:00"
+}

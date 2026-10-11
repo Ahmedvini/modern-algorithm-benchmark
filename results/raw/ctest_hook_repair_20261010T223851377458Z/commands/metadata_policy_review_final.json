@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/ctest_hook_repair_20261010T223851377458Z/create_reviewed_policy.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "static_metadata_parse_and_policy_write_only",
+  "stderr": "",
+  "stdout": "Reviewed root registrations: 32 Dart keys: 52 no CTest invoked\n",
+  "utc": "2026-10-10T22:43:03.053770+00:00"
+}

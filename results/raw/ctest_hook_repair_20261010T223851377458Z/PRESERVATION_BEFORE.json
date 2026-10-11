@@ -1,0 +1,62 @@
+{
+  "cpu_gpu_repair_review_20261010T185659333607Z": {
+    "actual_files": 57,
+    "sealed_files_verified": 56
+  },
+  "cpu_gpu_safety_repair_20261010T140524185993Z": {
+    "actual_files": 46,
+    "sealed_files_verified": 45
+  },
+  "cub_pin": {
+    "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+    "cub_version": 300001,
+    "files": {
+      "LICENSE": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+        "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+      },
+      "cub_version.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+        "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+      },
+      "device_radix_sort.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+        "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+      }
+    },
+    "installed_toolkit_identity": "Colab CUDA 13.0.88: reviewed version and SortKeys headers match v3.0.1; full tree hashes recorded by validation runner",
+    "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
+    "local_modifications_to_upstream": "none",
+    "previous_reference": {
+      "commit": "e944297b0b51a8e9c0f1b30425370c31c1c0e0a0",
+      "cub_version": 300000,
+      "files": {
+        "LICENSE": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/LICENSE",
+          "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE"
+        },
+        "cub_version.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/version.cuh",
+          "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh"
+        },
+        "device_radix_sort.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/device/device_radix_sort.cuh",
+          "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh"
+        }
+      },
+      "reference_release": "v3.0.0"
+    },
+    "reference_release": "v3.0.1",
+    "upstream": "https://github.com/NVIDIA/cccl",
+    "vendored_algorithm_sources": false
+  },
+  "existing_build_metadata_verified": 21,
+  "freeze_assets_verified": 3,
+  "original_historical_files_verified": 11345,
+  "prior_result_files_verified": 11448,
+  "production_dependency_and_protected_files_verified": 21,
+  "protected_anchors_verified": 26
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/ctest_hook_repair_20261010T223851377458Z/file_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "ast_and_diff_capture_only",
+  "stderr": "",
+  "stdout": "ADDED scripts/ctest_build_guard.py\nMODIFIED scripts/non_timing_tests.py\nADDED tests/ctest_fixture.py\nADDED tests/test_ctest_build_guard.py\nMODIFIED tests/test_cpu_gpu_safety.py\nMODIFIED tests/test_cpu_gpu_comparison.py\nMODIFIED docs/NON_TIMING_TEST_SELECTION_v1.json\nMODIFIED README.md\nMODIFIED docs/ROADMAP.md\nMODIFIED docs/AUDIT.md\nADDED docs/CTEST_BUILD_GUARD_v1.md\n",
+  "utc": "2026-10-10T22:54:07.602136+00:00"
+}

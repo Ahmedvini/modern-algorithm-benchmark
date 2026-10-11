@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/ctest_hook_repair_20261010T223851377458Z/run_existing_inert_selection_tests.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "inspected_selector_class_only_process_launch_blocked",
+  "stderr": "test_bad_discovery_never_reaches_execution_callback (test_cpu_gpu_safety.SelectorTests.test_bad_discovery_never_reaches_execution_callback) ... ok\ntest_even_a_relabelled_known_timing_entry_point_is_forbidden (test_cpu_gpu_safety.SelectorTests.test_even_a_relabelled_known_timing_entry_point_is_forbidden) ... ok\ntest_exact_cpu_list_excludes_all_timing_tests_and_known_32768_case (test_cpu_gpu_safety.SelectorTests.test_exact_cpu_list_excludes_all_timing_tests_and_known_32768_case) ... ok\ntest_fixture_dependencies_environment_and_missing_commands_rejected (test_cpu_gpu_safety.SelectorTests.test_fixture_dependencies_environment_and_missing_commands_rejected) ... ok\ntest_gpu_correctness_requires_explicit_opt_in_and_never_includes_gpu_benchmark (test_cpu_gpu_safety.SelectorTests.test_gpu_correctness_requires_explicit_opt_in_and_never_includes_gpu_benchmark) ... ok\ntest_non_timing_prerequisites_cannot_authorize_a_study (test_cpu_gpu_safety.SelectorTests.test_non_timing_prerequisites_cannot_authorize_a_study) ... ok\ntest_safe_name_cannot_mask_timing_command_or_arguments (test_cpu_gpu_safety.SelectorTests.test_safe_name_cannot_mask_timing_command_or_arguments) ... ok\ntest_selection_is_saved_before_execution_callback (test_cpu_gpu_safety.SelectorTests.test_selection_is_saved_before_execution_callback) ... ok\ntest_source_snapshot_change_requires_reclassification (test_cpu_gpu_safety.SelectorTests.test_source_snapshot_change_requires_reclassification) ... ok\ntest_unclassified_manifest_entry_rejected (test_cpu_gpu_safety.SelectorTests.test_unclassified_manifest_entry_rejected) ... ok\ntest_unknown_missing_duplicate_and_malformed_discovery_fail_closed (test_cpu_gpu_safety.SelectorTests.test_unknown_missing_duplicate_and_malformed_discovery_fail_closed) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.642s\n\nOK\n",
+  "stdout": "",
+  "utc": "2026-10-10T22:46:58.224907+00:00"
+}

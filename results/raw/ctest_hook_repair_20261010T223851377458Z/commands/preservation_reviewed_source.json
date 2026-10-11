@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/ctest_hook_repair_20261010T223851377458Z/verify_preservation_v2.py",
+    "PRESERVATION_REVIEWED_SOURCE"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "file_hashes_and_historical_seals_only",
+  "stderr": "",
+  "stdout": "{\n  \"build_metadata_verified\": 21,\n  \"cpu_gpu_repair_review_20261010T185659333607Z\": {\n    \"actual_files\": 57,\n    \"sealed_files_verified\": 56\n  },\n  \"cpu_gpu_safety_repair_20261010T140524185993Z\": {\n    \"actual_files\": 46,\n    \"sealed_files_verified\": 45\n  },\n  \"cub_pin_sha256\": \"477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1\",\n  \"cub_version\": 300001,\n  \"freeze_manifest_verified_against_pinned_hash\": true,\n  \"frozen_assets_verified\": 3,\n  \"historical_differences\": [],\n  \"historical_files_verified\": 11345,\n  \"new_evidence_files_at_check\": 46,\n  \"prior_results_verified\": 11448,\n  \"production_adapter_sha256\": \"b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb\",\n  \"production_headers_dependencies_verified\": 80,\n  \"protected_anchors_verified\": 26,\n  \"results_at_check\": 11494\n}\n",
+  "utc": "2026-10-10T22:52:30.621312+00:00"
+}

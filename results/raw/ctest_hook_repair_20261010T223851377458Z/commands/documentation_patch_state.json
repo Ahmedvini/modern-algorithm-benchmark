@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path; p=Path(\"docs/CTEST_BUILD_GUARD_v1.md\"); print(\"guard document exists:\",p.exists()); print(Path(\"README.md\").read_text()[-800:]); print(Path(\"docs/ROADMAP.md\").read_text()[-500:])"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety": "read_only_patch_state_inspection",
+  "stderr": "",
+  "stdout": "guard document exists: False\nion**. No resume/overwrite.\nAnalysis supports both recorded matrix parts; incomplete studies cannot produce\npaired/cross-input comparisons, and prepared diagnostics never replace production\nhost-call timing. This is tooling support, not a completed comparison study.\n\nThe [safety repair](docs/CPU_GPU_SAFETY_REPAIR_v1.md) adds independent frozen-source\nanchor enforcement and a reviewed, fail-closed non-timing test selector.\n`python3 -B scripts/non_timing_tests.py --build-dir build/EXISTING_RELEASE` only\nprints discovery/selection; it never executes tests. The prerequisite-only\nvalidator now uses that selection and marks its result correctness-only,\n`study_eligible=false`. It cannot satisfy the unchanged frozen full-study gate.\nNo fresh prerequisite run or study was performed by this repair.\n\nnged frozen full-study gate.\nSee [repair audit](../results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/FINAL_AUDIT.md)\nand [selection contract](CPU_GPU_SAFETY_REPAIR_v1.md).\n\nFull-study launch remains **NO-GO**. Next: independently review this repair, then\nseparately authorize fresh validation on the execution VM. Full frozen coverage\n(including timing-framework tests) and all-size resource gates remain required\nbefore separate study authorization. No fresh prerequisite validation was run.\n\n",
+  "utc": "2026-10-10T22:50:45.433326+00:00"
+}

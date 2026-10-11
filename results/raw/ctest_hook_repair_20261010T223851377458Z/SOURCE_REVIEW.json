@@ -1,0 +1,36 @@
+{
+  "changes": {
+    "scripts/ctest_build_guard.py": {
+      "after": "700fb64e7ce5968f2e43ce786f10fca07e9685445282171f67ce4b112acaa3f5",
+      "before": null
+    },
+    "scripts/non_timing_tests.py": {
+      "after": "99dd6b2fcc99aa81962a477313f13d178e2f6ae01de12794d9908d3b82d05396",
+      "before": "c6eb159729a44dd8d12da95e49882d3c66cb78f17484b8e3034f2c1d65fee01e"
+    },
+    "tests/ctest_fixture.py": {
+      "after": "a53030aa3bd8f0b43415b37eec8c8df56f3ece0185e854a058ca88b012c4dd56",
+      "before": null
+    },
+    "tests/test_cpu_gpu_comparison.py": {
+      "after": "ca19c5ead3133d710e49b73dd556dec4d3a119e6c86b6d221927be667cd6e9d5",
+      "before": "aabee54e413c5efba862880f0f4bff36614089b4fb6d6091b9eae235fc3968c4"
+    },
+    "tests/test_cpu_gpu_safety.py": {
+      "after": "bb56043276c73c4c303bd1f7dc225db5908d6a2d3e06f20494ec4aa589663183",
+      "before": "832855c4ced18df51ea7f59beb3c888a7f9fbb4654c112717c65f5d6e65ea5dc"
+    },
+    "tests/test_ctest_build_guard.py": {
+      "after": "ce35488030412d4a485191d89bea1cbe8c4dc1e9feee1b8a30e3279404e2893e",
+      "before": null
+    }
+  },
+  "syntax_checked": [
+    "scripts/ctest_build_guard.py",
+    "scripts/non_timing_tests.py",
+    "tests/ctest_fixture.py",
+    "tests/test_ctest_build_guard.py",
+    "tests/test_cpu_gpu_safety.py",
+    "tests/test_cpu_gpu_comparison.py"
+  ]
+}

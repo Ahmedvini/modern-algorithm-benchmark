@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/ctest_hook_repair_20261010T223851377458Z/create_reviewed_policy.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 1,
+  "safety": "static_metadata_parse_and_policy_write_only",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/ctest_hook_repair_20261010T223851377458Z/create_reviewed_policy.py\", line 19, in <module>\n    assert args[1:]==expected_command(manifest['tests'][name]['command'],build)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "stdout": "",
+  "utc": "2026-10-10T22:42:39.554692+00:00"
+}
