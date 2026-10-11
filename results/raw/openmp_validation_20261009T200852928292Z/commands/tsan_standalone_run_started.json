@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "env",
+    "TSAN_OPTIONS=halt_on_error=1",
+    "build/openmp_probe/tsan_standalone"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:24:48.787094+00:00"
+}

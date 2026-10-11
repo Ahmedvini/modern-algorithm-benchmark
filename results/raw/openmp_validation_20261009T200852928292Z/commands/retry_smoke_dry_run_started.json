@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "scripts/run_parallel_matrix.py",
+    "--preset",
+    "smoke",
+    "--output",
+    "results/raw/openmp_smoke_20261009T200852928292Z_retry1",
+    "--processed",
+    "results/processed/openmp_smoke_20261009T200852928292Z_retry1",
+    "--figures",
+    "results/figures/openmp_smoke_20261009T200852928292Z_retry1",
+    "--dry-run"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:37:41.567814+00:00"
+}

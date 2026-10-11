@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "command": "record_command.py baseline_configure cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_SANITIZERS=OFF",
+  "reason": "new commands directory was not created; child configure was not launched"
+}

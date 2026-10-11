@@ -1,0 +1,2113 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -143,3 +143,36 @@
+              COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_benchmark.py
+                      $<TARGET_FILE:sort_benchmark>)
+ endif()
++
++# Optional OpenMP family; original six-entry registry and timing CLIs are unchanged.
++option(MAB_ENABLE_OPENMP "Build the separate OpenMP parallel sorting family" ON)
++if(MAB_ENABLE_OPENMP)
++    find_package(OpenMP REQUIRED COMPONENTS CXX)
++    find_package(Threads REQUIRED)
++    add_library(mab_parallel src/algorithms/parallel_mergesort.cpp)
++    target_link_libraries(mab_parallel PUBLIC mab_core OpenMP::OpenMP_CXX)
++    add_library(mab_parallel_timing src/benchmark/parallel_timing.cpp)
++    target_link_libraries(mab_parallel_timing PUBLIC mab_parallel mab_timing)
++    foreach(pair IN ITEMS OpenMP_CXX_VERSION OpenMP_CXX_FLAGS OpenMP_CXX_LIBRARIES)
++        mab_cxx_literal(${pair}_LITERAL "${${pair}}")
++    endforeach()
++    file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/generated/$<CONFIG>/parallel_build.hpp" CONTENT
++"#pragma once
++namespace mab::parallel_build {
++inline constexpr const char* version = ${OpenMP_CXX_VERSION_LITERAL};
++inline constexpr const char* flags = ${OpenMP_CXX_FLAGS_LITERAL};
++inline constexpr const char* libraries = ${OpenMP_CXX_LIBRARIES_LITERAL};
++}
++")
++    add_executable(parallel_sort_benchmark src/benchmark/parallel_main.cpp)
++    target_include_directories(parallel_sort_benchmark PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
++    target_link_libraries(parallel_sort_benchmark PRIVATE mab_parallel_timing)
++    if(BUILD_TESTING)
++        add_executable(test_parallel_mergesort tests/test_parallel_mergesort.cpp)
++        target_link_libraries(test_parallel_mergesort PRIVATE mab_parallel_timing Threads::Threads)
++        add_test(NAME parallel_mergesort COMMAND test_parallel_mergesort)
++        set_tests_properties(parallel_mergesort PROPERTIES ENVIRONMENT "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=8;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE")
++        add_test(NAME parallel_framework COMMAND ${Python3_EXECUTABLE}
++            ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_parallel_benchmark.py $<TARGET_FILE:parallel_sort_benchmark>)
++    endif()
++endif()
+--- a/README.md
++++ b/README.md
+@@ -457,4 +457,73 @@
+ retain the evidence. Shared-machine frequency/cache/thermal/background conditions
+ were uncontrolled; these descriptive findings establish no universal ranking or
+ statistical significance. Separate comparison/memory studies, per-query latency
+-and independent-session replication remain deferred. Phase 6 OpenMP is next.
++and independent-session replication remain deferred. At that audit, Phase 6 OpenMP was next; its completed evidence is below.
++
++## OpenMP parallel Merge Sort (Phase 6)
++
++The optional `MAB_ENABLE_OPENMP=ON` (default) builds separate parallel targets;
++set it OFF to build the original CPU targets without OpenMP. GCC/Clang require a
++supported OpenMP runtime. The original six-entry registry, std_sort default,
++sequential merge_sort and frozen Phase 5 presets remain unchanged.
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_OPENMP=ON
++cmake --build build/release --parallel 2
++build/release/parallel_sort_benchmark --output results/raw/NEW_PARALLEL_RUN --sort all --threads 4 --size 100000
++python3 scripts/run_parallel_matrix.py --preset smoke --output results/raw/NEW_OMP_ID --processed results/processed/NEW_OMP_ID --figures results/figures/NEW_OMP_ID --dry-run
++# Execute only after protocol/resource review; remove --dry-run.
++```
++
++The new executable defaults to sequential merge_sort; --sort selects merge_sort,
++parallel_merge_sort or all. --threads accepts unsigned decimal1..64, default1.
++All existing dataset/timing options and validation-only build policy apply.
++The library creates a team only for N>=32768 and request>1, with grain16384.
++CSV records requested and actual team size and implementation version per trial.
++Team size does not prove every worker executed a task. Above-threshold studies
++require actual=request. Threads1/2/4/8 are supported by the matrix runner, which
++sets and records OMP_DYNAMIC=FALSE,OMP_THREAD_LIMIT=8,OMP_MAX_ACTIVE_LEVELS=1,
++OMP_WAIT_POLICY=PASSIVE. Different concurrent runs still contend; schedule serially.
++
++The [frozen OpenMP contract](docs/OPENMP_PROTOCOL_v1.md) defines disjoint tasks,
++barriers, allocation/nesting behavior and separate scaling baselines. Analysis
++uses sequential Merge Sort / parallel time as primary speedup; parallel one-thread
++/ parallel time is reported separately. Ratios are computed from within-dataset
++medians before cross-dataset aggregation. No comparison instrumentation enters
++primary timing. Counts/RSS, CUDA and 100M workloads are outside this phase.
++
++```sh
++python3 scripts/analyze_parallel_results.py results/raw/OMP_ID --output results/processed/NEW_REGEN_ID --figures results/figures/NEW_REGEN_ID
++```
++
++All paths must be absent; no overwrite/resume. The matrix analyzer requires both
++baselines and a matrix manifest. Single CLI bundles retain raw CSV/metadata.
++See AUDIT.md for actual test/study status; instructions alone are not results.
++
++Phase 6 now delivers a validated implementation **and completed scaling study**.
++Fresh final Release and ASan/UBSan suites passed **24/24 groups**, including
++523 input cases/4,184 parallel public/registry checks and 13 Python framework tests.
++Leak detection was enabled. Teams1/2/4/8 were tested. The corrected smoke passed
++32 configurations,320 measured/64 warmup trials. The full study passed180
++configurations,1,800 measured/360 warmup trials across32768/100K/1M elements,
++five distributions and three seeds, with zero failed/missing trials. All20SVG/PDF
++figure pairs and summaries/report regenerated byte-for-byte. All3,796 prior
++artifacts stayed unchanged.
++
++ThreadSanitizer could not initialize (`unexpected memory mapping`,exit66), also
++on an independent non-OpenMP probe. Concurrent stress and disjoint-task review
++supplement sanitizers; this is no race-freedom claim. The first full attempt is
++retained FAILED because strict analysis incorrectly expected nonzero swaps for
++already-sorted input. Its180 children passed, but no completion marker was created.
++An all-distribution regression and fresh full suites preceded the exclusive retry;
++no timings were pooled between attempts. See AUDIT.md for all failures/commands.
++
++[Frozen retry launch](docs/studies/openmp_scaling_20261009T200852928292Z_retry1_v2.md),
++[full report](results/processed/openmp_scaling_20261009T200852928292Z_retry1/REPORT.md),
++[summary](results/processed/openmp_scaling_20261009T200852928292Z_retry1/summary.json),
++[raw matrix](results/raw/openmp_scaling_20261009T200852928292Z_retry1/matrix.json),
++[plot manifest](results/figures/openmp_scaling_20261009T200852928292Z_retry1/plot_manifest.json) and
++[verification](results/raw/openmp_validation_20261009T200852928292Z/full_retry_verification.json)
++retain exact configurations, statistics, compiler/runtime identity and integrity.
++The shared-machine study does not establish significance or universal superiority.
++Next roadmap milestone: Phase7 CUDA device/runtime preflight and reproducible
++Colab/cloud guide, with GPU results explicitly not run until a device is verified.
+--- a/docs/ALGORITHMS.md
++++ b/docs/ALGORITHMS.md
+@@ -300,3 +300,30 @@
+ input and query identities. Build/sort/lookup operations retain their existing
+ contracts and timing boundaries. Counted metrics remain independent. Plot and
+ report comparisons are descriptive and retain input/build identity and spread.
++
++## parallel_merge_sort: OpenMP project Merge Sort
++
++The separate configurable registry contains merge_sort and parallel_merge_sort;
++normal sorting registry/default semantics are preserved. Public
++parallel_merge_sort(Values&,int) returns actual team size/parallel-region status.
++Stable signed-int32 output, requests1..64, no nested OpenMP invocation. One N-key
++buffer is allocated before mutation/task entry; allocation errors propagate.
++N<32768 or request1 uses allocation-free serial merging after that allocation.
++Otherwise a single OpenMP team starts tied child tasks at halves above grain16384;
++taskwait precedes each parent merge/copy. Child value/buffer ranges are disjoint.
++Only nonthrowing int32 operations run inside tasks; runtime creation failures are
++not claimed recoverable. No global counters or ICV mutation. Explicit test-only
++observers verify tasks/bounds/stability; normal production uses an empty observer.
++
++Work O(N log N), auxiliary O(N) plus task/team runtime memory and bounded range
++recursion. Parent merges are serial. This is a top-down task implementation with
++bottom-up serial leaves and copy-back merges, distinct from the preserved
++alternating-buffer sequential Merge Sort. Its request1 time is therefore a separate
++implementation baseline; do not conflate it with sequential Merge Sort speedup.
++No counted adapter or isolated allocation measurement is implemented for it.
++
++The [versioned contract](OPENMP_PROTOCOL_v1.md) defines synchronization and test
++policy. OpenMP specifies [task execution](https://www.openmp.org/spec-html/5.2/openmpse73.html)
++and [taskwait synchronization](https://www.openmp.org/spec-html/5.2/openmpse93.html).
++Correctness stress and disjoint ownership review do not prove absence of races;
++actual race-detector outcomes are recorded in AUDIT.md.
+--- a/docs/AUDIT.md
++++ b/docs/AUDIT.md
+@@ -1718,3 +1718,178 @@
+ error was corrected; final_review_second.py and final_review_corrected command
+ record preserve it. final_review_complete is the final corrected invocation.
+ Neither helper failure modified an experiment or required a production-code change.
++
++## Phase 6 — OpenMP implementation and completed scaling study (2026-10-09)
++
++Workspace writable; no Git metadata (git status128), no repository initialized.
++Inspected AGENTS.md completely, README, roadmap/audit/algorithm/benchmark/protocol/
++metrics docs, existing core/registry/CLI/CMake/tests and Phase5 tooling before edits.
++Baseline fresh Release configure/build/CTest exited0,22/22 groups passed17.54s.
++The starting106 project-file hashes/backups and3,796 previous artifact hashes are
++retained in `results/raw/openmp_validation_20261009T200852928292Z/repository_before.json`, `prior_artifacts_sha256.json`
++and `build/openmp_review_20261009T200852928292Z`. All earlier raw/processed/figures and historical protocols,
++including frozen1M sorting and Phase5 full study, remain unchanged.
++
++Contract `results/raw/openmp_validation_20261009T200852928292Z/PROTOCOL_v1.md` and docs/OPENMP_PROTOCOL_v1.md were frozen
++before implementation. Stable signed-int32 parallel Merge Sort uses one N-key
++buffer allocated before mutation, task splits above16384, taskwait before parent
++merge/copyback and a final team barrier. Requests1..64, serial for request1 or
++N<32768; invalid or nested requests reject before mutation. Parent merges are
++serial; O(NlogN) work/O(N) keys plus runtime/task/stack overhead. Task bodies
++cannot throw/allocate; OpenMP runtime failure is runtime-defined. No fault-injection
++claim. Empty/singleton safe, no arithmetic transformation of keys.
++
++Separate configurable registry/executable preserves the old6-entry registry,
++std_sort default and sequential merge_sort. The old timing loop is factored into
++one shared template; copy/reference validation remain outside steady_clock ns.
++Allocation, team creation, tasks/joins and deallocation are timed. New32-column
++parallel_sort_timing_v1 appends version/request/actual-team/region fields; original
++sort_timing_v1 CSV remains28 columns. Requested team is not busy-worker count.
++Normal timing has no test observer/counting/RSS. Benchmark metadata retains
++source/executable/tool/library hashes, compile commands, OpenMP flags/runtime paths
++and environment. No guessed libgomp version.
++
++Files added: include/algorithms/parallel_mergesort.hpp,
++include/algorithms/detail/parallel_mergesort_impl.hpp,
++src/algorithms/parallel_mergesort.cpp, include/benchmark/detail/timing_impl.hpp,
++include/benchmark/parallel_timing.hpp, src/benchmark/parallel_timing.cpp,
++src/benchmark/parallel_main.cpp, scripts/run_parallel_matrix.py,
++scripts/analyze_parallel_results.py, tests/test_parallel_mergesort.cpp,
++tests/test_parallel_benchmark.py, docs/OPENMP_PROTOCOL_v1.md and both frozen
++OpenMP study launch documents in docs/studies/. Existing changes: CMakeLists.txt,
++include/benchmark/timing.hpp, src/benchmark/timing.cpp, README.md and docs/
++ALGORITHMS.md, BENCHMARKING.md, EXPERIMENT_PROTOCOL.md, METRICS.md, ROADMAP.md,
++AUDIT.md. No vendor, generator, old algorithm/registry or old test/Python file
++changes. Full final inventory and review patch are retained with this audit.
++
++Final commands (all exit0, stdout/stderr/argv/status retained in commands/):
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_SANITIZERS=OFF -DMAB_ENABLE_OPENMP=ON
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DMAB_ENABLE_SANITIZERS=ON -DMAB_ENABLE_OPENMP=ON
++cmake --build build/sanitize --parallel 2
++env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V
++python3 tests/test_parallel_benchmark.py build/release/parallel_sort_benchmark
++```
++Final corrected Release24/24 passed30.09s, ASan/UBSan24/24 passed84.51s;
++13 parallel Python tests passed standalone and within each suite, including all
++five distributions/zero sorted swaps. Existing Phase5 Python23 methods still pass.
++No compiler warnings in fresh build logs. Leak detection enabled; no ptrace failure
++or leak-disabled retry occurred. Earlier reviewed suites24/24 also passed before
++the metadata correction; they are retained separately, not the final evidence.
++C++ parallel tests:523 inputs,4,184 public/registry output checks at1/2/4/8threads,
++ten concurrent131073-element calls; eight observed tasks and65,549 merges in
++stable projected-key fixture, bounds/threshold/serialized-nesting and6 timing rows.
++Exact equality to std::sort/sequential results verifies order and permutation;
++stability uses projected-key identity. OpenMP-enabled team probe1:1,2:2,4:4,8:8.
++OpenMP-OFF configure/build sort_benchmark/list-sorts all exited0 and retained
++originalsix names; no full OFF CTest is claimed.
++
++Concurrency limitation: TSan compilation succeeded, but both the parallel test
++and independent std::thread probe exited66 before tests with `FATAL:
++ThreadSanitizer: unexpected memory mapping`. This is an environment startup
++failure, not evidence of an OpenMP-specific conflict or race-free execution.
++Valgrind unavailable. No access-control/ASLR workaround attempted. Disjoint ranges,
++barriers, atomic internal observers, concurrent-call stress and ASan/UBSan are
++complementary validation, not a race-detector pass. Exact commands/diagnostics:
++commands/tsan_compile.json, tsan_run.json, tsan_standalone_compile.json,
++tsan_standalone_run.json.
++
++Failures retained: initial recorder setup exited1 because commands/ did not yet
++exist; its baseline child was never launched (initial_recorder_failure.json).
++Initial Python fixtures emitted unclosed-file ResourceWarnings, corrected with
++StringIO before final tests; no final warning. First full study command exited1:
++`matrix/bundle configuration differs`. All180 child processes actually exited0
++with1,800 correct measured/360 warmup rows, but analyzer incorrectly required
++floor(N/100) swaps for already-sorted input, which correctly records0. This was
++an analysis defect; corrected without changing datasets/timing code. The original
++attempt `openmp_scaling_20261009T200852928292Z` remains FAILED, no COMPLETE or derived-success claim.
++Its1,806 files are hash-protected, diagnosis in failed_attempt_diagnosis.json.
++An all-five-distribution regression and fresh Release/sanitizer suites preceded
++exclusive new smoke/full retry paths. No attempt pooling, overwrite or resume.
++Exploratory read of nonexistent case_0004/run.json exited1 (actual name run_000004);
++it did not affect execution or evidence.
++
++Corrected smoke commands (all exit0):
++```sh
++python3 scripts/run_parallel_matrix.py --preset smoke --output results/raw/openmp_smoke_20261009T200852928292Z_retry1 --processed results/processed/openmp_smoke_20261009T200852928292Z_retry1 --figures results/figures/openmp_smoke_20261009T200852928292Z_retry1 --dry-run
++python3 scripts/run_parallel_matrix.py --preset smoke --output results/raw/openmp_smoke_20261009T200852928292Z_retry1 --processed results/processed/openmp_smoke_20261009T200852928292Z_retry1 --figures results/figures/openmp_smoke_20261009T200852928292Z_retry1
++python3 -B results/raw/openmp_validation_20261009T200852928292Z/verify_run.py smoke
++```
++Smoke32 configurations,N0/32767/32768/65537,uniform/duplicate_heavy,seed1729,
++threads1/2/4/8,W1/R5:320 measured and64 warmup successes, zero failed/missing.
++Eight figure pairs/report/summary bytes regenerated; all329 raw files unchanged.
++All-distribution N100 validation additionally passes within the13-method suite.
++
++Full retry launch frozen before execution at
++`docs/studies/openmp_scaling_20261009T200852928292Z_retry1_v2.md` and RETRY_FULL_STUDY_LAUNCH_v2.md.
++Original v1 remains immutable; v2 clarifies sorted swaps0 and records retry reason,
++new paths, hashes/resources. No matrix change. Corrected smoke forecast199.616s
++child wall (Nlog2(N+2) ratio×4), below1800s budget, plotting separate. Memory estimate
++150,217,728 bytes, required available536,870,912 bytes; disk allowance419,889,152,
++required free839,778,304. Actual prelaunch availableRAM6,755,241,984 and disk free
++134,562,123,776 bytes. These are planning/snapshot values, not isolated memory.
++
++Full commands (all exit0):
++```sh
++python3 scripts/run_parallel_matrix.py --preset full --output results/raw/openmp_scaling_20261009T200852928292Z_retry1 --processed results/processed/openmp_scaling_20261009T200852928292Z_retry1 --figures results/figures/openmp_scaling_20261009T200852928292Z_retry1 --dry-run
++python3 scripts/run_parallel_matrix.py --preset full --output results/raw/openmp_scaling_20261009T200852928292Z_retry1 --processed results/processed/openmp_scaling_20261009T200852928292Z_retry1 --figures results/figures/openmp_scaling_20261009T200852928292Z_retry1
++python3 -B results/raw/openmp_validation_20261009T200852928292Z/verify_run.py full
++```
++Full180 configurations:N32768/100000/1000000,5distributions,3seeds1729/42/2718,
++threads1/2/4/8,two sorters,W1/R5,card16,sorted swaps0/defaultfloor(N/100)otherwise,
++256MiB array budget. All1,800 measured/360warmup trials passed, failed/missing0;
++all180 child commands and analysis exited0. Pipeline wall33.123s includes analysis.
++Each input fingerprint agrees across thread configurations. Observed parallel
++teams2/4/8 equal requests; request1 executes serial. Timing remains uninstrumented.
++360 per-dataset algorithm groups,180 dataset ratios,60 cross-dataset groups;
++20SVG/PDF figure pairs, report/summary/observations regenerated byte-for-byte.
++All1,809 raw files unchanged through regeneration, all3,796 previous artifacts,
++original smoke, failed attempt and frozen protocols unchanged.
++
++Descriptive N1M,p8 results: median of three dataset-specific ratios, formed from
++within-dataset five-trial medians. Efficiency divides primary ratio by actual8;
++min/max is across dataset ratios, not a confidence interval. No significance claim.
++
++| Distribution | Sequential-baseline speedup | Min–max | Efficiency | Separate parallel1 speedup |
++|---|---:|---|---:|---:|
++| duplicate_heavy | 3.568831 | 3.468465–3.826871 | 0.446104 | 3.893432 |
++| nearly_sorted | 3.079466 | 2.492053–3.328528 | 0.384933 | 3.777703 |
++| reverse_sorted | 2.603176 | 2.111693–2.929176 | 0.325397 | 4.384512 |
++| sorted | 2.501757 | 2.457263–2.671667 | 0.312720 | 3.594457 |
++| uniform | 3.045514 | 3.042874–3.512856 | 0.380689 | 3.355280 |
++
++Environment: Linux6.18.7-76061807-generic x86_64/glibc2.39, Intel i5-11400H,
++6physical/12logical CPUs, affinity0..11; totalRAM16,475,164,672bytes; GNU13.3.0,
++CMake3.28.3,Python3.12.3,Matplotlib3.11.0. Release-O3-DNDEBUG for both algorithms,
++parallel translation units additionally-fopenmp; CMake OpenMP4.5/_OPENMP201511,
++actual libgomp linkage/hashes retained. Exposed cgroup memory.max=max; governors
++performance at retry preflight, load3.3564/2.5723/1.9731. These are observations,
++not controls; no affinity/frequency/cache/thermal/background changes imposed.
++Thermal state not measured;12logical CPUs are not12physical cores.
++OMP_DYNAMIC=FALSE,THREAD_LIMIT=8,MAX_ACTIVE_LEVELS=1,WAIT_POLICY=PASSIVE recorded.
++
++Raw `results/raw/openmp_scaling_20261009T200852928292Z_retry1`, processed `results/processed/openmp_scaling_20261009T200852928292Z_retry1` and figures
++`results/figures/openmp_scaling_20261009T200852928292Z_retry1` retain matrix, environments/source/compile/runtime
++identities, every row/outlier, statistics, report and machine-readable plot manifest.
++`results/raw/openmp_validation_20261009T200852928292Z/full_retry_verification.json` supports completion/regeneration;
++smoke_retry_verification.json supports smoke. execution_tools and retry_execution_tools
++archive exact pre/post-correction Python tools. COMMANDS.md/commands/ retain exact
++argv, exit status, stdout/stderr, including prior failures. final_review.json,
++FINAL_AUDIT.md, file_changes.json, source_after.json and changes.patch support
++saved-file/integrity review. Regenerate into NEW paths with analyze_parallel_results.py;
++raw files are immutable, no retries/resumption in-place.
++
++Phase6 delivers validated OpenMP implementation **and completed scaling study**.
++Limitations: TSan unavailable as above; serial parent merges and different serial
++merge strategies between sequential baseline and parallel-request1; team count
++not busy-worker count; one shared session with fixed matrix order/odd-R cyclic
++imbalance and uncontrolled frequency/cache/thermal/load. Ratios aggregate datasets,
++not independent repetitions. No isolated RSS, comparison-count experiment,
++independent-session replication, statistical significance or linear/universal
++scaling claim. No CUDA, learned-index/AlphaDev or100M experiment was attempted.
++Next roadmap milestone: Phase7 CUDA device/runtime preflight and reproducible CUB
++Colab/cloud guide with separate transfer/kernel/end-to-end semantics; do not claim
++GPU results until actual verified execution. Other deferred research remains listed
++in ROADMAP.md.
+--- a/docs/BENCHMARKING.md
++++ b/docs/BENCHMARKING.md
+@@ -385,3 +385,49 @@
+ The full row totals differ from upper bounds solely because policies are explicitly
+ unavailable, not failed/missing trials. Construction includes1,500 measured builds;
+ 11,700 structure lookup batches are separate. Comparison/RSS paths were not run.
++
++## Phase 6 OpenMP family: parallel_sort_timing_v1
++
++The new parallel_sort_benchmark reuses the shared run_timing_engine template;
++original run_timing_trials retains normal dispatch and the unchanged 28-field
++sort_timing_v1 CSV. The new configurable path returns actual-team information
++from the sorter, copying it to the row after the stop timestamp. Clock, restore,
++full reference validation, seed-offset cyclic order and error handling are shared.
++The new CSV is the old 28 fields with protocol=parallel_sort_timing_v1, followed
++by implementation_version,requested_threads,actual_threads,parallel_region.
++Sequential rows report1/1/false; parallel requests may run serial below threshold.
++A failed invocation can report actual_threads=0 (unknown), never a guessed team.
++Buffer allocation, OpenMP team/tasks/joins and buffer destruction belong to timing.
++
++run.json adds parallel_threads,parallel_threshold,task_grain,openmp_macro,
++openmp_version,openmp_flags and openmp_runtime_libraries. CMake/compile commands,
++source hashes and upstream provenance remain sidecars. Matrix environment records
++OMP/GOMP policy, actual runtime linkage paths/hashes and CPU/OS/compiler/resources;
++no runtime version is invented when unavailable. Common Release optimization flags
++apply; -fopenmp is required for parallel translation units and its flags are recorded.
++
++run_parallel_matrix.py extends orchestration with a separate versioned family;
++it reuses Phase 5 resource/signal/process helpers and existing environment capture,
++CSV escaping, dataset generation and sample-statistics functions. Phase 5 presets
++and old family scripts remain unchanged. It validates bounded matrices, prints
++stable dry-run plans, runs serial children, validates raw collection, then invokes
++analysis/plots/report before final completion. Failures/interruption retain exact
++command diagnostics and FAILED/INTERRUPTED markers. Missing trials are explicit.
++Directories are exclusively created; retry with a new ID, no resume or overwrite.
++--config custom JSON follows the strict preset schema; --preset full is only the
++unchanged candidate matrix, subject to separately frozen launch/resource review.
++
++Analyzer grouping retains size/distribution/dataset/request/actual-team identities;
++mixed actual teams within a cell are rejected. Default studies require actual=request
++above threshold. Ratios require complete positive medians and the parallel request1
++baseline. Below threshold scaling ratios are unavailable. Per-dataset timings use
++median/mean/sample SD/min/max ns. Primary speedup uses the sequential cell median;
++secondary speedup uses parallel request1's median on the same input. Efficiencies
++divide their respective speedups by actual p. Ratios precede cross-dataset statistics;
++identical fingerprints collapse, seeds are equally weighted. Outliers stay; no
++confidence intervals/significance claim. Figures show dataset min/max spreads.
++
++summary.json,observations.jsonl,REPORT.md and SVG/PDF/plot_manifest.json are separate
++from raw bundles. Regeneration is byte-identical on the recorded plotting stack.
++No memory/counting result is inferred from timing. See [frozen protocol](OPENMP_PROTOCOL_v1.md)
++and AUDIT.md for actual smoke/full execution and sanitizer/race-detector limitations.
+--- a/docs/EXPERIMENT_PROTOCOL.md
++++ b/docs/EXPERIMENT_PROTOCOL.md
+@@ -157,3 +157,14 @@
+ phase5_full_20261009T191000587965Z. All derived bytes regenerated; frozen family protocols and older
+ sorting study stayed unchanged. No comparison/memory measurement or universal
+ performance conclusion is inferred from this timing study.
++
++## Phase 6 OpenMP extension
++
++[OPENMP_PROTOCOL_v1.md](OPENMP_PROTOCOL_v1.md) freezes separate configurable
++parallel Merge Sort contracts and parallel_sort_timing_v1. Existing generator,
++sort/search/structure protocols, Phase 5 presets and previous results are unchanged.
++Primary sequential-merge and secondary parallel-one-thread scaling baselines remain
++separate. Actual teams, compiler/runtime/flags, task threshold and environment are
++recorded; construction/copies/validation follow shared sorting timing boundaries.
++A separately frozen launch document follows correctness/sanitizer/smoke/regeneration
++and resource review; this candidate protocol alone is not proof a full study ran.
+--- a/docs/METRICS.md
++++ b/docs/METRICS.md
+@@ -216,3 +216,19 @@
+ protocol. Separate comparison and process-RSS implementations are unchanged;
+ no count/memory experiment is inferred from timing or theoretical complexities.
+ Unsupported count/memory plots remain explicitly listed as missing evidence.
++
++## Phase 6 parallel sorting metrics
++
++parallel_sort_timing_v1 records normal sorting ns and requested/actual OpenMP team
++size per row; it does not count comparisons or process RSS. Team size means members
++of the created team, not observed busy workers. Below threshold or request1 executes
++serially and reports actual1. Unknown failed invocation team size is0. Task/merge/
++worker observers exist only in correctness tests. Mixed actual-team cells are rejected
++from analysis rather than pooled. Common sorting validation remains outside timing.
++
++Algorithmic speedup uses the sequential merge_sort cell median / parallel median;
++implementation speedup uses the separate parallel-request1 median / parallel median.
++Their efficiencies divide by actual p. Compute ratios per dataset, then summarize
++equally weighted distinct-input ratios with sample SD/min/max. These are descriptive
++ratios, not significance or a promise of linear scaling. No parallel counted adapter,
++isolated buffer tracking or measured OpenMP runtime memory is implemented.
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -11,11 +11,13 @@
+ | 3 — search benchmarks | Complete for batch mode: three array searches, deterministic queries, separate counts, CSV/statistics; individual-query timing deferred |
+ | 4 — search data structures | Complete: Skip List and B-tree orders 10/16/32/64, differential/invariant tests, separate build/lookup smoke and verified immutable evidence |
+ | 5 — orchestration and analysis | Complete for CPU timing: strict all-family orchestration, hierarchical statistics, SVG/PDF variability plots/report, validated smoke and full multi-size study |
+-| 6 — OpenMP | Pending |
++| 6 — OpenMP | Complete: stable task Merge Sort, team metadata, fresh 24/24 Release/sanitizer groups and validated 1/2/4/8-thread scaling study; TSan startup limitation retained |
+ | 7 — CUDA | Pending; not run |
+ | 8 — learned index and AlphaDev study | Pending |
+ | 9 — 100M scale | Pending; not run |
+ | 10 — report and presentation | Pending |
++
++The entries below record milestone history; the status table and latest phase entry describe the current state.
+ 
+ Phase 0 validation: 2/2 CTest tests passed (310 differential sort cases and three
+ Python environment-manifest tests). See AUDIT.md for the initial missing-build
+@@ -151,3 +153,30 @@
+ session, not significance or a universal ranking. No CUDA or 100M run occurred.
+ Exact next implementation milestone: Phase 6 OpenMP parallel sorting with separate
+ thread-count configuration, differential validation and reproducible scaling.
++
++Phase 6 is complete for the documented OpenMP scope: separate stable
++parallel_merge_sort_v1, shared timing loop and32-column parallel_sort_timing_v1,
++actual-team metadata, strict exclusive matrix orchestration, paired dataset-level
++speedup/efficiency, min/max variability plots and reproducible report. The original
++six algorithms/default and all prior frozen artifacts remain unchanged.
++Final Release24/24 and ASan/UBSan24/24 groups passed; leak detection stayed enabled.
++523 inputs/4,184 outputs, ten concurrent large calls, observed task/merge/stability
++checks and13 Python methods passed. ThreadSanitizer startup failed even without
++OpenMP (exit66); no race-freedom claim. The all-distribution metadata regression
++corrected the first full attempt's analysis failure before fresh tests and retry.
++
++The exclusive retry smoke completed320 measured/64 warmups in32 configurations;
++the full study completed1,800 measured/360 warmups in180 configurations, zero
++failed/missing trials, N32768/100K/1M, all five distributions, three seeds and
++threads1/2/4/8. Twenty SVG/PDF pairs/report/summary regenerated exactly.
++All3,796 prior artifacts and the failed attempt remain unchanged. Evidence:
++[protocol](OPENMP_PROTOCOL_v1.md), [frozen launch](studies/openmp_scaling_20261009T200852928292Z_retry1_v2.md),
++[report](../results/processed/openmp_scaling_20261009T200852928292Z_retry1/REPORT.md),
++[audit](AUDIT.md) and [results/raw/openmp_validation_20261009T200852928292Z](../results/raw/openmp_validation_20261009T200852928292Z).
++
++Next implementation milestone: **Phase7 CUDA** — verify actual device/runtime,
++freeze transfer/kernel/end-to-end semantics, and provide a reproducible CUB Colab/
++cloud notebook or guide. No GPU result is implied. Learned-index/AlphaDev,
++100M/resource scaling and final research report/presentation remain pending.
++Independent-session CPU replication, direct per-query latency calibration and
++separate comparison/memory experiment figures remain deferred research work.
+--- a/include/benchmark/timing.hpp
++++ b/include/benchmark/timing.hpp
+@@ -33,6 +33,9 @@
+     std::string_view status;
+     std::string_view correctness;
+     std::string error;
++    int requested_threads = 1;
++    int actual_threads = 1;
++    bool parallel_region = false;
+ };
+ 
+ // Sink and input restore/verification are outside the timed call. False means
+--- a/src/benchmark/timing.cpp
++++ b/src/benchmark/timing.cpp
+@@ -1,4 +1,5 @@
+ #include "benchmark/timing.hpp"
++#include "benchmark/detail/timing_impl.hpp"
+ 
+ #include <algorithm>
+ #include <chrono>
+@@ -59,53 +60,7 @@
+ bool run_timing_trials(const Values& original, const TimingConfig& config,
+                        const std::vector<Sorter>& sorters,
+                        const std::function<void(const TimingTrial&)>& sink) {
+-    validate_timing_config(config);
+-    if (original.size() != config.dataset.size || sorters.empty() || !sink)
+-        throw std::invalid_argument("invalid timing input/sorters/sink");
+-    for (std::size_t i = 0; i < sorters.size(); ++i) {
+-        if (!sorters[i].sort || sorters[i].name.empty()) throw std::invalid_argument("invalid sorter");
+-        for (std::size_t j = 0; j < i; ++j)
+-            if (sorters[i].name == sorters[j].name) throw std::invalid_argument("duplicate sorter");
+-    }
+-    auto expected = original;
+-    std::sort(expected.begin(), expected.end());
+-    Values working(original.size());
+-    using Clock = std::chrono::steady_clock;
+-    static_assert(Clock::is_steady, "timing requires a monotonic clock");
+-    for (const auto phase : {std::string_view{"warmup"}, std::string_view{"measure"}}) {
+-        const auto repetitions = phase == "warmup" ? config.warmups : config.repetitions;
+-        for (std::size_t trial = 0; trial < repetitions; ++trial) {
+-            const auto offset = (config.dataset.seed % sorters.size() + trial % sorters.size()) % sorters.size();
+-            for (std::size_t order = 0; order < sorters.size(); ++order) {
+-                const auto& sorter = sorters[(offset + order) % sorters.size()];
+-                std::copy(original.begin(), original.end(), working.begin());
+-                TimingTrial result{sorter.name, phase, trial, order, std::nullopt, "ok", "passed", {}};
+-                try {
+-                    const auto start = Clock::now();
+-                    sorter.sort(working);
+-                    const auto stop = Clock::now();
+-                    const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
+-                    if (elapsed < 0) throw std::runtime_error("negative steady-clock duration");
+-                    result.elapsed_ns = static_cast<std::uint64_t>(elapsed);
+-                } catch (const std::exception& error) {
+-                    result.status = "error";
+-                    result.correctness = "not_checked";
+-                    result.error = error.what();
+-                } catch (...) {
+-                    result.status = "error";
+-                    result.correctness = "not_checked";
+-                    result.error = "non-standard sorter exception";
+-                }
+-                if (result.status == "ok" && working != expected) {
+-                    result.status = "error";
+-                    result.correctness = "failed";
+-                    result.error = "full sorted output differs from std::sort reference";
+-                }
+-                sink(result);
+-                if (result.status != "ok") return false;
+-            }
+-        }
+-    }
+-    return true;
++    return detail::run_timing_engine(original,config,sorters,sink,
++        [](const Sorter& sorter, Values& values) { sorter.sort(values); });
+ }
+-}  // namespace mab
++} // namespace mab
+--- /dev/null
++++ b/docs/OPENMP_PROTOCOL_v1.md
+@@ -0,0 +1,122 @@
++# Phase 6: parallel_merge_sort_v1 and parallel_sort_timing_v1
++
++Frozen before the parallel implementation. This adds a separate configurable
++sorting family; sort_timing_v1 and all Phase 5 presets/results remain unchanged.
++
++## Algorithm and public contract
++
++Signed int32 Values, ascending, stable (left wins equal keys), deterministic full
++output. Public parallel_merge_sort(values, requested_threads) returns the actual
++OpenMP team size and whether a parallel region was entered. Requests are integers
++in [1,64]; invalid requests and invocation inside an existing OpenMP region throw
++invalid_argument before mutation. Empty/singleton input returns actual_threads=1.
++The old bottom-up merge_sort and six-entry sorting registry/default are preserved.
++A separate configurable registry has merge_sort and parallel_merge_sort.
++
++One N-key buffer is allocated per nontrivial call before task creation. Allocation
++failure propagates before mutation; no allocations or throwing operations occur
++inside task bodies. The comparator and optional internal test observer must be
++nothrow and copied by value; keys are never arithmetically transformed. OpenMP
++runtime allocation/creation failure is runtime-defined, not converted to a C++
++exception or claimed recoverable. No allocation-failure injection is promised.
++
++For requested=1 or N<32768, perform stable serial merging using that workspace;
++actual_threads=1 and parallel_region=false. Otherwise enter exactly one parallel
++region with num_threads(requested); a single thread records omp_get_num_threads
++and starts sorting. Lengths >16384 split at begin+(end-begin)/2, create two tied
++child tasks, then taskwait before merging into the same-range workspace and
++copying back. Leaves use allocation-free serial bottom-up merges. Child ranges
++and their buffers are disjoint; parents access them only after taskwait. The
++parallel-region final barrier completes all work. Merges themselves are serial
++within each node, so this is not a linear-scaling or parallel-merge claim.
++
++Expected work O(N log N), auxiliary O(N), bounded O(log N) range recursion plus
++OpenMP runtime task/team memory (not measured). Default tasks cannot throw.
++No global mutable state, counter, omp_set_num_threads or omp_set_dynamic call.
++Independent external calls own their buffers; nested OpenMP calls are rejected.
++Team size is observable, not evidence every team member executed a task. Test-only
++observers track tasks, merge boundaries and worker IDs; primary timing has no
++such counters. Public stability follows merge ordering; a projected-int32
++internal fixture makes equal-key identity observable without a generic public API.
++
++## Benchmark and compatibility
++
++parallel_sort_benchmark defaults to merge_sort, N1000, seed1729, uniform,
++threads=1,W1,R5,memory_limit_mib=256. --sort accepts merge_sort,parallel_merge_sort
++or all; --threads [1,64] configures the parallel entry only. Existing dataset,
++list/help, numeric validation, build guard, exclusive output and failure behavior
++follow sort_benchmark. The same shared timing loop restores inputs outside timing,
++uses steady_clock integer ns, checks full std::sort output outside timing, retains
++warmups and cyclic seed/trial algorithm ordering. Buffer allocation, team creation,
++tasks, joins and deallocation are inside the sorting interval; dataset generation,
++copying, metadata and verification are excluded. Normal counters/RSS are absent.
++
++Raw schema is sort_timing_v1's 28 fields with protocol=parallel_sort_timing_v1,
++plus implementation_version,requested_threads,actual_threads,parallel_region.
++The sequential entry reports requested/actual=1/1; run.json records configured
++parallel_threads separately. Actual team size is measured each invocation; below
++threshold/request1 reports serial1 even when configured request>1. Runtime may
++contract teams: record it, never silently substitute the request. Strict analysis
++separates actual-team identities; full study requires actual=request above threshold.
++
++run.json retains compiler/build/platform, source/dataset/executable identities,
++OpenMP _OPENMP and CMake OpenMP version/flags/libraries, clock and invocation.
++Matrix environment retains CPU/OS/RAM/limits/governor/load, relevant OMP variables,
++ldd runtime paths and SHA256 hashes (runtime version unavailable unless recorded).
++No guessed runtime version. CMake MAB_ENABLE_OPENMP enables only separate targets;
++OFF leaves previous targets/tests available. No vendored source modification.
++
++## Correctness and concurrency gates
++
++Differential public/configurable registry/serial/std::sort tests: empty/singleton,
++extrema/equal/negative, exhaustive small arrays, five distributions, fixed seeds,
++boundaries around16384/32768 and larger ranges; requests1/2/4/8 and repeated calls.
++Assert tasks/merges through internal test-only observers, check range bounds and
++projected stability. Stress independent simultaneous invocations and repeated
++runtime scheduling; these tests do not prove absence of data races.
++Attempt ThreadSanitizer with the available toolchain/runtime and retain diagnostics.
++If unsupported, record the exact failure and use disjoint-range/synchronization
++review, concurrent-call/observer tests and ASan/UBSan as complementary checks;
++never call ordinary tests a race-detector pass.
++
++Before study: fresh full Release and sanitizer tests, Python tests, every-thread
++smoke, byte-identical summary/figure regeneration and all prior-artifact hashes.
++Leak detection disabled only on the documented ptrace failure. No large run until
++these pass. Record any failure, missing configuration or interruption; never COMPLETE
++on partial output. Exclusive outputs and new IDs; no overwrite or resume.
++
++## Scaling design and statistical units
++
++Candidate full matrix (freeze a separate launch protocol after smoke resource
++planning): N32768/100000/1000000, all five distributions, seeds1729/42/2718,
++threads1/2/4/8,W1,R5,cardinality16,default swaps. 180 configurations (45 datasets
++x4 requests), two algorithms:1800 measured/360 warmup rows. Maximum N1M.
++Smoke: N0/32767/32768/65537,uniform/duplicate_heavy,seed1729,all four requests,W1,R5:
++32 configurations,320 measured/64 warmup rows. No smoke leaderboard claim.
++
++Run serially in size,seed,distribution,thread order; preserve cyclic algorithm
++order in each child. Set OMP_DYNAMIC=FALSE,OMP_THREAD_LIMIT=8,OMP_MAX_ACTIVE_LEVELS=1
++for declared studies, record remaining affinity/scheduling policy. Do not silently
++alter application global settings. Requested threads1/2/4/8 are subject to preflight
++team probes and available CPU affinity. Warn in report about unbalanced odd-R
++cyclic positions, warmed copies, serial merge span and fixed configuration order.
++
++Per dataset/configuration/algorithm: successful/failed/missing/warmup counts,
++median/mean/sample SD(ddof1)/min/max ns, retain every outlier. Primary algorithmic
++speedup=median(sequential merge_sort in the same cell)/median(parallel at p).
++Efficiency=speedup/actual p, reported only above threshold with actual=request.
++Separately implementation speedup=median(parallel request1 for same dataset)/
++median(parallel requestp); do not call these the same baseline. Per-dataset ratios
++are computed before equal-weight cross-dataset aggregation; collapse identical
++input fingerprints. Report medians/means/sample SD/min/max of dataset ratios,
++not ratios of pooled trial means or independent-trial confidence intervals.
++No significance test or universal speed/linear scaling claim.
++
++Resource forecast from validated smoke: overhead-inclusive wall durations scaled
++by N*log2(N+1), same configuration/round counts, conservative allowance; record
++model and uncertainty. Memory max16*N (array planning) plus runtime/analysis
++allowance; >=512MiB available memory and>=128MiB free disk and accessible cgroup
++headroom, stronger gates if estimates require it. These are estimates, not RSS or
++hard caps. Record compiler/runtime/flags/hardware/power/load; no cache, thermal,
++frequency or exclusive-background-control claim without evidence. A full launch
++requires its own frozen protocol and justified forecast; no CUDA/learned/100M work.
+--- /dev/null
++++ b/docs/studies/openmp_scaling_20261009T200852928292Z_retry1_v2.md
+@@ -0,0 +1,158 @@
++# OpenMP scaling study v2 — frozen retry launch
++
++Attempt1 retained FAILED after all180 children completed1800 measured/360 warmups:
++the analyzer incorrectly required floor(N/100) swaps for sorted input, whose existing
++contract records0. Corrected analyzer plus all-five-distribution regression passed
++fresh suites before retry. The timing engine, binary, workload and trial counts are
++unchanged; no retry in place or pooling with attempt1. Original launch v1 remains
++immutable. This document clarifies swap metadata and freezes new output paths.
++
++Saved before the retry; no previous protocol or result changes. This extends
++OPENMP_PROTOCOL_v1.md (parallel_sort_timing_v1) with the unchanged full preset.
++
++180 configurations: N32768/100000/1000000, uniform/sorted/reverse_sorted/
++duplicate_heavy/nearly_sorted, seeds1729/42/2718, threads1/2/4/8. Two sorters:
++sequential merge_sort and parallel_merge_sort. W1/R5, cardinality16, swaps=0 for sorted and floor(N/100) otherwise,
++256MiB array planning budget. Expected1800 measured and360 warmup rows.
++OMP_DYNAMIC=FALSE,OMP_THREAD_LIMIT=8,OMP_MAX_ACTIVE_LEVELS=1,OMP_WAIT_POLICY=PASSIVE.
++Actual team must equal request above threshold; team size is not a busy-worker count.
++
++Shared timing engine; identical restored inputs; generation/copying/full reference
++validation excluded. Allocation/team creation/task execution/joins/deallocation
++included. No counting/RSS. Primary ratio uses same-cell sequential median; separate
++parallel-request1 ratio. Per-dataset medians and ratios precede equal-weight distinct
++input aggregation. Keep all outliers and sample SD/min/max; no significance claim.
++Fixed size/seed/distribution/thread order and cyclic algorithm order, odd R imbalance,
++serial parent merges, warmed copies and uncontrolled shared-machine frequency/cache/
++thermal/background state remain confounders. No affinity/governor change; thermal
++state unmeasured. ThreadSanitizer startup fails in this environment, including a
++non-OpenMP probe; ordinary stress/ASan/UBSan are not a race-freedom proof.
++
++Prelaunch gates: final reviewed Release24/24 and ASan/UBSan24/24, leak detection
++on; Python13/13; smoke32 configurations,320 measured/64 warmup successes, zero
++failed/missing trials; exact derived regeneration; prior3796 artifact hashes match.
++Smoke overhead-inclusive child wall forecast, scaled by Nlog2(N+2) and fourfold
++allowance, is 199.61564643710625 seconds, below1800s budget;
++plotting separate. This is a forecast, not measured full duration. Resource estimates
++and actual available resources below are planning values, not measured algorithm RSS.
++
++Exact command:
++```sh
++python3 scripts/run_parallel_matrix.py --preset full --output results/raw/openmp_scaling_20261009T200852928292Z_retry1 --processed results/processed/openmp_scaling_20261009T200852928292Z_retry1 --figures results/figures/openmp_scaling_20261009T200852928292Z_retry1
++```
++
++Configuration/source identity and resource evidence:
++```json
++{
++  "binary_sha256": "b5a990e58a51e453976980a0c6701dd21d1fae8447db922a48d9416199176a9d",
++  "configuration_sha256": "bfd68b6f9e1dcac7338c0464d79803f71954c6b7188e486cf2534affca3b97d7",
++  "frozen_utc": "2026-10-09T20:37:49.178511+00:00",
++  "implementation_protocol_sha256": "83a7bdf942e941fe69a6b6e0cf1795edaeb96e82e7c80975a67a587b2477e7ac",
++  "resources": {
++    "disk_bytes_allowance": 419889152,
++    "required_available_memory_bytes": 536870912,
++    "required_free_disk_bytes": 839778304,
++    "workspace_bytes_estimate": 150217728
++  },
++  "snapshot": {
++    "affinity": [
++      0,
++      1,
++      2,
++      3,
++      4,
++      5,
++      6,
++      7,
++      8,
++      9,
++      10,
++      11
++    ],
++    "available_memory_bytes": 6755241984,
++    "cgroups": [
++      {
++        "headroom_bytes": null,
++        "memory_current": 1922560000,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/cosmic-files-applet.scope"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 7959949312,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 8015478784,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 8372408320,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 8396013568,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice"
++      }
++    ],
++    "controls": "No affinity/frequency/cache/thermal/background changes; shared machine.",
++    "disk_free_bytes": 134562123776,
++    "frequency_policy": {
++      "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy10/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy11/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy5/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy6/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy7/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy8/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy9/scaling_governor": "performance"
++    },
++    "load_average": [
++      3.3564453125,
++      2.572265625,
++      1.97314453125
++    ],
++    "logical_cpu_count": 12,
++    "platform": "linux",
++    "resource_limits": {
++      "AS": [
++        -1,
++        -1
++      ],
++      "CPU": [
++        -1,
++        -1
++      ],
++      "DATA": [
++        -1,
++        -1
++      ],
++      "FSIZE": [
++        -1,
++        -1
++      ],
++      "STACK": [
++        8388608,
++        -1
++      ]
++    },
++    "total_memory_bytes": 16475164672
++  }
++}
++```
++
++Results are complete only if every configuration/trial/actual-team/correctness
++check passes and summaries/plots/report regenerate from immutable raw data.
++Failures/interruption are retained, never completion; no retries in-place.
++No CUDA, learned index, AlphaDev or100M work. Maximum study size1M.
+--- /dev/null
++++ b/docs/studies/openmp_scaling_20261009T200852928292Z_v1.md
+@@ -0,0 +1,151 @@
++# OpenMP scaling study v1 — frozen launch
++
++Saved before execution; no previous protocol or result changes. This extends
++OPENMP_PROTOCOL_v1.md (parallel_sort_timing_v1) with the unchanged full preset.
++
++180 configurations: N32768/100000/1000000, uniform/sorted/reverse_sorted/
++duplicate_heavy/nearly_sorted, seeds1729/42/2718, threads1/2/4/8. Two sorters:
++sequential merge_sort and parallel_merge_sort. W1/R5, cardinality16, swaps=floor(N/100),
++256MiB array planning budget. Expected1800 measured and360 warmup rows.
++OMP_DYNAMIC=FALSE,OMP_THREAD_LIMIT=8,OMP_MAX_ACTIVE_LEVELS=1,OMP_WAIT_POLICY=PASSIVE.
++Actual team must equal request above threshold; team size is not a busy-worker count.
++
++Shared timing engine; identical restored inputs; generation/copying/full reference
++validation excluded. Allocation/team creation/task execution/joins/deallocation
++included. No counting/RSS. Primary ratio uses same-cell sequential median; separate
++parallel-request1 ratio. Per-dataset medians and ratios precede equal-weight distinct
++input aggregation. Keep all outliers and sample SD/min/max; no significance claim.
++Fixed size/seed/distribution/thread order and cyclic algorithm order, odd R imbalance,
++serial parent merges, warmed copies and uncontrolled shared-machine frequency/cache/
++thermal/background state remain confounders. No affinity/governor change; thermal
++state unmeasured. ThreadSanitizer startup fails in this environment, including a
++non-OpenMP probe; ordinary stress/ASan/UBSan are not a race-freedom proof.
++
++Prelaunch gates: final reviewed Release24/24 and ASan/UBSan24/24, leak detection
++on; Python12/12; smoke32 configurations,320 measured/64 warmup successes, zero
++failed/missing trials; exact derived regeneration; prior3796 artifact hashes match.
++Smoke overhead-inclusive child wall forecast, scaled by Nlog2(N+2) and fourfold
++allowance, is 184.14736184079177 seconds, below1800s budget;
++plotting separate. This is a forecast, not measured full duration. Resource estimates
++and actual available resources below are planning values, not measured algorithm RSS.
++
++Exact command:
++```sh
++python3 scripts/run_parallel_matrix.py --preset full --output results/raw/openmp_scaling_20261009T200852928292Z --processed results/processed/openmp_scaling_20261009T200852928292Z --figures results/figures/openmp_scaling_20261009T200852928292Z
++```
++
++Configuration/source identity and resource evidence:
++```json
++{
++  "binary_sha256": "b5a990e58a51e453976980a0c6701dd21d1fae8447db922a48d9416199176a9d",
++  "configuration_sha256": "bfd68b6f9e1dcac7338c0464d79803f71954c6b7188e486cf2534affca3b97d7",
++  "frozen_utc": "2026-10-09T20:32:16.777201+00:00",
++  "implementation_protocol_sha256": "83a7bdf942e941fe69a6b6e0cf1795edaeb96e82e7c80975a67a587b2477e7ac",
++  "resources": {
++    "disk_bytes_allowance": 419889152,
++    "required_available_memory_bytes": 536870912,
++    "required_free_disk_bytes": 839778304,
++    "workspace_bytes_estimate": 150217728
++  },
++  "snapshot": {
++    "affinity": [
++      0,
++      1,
++      2,
++      3,
++      4,
++      5,
++      6,
++      7,
++      8,
++      9,
++      10,
++      11
++    ],
++    "available_memory_bytes": 6587469824,
++    "cgroups": [
++      {
++        "headroom_bytes": null,
++        "memory_current": 1872969728,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/cosmic-files-applet.scope"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 8327446528,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 8383234048,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 8739078144,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice/user-1000.slice"
++      },
++      {
++        "headroom_bytes": null,
++        "memory_current": 8762683392,
++        "memory_max": "max",
++        "path": "/sys/fs/cgroup/user.slice"
++      }
++    ],
++    "controls": "No affinity/frequency/cache/thermal/background changes; shared machine.",
++    "disk_free_bytes": 134517039104,
++    "frequency_policy": {
++      "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy10/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy11/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy5/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy6/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy7/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy8/scaling_governor": "performance",
++      "/sys/devices/system/cpu/cpufreq/policy9/scaling_governor": "performance"
++    },
++    "load_average": [
++      1.6728515625,
++      1.61572265625,
++      1.5625
++    ],
++    "logical_cpu_count": 12,
++    "platform": "linux",
++    "resource_limits": {
++      "AS": [
++        -1,
++        -1
++      ],
++      "CPU": [
++        -1,
++        -1
++      ],
++      "DATA": [
++        -1,
++        -1
++      ],
++      "FSIZE": [
++        -1,
++        -1
++      ],
++      "STACK": [
++        8388608,
++        -1
++      ]
++    },
++    "total_memory_bytes": 16475164672
++  }
++}
++```
++
++Results are complete only if every configuration/trial/actual-team/correctness
++check passes and summaries/plots/report regenerate from immutable raw data.
++Failures/interruption are retained, never completion; no retries in-place.
++No CUDA, learned index, AlphaDev or100M work. Maximum study size1M.
+--- /dev/null
++++ b/include/algorithms/detail/parallel_mergesort_impl.hpp
+@@ -0,0 +1,91 @@
++#pragma once
++#include "algorithms/parallel_mergesort.hpp"
++#include <algorithm>
++#include <functional>
++#include <omp.h>
++#include <stdexcept>
++#include <type_traits>
++
++namespace mab::detail {
++struct NoParallelObserver {
++    void task(std::size_t, std::size_t) const noexcept {}
++    void merge(std::size_t, std::size_t, std::size_t) const noexcept {}
++};
++struct ParallelKeyLess {
++    bool operator()(Key a, Key b) const noexcept { return a < b; }
++};
++template<class Less, class Observer>
++void merge_range(Values& values, Values& buffer, std::size_t begin,
++                 std::size_t middle, std::size_t end, Less less, Observer observer) noexcept {
++    observer.merge(begin, middle, end);
++    auto left=begin, right=middle, out=begin;
++    while (left<middle && right<end) {
++        if (less(values[right], values[left])) buffer[out++]=values[right++];
++        else buffer[out++]=values[left++];
++    }
++    while (left<middle) buffer[out++]=values[left++];
++    while (right<end) buffer[out++]=values[right++];
++    std::copy(buffer.begin()+begin, buffer.begin()+end, values.begin()+begin);
++}
++template<class Less, class Observer>
++void serial_range(Values& values, Values& buffer, std::size_t begin,
++                  std::size_t end, Less less, Observer observer) noexcept {
++    const auto size=end-begin;
++    for (std::size_t width=1; width<size;) {
++        for (auto first=begin; first<end;) {
++            const auto middle=first+std::min(width,end-first);
++            const auto last=middle+std::min(width,end-middle);
++            merge_range(values,buffer,first,middle,last,less,observer);
++            first=last;
++        }
++        if (width>=size-width) break;
++        width*=2;
++    }
++}
++template<class Less, class Observer>
++void task_range(Values& values, Values& buffer, std::size_t begin,
++                std::size_t end, Less less, Observer observer) noexcept {
++    if (end-begin<=parallel_merge_grain) {
++        serial_range(values,buffer,begin,end,less,observer);
++        return;
++    }
++    const auto middle=begin+(end-begin)/2;
++    #pragma omp task default(none) shared(values,buffer) firstprivate(begin,middle,less,observer)
++    {
++        observer.task(begin,middle);
++        task_range(values,buffer,begin,middle,less,observer);
++    }
++    #pragma omp task default(none) shared(values,buffer) firstprivate(middle,end,less,observer)
++    {
++        observer.task(middle,end);
++        task_range(values,buffer,middle,end,less,observer);
++    }
++    #pragma omp taskwait
++    merge_range(values,buffer,begin,middle,end,less,observer);
++}
++template<class Less=ParallelKeyLess, class Observer=NoParallelObserver>
++ParallelSortInfo parallel_merge_sort_impl(Values& values, int threads,
++                                          Less less=Less{}, Observer observer=Observer{}) {
++    static_assert(std::is_nothrow_invocable_r_v<bool,Less,Key,Key>);
++    static_assert(std::is_nothrow_copy_constructible_v<Less> && std::is_nothrow_copy_constructible_v<Observer>);
++    static_assert(noexcept(observer.task(0,0)) && noexcept(observer.merge(0,0,0)));
++    if (threads<1 || threads>64) throw std::invalid_argument("threads must be in [1,64]");
++    if (omp_get_level()>0) throw std::invalid_argument("nested OpenMP sorting is unsupported");
++    if (values.size()<2) return {};
++    Values buffer(values.size()); // All user allocation happens before tasks/mutation.
++    if (threads==1 || values.size()<parallel_merge_threshold) {
++        serial_range(values,buffer,0,values.size(),less,observer);
++        return {};
++    }
++    int actual=1;
++    #pragma omp parallel num_threads(threads) default(none) shared(values,buffer,actual) firstprivate(less,observer)
++    {
++        #pragma omp single
++        {
++            actual=omp_get_num_threads();
++            task_range(values,buffer,0,values.size(),less,observer);
++        }
++    }
++    return {actual,true};
++}
++} // namespace mab::detail
+--- /dev/null
++++ b/include/algorithms/parallel_mergesort.hpp
+@@ -0,0 +1,24 @@
++#pragma once
++#include "common/types.hpp"
++#include <array>
++#include <string_view>
++
++namespace mab {
++inline constexpr std::size_t parallel_merge_threshold = 32768;
++inline constexpr std::size_t parallel_merge_grain = 16384;
++inline constexpr std::string_view parallel_merge_version = "parallel_merge_sort_v1";
++struct ParallelSortInfo {
++    int actual_threads = 1; // Team size, not count of workers that executed tasks.
++    bool parallel_region = false;
++};
++// Stable int32 sort. Requests [1,64], no invocation from an OpenMP region.
++// Buffer allocation precedes mutation; task bodies do not throw or allocate.
++ParallelSortInfo parallel_merge_sort(Values& values, int requested_threads);
++struct ConfiguredSorter {
++    std::string_view name;
++    ParallelSortInfo (*sort)(Values&, int);
++    int threads;
++};
++const std::array<ConfiguredSorter, 2>& parallel_sorters() noexcept;
++ConfiguredSorter find_parallel_sorter(std::string_view name, int threads);
++} // namespace mab
+--- /dev/null
++++ b/include/benchmark/detail/timing_impl.hpp
+@@ -0,0 +1,77 @@
++#pragma once
++#include "benchmark/timing.hpp"
++#include <algorithm>
++#include <chrono>
++#include <stdexcept>
++#include <type_traits>
++namespace mab::detail {
++template<class Entry, class Invoke>
++bool run_timing_engine(const Values& original, const TimingConfig& config,
++                       const std::vector<Entry>& sorters,
++                       const std::function<void(const TimingTrial&)>& sink, Invoke invoke) {
++    validate_timing_config(config);
++    if (original.size() != config.dataset.size || sorters.empty() || !sink)
++        throw std::invalid_argument("invalid timing input/sorters/sink");
++    for (std::size_t i = 0; i < sorters.size(); ++i) {
++        if (!sorters[i].sort || sorters[i].name.empty()) throw std::invalid_argument("invalid sorter");
++        for (std::size_t j = 0; j < i; ++j)
++            if (sorters[i].name == sorters[j].name) throw std::invalid_argument("duplicate sorter");
++    }
++    auto expected = original;
++    std::sort(expected.begin(), expected.end());
++    Values working(original.size());
++    using Clock = std::chrono::steady_clock;
++    static_assert(Clock::is_steady, "timing requires a monotonic clock");
++    for (const auto phase : {std::string_view{"warmup"}, std::string_view{"measure"}}) {
++        const auto repetitions = phase == "warmup" ? config.warmups : config.repetitions;
++        for (std::size_t trial = 0; trial < repetitions; ++trial) {
++            const auto offset = (config.dataset.seed % sorters.size() + trial % sorters.size()) % sorters.size();
++            for (std::size_t order = 0; order < sorters.size(); ++order) {
++                const auto& sorter = sorters[(offset + order) % sorters.size()];
++                std::copy(original.begin(), original.end(), working.begin());
++                TimingTrial result{sorter.name, phase, trial, order, std::nullopt, "ok", "passed", {}};
++                if constexpr (!std::is_void_v<decltype(invoke(sorter,working))>) {
++                    result.requested_threads=sorter.threads;
++                    result.actual_threads=0; // Unknown if invocation throws.
++                }
++                try {
++                    const auto start = Clock::now();
++                    if constexpr (std::is_void_v<decltype(invoke(sorter,working))>) {
++                        invoke(sorter,working);
++                    } else {
++                        const auto info=invoke(sorter,working);
++                        const auto stop=Clock::now();
++                        const auto elapsed=std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
++                        if (elapsed<0) throw std::runtime_error("negative steady-clock duration");
++                        result.elapsed_ns=static_cast<std::uint64_t>(elapsed);
++                        result.actual_threads=info.actual_threads;
++                        result.parallel_region=info.parallel_region;
++                    }
++                    if constexpr (std::is_void_v<decltype(invoke(sorter,working))>) {
++                        const auto stop = Clock::now();
++                        const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
++                        if (elapsed < 0) throw std::runtime_error("negative steady-clock duration");
++                        result.elapsed_ns = static_cast<std::uint64_t>(elapsed);
++                    }
++                } catch (const std::exception& error) {
++                    result.status = "error";
++                    result.correctness = "not_checked";
++                    result.error = error.what();
++                } catch (...) {
++                    result.status = "error";
++                    result.correctness = "not_checked";
++                    result.error = "non-standard sorter exception";
++                }
++                if (result.status == "ok" && working != expected) {
++                    result.status = "error";
++                    result.correctness = "failed";
++                    result.error = "full sorted output differs from std::sort reference";
++                }
++                sink(result);
++                if (result.status != "ok") return false;
++            }
++        }
++    }
++    return true;
++}
++} // namespace mab::detail
+--- /dev/null
++++ b/include/benchmark/parallel_timing.hpp
+@@ -0,0 +1,7 @@
++#pragma once
++#include "algorithms/parallel_mergesort.hpp"
++#include "benchmark/timing.hpp"
++namespace mab {
++bool run_parallel_timing_trials(const Values& original,const TimingConfig& config,
++    const std::vector<ConfiguredSorter>& sorters,const std::function<void(const TimingTrial&)>& sink);
++} // namespace mab
+--- /dev/null
++++ b/scripts/analyze_parallel_results.py
+@@ -0,0 +1,230 @@
++#!/usr/bin/env python3
++"""Strict parallel timing validation and paired, dataset-level scaling analysis."""
++import argparse
++import csv
++import json
++from pathlib import Path
++import statistics
++from analyze_results import FIELDS as BASE_FIELDS, integer, summarize_samples
++from experiment_model import load_json, save_json, sha256, tree_hashes
++
++PROTOCOL='parallel_sort_timing_v1'
++FIELDS=BASE_FIELDS+['implementation_version','requested_threads','actual_threads','parallel_region']
++ALGORITHMS=['merge_sort','parallel_merge_sort']
++
++
++def stats(values):
++    return dict(count=len(values),median=statistics.median(values) if values else None,
++                mean=statistics.mean(values) if values else None,
++                sample_stdev=statistics.stdev(values) if len(values)>1 else None,
++                minimum=min(values) if values else None,maximum=max(values) if values else None)
++
++
++def read_bundle(path, allow_incomplete=False):
++    if path.is_symlink():raise ValueError('symlink bundle rejected')
++    m=load_json(path/'run.json')
++    if m['protocol']!=PROTOCOL or m['schema_version']!=1 or m['algorithms']!=ALGORITHMS:
++        raise ValueError('incompatible parallel bundle')
++    if type(m['parallel_threads']) is not int or not 1<=m['parallel_threads']<=64:
++        raise ValueError('invalid configured threads')
++    if m['parallel_threshold']!=32768 or m['task_grain']!=16384 or m['openmp_macro']<=0:
++        raise ValueError('implementation contract differs')
++    if not 1<=m['repetitions']<=10000 or not 0<=m['warmups']<=1000:raise ValueError('invalid rounds')
++    for sidecar in ['source_hashes.json','compile_commands.json','CMakeCache.txt','pdqsort_upstream.json','timsort_upstream.json']:
++        if not (path/sidecar).is_file():raise ValueError('missing provenance: '+sidecar)
++    rows=[];seen=set();failed=False
++    with (path/'trials.csv').open(newline='',encoding='utf-8') as stream:
++        reader=csv.DictReader(stream,strict=True)
++        if reader.fieldnames!=FIELDS:raise ValueError('parallel CSV schema mismatch')
++        for row in reader:
++            if failed or set(row)!=set(FIELDS) or any(v is None for v in row.values()):raise ValueError('malformed/fail-fast rows')
++            if row['protocol']!=PROTOCOL or row['schema_version']!='1' or row['elapsed_unit']!='ns':raise ValueError('protocol/unit mismatch')
++            for key in ['run_id','run_kind','distribution','size','seed','nearly_sorted_swaps','duplicate_cardinality','dataset_generator',
++                        'input_hash_fnv1a64','repetitions','warmups','compiler_id','compiler_version','build_type','platform','architecture']:
++                if row[key]!=str(m[key]):raise ValueError('metadata mismatch: '+key)
++            if row['sanitizers']!=str(m['sanitizers']).lower():raise ValueError('sanitizer metadata mismatch')
++            for key in ['size','seed','nearly_sorted_swaps','duplicate_cardinality','input_hash_fnv1a64','repetitions','warmups']:
++                integer(row[key])
++            if row['run_kind'] not in ['performance','validation'] or (row['run_kind']=='performance' and (m['build_type']!='Release' or m['sanitizers'])):
++                raise ValueError('invalid performance build')
++            index=len(rows);warm=m['warmups']*2;phase='warmup' if index<warm else 'measure';offset_index=index if index<warm else index-warm
++            trial=offset_index//2;order=offset_index%2
++            if row['phase']!=phase or integer(row['trial_index'])!=trial or integer(row['execution_order'])!=order or trial>=(m['warmups'] if phase=='warmup' else m['repetitions']):
++                raise ValueError('trial schedule mismatch')
++            if row['algorithm']!=ALGORITHMS[(m['seed']%2+trial%2+order)%2]:raise ValueError('algorithm order mismatch')
++            identity=(phase,trial,row['algorithm'])
++            if identity in seen:raise ValueError('duplicate trial identity')
++            seen.add(identity)
++            parallel=row['algorithm']=='parallel_merge_sort';request=m['parallel_threads'] if parallel else 1
++            if integer(row['requested_threads'])!=request or row['implementation_version']!=('parallel_merge_sort_v1' if parallel else 'merge_sort_v1'):
++                raise ValueError('implementation/request mismatch')
++            if row['status']=='ok':
++                if row['correctness']!='passed' or row['error']:raise ValueError('invalid successful correctness')
++                integer(row['elapsed_ns']);actual=integer(row['actual_threads']);region=parallel and request>1 and m['size']>=32768
++                if not 1<=actual<=request or row['parallel_region']!=str(region).lower() or (not region and actual!=1):raise ValueError('invalid actual team metadata')
++            elif row['status']=='error':
++                if row['correctness'] not in ['failed','not_checked'] or not row['error']:raise ValueError('missing failure diagnostic')
++                if row['elapsed_ns']:integer(row['elapsed_ns'])
++                failed=True
++            else:raise ValueError('invalid status')
++            rows.append(row)
++    expected=2*(m['warmups']+m['repetitions']);complete=False
++    if m['expected_measured_rows']!=2*m['repetitions'] or m['expected_warmup_rows']!=2*m['warmups']:raise ValueError('planned row mismatch')
++    if (path/'COMPLETE.json').exists():
++        done=load_json(path/'COMPLETE.json');complete=done.get('complete') is True and done.get('schema_version')==1 and done.get('rows')==expected
++        if not complete or len(rows)!=expected or failed or (path/'FAILED.json').exists():raise ValueError('contradictory completion')
++    if not complete and not allow_incomplete:raise ValueError('incomplete bundle')
++    groups=[]
++    for name in ALGORITHMS:
++        selected=[r for r in rows if r['algorithm']==name and r['phase']=='measure'];ok=[r for r in selected if r['status']=='ok']
++        group={k:m[k] for k in ['size','seed','distribution','input_hash_fnv1a64','parallel_threads','run_kind','compiler_id','compiler_version','build_type','sanitizers','platform','architecture']}
++        group.update(algorithm=name,actual_threads=sorted({integer(r['actual_threads']) for r in ok}),
++                     successful_trials=len(ok),failed_trials=len(selected)-len(ok),missing_trials=m['repetitions']-len(selected),
++                     warmup_rows=sum(r['phase']=='warmup' and r['algorithm']==name for r in rows),
++                     failed_warmups=sum(r['phase']=='warmup' and r['algorithm']==name and r['status']!='ok' for r in rows),
++                     missing_warmups=m['warmups']-sum(r['phase']=='warmup' and r['algorithm']==name for r in rows),
++                     timing_ns=summarize_samples([integer(r['elapsed_ns']) for r in ok]),source_csv=str(path/'trials.csv'))
++        if len(group['actual_threads'])>1:raise ValueError('mixed actual teams require separate configurations')
++        groups.append(group)
++    return m,rows,groups,complete
++
++
++def analyze(source,allow_incomplete=False):
++    source=Path(source).resolve();plan=load_json(source/'matrix.json')
++    if plan['protocol']!=PROTOCOL or plan['schema_version']!=1:raise ValueError('incompatible matrix')
++    from run_parallel_matrix import make_plan
++    cases=plan['cases'];config=plan['configuration']
++    rebuilt=make_plan(config,Path(plan['binary']),source,Path(plan['processed_path']),Path(plan['figure_path']))
++    if plan!=rebuilt:raise ValueError('matrix plan/configuration fingerprint differs')
++    expected=[dict(size=n,seed=s,distribution=d,threads=p) for n in config['sizes'] for s in config['seeds'] for d in config['distributions'] for p in config['threads']]
++    if cases!=expected or len(cases)!=len(plan['commands']) or len(cases)!=len(plan['runs']) or len(set(plan['runs']))!=len(cases):raise ValueError('matrix coverage mismatch')
++    if any(Path(n).name!=n or n in ['.','..'] for n in plan['runs']):raise ValueError('invalid bundle path')
++    if {p.name for p in source.iterdir() if p.is_dir()}!=set(n for n in plan['runs'] if (source/n).is_dir()):raise ValueError('extra bundle')
++    protocol=load_json(source/'protocol.json')
++    if sha256(source/'PROTOCOL_v1.md')!=protocol['sha256']:raise ValueError('protocol hash differs')
++    collected=(source/'COLLECTED.json').exists()
++    if collected:
++        c=load_json(source/'COLLECTED.json')
++        if c.get('complete') is not True or c.get('runs')!=len(cases):raise ValueError('invalid collection marker')
++    complete=collected and not (source/'FAILED.json').exists() and not (source/'INTERRUPTED.json').exists();groups=[];observations=[];missing=[];commands=[];input_hashes={};build_id=None
++    for index,(name,case,command) in enumerate(zip(plan['runs'],cases,plan['commands'])):
++        result_path=source/(name+'_command.json');result=load_json(result_path) if result_path.exists() else None
++        if result and (result['command']!=command or type(result['exit_code']) not in [int,type(None)]):raise ValueError('command metadata mismatch')
++        command_ok=result is not None and result['status']=='successful' and result['exit_code']==0
++        commands.append(dict(run=name,status=result['status'] if result else 'missing',exit_code=result['exit_code'] if result else None))
++        if not command_ok:complete=False
++        if not (source/name/'run.json').exists():missing.append(name);complete=False;continue
++        m,rows,cell,done=read_bundle(source/name,allow_incomplete)
++        for k in ['size','seed','distribution']:
++            if m[k]!=case[k]:raise ValueError('matrix/bundle workload differs')
++        expected_swaps=0 if case['distribution']=='sorted' else case['size']//100
++        if m['parallel_threads']!=case['threads'] or m['repetitions']!=config['repetitions'] or m['warmups']!=config['warmups'] or m['duplicate_cardinality']!=config['distinct'] or m['nearly_sorted_swaps']!=expected_swaps or m['invocation']!=command:
++            raise ValueError('matrix/bundle configuration differs')
++        identity=(case['size'],case['seed'],case['distribution']);fingerprint=m['input_hash_fnv1a64']
++        if identity in input_hashes and input_hashes[identity]!=fingerprint:raise ValueError('thread cases received different data')
++        input_hashes[identity]=fingerprint
++        signature=(m['compiler_id'],m['compiler_version'],m['build_type'],m['sanitizers'],m['openmp_flags'],m['openmp_runtime_libraries'],sha256(source/name/'source_hashes.json'),sha256(source/name/'compile_commands.json'))
++        if build_id is not None and signature!=build_id:raise ValueError('incompatible build identity')
++        build_id=signature
++        if config['require_requested_teams']:
++            for row in rows:
++                if row['status']=='ok' and row['parallel_region']=='true' and row['actual_threads']!=row['requested_threads']:raise ValueError('runtime contracted a required study team')
++        complete=complete and done;groups.extend(cell)
++        observations.extend(dict(source_csv=str(source/name/'trials.csv'),row_index=i,raw=row) for i,row in enumerate(rows))
++    marker_path=source/'COMPLETE.json'
++    if marker_path.exists():
++        marker=load_json(marker_path);current=tree_hashes(source);current.pop('COMPLETE.json',None)
++        if marker.get('complete') is not True or marker.get('runs')!=len(cases) or marker.get('raw_sha256')!=current or not complete or (source/'FAILED.json').exists() or (source/'INTERRUPTED.json').exists():raise ValueError('matrix completion/hash contradiction')
++    elif not collected and not allow_incomplete:raise ValueError('incomplete matrix')
++    if not complete and not allow_incomplete:raise ValueError('incomplete matrix')
++    lookup={(g['size'],g['seed'],g['distribution'],g['parallel_threads'],g['algorithm']):g for g in groups}
++    ratios=[]
++    for g in groups:
++        if g['algorithm']!='parallel_merge_sort':continue
++        key=(g['size'],g['seed'],g['distribution']);p=g['parallel_threads'];seq=lookup.get((*key,p,'merge_sort'));one=lookup.get((*key,1,'parallel_merge_sort'))
++        valid=g['size']>=32768 and g['actual_threads']==[p] and all(x is not None and x['missing_trials']==x['failed_trials']==0 and x['timing_ns']['median_ns']>0 for x in [g,seq,one])
++        par=g['timing_ns']['median_ns'];s=seq['timing_ns']['median_ns']/par if valid else None;i=one['timing_ns']['median_ns']/par if valid else None
++        ratios.append(dict(size=g['size'],seed=g['seed'],distribution=g['distribution'],input_hash_fnv1a64=g['input_hash_fnv1a64'],threads=p,
++                           algorithmic_speedup=s,parallel_one_thread_speedup=i,algorithmic_efficiency=s/p if valid else None,
++                           parallel_one_thread_efficiency=i/p if valid else None,parallel_median_ns=par,
++                           unavailable_reason=None if valid else 'requires above-threshold complete positive medians, request1 baseline and exact observed team'))
++    cross=[]
++    for key in sorted({(g['size'],g['distribution'],g['threads']) for g in ratios}):
++        entries=[g for g in ratios if (g['size'],g['distribution'],g['threads'])==key];units={}
++        for g in entries:units.setdefault(g['input_hash_fnv1a64'],[]).append(g)
++        row=dict(size=key[0],distribution=key[1],threads=key[2],declared_datasets=len(entries),distinct_inputs=len(units),unavailable_datasets=sum(g['unavailable_reason'] is not None for g in entries))
++        for metric in ['algorithmic_speedup','parallel_one_thread_speedup','algorithmic_efficiency','parallel_one_thread_efficiency','parallel_median_ns']:
++            samples=[statistics.median([g[metric] for g in bucket if g[metric] is not None]) for bucket in units.values() if any(g[metric] is not None for g in bucket)]
++            row[metric]=stats(samples)
++        cross.append(row)
++    missing_trials=len(missing)*2*config['repetitions']+sum(g['missing_trials'] for g in groups)
++    return dict(schema_version=1,protocol=PROTOCOL,source=str(source),complete=complete,configuration=config,build_identity=build_id,
++                successful_measured=sum(g['successful_trials'] for g in groups),failed_measured=sum(g['failed_trials'] for g in groups),missing_measured=missing_trials,
++                warmup_rows=sum(g['warmup_rows'] for g in groups),failed_warmups=sum(g['failed_warmups'] for g in groups),
++                missing_warmups=len(missing)*2*config['warmups']+sum(g['missing_warmups'] for g in groups),missing_configurations=missing,
++                commands=commands,groups=groups,dataset_ratios=ratios,cross_dataset=cross,
++                aggregation='Within-dataset medians, ratios before equal-weight distinct-input summaries; all outliers retained; SD ddof1; no confidence interval.'),observations
++
++
++def render(summary,source,output,figures):
++    import matplotlib
++    matplotlib.use('Agg')
++    import matplotlib.pyplot as plt
++    matplotlib.rcParams.update({'svg.hashsalt':PROTOCOL,'font.family':'DejaVu Sans','pdf.fonttype':42})
++    figures.mkdir(exist_ok=False);entries=[]
++    for distribution in summary['configuration']['distributions']:
++        selected=[g for g in summary['cross_dataset'] if g['distribution']==distribution]
++        for metric,unit in [('parallel_median_ns','ms'),('algorithmic_speedup','Sequential Merge Sort / parallel'),('parallel_one_thread_speedup','Parallel one-thread / parallel'),('algorithmic_efficiency','Sequential-baseline speedup / actual team size')]:
++            fig,ax=plt.subplots(figsize=(7,4.5));points=[]
++            for n in summary['configuration']['sizes']:
++                rows=[g for g in selected if g['size']==n and g[metric]['median'] is not None];rows.sort(key=lambda g:g['threads'])
++                if not rows:continue
++                factor=1e-6 if metric=='parallel_median_ns' else 1
++                x=[g['threads'] for g in rows];y=[g[metric]['median']*factor for g in rows]
++                lo=[(g[metric]['median']-g[metric]['minimum'])*factor for g in rows];hi=[(g[metric]['maximum']-g[metric]['median'])*factor for g in rows]
++                ax.errorbar(x,y,yerr=[lo,hi],marker='o',capsize=3,label=f'N={n}; datasets={rows[0][metric]["count"]}')
++                points.extend(dict(size=n,threads=g['threads'],statistics=g[metric]) for g in rows)
++            ax.set(xlabel=('Requested threads; below threshold executes serial1' if metric=='parallel_median_ns' else 'Requested = observed team size; parallel request1 is serial'),ylabel=unit,ylim=(0,None),title=f'{distribution}: median of dataset summaries; min–max spread')
++            ax.set_xticks(summary['configuration']['threads']);ax.grid(alpha=.2)
++            if points:ax.legend(fontsize=8)
++            else:ax.text(.5,.5,'Scaling metric unavailable for this workload',ha='center',transform=ax.transAxes)
++            fig.tight_layout();name=distribution+'_'+metric;outputs={}
++            for fmt in ['svg','pdf']:
++                file=name+'.'+fmt;fig.savefig(figures/file,metadata={'Date':None,'Creator':PROTOCOL} if fmt=='svg' else {'CreationDate':None,'ModDate':None,'Creator':PROTOCOL,'Producer':PROTOCOL});outputs[fmt]=file
++            plt.close(fig);entries.append(dict(distribution=distribution,metric=metric,unit=unit,points=points,outputs=outputs))
++    save_json(figures/'plot_manifest.json',dict(protocol=PROTOCOL,source_sha256={k:v for k,v in tree_hashes(source).items() if k not in ['COMPLETE.json','analysis_command.json','final_resources.json']},summary_sha256=sha256(output/'summary.json'),matplotlib_version=matplotlib.__version__,figures=entries,output_sha256=tree_hashes(figures)))
++    lines=['# OpenMP scaling report','',f'Complete: {summary["complete"]}. Measured successes {summary["successful_measured"]}; failed {summary["failed_measured"]}; missing {summary["missing_measured"]}; warmups {summary["warmup_rows"]}.',
++           '', 'Sequential merge_sort is the primary baseline; parallel request1 is a separate implementation baseline. Ratios use within-dataset medians before equal weighting distinct input fingerprints. Min/max spreads are not confidence intervals. All outliers retained.',
++           '', '| N | Distribution | Threads | Datasets | Sequential-baseline speedup median / min / max | Efficiency median | Parallel1 speedup median |', '|---:|---|---:|---:|---|---:|---:|']
++    def f(x):return 'unavailable' if x is None else format(x,'.6g')
++    for row in summary['cross_dataset']:
++        s=row['algorithmic_speedup'];lines.append(f'| {row["size"]} | {row["distribution"]} | {row["threads"]} | {s["count"]} | {f(s["median"])} / {f(s["minimum"])} / {f(s["maximum"])} | {f(row["algorithmic_efficiency"]["median"])} | {f(row["parallel_one_thread_speedup"]["median"])} |')
++    lines+=['','## Environment','```json',json.dumps(load_json(source/'environment.json'),indent=2,sort_keys=True),'```','',
++            '## Limitations and reproduction','One shared Linux session, unpinned frequency/affinity/thermal/background load; fixed configuration order and odd-repetition cyclic imbalance. Serial parent merges limit parallelism. Actual team size is not a count of task-executing workers. No race-freedom, significance or universal superiority claim. No isolated memory/counting or CUDA/100M experiment.',
++            '','Full ns statistics, failures and every raw row remain in summary.json/observations.jsonl. Plot stack/points/source hashes are in plot_manifest.json. Regenerate to new paths:',
++            f'`python3 scripts/analyze_parallel_results.py {source} --output NEW_PROCESSED --figures NEW_FIGURES`','']
++    with (output/'REPORT.md').open('x') as stream:stream.write('\n'.join(lines))
++
++
++def write_analysis(source,output,figures,allow_incomplete=False):
++    source=Path(source).resolve();output=Path(output).absolute();figures=Path(figures).absolute()
++    paths=[source,output.resolve(),figures.resolve()]
++    if any(a==b or a in b.parents or b in a.parents for i,a in enumerate(paths) for b in paths[i+1:]):raise ValueError('overlapping outputs')
++    if output.exists() or figures.exists() or output.is_symlink() or figures.is_symlink():raise FileExistsError('derived output exists')
++    summary,rows=analyze(source,allow_incomplete);before=tree_hashes(source);output.mkdir(exist_ok=False)
++    save_json(output/'summary.json',summary)
++    with (output/'observations.jsonl').open('x') as stream:
++        for row in rows:stream.write(json.dumps(row,sort_keys=True,allow_nan=False)+'\n')
++    render(summary,source,output,figures)
++    if tree_hashes(source)!=before:raise ValueError('raw mutated during analysis')
++    save_json(output/('COMPLETE.json' if summary['complete'] else 'INCOMPLETE.json'),dict(complete=summary['complete'],files_sha256=tree_hashes(output),figures_sha256=tree_hashes(figures)))
++    return summary
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__,allow_abbrev=False);p.add_argument('source',type=Path);p.add_argument('--output',type=Path,required=True);p.add_argument('--figures',type=Path,required=True);p.add_argument('--allow-incomplete',action='store_true');args=p.parse_args()
++    try:
++        result=write_analysis(args.source,args.output,args.figures,args.allow_incomplete);print(args.output)
++        if not result['complete']:p.exit(1,'partial analysis retained\n')
++    except (OSError,ValueError,KeyError,TypeError,csv.Error) as error:p.exit(1,'analysis failed: '+str(error)+'\n')
++if __name__=='__main__':main()
+--- /dev/null
++++ b/scripts/run_parallel_matrix.py
+@@ -0,0 +1,149 @@
++#!/usr/bin/env python3
++"""Phase 6 serial orchestration using the existing timing core and Phase 5 helpers."""
++import argparse
++import itertools
++import json
++import os
++from pathlib import Path
++import signal
++import sys
++import math
++from capture_environment import capture
++from experiment_model import load_json,save_json,sha256,tree_hashes,canonical
++from run_experiments import resource_snapshot,check_resources,run_child,interrupted
++from run_matrix import numbers,DISTRIBUTIONS
++
++ROOT=Path(__file__).resolve().parents[1]
++PROTOCOL='parallel_sort_timing_v1'
++POLICY={'OMP_DYNAMIC':'FALSE','OMP_THREAD_LIMIT':'8','OMP_MAX_ACTIVE_LEVELS':'1','OMP_WAIT_POLICY':'PASSIVE'}
++
++
++def preset(name):
++    return dict(schema_version=1,protocol=PROTOCOL,profile=name,
++                sizes=[0,32767,32768,65537] if name=='smoke' else [32768,100000,1000000],
++                seeds=[1729] if name=='smoke' else [1729,42,2718],
++                distributions=['uniform','duplicate_heavy'] if name=='smoke' else list(DISTRIBUTIONS),
++                threads=[1,2,4,8],repetitions=5,warmups=1,distinct=16,memory_limit_mib=256,
++                require_requested_teams=True,validation_only=False)
++
++
++def validate_config(c):
++    if not isinstance(c,dict) or set(c)!=set(preset('smoke')) or type(c['schema_version']) is not int or c['schema_version']!=1 or c['protocol']!=PROTOCOL:raise ValueError('invalid config/schema/protocol')
++    if c['profile'] not in ['smoke','full','custom']:raise ValueError('unknown profile')
++    if c['profile']!='custom' and c!=preset(c['profile']):raise ValueError('changed preset requires custom label')
++    for k,low,high in [('repetitions',1,10000),('warmups',0,1000),('distinct',1,2**32),('memory_limit_mib',1,65536)]:
++        if type(c[k]) is not int or not low<=c[k]<=high:raise ValueError('invalid '+k)
++    for k,low,high in [('sizes',0,1000000),('seeds',0,2**64-1),('threads',1,8)]:
++        if not isinstance(c[k],list) or not c[k] or len(c[k])>100 or any(type(x) is not int or not low<=x<=high for x in c[k]) or len(set(c[k]))!=len(c[k]):raise ValueError('invalid '+k)
++    if c['threads']!=sorted(c['threads']) or any(x not in [1,2,4,8] for x in c['threads']) or 1 not in c['threads']:raise ValueError('threads require ordered subset of1,2,4,8 including baseline1')
++    d=c['distributions']
++    if not isinstance(d,list) or not d or any(x not in DISTRIBUTIONS for x in d) or len(set(d))!=len(d):raise ValueError('invalid distributions')
++    if type(c['require_requested_teams']) is not bool or type(c['validation_only']) is not bool:raise ValueError('invalid Boolean')
++    count=len(c['sizes'])*len(c['seeds'])*len(d)*len(c['threads'])
++    if count>256 or count*2*(c['repetitions']+c['warmups'])>100000:raise ValueError('matrix too large')
++    if max(c['sizes'])*16>c['memory_limit_mib']*1024**2:raise ValueError('array planning budget exceeded')
++    return c
++
++
++def make_plan(config,binary,raw,processed,figures):
++    c=validate_config(config);binary=Path(binary).resolve();raw=Path(raw).absolute();processed=Path(processed).absolute();figures=Path(figures).absolute()
++    paths=[raw.resolve(),processed.resolve(),figures.resolve()]
++    if any(a==b or a in b.parents or b in a.parents for i,a in enumerate(paths) for b in paths[i+1:]):raise ValueError('overlapping outputs')
++    cases=[dict(size=n,seed=s,distribution=d,threads=p) for n,s,d,p in itertools.product(c['sizes'],c['seeds'],c['distributions'],c['threads'])]
++    names=[f'run_{i:06d}' for i in range(len(cases))];commands=[]
++    for name,case in zip(names,cases):
++        command=[str(binary),'--output',str(raw/name),'--sort','all','--size',str(case['size']),'--seed',str(case['seed']),
++                 '--distribution',case['distribution'],'--threads',str(case['threads']),'--repetitions',str(c['repetitions']),
++                 '--warmups',str(c['warmups']),'--distinct',str(c['distinct']),'--memory-limit-mib',str(c['memory_limit_mib']),
++                 '--run-id',raw.name+':'+name]
++        if c['validation_only']:command.append('--validation-only')
++        commands.append(command)
++    workspace=max(c['sizes'])*16+128*1024**2;disk=len(cases)*2*1024**2+len(cases)*2*(c['repetitions']+c['warmups'])*4096+32*1024**2
++    return dict(schema_version=1,protocol=PROTOCOL,configuration=c,configuration_sha256=__import__('hashlib').sha256(canonical(c).encode()).hexdigest(),
++                binary=str(binary),raw_path=str(raw),processed_path=str(processed),figure_path=str(figures),cases=cases,runs=names,commands=commands,
++                environment_policy=POLICY,resources=dict(workspace_bytes_estimate=workspace,required_available_memory_bytes=max(512*1024**2,workspace*2),
++                disk_bytes_allowance=disk,required_free_disk_bytes=max(128*1024**2,disk*2)))
++
++
++def run(plan):
++    raw=Path(plan['raw_path']);processed=Path(plan['processed_path']);figures=Path(plan['figure_path']);binary=Path(plan['binary'])
++    for p in [raw,processed,figures]:
++        if not p.parent.is_dir():raise ValueError('output parent must exist')
++        if p.exists() or p.is_symlink():raise FileExistsError('existing output rejected')
++    import matplotlib
++    probe=run_child([str(binary),'--list-sorts'])
++    if probe['status']!='successful' or probe['stdout'].splitlines()!=['merge_sort','parallel_merge_sort']:raise ValueError('parallel registry unavailable')
++    build=next((p for p in [binary.parent,*binary.parent.parents] if (p/'CMakeCache.txt').exists()),None)
++    if build is None:raise ValueError('no CMake cache')
++    snapshot=resource_snapshot(raw.parent);check_resources(snapshot,plan['resources'])
++    if snapshot['affinity'] is not None and max(plan['configuration']['threads'])>len(snapshot['affinity']):raise ValueError('requested study teams exceed accessible CPUs')
++    # Environment policy belongs to this runner/children, never library global ICVs.
++    previous={k:os.environ.get(k) for k in POLICY};os.environ.update(POLICY)
++    try:
++        raw.mkdir(exist_ok=False)
++        try:
++            save_json(raw/'matrix.json',plan);save_json(raw/'preflight.json',snapshot)
++            environment=capture(build,' '.join(sys.argv));runtime=run_child(['ldd',str(binary)])
++            libraries={}
++            if runtime['status']=='successful':
++                for line in runtime['stdout'].splitlines():
++                    parts=line.split()
++                    if '=>' in parts and len(parts)>2 and Path(parts[2]).is_file():libraries[parts[2]]=sha256(Path(parts[2]))
++            environment.update(record_kind='parallel_scaling_environment',executable_sha256=sha256(binary),runtime_linkage=runtime,runtime_library_sha256=libraries,
++                omp_environment={k:v for k,v in os.environ.items() if k.startswith('OMP_') or k.startswith('GOMP_')},registry_probe=probe,
++                tools_sha256={p.name:sha256(p) for p in (ROOT/'scripts').glob('*.py')},matplotlib_version=matplotlib.__version__)
++            save_json(raw/'environment.json',environment)
++            protocol=ROOT/'docs/OPENMP_PROTOCOL_v1.md'
++            with (raw/'PROTOCOL_v1.md').open('xb') as f:f.write(protocol.read_bytes())
++            save_json(raw/'protocol.json',dict(path=str(protocol),sha256=sha256(protocol)))
++            for name,command in zip(plan['runs'],plan['commands']):
++                save_json(raw/(name+'_started.json'),dict(command=command))
++                result=run_child(command);save_json(raw/(name+'_command.json'),result)
++                if result['status']=='interrupted':raise InterruptedError(name+' interrupted')
++                if result['status']!='successful':raise RuntimeError(name+' failed: '+result['stderr'])
++            from analyze_parallel_results import analyze
++            checked,_=analyze(raw,allow_incomplete=True)
++            if checked['failed_measured'] or checked['missing_measured'] or checked['failed_warmups'] or checked['missing_warmups']:raise ValueError('incomplete raw trials')
++            save_json(raw/'COLLECTED.json',dict(complete=True,runs=len(plan['runs'])))
++            result=run_child([sys.executable,str(ROOT/'scripts/analyze_parallel_results.py'),str(raw),'--output',str(processed),'--figures',str(figures)])
++            save_json(raw/'analysis_command.json',result)
++            if result['status']=='interrupted':raise InterruptedError('analysis interrupted')
++            if result['status']!='successful':raise RuntimeError('analysis failed: '+result['stderr'])
++            marker=load_json(processed/'COMPLETE.json');files=tree_hashes(processed);files.pop('COMPLETE.json',None)
++            if marker['complete'] is not True or marker['files_sha256']!=files or marker['figures_sha256']!=tree_hashes(figures):raise ValueError('derived hash mismatch')
++            save_json(raw/'final_resources.json',resource_snapshot(raw.parent))
++            save_json(raw/'COMPLETE.json',dict(complete=True,runs=len(plan['runs']),raw_sha256=tree_hashes(raw),processed_sha256=tree_hashes(processed),figures_sha256=tree_hashes(figures)))
++        except (Exception,KeyboardInterrupt) as error:
++            marker='INTERRUPTED.json' if isinstance(error,(InterruptedError,KeyboardInterrupt)) else 'FAILED.json'
++            try:save_json(raw/marker,dict(complete=False,error=str(error)))
++            except OSError:pass
++            raise
++    finally:
++        for k,v in previous.items():
++            if v is None:os.environ.pop(k,None)
++            else:os.environ[k]=v
++    return raw
++
++
++def forecast(pilot,target):
++    from analyze_parallel_results import analyze
++    summary,_=analyze(Path(pilot));p=load_json(Path(pilot)/'matrix.json');validate_config(target)
++    cost=lambda c:sum(max(1,n)*math.log2(n+2) for n in c['sizes'])*len(c['seeds'])*len(c['distributions'])*len(c['threads'])*2*(c['warmups']+c['repetitions'])
++    wall=sum(load_json(Path(pilot)/(name+'_command.json'))['wall_seconds'] for name in p['runs'])
++    estimate=wall*cost(target)/cost(p['configuration'])*4
++    return dict(method='overhead-inclusive child wall * Nlog2(N+2) matrix work ratio *4; plotting separate',pilot_wall_seconds=wall,forecast_seconds=estimate,
++                family_wall_budget_seconds=1800,runtime_gate_passed=estimate<=1800,target_configuration=target)
++
++
++def main():
++    p=argparse.ArgumentParser(description=__doc__,allow_abbrev=False);p.add_argument('--preset',choices=['smoke','full'],default='smoke');p.add_argument('--config',type=Path)
++    p.add_argument('--binary',type=Path,default=Path('build/release/parallel_sort_benchmark'));p.add_argument('--output',type=Path,required=True)
++    p.add_argument('--processed',type=Path,required=True);p.add_argument('--figures',type=Path,required=True);p.add_argument('--dry-run',action='store_true');args=p.parse_args()
++    old=signal.signal(signal.SIGTERM,interrupted)
++    try:
++        plan=make_plan(load_json(args.config) if args.config else preset(args.preset),args.binary,args.output,args.processed,args.figures)
++        if args.dry_run:print(json.dumps(plan,indent=2,sort_keys=True,allow_nan=False))
++        else:print(run(plan))
++    except (OSError,ValueError,KeyError,TypeError,RuntimeError,KeyboardInterrupt) as error:p.exit(130 if isinstance(error,(KeyboardInterrupt,InterruptedError)) else 1,'parallel experiment failed: '+str(error)+'\n')
++    finally:signal.signal(signal.SIGTERM,old)
++if __name__=='__main__':main()
+--- /dev/null
++++ b/src/algorithms/parallel_mergesort.cpp
+@@ -0,0 +1,26 @@
++#include "algorithms/detail/parallel_mergesort_impl.hpp"
++#include "algorithms/mergesort.hpp"
++#include <stdexcept>
++#include <string>
++
++namespace mab {
++ParallelSortInfo parallel_merge_sort(Values& values, int threads) {
++    return detail::parallel_merge_sort_impl(values,threads);
++}
++namespace {
++ParallelSortInfo sequential(Values& values,int) { merge_sort(values); return {}; }
++}
++const std::array<ConfiguredSorter,2>& parallel_sorters() noexcept {
++    static const std::array<ConfiguredSorter,2> registry{{
++        {"merge_sort",sequential,1},{"parallel_merge_sort",parallel_merge_sort,1}}};
++    return registry;
++}
++ConfiguredSorter find_parallel_sorter(std::string_view name,int threads) {
++    if (threads<1 || threads>64) throw std::invalid_argument("threads must be in [1,64]");
++    for (auto sorter:parallel_sorters()) if (sorter.name==name) {
++        sorter.threads=name=="merge_sort"?1:threads;
++        return sorter;
++    }
++    throw std::invalid_argument("unknown configured sorter: "+std::string(name));
++}
++} // namespace mab
+--- /dev/null
++++ b/src/benchmark/parallel_main.cpp
+@@ -0,0 +1,227 @@
++#include "benchmark/parallel_timing.hpp"
++#include "parallel_build.hpp"
++#include <omp.h>
++#include "benchmark/output.hpp"
++#include "benchmark_build.hpp"
++
++#include <charconv>
++#include <chrono>
++#include <exception>
++#include <filesystem>
++#include <fstream>
++#include <iostream>
++#include <locale>
++#include <sstream>
++#include <stdexcept>
++#include <string>
++#include <thread>
++
++namespace fs = std::filesystem;
++namespace {
++template <typename T> T number(std::string_view text) {
++    T result{};
++    const auto parsed = std::from_chars(text.data(), text.data() + text.size(), result);
++    if (text.empty() || parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size())
++        throw std::invalid_argument("expected unsigned decimal integer: " + std::string(text));
++    return result;
++}
++
++std::ofstream new_file(const fs::path& path) {
++    std::ofstream stream;
++    stream.exceptions(std::ios::failbit | std::ios::badbit);
++    stream.imbue(std::locale::classic());
++    stream.open(path, std::ios::binary);
++    return stream;
++}
++
++void json_file(const fs::path& path, const std::string& content) {
++    auto stream = new_file(path);
++    stream << content << '\n';
++    stream.close();
++}
++
++std::string optional_text(const fs::path& path) {
++    std::ifstream stream(path, std::ios::binary);
++    if (!stream) return {};
++    return std::string(std::istreambuf_iterator<char>(stream), std::istreambuf_iterator<char>());
++}
++
++std::vector<mab::ConfiguredSorter> selected_sorters(std::string_view names, int threads) {
++    if (names == "all") names="merge_sort,parallel_merge_sort";
++    std::vector<mab::ConfiguredSorter> selected;
++    while (true) {
++        const auto comma = names.find(',');
++        const auto sorter = mab::find_parallel_sorter(names.substr(0, comma),threads);
++        for (const auto& prior : selected)
++            if (prior.name == sorter.name) throw std::invalid_argument("duplicate sorter");
++        selected.push_back(sorter);
++        if (comma == std::string_view::npos) break;
++        names.remove_prefix(comma + 1);
++    }
++    return selected;
++}
++
++void usage() {
++    std::cout << "Usage: parallel_sort_benchmark --output NEW_DIRECTORY [--sort NAME[,NAME...]|all]\n"
++                 "  [--size N] [--seed S] [--distribution uniform|sorted|reverse_sorted|duplicate_heavy|nearly_sorted]\n"
++                 "  [--threads P] [--swaps K] [--distinct K] [--repetitions R] [--warmups W]\n"
++                 "  [--memory-limit-mib M] [--run-id ID] [--validation-only] [--list-sorts] [--help]\n"
++                 "Defaults: merge_sort, threads=1, size=1000, seed=1729, uniform, R=5, W=1, M=256.\n"
++                 "Performance runs require Release without sanitizers. Output must not exist.\n";
++}
++}  // namespace
++
++int main(int argc, char** argv) {
++    fs::path output;
++    bool owns_output = false;
++    try {
++        mab::TimingConfig config;
++        std::string sorter_names = "merge_sort", run_id;
++        int threads=1;
++        bool validation_only = false;
++        std::vector<std::string> invocation;
++        for (int i = 0; i < argc; ++i) invocation.emplace_back(argv[i]);
++        for (int i = 1; i < argc; ++i) {
++            const std::string_view option(argv[i]);
++            if (option == "--help") { usage(); return 0; }
++            if (option == "--list-sorts") {
++                for (const auto& sorter : mab::parallel_sorters()) std::cout << sorter.name << '\n';
++                return 0;
++            }
++            if (option == "--validation-only") { validation_only = true; continue; }
++            if (option != "--threads" && option != "--output" && option != "--sort" && option != "--size" && option != "--seed" &&
++                option != "--distribution" && option != "--swaps" && option != "--distinct" &&
++                option != "--repetitions" && option != "--warmups" && option != "--memory-limit-mib" && option != "--run-id")
++                throw std::invalid_argument("unknown option: " + std::string(option));
++            if (++i == argc) throw std::invalid_argument("missing value for " + std::string(option));
++            const std::string_view value(argv[i]);
++            if (option == "--output") output = std::string(value);
++            else if (option == "--sort") { (void)selected_sorters(value,threads); sorter_names = value; }
++            else if (option == "--threads") {
++                const auto requested=number<unsigned int>(value);
++                if(requested<1 || requested>64) throw std::invalid_argument("threads must be in [1,64]");
++                threads=static_cast<int>(requested);
++            }
++            else if (option == "--size") config.dataset.size = number<std::size_t>(value);
++            else if (option == "--seed") config.dataset.seed = number<std::uint64_t>(value);
++            else if (option == "--distribution") {
++                config.sorted_input = value == "sorted";
++                if (!config.sorted_input) config.dataset.distribution = mab::parse_distribution(value);
++            } else if (option == "--swaps") config.dataset.nearly_sorted_swaps = number<std::size_t>(value);
++            else if (option == "--distinct") config.dataset.duplicate_cardinality = number<std::uint64_t>(value);
++            else if (option == "--repetitions") config.repetitions = number<std::size_t>(value);
++            else if (option == "--warmups") config.warmups = number<std::size_t>(value);
++            else if (option == "--memory-limit-mib") config.memory_limit_mib = number<std::size_t>(value);
++            else run_id = value;
++        }
++        mab::validate_timing_config(config);
++        const auto selected = selected_sorters(sorter_names,threads);
++        if (output.empty()) throw std::invalid_argument("--output NEW_DIRECTORY is required");
++        if (!validation_only && (std::string_view(mab::build::configuration) != "Release" || mab::build::sanitizers))
++            throw std::invalid_argument("performance requires Release without sanitizers; use --validation-only for tests");
++        if (run_id.empty()) run_id = output.filename().string();
++        if (run_id.empty()) throw std::invalid_argument("empty run identifier");
++        // Atomic directory creation provides portable exclusive result ownership.
++        if (!fs::create_directory(output)) throw std::runtime_error("output already exists: " + output.string());
++        owns_output = true;
++        const auto original = mab::make_timing_input(config);
++        const auto hash = std::to_string(mab::input_fingerprint(original));
++        const std::string run_kind = validation_only ? "validation" : "performance";
++        const auto measured_rows = config.repetitions * selected.size();
++        const auto warmup_rows = config.warmups * selected.size();
++        const auto started = std::chrono::duration_cast<std::chrono::seconds>(
++            std::chrono::system_clock::now().time_since_epoch()).count();
++        bool commands_copied = false;
++        const fs::path commands = fs::path(mab::build::binary_dir) / "compile_commands.json";
++        if (fs::exists(commands)) {
++            fs::copy_file(commands, output / "compile_commands.json");
++            commands_copied = true;
++        }
++        for (const auto name : {"pdqsort", "timsort"})
++            fs::copy_file(fs::path(mab::build::binary_dir) / (std::string(name) + "_upstream.json"),
++                          output / (std::string(name) + "_upstream.json"));
++        fs::copy_file(fs::path(mab::build::binary_dir) / "generated" / mab::build::configuration / "source_hashes.json",
++                      output / "source_hashes.json");
++        const auto cache = fs::path(mab::build::binary_dir) / "CMakeCache.txt";
++        if (fs::exists(cache)) fs::copy_file(cache, output / "CMakeCache.txt");
++        std::ostringstream metadata;
++        metadata.imbue(std::locale::classic());
++        metadata << "{\"schema_version\":1,\"protocol\":\"parallel_sort_timing_v1\",\"run_id\":" << mab::json_string(run_id)
++                 << ",\"run_kind\":" << mab::json_string(run_kind) << ",\"started_unix_seconds\":" << started
++                 << ",\"size\":" << config.dataset.size << ",\"seed\":" << config.dataset.seed
++                 << ",\"distribution\":" << mab::json_string(mab::timing_distribution(config))
++                 << ",\"nearly_sorted_swaps\":" << mab::timing_swaps(config)
++                 << ",\"duplicate_cardinality\":" << config.dataset.duplicate_cardinality
++                 << ",\"dataset_generator\":\"mt19937_64_v1\",\"input_hash_fnv1a64\":" << mab::json_string(hash)
++                 << ",\"repetitions\":" << config.repetitions << ",\"warmups\":" << config.warmups
++                 << ",\"expected_measured_rows\":" << measured_rows << ",\"expected_warmup_rows\":" << warmup_rows
++                 << ",\"memory_limit_mib\":" << config.memory_limit_mib
++                 << ",\"planned_array_workspace_bytes\":" << static_cast<std::uint64_t>(original.size()) * 4 * sizeof(mab::Key)
++                 << ",\"clock\":\"steady_clock\",\"clock_period_num\":" << std::chrono::steady_clock::period::num
++                 << ",\"clock_period_den\":" << std::chrono::steady_clock::period::den
++                 << ",\"elapsed_unit\":\"ns\",\"order_policy\":\"seed_offset_cyclic_v1\",\"compiler_id\":"
++                 << mab::json_string(mab::build::compiler_id) << ",\"compiler_version\":" << mab::json_string(mab::build::compiler_version)
++                 << ",\"compiler_path\":" << mab::json_string(mab::build::compiler_path)
++                 << ",\"build_type\":" << mab::json_string(mab::build::configuration)
++                 << ",\"sanitizers\":" << (mab::build::sanitizers ? "true" : "false") << ",\"cplusplus\":" << __cplusplus
++                 << ",\"cmake_global_flags\":" << mab::json_string(mab::build::global_flags)
++                 << ",\"cmake_configuration_flags\":" << mab::json_string(mab::build::configuration_flags)
++                 << ",\"compile_commands_available\":" << (commands_copied ? "true" : "false")
++                 << ",\"platform\":" << mab::json_string(mab::build::platform)
++                 << ",\"architecture\":" << mab::json_string(mab::build::architecture)
++                 << ",\"logical_cpu_count_hint\":" << std::thread::hardware_concurrency()
++                 << ",\"linux_cpuinfo\":" << mab::json_string(optional_text("/proc/cpuinfo"))
++                 << ",\"linux_meminfo\":" << mab::json_string(optional_text("/proc/meminfo"))
++                 << ",\"algorithms\":[";
++        for (std::size_t i = 0; i < selected.size(); ++i) {
++            if (i) metadata << ',';
++            metadata << mab::json_string(selected[i].name);
++        }
++        metadata << "],\"parallel_threads\":" << threads
++                 << ",\"parallel_threshold\":" << mab::parallel_merge_threshold
++                 << ",\"task_grain\":" << mab::parallel_merge_grain
++                 << ",\"openmp_macro\":" << _OPENMP
++                 << ",\"openmp_version\":" << mab::json_string(mab::parallel_build::version)
++                 << ",\"openmp_flags\":" << mab::json_string(mab::parallel_build::flags)
++                 << ",\"openmp_runtime_libraries\":" << mab::json_string(mab::parallel_build::libraries)
++                 << ",\"invocation\":[";
++        for (std::size_t i = 0; i < invocation.size(); ++i) {
++            if (i) metadata << ',';
++            metadata << mab::json_string(invocation[i]);
++        }
++        metadata << "]}";
++        json_file(output / "run.json", metadata.str());
++        auto csv = new_file(output / "trials.csv");
++        mab::write_csv_row(csv, {"schema_version", "protocol", "run_id", "run_kind", "algorithm", "distribution",
++            "size", "seed", "nearly_sorted_swaps", "duplicate_cardinality", "dataset_generator", "input_hash_fnv1a64",
++            "phase", "trial_index", "execution_order", "elapsed_ns", "elapsed_unit", "status", "correctness", "error",
++            "repetitions", "warmups", "compiler_id", "compiler_version", "build_type", "sanitizers", "platform", "architecture", "implementation_version", "requested_threads", "actual_threads", "parallel_region"});
++        std::size_t actual_rows = 0;
++        const auto completed = mab::run_parallel_timing_trials(original, config, selected, [&](const mab::TimingTrial& row) {
++            mab::write_csv_row(csv, {"1", "parallel_sort_timing_v1", run_id, run_kind, std::string(row.algorithm),
++                std::string(mab::timing_distribution(config)), std::to_string(original.size()), std::to_string(config.dataset.seed),
++                std::to_string(mab::timing_swaps(config)), std::to_string(config.dataset.duplicate_cardinality), "mt19937_64_v1", hash,
++                std::string(row.phase), std::to_string(row.trial_index), std::to_string(row.execution_order),
++                row.elapsed_ns ? std::to_string(*row.elapsed_ns) : "", "ns", std::string(row.status), std::string(row.correctness), row.error,
++                std::to_string(config.repetitions), std::to_string(config.warmups), mab::build::compiler_id, mab::build::compiler_version,
++                mab::build::configuration, mab::build::sanitizers ? "true" : "false", mab::build::platform, mab::build::architecture,
++                row.algorithm=="parallel_merge_sort" ? std::string(mab::parallel_merge_version) : "merge_sort_v1",
++                std::to_string(row.requested_threads),std::to_string(row.actual_threads),row.parallel_region?"true":"false"});
++            csv.flush();
++            ++actual_rows;
++        });
++        csv.close();
++        if (!completed) throw std::runtime_error("sort failed; inspect retained trials.csv");
++        if (actual_rows != measured_rows + warmup_rows) throw std::runtime_error("incomplete trial count");
++        json_file(output / "COMPLETE.json", "{\"schema_version\":1,\"complete\":true,\"rows\":" + std::to_string(actual_rows) + "}");
++        std::cout << "Completed " << measured_rows << " measured trials; raw data: " << (output / "trials.csv") << '\n';
++        return 0;
++    } catch (const std::exception& error) {
++        if (owns_output) {
++            try { json_file(output / "FAILED.json", "{\"complete\":false,\"error\":" + mab::json_string(error.what()) + "}"); }
++            catch (...) { /* The stderr error and absent completion marker remain authoritative. */ }
++        }
++        std::cerr << "error: " << error.what() << '\n';
++        return 1;
++    }
++}
+--- /dev/null
++++ b/src/benchmark/parallel_timing.cpp
+@@ -0,0 +1,11 @@
++#include "benchmark/parallel_timing.hpp"
++#include "benchmark/detail/timing_impl.hpp"
++namespace mab {
++bool run_parallel_timing_trials(const Values& original,const TimingConfig& config,
++    const std::vector<ConfiguredSorter>& sorters,const std::function<void(const TimingTrial&)>& sink) {
++    for (const auto& sorter:sorters)
++        if(sorter.threads<1 || sorter.threads>64) throw std::invalid_argument("threads must be in [1,64]");
++    return detail::run_timing_engine(original,config,sorters,sink,
++        [](const ConfiguredSorter& sorter,Values& values) { return sorter.sort(values,sorter.threads); });
++}
++} // namespace mab
+--- /dev/null
++++ b/tests/test_parallel_benchmark.py
+@@ -0,0 +1,137 @@
++#!/usr/bin/env python3
++import copy
++import csv
++import json
++import io
++import os
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import tempfile
++import unittest
++
++ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'))
++from analyze_parallel_results import read_bundle,analyze,write_analysis,stats
++from run_parallel_matrix import preset,make_plan,validate_config,forecast
++from experiment_model import tree_hashes,load_json,save_json
++BINARY=Path(sys.argv[1]).resolve();sys.argv=sys.argv[:1]
++ENV=dict(os.environ,OMP_DYNAMIC='FALSE',OMP_THREAD_LIMIT='8',OMP_WAIT_POLICY='PASSIVE')
++
++class ParallelFramework(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.tmp=tempfile.TemporaryDirectory();cls.base=Path(cls.tmp.name)
++        cls.config=preset('smoke');cls.config.update(profile='custom',sizes=[0,32768],seeds=[1729],distributions=['uniform'],threads=[1,2],repetitions=2,validation_only=True)
++        cls.raw=cls.base/'raw';cls.processed=cls.base/'processed';cls.figures=cls.base/'figures'
++        cls.config_path=cls.base/'config.json';save_json(cls.config_path,cls.config)
++        cls.command=[sys.executable,str(ROOT/'scripts/run_parallel_matrix.py'),'--binary',str(BINARY),'--config',str(cls.config_path),'--output',str(cls.raw),'--processed',str(cls.processed),'--figures',str(cls.figures)]
++        r=subprocess.run(cls.command,capture_output=True,text=True,env=ENV)
++        if r.returncode:raise AssertionError(r.stderr)
++    @classmethod
++    def tearDownClass(cls):cls.tmp.cleanup()
++    def setUp(self):self.temp=tempfile.TemporaryDirectory();self.work=Path(self.temp.name)
++    def tearDown(self):self.temp.cleanup()
++    def cli(self,*args):
++        return subprocess.run([str(BINARY),'--output',str(self.work/'run'),'--validation-only',*map(str,args)],capture_output=True,text=True,env=ENV)
++    def test_config_and_dry_run(self):
++        a=subprocess.run([*self.command,'--dry-run'],capture_output=True,text=True);b=subprocess.run([*self.command,'--dry-run'],capture_output=True,text=True)
++        self.assertEqual(a.returncode,0);self.assertEqual(a.stdout,b.stdout)
++        plan=json.loads(a.stdout);self.assertEqual(len(plan['cases']),4);self.assertEqual(plan['configuration'],self.config)
++        c=copy.deepcopy(self.config);c['threads']=[1,4]
++        self.assertNotEqual(make_plan(c,BINARY,self.raw,self.processed,self.figures)['configuration_sha256'],plan['configuration_sha256'])
++    def test_invalid_config(self):
++        for key,value in [('repetitions',0),('warmups',-1),('seeds',[2**64]),('threads',[2]),('threads',[1,3]),('threads',[1,1]),('sizes',[1000001]),('sizes',[True]),('protocol','wrong'),('distinct',0),('profile','full')]:
++            c=copy.deepcopy(self.config);c[key]=value
++            with self.subTest(key=key,value=value),self.assertRaises(ValueError):validate_config(c)
++        c=copy.deepcopy(self.config);c['extra']=1
++        with self.assertRaises(ValueError):validate_config(c)
++    def test_cli_invalid_and_registry(self):
++        for args in [('--threads','0'),('--threads','65'),('--threads','-1'),('--threads','+2'),('--threads','2.5'),('--threads','18446744073709551616'),('--sort','unknown'),('--sort','merge_sort,merge_sort'),('--repetitions','0'),('--seed','-1')]:
++            with self.subTest(args=args):self.assertEqual(self.cli(*args).returncode,1)
++        r=subprocess.run([str(BINARY),'--list-sorts'],capture_output=True,text=True);self.assertEqual(r.stdout.splitlines(),['merge_sort','parallel_merge_sort'])
++        r=self.cli('--sort','all','--threads','4','--size','32768','--repetitions','1','--warmups','0');self.assertEqual(r.returncode,0,r.stderr)
++        m,rows,_,done=read_bundle(self.work/'run');self.assertTrue(done);self.assertEqual(m['parallel_threads'],4)
++        self.assertEqual({(r['algorithm'],r['requested_threads'],r['actual_threads']) for r in rows},{('merge_sort','1','1'),('parallel_merge_sort','4','4')})
++    def test_actual_contracted_team(self):
++        env=dict(ENV,OMP_THREAD_LIMIT='2');command=[str(BINARY),'--output',str(self.work/'contracted'),'--validation-only','--sort','all','--size','32768','--threads','8','--repetitions','1','--warmups','0']
++        r=subprocess.run(command,capture_output=True,text=True,env=env);self.assertEqual(r.returncode,0,r.stderr)
++        _,rows,_,_=read_bundle(self.work/'contracted');par=next(r for r in rows if r['algorithm']=='parallel_merge_sort')
++        self.assertEqual((par['requested_threads'],par['actual_threads']),('8','2'))
++    def test_schema_and_reproducibility(self):
++        summary,rows=analyze(self.raw);self.assertTrue(summary['complete']);self.assertEqual((summary['successful_measured'],summary['warmup_rows']),(16,8))
++        self.assertEqual((summary['failed_measured'],summary['missing_measured']),(0,0));self.assertEqual(len(rows),24)
++        eligible=[r for r in summary['dataset_ratios'] if r['size']==32768];self.assertEqual(len(eligible),2)
++        for row in eligible:self.assertIsNotNone(row['algorithmic_speedup'])
++        for row in summary['dataset_ratios']:
++            if row['size']==0:self.assertIsNone(row['algorithmic_speedup'])
++    def test_malformed_duplicate_and_team(self):
++        for field,value in [('protocol','wrong'),('elapsed_ns','nan'),('actual_threads','99'),('implementation_version','wrong'),('trial_index','999')]:
++            target=self.work/field;shutil.copytree(self.raw/'run_000002',target)
++            path=target/'trials.csv';rows=list(csv.DictReader(io.StringIO(path.read_text())));fields=list(rows[0]);rows[0][field]=value
++            with path.open('w',newline='') as f:w=csv.DictWriter(f,fields);w.writeheader();w.writerows(rows)
++            with self.subTest(field=field),self.assertRaises(ValueError):read_bundle(target)
++        target=self.work/'duplicate';shutil.copytree(self.raw/'run_000002',target);path=target/'trials.csv';lines=path.read_text().splitlines();path.write_text('\n'.join(lines+[lines[1]])+'\n')
++        with self.assertRaises(ValueError):read_bundle(target)
++    def test_hand_checked_statistics_and_baselines(self):
++        self.assertEqual(stats([10,20,30]),dict(count=3,median=20,mean=20,sample_stdev=10.0,minimum=10,maximum=30))
++        self.assertIsNone(stats([1])['sample_stdev'])
++        # Independent fake timing observations on copied actual schema, never study evidence.
++        raw=self.work/'synthetic';shutil.copytree(self.raw,raw)
++        plan=load_json(raw/'matrix.json');plan=make_plan(plan['configuration'],BINARY,raw,self.work/'derived',self.work/'figures')
++        (raw/'matrix.json').write_text(json.dumps(plan));(raw/'COMPLETE.json').unlink()
++        for name,command in zip(plan['runs'],plan['commands']):
++            path=raw/name/'run.json';m=load_json(path);m['run_id']=raw.name+':'+name;m['invocation']=command;path.write_text(json.dumps(m))
++            path=raw/(name+'_command.json');r=load_json(path);r['command']=command;path.write_text(json.dumps(r))
++            path=raw/name/'trials.csv';rows=list(csv.DictReader(io.StringIO(path.read_text())));fields=list(rows[0])
++            for row in rows:
++                row['run_id']=m['run_id'];row['elapsed_ns']=str(100 if row['algorithm']=='merge_sort' else 80 if m['parallel_threads']==1 else 40)
++            with path.open('w',newline='') as f:w=csv.DictWriter(f,fields);w.writeheader();w.writerows(rows)
++        s,_=analyze(raw);row=next(r for r in s['dataset_ratios'] if r['size']==32768 and r['threads']==2)
++        self.assertEqual((row['algorithmic_speedup'],row['parallel_one_thread_speedup'],row['algorithmic_efficiency']),(2.5,2,1.25))
++    def test_partial_missing_and_failed_command(self):
++        raw=self.work/'partial';shutil.copytree(self.raw,raw);(raw/'COMPLETE.json').unlink();(raw/'COLLECTED.json').unlink()
++        # Missing output is modeled with a compatible absolute plan and existing metadata adjusted.
++        plan=make_plan(self.config,BINARY,raw,self.work/'processed',self.work/'figures');(raw/'matrix.json').write_text(json.dumps(plan))
++        for name in plan['runs']:shutil.rmtree(raw/name);(raw/(name+'_command.json')).unlink()
++        with self.assertRaises(ValueError):analyze(raw)
++        s,_=analyze(raw,True);self.assertFalse(s['complete']);self.assertEqual(s['missing_measured'],16);self.assertEqual(len(s['missing_configurations']),4)
++        self.assertTrue(all(c['status']=='missing' for c in s['commands']))
++    def test_output_safety(self):
++        before=tree_hashes(self.raw);r=subprocess.run(self.command,capture_output=True,text=True,env=ENV)
++        self.assertNotEqual(r.returncode,0);self.assertEqual(before,tree_hashes(self.raw))
++        with self.assertRaises(FileExistsError):write_analysis(self.raw,self.processed,self.figures)
++        with self.assertRaises(ValueError):make_plan(self.config,BINARY,self.raw,self.raw/'nested',self.figures)
++    def test_summary_plot_report_regeneration(self):
++        before=tree_hashes(self.raw);write_analysis(self.raw,self.work/'processed',self.work/'figures')
++        self.assertEqual(tree_hashes(self.processed),tree_hashes(self.work/'processed'))
++        self.assertEqual(tree_hashes(self.figures),tree_hashes(self.work/'figures'));self.assertEqual(tree_hashes(self.raw),before)
++        m=load_json(self.figures/'plot_manifest.json');self.assertEqual(len(m['figures']),4)
++        self.assertEqual(m['summary_sha256'],__import__('hashlib').sha256((self.processed/'summary.json').read_bytes()).hexdigest())
++    def test_failed_subprocess_retained(self):
++        stub=self.work/'stub';stub.write_text('#!/usr/bin/env python3\nimport sys\nif "--list-sorts" in sys.argv: print("merge_sort\\nparallel_merge_sort")\nelse: sys.exit(9)\n');stub.chmod(0o755)
++        shutil.copyfile(BINARY.parent/'CMakeCache.txt',self.work/'CMakeCache.txt')
++        config=copy.deepcopy(self.config);config.update(sizes=[1],threads=[1]);path=self.work/'c.json';save_json(path,config)
++        raw=self.work/'failed';command=[sys.executable,str(ROOT/'scripts/run_parallel_matrix.py'),'--binary',str(stub),'--config',str(path),'--output',str(raw),'--processed',str(self.work/'p'),'--figures',str(self.work/'f')]
++        r=subprocess.run(command,capture_output=True,text=True,env=ENV);self.assertEqual(r.returncode,1,r.stderr)
++        self.assertTrue((raw/'FAILED.json').exists());self.assertFalse((raw/'COMPLETE.json').exists())
++        self.assertEqual(load_json(raw/'run_000000_command.json')['exit_code'],9)
++        s,_=analyze(raw,True);self.assertFalse(s['complete']);self.assertEqual(s['missing_measured'],4)
++        self.assertEqual(s['commands'][0]['status'],'failed')
++
++    def test_forecast(self):
++        f=forecast(self.raw,self.config);self.assertAlmostEqual(f['forecast_seconds'],f['pilot_wall_seconds']*4)
++        self.assertTrue(f['runtime_gate_passed'])
++
++    def test_all_distributions_sorted_swap_metadata(self):
++        config=copy.deepcopy(self.config)
++        config.update(sizes=[100],threads=[1],distributions=preset('full')['distributions'],repetitions=1,warmups=0)
++        path=self.work/'all.json';save_json(path,config)
++        raw=self.work/'all';processed=self.work/'p';figures=self.work/'f'
++        command=[sys.executable,str(ROOT/'scripts/run_parallel_matrix.py'),'--binary',str(BINARY),'--config',str(path),'--output',str(raw),'--processed',str(processed),'--figures',str(figures)]
++        r=subprocess.run(command,capture_output=True,text=True,env=ENV);self.assertEqual(r.returncode,0,r.stderr)
++        summary,rows=analyze(raw);self.assertTrue(summary['complete']);self.assertEqual(summary['successful_measured'],10)
++        self.assertEqual({(r['raw']['distribution'],r['raw']['nearly_sorted_swaps']) for r in rows},
++                         {(d,'0' if d=='sorted' else '1') for d in config['distributions']})
++
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/tests/test_parallel_mergesort.cpp
+@@ -0,0 +1,115 @@
++#include "algorithms/detail/parallel_mergesort_impl.hpp"
++#include "algorithms/mergesort.hpp"
++#include "benchmark/parallel_timing.hpp"
++#include "test_support.hpp"
++#include <atomic>
++#include <future>
++#include <iostream>
++#include <limits>
++
++namespace {
++struct Trace {
++    std::atomic<std::size_t> tasks{0}, merges{0};
++    std::atomic<unsigned> workers{0};
++    std::atomic<bool> bad{false};
++    std::size_t size;
++};
++struct Observer {
++    Trace* trace;
++    void task(std::size_t begin,std::size_t end) const noexcept {
++        if(begin>=end || end>trace->size) trace->bad.store(true);
++        trace->tasks.fetch_add(1);
++        trace->workers.fetch_or(1U<<static_cast<unsigned>(omp_get_thread_num()));
++    }
++    void merge(std::size_t begin,std::size_t middle,std::size_t end) const noexcept {
++        if(begin>middle || middle>end || end>trace->size) trace->bad.store(true);
++        trace->merges.fetch_add(1);
++    }
++};
++struct GroupLess { bool operator()(mab::Key a,mab::Key b) const noexcept { return a/100000<b/100000; } };
++}
++int main() {
++ try {
++    std::size_t cases=0, output_checks=0;
++    const auto check=[&](const mab::Values& input) {
++        auto expected=input, sequential=input;
++        std::sort(expected.begin(),expected.end());mab::merge_sort(sequential);
++        require(expected==sequential,"sequential baseline mismatch");
++        for(int p:{1,2,4,8}) {
++            auto actual=input;
++            const auto info=mab::parallel_merge_sort(actual,p);
++            require(actual==expected,"parallel differential/permutation mismatch");++output_checks;
++            require(info.actual_threads>=1 && info.actual_threads<=p,"invalid team size");
++            const bool region=p>1 && input.size()>=mab::parallel_merge_threshold;
++            require(info.parallel_region==region,"parallel threshold mismatch");
++            if(!region) require(info.actual_threads==1,"serial call claims team");
++            actual=input;
++            const auto sorter=mab::find_parallel_sorter("parallel_merge_sort",p);
++            sorter.sort(actual,sorter.threads);
++            require(actual==expected,"registered/repeated sort mismatch");++output_checks;
++            mab::Values small{3,-1,0};mab::parallel_merge_sort(small,p);
++            require(small==mab::Values({-1,0,3}),"workspace isolation");
++        }
++        ++cases;
++    };
++    const auto lo=std::numeric_limits<mab::Key>::min(),hi=std::numeric_limits<mab::Key>::max();
++    for(const auto& v:std::vector<mab::Values>{{},{0},{lo},{hi},{2,1},{1,2},{1,1},{hi,lo,0,-1,1,lo+1,hi-1,hi,lo}})check(v);
++    std::size_t combinations=1;
++    for(std::size_t n=0;n<=5;++n) {
++        for(std::size_t code=0;code<combinations;++code) {
++            auto x=code;mab::Values v(n);for(auto& k:v){k=static_cast<mab::Key>(x%3)-1;x/=3;}check(v);
++        }
++        combinations*=3;
++    }
++    for(auto seed:{std::uint64_t{42},std::uint64_t{1729}})
++      for(std::size_t n:{0,1,2,3,7,31,16383,16384,16385,32767,32768,32769,65535,65536,65537})
++        for(int distribution=0;distribution<5;++distribution) {
++            mab::TimingConfig config;config.dataset.size=n;config.dataset.seed=seed;
++            config.sorted_input=distribution==4;
++            config.dataset.distribution=static_cast<mab::Distribution>(distribution==4?0:distribution);
++            check(mab::make_timing_input(config));
++        }
++    check(mab::Values(65537,lo));
++    mab::Values decorated(65537);
++    for(std::size_t i=0;i<decorated.size();++i)decorated[i]=static_cast<mab::Key>((i%7)*100000+i);
++    auto stable=decorated;std::stable_sort(stable.begin(),stable.end(),GroupLess{});
++    Trace trace;trace.size=decorated.size();
++    const auto info=mab::detail::parallel_merge_sort_impl(decorated,8,GroupLess{},Observer{&trace});
++    require(decorated==stable,"stable projected-key order mismatch");
++    require(trace.tasks>0 && trace.merges>0 && !trace.bad,"task/merge observer validation failed");
++    require(info.parallel_region && info.actual_threads>=2,"parallel fixture did not form a team");
++    const auto concurrent=[&](int p) {mab::TimingConfig c;c.dataset.size=131073;c.dataset.seed=static_cast<std::uint64_t>(p);
++        auto v=mab::make_timing_input(c),expected=v;std::sort(expected.begin(),expected.end());
++        for(int i=0;i<5;++i){auto copy=v;mab::parallel_merge_sort(copy,p);if(copy!=expected)return false;}return true;};
++    auto a=std::async(std::launch::async,concurrent,2),b=std::async(std::launch::async,concurrent,4);
++    require(a.get() && b.get(),"concurrent independent invocations failed");
++    for(int invalid:{-1,0,65}) {mab::Values v{2,1};bool rejected=false;
++        try{mab::parallel_merge_sort(v,invalid);}catch(const std::invalid_argument&){rejected=true;}
++        require(rejected && v==mab::Values({2,1}),"invalid threads mutated input");}
++    bool nested_rejected=false;
++    #pragma omp parallel num_threads(2) shared(nested_rejected)
++    {
++        #pragma omp single
++        {mab::Values v{2,1};try{mab::parallel_merge_sort(v,2);}catch(const std::invalid_argument&){nested_rejected=true;}}
++    }
++    require(nested_rejected,"nested OpenMP call was not rejected");
++    bool serialized_rejected=false;
++    #pragma omp parallel num_threads(1) shared(serialized_rejected)
++    {
++        mab::Values v{2,1};
++        try{mab::parallel_merge_sort(v,2);}catch(const std::invalid_argument&){serialized_rejected=true;}
++    }
++    require(serialized_rejected,"serialized enclosing OpenMP region was not rejected");
++    mab::TimingConfig c;c.dataset.size=32768;c.repetitions=2;c.warmups=1;
++    auto v=mab::make_timing_input(c);std::size_t rows=0;
++    require(mab::run_parallel_timing_trials(v,c,{mab::find_parallel_sorter("merge_sort",4),mab::find_parallel_sorter("parallel_merge_sort",4)},
++        [&](const mab::TimingTrial& row){require(row.status=="ok" && row.correctness=="passed" && row.elapsed_ns.has_value(),"timing correctness");
++            require(row.requested_threads==(row.algorithm=="merge_sort"?1:4),"requested team metadata");++rows;}),"shared timing failed");
++    require(rows==6,"shared timing row count");
++    require(mab::sorters().size()==6 && mab::sorters().front().name=="std_sort","old registry/default changed");
++    std::cout<<"Passed "<<cases<<" inputs, "<<output_checks<<" public/registry output checks at threads1/2/4/8; 10 concurrent large calls; "
++             <<trace.tasks<<" observed tasks, "<<trace.merges<<" observed merges, worker mask="<<trace.workers
++             <<"; stability, threshold, nested rejection and 6 timing rows passed\n";
++    return 0;
++ } catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}
++}

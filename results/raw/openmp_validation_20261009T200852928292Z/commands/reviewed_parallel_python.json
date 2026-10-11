@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_parallel_benchmark.py",
+    "build/release/parallel_sort_benchmark"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:25:56.404244+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "............\n----------------------------------------------------------------------\nRan 12 tests in 3.454s\n\nOK\n",
+  "wall_seconds": 3.5853883320014575,
+  "ended_utc": "2026-10-09T20:25:59.989785+00:00"
+}

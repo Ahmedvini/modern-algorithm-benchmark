@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/openmp_validation_20261009T200852928292Z/verify_smoke.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:30:57.077275+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"configurations\": 32,\n  \"successful_measured\": 320,\n  \"warmups\": 64,\n  \"failed_measured\": 0,\n  \"missing_measured\": 0,\n  \"summary_report_figures_regenerated_byte_identical\": true,\n  \"raw_unchanged_files\": 329,\n  \"prior_artifacts_unchanged\": 3796,\n  \"figure_pairs\": 8\n}\n{\n  \"family_wall_budget_seconds\": 1800,\n  \"forecast_seconds\": 184.14736184079177,\n  \"method\": \"overhead-inclusive child wall * Nlog2(N+2) matrix work ratio *4; plotting separate\",\n  \"pilot_wall_seconds\": 0.5646888410046813,\n  \"runtime_gate_passed\": true,\n  \"target_configuration\": {\n    \"distinct\": 16,\n    \"distributions\": [\n      \"uniform\",\n      \"sorted\",\n      \"reverse_sorted\",\n      \"duplicate_heavy\",\n      \"nearly_sorted\"\n    ],\n    \"memory_limit_mib\": 256,\n    \"profile\": \"full\",\n    \"protocol\": \"parallel_sort_timing_v1\",\n    \"repetitions\": 5,\n    \"require_requested_teams\": true,\n    \"schema_version\": 1,\n    \"seeds\": [\n      1729,\n      42,\n      2718\n    ],\n    \"sizes\": [\n      32768,\n      100000,\n      1000000\n    ],\n    \"threads\": [\n      1,\n      2,\n      4,\n      8\n    ],\n    \"validation_only\": false,\n    \"warmups\": 1\n  }\n}\n",
+  "stderr": "",
+  "wall_seconds": 3.1135453060014697,
+  "ended_utc": "2026-10-09T20:31:00.190947+00:00"
+}

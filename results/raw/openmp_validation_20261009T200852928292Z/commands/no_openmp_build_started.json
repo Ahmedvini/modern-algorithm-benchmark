@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/no_openmp",
+    "--target",
+    "sort_benchmark",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:29:25.193056+00:00"
+}

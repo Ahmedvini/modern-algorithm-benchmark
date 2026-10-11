@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "env",
+    "OMP_DYNAMIC=FALSE",
+    "OMP_THREAD_LIMIT=8",
+    "OMP_WAIT_POLICY=PASSIVE",
+    "build/release/test_parallel_mergesort"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:19:26.999461+00:00"
+}

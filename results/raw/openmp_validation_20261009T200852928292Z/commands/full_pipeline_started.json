@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_parallel_matrix.py",
+    "--preset",
+    "full",
+    "--output",
+    "results/raw/openmp_scaling_20261009T200852928292Z",
+    "--processed",
+    "results/processed/openmp_scaling_20261009T200852928292Z",
+    "--figures",
+    "results/figures/openmp_scaling_20261009T200852928292Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:32:16.922332+00:00"
+}

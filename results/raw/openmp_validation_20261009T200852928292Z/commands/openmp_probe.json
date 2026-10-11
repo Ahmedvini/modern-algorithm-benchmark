@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "OMP_DYNAMIC=FALSE",
+    "OMP_THREAD_LIMIT=8",
+    "build/openmp_probe/probe"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:09:24.442722+00:00",
+  "exit_code": 0,
+  "stdout": "1:1\n2:2\n4:4\n8:8\n_OPENMP=201511 dynamic=0\n",
+  "stderr": "",
+  "wall_seconds": 0.0021270689976518042,
+  "ended_utc": "2026-10-09T20:09:24.444959+00:00"
+}

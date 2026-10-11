@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "results/raw/openmp_validation_20261009T200852928292Z/freeze_retry_full.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:37:48.877831+00:00"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "env",
+    "OMP_DYNAMIC=FALSE",
+    "OMP_THREAD_LIMIT=8",
+    "OMP_WAIT_POLICY=PASSIVE",
+    "build/release/test_parallel_mergesort"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:19:26.999461+00:00",
+  "exit_code": 0,
+  "stdout": "Passed 523 inputs, 4184 public/registry output checks at threads1/2/4/8; 10 concurrent large calls; 8 observed tasks, 65549 observed merges, worker mask=109; stability, threshold, nested rejection and 6 timing rows passed\n",
+  "stderr": "",
+  "wall_seconds": 0.8091210829988995,
+  "ended_utc": "2026-10-09T20:19:27.808699+00:00"
+}

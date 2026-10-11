@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/openmp_validation_20261009T200852928292Z/freeze_full.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:32:16.492446+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"configurations\": 180,\n  \"measured\": 1800,\n  \"warmups\": 360,\n  \"forecast_seconds\": 184.14736184079177,\n  \"resources\": {\n    \"workspace_bytes_estimate\": 150217728,\n    \"required_available_memory_bytes\": 536870912,\n    \"disk_bytes_allowance\": 419889152,\n    \"required_free_disk_bytes\": 839778304\n  },\n  \"available_memory\": 6587469824,\n  \"disk_free\": 134517039104,\n  \"protocol\": \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/docs/studies/openmp_scaling_20261009T200852928292Z_v1.md\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.2910041249997448,
+  "ended_utc": "2026-10-09T20:32:16.783667+00:00"
+}

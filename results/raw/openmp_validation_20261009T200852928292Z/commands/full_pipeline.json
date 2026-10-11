@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_parallel_matrix.py",
+    "--preset",
+    "full",
+    "--output",
+    "results/raw/openmp_scaling_20261009T200852928292Z",
+    "--processed",
+    "results/processed/openmp_scaling_20261009T200852928292Z",
+    "--figures",
+    "results/figures/openmp_scaling_20261009T200852928292Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:32:16.922332+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "parallel experiment failed: matrix/bundle configuration differs\n",
+  "wall_seconds": 24.9004198779985,
+  "ended_utc": "2026-10-09T20:32:41.822890+00:00"
+}

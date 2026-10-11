@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/no_openmp",
+    "--target",
+    "sort_benchmark",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:29:25.193056+00:00",
+  "exit_code": 0,
+  "stdout": "[ 14%] Building CXX object CMakeFiles/mab_core.dir/src/datasets/generator.cpp.o\n[ 14%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/baselines.cpp.o\n[ 21%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o\n[ 28%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/sorting.cpp.o\n[ 35%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/pdqsort.cpp.o\n[ 42%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/timsort.cpp.o\n[ 50%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/mergesort.cpp.o\n[ 57%] Building CXX object CMakeFiles/mab_core.dir/src/algorithms/radixsort.cpp.o\n[ 64%] Linking CXX static library libmab_core.a\n[ 64%] Built target mab_core\n[ 78%] Building CXX object CMakeFiles/mab_timing.dir/src/benchmark/output.cpp.o\n[ 78%] Building CXX object CMakeFiles/mab_timing.dir/src/benchmark/timing.cpp.o\n[ 85%] Linking CXX static library libmab_timing.a\n[ 85%] Built target mab_timing\n[ 92%] Building CXX object CMakeFiles/sort_benchmark.dir/src/benchmark/timing_main.cpp.o\n[100%] Linking CXX executable sort_benchmark\n[100%] Built target sort_benchmark\n",
+  "stderr": "",
+  "wall_seconds": 3.708653563000553,
+  "ended_utc": "2026-10-09T20:29:28.901860+00:00"
+}

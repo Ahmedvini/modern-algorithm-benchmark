@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "env",
+    "TSAN_OPTIONS=halt_on_error=1",
+    "build/openmp_probe/tsan_standalone"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:24:48.787094+00:00",
+  "exit_code": 66,
+  "stdout": "",
+  "stderr": "FATAL: ThreadSanitizer: unexpected memory mapping 0x5f56b3b0a000-0x5f56b3b0b000\n",
+  "wall_seconds": 0.006578782998985844,
+  "ended_utc": "2026-10-09T20:24:48.793788+00:00"
+}

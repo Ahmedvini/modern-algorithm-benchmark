@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "env",
+    "OMP_DYNAMIC=FALSE",
+    "OMP_THREAD_LIMIT=8",
+    "build/openmp_probe/probe"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:09:24.442722+00:00"
+}

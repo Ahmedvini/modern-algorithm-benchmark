@@ -1,0 +1,31 @@
+{
+  "added": [
+    "docs/OPENMP_PROTOCOL_v1.md",
+    "docs/studies/openmp_scaling_20261009T200852928292Z_retry1_v2.md",
+    "docs/studies/openmp_scaling_20261009T200852928292Z_v1.md",
+    "include/algorithms/detail/parallel_mergesort_impl.hpp",
+    "include/algorithms/parallel_mergesort.hpp",
+    "include/benchmark/detail/timing_impl.hpp",
+    "include/benchmark/parallel_timing.hpp",
+    "scripts/analyze_parallel_results.py",
+    "scripts/run_parallel_matrix.py",
+    "src/algorithms/parallel_mergesort.cpp",
+    "src/benchmark/parallel_main.cpp",
+    "src/benchmark/parallel_timing.cpp",
+    "tests/test_parallel_benchmark.py",
+    "tests/test_parallel_mergesort.cpp"
+  ],
+  "modified": [
+    "CMakeLists.txt",
+    "README.md",
+    "docs/ALGORITHMS.md",
+    "docs/AUDIT.md",
+    "docs/BENCHMARKING.md",
+    "docs/EXPERIMENT_PROTOCOL.md",
+    "docs/METRICS.md",
+    "docs/ROADMAP.md",
+    "include/benchmark/timing.hpp",
+    "src/benchmark/timing.cpp"
+  ],
+  "protected_original_files": 96
+}

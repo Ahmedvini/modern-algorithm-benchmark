@@ -1,0 +1,12 @@
+{
+  "complete": false,
+  "successful_measured": 1800,
+  "failed_measured": 0,
+  "missing_measured": 0,
+  "warmup_rows": 360,
+  "failed_warmups": 0,
+  "missing_warmups": 0,
+  "configurations": 180,
+  "command_successes": 180,
+  "reason": "Analyzer incorrectly expected nonzero swaps for sorted input. No original artifacts modified; attempt remains FAILED."
+}

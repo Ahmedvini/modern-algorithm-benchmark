@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/release",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:26:00.173061+00:00",
+  "exit_code": 0,
+  "stdout": "[ 11%] Built target mab_core\n[ 13%] Built target algorithm_benchmark\n[ 18%] Built target mab_metrics\n[ 21%] Building CXX object CMakeFiles/mab_timing.dir/src/benchmark/timing.cpp.o\n[ 22%] Built target mab_search\n[ 27%] Built target mab_structures\n[ 30%] Built target test_baselines\n[ 32%] Built target test_datasets\n[ 35%] Built target test_quicksort\n[ 37%] Built target test_pdqsort\n[ 40%] Built target test_timsort\n[ 42%] Built target test_mergesort\n[ 45%] Built target test_radixsort\n[ 47%] Built target test_comparisons\n[ 50%] Built target test_memory\n[ 55%] Built target test_memory_unsupported\n[ 57%] Built target mab_parallel\n[ 60%] Built target sort_metrics\n[ 62%] Built target mab_search_metrics\n[ 65%] Built target test_structures\n[ 67%] Built target test_searching\n[ 68%] Linking CXX static library libmab_timing.a\n[ 70%] Built target mab_timing\n[ 73%] Built target mab_search_timing\n[ 73%] Linking CXX executable sort_benchmark\n[ 75%] Linking CXX executable test_timing\n[ 76%] Built target sort_benchmark\n[ 77%] Built target test_timing\n[ 78%] Building CXX object CMakeFiles/mab_parallel_timing.dir/src/benchmark/parallel_timing.cpp.o\n[ 80%] Linking CXX executable search_benchmark\n[ 81%] Built target search_benchmark\n[ 82%] Linking CXX executable search_counts\n[ 83%] Built target search_counts\n[ 86%] Built target mab_structure_timing\n[ 87%] Linking CXX executable test_search_timing\n[ 88%] Built target test_search_timing\n[ 90%] Linking CXX executable structure_benchmark\n[ 91%] Built target structure_benchmark\n[ 92%] Linking CXX executable test_structure_timing\n[ 93%] Built target test_structure_timing\n[ 95%] Linking CXX static library libmab_parallel_timing.a\n[ 95%] Built target mab_parallel_timing\n[ 96%] Linking CXX executable test_parallel_mergesort\n[ 97%] Linking CXX executable parallel_sort_benchmark\n[100%] Built target test_parallel_mergesort\n[100%] Built target parallel_sort_benchmark\n",
+  "stderr": "",
+  "wall_seconds": 1.2008573310013162,
+  "ended_utc": "2026-10-09T20:26:01.374032+00:00"
+}

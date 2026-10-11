@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "c++",
+    "-g",
+    "-O1",
+    "-std=c++17",
+    "-fsanitize=thread",
+    "build/openmp_probe/tsan_standalone.cpp",
+    "-pthread",
+    "-o",
+    "build/openmp_probe/tsan_standalone"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:24:48.599013+00:00"
+}

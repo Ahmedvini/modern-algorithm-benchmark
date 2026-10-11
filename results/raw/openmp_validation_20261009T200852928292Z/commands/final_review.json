@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/openmp_validation_20261009T200852928292Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:41:19.370123+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"phase\": 6,\n  \"release_groups_passed\": 24,\n  \"sanitizer_groups_passed\": 24,\n  \"leak_detection_enabled\": true,\n  \"parallel_python_methods\": 13,\n  \"parallel_input_cases\": 523,\n  \"public_registry_checks\": 4184,\n  \"concurrent_large_calls\": 10,\n  \"observed_tasks\": 8,\n  \"observed_merges\": 65549,\n  \"tsan_status\": \"startup failure exit66, also independent non-OpenMP probe; no race-freedom claim\",\n  \"smoke_measured\": 320,\n  \"smoke_warmups\": 64,\n  \"full_configurations\": 180,\n  \"full_measured\": 1800,\n  \"full_warmups\": 360,\n  \"failed_measured\": 0,\n  \"missing_measured\": 0,\n  \"full_figure_pairs\": 20,\n  \"all_derived_byte_identical\": true,\n  \"prior_artifacts_unchanged\": 3796,\n  \"failed_attempt_preserved_files\": 1806,\n  \"original_files_unchanged\": 96,\n  \"modified_files\": 10,\n  \"added_files\": 14,\n  \"source_files\": 120,\n  \"frozen_protocols_unchanged\": true,\n  \"source_manifest_matches_current_build\": true,\n  \"binary_sha256\": \"b5a990e58a51e453976980a0c6701dd21d1fae8447db922a48d9416199176a9d\",\n  \"source_after_sha256\": \"718fe55a36144ff5cc29b57ecd9b88eb2adbab4e4799223d1bc4b4ff2349447c\",\n  \"patch_sha256\": \"8872ab7d41c7964d7f828e4e65da759446527ac68995fa3281791976abc144b3\",\n  \"audit_sha256\": \"cdc2928c75225def7afb60408898e4b250aaf0eae50edd8563491878f1ae75c5\"\n}\n{\n  \"modified\": [\n    \"CMakeLists.txt\",\n    \"README.md\",\n    \"docs/ALGORITHMS.md\",\n    \"docs/AUDIT.md\",\n    \"docs/BENCHMARKING.md\",\n    \"docs/EXPERIMENT_PROTOCOL.md\",\n    \"docs/METRICS.md\",\n    \"docs/ROADMAP.md\",\n    \"include/benchmark/timing.hpp\",\n    \"src/benchmark/timing.cpp\"\n  ],\n  \"added\": [\n    \"docs/OPENMP_PROTOCOL_v1.md\",\n    \"docs/studies/openmp_scaling_20261009T200852928292Z_retry1_v2.md\",\n    \"docs/studies/openmp_scaling_20261009T200852928292Z_v1.md\",\n    \"include/algorithms/detail/parallel_mergesort_impl.hpp\",\n    \"include/algorithms/parallel_mergesort.hpp\",\n    \"include/benchmark/detail/timing_impl.hpp\",\n    \"include/benchmark/parallel_timing.hpp\",\n    \"scripts/analyze_parallel_results.py\",\n    \"scripts/run_parallel_matrix.py\",\n    \"src/algorithms/parallel_mergesort.cpp\",\n    \"src/benchmark/parallel_main.cpp\",\n    \"src/benchmark/parallel_timing.cpp\",\n    \"tests/test_parallel_benchmark.py\",\n    \"tests/test_parallel_mergesort.cpp\"\n  ],\n  \"protected_original_files\": 96\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.8158898700021382,
+  "ended_utc": "2026-10-09T20:41:20.186138+00:00"
+}

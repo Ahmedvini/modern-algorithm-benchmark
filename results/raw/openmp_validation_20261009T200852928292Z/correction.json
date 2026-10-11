@@ -1,0 +1,12 @@
+{
+  "changes": [
+    "scripts/analyze_parallel_results.py: expected swaps zero for sorted, existing default otherwise",
+    "tests/test_parallel_benchmark.py: all-five-distribution regression at N100"
+  ],
+  "failed_attempt": "openmp_scaling_20261009T200852928292Z",
+  "failed_attempt_preserved": true,
+  "no_workload_or_cpp_changes": true,
+  "reason": "Sorted input records zero swaps; analyzer formerly required N//100 for every distribution.",
+  "retry_full": "openmp_scaling_20261009T200852928292Z_retry1",
+  "retry_smoke": "openmp_smoke_20261009T200852928292Z_retry1"
+}

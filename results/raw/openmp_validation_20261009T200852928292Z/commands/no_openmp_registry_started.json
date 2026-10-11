@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "build/no_openmp/sort_benchmark",
+    "--list-sorts"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:29:28.933872+00:00"
+}

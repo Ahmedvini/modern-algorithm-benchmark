@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "env",
+    "OMP_DYNAMIC=FALSE",
+    "OMP_THREAD_LIMIT=8",
+    "OMP_WAIT_POLICY=PASSIVE",
+    "TSAN_OPTIONS=halt_on_error=1",
+    "build/openmp_probe/test_parallel_tsan"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:23:32.443747+00:00"
+}

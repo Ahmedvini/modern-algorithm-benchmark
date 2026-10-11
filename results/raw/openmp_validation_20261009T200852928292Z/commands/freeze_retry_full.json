@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "results/raw/openmp_validation_20261009T200852928292Z/freeze_retry_full.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:37:48.877831+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"configurations\": 180,\n  \"measured\": 1800,\n  \"warmups\": 360,\n  \"forecast_seconds\": 199.61564643710625,\n  \"resources\": {\n    \"workspace_bytes_estimate\": 150217728,\n    \"required_available_memory_bytes\": 536870912,\n    \"disk_bytes_allowance\": 419889152,\n    \"required_free_disk_bytes\": 839778304\n  },\n  \"available_memory\": 6755241984,\n  \"disk_free\": 134562123776,\n  \"protocol\": \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/docs/studies/openmp_scaling_20261009T200852928292Z_retry1_v2.md\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 0.30770607700105757,
+  "ended_utc": "2026-10-09T20:37:49.185677+00:00"
+}

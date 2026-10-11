@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "c++",
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-fopenmp",
+    "build/openmp_probe/probe.cpp",
+    "-o",
+    "build/openmp_probe/probe"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:09:24.179627+00:00"
+}

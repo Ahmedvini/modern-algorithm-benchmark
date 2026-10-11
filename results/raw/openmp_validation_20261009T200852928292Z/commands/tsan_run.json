@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "env",
+    "OMP_DYNAMIC=FALSE",
+    "OMP_THREAD_LIMIT=8",
+    "OMP_WAIT_POLICY=PASSIVE",
+    "TSAN_OPTIONS=halt_on_error=1",
+    "build/openmp_probe/test_parallel_tsan"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:23:32.443747+00:00",
+  "exit_code": 66,
+  "stdout": "",
+  "stderr": "FATAL: ThreadSanitizer: unexpected memory mapping 0x64705af2c000-0x64705af30000\n",
+  "wall_seconds": 0.008684862998052267,
+  "ended_utc": "2026-10-09T20:23:32.452542+00:00"
+}

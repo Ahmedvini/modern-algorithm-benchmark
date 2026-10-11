@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/sanitize",
+    "-DCMAKE_BUILD_TYPE=Debug",
+    "-DMAB_ENABLE_SANITIZERS=ON",
+    "-DMAB_ENABLE_OPENMP=ON"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:27:30.915474+00:00",
+  "exit_code": 0,
+  "stdout": "-- Found OpenMP_CXX: -fopenmp (found version \"4.5\") \n-- Found OpenMP: TRUE (found version \"4.5\") found components: CXX \n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE  \n-- Configuring done (0.3s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize\n",
+  "stderr": "",
+  "wall_seconds": 0.33765326400316553,
+  "ended_utc": "2026-10-09T20:27:31.253248+00:00"
+}

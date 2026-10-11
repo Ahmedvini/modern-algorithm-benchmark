@@ -1,0 +1,22 @@
+{
+  "actual_parallel_teams": [
+    2,
+    4,
+    8
+  ],
+  "complete": true,
+  "configurations": 180,
+  "cross_dataset_groups": 60,
+  "distinct_dataset_configurations": 180,
+  "failed_attempt_unchanged_files": 1806,
+  "failed_measured": 0,
+  "failed_warmups": 0,
+  "figure_pairs": 20,
+  "missing_measured": 0,
+  "missing_warmups": 0,
+  "prior_artifacts_unchanged": 3796,
+  "raw_unchanged_files": 1809,
+  "successful_measured": 1800,
+  "summary_report_figures_regenerated_byte_identical": true,
+  "warmups": 360
+}

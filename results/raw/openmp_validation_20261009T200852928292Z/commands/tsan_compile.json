@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "c++",
+    "-std=c++17",
+    "-g",
+    "-O1",
+    "-fopenmp",
+    "-fsanitize=thread",
+    "-fno-omit-frame-pointer",
+    "-Iinclude",
+    "-Itests",
+    "tests/test_parallel_mergesort.cpp",
+    "src/algorithms/parallel_mergesort.cpp",
+    "src/algorithms/mergesort.cpp",
+    "src/benchmark/parallel_timing.cpp",
+    "src/benchmark/timing.cpp",
+    "build/release/libmab_core.a",
+    "-pthread",
+    "-o",
+    "build/openmp_probe/test_parallel_tsan"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:19:27.844319+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "wall_seconds": 2.8142950139990717,
+  "ended_utc": "2026-10-09T20:19:30.658739+00:00"
+}

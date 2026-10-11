@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/sanitize",
+    "-DCMAKE_BUILD_TYPE=Debug",
+    "-DMAB_ENABLE_SANITIZERS=ON",
+    "-DMAB_ENABLE_OPENMP=ON"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:27:30.915474+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_parallel_matrix.py",
+    "--preset",
+    "smoke",
+    "--output",
+    "results/raw/openmp_smoke_20261009T200852928292Z",
+    "--processed",
+    "results/processed/openmp_smoke_20261009T200852928292Z",
+    "--figures",
+    "results/figures/openmp_smoke_20261009T200852928292Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T20:30:26.707642+00:00",
+  "exit_code": 0,
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z\n",
+  "stderr": "",
+  "wall_seconds": 3.768079568999383,
+  "ended_utc": "2026-10-09T20:30:30.475884+00:00"
+}
