@@ -1,0 +1,42 @@
+{
+  "added": {
+    "docs/CPU_ONLY_RELEASE_v1.md": "b779a04446a1e6eb94dd3b7ff3adb1949775d6887a9cefff71ba299bbe4fd625",
+    "docs/DEFERRED_GPU.md": "4fc3833d89983888bdc3bcdca587e34a52d97a7e4f43597ec7d7e20c57c9f7f4",
+    "report/test_cpu_release.py": "bbdf54f8c47eb8b36c885bb56f2592c1c974445696ef3892e1593f07a11e5302",
+    "report/verify_cpu.py": "dc823bacb7e3045606f2f82c91545e1bee8fbdf19d40c839957fb54da385ea92"
+  },
+  "modified": {
+    "README.md": {
+      "after": "6c5a1f54a25141a358cc989ff38589e0d562003462e88d5a450463d9ac2a43f8",
+      "before": "9386453924274b25bd8720f681e692cb89993325a8b681d50d08cbc545134526"
+    },
+    "docs/ALGORITHMS.md": {
+      "after": "05e5dbccba0b923dac12abe839733d4e543e678e64dc7040a6d77cae5a6c118e",
+      "before": "666c37102d90e3bd7d3ae595dee8ea6dc7319aa3c5604f91f25d98d86f743d68"
+    },
+    "docs/AUDIT.md": {
+      "after": "562a3def5b9c894130c383712d0452385dbd954229f6d82a330436ce6e2de22d",
+      "before": "3f0e47d87e692242d88a62202cad6d3a06f5cb1fb10b656a012999a61884d065"
+    },
+    "docs/BENCHMARKING.md": {
+      "after": "78f009ef465f8c6acc2277df8066fe7d5bae554b890ede84bd4854e846095399",
+      "before": "a8d316a0e853654a8dfbf721df2e1f7d7d8723c493e5e9dd0d97ea76a232013a"
+    },
+    "docs/METRICS.md": {
+      "after": "2fa0f9ffe02115225e8c827fe378a9f6ee08474cf707ee3523c48b44a5cc07c5",
+      "before": "7f6039ce521dab65c528f588f7d44541e8627613120aa83e7dfdd6c1350cc193"
+    },
+    "docs/ROADMAP.md": {
+      "after": "e1b9813959631b98bbdfd85071f193453bbbd5314e188f8fc24f8b9277748481",
+      "before": "5b505b9e79847ee8e4a5e3a9f858e87366d816e55752993684780c2ca837e707"
+    },
+    "report/README.md": {
+      "after": "999302fa6ea301a577c0bf1f2f10b55f6b21deabe894898467b92db4f80f2473",
+      "before": "00cdeaf82981280e3f7c8a9454d3e3ecd5ade568d93346e74ab4483b7720edd9"
+    },
+    "report/generate.py": {
+      "after": "b99013beb2be29f8843f0460d53a53999cad607a90d29e9e31651d96e7aac560",
+      "before": "3bd6e8820f280e78a460f7df6980c8c108f3854c1c8c22b8ac195b3ab353ce27"
+    }
+  }
+}

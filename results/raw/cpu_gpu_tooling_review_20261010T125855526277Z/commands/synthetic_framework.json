@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "tests/test_cpu_gpu_comparison.py",
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/release/comparison_input"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "ended_utc": "2026-10-10T13:01:25.394473+00:00",
+  "exit_code": 0,
+  "started_utc": "2026-10-10T13:01:15.935839+00:00",
+  "stderr": ".................fixture stop before preflight\n...........................explicit injected worker failure\n...synthetic stop before preflight\n..study total timeout before input\n.\n----------------------------------------------------------------------\nRan 50 tests in 9.371s\n\nOK\n",
+  "stdout": "interrupt interrupted exit -15\nfailed completed exit 9\ntimeout timeout exit -15\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nstudy complete:1200 measured/240 warm-ups.\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\n"
+}

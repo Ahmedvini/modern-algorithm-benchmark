@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/inspect_bundle.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "ended_utc": "2026-10-10T13:06:14.655026+00:00",
+  "exit_code": 0,
+  "started_utc": "2026-10-10T13:06:14.609629+00:00",
+  "stderr": "",
+  "stdout": "{\n  \"archive_members\": 167,\n  \"source_files_matched\": 137,\n  \"unsafe_members\": 0,\n  \"extracted\": false,\n  \"changed_source_files_in_tooling_milestone\": [\n    \"scripts/analyze_cpu_gpu.py\",\n    \"scripts/run_cpu_gpu_pilot.py\",\n    \"scripts/validate_cpu_gpu_pilot.py\",\n    \"tests/test_cpu_gpu_comparison.py\"\n  ],\n  \"added_source_files_in_tooling_milestone\": [\n    \"scripts/run_cpu_gpu_study.py\"\n  ],\n  \"documentation_changes\": [\n    \"README.md\",\n    \"docs/AUDIT.md\",\n    \"docs/ROADMAP.md\",\n    \"docs/CPU_GPU_FULL_MATRIX_TOOLING_v1.md\"\n  ]\n}\n"
+}

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/probe_full_analysis.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "ended_utc": "2026-10-10T13:03:24.411589+00:00",
+  "exit_code": 1,
+  "started_utc": "2026-10-10T13:03:23.126924+00:00",
+  "stderr": "",
+  "stdout": "{\n  \"kind\": \"synthetic_full_analysis_review_probe\",\n  \"sorting_calls\": 0,\n  \"actual_gpu_calls\": 0,\n  \"baseline_accepted\": true,\n  \"protected_source_change_rejected\": false,\n  \"note\": \"All timings and metadata in disposable fixtures are synthetic; no performance evidence is created.\",\n  \"synthetic_measured_records\": 1200,\n  \"synthetic_warmup_records\": 240,\n  \"altered_source_result_marked_complete\": true,\n  \"target\": \"src/cuda/cub_sort.cu\",\n  \"frozen_digest\": \"b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb\",\n  \"fixture_digest\": \"0000000000000000000000000000000000000000000000000000000000000000\"\n}\n"
+}

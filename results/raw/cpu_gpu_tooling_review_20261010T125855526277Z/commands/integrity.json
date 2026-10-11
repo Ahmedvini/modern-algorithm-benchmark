@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/verify_retained.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "ended_utc": "2026-10-10T13:00:23.411082+00:00",
+  "exit_code": 0,
+  "started_utc": "2026-10-10T13:00:22.406367+00:00",
+  "stderr": "",
+  "stdout": "{\n  \"evidence_sha256\": {\n    \"checked\": 85,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"current_source_sha256\": {\n    \"checked\": 137,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"documentation_sha256\": {\n    \"checked\": 4,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"frozen_files_sha256\": {\n    \"checked\": 4,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"pre_tooling_artifacts\": {\n    \"checked\": 11228,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"review_start_artifacts\": {\n    \"checked\": 11314,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"frozen_assets_independent\": {\n    \"checked\": 3,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"freeze_sha256\": \"518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6\",\n  \"freeze_matches_accepted_identity\": true,\n  \"protected_anchors_with_explicit_reviewed_cmake\": {\n    \"checked\": 26,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"accepted_pilot_evidence\": {\n    \"checked\": 373,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"workspace_evidence\": {\n    \"checked\": 62,\n    \"missing\": [],\n    \"changed\": []\n  },\n  \"retained_installed_dependency_manifests\": {\n    \"count\": 1688,\n    \"exactly_equal\": true,\n    \"note\": \"Retained manifests checked; no assertion that the current remote installation is available or unchanged.\"\n  },\n  \"pass\": true\n}\n"
+}

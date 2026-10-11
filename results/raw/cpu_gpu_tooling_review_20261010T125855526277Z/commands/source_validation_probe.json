@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/probe_source_validation.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "ended_utc": "2026-10-10T13:01:50.970218+00:00",
+  "exit_code": 1,
+  "started_utc": "2026-10-10T13:01:50.840368+00:00",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/probe_source_validation.py\", line 52, in <module>\n    validate_study_metadata(directory, meta, model)\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/analyze_cpu_gpu.py\", line 84, in validate_study_metadata\n    require(environment['omp_environment']==model['openmp_policy']['environment'],'OpenMP environment mismatch')\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/cpu_gpu_protocol.py\", line 26, in require\n    raise ValueError(message)\nValueError: OpenMP environment mismatch\n",
+  "stdout": ""
+}
