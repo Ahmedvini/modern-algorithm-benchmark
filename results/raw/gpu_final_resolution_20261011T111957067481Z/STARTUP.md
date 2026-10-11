@@ -1,0 +1,1 @@
+Read-only startup inspected pwd, AGENTS.md, prior FINAL_AUDIT.md, COMMANDS.md and integrity keys/counts; exit0. This bootstrap independently verified every digest map in the prior seal before creating this exclusive directory, and captured all prior result/report/build-metadata identities. No workload, build, test or remote command ran during bootstrap.

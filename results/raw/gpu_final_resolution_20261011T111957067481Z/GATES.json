@@ -1,0 +1,79 @@
+[
+  {
+    "evidence": [
+      "OFFLINE_GATE_RESULTS.json",
+      "BASELINE.json"
+    ],
+    "gate": "Protocol/frozen/CUB/production guards",
+    "status": "PASS"
+  },
+  {
+    "evidence": [
+      "FINAL_INTEGRITY.json"
+    ],
+    "gate": "All prior CPU/report/result preservation",
+    "status": "PASS"
+  },
+  {
+    "evidence": [
+      "SOURCE_BUNDLE.json",
+      "OFFLINE_GATE_RESULTS.json"
+    ],
+    "gate": "Current source/local correctness selection",
+    "status": "PASS"
+  },
+  {
+    "evidence": [
+      "REUSED_CPU_EVIDENCE.json"
+    ],
+    "gate": "CPU Release/ASan-UBSan correctness evidence",
+    "status": "PASS (reused, not rerun)"
+  },
+  {
+    "evidence": [
+      "APPROVAL_SEARCH.json",
+      "ADDITIONAL_ARCHIVE_SEARCH.json",
+      "OFFLINE_GATE_RESULTS.json"
+    ],
+    "gate": "Independent evidence/selection trust authority",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": [
+      "command_005.json",
+      "command_006.json",
+      "command_011.json"
+    ],
+    "gate": "Available confirmed-free GPU session",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": [
+      "EXTERNAL_DEPENDENCIES.md"
+    ],
+    "gate": "Intended current GPU compiler/linker/build/binary provenance",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": [
+      "EXTERNAL_DEPENDENCIES.md"
+    ],
+    "gate": "Identity-matched GPU correctness and required full framework coverage",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": [
+      "EXTERNAL_DEPENDENCIES.md"
+    ],
+    "gate": "Current GPU all-size resources and worker readiness",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": [
+      "DRY_RUN.json",
+      "FROZEN_ORDER.json"
+    ],
+    "gate": "Frozen full-study eligibility/launch/post-run audit",
+    "status": "BLOCKED; NOT LAUNCHED"
+  }
+]

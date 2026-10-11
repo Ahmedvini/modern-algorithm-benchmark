@@ -1,0 +1,12 @@
+{
+  "inspection_date": "2026-10-11",
+  "method": "web search and open; exit codes not applicable",
+  "sources": [
+    {"url": "https://github.com/googlecolab/google-colab-cli/blob/main/docs/04_automation_and_utility.md", "finding": "Usage reports account balance, hourly consumption rate and active assignments from the session backend."},
+    {"url": "https://github.com/googlecolab/google-colab-cli/discussions/49", "finding": "Upstream discussion of attaching browser-created sessions; contributor describes free-tier browser allocation. This is a feature discussion, not proof that this account has a free runtime."},
+    {"url": "https://github.com/googlecolab/google-colab-cli/issues/96", "finding": "Attach request is closed as not planned; author reports a prototype. No prototype or state mutation was executed here."},
+    {"url": "https://research.google.com/colaboratory/faq.html", "finding": "Official FAQ describes free GPU notebook access with variable availability and restrictions on remote control in free managed runtimes. No free account assignment is guaranteed."}
+  ],
+  "capability_discovery": "Available tool metadata inspected for browser/Colab/GPU access. No browser-control or alternate GPU provider capability was exposed; Sites and worktree tools were not used.",
+  "terminal_failure": {"attempted_recorder": "python3 -B undefined/record.py", "exit_code": 2, "stderr": "python3: can't open file '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/undefined/record.py': [Errno 2] No such file or directory", "cause": "Orchestration-store lookup returned undefined after web calls; the intended read-only command did not run. Corrected absolute recorder path was used for command_011.json."}
+}

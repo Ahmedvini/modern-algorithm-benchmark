@@ -1,0 +1,26 @@
+{
+  "artifacts_matched": true,
+  "results": {
+    "release": {
+      "groups_passed": 21,
+      "log": "results/raw/autonomous_completion_20261011T095554571762Z/cpu_release.json",
+      "log_sha256": "3582c4688a6dc3af4d9e2d323ae03e76f091808474ee5ca36a6eac171046945e",
+      "recorded_exit_code": 0,
+      "reexecuted": false,
+      "scope": "local CPU correctness only; two internal GPU methods skipped; not full-study prerequisite approval",
+      "selection": "results/raw/autonomous_completion_20261011T095554571762Z/cpu_release_selection.json",
+      "selection_sha256": "632f20586e58ea0871eb682a32c5f1dd6f307a1e7f6870f7530b574eb1f3ed1f"
+    },
+    "sanitize": {
+      "groups_passed": 21,
+      "log": "results/raw/autonomous_completion_20261011T095554571762Z/cpu_sanitize.json",
+      "log_sha256": "7640f28ca5c67c79fd9e813071c3e137e5f32484843de1d39a59b7fbc8939a3e",
+      "recorded_exit_code": 0,
+      "reexecuted": false,
+      "scope": "local CPU correctness only; two internal GPU methods skipped; not full-study prerequisite approval",
+      "selection": "results/raw/autonomous_completion_20261011T095554571762Z/cpu_sanitize_selection.json",
+      "selection_sha256": "1f6266549a91516839384663fd557a6c483f62c0b7dbe4d1cb7802600ec113cb"
+    }
+  },
+  "source_identity_matched": true
+}
