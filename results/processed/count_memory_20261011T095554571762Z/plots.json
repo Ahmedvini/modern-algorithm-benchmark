@@ -1,0 +1,58 @@
+[
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "uniform",
+    "file": "uniform_count.png",
+    "metric": "count",
+    "source": "summary.json"
+  },
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "uniform",
+    "file": "uniform_process_rss.png",
+    "metric": "process_rss",
+    "source": "summary.json"
+  },
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "nearly_sorted",
+    "file": "nearly_sorted_count.png",
+    "metric": "count",
+    "source": "summary.json"
+  },
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "nearly_sorted",
+    "file": "nearly_sorted_process_rss.png",
+    "metric": "process_rss",
+    "source": "summary.json"
+  },
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "reverse_sorted",
+    "file": "reverse_sorted_count.png",
+    "metric": "count",
+    "source": "summary.json"
+  },
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "reverse_sorted",
+    "file": "reverse_sorted_process_rss.png",
+    "metric": "process_rss",
+    "source": "summary.json"
+  },
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "duplicate_heavy",
+    "file": "duplicate_heavy_count.png",
+    "metric": "count",
+    "source": "summary.json"
+  },
+  {
+    "aggregation": "median/min\u2013max across seed datasets",
+    "distribution": "duplicate_heavy",
+    "file": "duplicate_heavy_process_rss.png",
+    "metric": "process_rss",
+    "source": "summary.json"
+  }
+]

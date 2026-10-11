@@ -1,0 +1,34 @@
+[
+  {
+    "distribution": "duplicate_heavy",
+    "file": "duplicate_heavy_lookup.png",
+    "operation": "lookup_batch",
+    "source": "summary.json",
+    "spread": "cross-seed min/max",
+    "transformation": "median dataset batch nanoseconds / 1000"
+  },
+  {
+    "distribution": "nearly_sorted",
+    "file": "nearly_sorted_lookup.png",
+    "operation": "lookup_batch",
+    "source": "summary.json",
+    "spread": "cross-seed min/max",
+    "transformation": "median dataset batch nanoseconds / 1000"
+  },
+  {
+    "distribution": "reverse_sorted",
+    "file": "reverse_sorted_lookup.png",
+    "operation": "lookup_batch",
+    "source": "summary.json",
+    "spread": "cross-seed min/max",
+    "transformation": "median dataset batch nanoseconds / 1000"
+  },
+  {
+    "distribution": "uniform",
+    "file": "uniform_lookup.png",
+    "operation": "lookup_batch",
+    "source": "summary.json",
+    "spread": "cross-seed min/max",
+    "transformation": "median dataset batch nanoseconds / 1000"
+  }
+]

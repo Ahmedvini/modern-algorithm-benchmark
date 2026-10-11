@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "protocol": "cuda_sort_timing_v1",
+  "source": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cuda_timing_20261009T231303050084Z/downloaded/raw/smallest",
+  "complete": true,
+  "elapsed_unit": "ns",
+  "aggregation": "within_dataset; sample stdev ddof1; retain all outliers",
+  "groups": [
+    {
+      "schema_version": 1,
+      "protocol": "cuda_sort_timing_v1",
+      "run_id": "smallest",
+      "algorithm": "cub_radix_sort",
+      "implementation_version": "cub_radix_sort_v1",
+      "distribution": "uniform",
+      "size": 1025,
+      "seed": 1729,
+      "nearly_sorted_swaps": 10,
+      "duplicate_cardinality": 16,
+      "dataset_generator": "mt19937_64_v1",
+      "input_hash_fnv1a64": "16235787445208220162",
+      "repetitions": 5,
+      "warmups": 1,
+      "gpu_name": "Tesla T4",
+      "cub_version": 300001,
+      "build_type": "Release",
+      "run_kind": "performance",
+      "complete": true,
+      "successful_trials": 5,
+      "failed_trials": 0,
+      "missing_trials": 0,
+      "warmup_rows": 1,
+      "failed_warmups": 0,
+      "missing_warmups": 0,
+      "metrics": {
+        "h2d_ns": {
+          "successful_trials": 5,
+          "median_ns": 12191.999703645706,
+          "mean_ns": 11251.19999051094,
+          "stdev_ns": 3136.2940199513287,
+          "min_ns": 6207.999773323536,
+          "max_ns": 13856.000266969204
+        },
+        "device_sort_ns": {
+          "successful_trials": 5,
+          "median_ns": 46528.00038456917,
+          "mean_ns": 46361.59986257553,
+          "stdev_ns": 726.3359863773276,
+          "min_ns": 45120.0008392334,
+          "max_ns": 46911.999583244324
+        },
+        "d2h_ns": {
+          "successful_trials": 5,
+          "median_ns": 6655.999924987555,
+          "mean_ns": 7174.399867653847,
+          "stdev_ns": 2477.4076304006726,
+          "min_ns": 4639.999940991402,
+          "max_ns": 9759.999811649323
+        },
+        "end_to_end_ns": {
+          "successful_trials": 5,
+          "median_ns": 72354.0,
+          "mean_ns": 72972.2,
+          "stdev_ns": 5430.479463178182,
+          "min_ns": 65624.0,
+          "max_ns": 78546.0
+        }
+      }
+    }
+  ],
+  "missing_configurations": []
+}

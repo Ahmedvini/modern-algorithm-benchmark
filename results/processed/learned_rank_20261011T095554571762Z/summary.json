@@ -1,0 +1,3614 @@
+{
+  "configurations": 48,
+  "cross_seed": [
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "duplicate_heavy",
+      "maximum": 20314,
+      "mean": 18862.666666666668,
+      "median": 18934,
+      "minimum": 17340,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1488.2826792425333,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 398,
+      "mean": 385.3333333333333,
+      "median": 386,
+      "minimum": 372,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 13.012814197295423,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 20716,
+      "mean": 20495.333333333332,
+      "median": 20473,
+      "minimum": 20297,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 210.3909060138611,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "nearly_sorted",
+      "maximum": 40949,
+      "mean": 37566.333333333336,
+      "median": 35939,
+      "minimum": 35811,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 2930.1742837813135,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 716,
+      "mean": 494,
+      "median": 390,
+      "minimum": 376,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 192.38503060269528,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 33511,
+      "mean": 30245.666666666668,
+      "median": 28635,
+      "minimum": 28591,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 2827.9471942264645,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "reverse_sorted",
+      "maximum": 37409,
+      "mean": 36028.333333333336,
+      "median": 35643,
+      "minimum": 35033,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1233.979470385684,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 397,
+      "mean": 387,
+      "median": 392,
+      "minimum": 372,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 13.228756555322953,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 27781,
+      "mean": 27095,
+      "median": 26767,
+      "minimum": 26737,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 594.2827609816727,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "uniform",
+      "maximum": 36759,
+      "mean": 35144,
+      "median": 34833,
+      "minimum": 33840,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1484.1431871622092,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 386,
+      "mean": 372,
+      "median": 375,
+      "minimum": 355,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 15.716233645501712,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 29231,
+      "mean": 27696,
+      "median": 27221,
+      "minimum": 26636,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1361.148412187297,
+      "size": 1000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "duplicate_heavy",
+      "maximum": 27442,
+      "mean": 27098.333333333332,
+      "median": 27185,
+      "minimum": 26668,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 394.21102639745294,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 3783,
+      "mean": 3681.3333333333335,
+      "median": 3680,
+      "minimum": 3581,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 101.0066004443934,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 24681,
+      "mean": 23929.333333333332,
+      "median": 23800,
+      "minimum": 23307,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 696.07063817786,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "nearly_sorted",
+      "maximum": 57922,
+      "mean": 54850.333333333336,
+      "median": 54947,
+      "minimum": 51682,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 3121.1229282636937,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 5263,
+      "mean": 4149.333333333333,
+      "median": 3684,
+      "minimum": 3501,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 968.794267805778,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 42652,
+      "mean": 39777.333333333336,
+      "median": 40475,
+      "minimum": 36205,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 3279.6350914901086,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "reverse_sorted",
+      "maximum": 60054,
+      "mean": 58895.666666666664,
+      "median": 58539,
+      "minimum": 58094,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1027.5253443751806,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 5962,
+      "mean": 4559.666666666667,
+      "median": 3910,
+      "minimum": 3807,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 1215.5477503304153,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 53307,
+      "mean": 46159.666666666664,
+      "median": 44365,
+      "minimum": 40807,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 6440.351025629995,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "uniform",
+      "maximum": 51283,
+      "mean": 50636.333333333336,
+      "median": 50496,
+      "minimum": 50130,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 589.1708863592407,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 3399,
+      "mean": 3314.3333333333335,
+      "median": 3317,
+      "minimum": 3227,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 86.03100216394863,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 42654,
+      "mean": 40435.333333333336,
+      "median": 41821,
+      "minimum": 36831,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 3149.108815733958,
+      "size": 10000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "duplicate_heavy",
+      "maximum": 27310,
+      "mean": 26522.666666666668,
+      "median": 26907,
+      "minimum": 25351,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1034.5068068086034,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 33232,
+      "mean": 32464.666666666668,
+      "median": 32319,
+      "minimum": 31843,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 705.8642456827895,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 25953,
+      "mean": 23400.333333333332,
+      "median": 22637,
+      "minimum": 21611,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 2269.4160776140925,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "nearly_sorted",
+      "maximum": 63877,
+      "mean": 62300.666666666664,
+      "median": 62917,
+      "minimum": 60108,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1958.632260873218,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 32300,
+      "mean": 31424.666666666668,
+      "median": 31280,
+      "minimum": 30694,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 812.7147921216479,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 61483,
+      "mean": 59436.666666666664,
+      "median": 61156,
+      "minimum": 55671,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 3265.2589994261302,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "reverse_sorted",
+      "maximum": 64697,
+      "mean": 62737,
+      "median": 61911,
+      "minimum": 61603,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 1704.381412712542,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 35584,
+      "mean": 33096.666666666664,
+      "median": 32129,
+      "minimum": 31577,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 2171.7035555833427,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 62421,
+      "mean": 60487,
+      "median": 61253,
+      "minimum": 57787,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 2410.0946039523014,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "uniform",
+      "maximum": 79907,
+      "mean": 72416.66666666667,
+      "median": 75762,
+      "minimum": 61581,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 9610.09939247942,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 39275,
+      "mean": 36408.333333333336,
+      "median": 38582,
+      "minimum": 31368,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 4378.787769843765,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 73331,
+      "mean": 66518.66666666667,
+      "median": 68246,
+      "minimum": 57979,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 7820.4051259083335,
+      "size": 100000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "duplicate_heavy",
+      "maximum": 39903,
+      "mean": 35536.333333333336,
+      "median": 34160,
+      "minimum": 32546,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 3866.79225370763,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 632170,
+      "mean": 568275,
+      "median": 578882,
+      "minimum": 493773,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 69805.54232294166,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 37245,
+      "mean": 32584,
+      "median": 33748,
+      "minimum": 26759,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 5339.028095074983,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "nearly_sorted",
+      "maximum": 155036,
+      "mean": 139370,
+      "median": 154655,
+      "minimum": 108419,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 26805.029210952187,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 967037,
+      "mean": 798990,
+      "median": 829069,
+      "minimum": 600864,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 184930.32786160306,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 139109,
+      "mean": 115839.33333333333,
+      "median": 107055,
+      "minimum": 101354,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 20352.72439584768,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "reverse_sorted",
+      "maximum": 126401,
+      "mean": 109398.66666666667,
+      "median": 106410,
+      "minimum": 95385,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 15722.504900089341,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 571018,
+      "mean": 546314.3333333334,
+      "median": 554255,
+      "minimum": 513670,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 29487.09745521477,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 115216,
+      "mean": 98974.66666666667,
+      "median": 94804,
+      "minimum": 86904,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 14609.523651828396,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "uniform",
+      "maximum": 171715,
+      "mean": 139250,
+      "median": 125127,
+      "minimum": 120908,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 28194.541297917935,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 1044690,
+      "mean": 766720,
+      "median": 664637,
+      "minimum": 590833,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 243541.06076594148,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 136460,
+      "mean": 120649,
+      "median": 115328,
+      "minimum": 110159,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 13934.505050413523,
+      "size": 1000000,
+      "unit": "ns"
+    }
+  ],
+  "datasets": [
+    {
+      "distribution": "uniform",
+      "fallback_queries": 0,
+      "id": "n1000_uniform_s42",
+      "input_fingerprint": "8054562443700637375",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 6.589,
+      "mean_learned_comparisons": 10.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 19779584
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "9829280109434229368",
+      "seed": 42,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 39171,
+          "mean": 36916.6,
+          "median": 36759,
+          "minimum": 34987,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1503.7843262915064,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 468,
+          "mean": 394.2,
+          "median": 375,
+          "minimum": 372,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 41.54756310543375,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 31533,
+          "mean": 28709.4,
+          "median": 29231,
+          "minimum": 26043,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2490.1844911572316,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 0,
+      "id": "n1000_uniform_s2718",
+      "input_fingerprint": "14116603906893226816",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 3.642,
+      "mean_learned_comparisons": 10.345,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20434944
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "2681446138875829628",
+      "seed": 2718,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 37500,
+          "mean": 34449.4,
+          "median": 33840,
+          "minimum": 30779,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2886.66387028348,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 459,
+          "mean": 394,
+          "median": 386,
+          "minimum": 358,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 39.45250308915773,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 30497,
+          "mean": 27906.2,
+          "median": 26636,
+          "minimum": 26170,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2063.834707528682,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 0,
+      "id": "n1000_uniform_s314159",
+      "input_fingerprint": "13198114741911734222",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 5.984,
+      "mean_learned_comparisons": 10.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20434944
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "5282073259436644666",
+      "seed": 314159,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 41189,
+          "mean": 36060.6,
+          "median": 34833,
+          "minimum": 32298,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3956.8725402772325,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 445,
+          "mean": 370.6,
+          "median": 355,
+          "minimum": 345,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 42.00357127673789,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 31552,
+          "mean": 28240.2,
+          "median": 27221,
+          "minimum": 25037,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2792.7557537314287,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 0,
+      "id": "n1000_nearly_sorted_s42",
+      "input_fingerprint": "8054562443700637375",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 6.589,
+      "mean_learned_comparisons": 10.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20434944
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "9829280109434229368",
+      "seed": 42,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 37360,
+          "mean": 35933.4,
+          "median": 35811,
+          "minimum": 34073,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1254.8654509548026,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 445,
+          "mean": 387.6,
+          "median": 376,
+          "minimum": 358,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 36.045804194108364,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 45448,
+          "mean": 31034.2,
+          "median": 28635,
+          "minimum": 24939,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 8263.424030025326,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 0,
+      "id": "n1000_nearly_sorted_s2718",
+      "input_fingerprint": "14116603906893226816",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 3.642,
+      "mean_learned_comparisons": 10.345,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "2681446138875829628",
+      "seed": 2718,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 42911,
+          "mean": 39173.6,
+          "median": 40949,
+          "minimum": 33816,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3651.4489315886644,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 782,
+          "mean": 725.2,
+          "median": 716,
+          "minimum": 699,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 33.68530837026729,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 36969,
+          "mean": 32860.4,
+          "median": 33511,
+          "minimum": 28566,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3794.9760605305537,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 0,
+      "id": "n1000_nearly_sorted_s314159",
+      "input_fingerprint": "13198114741911734222",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 5.984,
+      "mean_learned_comparisons": 10.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "5282073259436644666",
+      "seed": 314159,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 38355,
+          "mean": 36074,
+          "median": 35939,
+          "minimum": 34114,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1519.0651730587467,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 468,
+          "mean": 403.8,
+          "median": 390,
+          "minimum": 385,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 35.99583309217888,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 32563,
+          "mean": 29293.6,
+          "median": 28591,
+          "minimum": 26366,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2461.4500401186287,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 0,
+      "id": "n1000_reverse_sorted_s42",
+      "input_fingerprint": "8054562443700637375",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 6.589,
+      "mean_learned_comparisons": 10.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "9829280109434229368",
+      "seed": 42,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 38269,
+          "mean": 35174.8,
+          "median": 35033,
+          "minimum": 32442,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2340.411651825379,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 513,
+          "mean": 426,
+          "median": 392,
+          "minimum": 383,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 56.004464107783406,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 31114,
+          "mean": 27059.4,
+          "median": 26737,
+          "minimum": 23398,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3155.0658154783396,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 0,
+      "id": "n1000_reverse_sorted_s2718",
+      "input_fingerprint": "14116603906893226816",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 3.642,
+      "mean_learned_comparisons": 10.345,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "2681446138875829628",
+      "seed": 2718,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 42221,
+          "mean": 37206.2,
+          "median": 37409,
+          "minimum": 33516,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3390.043613288773,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 451,
+          "mean": 388.6,
+          "median": 372,
+          "minimum": 370,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 35.061374759127744,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 29864,
+          "mean": 27791.4,
+          "median": 26767,
+          "minimum": 25912,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1851.800421211746,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 0,
+      "id": "n1000_reverse_sorted_s314159",
+      "input_fingerprint": "13198114741911734222",
+      "mean_binary_comparisons": 10.639,
+      "mean_correction_distance": 5.984,
+      "mean_learned_comparisons": 10.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "5282073259436644666",
+      "seed": 314159,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 37506,
+          "mean": 35709.6,
+          "median": 35643,
+          "minimum": 33069,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1882.3398471051926,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 445,
+          "mean": 401.2,
+          "median": 397,
+          "minimum": 379,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 26.27165773224065,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 31572,
+          "mean": 28474.4,
+          "median": 27781,
+          "minimum": 25355,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2694.1691298060705,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 262,
+      "id": "n1000_duplicate_heavy_s42",
+      "input_fingerprint": "989110580321623969",
+      "mean_binary_comparisons": 10.444,
+      "mean_correction_distance": 14.506,
+      "mean_learned_comparisons": 12.839,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "6287981524511207105",
+      "seed": 42,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 20787,
+          "mean": 18963,
+          "median": 18934,
+          "minimum": 17324,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1563.2200740778633,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 484,
+          "mean": 405.2,
+          "median": 386,
+          "minimum": 378,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 44.48258086037725,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 22853,
+          "mean": 20691.4,
+          "median": 20297,
+          "minimum": 19756,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1271.75363180138,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 261,
+      "id": "n1000_duplicate_heavy_s2718",
+      "input_fingerprint": "4384071319160519485",
+      "mean_binary_comparisons": 10.444,
+      "mean_correction_distance": 21.52,
+      "mean_learned_comparisons": 12.832,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "13919762521565805404",
+      "seed": 2718,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 23723,
+          "mean": 18680.4,
+          "median": 17340,
+          "minimum": 16359,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2938.1099877302076,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 509,
+          "mean": 419.2,
+          "median": 398,
+          "minimum": 384,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 51.124358186680446,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 23668,
+          "mean": 21132.4,
+          "median": 20716,
+          "minimum": 20176,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1450.6773590292225,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 194,
+      "id": "n1000_duplicate_heavy_s314159",
+      "input_fingerprint": "378424140019289231",
+      "mean_binary_comparisons": 10.444,
+      "mean_correction_distance": 15.138,
+      "mean_learned_comparisons": 12.143,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8217768253086264945",
+      "seed": 314159,
+      "size": 1000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 24892,
+          "mean": 21311.2,
+          "median": 20314,
+          "minimum": 19330,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2389.2525400216696,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 458,
+          "mean": 391.2,
+          "median": 372,
+          "minimum": 369,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 38.16673944680106,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 23390,
+          "mean": 21245,
+          "median": 20473,
+          "minimum": 20154,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1367.059252556377,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 137,
+      "id": "n10000_uniform_s42",
+      "input_fingerprint": "14691747855287005681",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 13.993,
+      "mean_learned_comparisons": 12.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "17036765910784093353",
+      "seed": 42,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 59140,
+          "mean": 52375.8,
+          "median": 51283,
+          "minimum": 48875,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4078.3167728855983,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3436,
+          "mean": 3402.6,
+          "median": 3399,
+          "minimum": 3380,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 21.593980642762464,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 45343,
+          "mean": 38939,
+          "median": 36831,
+          "minimum": 34662,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4972.050231041517,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 242,
+      "id": "n10000_uniform_s2718",
+      "input_fingerprint": "18260378824395607602",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 18.252,
+      "mean_learned_comparisons": 13.792,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "17636718460261298694",
+      "seed": 2718,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 52742,
+          "mean": 50590.6,
+          "median": 50496,
+          "minimum": 48243,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1972.953319265309,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3384,
+          "mean": 3328.2,
+          "median": 3317,
+          "minimum": 3301,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 32.3681942653587,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 45173,
+          "mean": 42091.2,
+          "median": 42654,
+          "minimum": 38607,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2755.90052432957,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 231,
+      "id": "n10000_uniform_s314159",
+      "input_fingerprint": "4693716137071529407",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 17.443,
+      "mean_learned_comparisons": 13.629,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "2021939275249819574",
+      "seed": 314159,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 58094,
+          "mean": 51429.2,
+          "median": 50130,
+          "minimum": 49034,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3756.3590350231434,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3302,
+          "mean": 3255.4,
+          "median": 3227,
+          "minimum": 3222,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 41.674932513442656,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 44376,
+          "mean": 40724.2,
+          "median": 41821,
+          "minimum": 36680,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3139.7790049619734,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 137,
+      "id": "n10000_nearly_sorted_s42",
+      "input_fingerprint": "14691747855287005681",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 13.993,
+      "mean_learned_comparisons": 12.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "17036765910784093353",
+      "seed": 42,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 57622,
+          "mean": 52765.6,
+          "median": 51682,
+          "minimum": 50003,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2954.617623314394,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 5320,
+          "mean": 5272.8,
+          "median": 5263,
+          "minimum": 5240,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 31.443600302764313,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 43560,
+          "mean": 37475.6,
+          "median": 36205,
+          "minimum": 33916,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3695.287850763456,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 242,
+      "id": "n10000_nearly_sorted_s2718",
+      "input_fingerprint": "18260378824395607602",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 18.252,
+      "mean_learned_comparisons": 13.792,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "17636718460261298694",
+      "seed": 2718,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 59808,
+          "mean": 55188,
+          "median": 54947,
+          "minimum": 52881,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2773.475887762502,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3732,
+          "mean": 3519.6,
+          "median": 3501,
+          "minimum": 3415,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 124.44597221284424,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 45041,
+          "mean": 41827.8,
+          "median": 40475,
+          "minimum": 39245,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2872.940601544,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 231,
+      "id": "n10000_nearly_sorted_s314159",
+      "input_fingerprint": "4693716137071529407",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 17.443,
+      "mean_learned_comparisons": 13.629,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "2021939275249819574",
+      "seed": 314159,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 58489,
+          "mean": 57390,
+          "median": 57922,
+          "minimum": 55422,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1305.1258560001024,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3747,
+          "mean": 3689,
+          "median": 3684,
+          "minimum": 3656,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 36.24913792078372,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 49315,
+          "mean": 44363.8,
+          "median": 42652,
+          "minimum": 39386,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4436.40059056889,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 137,
+      "id": "n10000_reverse_sorted_s42",
+      "input_fingerprint": "14691747855287005681",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 13.993,
+      "mean_learned_comparisons": 12.306,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "17036765910784093353",
+      "seed": 42,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 61313,
+          "mean": 58622.4,
+          "median": 58094,
+          "minimum": 56618,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1856.1377373460193,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3840,
+          "mean": 3809.8,
+          "median": 3807,
+          "minimum": 3786,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 19.524343778985248,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 49971,
+          "mean": 42552.6,
+          "median": 40807,
+          "minimum": 37639,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4871.897299820676,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 242,
+      "id": "n10000_reverse_sorted_s2718",
+      "input_fingerprint": "18260378824395607602",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 18.252,
+      "mean_learned_comparisons": 13.792,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "17636718460261298694",
+      "seed": 2718,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 61725,
+          "mean": 59021.4,
+          "median": 58539,
+          "minimum": 57297,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1739.8291008027197,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3985,
+          "mean": 3917.8,
+          "median": 3910,
+          "minimum": 3878,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 43.59701824666453,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 51471,
+          "mean": 44559.4,
+          "median": 44365,
+          "minimum": 40698,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4253.940443870835,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 231,
+      "id": "n10000_reverse_sorted_s314159",
+      "input_fingerprint": "4693716137071529407",
+      "mean_binary_comparisons": 14.215,
+      "mean_correction_distance": 17.443,
+      "mean_learned_comparisons": 13.629,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "2021939275249819574",
+      "seed": 314159,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 62198,
+          "mean": 60808.2,
+          "median": 60054,
+          "minimum": 59702,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1266.6922278122654,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 6007,
+          "mean": 5684.4,
+          "median": 5962,
+          "minimum": 4555,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 632.031486557434,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 56659,
+          "mean": 52306.8,
+          "median": 53307,
+          "minimum": 46242,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3816.123975973527,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 467,
+      "id": "n10000_duplicate_heavy_s42",
+      "input_fingerprint": "223260701374090104",
+      "mean_binary_comparisons": 14.285,
+      "mean_correction_distance": 141.502,
+      "mean_learned_comparisons": 16.752,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "5335303570517267779",
+      "seed": 42,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 28099,
+          "mean": 27325.6,
+          "median": 27185,
+          "minimum": 26623,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 569.4319976959497,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3840,
+          "mean": 3793.8,
+          "median": 3783,
+          "minimum": 3766,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 28.516661796220117,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 26447,
+          "mean": 24799.4,
+          "median": 24681,
+          "minimum": 23783,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1036.8169076553488,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 467,
+      "id": "n10000_duplicate_heavy_s2718",
+      "input_fingerprint": "13067709476142401341",
+      "mean_binary_comparisons": 14.1,
+      "mean_correction_distance": 197.121,
+      "mean_learned_comparisons": 16.567,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "13575557527264231296",
+      "seed": 2718,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 29112,
+          "mean": 27653.4,
+          "median": 27442,
+          "minimum": 26381,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1012.6691463651887,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3737,
+          "mean": 3694,
+          "median": 3680,
+          "minimum": 3668,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 28.310775333784132,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 25803,
+          "mean": 24280.6,
+          "median": 23800,
+          "minimum": 23533,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 923.2200712722833,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 467,
+      "id": "n10000_duplicate_heavy_s314159",
+      "input_fingerprint": "17712425171247256982",
+      "mean_binary_comparisons": 13.977,
+      "mean_correction_distance": 145.874,
+      "mean_learned_comparisons": 16.444,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 40000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "11585971091191597790",
+      "seed": 314159,
+      "size": 10000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 27505,
+          "mean": 26583.6,
+          "median": 26668,
+          "minimum": 25847,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 663.8834988158691,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 3636,
+          "mean": 3589.2,
+          "median": 3581,
+          "minimum": 3555,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 30.938648968563577,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 24969,
+          "mean": 23607,
+          "median": 23307,
+          "minimum": 22838,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 882.1669343157223,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 525,
+      "id": "n100000_uniform_s42",
+      "input_fingerprint": "13544986668185733582",
+      "mean_binary_comparisons": 17.435,
+      "mean_correction_distance": 48.842,
+      "mean_learned_comparisons": 19.318,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8067181949956012538",
+      "seed": 42,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 83795,
+          "mean": 80582.8,
+          "median": 79907,
+          "minimum": 78002,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2491.9871990040397,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 47929,
+          "mean": 42195.4,
+          "median": 39275,
+          "minimum": 37196,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 5207.917078832957,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 80092,
+          "mean": 74312.8,
+          "median": 73331,
+          "minimum": 70970,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3845.1387101117693,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 598,
+      "id": "n100000_uniform_s2718",
+      "input_fingerprint": "12749108023920353284",
+      "mean_binary_comparisons": 17.453,
+      "mean_correction_distance": 103.274,
+      "mean_learned_comparisons": 20.886,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "12982307912411453631",
+      "seed": 2718,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 81903,
+          "mean": 76350.4,
+          "median": 75762,
+          "minimum": 70964,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 5414.775553981901,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 48099,
+          "mean": 41888.2,
+          "median": 38582,
+          "minimum": 36566,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 5564.80235048829,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 81711,
+          "mean": 72282.4,
+          "median": 68246,
+          "minimum": 65235,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 8139.985644950487,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 465,
+      "id": "n100000_uniform_s314159",
+      "input_fingerprint": "10835160196517051473",
+      "mean_binary_comparisons": 17.453,
+      "mean_correction_distance": 79.769,
+      "mean_learned_comparisons": 18.212,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8334793245508216380",
+      "seed": 314159,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 66700,
+          "mean": 62379.6,
+          "median": 61581,
+          "minimum": 60454,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2519.3299307553984,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 32536,
+          "mean": 31648,
+          "median": 31368,
+          "minimum": 31109,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 633.7108962295031,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 64141,
+          "mean": 58060.4,
+          "median": 57979,
+          "minimum": 54111,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4068.5785970041184,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 525,
+      "id": "n100000_nearly_sorted_s42",
+      "input_fingerprint": "13544986668185733582",
+      "mean_binary_comparisons": 17.435,
+      "mean_correction_distance": 48.842,
+      "mean_learned_comparisons": 19.318,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8067181949956012538",
+      "seed": 42,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 70752,
+          "mean": 64441.8,
+          "median": 62917,
+          "minimum": 61655,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3697.9378983428046,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 34220,
+          "mean": 31893.2,
+          "median": 31280,
+          "minimum": 31069,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 1332.2393553712486,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 63434,
+          "mean": 61629.2,
+          "median": 61156,
+          "minimum": 59886,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1690.2879044707147,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 598,
+      "id": "n100000_nearly_sorted_s2718",
+      "input_fingerprint": "12749108023920353284",
+      "mean_binary_comparisons": 17.453,
+      "mean_correction_distance": 103.274,
+      "mean_learned_comparisons": 20.886,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "12982307912411453631",
+      "seed": 2718,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 64330,
+          "mean": 63604.4,
+          "median": 63877,
+          "minimum": 62737,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 688.5348938143949,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 34053,
+          "mean": 32779.2,
+          "median": 32300,
+          "minimum": 32261,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 773.4430812929934,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 64150,
+          "mean": 61617,
+          "median": 61483,
+          "minimum": 59439,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2058.20370711939,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 465,
+      "id": "n100000_nearly_sorted_s314159",
+      "input_fingerprint": "10835160196517051473",
+      "mean_binary_comparisons": 17.453,
+      "mean_correction_distance": 79.769,
+      "mean_learned_comparisons": 18.212,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8334793245508216380",
+      "seed": 314159,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 62247,
+          "mean": 60559.6,
+          "median": 60108,
+          "minimum": 59432,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1260.8240559253302,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 33742,
+          "mean": 31263,
+          "median": 30694,
+          "minimum": 30554,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 1388.6763481819657,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 57765,
+          "mean": 55051.6,
+          "median": 55671,
+          "minimum": 52138,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2209.847460799048,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 525,
+      "id": "n100000_reverse_sorted_s42",
+      "input_fingerprint": "13544986668185733582",
+      "mean_binary_comparisons": 17.435,
+      "mean_correction_distance": 48.842,
+      "mean_learned_comparisons": 19.318,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8067181949956012538",
+      "seed": 42,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 73436,
+          "mean": 63712.2,
+          "median": 61603,
+          "minimum": 60281,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 5475.312201144333,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 34377,
+          "mean": 32240.6,
+          "median": 32129,
+          "minimum": 31176,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 1286.2287121659197,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 69178,
+          "mean": 62945.2,
+          "median": 62421,
+          "minimum": 57249,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4443.551586287707,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 598,
+      "id": "n100000_reverse_sorted_s2718",
+      "input_fingerprint": "12749108023920353284",
+      "mean_binary_comparisons": 17.453,
+      "mean_correction_distance": 103.274,
+      "mean_learned_comparisons": 20.886,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "12982307912411453631",
+      "seed": 2718,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 70130,
+          "mean": 63652.8,
+          "median": 61911,
+          "minimum": 60363,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3968.238047295046,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 32057,
+          "mean": 31672.8,
+          "median": 31577,
+          "minimum": 31510,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 222.43358559354294,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 64442,
+          "mean": 58722.6,
+          "median": 57787,
+          "minimum": 55955,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3503.2008649233917,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 465,
+      "id": "n100000_reverse_sorted_s314159",
+      "input_fingerprint": "10835160196517051473",
+      "mean_binary_comparisons": 17.453,
+      "mean_correction_distance": 79.769,
+      "mean_learned_comparisons": 18.212,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8334793245508216380",
+      "seed": 314159,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 71151,
+          "mean": 65574.4,
+          "median": 64697,
+          "minimum": 62367,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3697.8854498212895,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 36130,
+          "mean": 35166.4,
+          "median": 35584,
+          "minimum": 33758,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 957.028369485461,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 61802,
+          "mean": 59585,
+          "median": 61253,
+          "minimum": 55455,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2751.9132435452975,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 466,
+      "id": "n100000_duplicate_heavy_s42",
+      "input_fingerprint": "18029728679585175737",
+      "mean_binary_comparisons": 17.259,
+      "mean_correction_distance": 1537.549,
+      "mean_learned_comparisons": 18.111,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "949464845774758080",
+      "seed": 42,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 27989,
+          "mean": 27166.8,
+          "median": 26907,
+          "minimum": 26753,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 502.7585901802176,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 33145,
+          "mean": 32105,
+          "median": 31843,
+          "minimum": 31828,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 581.5698582285709,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 23745,
+          "mean": 22745.6,
+          "median": 22637,
+          "minimum": 22025,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 621.8937208237434,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 466,
+      "id": "n100000_duplicate_heavy_s2718",
+      "input_fingerprint": "6690829527338516617",
+      "mean_binary_comparisons": 17.318,
+      "mean_correction_distance": 1555.113,
+      "mean_learned_comparisons": 18.17,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "16617928316340100104",
+      "seed": 2718,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 26579,
+          "mean": 25666,
+          "median": 25351,
+          "minimum": 25172,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 580.2964759500095,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 42644,
+          "mean": 34393.6,
+          "median": 32319,
+          "minimum": 32270,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 4612.445912962015,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 23573,
+          "mean": 21809.4,
+          "median": 21611,
+          "minimum": 20914,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1031.613929723712,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 467,
+      "id": "n100000_duplicate_heavy_s314159",
+      "input_fingerprint": "15175224714920995766",
+      "mean_binary_comparisons": 17.386,
+      "mean_correction_distance": 1593.223,
+      "mean_learned_comparisons": 18.258,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 400000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "3506013810297193065",
+      "seed": 314159,
+      "size": 100000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 29616,
+          "mean": 27693.6,
+          "median": 27310,
+          "minimum": 26745,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1195.236922120464,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 33606,
+          "mean": 33160.6,
+          "median": 33232,
+          "minimum": 32422,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 478.7272710009322,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 26253,
+          "mean": 25267,
+          "median": 25953,
+          "minimum": 23993,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1122.7668947737993,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 552,
+      "id": "n1000000_uniform_s42",
+      "input_fingerprint": "13722030013515332321",
+      "mean_binary_comparisons": 20.629,
+      "mean_correction_distance": 89.829,
+      "mean_learned_comparisons": 21.536,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8062774740803607409",
+      "seed": 42,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 132309,
+          "mean": 119312,
+          "median": 120908,
+          "minimum": 103916,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 10189.6031080705,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 725913,
+          "mean": 664399.8,
+          "median": 664637,
+          "minimum": 590720,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 59249.66700919086,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 129570,
+          "mean": 114251,
+          "median": 115328,
+          "minimum": 101764,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 10227.873923743879,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 626,
+      "id": "n1000000_uniform_s2718",
+      "input_fingerprint": "3863707414789519733",
+      "mean_binary_comparisons": 20.62,
+      "mean_correction_distance": 169.594,
+      "mean_learned_comparisons": 22.869,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "11735274663609642743",
+      "seed": 2718,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 126515,
+          "mean": 122465.6,
+          "median": 125127,
+          "minimum": 115292,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4908.379803967904,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 609497,
+          "mean": 588453.4,
+          "median": 590833,
+          "minimum": 569325,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 15857.395649979853,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 115383,
+          "mean": 110312.6,
+          "median": 110159,
+          "minimum": 105210,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3741.0774250207655,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "uniform",
+      "fallback_queries": 613,
+      "id": "n1000000_uniform_s314159",
+      "input_fingerprint": "4749611502687780276",
+      "mean_binary_comparisons": 20.624,
+      "mean_correction_distance": 169.674,
+      "mean_learned_comparisons": 22.706,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "10723369033182723896",
+      "seed": 314159,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 272145,
+          "mean": 194733.8,
+          "median": 171715,
+          "minimum": 157176,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 46183.673713770324,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 1352534,
+          "mean": 1075920,
+          "median": 1044690,
+          "minimum": 909904,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 172704.54142262734,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 181311,
+          "mean": 142049,
+          "median": 136460,
+          "minimum": 125099,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 22738.29189934899,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 552,
+      "id": "n1000000_nearly_sorted_s42",
+      "input_fingerprint": "13722030013515332321",
+      "mean_binary_comparisons": 20.629,
+      "mean_correction_distance": 89.829,
+      "mean_learned_comparisons": 21.536,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8062774740803607409",
+      "seed": 42,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 117369,
+          "mean": 110117.2,
+          "median": 108419,
+          "minimum": 107197,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4187.4160528898965,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 634672,
+          "mean": 595121.8,
+          "median": 600864,
+          "minimum": 550472,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 31097.181193799544,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 108037,
+          "mean": 102952,
+          "median": 101354,
+          "minimum": 99191,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3511.9538721344275,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 626,
+      "id": "n1000000_nearly_sorted_s2718",
+      "input_fingerprint": "3863707414789519733",
+      "mean_binary_comparisons": 20.62,
+      "mean_correction_distance": 169.594,
+      "mean_learned_comparisons": 22.869,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "11735274663609642743",
+      "seed": 2718,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 326009,
+          "mean": 184766.4,
+          "median": 155036,
+          "minimum": 113380,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 84773.66852566898,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 1479701,
+          "mean": 1073370.4,
+          "median": 967037,
+          "minimum": 824222,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 262243.12279695726,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 177183,
+          "mean": 118690.6,
+          "median": 107055,
+          "minimum": 96006,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 33037.166151169804,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "nearly_sorted",
+      "fallback_queries": 613,
+      "id": "n1000000_nearly_sorted_s314159",
+      "input_fingerprint": "4749611502687780276",
+      "mean_binary_comparisons": 20.624,
+      "mean_correction_distance": 169.674,
+      "mean_learned_comparisons": 22.706,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "10723369033182723896",
+      "seed": 314159,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 162897,
+          "mean": 150812.8,
+          "median": 154655,
+          "minimum": 134327,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 10793.47929075699,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 1026315,
+          "mean": 812323,
+          "median": 829069,
+          "minimum": 662107,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 145091.19333026384,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 167911,
+          "mean": 144368.6,
+          "median": 139109,
+          "minimum": 134597,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 13635.484050813891,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 552,
+      "id": "n1000000_reverse_sorted_s42",
+      "input_fingerprint": "13722030013515332321",
+      "mean_binary_comparisons": 20.629,
+      "mean_correction_distance": 89.829,
+      "mean_learned_comparisons": 21.536,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "8062774740803607409",
+      "seed": 42,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 98812,
+          "mean": 95613,
+          "median": 95385,
+          "minimum": 93729,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2065.425500956159,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 575835,
+          "mean": 516606.8,
+          "median": 513670,
+          "minimum": 470856,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 42351.03055062533,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 91819,
+          "mean": 87397.6,
+          "median": 86904,
+          "minimum": 84176,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2787.1898571859074,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 626,
+      "id": "n1000000_reverse_sorted_s2718",
+      "input_fingerprint": "3863707414789519733",
+      "mean_binary_comparisons": 20.62,
+      "mean_correction_distance": 169.594,
+      "mean_learned_comparisons": 22.869,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "11735274663609642743",
+      "seed": 2718,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 118693,
+          "mean": 108636.2,
+          "median": 106410,
+          "minimum": 100740,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 7549.917496237956,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 643161,
+          "mean": 564092.6,
+          "median": 554255,
+          "minimum": 517147,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 52992.7057461685,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 116774,
+          "mean": 99148.8,
+          "median": 94804,
+          "minimum": 88425,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 11208.825348804396,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "reverse_sorted",
+      "fallback_queries": 613,
+      "id": "n1000000_reverse_sorted_s314159",
+      "input_fingerprint": "4749611502687780276",
+      "mean_binary_comparisons": 20.624,
+      "mean_correction_distance": 169.674,
+      "mean_learned_comparisons": 22.706,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "10723369033182723896",
+      "seed": 314159,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 128162,
+          "mean": 121576.2,
+          "median": 126401,
+          "minimum": 110707,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 7997.278393303562,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 630790,
+          "mean": 575207.8,
+          "median": 571018,
+          "minimum": 532655,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 35989.726425745444,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 121428,
+          "mean": 112002,
+          "median": 115216,
+          "minimum": 99667,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 9896.249567386627,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 463,
+      "id": "n1000000_duplicate_heavy_s42",
+      "input_fingerprint": "8231713612044101141",
+      "mean_binary_comparisons": 20.387,
+      "mean_correction_distance": 15496.222,
+      "mean_learned_comparisons": 19.563,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "13296992131840598467",
+      "seed": 42,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 37303,
+          "mean": 33647,
+          "median": 34160,
+          "minimum": 29898,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3224.747587021347,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 740130,
+          "mean": 643483.2,
+          "median": 632170,
+          "minimum": 562223,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 71499.49249260445,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 35170,
+          "mean": 32253.6,
+          "median": 33748,
+          "minimum": 25016,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 4125.95671329693,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 463,
+      "id": "n1000000_duplicate_heavy_s2718",
+      "input_fingerprint": "4632789349352516737",
+      "mean_binary_comparisons": 20.444,
+      "mean_correction_distance": 15678.341,
+      "mean_learned_comparisons": 19.62,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "1224168740023035970",
+      "seed": 2718,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 43133,
+          "mean": 39367.6,
+          "median": 39903,
+          "minimum": 34010,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 3726.1569075925936,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 650594,
+          "mean": 596211.8,
+          "median": 578882,
+          "minimum": 555932,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 44983.279429139,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 41073,
+          "mean": 34189.2,
+          "median": 37245,
+          "minimum": 26511,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 6778.625170342435,
+          "unit": "ns"
+        }
+      ]
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "fallback_queries": 463,
+      "id": "n1000000_duplicate_heavy_s314159",
+      "input_fingerprint": "139224265639911555",
+      "mean_binary_comparisons": 20.444,
+      "mean_correction_distance": 15726.597,
+      "mean_learned_comparisons": 19.62,
+      "memory": {
+        "object_bytes": 24,
+        "owned_capacity_bytes": 4000000,
+        "process_lifetime_peak": {
+          "error_code": null,
+          "method": "getrusage_ru_maxrss",
+          "metric": "peak_rss",
+          "scope": "process_lifetime",
+          "status": "ok",
+          "unit": "bytes",
+          "value": 20566016
+        }
+      },
+      "queries": 1000,
+      "query_fingerprint": "10168786969795230937",
+      "seed": 314159,
+      "size": 1000000,
+      "timings": [
+        {
+          "algorithm": "binary_search",
+          "maximum": 35858,
+          "mean": 32302.8,
+          "median": 32546,
+          "minimum": 29804,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 2425.946969741919,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 534422,
+          "mean": 498075.6,
+          "median": 493773,
+          "minimum": 462877,
+          "n": 5,
+          "operation": "build",
+          "sample_sd": 26425.395849447556,
+          "unit": "ns"
+        },
+        {
+          "algorithm": "learned_rank",
+          "maximum": 28073,
+          "mean": 26463.6,
+          "median": 26759,
+          "minimum": 24819,
+          "n": 5,
+          "operation": "lookup_batch",
+          "sample_sd": 1217.4846200260602,
+          "unit": "ns"
+        }
+      ]
+    }
+  ],
+  "failed": 0,
+  "measured_builds": 240,
+  "measured_query_batches": 480,
+  "missing": 0,
+  "protocol": "learned_rank_v1",
+  "warmup_builds": 48,
+  "warmup_query_batches": 96
+}

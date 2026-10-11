@@ -1,0 +1,2567 @@
+{
+  "complete": true,
+  "cross_dataset": [
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_std_sort",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 24698,
+        "mean_ns": 24698,
+        "median_ns": 24698,
+        "min_ns": 24698,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_merge_sort",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 41598,
+        "mean_ns": 41598,
+        "median_ns": 41598,
+        "min_ns": 41598,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 49368,
+        "mean_ns": 49368,
+        "median_ns": 49368,
+        "min_ns": 49368,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 75793,
+        "mean_ns": 75793,
+        "median_ns": 75793,
+        "min_ns": 75793,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "h2d_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 5824.000108987093,
+        "mean_ns": 5824.000108987093,
+        "median_ns": 5824.000108987093,
+        "min_ns": 5824.000108987093,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "device_sort_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 33344.000577926636,
+        "mean_ns": 33344.000577926636,
+        "median_ns": 33344.000577926636,
+        "min_ns": 33344.000577926636,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "d2h_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 9600.000455975533,
+        "mean_ns": 9600.000455975533,
+        "median_ns": 9600.000455975533,
+        "min_ns": 9600.000455975533,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "end_to_end_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 57297,
+        "mean_ns": 57297,
+        "median_ns": 57297,
+        "min_ns": 57297,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_std_sort",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 14907,
+        "mean_ns": 14907,
+        "median_ns": 14907,
+        "min_ns": 14907,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_merge_sort",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 15172,
+        "mean_ns": 15172,
+        "median_ns": 15172,
+        "min_ns": 15172,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 22263,
+        "mean_ns": 22263,
+        "median_ns": 22263,
+        "min_ns": 22263,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 67166,
+        "mean_ns": 67166,
+        "median_ns": 67166,
+        "min_ns": 67166,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "h2d_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 6175.999995321035,
+        "mean_ns": 6175.999995321035,
+        "median_ns": 6175.999995321035,
+        "min_ns": 6175.999995321035,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "device_sort_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 28319.99957561493,
+        "mean_ns": 28319.99957561493,
+        "median_ns": 28319.99957561493,
+        "min_ns": 28319.99957561493,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "d2h_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 5311.999935656786,
+        "mean_ns": 5311.999935656786,
+        "median_ns": 5311.999935656786,
+        "min_ns": 5311.999935656786,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "end_to_end_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 48090,
+        "mean_ns": 48090,
+        "median_ns": 48090,
+        "min_ns": 48090,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_std_sort",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 41368,
+        "mean_ns": 41368,
+        "median_ns": 41368,
+        "min_ns": 41368,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_merge_sort",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 55705,
+        "mean_ns": 55705,
+        "median_ns": 55705,
+        "min_ns": 55705,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 59862,
+        "mean_ns": 59862,
+        "median_ns": 59862,
+        "min_ns": 59862,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 64105,
+        "mean_ns": 64105,
+        "median_ns": 64105,
+        "min_ns": 64105,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "h2d_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 5919.999908655882,
+        "mean_ns": 5919.999908655882,
+        "median_ns": 5919.999908655882,
+        "min_ns": 5919.999908655882,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "device_sort_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 21888.000890612602,
+        "mean_ns": 21888.000890612602,
+        "median_ns": 21888.000890612602,
+        "min_ns": 21888.000890612602,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "d2h_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 4031.9999679923058,
+        "mean_ns": 4031.9999679923058,
+        "median_ns": 4031.9999679923058,
+        "min_ns": 4031.9999679923058,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "end_to_end_ns",
+      "size": 1025,
+      "statistics": {
+        "max_ns": 39941,
+        "mean_ns": 39941,
+        "median_ns": 39941,
+        "min_ns": 39941,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_std_sort",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 31831862,
+        "mean_ns": 31831862,
+        "median_ns": 31831862,
+        "min_ns": 31831862,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_merge_sort",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 50374917,
+        "mean_ns": 50374917,
+        "median_ns": 50374917,
+        "min_ns": 50374917,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 46867424,
+        "mean_ns": 46867424,
+        "median_ns": 46867424,
+        "min_ns": 46867424,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 3154675,
+        "mean_ns": 3154675,
+        "median_ns": 3154675,
+        "min_ns": 3154675,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "h2d_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 342720.00193595886,
+        "mean_ns": 342720.00193595886,
+        "median_ns": 342720.00193595886,
+        "min_ns": 342720.00193595886,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "device_sort_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 381599.9925136566,
+        "mean_ns": 381599.9925136566,
+        "median_ns": 381599.9925136566,
+        "min_ns": 381599.9925136566,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "d2h_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 314336.00187301636,
+        "mean_ns": 314336.00187301636,
+        "median_ns": 314336.00187301636,
+        "min_ns": 314336.00187301636,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "metric": "end_to_end_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 1054405,
+        "mean_ns": 1054405,
+        "median_ns": 1054405,
+        "min_ns": 1054405,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_std_sort",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 20261968,
+        "mean_ns": 20261968,
+        "median_ns": 20261968,
+        "min_ns": 20261968,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_merge_sort",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 24478621,
+        "mean_ns": 24478621,
+        "median_ns": 24478621,
+        "min_ns": 24478621,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 32218138,
+        "mean_ns": 32218138,
+        "median_ns": 32218138,
+        "min_ns": 32218138,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 3107064,
+        "mean_ns": 3107064,
+        "median_ns": 3107064,
+        "min_ns": 3107064,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "h2d_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 343903.9885997772,
+        "mean_ns": 343903.9885997772,
+        "median_ns": 343903.9885997772,
+        "min_ns": 343903.9885997772,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "device_sort_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 279136.0020637512,
+        "mean_ns": 279136.0020637512,
+        "median_ns": 279136.0020637512,
+        "min_ns": 279136.0020637512,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "d2h_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 317887.9916667938,
+        "mean_ns": 317887.9916667938,
+        "median_ns": 317887.9916667938,
+        "min_ns": 317887.9916667938,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "metric": "end_to_end_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 959410,
+        "mean_ns": 959410,
+        "median_ns": 959410,
+        "min_ns": 959410,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_std_sort",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 78558687,
+        "mean_ns": 78558687,
+        "median_ns": 78558687,
+        "min_ns": 78558687,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_merge_sort",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 104438312,
+        "mean_ns": 104438312,
+        "median_ns": 104438312,
+        "min_ns": 104438312,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 74786327,
+        "mean_ns": 74786327,
+        "median_ns": 74786327,
+        "min_ns": 74786327,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "host_call_e2e_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 3338940,
+        "mean_ns": 3338940,
+        "median_ns": 3338940,
+        "min_ns": 3338940,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "h2d_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 343551.99337005615,
+        "mean_ns": 343551.99337005615,
+        "median_ns": 343551.99337005615,
+        "min_ns": 343551.99337005615,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "device_sort_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 492576.003074646,
+        "mean_ns": 492576.003074646,
+        "median_ns": 492576.003074646,
+        "min_ns": 492576.003074646,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "d2h_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 315840.0058746338,
+        "mean_ns": 315840.0058746338,
+        "median_ns": 315840.0058746338,
+        "min_ns": 315840.0058746338,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight distinct-input medians; identical-input seed medians collapsed by median",
+      "backend_id": "gpu_cub_prepared",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "metric": "end_to_end_ns",
+      "size": 1000000,
+      "statistics": {
+        "max_ns": 1168889,
+        "mean_ns": 1168889,
+        "median_ns": 1168889,
+        "min_ns": 1168889,
+        "stdev_ns": null,
+        "successful_trials": 1
+      },
+      "unit": "ns"
+    }
+  ],
+  "cross_dataset_paired_ratios": [
+    {
+      "baseline": "cpu_merge_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.5488369638357105,
+        "mean": 0.5488369638357105,
+        "median": 0.5488369638357105,
+        "minimum": 0.5488369638357105,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.6513530273244231,
+        "mean": 0.6513530273244231,
+        "median": 0.6513530273244231,
+        "minimum": 0.6513530273244231,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.3258612272901191,
+        "mean": 0.3258612272901191,
+        "median": 0.3258612272901191,
+        "minimum": 0.3258612272901191,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.22588809814489474,
+        "mean": 0.22588809814489474,
+        "median": 0.22588809814489474,
+        "minimum": 0.22588809814489474,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.3314623470208141,
+        "mean": 0.3314623470208141,
+        "median": 0.3314623470208141,
+        "minimum": 0.3314623470208141,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.22194264955483428,
+        "mean": 0.22194264955483428,
+        "median": 0.22194264955483428,
+        "minimum": 0.22194264955483428,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.8689649793307854,
+        "mean": 0.8689649793307854,
+        "median": 0.8689649793307854,
+        "minimum": 0.8689649793307854,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.9338117151548241,
+        "mean": 0.9338117151548241,
+        "median": 0.9338117151548241,
+        "minimum": 0.9338117151548241,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "size": 1025,
+      "statistics": {
+        "count": 1,
+        "maximum": 0.6453162779814368,
+        "mean": 0.6453162779814368,
+        "median": 0.6453162779814368,
+        "minimum": 0.6453162779814368,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 15.968338101389207,
+        "mean": 15.968338101389207,
+        "median": 15.968338101389207,
+        "minimum": 15.968338101389207,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 14.856498371464573,
+        "mean": 14.856498371464573,
+        "median": 14.856498371464573,
+        "minimum": 14.856498371464573,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 10.090377614175786,
+        "mean": 10.090377614175786,
+        "median": 10.090377614175786,
+        "minimum": 10.090377614175786,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 7.87837682133358,
+        "mean": 7.87837682133358,
+        "median": 7.87837682133358,
+        "minimum": 7.87837682133358,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 10.369319074212825,
+        "mean": 10.369319074212825,
+        "median": 10.369319074212825,
+        "minimum": 10.369319074212825,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "signed_edges",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 6.521258654472518,
+        "mean": 6.521258654472518,
+        "median": 6.521258654472518,
+        "minimum": 6.521258654472518,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 31.27888251960203,
+        "mean": 31.27888251960203,
+        "median": 31.27888251960203,
+        "minimum": 31.27888251960203,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 22.398224286749688,
+        "mean": 22.398224286749688,
+        "median": 22.398224286749688,
+        "minimum": 22.398224286749688,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "denominator": "gpu_cub_adapter",
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "size": 1000000,
+      "statistics": {
+        "count": 1,
+        "maximum": 23.528031950259663,
+        "mean": 23.528031950259663,
+        "median": 23.528031950259663,
+        "minimum": 23.528031950259663,
+        "stdev": null
+      },
+      "unit": "dimensionless"
+    }
+  ],
+  "groups": [
+    {
+      "backend_id": "cpu_std_sort",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "failed_trials": 0,
+      "input_sha256": "e0538418dd0cea5beb705a6e9a37c507b075fd490383f8122a151d4fbf2ef33f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 20432129,
+          "mean_ns": 20256655.8,
+          "median_ns": 20261968,
+          "min_ns": 20082997,
+          "stdev_ns": 123655.9088547733,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_merge_sort",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "failed_trials": 0,
+      "input_sha256": "e0538418dd0cea5beb705a6e9a37c507b075fd490383f8122a151d4fbf2ef33f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 26594153,
+          "mean_ns": 24870685.8,
+          "median_ns": 24478621,
+          "min_ns": 24104252,
+          "stdev_ns": 1000946.9820793207,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "failed_trials": 0,
+      "input_sha256": "e0538418dd0cea5beb705a6e9a37c507b075fd490383f8122a151d4fbf2ef33f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 32536243,
+          "mean_ns": 32052429.2,
+          "median_ns": 32218138,
+          "min_ns": 31593328,
+          "stdev_ns": 400349.6764650872,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_adapter",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "failed_trials": 0,
+      "input_sha256": "e0538418dd0cea5beb705a6e9a37c507b075fd490383f8122a151d4fbf2ef33f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 3204416,
+          "mean_ns": 3086309,
+          "median_ns": 3107064,
+          "min_ns": 2891361,
+          "stdev_ns": 119181.18227933468,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_prepared",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "failed_trials": 0,
+      "input_sha256": "e0538418dd0cea5beb705a6e9a37c507b075fd490383f8122a151d4fbf2ef33f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 319328.0100822449,
+          "mean_ns": 316543.9963340759,
+          "median_ns": 317887.9916667938,
+          "min_ns": 311807.9900741577,
+          "stdev_ns": 2935.5590869121984,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 281984.00139808655,
+          "mean_ns": 279360.0022792816,
+          "median_ns": 279136.0020637512,
+          "min_ns": 277247.99513816833,
+          "stdev_ns": 1934.2177482273555,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 968712,
+          "mean_ns": 959658.6,
+          "median_ns": 959410,
+          "min_ns": 947517,
+          "stdev_ns": 8082.947933767729,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 345791.9955253601,
+          "mean_ns": 343897.5930213928,
+          "median_ns": 343903.9885997772,
+          "min_ns": 341791.9874191284,
+          "stdev_ns": 1475.3738397535994,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "diagnostics_only",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_std_sort",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "failed_trials": 0,
+      "input_sha256": "d0603029325b5f050a95f721aef45f6470780199a2c146bf68f89357606498a1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 79044167,
+          "mean_ns": 78618582.6,
+          "median_ns": 78558687,
+          "min_ns": 78369131,
+          "stdev_ns": 276324.6338318392,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_merge_sort",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "failed_trials": 0,
+      "input_sha256": "d0603029325b5f050a95f721aef45f6470780199a2c146bf68f89357606498a1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 110319010,
+          "mean_ns": 105977124,
+          "median_ns": 104438312,
+          "min_ns": 104287884,
+          "stdev_ns": 2598609.7806738894,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "failed_trials": 0,
+      "input_sha256": "d0603029325b5f050a95f721aef45f6470780199a2c146bf68f89357606498a1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 75179761,
+          "mean_ns": 74180059.2,
+          "median_ns": 74786327,
+          "min_ns": 72780906,
+          "stdev_ns": 1090647.0757150087,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_adapter",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "failed_trials": 0,
+      "input_sha256": "d0603029325b5f050a95f721aef45f6470780199a2c146bf68f89357606498a1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 3451085,
+          "mean_ns": 3349204.2,
+          "median_ns": 3338940,
+          "min_ns": 3255085,
+          "stdev_ns": 86621.6229685175,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_prepared",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "failed_trials": 0,
+      "input_sha256": "d0603029325b5f050a95f721aef45f6470780199a2c146bf68f89357606498a1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 317312.00218200684,
+          "mean_ns": 315244.8058128357,
+          "median_ns": 315840.0058746338,
+          "min_ns": 311776.0121822357,
+          "stdev_ns": 2340.0057462781638,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 524800.0025749207,
+          "mean_ns": 461740.7977581024,
+          "median_ns": 492576.003074646,
+          "min_ns": 326175.9877204895,
+          "stdev_ns": 78489.19796634215,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 1199064,
+          "mean_ns": 1135417.6,
+          "median_ns": 1168889,
+          "min_ns": 994403,
+          "stdev_ns": 81195.27975997126,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 343807.99531936646,
+          "mean_ns": 342931.193113327,
+          "median_ns": 343551.99337005615,
+          "min_ns": 340864.00270462036,
+          "stdev_ns": 1220.953901063219,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "diagnostics_only",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_std_sort",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "failed_trials": 0,
+      "input_sha256": "e8bae355bcbc3652e8f8ea51996a7a0bcc8c24b989071a26217fafb145ba274f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 32958201,
+          "mean_ns": 32024212.2,
+          "median_ns": 31831862,
+          "min_ns": 31664427,
+          "stdev_ns": 538556.6034064572,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_merge_sort",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "failed_trials": 0,
+      "input_sha256": "e8bae355bcbc3652e8f8ea51996a7a0bcc8c24b989071a26217fafb145ba274f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 51799614,
+          "mean_ns": 50657495.4,
+          "median_ns": 50374917,
+          "min_ns": 50290761,
+          "stdev_ns": 642474.7419652387,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "failed_trials": 0,
+      "input_sha256": "e8bae355bcbc3652e8f8ea51996a7a0bcc8c24b989071a26217fafb145ba274f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 49082870,
+          "mean_ns": 47232113.4,
+          "median_ns": 46867424,
+          "min_ns": 46277693,
+          "stdev_ns": 1103538.9570519475,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_adapter",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "failed_trials": 0,
+      "input_sha256": "e8bae355bcbc3652e8f8ea51996a7a0bcc8c24b989071a26217fafb145ba274f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 3192787,
+          "mean_ns": 3151760.8,
+          "median_ns": 3154675,
+          "min_ns": 3088892,
+          "stdev_ns": 43578.23991627014,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_prepared",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "failed_trials": 0,
+      "input_sha256": "e8bae355bcbc3652e8f8ea51996a7a0bcc8c24b989071a26217fafb145ba274f",
+      "interrupted_trials": 0,
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 316159.9934101105,
+          "mean_ns": 314271.99840545654,
+          "median_ns": 314336.00187301636,
+          "min_ns": 311967.99874305725,
+          "stdev_ns": 1881.6155122374644,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 446559.99541282654,
+          "mean_ns": 399801.59997940063,
+          "median_ns": 381599.9925136566,
+          "min_ns": 353376.00111961365,
+          "stdev_ns": 42515.5018988138,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 1119094,
+          "mean_ns": 1075690.8,
+          "median_ns": 1054405,
+          "min_ns": 1040338,
+          "stdev_ns": 38592.05420420115,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 347104.012966156,
+          "mean_ns": 343660.8016490936,
+          "median_ns": 342720.00193595886,
+          "min_ns": 342624.0086555481,
+          "stdev_ns": 1938.9263296848658,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "scope": "diagnostics_only",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_std_sort",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "failed_trials": 0,
+      "input_sha256": "d891ca277ccf8a0ef5ccb118a945be27702526430f0f60faf586b46e052deed1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 25207,
+          "mean_ns": 24790.2,
+          "median_ns": 24698,
+          "min_ns": 24372,
+          "stdev_ns": 356.5027349123706,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_merge_sort",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "failed_trials": 0,
+      "input_sha256": "d891ca277ccf8a0ef5ccb118a945be27702526430f0f60faf586b46e052deed1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 43182,
+          "mean_ns": 41697.4,
+          "median_ns": 41598,
+          "min_ns": 40807,
+          "stdev_ns": 977.3217484533944,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "failed_trials": 0,
+      "input_sha256": "d891ca277ccf8a0ef5ccb118a945be27702526430f0f60faf586b46e052deed1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 51248,
+          "mean_ns": 49775.4,
+          "median_ns": 49368,
+          "min_ns": 48968,
+          "stdev_ns": 929.6186314828248,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_adapter",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "failed_trials": 0,
+      "input_sha256": "d891ca277ccf8a0ef5ccb118a945be27702526430f0f60faf586b46e052deed1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 84088,
+          "mean_ns": 78758.6,
+          "median_ns": 75793,
+          "min_ns": 75443,
+          "stdev_ns": 4385.807143502779,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_prepared",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "failed_trials": 0,
+      "input_sha256": "d891ca277ccf8a0ef5ccb118a945be27702526430f0f60faf586b46e052deed1",
+      "interrupted_trials": 0,
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 10623.999871313572,
+          "mean_ns": 9593.600034713745,
+          "median_ns": 9600.000455975533,
+          "min_ns": 8960.000239312649,
+          "stdev_ns": 644.1464821944052,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 37023.99879693985,
+          "mean_ns": 33811.19966506958,
+          "median_ns": 33344.000577926636,
+          "min_ns": 32287.999987602234,
+          "stdev_ns": 1932.5714603269678,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 84386,
+          "mean_ns": 63835.4,
+          "median_ns": 57297,
+          "min_ns": 56344,
+          "stdev_ns": 11993.01001833985,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 8031.999692320824,
+          "mean_ns": 6380.799971520901,
+          "median_ns": 5824.000108987093,
+          "min_ns": 5599.99980032444,
+          "stdev_ns": 1001.9116633330624,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "diagnostics_only",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_std_sort",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "failed_trials": 0,
+      "input_sha256": "0c4c94af1a5af0c44bd2ff788ebc819b0203da70d8542162b1d82de6c15d51ed",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 16463,
+          "mean_ns": 15036.6,
+          "median_ns": 14907,
+          "min_ns": 14040,
+          "stdev_ns": 938.7397402901403,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_merge_sort",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "failed_trials": 0,
+      "input_sha256": "0c4c94af1a5af0c44bd2ff788ebc819b0203da70d8542162b1d82de6c15d51ed",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 28465,
+          "mean_ns": 17952.6,
+          "median_ns": 15172,
+          "min_ns": 14935,
+          "stdev_ns": 5891.249129004816,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "failed_trials": 0,
+      "input_sha256": "0c4c94af1a5af0c44bd2ff788ebc819b0203da70d8542162b1d82de6c15d51ed",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 28888,
+          "mean_ns": 23370,
+          "median_ns": 22263,
+          "min_ns": 21338,
+          "stdev_ns": 3117.3449440188683,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_adapter",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "failed_trials": 0,
+      "input_sha256": "0c4c94af1a5af0c44bd2ff788ebc819b0203da70d8542162b1d82de6c15d51ed",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 76343,
+          "mean_ns": 68918.2,
+          "median_ns": 67166,
+          "min_ns": 66219,
+          "stdev_ns": 4218.865925814662,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_prepared",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "failed_trials": 0,
+      "input_sha256": "0c4c94af1a5af0c44bd2ff788ebc819b0203da70d8542162b1d82de6c15d51ed",
+      "interrupted_trials": 0,
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 10432.000271975994,
+          "mean_ns": 6444.800086319447,
+          "median_ns": 5311.999935656786,
+          "min_ns": 5280.000157654285,
+          "stdev_ns": 2245.547509848845,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 29791.999608278275,
+          "mean_ns": 28467.199951410294,
+          "median_ns": 28319.99957561493,
+          "min_ns": 27744.000777602196,
+          "stdev_ns": 817.598138945663,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 61360,
+          "mean_ns": 50553,
+          "median_ns": 48090,
+          "min_ns": 45345,
+          "stdev_ns": 6256.448273581425,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 12831.99992030859,
+          "mean_ns": 7187.199965119362,
+          "median_ns": 6175.999995321035,
+          "min_ns": 5247.999913990498,
+          "stdev_ns": 3195.084208039067,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "diagnostics_only",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_std_sort",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "failed_trials": 0,
+      "input_sha256": "b5377bd58aaa7b2a14d0700de0d250c83d197b69dba19d16a09cc9f73de82549",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 41622,
+          "mean_ns": 41040,
+          "median_ns": 41368,
+          "min_ns": 39971,
+          "stdev_ns": 685.9682937279244,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_merge_sort",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "failed_trials": 0,
+      "input_sha256": "b5377bd58aaa7b2a14d0700de0d250c83d197b69dba19d16a09cc9f73de82549",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 64624,
+          "mean_ns": 57319.4,
+          "median_ns": 55705,
+          "min_ns": 54960,
+          "stdev_ns": 4107.824217271231,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "failed_trials": 0,
+      "input_sha256": "b5377bd58aaa7b2a14d0700de0d250c83d197b69dba19d16a09cc9f73de82549",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 60590,
+          "mean_ns": 59697.6,
+          "median_ns": 59862,
+          "min_ns": 58920,
+          "stdev_ns": 692.1696323878996,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_adapter",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "failed_trials": 0,
+      "input_sha256": "b5377bd58aaa7b2a14d0700de0d250c83d197b69dba19d16a09cc9f73de82549",
+      "interrupted_trials": 0,
+      "metrics": {
+        "host_call_e2e_ns": {
+          "max_ns": 68142,
+          "mean_ns": 64495.2,
+          "median_ns": 64105,
+          "min_ns": 62317,
+          "stdev_ns": 2206.0469623287713,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "host_vector_api_call_v1",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    },
+    {
+      "backend_id": "gpu_cub_prepared",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "failed_trials": 0,
+      "input_sha256": "b5377bd58aaa7b2a14d0700de0d250c83d197b69dba19d16a09cc9f73de82549",
+      "interrupted_trials": 0,
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 11231.999844312668,
+          "mean_ns": 6547.199888154864,
+          "median_ns": 4031.9999679923058,
+          "min_ns": 3072.0001086592674,
+          "stdev_ns": 4277.934302090897,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 22592.000663280487,
+          "mean_ns": 21952.00026035309,
+          "median_ns": 21888.000890612602,
+          "min_ns": 21536.000072956085,
+          "stdev_ns": 454.2423389024743,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 50034,
+          "mean_ns": 42470.4,
+          "median_ns": 39941,
+          "min_ns": 37795,
+          "stdev_ns": 5179.19987063639,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 8799.999952316284,
+          "mean_ns": 6310.399994254112,
+          "median_ns": 5919.999908655882,
+          "min_ns": 5375.999957323074,
+          "stdev_ns": 1414.4217019164785,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "scope": "diagnostics_only",
+      "successful_trials": 5,
+      "warmup_status": "ok"
+    }
+  ],
+  "interpretation": "descriptive only; retain all outliers; repetitions are not independent datasets; no confidence intervals/significance",
+  "matrix_part": "pilot",
+  "measured": {
+    "failed": 0,
+    "interrupted": 0,
+    "missing": 0,
+    "successful": 150
+  },
+  "paired_host_call_ratios": [
+    {
+      "baseline": "cpu_std_sort",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 6.521258654472518,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 7.87837682133358,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 10.369319074212825,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 23.528031950259663,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 31.27888251960203,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 22.398224286749688,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 10.090377614175786,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 15.968338101389207,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 14.856498371464573,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1000000
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.3258612272901191,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.5488369638357105,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.6513530273244231,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "duplicate_heavy",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.22194264955483428,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.22588809814489474,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.3314623470208141,
+      "recipe": {
+        "dataset_generator": "signed_edges_v1",
+        "distribution": "signed_edges",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_std_sort",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.6453162779814368,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_merge_sort",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.8689649793307854,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    },
+    {
+      "baseline": "cpu_parallel_merge_sort_t2",
+      "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+      "denominator": "gpu_cub_adapter",
+      "ratio": 0.9338117151548241,
+      "recipe": {
+        "dataset_generator": "mt19937_64_v1",
+        "distribution": "uniform",
+        "duplicate_cardinality": 16,
+        "key_type": "signed_int32",
+        "nearly_sorted_swaps": 0,
+        "seed": 1729,
+        "size": 1025
+      },
+      "resolution_limited": false,
+      "scope": "host_vector_api_call_v1"
+    }
+  ],
+  "protocol": "cpu_gpu_comparison_v1",
+  "raw_sha256": {
+    "build.json": "8104a344b42865e03cf8adc298f7a13753938d23f5ea186d5518962fe68fd575",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/dataset.json": "c2bf47235395dbcea82f7cc7b24df4c3169e828f971faf04d60d88d3ab0b5712",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/input.bin": "e0538418dd0cea5beb705a6e9a37c507b075fd490383f8122a151d4fbf2ef33f",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/input.json": "d68ea940f7c237022cba1694e2d9897879d56039257c0b0c974d49542383d999",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/COMPLETE.json": "788fa188af7a8578b903087f9ad256161125cea817995aee4aecfef6a16ab1e6",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/attempts.jsonl": "731b51f3fdc6ea6624e73bce5e5568ad6f8f643c9bb51642aeed5e184bf61930",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/prepared/COMPLETE.json": "a1f6a76323e799b00e704bfecb0c5b1dd9223f85d51df8bf3c08e7e28e78dc81",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/prepared/run.json": "84e8513cc3c96ec0d9d2bc23c6bc152687c3ba0727a4064880b35f8a90e8ded2",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/prepared/trials.csv": "3563314b56b18cc09177734bc577041a38ac498be9d431d6bfb823b299d1167f",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/prepared_order.csv": "f94f93dcf5249c492ed5dcb8a2595ccf49aa2ffd40dc448eddab7ad367a87b50",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/primary.csv": "385289ebcc94c56f9a470911b5d9ae8c31f201d6037362ce0b69d75faac08f3a",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/process_memory.json": "e0ececc830cdfa46d0453b1add2815323777dcd2e07b9ebc7c2bb63d9e6db442",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/resources.json": "e648531da3fbb8a01a84e945f3307252cf9484e672905a12c2151605579fe989",
+    "data_165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d/measurements/timer_calibration.json": "97ee7498d56149b100f3b09722843739d9f590638470d99c30c2a993e8f67417",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/dataset.json": "b250914a5fadb98f0dae638f931d8c3ca33fc0fd6af8ea86d76e6ebc1096a2c6",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/input.bin": "0c4c94af1a5af0c44bd2ff788ebc819b0203da70d8542162b1d82de6c15d51ed",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/input.json": "c2d5ed49634b6ad87e1428b8df0847b85ad8068fe4cb2d8ba03d66cfad2cc4ea",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/COMPLETE.json": "788fa188af7a8578b903087f9ad256161125cea817995aee4aecfef6a16ab1e6",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/attempts.jsonl": "63ec7a72eaa33891ac5403d593df264110590d2dec9b63cc6115760c9719c28f",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/prepared/COMPLETE.json": "a1f6a76323e799b00e704bfecb0c5b1dd9223f85d51df8bf3c08e7e28e78dc81",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/prepared/run.json": "f05ffddea36b65b09927785f192da9a306ee1a66b8e55880f0a7a2e4f8e10958",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/prepared/trials.csv": "8753dee1461f2792d007700d011b15530aa969b620da90a252530586f655ec5c",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/prepared_order.csv": "260a5925e7ee046377ad512728d160167ebae4b40ed096bd7a348c5bd72ebded",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/primary.csv": "8896fde756de74be0a50f9612c98d9ecdcc854fc3eb748267c05aac362035d82",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/process_memory.json": "66b7c0841e9da1593dc278da3600cee376ca2a0ee4d74026d0f7f80645b546d5",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/resources.json": "1d517d6aba6040447bc788b60c74b687a77da9dff9e11a93a84f91f1ee2cdf29",
+    "data_57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b/measurements/timer_calibration.json": "97ee7498d56149b100f3b09722843739d9f590638470d99c30c2a993e8f67417",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/dataset.json": "84766adc95648b0cb9b849f0a70c2243345da559e8a905cb839373dac2865adb",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/input.bin": "e8bae355bcbc3652e8f8ea51996a7a0bcc8c24b989071a26217fafb145ba274f",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/input.json": "45e87207edf39fb65e23876893f93c7b6ad5f3be995760ba289608d407f5cae2",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/COMPLETE.json": "788fa188af7a8578b903087f9ad256161125cea817995aee4aecfef6a16ab1e6",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/attempts.jsonl": "3e34696b0e86d1fbe3e662a8cfe7a7dbc1f5671b500ae5289bf9f3719d08ef3d",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/prepared/COMPLETE.json": "a1f6a76323e799b00e704bfecb0c5b1dd9223f85d51df8bf3c08e7e28e78dc81",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/prepared/run.json": "f6ba7f2d8f773450919b1a1556d1927f10f73afc1897e6532cf6bbb308ab70d3",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/prepared/trials.csv": "62531fc4718a38045f4f17567d36c9d3a6a1b712f8a4c7059cb5183d06b80028",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/prepared_order.csv": "d159b86fd64086ffdec110fbb318870efad8e15a6f357de47df92760193f0fde",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/primary.csv": "da2ac1ca2def29b7d7aedcd29cb295cb0c8d2d3b77e7a3ef19b9fdb8bdf39450",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/process_memory.json": "adb3e8ca1185de09d931e0faa65113976b637eb6604b755b21d9c97f63739add",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/resources.json": "e648531da3fbb8a01a84e945f3307252cf9484e672905a12c2151605579fe989",
+    "data_ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407/measurements/timer_calibration.json": "97a9bb6902a1d63db0994ebd032fbb0c60b9cd984afa7896ca2d434e110f36ab",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/dataset.json": "7f060a7aeed95d511a837c179e9441715c2c9eae8e308dcea193b984549122ec",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/input.bin": "d0603029325b5f050a95f721aef45f6470780199a2c146bf68f89357606498a1",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/input.json": "2b49c4796051e7cb33739e1594d0495edd3f2ade0f311ce46c0c81bf4060fddf",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/COMPLETE.json": "788fa188af7a8578b903087f9ad256161125cea817995aee4aecfef6a16ab1e6",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/attempts.jsonl": "a5ba4a800f8ff8645568cc98dbd414738fd6ec15ae67b6df78e9fae295e3eef2",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/prepared/COMPLETE.json": "a1f6a76323e799b00e704bfecb0c5b1dd9223f85d51df8bf3c08e7e28e78dc81",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/prepared/run.json": "45ea2bf4a9ea3b9a958f53d052dac3a48bc4675633d3914952c2c197aabe6003",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/prepared/trials.csv": "b03eb3439a495027b8c2e7b4cadbe1ed8afd31712cca7ffde6cfcb0519d163f4",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/prepared_order.csv": "929610a540ecbaf440af9e3aa6b209d2a78d194bbf3f941b5306b510a9b099d1",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/primary.csv": "2f000458f435d18a0abf655e0883cbbb97d0b4de1474e36627d3d8065c850105",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/process_memory.json": "0e359dc7734180bb76845123b371531a98107f4edd7c69c9805e0cf6d9f1506b",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/resources.json": "e648531da3fbb8a01a84e945f3307252cf9484e672905a12c2151605579fe989",
+    "data_b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08/measurements/timer_calibration.json": "edfd978997407ae95c3fba0d10388a162ca37cad4c63cdd87ae24a27d1679f58",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/dataset.json": "df0299ce958e06bffc1662eab1edbd5b2205269755463defe77d4a3ac2bef6b8",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/input.bin": "b5377bd58aaa7b2a14d0700de0d250c83d197b69dba19d16a09cc9f73de82549",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/input.json": "6e70910c81a84841f3b010ed5ae6680dd4989aaa485cdb6c638c41fa52b23920",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/COMPLETE.json": "788fa188af7a8578b903087f9ad256161125cea817995aee4aecfef6a16ab1e6",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/attempts.jsonl": "20daad3faba759e1d5611bd382d5db493e33be698b903a8936ab0a7019a2a02b",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/prepared/COMPLETE.json": "a1f6a76323e799b00e704bfecb0c5b1dd9223f85d51df8bf3c08e7e28e78dc81",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/prepared/run.json": "03a93e591708f966710b7a467f3476332f85be054f80e3f12f65cdbb1baa886a",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/prepared/trials.csv": "04d736ad5cd37daa6054d6c723223dbc2dbcccf4bebb718d7da664e3e414ed66",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/prepared_order.csv": "a388e5ae837346aec72b8e4170cafceedf5ebe0bc11f94aeb7727a8cdaaf5c94",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/primary.csv": "4e30868c0fa15b14d3fc3a1d18a0f9cdd9d04b758f19730432cfa3e1260f7e16",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/process_memory.json": "57eda4518430bd170deae3479526a55ad60ebf865b8b2734a868df8d7b9fe92b",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/resources.json": "1d517d6aba6040447bc788b60c74b687a77da9dff9e11a93a84f91f1ee2cdf29",
+    "data_c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0/measurements/timer_calibration.json": "97ee7498d56149b100f3b09722843739d9f590638470d99c30c2a993e8f67417",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/dataset.json": "013f3bc2e13efa02b44afe440c7525ec1c9340861ea9fd9e1b42282abcee3e8a",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/input.bin": "d891ca277ccf8a0ef5ccb118a945be27702526430f0f60faf586b46e052deed1",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/input.json": "eb12e32c26b25918b87019a0965800563b50f0b801d4ee0268dbc98412535ff0",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/COMPLETE.json": "788fa188af7a8578b903087f9ad256161125cea817995aee4aecfef6a16ab1e6",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/attempts.jsonl": "925c5abd6afbf156234ffb5e593083d77b63e130621844050b4f868d0f7209c0",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/prepared/COMPLETE.json": "a1f6a76323e799b00e704bfecb0c5b1dd9223f85d51df8bf3c08e7e28e78dc81",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/prepared/run.json": "69bcd1982b8787788e308d8756e0ab547148b0be49e32e4d2e7cbb2fb1f46155",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/prepared/trials.csv": "7387b42c7412eb8194e5d64e013d20bcfbf854499b39d460b8e7e4a230386d53",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/prepared_order.csv": "d9161e32e1d2d5f7c9113a7cd4768fce4eb544c34b803feeceef1a95bbbb68ee",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/primary.csv": "118cc020c3e8b63b63202f08a869e4d28423751d44813a19753563be435a7fb0",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/process_memory.json": "c405204be5a2db7cf32fac180e0e26a6194100120283c97c4f9a3a7136687a99",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/resources.json": "1d517d6aba6040447bc788b60c74b687a77da9dff9e11a93a84f91f1ee2cdf29",
+    "data_e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e/measurements/timer_calibration.json": "97ee7498d56149b100f3b09722843739d9f590638470d99c30c2a993e8f67417",
+    "environment.json": "fb5e76af1b6832b358a2b07882399c222464e68d2140543caf5d1912ce520c43",
+    "run.json": "f439175a2996c492a89b166779154aeb2a53ece746cee45a6a15eaea38199ab3",
+    "workspace_queries.json": "8f2f0ada8c9b08089273f07f54b423cf3431ce8276ab9c533fee66a9c2cde6d9"
+  },
+  "run_id": "pilot_v3",
+  "schema_version": 1,
+  "unit": "ns",
+  "warmups": {
+    "failed": 0,
+    "interrupted": 0,
+    "missing": 0,
+    "successful": 30
+  }
+}
