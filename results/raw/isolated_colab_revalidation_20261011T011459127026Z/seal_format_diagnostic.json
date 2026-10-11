@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import json,hashlib;from pathlib import Path;r=Path.cwd();names=[\"ctest_path_independent_review_20261011T000547578754Z\",\"cpu_gpu_readiness_20261011T004018152238Z\",\"colab_t4_diagnostics_20261011T005409276199Z\",\"isolated_colab_build_20261011T010417197263Z\"]\nfor name in names:\n d=r/\"results/raw\"/name;s=json.loads((d/\"FINAL_INTEGRITY.json\").read_text());m=s[\"evidence_sha256\"];print(name,\"keys\",list(m)[:2]);bad=[]\n for p,h in m.items():\n  candidates=[(d/p),(r/p)];matches=[str(x) for x in candidates if x.is_file() and hashlib.sha256(x.read_bytes()).hexdigest()==h]\n  if not matches:bad.append(p)\n print(\"unmatched_entries\",bad)"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:16:47.357316+00:00",
+  "exit_code": 0,
+  "stdout": "ctest_path_independent_review_20261011T000547578754Z keys ['results/raw/ctest_path_independent_review_20261011T000547578754Z/BEFORE.json', 'results/raw/ctest_path_independent_review_20261011T000547578754Z/BEFORE_ALL_RESULTS.json']\nunmatched_entries []\ncpu_gpu_readiness_20261011T004018152238Z keys ['results/raw/cpu_gpu_readiness_20261011T004018152238Z/BEFORE.json', 'results/raw/cpu_gpu_readiness_20261011T004018152238Z/COMMANDS.md']\nunmatched_entries []\ncolab_t4_diagnostics_20261011T005409276199Z keys ['BEFORE.json', 'COMMANDS.md']\nunmatched_entries []\nisolated_colab_build_20261011T010417197263Z keys ['BEFORE.json', 'BUNDLE.json']\nunmatched_entries []\n",
+  "stderr": "",
+  "scope": "Read-only diagnosis of retained manifest path conventions after failed pre-transfer verification; no transfer/build"
+}

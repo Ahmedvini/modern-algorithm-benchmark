@@ -1,0 +1,8 @@
+{
+  "command": "build/release/sort_metrics --sort quick_sort --size 2 --distribution duplicate_heavy --distinct 1",
+  "chunk_id": "120ee9",
+  "wall_time_seconds": 0.000018324,
+  "exit_code": 0,
+  "original_token_count": 146,
+  "output": "{\"schema_version\":1,\"mode\":\"sort_metrics\",\"status\":\"ok\",\"sort_algorithm\":\"quick_sort\",\"instrumented_implementation\":\"project_quick_sort_counting_less\",\"comparison_convention\":\"key_less_than_v1\",\"key_comparisons\":7,\"dataset_generator\":\"mt19937_64_v1\",\"size\":2,\"seed\":1729,\"distribution\":\"duplicate_heavy\",\"nearly_sorted_swaps\":0,\"duplicate_cardinality\":1,\"memory_sample_point\":\"after_instrumented_sort_before_validation\",\"process_memory\":{\"status\":\"ok\",\"metric\":\"peak_rss\",\"scope\":\"process_lifetime\",\"unit\":\"bytes\",\"method\":\"getrusage_ru_maxrss\",\"value\":476626944,\"error_code\":null}}\n"
+}

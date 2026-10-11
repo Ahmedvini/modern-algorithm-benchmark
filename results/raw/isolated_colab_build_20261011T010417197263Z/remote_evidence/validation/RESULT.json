@@ -1,0 +1,1836 @@
+{
+  "benchmarks": 0,
+  "build_directory": "/content/mab_isolated_20261011T010417197263Z/build-release",
+  "cpu_correctness": "Passed 4015 Merge Sort differential cases through public/registry/repeated paths; stable merge fixture passed\n",
+  "ctest_invocations": 0,
+  "cuda_correctness": {
+    "algorithm": "cub_radix_sort",
+    "cases": 475,
+    "compute_major": 7,
+    "compute_minor": 5,
+    "cub_version": 300001,
+    "device": 0,
+    "driver_api_version": 13000,
+    "implementation_version": "cub_radix_sort_v1",
+    "output_checks": 1900,
+    "protocol": "cuda_sort_correctness_v2",
+    "runtime_api_version": 13000,
+    "schema_version": 1,
+    "status": "ok"
+  },
+  "description": {
+    "architecture": "x86_64",
+    "binary_dir": "/content/mab_isolated_20261011T010417197263Z/build-release",
+    "build_type": "Release",
+    "compiler_id": "GNU",
+    "compiler_path": "/usr/bin/c++",
+    "compiler_version": "13.3.0",
+    "configuration_flags": "-O3 -DNDEBUG",
+    "cub_version": 300001,
+    "cuda_architectures": "75",
+    "cuda_compiler_version": "13.0.88",
+    "cuda_flags": "",
+    "cuda_release_flags": "-O3 -DNDEBUG",
+    "cuda_toolkit_version": "13.0.88",
+    "cxx_standard": 17,
+    "global_flags": "",
+    "implementation_version": "cpu_gpu_comparison_driver_v1",
+    "openmp_flags": "-fopenmp",
+    "openmp_libraries": "/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so;/usr/lib/x86_64-linux-gnu/libpthread.a",
+    "openmp_version": "4.5",
+    "platform": "Linux",
+    "sanitizers": false,
+    "source_dir": "/content/mab_isolated_20261011T010417197263Z/source"
+  },
+  "failure": null,
+  "full_study_authorized": false,
+  "records": [
+    {
+      "argv": [
+        "cmake",
+        "-S",
+        "/content/mab_isolated_20261011T010417197263Z/source",
+        "-B",
+        "/content/mab_isolated_20261011T010417197263Z/build-release",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_FLAGS=",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+        "-DMAB_ENABLE_OPENMP=ON",
+        "-DBUILD_TESTING=ON",
+        "-DMAB_ENABLE_CUDA=ON",
+        "-DMAB_ENABLE_CUDA_SORT=ON",
+        "-DMAB_ENABLE_CPU_GPU_COMPARISON=ON",
+        "-DMAB_ENABLE_SANITIZERS=OFF",
+        "-DCMAKE_CUDA_ARCHITECTURES=75",
+        "-DCMAKE_CUDA_FLAGS=",
+        "-DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG"
+      ],
+      "cwd": "/content/mab_isolated_20261011T010417197263Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:07:27.063776+00:00",
+      "name": "configure",
+      "started_utc": "2026-10-11T01:07:17.807664+00:00"
+    },
+    {
+      "argv": [
+        "cmake",
+        "--build",
+        "/content/mab_isolated_20261011T010417197263Z/build-release",
+        "--target",
+        "cpu_gpu_comparison",
+        "comparison_input",
+        "test_cuda_sorting",
+        "test_mergesort",
+        "--parallel",
+        "2"
+      ],
+      "cwd": "/content/mab_isolated_20261011T010417197263Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:08:07.323869+00:00",
+      "name": "build",
+      "started_utc": "2026-10-11T01:07:27.066214+00:00"
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T010417197263Z/build-release/test_mergesort"
+      ],
+      "cwd": "/content/mab_isolated_20261011T010417197263Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:08:07.441327+00:00",
+      "name": "cpu_correctness",
+      "started_utc": "2026-10-11T01:08:07.325251+00:00"
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T010417197263Z/build-release/test_cuda_sorting"
+      ],
+      "cwd": "/content/mab_isolated_20261011T010417197263Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:08:08.462064+00:00",
+      "name": "gpu_correctness",
+      "started_utc": "2026-10-11T01:08:07.442503+00:00"
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T010417197263Z/build-release/cpu_gpu_comparison",
+        "--describe"
+      ],
+      "cwd": "/content/mab_isolated_20261011T010417197263Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:08:08.468247+00:00",
+      "name": "comparison_describe",
+      "started_utc": "2026-10-11T01:08:08.464334+00:00"
+    }
+  ],
+  "source_directory": "/content/mab_isolated_20261011T010417197263Z/source",
+  "study_eligible": false,
+  "timing_trials": 0,
+  "validation_passed": true,
+  "warnings": [
+    {
+      "file": "build.stderr.txt",
+      "line": 1,
+      "text": "/tmp/tmpxft_00001b98_00000000-6_comparison_resources.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 4,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 7,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:4:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 10,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 13,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 16,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 19,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 22,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:3:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 25,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:7:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 28,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:1:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 31,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:5:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 34,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:6:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 37,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:7:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 40,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:8:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 43,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:9:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 46,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:10:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 49,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:11:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 52,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:12:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 55,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:14:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 58,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:15:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 61,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:16:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 62,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:11:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 65,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:14:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 68,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:13:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 71,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:14:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 74,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:15:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 77,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:16:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 80,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:17:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 83,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:18:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 86,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:19:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 89,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:20:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 92,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:21:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 95,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:22:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 98,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:23:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 101,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:24:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 104,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:24:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 107,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:25:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 110,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:26:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 113,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:27:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 116,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:28:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 119,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:28:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 122,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:29:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 125,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:30:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 128,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:31:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 131,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:32:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 134,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:33:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 137,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:34:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 140,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:35:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 143,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:36:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 146,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:37:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 149,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:38:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 152,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:39:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 155,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:40:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 158,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:41:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 161,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:42:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 164,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:43:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 167,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:44:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 170,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:45:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 173,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:46:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 176,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:47:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 179,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:48:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 182,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:49:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 185,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:50:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 188,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:51:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 191,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:52:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 194,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:53:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 197,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:54:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 200,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:55:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 203,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:56:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 206,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:57:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 209,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:58:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 212,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:59:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 215,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:60:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 218,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:61:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 221,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:62:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 224,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:63:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 227,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:64:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 230,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:66:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 231,
+      "text": "tmpxft_00001b98_00000000-6_comparison_resources.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 232,
+      "text": "tmpxft_00001b98_00000000-6_comparison_resources.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 233,
+      "text": "/tmp/tmpxft_00001bef_00000000-6_cub_sort.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 236,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 239,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:4:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 242,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 245,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 248,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 251,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 254,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:3:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 257,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:7:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 260,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:1:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 263,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:7:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 266,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:8:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 269,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:9:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 272,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:10:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 273,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:9:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 276,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:10:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 279,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:11:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 282,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:12:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 285,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:13:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 288,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:15:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 291,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:16:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 294,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:17:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 295,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:5:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 298,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:6:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 301,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:10:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 304,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:11:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 307,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:12:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 310,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:13:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 313,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:14:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 314,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:13:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 317,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:16:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 320,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:15:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 323,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:17:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 326,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:19:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 329,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:20:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 332,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:21:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 335,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:23:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 338,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:24:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 341,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:26:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 344,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:28:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 347,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:29:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 350,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:30:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 353,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:31:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 356,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:32:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 359,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:33:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 362,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:34:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 365,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:35:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 368,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:36:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 371,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:37:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 374,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:38:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 377,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:39:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 380,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:40:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 383,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:41:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 386,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:42:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 389,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:43:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 392,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:44:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 395,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:46:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 398,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:47:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 401,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:48:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 404,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:50:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 407,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:51:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 410,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:53:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 413,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:54:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 416,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:55:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 419,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:56:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 422,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:57:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 425,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:58:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 428,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:60:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 431,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:61:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 434,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:62:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 437,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:63:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 440,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:64:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 443,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:65:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 446,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:66:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 449,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:67:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 452,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:69:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 455,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:70:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 458,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:71:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 461,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:73:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 464,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:74:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 467,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:75:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 470,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:76:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 473,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:77:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 476,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:78:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 479,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:79:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 482,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:80:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 485,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:82:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 488,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:83:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 491,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:84:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 494,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:85:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 497,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:86:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 500,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:87:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 503,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:88:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 506,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:89:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 509,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:90:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 512,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:91:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 515,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:91:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 518,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:93:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 519,
+      "text": "tmpxft_00001bef_00000000-6_cub_sort.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 520,
+      "text": "tmpxft_00001bef_00000000-6_cub_sort.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 521,
+      "text": "/tmp/tmpxft_00001c6f_00000000-6_cub_timing.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 524,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 527,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:4:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 530,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 533,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 536,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 539,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 542,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:3:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 545,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:7:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 548,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:1:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 551,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:7:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 554,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:8:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 557,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:9:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 560,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:10:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 561,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:9:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 564,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:10:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 567,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:11:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 570,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:12:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 573,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:13:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 576,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:14:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 579,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:15:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 582,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:16:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 585,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:17:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 588,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:18:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 591,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:19:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 594,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:22:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 597,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:24:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 600,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:25:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 603,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:26:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 606,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:27:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 609,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:28:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 612,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:29:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 615,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:30:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 618,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:31:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 621,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:32:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 624,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:34:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 627,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:35:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 630,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:36:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 633,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:37:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 634,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:14:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 637,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:17:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 640,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:16:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 643,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:17:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 646,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:18:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 649,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:19:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 652,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:20:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 655,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:21:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 658,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:22:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 661,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:23:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 664,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:24:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 667,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:25:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 670,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:26:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 673,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:27:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 676,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:28:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 679,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:29:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 682,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:30:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 685,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:31:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 688,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:32:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 691,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:33:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 694,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:34:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 697,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:35:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 700,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:36:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 703,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:37:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 706,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:38:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 709,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:39:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 712,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:40:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 715,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:41:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 718,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:42:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 721,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:43:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 724,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:44:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 727,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:45:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 730,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:46:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 733,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:47:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 736,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:48:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 739,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:49:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 742,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:50:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 745,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:51:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 748,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:52:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 751,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:53:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 754,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:54:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 757,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:55:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 760,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:56:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 763,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:57:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 766,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:58:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 769,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:59:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 772,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:60:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 775,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:61:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 778,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:62:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 781,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:63:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 784,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:64:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 787,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:65:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 790,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:66:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 793,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:67:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 796,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:69:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 799,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:71:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 802,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:72:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 805,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:73:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 808,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:74:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 811,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:75:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 814,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:76:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 817,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:77:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 820,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:78:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 823,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:79:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 826,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:80:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 829,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:81:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 832,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:82:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 835,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:83:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 838,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:84:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 841,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:85:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 844,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:86:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 847,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:87:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 850,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:88:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 853,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:89:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 856,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:90:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 859,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:92:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 862,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:93:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 865,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:94:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 868,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:95:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 871,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:96:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 874,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:97:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 877,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:98:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 880,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:99:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 883,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:100:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 886,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:102:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 889,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:103:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 892,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:104:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 895,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:105:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 898,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:106:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 901,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:107:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 904,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:108:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 907,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:109:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 910,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:110:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 913,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:111:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 916,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:112:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 919,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:113:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 922,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:114:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 925,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:115:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 928,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:116:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 931,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:117:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 934,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:118:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 937,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:119:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 940,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:120:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 943,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:121:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 946,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:122:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 949,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:123:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 952,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:124:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 955,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:125:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 958,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:126:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 961,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:127:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 964,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:128:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 967,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:129:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 970,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:130:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 973,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:131:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 976,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:132:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 979,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:133:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 982,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:134:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 985,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:135:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 988,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:136:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 991,
+      "text": "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:138:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 992,
+      "text": "tmpxft_00001c6f_00000000-6_cub_timing.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension"
+    },
+    {
+      "file": "build.stderr.txt",
+      "line": 993,
+      "text": "tmpxft_00001c6f_00000000-6_cub_timing.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "upload",
+    "results/raw/isolated_colab_build_20261011T010417197263Z/reviewed_source.tar.gz",
+    "/content/mab_source_20261011T010417197263Z.tar.gz",
+    "--session",
+    "cpu-gpu-validation"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:05:52.010500+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Uploaded 'results/raw/isolated_colab_build_20261011T010417197263Z/reviewed_source.tar.gz' to '/content/mab_source_20261011T010417197263Z.tar.gz'\n",
+  "stderr": "",
+  "scope": "Transfer only the verified 153-file reviewed source bundle; no results/credentials"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "git",
+    "status",
+    "--porcelain=v1"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:15:23.988602+00:00",
+  "exit_code": 128,
+  "stdout": "",
+  "stderr": "fatal: not a git repository (or any of the parent directories): .git\n",
+  "scope": "Read-only Git working-tree check; no initialization"
+}

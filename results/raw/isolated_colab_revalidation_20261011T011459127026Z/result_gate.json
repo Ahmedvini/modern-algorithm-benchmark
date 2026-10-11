@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/isolated_colab_revalidation_20261011T011459127026Z/result_gate.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:20:21.042588+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"validation_passed\": true,\n  \"evidence_archive\": \"/content/mab_isolated_20261011T011459127026Z/validation_evidence.tar.gz\",\n  \"archive_sha256\": \"09465a736169d8849eb5331f678aaeb18ca0f0cde51c092448298f4f3721dcba\"\n}\nGPU: {'schema_version': 1, 'protocol': 'cuda_sort_correctness_v2', 'algorithm': 'cub_radix_sort', 'implementation_version': 'cub_radix_sort_v1', 'status': 'ok', 'cases': 475, 'output_checks': 1900, 'cub_version': 300001, 'runtime_api_version': 13000, 'driver_api_version': 13000, 'device': 0, 'compute_major': 7, 'compute_minor': 5}\nCPU: Passed 4015 Merge Sort differential cases through public/registry/repeated paths; stable merge fixture passed\n\nWarnings: {' style of line directive is a GCC extension': 341}\n",
+  "stderr": "",
+  "scope": "Read retained remote completion/individual command statuses and narrow correctness outputs; no workloads"
+}

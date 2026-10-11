@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "/content/mab_isolated_20261011T011459127026Z/build-release",
+    "--target",
+    "cpu_gpu_comparison",
+    "comparison_input",
+    "test_cuda_sorting",
+    "test_mergesort",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+  "name": "build",
+  "started_utc": "2026-10-11T01:19:13.719406+00:00"
+}

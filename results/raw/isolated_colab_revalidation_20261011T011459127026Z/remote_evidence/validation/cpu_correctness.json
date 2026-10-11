@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "/content/mab_isolated_20261011T011459127026Z/build-release/test_mergesort"
+  ],
+  "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+  "exit_code": 0,
+  "finished_utc": "2026-10-11T01:19:53.414640+00:00",
+  "name": "cpu_correctness",
+  "started_utc": "2026-10-11T01:19:53.298362+00:00"
+}

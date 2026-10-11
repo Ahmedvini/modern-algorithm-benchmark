@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/isolated_colab_revalidation_20261011T011459127026Z/pre_transfer_gate.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:18:02.847497+00:00",
+  "exit_code": 0,
+  "stdout": "Reviewed source, exact existing T4 session identity, and absent destination independently confirmed before upload\n",
+  "stderr": "",
+  "scope": "Fresh pre-upload source/archive, exact session/GPU identity and absent exclusive destination verification"
+}

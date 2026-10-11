@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/isolated_colab_revalidation_20261011T011459127026Z/verify_reviewed_source.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:16:36.541999+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/isolated_colab_revalidation_20261011T011459127026Z/verify_reviewed_source.py\", line 16, in <module>\n    d=r/'results/raw'/name;seal=load(d/'FINAL_INTEGRITY.json');entries=seal['evidence_sha256'];verified(entries,d)\n                                                                                               ^^^^^^^^^^^^^^^^^^^\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/isolated_colab_revalidation_20261011T011459127026Z/verify_reviewed_source.py\", line 9, in verified\n    assert all((base/p).is_file() and not (base/p).is_symlink() and sha(base/p)==h for p,h in mapping.items())\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "scope": "Static trusted-hash, exact source membership, previous independent-review and evidence-seal verification; no workload"
+}

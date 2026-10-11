@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/isolated_colab_build_20261011T010417197263Z/make_bundle.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:05:06.614996+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"archive\": \"reviewed_source.tar.gz\",\n  \"archive_sha256\": \"953319b89a78d1e21498c4324570ec301bfb574eae4530a353db9c648b61b400\",\n  \"source_identity_sha256\": \"7ce8297b76037af65d6d2dbbf3e2ccf5ec4684849090ee554a6d9552fcd50bda\",\n  \"files\": 153,\n  \"revision\": \"No Git metadata; SOURCE_IDENTITY.json is the precise content identity\"\n}\n",
+  "stderr": "",
+  "scope": "Read/hash reviewed source and create allowlisted archive only"
+}

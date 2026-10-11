@@ -1,0 +1,8 @@
+{
+  "command": "python3 scripts/capture_environment.py --build-dir build/sanitize --output results/raw/metrics_validation_20261009T154659316368Z/sanitize_environment.json",
+  "chunk_id": "94f554",
+  "wall_time_seconds": 0.000012983,
+  "exit_code": 0,
+  "original_token_count": 20,
+  "output": "results/raw/metrics_validation_20261009T154659316368Z/sanitize_environment.json\n"
+}

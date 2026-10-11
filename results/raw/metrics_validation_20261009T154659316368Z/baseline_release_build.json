@@ -1,0 +1,8 @@
+{
+  "command": "cmake --build build/release --parallel 2",
+  "chunk_id": "7cf32f",
+  "wall_time_seconds": 0.000011181,
+  "exit_code": 0,
+  "original_token_count": 60,
+  "output": "[ 36%] Built target mab_core\n[ 57%] Built target algorithm_benchmark\n[ 57%] Built target test_baselines\n[ 78%] Built target test_datasets\n[ 78%] Built target test_quicksort\n[100%] Built target test_timsort\n[100%] Built target test_pdqsort\n"
+}

@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    "/content/mab_isolated_20261011T011459127026Z/source",
+    "-B",
+    "/content/mab_isolated_20261011T011459127026Z/build-release",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_CXX_FLAGS=",
+    "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+    "-DMAB_ENABLE_OPENMP=ON",
+    "-DBUILD_TESTING=ON",
+    "-DMAB_ENABLE_CUDA=ON",
+    "-DMAB_ENABLE_CUDA_SORT=ON",
+    "-DMAB_ENABLE_CPU_GPU_COMPARISON=ON",
+    "-DMAB_ENABLE_SANITIZERS=OFF",
+    "-DCMAKE_CUDA_ARCHITECTURES=75",
+    "-DCMAKE_CUDA_FLAGS=",
+    "-DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG"
+  ],
+  "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+  "name": "configure",
+  "started_utc": "2026-10-11T01:19:06.680363+00:00"
+}

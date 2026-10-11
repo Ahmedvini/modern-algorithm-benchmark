@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/isolated_colab_revalidation_20261011T011459127026Z/transfer_gate.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:18:59.332189+00:00",
+  "exit_code": 0,
+  "stdout": "Exact guarded source identity retained through remote archive and extraction; build permitted, timing trials prohibited\n",
+  "stderr": "",
+  "scope": "Verify complete remote source identity and frozen markers before any configure/build"
+}

@@ -1,0 +1,22 @@
+{
+  "comparison_input": {
+    "bytes": 63616,
+    "path": "/content/mab_isolated_20261011T011459127026Z/build-release/comparison_input",
+    "sha256": "52d1fe3a6b3b5c1e575891480d4a654a45b44e963a672a031af6a33d3b84b04a"
+  },
+  "cpu_gpu_comparison": {
+    "bytes": 658976,
+    "path": "/content/mab_isolated_20261011T011459127026Z/build-release/cpu_gpu_comparison",
+    "sha256": "62a2290576b0618e1a8e9fb3faeed8aa5a0d2784ba655ba8102314be0a21571a"
+  },
+  "test_cuda_sorting": {
+    "bytes": 241688,
+    "path": "/content/mab_isolated_20261011T011459127026Z/build-release/test_cuda_sorting",
+    "sha256": "e688ef2005ee380845f955c72652cfc1af2bf0730bfd7999e400f80c4ea67b2a"
+  },
+  "test_mergesort": {
+    "bytes": 72696,
+    "path": "/content/mab_isolated_20261011T011459127026Z/build-release/test_mergesort",
+    "sha256": "c59f5df73f847c613f7d8b874d6cae6ed50053aabd9d9fcbd7d49c76e9f5ce66"
+  }
+}

@@ -1,0 +1,993 @@
+/tmp/tmpxft_00001b98_00000000-6_comparison_resources.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension
+    1 | # 1 "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu"
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:4:3: warning: style of line directive is a GCC extension
+    4 | #include <cuda_runtime.h>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:3:3: warning: style of line directive is a GCC extension
+    3 | #include <cub/version.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:7:3: warning: style of line directive is a GCC extension
+    7 | #include <stdexcept>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:1:3: warning: style of line directive is a GCC extension
+    1 | #include "benchmark/cuda_comparison.hpp"
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:5:3: warning: style of line directive is a GCC extension
+    5 | struct CudaComparisonResources {
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:6:3: warning: style of line directive is a GCC extension
+    6 |     std::size_t prepared_query_bytes = 0, adapter_query_bytes = 0;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:7:3: warning: style of line directive is a GCC extension
+    7 |     std::size_t prepared_diagnostic_allocation_bytes = 0, adapter_diagnostic_allocation_bytes = 0;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:8:3: warning: style of line directive is a GCC extension
+    8 |     std::size_t free_device_bytes = 0, total_device_bytes = 0;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:9:3: warning: style of line directive is a GCC extension
+    9 |     std::string gpu_name;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:10:3: warning: style of line directive is a GCC extension
+   10 |     int compute_major = 0, compute_minor = 0, runtime_version = 0, driver_version = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:11:3: warning: style of line directive is a GCC extension
+   11 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:12:3: warning: style of line directive is a GCC extension
+   12 | // Isolated sizing/allocation diagnostic, not instrumentation of production calls.
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:14:3: warning: style of line directive is a GCC extension
+   14 | void synchronize_comparison_device();
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:15:3: warning: style of line directive is a GCC extension
+   15 | } // namespace mab
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_comparison.hpp:16:3: warning: style of line directive is a GCC extension
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:11:3: warning: style of line directive is a GCC extension
+   11 | namespace {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:14:3: warning: style of line directive is a GCC extension
+   14 |     if (status != cudaSuccess) throw std::runtime_error(std::string(operation)+": "+cudaGetErrorString(status));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:13:3: warning: style of line directive is a GCC extension
+   13 | void check(cudaError_t status, const char* operation) {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:14:3: warning: style of line directive is a GCC extension
+   14 |     if (status != cudaSuccess) throw std::runtime_error(std::string(operation)+": "+cudaGetErrorString(status));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:15:3: warning: style of line directive is a GCC extension
+   15 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:16:3: warning: style of line directive is a GCC extension
+   16 | struct Buffer {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:17:3: warning: style of line directive is a GCC extension
+   17 |     void* pointer = nullptr;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:18:3: warning: style of line directive is a GCC extension
+   18 |     Buffer() = default;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:19:3: warning: style of line directive is a GCC extension
+   19 |     Buffer(const Buffer&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:20:3: warning: style of line directive is a GCC extension
+   20 |     Buffer& operator=(const Buffer&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:21:3: warning: style of line directive is a GCC extension
+   21 |     void allocate(std::size_t bytes) { check(cudaMalloc(&pointer,bytes),"diagnostic cudaMalloc"); }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:22:3: warning: style of line directive is a GCC extension
+   22 |     void close() { auto p=pointer; pointer=nullptr; if(p) check(cudaFree(p),"diagnostic cudaFree"); }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:23:3: warning: style of line directive is a GCC extension
+   23 |     ~Buffer() { if(pointer) { auto s=cudaFree(pointer); if(s!=cudaSuccess) std::fprintf(stderr,"diagnostic cleanup: %s\n",cudaGetErrorString(s)); } }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:24:3: warning: style of line directive is a GCC extension
+   24 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:24:3: warning: style of line directive is a GCC extension
+   24 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:25:3: warning: style of line directive is a GCC extension
+   25 | struct Stream {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:26:3: warning: style of line directive is a GCC extension
+   26 |     cudaStream_t value = nullptr;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:27:3: warning: style of line directive is a GCC extension
+   27 |     ~Stream() { if(value) { auto s=cudaStreamDestroy(value); if(s!=cudaSuccess) std::fprintf(stderr,"diagnostic stream cleanup: %s\n",cudaGetErrorString(s)); } }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:28:3: warning: style of line directive is a GCC extension
+   28 |     void close() { auto s=value; value=nullptr; check(cudaStreamDestroy(s),"diagnostic destroy stream"); }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:28:3: warning: style of line directive is a GCC extension
+   28 |     void close() { auto s=value; value=nullptr; check(cudaStreamDestroy(s),"diagnostic destroy stream"); }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:29:3: warning: style of line directive is a GCC extension
+   29 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:30:3: warning: style of line directive is a GCC extension
+   30 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:31:3: warning: style of line directive is a GCC extension
+   31 | void synchronize_comparison_device() { check(cudaDeviceSynchronize(),"pre-call device synchronize"); }
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:32:3: warning: style of line directive is a GCC extension
+   32 | CudaComparisonResources query_comparison_resources(std::size_t n) {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:33:3: warning: style of line directive is a GCC extension
+   33 |     if (n < 2 || n > 1000000) throw std::invalid_argument("resource diagnostic size outside [2,1M]");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:34:3: warning: style of line directive is a GCC extension
+   34 |     CudaComparisonResources result;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:35:3: warning: style of line directive is a GCC extension
+   35 |     int device=0; cudaDeviceProp prop{};
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:36:3: warning: style of line directive is a GCC extension
+   36 |     check(cudaGetDevice(&device),"diagnostic get device");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:37:3: warning: style of line directive is a GCC extension
+   37 |     check(cudaGetDeviceProperties(&prop,device),"diagnostic device properties");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:38:3: warning: style of line directive is a GCC extension
+   38 |     result.gpu_name=prop.name; result.compute_major=prop.major; result.compute_minor=prop.minor;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:39:3: warning: style of line directive is a GCC extension
+   39 |     if (result.gpu_name!="Tesla T4" || prop.major!=7 || prop.minor!=5)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:40:3: warning: style of line directive is a GCC extension
+   40 |         throw std::runtime_error("frozen pilot requires Tesla T4 compute7.5");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:41:3: warning: style of line directive is a GCC extension
+   41 |     check(cudaRuntimeGetVersion(&result.runtime_version),"diagnostic runtime version");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:42:3: warning: style of line directive is a GCC extension
+   42 |     check(cudaDriverGetVersion(&result.driver_version),"diagnostic driver version");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:43:3: warning: style of line directive is a GCC extension
+   43 |     synchronize_comparison_device();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:44:3: warning: style of line directive is a GCC extension
+   44 |     check(cudaMemGetInfo(&result.free_device_bytes,&result.total_device_bytes),"diagnostic free memory");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:45:3: warning: style of line directive is a GCC extension
+   45 |     if (16*n > result.free_device_bytes/2) throw std::runtime_error("insufficient device key-buffer headroom");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:46:3: warning: style of line directive is a GCC extension
+   46 |     Buffer input, output, prepared_workspace, adapter_workspace;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:47:3: warning: style of line directive is a GCC extension
+   47 |     input.allocate(4*n); output.allocate(4*n);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:48:3: warning: style of line directive is a GCC extension
+   48 |     auto* in=static_cast<std::int32_t*>(input.pointer); auto* out=static_cast<std::int32_t*>(output.pointer);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:49:3: warning: style of line directive is a GCC extension
+   49 |     Stream stream; check(cudaStreamCreateWithFlags(&stream.value,cudaStreamNonBlocking),"diagnostic create stream");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:50:3: warning: style of line directive is a GCC extension
+   50 |     check(cub::DeviceRadixSort::SortKeys(nullptr,result.adapter_query_bytes,in,out,static_cast<int>(n),0,32),"default-stream workspace query");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:51:3: warning: style of line directive is a GCC extension
+   51 |     check(cub::DeviceRadixSort::SortKeys(nullptr,result.prepared_query_bytes,in,out,static_cast<int>(n),0,32,stream.value),"private-stream workspace query");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:52:3: warning: style of line directive is a GCC extension
+   52 |     constexpr std::size_t cap=64*1024*1024;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:53:3: warning: style of line directive is a GCC extension
+   53 |     if (result.adapter_query_bytes>cap || result.prepared_query_bytes>cap)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:54:3: warning: style of line directive is a GCC extension
+   54 |         throw std::runtime_error("workspace exceeds frozen 64MiB cap: adapter="+std::to_string(result.adapter_query_bytes)+" prepared="+std::to_string(result.prepared_query_bytes));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:55:3: warning: style of line directive is a GCC extension
+   55 |     result.adapter_diagnostic_allocation_bytes=std::max(result.adapter_query_bytes,std::size_t{1});
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:56:3: warning: style of line directive is a GCC extension
+   56 |     result.prepared_diagnostic_allocation_bytes=std::max(result.prepared_query_bytes,std::size_t{1});
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:57:3: warning: style of line directive is a GCC extension
+   57 |     const auto peak=16*n+result.adapter_diagnostic_allocation_bytes+result.prepared_diagnostic_allocation_bytes;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:58:3: warning: style of line directive is a GCC extension
+   58 |     if (peak>256*1024*1024 || peak>result.free_device_bytes/2) throw std::runtime_error("combined frozen device budget exceeded");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:59:3: warning: style of line directive is a GCC extension
+   59 |     adapter_workspace.allocate(result.adapter_diagnostic_allocation_bytes);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:60:3: warning: style of line directive is a GCC extension
+   60 |     prepared_workspace.allocate(result.prepared_diagnostic_allocation_bytes);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:61:3: warning: style of line directive is a GCC extension
+   61 |     prepared_workspace.close(); adapter_workspace.close(); output.close(); input.close(); stream.close();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:62:3: warning: style of line directive is a GCC extension
+   62 |     return result;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:63:3: warning: style of line directive is a GCC extension
+   63 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:64:3: warning: style of line directive is a GCC extension
+   64 | } // namespace mab
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/comparison_resources.cu:66:3: warning: style of line directive is a GCC extension
+tmpxft_00001b98_00000000-6_comparison_resources.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension
+tmpxft_00001b98_00000000-6_comparison_resources.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+/tmp/tmpxft_00001bef_00000000-6_cub_sort.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension
+    1 | # 1 "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu"
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:4:3: warning: style of line directive is a GCC extension
+    4 | #include <cuda_runtime.h>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:3:3: warning: style of line directive is a GCC extension
+    3 | #include <cub/version.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:7:3: warning: style of line directive is a GCC extension
+    7 | #include <cstdio>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:1:3: warning: style of line directive is a GCC extension
+    1 | #include "algorithms/cuda_sorting.hpp"
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:7:3: warning: style of line directive is a GCC extension
+    7 | using Key = std::int32_t;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:8:3: warning: style of line directive is a GCC extension
+    8 | using Values = std::vector<Key>;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:9:3: warning: style of line directive is a GCC extension
+    9 | }  // namespace mab
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:10:3: warning: style of line directive is a GCC extension
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:9:3: warning: style of line directive is a GCC extension
+    9 | struct Sorter {
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:10:3: warning: style of line directive is a GCC extension
+   10 |     std::string_view name;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:11:3: warning: style of line directive is a GCC extension
+   11 |     void (*sort)(Values&);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:12:3: warning: style of line directive is a GCC extension
+   12 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:13:3: warning: style of line directive is a GCC extension
+   13 | 
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:15:3: warning: style of line directive is a GCC extension
+   15 | const Sorter& find_sorter(std::string_view name);
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:16:3: warning: style of line directive is a GCC extension
+   16 | }  // namespace mab
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/sorting.hpp:17:3: warning: style of line directive is a GCC extension
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:5:3: warning: style of line directive is a GCC extension
+    5 | inline constexpr std::string_view cuda_sort_version = "cub_radix_sort_v1";
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:6:3: warning: style of line directive is a GCC extension
+    6 | // Requires a usable current CUDA device, including for empty/singleton input.
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:10:3: warning: style of line directive is a GCC extension
+   10 | const std::array<Sorter, 1>& cuda_sorters() noexcept;
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:11:3: warning: style of line directive is a GCC extension
+   11 | const Sorter& find_cuda_sorter(std::string_view name);
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:12:3: warning: style of line directive is a GCC extension
+   12 | int cuda_sort_cub_version() noexcept;
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:13:3: warning: style of line directive is a GCC extension
+   13 | } // namespace mab
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/algorithms/cuda_sorting.hpp:14:3: warning: style of line directive is a GCC extension
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:13:3: warning: style of line directive is a GCC extension
+   13 | namespace {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:16:3: warning: style of line directive is a GCC extension
+   16 | static_assert(CUB_VERSION == 300001, "Review a new CUB version before changing the pin");
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:15:3: warning: style of line directive is a GCC extension
+   15 |               "CUB adapter requires signed 32-bit keys");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:17:3: warning: style of line directive is a GCC extension
+   17 | 
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:19:3: warning: style of line directive is a GCC extension
+   19 |     if (status != cudaSuccess)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:20:3: warning: style of line directive is a GCC extension
+   20 |         throw std::runtime_error(std::string(operation) + ": " + cudaGetErrorString(status)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:21:3: warning: style of line directive is a GCC extension
+   21 |                                  + " (CUDA " + std::to_string(static_cast<int>(status)) + ")");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:23:3: warning: style of line directive is a GCC extension
+   23 | class DeviceBuffer {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:24:3: warning: style of line directive is a GCC extension
+   24 | public:
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:26:3: warning: style of line directive is a GCC extension
+   26 |         // A non-null buffer distinguishes execution from CUB's sizing query.
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:28:3: warning: style of line directive is a GCC extension
+   28 |     }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:29:3: warning: style of line directive is a GCC extension
+   29 |     DeviceBuffer(const DeviceBuffer&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:30:3: warning: style of line directive is a GCC extension
+   30 |     DeviceBuffer& operator=(const DeviceBuffer&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:31:3: warning: style of line directive is a GCC extension
+   31 |     ~DeviceBuffer() noexcept {
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:32:3: warning: style of line directive is a GCC extension
+   32 |         if (pointer_) {
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:33:3: warning: style of line directive is a GCC extension
+   33 |             const auto status = cudaFree(pointer_);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:34:3: warning: style of line directive is a GCC extension
+   34 |             if (status != cudaSuccess)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:35:3: warning: style of line directive is a GCC extension
+   35 |                 std::fprintf(stderr, "CUDA cleanup during unwinding: %s\n", cudaGetErrorString(status));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:36:3: warning: style of line directive is a GCC extension
+   36 |         }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:37:3: warning: style of line directive is a GCC extension
+   37 |     }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:38:3: warning: style of line directive is a GCC extension
+   38 |     void* get() const noexcept { return pointer_; }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:39:3: warning: style of line directive is a GCC extension
+   39 |     void close() {
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:40:3: warning: style of line directive is a GCC extension
+   40 |         void* allocation = pointer_;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:41:3: warning: style of line directive is a GCC extension
+   41 |         pointer_ = nullptr; // One free attempt, including when the runtime reports an error.
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:42:3: warning: style of line directive is a GCC extension
+   42 |         checked(cudaFree(allocation), "cudaFree");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:43:3: warning: style of line directive is a GCC extension
+   43 |     }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:44:3: warning: style of line directive is a GCC extension
+   44 | private:
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:46:3: warning: style of line directive is a GCC extension
+   46 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:47:3: warning: style of line directive is a GCC extension
+   47 | } // namespace
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:48:3: warning: style of line directive is a GCC extension
+   48 | 
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:50:3: warning: style of line directive is a GCC extension
+   50 |     if (values.size() > static_cast<std::size_t>(INT_MAX) ||
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:51:3: warning: style of line directive is a GCC extension
+   51 |         values.size() > std::numeric_limits<std::size_t>::max() / sizeof(Key))
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:53:3: warning: style of line directive is a GCC extension
+   53 |     int device = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:54:3: warning: style of line directive is a GCC extension
+   54 |     cudaDeviceProp properties{};
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:55:3: warning: style of line directive is a GCC extension
+   55 |     checked(cudaGetDevice(&device), "cudaGetDevice");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:56:3: warning: style of line directive is a GCC extension
+   56 |     checked(cudaGetDeviceProperties(&properties, device), "cudaGetDeviceProperties");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:57:3: warning: style of line directive is a GCC extension
+   57 |     if (values.size() < 2) return;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:58:3: warning: style of line directive is a GCC extension
+   58 | 
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:60:3: warning: style of line directive is a GCC extension
+   60 |     const auto bytes = values.size() * sizeof(Key);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:61:3: warning: style of line directive is a GCC extension
+   61 |     const int count = static_cast<int>(values.size());
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:62:3: warning: style of line directive is a GCC extension
+   62 |     DeviceBuffer input(bytes), sorted(bytes);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:63:3: warning: style of line directive is a GCC extension
+   63 |     auto* in = static_cast<Key*>(input.get());
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:64:3: warning: style of line directive is a GCC extension
+   64 |     auto* out = static_cast<Key*>(sorted.get());
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:65:3: warning: style of line directive is a GCC extension
+   65 |     std::size_t workspace_bytes = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:66:3: warning: style of line directive is a GCC extension
+   66 |     checked(cub::DeviceRadixSort::SortKeys(nullptr, workspace_bytes, in, out, count, 0, 32),
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:67:3: warning: style of line directive is a GCC extension
+   67 |             "CUB SortKeys workspace query");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:69:3: warning: style of line directive is a GCC extension
+   69 |     checked(cudaMemcpy(in, values.data(), bytes, cudaMemcpyHostToDevice), "H2D cudaMemcpy");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:70:3: warning: style of line directive is a GCC extension
+   70 |     checked(cub::DeviceRadixSort::SortKeys(workspace.get(), workspace_bytes, in, out, count, 0, 32),
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:71:3: warning: style of line directive is a GCC extension
+   71 |             "CUB SortKeys");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:73:3: warning: style of line directive is a GCC extension
+   73 |     checked(cudaStreamSynchronize(nullptr), "CUB stream synchronize");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:74:3: warning: style of line directive is a GCC extension
+   74 |     checked(cudaMemcpy(output.data(), out, bytes, cudaMemcpyDeviceToHost), "D2H cudaMemcpy");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:75:3: warning: style of line directive is a GCC extension
+   75 |     workspace.close();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:76:3: warning: style of line directive is a GCC extension
+   76 |     sorted.close();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:77:3: warning: style of line directive is a GCC extension
+   77 |     input.close();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:78:3: warning: style of line directive is a GCC extension
+   78 |     values.swap(output);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:79:3: warning: style of line directive is a GCC extension
+   79 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:80:3: warning: style of line directive is a GCC extension
+   80 | 
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:82:3: warning: style of line directive is a GCC extension
+   82 |     static const std::array<Sorter, 1> registry{{{"cub_radix_sort", cub_radix_sort}}};
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:83:3: warning: style of line directive is a GCC extension
+   83 |     return registry;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:84:3: warning: style of line directive is a GCC extension
+   84 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:85:3: warning: style of line directive is a GCC extension
+   85 | const Sorter& find_cuda_sorter(std::string_view name) {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:86:3: warning: style of line directive is a GCC extension
+   86 |     for (const auto& sorter : cuda_sorters())
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:87:3: warning: style of line directive is a GCC extension
+   87 |         if (sorter.name == name) return sorter;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:88:3: warning: style of line directive is a GCC extension
+   88 |     throw std::invalid_argument("unknown CUDA sorter: " + std::string(name));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:89:3: warning: style of line directive is a GCC extension
+   89 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:90:3: warning: style of line directive is a GCC extension
+   90 | int cuda_sort_cub_version() noexcept { return CUB_VERSION; }
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:91:3: warning: style of line directive is a GCC extension
+   91 | } // namespace mab
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:91:3: warning: style of line directive is a GCC extension
+   91 | } // namespace mab
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_sort.cu:93:3: warning: style of line directive is a GCC extension
+tmpxft_00001bef_00000000-6_cub_sort.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension
+tmpxft_00001bef_00000000-6_cub_sort.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension
+/tmp/tmpxft_00001c6f_00000000-6_cub_timing.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension
+    1 | # 1 "/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu"
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:4:3: warning: style of line directive is a GCC extension
+    4 | #include <cuda_runtime.h>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:2:3: warning: style of line directive is a GCC extension
+    2 | #include <cub/device/device_radix_sort.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:3:3: warning: style of line directive is a GCC extension
+    3 | #include <cub/version.cuh>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:7:3: warning: style of line directive is a GCC extension
+    7 | #include <chrono>
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:1:3: warning: style of line directive is a GCC extension
+    1 | #include "benchmark/cuda_timing.hpp"
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:7:3: warning: style of line directive is a GCC extension
+    7 | using Key = std::int32_t;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:8:3: warning: style of line directive is a GCC extension
+    8 | using Values = std::vector<Key>;
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:9:3: warning: style of line directive is a GCC extension
+    9 | }  // namespace mab
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/common/types.hpp:10:3: warning: style of line directive is a GCC extension
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:9:3: warning: style of line directive is a GCC extension
+    9 | struct CudaTimingSample {
+      |   ^
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:10:3: warning: style of line directive is a GCC extension
+   10 |     double h2d_ns = 0, device_sort_ns = 0, d2h_ns = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:11:3: warning: style of line directive is a GCC extension
+   11 |     std::uint64_t end_to_end_ns = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:12:3: warning: style of line directive is a GCC extension
+   12 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:13:3: warning: style of line directive is a GCC extension
+   13 | struct CudaTimingInfo {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:14:3: warning: style of line directive is a GCC extension
+   14 |     int device = 0, compute_major = 0, compute_minor = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:15:3: warning: style of line directive is a GCC extension
+   15 |     int runtime_version = 0, driver_version = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:16:3: warning: style of line directive is a GCC extension
+   16 |     std::string device_name;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:17:3: warning: style of line directive is a GCC extension
+   17 |     std::size_t device_memory_bytes = 0, workspace_bytes = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:18:3: warning: style of line directive is a GCC extension
+   18 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:19:3: warning: style of line directive is a GCC extension
+   19 | // Benchmark-only prepared execution. Does not change cub_radix_sort's contract.
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:22:3: warning: style of line directive is a GCC extension
+   22 | public:
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:24:3: warning: style of line directive is a GCC extension
+   24 |     ~CudaTimingSession();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:25:3: warning: style of line directive is a GCC extension
+   25 |     CudaTimingSession(const CudaTimingSession&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:26:3: warning: style of line directive is a GCC extension
+   26 |     CudaTimingSession& operator=(const CudaTimingSession&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:27:3: warning: style of line directive is a GCC extension
+   27 |     CudaTimingSession(CudaTimingSession&&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:28:3: warning: style of line directive is a GCC extension
+   28 |     CudaTimingSession& operator=(CudaTimingSession&&) = delete;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:29:3: warning: style of line directive is a GCC extension
+   29 |     CudaTimingSample sample(const Values& input, Values& output);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:30:3: warning: style of line directive is a GCC extension
+   30 |     const CudaTimingInfo& info() const noexcept;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:31:3: warning: style of line directive is a GCC extension
+   31 |     void close(); // Checked release before a successful run's completion marker.
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:32:3: warning: style of line directive is a GCC extension
+   32 | private:
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:34:3: warning: style of line directive is a GCC extension
+   34 |     std::unique_ptr<Impl> impl_;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:35:3: warning: style of line directive is a GCC extension
+   35 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:36:3: warning: style of line directive is a GCC extension
+   36 | } // namespace mab
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/include/benchmark/cuda_timing.hpp:37:3: warning: style of line directive is a GCC extension
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:14:3: warning: style of line directive is a GCC extension
+   14 | namespace {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:17:3: warning: style of line directive is a GCC extension
+   17 | void checked(cudaError_t status, const char* operation) {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:16:3: warning: style of line directive is a GCC extension
+   16 | static_assert(sizeof(Key) == 4 && std::numeric_limits<Key>::is_signed, "signed int32 required");
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:17:3: warning: style of line directive is a GCC extension
+   17 | void checked(cudaError_t status, const char* operation) {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:18:3: warning: style of line directive is a GCC extension
+   18 |     if (status != cudaSuccess)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:19:3: warning: style of line directive is a GCC extension
+   19 |         throw std::runtime_error(std::string(operation) + ": " + cudaGetErrorString(status));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:20:3: warning: style of line directive is a GCC extension
+   20 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:21:3: warning: style of line directive is a GCC extension
+   21 | void secondary(cudaError_t status) noexcept {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:22:3: warning: style of line directive is a GCC extension
+   22 |     if (status != cudaSuccess) std::fprintf(stderr, "CUDA timing cleanup: %s\n", cudaGetErrorString(status));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:23:3: warning: style of line directive is a GCC extension
+   23 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:24:3: warning: style of line directive is a GCC extension
+   24 | }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:25:3: warning: style of line directive is a GCC extension
+   25 | struct CudaTimingSession::Impl {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:26:3: warning: style of line directive is a GCC extension
+   26 |     CudaTimingInfo info;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:27:3: warning: style of line directive is a GCC extension
+   27 |     std::size_t size = 0, bytes = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:28:3: warning: style of line directive is a GCC extension
+   28 |     Key *host_input = nullptr, *host_output = nullptr, *input = nullptr, *output = nullptr;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:29:3: warning: style of line directive is a GCC extension
+   29 |     void* workspace = nullptr;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:30:3: warning: style of line directive is a GCC extension
+   30 |     cudaStream_t stream = nullptr;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:31:3: warning: style of line directive is a GCC extension
+   31 |     std::array<cudaEvent_t, 4> events{};
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:32:3: warning: style of line directive is a GCC extension
+   32 |     bool closed = false;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:33:3: warning: style of line directive is a GCC extension
+   33 |     ~Impl() noexcept {
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:34:3: warning: style of line directive is a GCC extension
+   34 |         if (stream) secondary(cudaStreamSynchronize(stream));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:35:3: warning: style of line directive is a GCC extension
+   35 |         for (auto e : events) if (e) secondary(cudaEventDestroy(e));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:36:3: warning: style of line directive is a GCC extension
+   36 |         if (workspace) secondary(cudaFree(workspace));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:37:3: warning: style of line directive is a GCC extension
+   37 |         if (output) secondary(cudaFree(output));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:38:3: warning: style of line directive is a GCC extension
+   38 |         if (input) secondary(cudaFree(input));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:39:3: warning: style of line directive is a GCC extension
+   39 |         if (host_output) secondary(cudaFreeHost(host_output));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:40:3: warning: style of line directive is a GCC extension
+   40 |         if (host_input) secondary(cudaFreeHost(host_input));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:41:3: warning: style of line directive is a GCC extension
+   41 |         if (stream) secondary(cudaStreamDestroy(stream));
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:42:3: warning: style of line directive is a GCC extension
+   42 |     }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:43:3: warning: style of line directive is a GCC extension
+   43 |     void init(std::size_t n, std::size_t memory_limit_mib) {
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:44:3: warning: style of line directive is a GCC extension
+   44 |         if (n > 1000000 || memory_limit_mib == 0 || memory_limit_mib > 65536)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:45:3: warning: style of line directive is a GCC extension
+   45 |             throw std::invalid_argument("CUDA timing size/limit outside milestone bounds");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:46:3: warning: style of line directive is a GCC extension
+   46 |         size = n; bytes = n * sizeof(Key);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:47:3: warning: style of line directive is a GCC extension
+   47 |         const auto limit = static_cast<std::uint64_t>(memory_limit_mib) * 1024 * 1024;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:48:3: warning: style of line directive is a GCC extension
+   48 |         if (bytes > limit / 5) throw std::invalid_argument("host payload budget exceeded");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:49:3: warning: style of line directive is a GCC extension
+   49 |         checked(cudaGetDevice(&info.device), "get device");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:50:3: warning: style of line directive is a GCC extension
+   50 |         cudaDeviceProp prop{};
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:51:3: warning: style of line directive is a GCC extension
+   51 |         checked(cudaGetDeviceProperties(&prop, info.device), "device properties");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:52:3: warning: style of line directive is a GCC extension
+   52 |         info.device_name = prop.name; info.compute_major = prop.major; info.compute_minor = prop.minor;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:53:3: warning: style of line directive is a GCC extension
+   53 |         info.device_memory_bytes = prop.totalGlobalMem;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:54:3: warning: style of line directive is a GCC extension
+   54 |         checked(cudaRuntimeGetVersion(&info.runtime_version), "runtime version");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:55:3: warning: style of line directive is a GCC extension
+   55 |         checked(cudaDriverGetVersion(&info.driver_version), "driver version");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:56:3: warning: style of line directive is a GCC extension
+   56 |         if (size < 2) return;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:57:3: warning: style of line directive is a GCC extension
+   57 |         std::size_t available = 0, total = 0;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:58:3: warning: style of line directive is a GCC extension
+   58 |         checked(cudaMemGetInfo(&available, &total), "device free memory");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:59:3: warning: style of line directive is a GCC extension
+   59 |         if (bytes > available / 4) throw std::runtime_error("device keys exceed half free memory");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:60:3: warning: style of line directive is a GCC extension
+   60 |         checked(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking), "create private stream");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:61:3: warning: style of line directive is a GCC extension
+   61 |         for (auto& event : events) checked(cudaEventCreate(&event), "create timing event");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:62:3: warning: style of line directive is a GCC extension
+   62 |         checked(cudaMallocHost(reinterpret_cast<void**>(&host_input), bytes), "allocate pinned input");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:63:3: warning: style of line directive is a GCC extension
+   63 |         checked(cudaMallocHost(reinterpret_cast<void**>(&host_output), bytes), "allocate pinned output");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:64:3: warning: style of line directive is a GCC extension
+   64 |         checked(cudaMalloc(reinterpret_cast<void**>(&input), bytes), "allocate device input");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:65:3: warning: style of line directive is a GCC extension
+   65 |         checked(cudaMalloc(reinterpret_cast<void**>(&output), bytes), "allocate device output");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:66:3: warning: style of line directive is a GCC extension
+   66 |         checked(cub::DeviceRadixSort::SortKeys(nullptr, info.workspace_bytes, input, output,
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:67:3: warning: style of line directive is a GCC extension
+   67 |                 static_cast<int>(size), 0, 32, stream), "workspace sizing");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:69:3: warning: style of line directive is a GCC extension
+   69 |             2 * bytes > available / 2 || info.workspace_bytes > available / 2 - 2 * bytes)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:71:3: warning: style of line directive is a GCC extension
+   71 |         checked(cudaMalloc(&workspace, info.workspace_bytes ? info.workspace_bytes : 1), "allocate workspace");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:72:3: warning: style of line directive is a GCC extension
+   72 |     }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:73:3: warning: style of line directive is a GCC extension
+   73 | };
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:74:3: warning: style of line directive is a GCC extension
+   74 | CudaTimingSession::CudaTimingSession(std::size_t n, std::size_t limit)
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:75:3: warning: style of line directive is a GCC extension
+   75 |     : impl_(std::make_unique<Impl>()) { impl_->init(n, limit); }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:76:3: warning: style of line directive is a GCC extension
+   76 | CudaTimingSession::~CudaTimingSession() = default;
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:77:3: warning: style of line directive is a GCC extension
+   77 | const CudaTimingInfo& CudaTimingSession::info() const noexcept { return impl_->info; }
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:78:3: warning: style of line directive is a GCC extension
+   78 | CudaTimingSample CudaTimingSession::sample(const Values& input, Values& output) {
+      |   ^~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:79:3: warning: style of line directive is a GCC extension
+   79 |     auto& s = *impl_;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:80:3: warning: style of line directive is a GCC extension
+   80 |     if (s.closed || input.size() != s.size || output.size() != s.size || &input == &output)
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:81:3: warning: style of line directive is a GCC extension
+   81 |         throw std::invalid_argument("invalid prepared CUDA timing buffers/session");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:82:3: warning: style of line directive is a GCC extension
+   82 |     using Clock = std::chrono::steady_clock;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:83:3: warning: style of line directive is a GCC extension
+   83 |     static_assert(Clock::is_steady, "monotonic host timer required");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:84:3: warning: style of line directive is a GCC extension
+   84 |     CudaTimingSample result;
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:85:3: warning: style of line directive is a GCC extension
+   85 |     if (s.size < 2) {
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:86:3: warning: style of line directive is a GCC extension
+   86 |         const auto start = Clock::now();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:87:3: warning: style of line directive is a GCC extension
+   87 |         if (s.size) output[0] = input[0];
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:88:3: warning: style of line directive is a GCC extension
+   88 |         const auto stop = Clock::now();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:89:3: warning: style of line directive is a GCC extension
+   89 |         result.end_to_end_ns = static_cast<std::uint64_t>(
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:90:3: warning: style of line directive is a GCC extension
+   90 |             std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count());
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:92:3: warning: style of line directive is a GCC extension
+   92 |     }
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:93:3: warning: style of line directive is a GCC extension
+   93 |     std::copy(input.begin(), input.end(), s.host_input);
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:94:3: warning: style of line directive is a GCC extension
+   94 |     checked(cudaStreamSynchronize(s.stream), "prior stream synchronize");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:95:3: warning: style of line directive is a GCC extension
+   95 |     const auto start = Clock::now();
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:96:3: warning: style of line directive is a GCC extension
+   96 |     checked(cudaEventRecord(s.events[0], s.stream), "record H2D start");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:97:3: warning: style of line directive is a GCC extension
+   97 |     checked(cudaMemcpyAsync(s.input, s.host_input, s.bytes, cudaMemcpyHostToDevice, s.stream), "H2D");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:98:3: warning: style of line directive is a GCC extension
+   98 |     checked(cudaEventRecord(s.events[1], s.stream), "record sort start");
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:99:3: warning: style of line directive is a GCC extension
+   99 |     checked(cub::DeviceRadixSort::SortKeys(s.workspace, s.info.workspace_bytes, s.input, s.output,
+      |   ^ 
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:100:3: warning: style of line directive is a GCC extension
+  100 |             static_cast<int>(s.size), 0, 32, s.stream), "CUB SortKeys");
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:102:3: warning: style of line directive is a GCC extension
+  102 |     checked(cudaEventRecord(s.events[2], s.stream), "record D2H start");
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:103:3: warning: style of line directive is a GCC extension
+  103 |     checked(cudaMemcpyAsync(s.host_output, s.output, s.bytes, cudaMemcpyDeviceToHost, s.stream), "D2H");
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:104:3: warning: style of line directive is a GCC extension
+  104 |     checked(cudaEventRecord(s.events[3], s.stream), "record D2H stop");
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:105:3: warning: style of line directive is a GCC extension
+  105 |     checked(cudaEventSynchronize(s.events[3]), "pipeline completion");
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:106:3: warning: style of line directive is a GCC extension
+  106 |     const auto stop = Clock::now();
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:107:3: warning: style of line directive is a GCC extension
+  107 |     const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:108:3: warning: style of line directive is a GCC extension
+  108 |     if (elapsed < 0) throw std::runtime_error("negative host duration");
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:109:3: warning: style of line directive is a GCC extension
+  109 |     result.end_to_end_ns = static_cast<std::uint64_t>(elapsed);
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:110:3: warning: style of line directive is a GCC extension
+  110 |     std::array<double*, 3> metrics{{&result.h2d_ns, &result.device_sort_ns, &result.d2h_ns}};
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:111:3: warning: style of line directive is a GCC extension
+  111 |     for (std::size_t i = 0; i < metrics.size(); ++i) {
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:112:3: warning: style of line directive is a GCC extension
+  112 |         float ms = 0;
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:113:3: warning: style of line directive is a GCC extension
+  113 |         checked(cudaEventElapsedTime(&ms, s.events[i], s.events[i + 1]), "event elapsed time");
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:114:3: warning: style of line directive is a GCC extension
+  114 |         if (!std::isfinite(ms) || ms < 0) throw std::runtime_error("invalid event duration");
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:115:3: warning: style of line directive is a GCC extension
+  115 |         *metrics[i] = static_cast<double>(ms) * 1000000.0;
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:116:3: warning: style of line directive is a GCC extension
+  116 |     }
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:117:3: warning: style of line directive is a GCC extension
+  117 |     std::copy(s.host_output, s.host_output + s.size, output.begin());
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:118:3: warning: style of line directive is a GCC extension
+  118 |     return result;
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:119:3: warning: style of line directive is a GCC extension
+  119 | }
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:120:3: warning: style of line directive is a GCC extension
+  120 | void CudaTimingSession::close() {
+      |   ^~~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:121:3: warning: style of line directive is a GCC extension
+  121 |     auto& s = *impl_;
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:122:3: warning: style of line directive is a GCC extension
+  122 |     if (s.closed) return;
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:123:3: warning: style of line directive is a GCC extension
+  123 |     if (s.stream) checked(cudaStreamSynchronize(s.stream), "close synchronize");
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:124:3: warning: style of line directive is a GCC extension
+  124 |     for (auto& event : s.events) if (event) {
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:125:3: warning: style of line directive is a GCC extension
+  125 |         const auto e = event; event = nullptr; checked(cudaEventDestroy(e), "destroy event");
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:126:3: warning: style of line directive is a GCC extension
+  126 |     }
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:127:3: warning: style of line directive is a GCC extension
+  127 |     auto release_device = [](auto*& pointer) {
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:128:3: warning: style of line directive is a GCC extension
+  128 |         if (pointer) { auto* value = pointer; pointer = nullptr; checked(cudaFree(value), "free device buffer"); }
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:129:3: warning: style of line directive is a GCC extension
+  129 |     };
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:130:3: warning: style of line directive is a GCC extension
+  130 |     release_device(s.workspace); release_device(s.output); release_device(s.input);
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:131:3: warning: style of line directive is a GCC extension
+  131 |     for (auto** p : {&s.host_output, &s.host_input})
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:132:3: warning: style of line directive is a GCC extension
+  132 |         if (*p) { auto* value = *p; *p = nullptr; checked(cudaFreeHost(value), "free pinned buffer"); }
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:133:3: warning: style of line directive is a GCC extension
+  133 |     if (s.stream) { const auto stream = s.stream; s.stream = nullptr; checked(cudaStreamDestroy(stream), "destroy stream"); }
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:134:3: warning: style of line directive is a GCC extension
+  134 |     s.closed = true;
+      |   ^ ~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:135:3: warning: style of line directive is a GCC extension
+  135 | }
+      |   ^  
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:136:3: warning: style of line directive is a GCC extension
+  136 | } // namespace mab
+      |   ^~~
+/content/mab_isolated_20261011T010417197263Z/source/src/cuda/cub_timing.cu:138:3: warning: style of line directive is a GCC extension
+tmpxft_00001c6f_00000000-6_cub_timing.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension
+tmpxft_00001c6f_00000000-6_cub_timing.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension

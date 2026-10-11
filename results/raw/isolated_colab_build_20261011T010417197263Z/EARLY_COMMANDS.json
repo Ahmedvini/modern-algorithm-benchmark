@@ -1,0 +1,60 @@
+{
+  "commands": [
+    {
+      "command": "pwd\ncat AGENTS.md\ncat results/raw/colab_t4_diagnostics_20261011T005409276199Z/FINAL_AUDIT.md\ncat docs/CPU_GPU_DRIVER_REVIEW_v1.json\ncat docs/NON_TIMING_TEST_SELECTION_v1.json",
+      "scope": "Initial instructions, diagnostics audit, reviewed identities",
+      "exit_code": 0
+    },
+    {
+      "command": "git status --short\nrg -n 'prerequisite|correctness|add_test|comparison|cuda_sort' CMakeLists.txt scripts/validate_cpu_gpu_pilot.py scripts/non_timing_tests.py docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md docs/CUDA_SORT_VALIDATION_GUIDE_v2.md\nrg --files scripts tests src/cuda include cmake third_party/cub",
+      "scope": "Read-only repository state/test scope discovery; initial Git emitted absent repository",
+      "exit_code": 0
+    },
+    {
+      "command": "cat README.md docs/ROADMAP.md docs/EXPERIMENT_PROTOCOL.md\ncat docs/CUDA_SORT_VALIDATION_GUIDE_v2.md\ncat scripts/validate_cpu_gpu_pilot.py\ncat src/benchmark/cpu_gpu_main.cpp\ncat tests/test_cuda_sorting.cpp",
+      "scope": "Read-only project docs, broad runner scope, worker early return and GPU correctness",
+      "exit_code": 0
+    },
+    {
+      "command": "cat CMakeLists.txt cmake/cuda.cmake\ncat scripts/non_timing_tests.py\ncat scripts/ctest_build_guard.py\ncat scripts/cpu_gpu_provenance.py",
+      "scope": "Read-only build integration and prior safety/provenance paths; no discovery or runner execution",
+      "exit_code": 0
+    },
+    {
+      "command": "cat src/benchmark/cpu_gpu_main.cpp\ncat tests/test_cuda_sorting.cpp\ncat cmake/cuda.cmake\ncat scripts/validate_cuda_sort.py",
+      "scope": "Read-only detailed target and correctness runner inspection",
+      "exit_code": 0
+    },
+    {
+      "command": "sed -n '1,85p' CMakeLists.txt\nsed -n '160,240p' CMakeLists.txt\ncat scripts/validate_cpu_gpu_pilot.py\nsed -n '1,105p' scripts/cpu_gpu_protocol.py\ncat docs/CPU_GPU_DRIVER_REVIEW_v1.json",
+      "scope": "Read-only integration and frozen provenance verification path",
+      "exit_code": 0
+    },
+    {
+      "command": "cat cmake/cuda.cmake\ncat tests/test_mergesort.cpp\ncat docs/CUDA_SORT_VALIDATION_GUIDE_v2.md\nsed -n '55,130p' tests/test_cuda_sorting.cpp\ncat cmake/benchmark_metadata.cmake\ncolab upload --help\ncolab download --help",
+      "scope": "Read-only correctness-test review and CLI transfer syntax; combined shell exit 0",
+      "exit_code": 0
+    },
+    {
+      "command": "cat tests/test_integer_sorts.hpp\nsed -n '1,40p' CMakeLists.txt\ncat src/algorithms/parallel_mergesort.cpp\ncat include/algorithms/detail/parallel_mergesort_impl.hpp",
+      "scope": "Read-only complete CPU test helper and linked algorithm implementation",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -B - <<'PY'\nimport datetime,hashlib,json\nfrom pathlib import Path\nr=Path.cwd(); e=r/'results/raw'/('isolated_colab_build_'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'));e.mkdir()\ndef sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()\ndef scan(b):return {str(p.relative_to(r)):sha(p) for p in sorted(b.rglob('*')) if p.is_file() and not p.is_relative_to(e)}\nold=r/'results/raw/colab_t4_diagnostics_20261011T005409276199Z'\nseal=json.loads((old/'FINAL_INTEGRITY.json').read_text());assert all(sha(old/p)==h for p,h in seal['evidence_sha256'].items())\nexpected=json.loads((old/'BEFORE.json').read_text())\nassert all(sha(r/p)==h for k in ['project_sha256','build_metadata_sha256'] for p,h in expected[k].items())\npolicy=json.loads((r/'docs/NON_TIMING_TEST_SELECTION_v1.json').read_text())\nassert all(sha(r/p)==h for p,h in policy['reviewed_source_sha256'].items())\nfreeze=r/'docs/studies/cpu_gpu_comparison_v1.freeze.json';assert sha(freeze)=='518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6'\nassert all(sha(r/p)==h for p,h in json.loads(freeze.read_text())['files_sha256'].items())\nb={'prior_results_sha256':scan(r/'results'),'project_sha256':expected['project_sha256'],'build_metadata_sha256':expected['build_metadata_sha256'],'previous_evidence_verified':len(seal['evidence_sha256']),'authorization':'User explicitly authorized reviewed source transfer, new isolated build, narrowly scoped correctness validation; no study/timing trials'}\nwith (e/'BEFORE.json').open('x') as f:json.dump(b,f,indent=2,sort_keys=True);f.write('\\n')\nprint(e.relative_to(r));print({k:len(v) for k,v in b.items() if k.endswith('sha256')})\nPY",
+      "scope": "Exclusive new evidence directory and integrity baseline",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\np=Path('results/raw/isolated_colab_build_20261011T010417197263Z')\nr=json.loads((p/'extract.json').read_text());assert r['exit_code']==0\ns=r['stdout'];assert s.count('TRANSFER_VERIFIED_BEGIN')==s.count('TRANSFER_VERIFIED_END')==1\nd=json.loads(s.split('TRANSFER_VERIFIED_BEGIN')[1].split('TRANSFER_VERIFIED_END')[0]);assert d['files_verified']==153 and d['frozen_verified']\nassert d['source_files_sha256']==json.loads((p/'SOURCE_IDENTITY.json').read_text())['files_sha256']\nassert d['archive_sha256']==json.loads((p/'BUNDLE.json').read_text())['archive_sha256']\nwith (p/'TRANSFER_CHECKED.json').open('x') as f:json.dump(d,f,indent=2);f.write('\\n')\nprint('Remote archive and all 153 source identities match local reviewed bundle; frozen hashes match')\nPY",
+      "scope": "Read retained transfer markers; compare all source/archive identities",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -B - <<'PY'\nimport json\nfrom collections import Counter\nfrom pathlib import Path\np=Path('results/raw/isolated_colab_build_20261011T010417197263Z')\nr=json.loads((p/'isolated_build_validation.json').read_text());assert r['exit_code']==0\ns=r['stdout'];assert s.count('ISOLATED_VALIDATION_BEGIN')==s.count('ISOLATED_VALIDATION_END')==1\nd=json.loads(s.split('ISOLATED_VALIDATION_BEGIN')[1].split('ISOLATED_VALIDATION_END')[0]);assert d['validation_passed']\nassert all(v['exit_code']==0 for v in d['result']['records'])\nassert not (p/'downloaded_validation.tar.gz').exists()\nwith (p/'REMOTE_RESULT_CHECKED.json').open('x') as f:json.dump(d,f,indent=2);f.write('\\n')\nprint(json.dumps({k:d[k] for k in ['validation_passed','evidence_archive','archive_sha256']},indent=2));print('GPU',d['result']['cuda_correctness']);print('CPU',d['result']['cpu_correctness']);print('WARNING_COUNTS',Counter(w['text'].split('warning:',1)[-1] for w in d['result']['warnings']))\nPY",
+      "scope": "Read retained build/validation markers; check command exits and warnings",
+      "exit_code": 0
+    }
+  ],
+  "note": "Combined shell statuses are recorded as observed. Initial Git diagnostic is independently retained with actual exit128 in git_status.json. Tool apply_patch modified only this new evidence directory; terminal polls only awaited recorded commands."
+}

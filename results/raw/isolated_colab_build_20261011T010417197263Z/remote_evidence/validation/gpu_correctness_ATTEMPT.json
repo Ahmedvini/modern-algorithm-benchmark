@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "/content/mab_isolated_20261011T010417197263Z/build-release/test_cuda_sorting"
+  ],
+  "cwd": "/content/mab_isolated_20261011T010417197263Z/source",
+  "name": "gpu_correctness",
+  "started_utc": "2026-10-11T01:08:07.442503+00:00"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "colab",
+    "download",
+    "/content/mab_isolated_20261011T011459127026Z/validation_evidence.tar.gz",
+    "results/raw/isolated_colab_revalidation_20261011T011459127026Z/downloaded_validation.tar.gz",
+    "--session",
+    "cpu-gpu-validation"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:20:50.742603+00:00",
+  "exit_code": 0,
+  "stdout": "[colab] Downloaded '/content/mab_isolated_20261011T011459127026Z/validation_evidence.tar.gz' to 'results/raw/isolated_colab_revalidation_20261011T011459127026Z/downloaded_validation.tar.gz'\n",
+  "stderr": "",
+  "scope": "Retrieve only new isolated validation logs/metadata archive into absent local evidence path"
+}

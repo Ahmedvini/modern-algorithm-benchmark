@@ -1,0 +1,7 @@
+{
+  "record_kind": "metrics_validation_review_command",
+  "command": "python3 results/raw/metrics_validation_20261009T154659316368Z/review_sources.py",
+  "exit_code": 0,
+  "result": "Verified preservation, vendor hashes, normal executable linkage/symbols, both full suites, and saved final logs/source hashes/review patch.",
+  "evidence": "source_review.json"
+}

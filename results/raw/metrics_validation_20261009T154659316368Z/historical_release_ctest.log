@@ -1,0 +1,123 @@
+Start testing: Oct 09 18:38 EEST
+----------------------------------------------------------
+1/7 Testing: baselines
+1/7 Test: baselines
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_baselines"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release
+"baselines" start time: Oct 09 18:38 EEST
+Output:
+----------------------------------------------------------
+Passed 3590 full-vector differential sort cases and 98508 linear-oracle search checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"baselines" end time: Oct 09 18:38 EEST
+"baselines" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/7 Testing: environment_manifest
+2/7 Test: environment_manifest
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_environment.py"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release
+"environment_manifest" start time: Oct 09 18:38 EEST
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"environment_manifest" end time: Oct 09 18:38 EEST
+"environment_manifest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/7 Testing: datasets
+3/7 Test: datasets
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_datasets"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release
+"datasets" start time: Oct 09 18:38 EEST
+Output:
+----------------------------------------------------------
+Passed 220 distribution/size/seed cases, five exact one-swap fixtures, one five-swap fixture, empty/singleton swap checks, and existing fixtures/validation
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"datasets" end time: Oct 09 18:38 EEST
+"datasets" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/7 Testing: cli
+4/7 Test: cli
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cli.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/algorithm_benchmark"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release
+"cli" start time: Oct 09 18:38 EEST
+Output:
+----------------------------------------------------------
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.087s
+
+OK
+<end of output>
+Test time =   0.13 sec
+----------------------------------------------------------
+Test Passed.
+"cli" end time: Oct 09 18:38 EEST
+"cli" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/7 Testing: quicksort
+5/7 Test: quicksort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_quicksort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release
+"quicksort" start time: Oct 09 18:38 EEST
+Output:
+----------------------------------------------------------
+Passed 3718 QuickSort differential cases through public and observed paths; forced zero-budget fallback=1, one-budget fallback=1, balanced-child fallbacks=2, sentinel-range fallback=1, default-budget adversarial fallbacks=618
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"quicksort" end time: Oct 09 18:38 EEST
+"quicksort" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/7 Testing: pdqsort
+6/7 Test: pdqsort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_pdqsort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release
+"pdqsort" start time: Oct 09 18:38 EEST
+Output:
+----------------------------------------------------------
+Passed 4027 PDQSort differential cases through public and registry paths
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"pdqsort" end time: Oct 09 18:38 EEST
+"pdqsort" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/7 Testing: timsort
+7/7 Test: timsort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_timsort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release
+"timsort" start time: Oct 09 18:38 EEST
+Output:
+----------------------------------------------------------
+Passed 4149 Timsort differential cases through public and registry paths
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"timsort" end time: Oct 09 18:38 EEST
+"timsort" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 09 18:38 EEST

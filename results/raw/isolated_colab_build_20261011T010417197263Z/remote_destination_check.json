@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-validation",
+    "--file",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/isolated_colab_build_20261011T010417197263Z/remote_check.py",
+    "--timeout",
+    "90"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:05:14.659469+00:00",
+  "exit_code": 0,
+  "stdout": "REMOTE_CHECK_BEGIN\n{\"destination\": \"/content/mab_isolated_20261011T010417197263Z\", \"archive\": \"/content/mab_source_20261011T010417197263Z.tar.gz\", \"paths_absent\": true, \"platform\": \"Linux-6.6.122+-x86_64-with-glibc2.39\", \"commands\": [{\"argv\": [\"nvidia-smi\", \"--query-gpu=name,uuid,driver_version,memory.total,memory.free\", \"--format=csv,noheader,nounits\"], \"exit_code\": 0, \"stdout\": \"Tesla T4, GPU-c51b969a-fbb1-a810-8346-93e2f6fc1849, 580.82.07, 15360, 14913\\n\", \"stderr\": \"\"}, {\"argv\": [\"nvcc\", \"--version\"], \"exit_code\": 0, \"stdout\": \"nvcc: NVIDIA (R) Cuda compiler driver\\nCopyright (c) 2005-2025 NVIDIA Corporation\\nBuilt on Wed_Aug_20_01:58:59_PM_PDT_2025\\nCuda compilation tools, release 13.0, V13.0.88\\nBuild cuda_13.0.r13.0/compiler.36424714_0\\n\", \"stderr\": \"\"}, {\"argv\": [\"cmake\", \"--version\"], \"exit_code\": 0, \"stdout\": \"cmake version 3.31.10\\n\\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\\n\", \"stderr\": \"\"}, {\"argv\": [\"g++\", \"--version\"], \"exit_code\": 0, \"stdout\": \"g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\\nCopyright (C) 2023 Free Software Foundation, Inc.\\nThis is free software; see the source for copying conditions.  There is NO\\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\\n\\n\", \"stderr\": \"\"}]}\nREMOTE_CHECK_END\n",
+  "stderr": "",
+  "scope": "GPU/tool metadata and absence of unique destination; no CUDA execution"
+}

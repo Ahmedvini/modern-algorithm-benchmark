@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "git",
+    "status",
+    "--short"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:07:33.513116+00:00",
+  "exit_code": 128,
+  "stdout": "",
+  "stderr": "fatal: not a git repository (or any of the parent directories): .git\n",
+  "scope": "Read-only source revision check; absent Git metadata is retained, no Git initialization"
+}

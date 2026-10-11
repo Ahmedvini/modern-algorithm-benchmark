@@ -1,0 +1,1241 @@
+--- before/CMakeLists.txt
++++ after/CMakeLists.txt
+@@ -30,6 +30,14 @@
+ add_executable(algorithm_benchmark src/main.cpp)
+ target_link_libraries(algorithm_benchmark PRIVATE mab_core)
+ 
++# Metrics are a separate library/executable; normal CLI links only mab_core.
++add_library(mab_metrics src/benchmark/comparisons.cpp src/benchmark/memory.cpp
++                        src/benchmark/memory_json.cpp)
++target_link_libraries(mab_metrics PUBLIC mab_core)
++target_include_directories(mab_metrics PRIVATE third_party/pdqsort third_party/timsort/include)
++add_executable(sort_metrics src/benchmark/metrics_main.cpp)
++target_link_libraries(sort_metrics PRIVATE mab_metrics)
++
+ include(CTest)
+ if(BUILD_TESTING)
+     find_package(Python3 REQUIRED COMPONENTS Interpreter)
+@@ -53,4 +61,19 @@
+     add_executable(test_timsort tests/test_timsort.cpp)
+     target_link_libraries(test_timsort PRIVATE mab_core)
+     add_test(NAME timsort COMMAND test_timsort)
++    add_executable(test_comparisons tests/test_comparisons.cpp)
++    target_link_libraries(test_comparisons PRIVATE mab_metrics)
++    add_test(NAME comparisons COMMAND test_comparisons)
++    add_executable(test_memory tests/test_memory.cpp)
++    target_link_libraries(test_memory PRIVATE mab_metrics)
++    add_test(NAME memory COMMAND test_memory)
++    # Compile the actual portable branch, rather than mock an unsupported result.
++    add_executable(test_memory_unsupported tests/test_memory.cpp src/benchmark/memory.cpp
++                   src/benchmark/memory_json.cpp)
++    target_compile_definitions(test_memory_unsupported PRIVATE MAB_FORCE_UNSUPPORTED_MEMORY=1)
++    target_link_libraries(test_memory_unsupported PRIVATE mab_core)
++    add_test(NAME memory_unsupported COMMAND test_memory_unsupported)
++    add_test(NAME metrics_cli
++             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_metrics_cli.py
++                     $<TARGET_FILE:sort_metrics>)
+ endif()
+--- before/README.md
++++ after/README.md
+@@ -156,4 +156,38 @@
+ warnings were emitted. Exact commands and immutable logs are recorded in
+ [the audit](docs/AUDIT.md). Timsort integration is complete; Phase 2 remains in
+ progress because additional sorters and comparison/memory/timing infrastructure
+-are pending. No benchmark, CUDA or 100-million-element run was performed.
++were pending at that stage. No benchmark, CUDA or 100-million-element run was performed.
++
++## Separate comparison and memory metrics
++
++```sh
++build/release/sort_metrics --sort quick_sort --size 2 --distribution duplicate_heavy --distinct 1
++```
++
++sort_metrics accepts the same dataset/sorter options and defaults listed above,
++including std_sort. It verifies counted output against std::sort and the normal
++registry sorter. The original CLI, eleven-field schema and registry are unchanged.
++All four sorters support run-local counts of executed signed-int32 less-than
++predicates, including pivot/partition/merge/fallback work. Generation and later
++verification are excluded. PDQSort explicitly preserves production's branchless
++policy. Counted runs are separate from normal execution and future timing runs.
++
++On Linux, getrusage(RUSAGE_SELF).ru_maxrss supplies process peak RSS, normalized
++from KiB to bytes. It includes input/runtime/allocator/instrumentation memory
++and does not isolate algorithm workspace. Sampling follows counted sorting and
++precedes validation copies. Other platforms report unsupported/null. No temporary
++buffer allocation measurement is implemented; theoretical space remains separate.
++
++The independent 15-field metrics JSON includes key_comparisons, its convention,
++adapter identity, dataset parameters and process_memory status/method/unit/scope/
++value/error_code. Memory errors emit a partial record, stderr diagnostic and
++exit 1; unsupported memory permits successful counting. See [metric definitions
++and schema](docs/METRICS.md) for exact fields and limitations. No timing is
++collected. Fresh validation and milestone status are recorded in the audit/roadmap.
++
++The comparison/memory milestone passed fresh full Release and Debug ASan/UBSan
++suites (11/11 groups each), including 1,404 inputs across all four counted sorters,
++six manually verified QuickSort count fixtures, reset/isolation/overflow checks,
++counted heap fallback, real/unsupported memory paths and seven metrics CLI methods.
++Leak detection remained enabled; no compiler warnings were emitted. These are
++metric validation runs, not benchmark performance measurements.
+--- before/docs/ALGORITHMS.md
++++ after/docs/ALGORITHMS.md
+@@ -134,3 +134,23 @@
+ 
+ Merge Sort, Radix Sort and all advanced structures are
+ pending. No measured algorithm-performance claims are made here.
++
++## Separate metric adapters
++
++All four sorters have counted adapters in mab_metrics. Each executed signed-int32
++less-than predicate counts once, including false/equal and pivot/heap/merge work.
++Counters are run-local, reset per call, and throw on uint64 overflow. Normal
++adapters do not update counters; the normal executable does not link mab_metrics.
++
++QuickSort's shared internal template now accepts a comparator, defaulting to
++std::less<Key>; policy, boundaries, budget and observers are preserved. The
++counted comparator reaches both heap calls. PDQSort uses upstream's explicit
++branchless entry point, preserving the normal int32/default-comparator policy.
++Timsort/std::sort use comparator APIs directly. Vendored files are unchanged.
++Counts depend on implementation and are not timing proxies. Exact cross-platform
++counts are not asserted for upstream/standard-library algorithms.
++
++Linux peak RSS is a process-lifetime high-water mark including input, runtime,
++allocator and instrumentation overhead. It does not measure algorithm-specific
++allocations. Other platforms return unsupported/null. See [METRICS.md](METRICS.md)
++for definitions, sampling point, schema, inclusion rules and validation limits.
+--- before/docs/AUDIT.md
++++ after/docs/AUDIT.md
+@@ -416,3 +416,177 @@
+ CSV infrastructure are unfinished. Next milestone: separate comparison-count
+ instrumentation and documented memory reporting, before performance experiments.
+ No benchmark measurements, CUDA execution or 100-million-element runs occurred.
++
++## Comparison instrumentation and memory reporting — 2026-10-09
++
++### Inspection and baseline
++
++Read AGENTS.md, README, roadmap, audit, algorithm/protocol documentation, CMake,
++sorting interfaces/registry/adapters, QuickSort internals, upstream comparator
++interfaces and existing tests before editing. No timing/output infrastructure
++existed beyond the correctness JSON CLI and raw validation records. pwd confirmed
++the project location; an anonymous temporary write/read/delete check succeeded.
++git status --short exited 128 because project Git metadata remains absent.
++No access controls were changed. Sources/docs/tests/vendors were backed up under
++build/metrics_review; prior CTest logs were exclusively copied as historical
++evidence before the build directories were reused. Vendor provenance hashes
++matched their pinned revisions before edits.
++
++The following baseline commands each exited 0 before feature changes:
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++```
++
++All seven previous groups passed: 3,590 sorting inputs, 98,508 search checks,
++220 dataset combinations and fixtures, three environment tests, ten CLI methods,
++3,718 QuickSort inputs with all fallback assertions (normal-budget total 618),
++4,027 PDQSort inputs and 4,149 Timsort inputs. No baseline defect was demonstrated.
++
++### Design and saved changes
++
++The separate mab_metrics library and sort_metrics executable contain instrumented
++adapters and process-memory reporting. algorithm_benchmark still links only
++mab_core; its source, CLI, eleven-field JSON and registry are unchanged. std_sort
++remains default in both executables. No timer or performance matrix was added.
++
++key_less_than_v1 counts each executed signed-int32 less-than predicate once,
++including false/equal results, pivot selection and heap/merge work. It excludes
++swaps, assignments, iterator/bookkeeping tests, generation and verification.
++Every sort initializes its own uint64 counter; comparator copies share only that
++call's local state. Overflow throws before wrapping. All four current algorithms
++support the same counting unit; counts are not machine instructions or timing.
++
++QuickSort's internal template was parameterized by a comparator, defaulting to
++std::less<Key>. The shared pivot/partition/budget policy is preserved and the
++comparator reaches recursive children and both heap calls. Existing public
++adapters and observer tests are unchanged. Normal execution has no counter.
++PDQSort counting explicitly uses its public branchless comparator entry point
++because ordinary custom-comparator dispatch would silently select another policy.
++Timsort/std::sort use comparator interfaces without source modifications. Timsort
++audit comparisons are excluded; enabling that macro rejects the counted build.
++Checked-library configurations need separate review; current flags do not enable
++those modes. Upstream/library exact counts are not hardcoded across platforms.
++
++Linux memory uses getrusage(RUSAGE_SELF).ru_maxrss in KiB, checked conversion to
++bytes. It is a process-lifetime peak, sampled after counted sorting and before
++validation vectors. It can include generation, input/output, runtime, allocator,
++instrumentation, sanitizer and execution-history effects; it does not isolate
++algorithm workspace. Unsupported platforms return unsupported/null, never zero.
++Measurement errors report errno/null in a partial record and exit 1. No algorithm
++temporary-buffer allocation measurement or theoretical-to-measured substitution
++was implemented. METRICS.md cites the Linux API documentation and defines scope,
++units, sample point and all 15 top-level/seven nested JSON fields.
++
++Files changed/added:
++
++- CMakeLists.txt: separate metrics library/executable and four new CTest groups.
++- include/algorithms/detail/quicksort_impl.hpp: shared comparator forwarding,
++  preserving default operation and observer seam.
++- include/benchmark/comparisons.hpp, detail/counting_less.hpp,
++  src/benchmark/comparisons.cpp: counted registry and run-local predicates.
++- include/benchmark/memory.hpp, src/benchmark/memory.cpp, memory_json.cpp:
++  platform-specific peak RSS, unsupported/error status and validated formatting.
++- src/benchmark/metrics_main.cpp: separate metric CLI, configuration/provenance
++  fields, normal/reference agreement and explicit partial memory-failure records.
++- tests/test_comparisons.cpp: exact project counts, comparator copy/isolation/
++  overflow, repeated/interleaved runs, differential data and heap forwarding.
++- tests/test_memory.cpp: synthetic format/error fixtures plus real and separately
++  compiled unsupported probes; no actual kernel failure is induced.
++- tests/test_metrics_cli.py: seven schema/configuration/error/repetition methods.
++- README.md, docs/ALGORITHMS.md, docs/EXPERIMENT_PROTOCOL.md, docs/METRICS.md,
++  docs/ROADMAP.md and this audit: definitions, methodology, limits and real status.
++
++### Fresh build and test results
++
++Each of the following commands exited 0:
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
++cmake --build build/release --parallel 2
++ctest --test-dir build/release --output-on-failure -V
++cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DMAB_ENABLE_SANITIZERS=ON
++cmake --build build/sanitize --parallel 2
++env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V
++```
++
++Full Release and Debug ASan/UBSan suites both passed 11/11 groups. Neither build
++emitted compiler warnings. Leak detection was enabled and the historical ptrace
++failure did not recur; no leak-disabled retry was executed.
++
++| CTest group | Actual result in each configuration |
++| --- | --- |
++| baselines | 3,590 full-vector sorting inputs and 98,508 search checks passed |
++| environment_manifest | Three Python tests passed |
++| datasets | 220 combinations plus all existing swap/validation fixtures passed |
++| cli | Ten existing Python methods passed unchanged |
++| quicksort | 3,718 existing inputs and all fallback assertions passed; adversarial fallback total still 618 |
++| pdqsort | 4,027 existing public/registry cases passed |
++| timsort | 4,149 existing public/registry cases passed |
++| comparisons | 1,404 inputs across all four sorters, repeated/interleaved reset, six exact QuickSort fixtures, comparator copy/isolation/overflow and counted heap fallback passed |
++| memory | Supported/zero/error/unsupported synthetic JSON fixtures, four inconsistent reports and repeated real Linux probes passed |
++| memory_unsupported | Same fixture tests and repeated probes compiled through the actual unsupported implementation branch passed |
++| metrics_cli | Seven Python methods passed; 80 sorter/distribution/size configurations repeated twice, defaults, exact equal-key QuickSort fixture, invalid inputs/help/bounds/repeated options |
++
++Comparison inputs comprise 11 explicit edges, 1,093 exhaustive arrays of lengths
++0..6 over {-1,0,1}, 252 four-distribution/three-seed/21-size combinations and
++48 patterns. Largest new counted input size is 4,096. For each input every sorter
++is checked against production and std::sort, repeated, followed by an empty run,
++interleaved with other sorters and repeated again. The forced zero-budget heap
++test compares counting against an independent local comparator over the same
++STL heap calls. This asserts forwarding, not a portable fixed STL count.
++
++Memory format values (including 4096 bytes and errno 22) are synthetic fixtures,
++not measured RSS. Real probes assert unit/high-water properties without assuming
++a fixed value. The unsupported branch is tested on Linux through a test-only
++compile definition; this is not Windows/macOS execution. Actual getrusage syscall
++failure is not induced; error-object formatting is tested with a fixture.
++
++A separate metric smoke command also exited 0:
++
++```sh
++build/release/sort_metrics --sort quick_sort --size 2 --distribution duplicate_heavy --distinct 1
++```
++
++It reported seven actual key comparisons and a Linux process RSS sample. The raw
++sample is preserved as returned, without interpreting the process high-water
++mark as two-element sorting workspace or a comparative memory experiment.
++
++### Evidence, failures and remaining work
++
++New evidence was exclusively created under
++results/raw/metrics_validation_20261009T154659316368Z. Historical logs are distinct
++from fresh per-command records. Source/provenance review, final logs and manifests
++are preserved separately; prior raw evidence was not overwritten. Environment
++capture commands both exited 0:
++
++```sh
++python3 scripts/capture_environment.py --build-dir build/release --output results/raw/metrics_validation_20261009T154659316368Z/release_environment.json
++python3 scripts/capture_environment.py --build-dir build/sanitize --output results/raw/metrics_validation_20261009T154659316368Z/sanitize_environment.json
++```
++
++The project Git-status failure (128) was expected because metadata is absent.
++One documentation apply_patch was rejected for a mismatched protocol-file
++context before any changes were applied; a follow-up inspection exited 2 because
++METRICS.md was not yet created. The corrected patch was applied successfully.
++There were no configure/build/test/sanitizer failures or suppressed diagnostics.
++
++Existing production registry, CLI, dataset implementation, algorithm adapters and
++all earlier test files were preserved byte-for-byte. All vendor files, licenses,
++attribution and provenance are unchanged. The QuickSort internal comparator seam
++is the only changed production implementation file and all prior observer/fallback
++tests still pass. Normal executable linkage excludes the metrics library.
++
++Validation covers the current GNU/Linux environment. Process RSS is not algorithm
++isolation and cannot be reset; sanitizer RSS is not a production-memory baseline.
++Other memory platforms and temporary-buffer allocation metrics remain unsupported.
++The older Timsort branch maintenance limitation is unchanged. No performance
++benchmarking, CUDA workload or 100-million-element input was executed.
++
++This comparison/memory milestone is complete with saved code, tests, definitions
++and passing fresh suites. Phase 2 overall remains in progress. Next milestone:
++implement repeatable Release timing/CSV infrastructure with identical inputs,
++repetitions, environment provenance and checks outside timing. Optional Merge/Radix
++baselines and measured experiment collection remain pending.
+--- before/docs/EXPERIMENT_PROTOCOL.md
++++ after/docs/EXPERIMENT_PROTOCOL.md
+@@ -2,13 +2,14 @@
+ 
+ ## Current baseline
+ 
+-Current executions are correctness tests, not performance experiments. No
+-sorting/search timings, comparison counts, peak memory measurements, speedups,
+-or charts have been collected. The std::sort adapter is the installed library's
++Current executions are correctness/metric validation, not performance experiments.
++Separate sort_metrics validation can collect key comparisons and process peak
++RSS under [METRICS.md](METRICS.md). No sorting/search timing series, memory
++comparison study, speedups or charts have been collected. The std::sort adapter is the installed library's
+ implementation; its precise library/compiler environment must accompany runs.
+ 
+ Release builds use the commands in README.md. Sanitizer tests will use a separate
+-Debug build. Correctness checks compare full vectors with std::stable_sort so
++Debug build. Correctness checks compare full vectors with std::stable_sort or std::sort so
+ lost or duplicated keys cannot pass by merely producing a sorted vector.
+ 
+ ## Requirements before measurements
+@@ -23,7 +24,8 @@
+ 
+ Every result must retain its exact command, compiler and flags, environment,
+ seed, distribution parameters, input size, repetitions, algorithm identity,
+-status and errors. A versioned CSV/JSON experiment schema and analysis tools are
++status and errors. A separate versioned sort_metrics JSON schema exists; timing
++CSV/JSON experiment schemas and analysis tools are
+ pending. Failed runs must remain visible. Raw output must never be overwritten;
+ summaries and plots belong under results/processed and results/figures.
+ 
+--- before/docs/ROADMAP.md
++++ after/docs/ROADMAP.md
+@@ -7,7 +7,7 @@
+ | --- | --- |
+ | 0 — audit and baseline | Complete: Release build, differential tests, immutable environment manifest |
+ | 1 — correctness-first core | Complete: saved CLI/generator docs and swap regressions; fresh Release and sanitizer suites passed 4/4 |
+-| 2 — required sorting algorithms and metrics | In progress: bounded QuickSort, pinned PDQSort and genuine pinned Timsort validated; extra sorters/metrics pending |
++| 2 — required sorting algorithms and metrics | In progress: QuickSort/PDQSort/Timsort and separate comparison/process-RSS metrics validated; extra sorters/timing CSV pending |
+ | 3 — search benchmarks | Pending |
+ | 4 — search data structures | Pending |
+ | 5 — orchestration and analysis | Pending |
+@@ -29,8 +29,16 @@
+ unchanged MIT-licensed source, hashes and attribution. Fresh full Release and
+ Debug ASan/UBSan suites pass 7/7 groups, including 4,149 dedicated Timsort inputs
+ through public/registry paths and ten CLI methods. Leak detection was enabled.
+-Phase 2 is not complete: optional Merge/Radix baselines, separate comparison
+-instrumentation, memory metrics and repeatable timing/CSV infrastructure remain
+-pending. The next unfinished milestone is separate comparison-count instrumentation
+-and documented memory reporting, before performance experiments. No performance
+-benchmarking was started during these integrations; CUDA and 100M remain not run.
++Separate comparison-count instrumentation and documented process memory reporting
++are now complete: all four sorters have counted adapters, and Linux process peak
++RSS is reported with explicit scope/units and unsupported/null elsewhere. Original
++CLI and registry behavior are preserved. Fresh Release and Debug ASan/UBSan pass
++11/11 groups, including 1,404 comparison inputs and real/forced-unsupported memory
++paths, with leak detection enabled. See METRICS.md and AUDIT.md for actual evidence.
++
++Phase 2 is not complete: optional Merge/Radix baselines and repeatable timing/CSV
++infrastructure remain pending. Algorithm-specific temporary allocation tracking
++is not implemented; the supported memory metric is process RSS, not isolation.
++Next milestone: implement the Release timing/CSV harness with identical dataset
++copies, repetitions, environment provenance and correctness outside timed regions.
++No performance benchmarking was started; CUDA and 100M remain not run.
+--- before/include/algorithms/detail/quicksort_impl.hpp
++++ after/include/algorithms/detail/quicksort_impl.hpp
+@@ -4,6 +4,7 @@
+ 
+ #include <algorithm>
+ #include <cstddef>
++#include <functional>
+ #include <utility>
+ 
+ namespace mab::detail {
+@@ -24,18 +25,24 @@
+     return 2 * logarithm;
+ }
+ 
+-inline Key median_of_three(Key first, Key middle, Key last) noexcept {
+-    if (first < middle) {
+-        if (middle < last) return middle;
+-        return first < last ? last : first;
++template <typename Compare>
++Key median_of_three(Key first, Key middle, Key last, Compare compare) {
++    if (compare(first, middle)) {
++        if (compare(middle, last)) return middle;
++        return compare(first, last) ? last : first;
+     }
+-    if (first < last) return first;
+-    return middle < last ? last : middle;
++    if (compare(first, last)) return first;
++    return compare(middle, last) ? last : middle;
+ }
+ 
+-template <typename Observer>
++inline Key median_of_three(Key first, Key middle, Key last) noexcept {
++    return median_of_three(first, middle, last, std::less<Key>{});
++}
++
++template <typename Observer, typename Compare = std::less<Key>>
+ void quick_sort_range(Values& values, std::size_t begin, std::size_t end,
+-                      std::size_t budget, Observer& observer, std::size_t stack_depth) {
++                      std::size_t budget, Observer& observer, std::size_t stack_depth,
++                      Compare compare = {}) {
+     observer.on_stack_depth(stack_depth);
+     // All ranges are half-open; empty/singleton ranges need no work.
+     while (end - begin > 1) {
+@@ -43,25 +50,25 @@
+             observer.on_heap_fallback(end - begin);
+             const auto first = values.begin() + static_cast<Values::difference_type>(begin);
+             const auto last = values.begin() + static_cast<Values::difference_type>(end);
+-            std::make_heap(first, last);
+-            std::sort_heap(first, last);
++            std::make_heap(first, last, compare);
++            std::sort_heap(first, last, compare);
+             return;
+         }
+         --budget;
+         observer.on_partition();
+         const Key pivot = median_of_three(values[begin], values[begin + (end - begin) / 2],
+-                                          values[end - 1]);
++                                          values[end - 1], compare);
+         // [begin,lower) < pivot, [lower,current) == pivot,
+         // [current,upper) unclassified, [upper,end) > pivot.
+         auto lower = begin;
+         auto current = begin;
+         auto upper = end;
+         while (current < upper) {
+-            if (values[current] < pivot) {
++            if (compare(values[current], pivot)) {
+                 std::swap(values[lower], values[current]);
+                 ++lower;
+                 ++current;
+-            } else if (pivot < values[current]) {
++            } else if (compare(pivot, values[current])) {
+                 --upper;  // current < upper before decrement prevents underflow.
+                 std::swap(values[current], values[upper]);
+             } else {
+@@ -72,22 +79,23 @@
+         // Recurse into the smaller strict partition; iterate over the larger.
+         if (lower - begin < end - upper) {
+             if (lower - begin > 1) {
+-                quick_sort_range(values, begin, lower, budget, observer, stack_depth + 1);
++                quick_sort_range(values, begin, lower, budget, observer, stack_depth + 1, compare);
+             }
+             begin = upper;
+         } else {
+             if (end - upper > 1) {
+-                quick_sort_range(values, upper, end, budget, observer, stack_depth + 1);
++                quick_sort_range(values, upper, end, budget, observer, stack_depth + 1, compare);
+             }
+             end = lower;
+         }
+     }
+ }
+ 
+-// Internal test seam: permits an exhausted/small budget and observer, without
+-// changing the public sorter or introducing global mutable instrumentation.
+-template <typename Observer>
+-void quick_sort_with_depth(Values& values, std::size_t budget, Observer& observer) {
+-    quick_sort_range(values, 0, values.size(), budget, observer, 1);
++// Internal seam for observed tests and a separately counted comparator.
++// Normal callers use std::less<Key> with no counter or runtime selection.
++template <typename Observer, typename Compare = std::less<Key>>
++void quick_sort_with_depth(Values& values, std::size_t budget, Observer& observer,
++                           Compare compare = {}) {
++    quick_sort_range(values, 0, values.size(), budget, observer, 1, compare);
+ }
+ }  // namespace mab::detail
+--- /dev/null
++++ after/docs/METRICS.md
+@@ -0,0 +1,145 @@
++# Sorting metric definitions
++
++sort_metrics and mab_metrics provide separate instrumented validation. The
++original algorithm_benchmark CLI, eleven-field schema, registry and std_sort
++default are preserved. The normal executable links only mab_core. This milestone
++adds no timer, repetition matrix, timing CSV or performance comparison.
++
++## Key comparisons: key_less_than_v1
++
++One comparison means one executed binary signed-int32 less-than evaluation in
++the counting comparator. True and false results each count once. Equal/self keys,
++copied pivots and temporary-buffer keys follow the same rule. A three-way decision
++that evaluates a < b and b < a counts twice. Pivot, insertion, partition, merge,
++galloping and heapsort comparisons are included. Swaps, assignments, iterator/index
++tests, run/depth/stack bookkeeping, generation and later verification are excluded.
++
++Each adapter creates a uint64 counter initialized to zero. Comparator copies
++refer to that run-local counter throughout the synchronous sort. No counters
++survive the call or are shared across independent calls. A single counted run
++does not execute its comparator in parallel. Overflow throws before wrapping;
++no successful count is returned, and input may already be partially rearranged.
++
++| Sorter | Instrumented identity | Relationship to production |
++| --- | --- | --- |
++| std_sort | std_sort_counting_less | std::sort with an ascending counting comparator; library/compiler dependent |
++| quick_sort | project_quick_sort_counting_less | Shared project template and depth budget; includes pivot/partition and both heap calls |
++| pdq_sort | upstream_pdqsort_branchless_counting_less | Explicit upstream branchless entry point preserves production int32/std::less policy |
++| tim_sort | upstream_gfx_timsort_counting_less | gfx::timsort with identity projection and counting comparator |
++
++All four current sorters support counting. Unknown counted names throw; tests
++require coverage of every production registry name. No count is estimated.
++QuickSort's internal template accepts a comparator, defaulting to empty
++std::less<Key> in normal execution. Its public adapter, pivot policy, boundaries,
++depth and observer semantics are preserved. Normal execution has no counter
++updates or runtime instrumentation switch.
++
++PDQSort's automatic trait recognizes std::less/std::greater but not a custom
++comparator. Passing a counter to ordinary pdqsort would choose a different
++partition policy. The counted adapter uses public pdqsort_branchless and a
++compile-time check that production still chooses branchless for int32/default
++comparison. No upstream trait or source is modified. Counting side effects may
++change generated instructions; this metric counts key predicates, not CPU branches.
++
++Timsort forwards ordering through its comparator, including upper_bound and
++galloping. Its post-sort audit is disabled in the established configuration;
++the counted translation unit rejects GFX_TIMSORT_ENABLE_AUDIT to prevent counting
++verification work. Checked/debug standard-library modes can add comparator
++checks and need separate metric review; the validated flags do not enable them.
++Vendored sources, licenses and provenance are unchanged.
++
++All adapters use the same signed-int32 predicate unit on identical inputs, so
++counts describe predicate work under those recorded implementations. Counts do
++not rank elapsed time or machine instructions. Comparator instantiation can
++change generated code, and std::sort counts are not portable across libraries.
++Exact tests use manually checked project QuickSort traces and comparator
++semantics; upstream/library counts are checked for repeatability within a build
++without hardcoding implementation-specific expected numbers. Counted runs must
++never substitute for normal timing runs.
++
++## Measured memory
++
++The metric is process peak resident set size, normalized to bytes. On Linux,
++getrusage(RUSAGE_SELF).ru_maxrss returns KiB; checked multiplication by 1024
++converts it. See [Linux getrusage documentation](https://man7.org/linux/man-pages/man2/getrusage.2.html).
++This interpretation requires Linux 2.6.32 or newer. Other platforms explicitly
++return unsupported, method none and a null value. macOS's different ru_maxrss
++units are not interpreted as Linux data.
++
++The scope is process lifetime up to sampling: a high-water mark, not current
++RSS, a resettable interval or an allocation delta. RUSAGE_SELF covers process
++threads, not children. Resource-usage history can survive exec, so a new CLI
++invocation does not establish an isolated algorithm-memory baseline.
++
++sort_metrics samples immediately after instrumented sorting and before creating
++reference/normal-sort validation vectors. Generation (including sorting inside
++some distributions) is part of the earlier process history. Output occupies the
++input vector. Resident input/output, algorithm workspace, stack, allocator
++metadata/retained pages, runtime/library/loader and counting overhead can all
++contribute. Sanitizer runs include sanitizer overhead. Only resident pages count;
++this is not virtual memory or allocated bytes. Later verification/output occur
++after the captured sample. Values can vary between launches/builds.
++
++RSS does not isolate algorithm auxiliary memory. No temporary-buffer allocation
++metric is implemented: upstream vectors retain their existing allocators, with
++no global allocation interposition. QuickSort's O(log N) stack and Timsort's O(N)
++workspace remain theoretical descriptions, separate from measured memory. No
++cross-algorithm memory study or performance conclusion is claimed.
++
++getrusage failure reports error/null/errno. Negative or unrepresentable results
++report EOVERFLOW instead of wrapping. The CLI emits a partial JSON record retaining
++comparisons, writes an error to stderr and exits 1. Unsupported memory permits a
++successful count record with unsupported/null, never a fabricated zero. Formatting
++rejects inconsistent reports.
++
++## CLI and schema
++
++```sh
++build/release/sort_metrics --sort quick_sort --size 2 --distribution duplicate_heavy --distinct 1
++```
++
++This validation input yields seven QuickSort key comparisons; RSS is read at
++runtime and has no fixed expected value. Dataset/sorter options and defaults
++match the correctness CLI: size 1000, seed 1729, uniform, swaps floor(N/100),
++distinct 16, std_sort. Strict unsigned decimal parsing, bounds, repeated options,
++immediate --help and allocation exception behavior follow README's CLI rules.
++No search workload is run. Unknown sorter errors say "unknown counted sorter".
++Argument/counter/correctness errors exit 1 with error: on stderr and no success
++JSON. Memory failure uses the partial-record behavior above.
++
++After full equality to std::sort and the corresponding normal registry sorter,
++the command emits one JSON object plus newline. It has 15 top-level fields:
++
++| Field | Meaning |
++| --- | --- |
++| schema_version | Integer 1 for this independent metric schema |
++| mode | sort_metrics |
++| status | ok, or partial for memory measurement failure |
++| sort_algorithm | Registered sorter name |
++| instrumented_implementation | Identity from the adapter table |
++| comparison_convention | key_less_than_v1 |
++| key_comparisons | uint64 count from this sort alone |
++| dataset_generator | mt19937_64_v1 |
++| size, seed, distribution | Resolved dataset configuration |
++| nearly_sorted_swaps, duplicate_cardinality | Requested/resolved parameters, including inactive ones |
++| memory_sample_point | after_instrumented_sort_before_validation |
++| process_memory | Object below |
++
++process_memory has seven fields: status (ok/unsupported/error), metric (peak_rss),
++scope (process_lifetime), unit (bytes), method (getrusage_ru_maxrss/none), value
++(uint64/null), error_code (errno/null). Value exists only for ok, error_code only
++for error; method none means unsupported. No timing or theoretical space is
++encoded as measured data. JSON consumers must preserve large integer precision.
++
++## Validation limits
++
++Tests cover exact QuickSort traces, exhaustive arrays, deterministic distributions,
++extrema, sorted/reverse/equal/patterned inputs, counted/normal/reference equality,
++copied comparators, overflow, repeated/interleaved reset and heap forwarding.
++Memory JSON fixtures are explicitly synthetic values, including zero, error and
++unsupported. Real Linux probes check units/high-water behavior without requiring
++a specific RSS. A separate build tests the actual unsupported source branch on
++Linux; Windows/macOS were not run. No actual getrusage failure is induced;
++error-object formatting uses a fixture. CLI tests cover schema, identities,
++parameters, invalid arguments and repeated counts while allowing RSS to vary.
++Raw records are metric validation evidence, not a performance experiment matrix.
+--- /dev/null
++++ after/include/benchmark/comparisons.hpp
+@@ -0,0 +1,20 @@
++#pragma once
++
++#include "common/types.hpp"
++
++#include <array>
++#include <cstdint>
++#include <string_view>
++
++namespace mab {
++struct CountedSorter {
++    std::string_view name;
++    std::string_view implementation;
++    std::uint64_t (*sort)(Values&);
++};
++
++// Each call starts at zero; only sorting key less-than evaluations are counted.
++// Keep these functions separate from normal sorting/timing paths.
++const std::array<CountedSorter, 4>& counted_sorters() noexcept;
++const CountedSorter& find_counted_sorter(std::string_view name);
++}  // namespace mab
+--- /dev/null
++++ after/include/benchmark/detail/counting_less.hpp
+@@ -0,0 +1,25 @@
++#pragma once
++
++#include "common/types.hpp"
++
++#include <cstdint>
++#include <limits>
++#include <stdexcept>
++
++namespace mab::detail {
++// Copies refer to the same run-local counter. No counter survives the run.
++class CountingLess {
++public:
++    explicit CountingLess(std::uint64_t& count) noexcept : count_(&count) {}
++
++    bool operator()(Key left, Key right) const {
++        if (*count_ == std::numeric_limits<std::uint64_t>::max())
++            throw std::overflow_error("key comparison counter overflow");
++        ++*count_;
++        return left < right;
++    }
++
++private:
++    std::uint64_t* count_;
++};
++}  // namespace mab::detail
+--- /dev/null
++++ after/include/benchmark/memory.hpp
+@@ -0,0 +1,22 @@
++#pragma once
++
++#include <cstdint>
++#include <iosfwd>
++#include <optional>
++#include <string_view>
++
++namespace mab {
++enum class MemoryStatus { ok, unsupported, error };
++
++struct ProcessMemory {
++    MemoryStatus status = MemoryStatus::unsupported;
++    std::string_view method = "none";
++    std::optional<std::uint64_t> peak_rss_bytes;
++    std::optional<int> error_code;
++};
++
++// Linux: getrusage(RUSAGE_SELF).ru_maxrss in KiB, normalized to bytes.
++// Other platforms return unsupported. This high-water mark is never reset.
++ProcessMemory process_memory();
++void write_memory_json(std::ostream& output, const ProcessMemory& memory);
++}  // namespace mab
+--- /dev/null
++++ after/src/benchmark/comparisons.cpp
+@@ -0,0 +1,66 @@
++#include "benchmark/comparisons.hpp"
++#include "benchmark/detail/counting_less.hpp"
++#include "algorithms/detail/quicksort_impl.hpp"
++
++#include "pdqsort.h"
++
++// Upstream audits compare keys after sorting; those are not algorithm work.
++#ifdef GFX_TIMSORT_ENABLE_AUDIT
++#error "Comparison counting requires Timsort audits to be disabled"
++#endif
++#include "gfx/timsort.hpp"
++
++#include <algorithm>
++#include <functional>
++#include <stdexcept>
++#include <string>
++#include <type_traits>
++
++namespace mab {
++namespace {
++std::uint64_t counted_std_sort(Values& values) {
++    std::uint64_t count = 0;
++    std::sort(values.begin(), values.end(), detail::CountingLess(count));
++    return count;
++}
++
++std::uint64_t counted_quick_sort(Values& values) {
++    std::uint64_t count = 0;
++    detail::NoQuickSortObserver observer;
++    detail::quick_sort_with_depth(values, detail::quick_sort_depth_budget(values.size()),
++                                  observer, detail::CountingLess(count));
++    return count;
++}
++
++std::uint64_t counted_pdq_sort(Values& values) {
++    // A custom comparator bypasses upstream's std::less trait. Explicitly use
++    // its public branchless entry point to preserve production's int32 policy.
++    static_assert(pdqsort_detail::is_default_compare<std::less<Key>>::value &&
++                  std::is_arithmetic<Key>::value, "production PDQSort policy changed");
++    std::uint64_t count = 0;
++    ::pdqsort_branchless(values.begin(), values.end(), detail::CountingLess(count));
++    return count;
++}
++
++std::uint64_t counted_tim_sort(Values& values) {
++    std::uint64_t count = 0;
++    gfx::timsort(values.begin(), values.end(), detail::CountingLess(count));
++    return count;
++}
++}  // namespace
++
++const std::array<CountedSorter, 4>& counted_sorters() noexcept {
++    static const std::array<CountedSorter, 4> registry{{
++        {"std_sort", "std_sort_counting_less", counted_std_sort},
++        {"quick_sort", "project_quick_sort_counting_less", counted_quick_sort},
++        {"pdq_sort", "upstream_pdqsort_branchless_counting_less", counted_pdq_sort},
++        {"tim_sort", "upstream_gfx_timsort_counting_less", counted_tim_sort}}};
++    return registry;
++}
++
++const CountedSorter& find_counted_sorter(std::string_view name) {
++    for (const auto& sorter : counted_sorters())
++        if (sorter.name == name) return sorter;
++    throw std::invalid_argument("unknown counted sorter: " + std::string(name));
++}
++}  // namespace mab
+--- /dev/null
++++ after/src/benchmark/memory.cpp
+@@ -0,0 +1,25 @@
++#include "benchmark/memory.hpp"
++
++#include <cerrno>
++#include <limits>
++
++#if defined(__linux__) && !defined(MAB_FORCE_UNSUPPORTED_MEMORY)
++#include <sys/resource.h>
++#endif
++
++namespace mab {
++ProcessMemory process_memory() {
++#if defined(__linux__) && !defined(MAB_FORCE_UNSUPPORTED_MEMORY)
++    rusage usage{};
++    if (getrusage(RUSAGE_SELF, &usage) != 0)
++        return {MemoryStatus::error, "getrusage_ru_maxrss", std::nullopt, errno};
++    if (usage.ru_maxrss < 0 || static_cast<std::uint64_t>(usage.ru_maxrss) >
++            std::numeric_limits<std::uint64_t>::max() / 1024)
++        return {MemoryStatus::error, "getrusage_ru_maxrss", std::nullopt, EOVERFLOW};
++    return {MemoryStatus::ok, "getrusage_ru_maxrss",
++            static_cast<std::uint64_t>(usage.ru_maxrss) * 1024, std::nullopt};
++#else
++    return {};
++#endif
++}
++}  // namespace mab
+--- /dev/null
++++ after/src/benchmark/memory_json.cpp
+@@ -0,0 +1,28 @@
++#include "benchmark/memory.hpp"
++
++#include <ostream>
++#include <stdexcept>
++
++namespace mab {
++void write_memory_json(std::ostream& output, const ProcessMemory& memory) {
++    const char* status = nullptr;
++    switch (memory.status) {
++        case MemoryStatus::ok: status = "ok"; break;
++        case MemoryStatus::unsupported: status = "unsupported"; break;
++        case MemoryStatus::error: status = "error"; break;
++    }
++    if (!status || (memory.status == MemoryStatus::ok) != memory.peak_rss_bytes.has_value() ||
++        (memory.status == MemoryStatus::error) != memory.error_code.has_value() ||
++        (memory.method != "none" && memory.method != "getrusage_ru_maxrss") ||
++        (memory.status == MemoryStatus::unsupported) != (memory.method == "none"))
++        throw std::invalid_argument("inconsistent process memory report");
++    output << "{\"status\":\"" << status << "\",\"metric\":\"peak_rss\",\"scope\":\"process_lifetime\","
++              "\"unit\":\"bytes\",\"method\":\"" << memory.method << "\",\"value\":";
++    if (memory.peak_rss_bytes) output << *memory.peak_rss_bytes;
++    else output << "null";
++    output << ",\"error_code\":";
++    if (memory.error_code) output << *memory.error_code;
++    else output << "null";
++    output << '}';
++}
++}  // namespace mab
+--- /dev/null
++++ after/src/benchmark/metrics_main.cpp
+@@ -0,0 +1,85 @@
++#include "benchmark/comparisons.hpp"
++#include "benchmark/memory.hpp"
++#include "algorithms/sorting.hpp"
++#include "datasets/generator.hpp"
++
++#include <algorithm>
++#include <charconv>
++#include <exception>
++#include <iostream>
++#include <stdexcept>
++#include <string>
++#include <string_view>
++
++namespace {
++template <typename T>
++T unsigned_number(std::string_view text) {
++    T value{};
++    const auto parsed = std::from_chars(text.data(), text.data() + text.size(), value);
++    if (parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size())
++        throw std::invalid_argument("expected an unsigned decimal integer: " + std::string(text));
++    return value;
++}
++
++void usage() {
++    std::cout << "Usage: sort_metrics [--size N] [--seed S]\n"
++                 "  [--sort std_sort|quick_sort|pdq_sort|tim_sort]\n"
++                 "  [--distribution uniform|nearly_sorted|reverse_sorted|duplicate_heavy]\n"
++                 "  [--swaps K] [--distinct K] [--help]\n"
++                 "Separate key-comparison counts and process peak RSS; no timing.\n";
++}
++}  // namespace
++
++int main(int argc, char** argv) {
++    try {
++        mab::DatasetConfig config;
++        const auto* counted = &mab::find_counted_sorter("std_sort");
++        for (int i = 1; i < argc; ++i) {
++            const std::string_view option(argv[i]);
++            if (option == "--help") { usage(); return 0; }
++            if (option != "--size" && option != "--seed" && option != "--distribution" &&
++                option != "--swaps" && option != "--distinct" && option != "--sort")
++                throw std::invalid_argument("unknown option: " + std::string(option));
++            if (++i == argc) throw std::invalid_argument("missing value for " + std::string(option));
++            const std::string_view value(argv[i]);
++            if (option == "--size") config.size = unsigned_number<std::size_t>(value);
++            else if (option == "--seed") config.seed = unsigned_number<std::uint64_t>(value);
++            else if (option == "--distribution") config.distribution = mab::parse_distribution(value);
++            else if (option == "--swaps") config.nearly_sorted_swaps = unsigned_number<std::size_t>(value);
++            else if (option == "--sort") counted = &mab::find_counted_sorter(value);
++            else config.duplicate_cardinality = unsigned_number<std::uint64_t>(value);
++        }
++        const auto& normal = mab::find_sorter(counted->name);
++        auto values = mab::generate_dataset(config);
++        const auto comparisons = counted->sort(values);
++        // Capture before validation copies/reference sorting affect the high-water mark.
++        const auto memory = mab::process_memory();
++        auto expected = mab::generate_dataset(config);
++        std::sort(expected.begin(), expected.end());
++        if (values != expected) throw std::runtime_error("instrumented sort correctness failure");
++        auto production = mab::generate_dataset(config);
++        normal.sort(production);
++        if (values != production) throw std::runtime_error("instrumented/normal sort disagreement");
++        const bool memory_error = memory.status == mab::MemoryStatus::error;
++        std::cout << "{\"schema_version\":1,\"mode\":\"sort_metrics\",\"status\":\""
++                  << (memory_error ? "partial" : "ok") << "\",\"sort_algorithm\":\"" << counted->name
++                  << "\",\"instrumented_implementation\":\"" << counted->implementation
++                  << "\",\"comparison_convention\":\"key_less_than_v1\",\"key_comparisons\":" << comparisons
++                  << ",\"dataset_generator\":\"mt19937_64_v1\",\"size\":" << config.size
++                  << ",\"seed\":" << config.seed << ",\"distribution\":\""
++                  << mab::distribution_name(config.distribution)
++                  << "\",\"nearly_sorted_swaps\":" << mab::swap_count(config)
++                  << ",\"duplicate_cardinality\":" << config.duplicate_cardinality
++                  << ",\"memory_sample_point\":\"after_instrumented_sort_before_validation\",\"process_memory\":";
++        mab::write_memory_json(std::cout, memory);
++        std::cout << "}\n";
++        if (memory_error) {
++            std::cerr << "error: process memory measurement failed (code " << *memory.error_code << ")\n";
++            return 1;
++        }
++        return 0;
++    } catch (const std::exception& error) {
++        std::cerr << "error: " << error.what() << '\n';
++        return 1;
++    }
++}
+--- /dev/null
++++ after/tests/test_comparisons.cpp
+@@ -0,0 +1,150 @@
++#include "benchmark/comparisons.hpp"
++#include "benchmark/detail/counting_less.hpp"
++#include "algorithms/detail/quicksort_impl.hpp"
++#include "algorithms/sorting.hpp"
++#include "datasets/generator.hpp"
++#include "test_support.hpp"
++
++#include <algorithm>
++#include <exception>
++#include <iostream>
++#include <limits>
++#include <stdexcept>
++
++namespace {
++std::size_t checked = 0;
++void check(const mab::Values& input) {
++    auto expected = input;
++    std::sort(expected.begin(), expected.end());
++    for (const auto& sorter : mab::counted_sorters()) {
++        auto production = input;
++        mab::find_sorter(sorter.name).sort(production);
++        auto counted = input;
++        const auto count = sorter.sort(counted);
++        require(counted == expected && counted == production, "counted/normal/reference output disagreement");
++        auto repeated = input;
++        require(sorter.sort(repeated) == count && repeated == expected, "count changed across identical runs");
++        if (input.size() < 2) require(count == 0, "trivial input performed key comparisons");
++        else require(count > 0, "nontrivial input reported no key comparisons");
++        auto empty = mab::Values{};
++        require(sorter.sort(empty) == 0, "counter was not reset after a nonempty run");
++        // Interleave other sorter calls before repeating this sorter.
++        for (const auto& other : mab::counted_sorters()) {
++            mab::Values scratch{3, 1, 2};
++            (void)other.sort(scratch);
++        }
++        repeated = input;
++        require(sorter.sort(repeated) == count && repeated == expected, "interleaved runs shared counter state");
++    }
++    ++checked;
++}
++
++struct HeapObserver {
++    std::size_t fallbacks = 0;
++    void on_partition() const {}
++    void on_stack_depth(std::size_t) const {}
++    void on_heap_fallback(std::size_t) { ++fallbacks; }
++};
++}  // namespace
++
++int main() {
++    try {
++        // Manually verified comparator accounting, including equal/self keys.
++        std::uint64_t first = 0, second = 0;
++        mab::detail::CountingLess less(first), independent(second);
++        auto copied = less;
++        require(less(-1, 0) && !copied(0, -1) && !less(7, 7), "counting comparator ordering changed");
++        require(first == 3 && second == 0, "comparator copies did not share only their local counter");
++        require(independent(-2, 1) && second == 1 && first == 3, "independent comparator state changed");
++        first = std::numeric_limits<std::uint64_t>::max();
++        bool overflow = false;
++        try { (void)less(0, 1); } catch (const std::overflow_error&) { overflow = true; }
++        require(overflow && first == std::numeric_limits<std::uint64_t>::max(), "counter wrapped on overflow");
++
++        // QuickSort traces include pivot-selection comparisons and both tests
++        // of an equal key. [1,2]: pivot=2, median costs 3, partition costs 3.
++        // [2,1]: pivot=1, median costs 3, partition costs 4. [1,1]: 3+4.
++        for (const auto& fixture : std::vector<std::pair<mab::Values, std::uint64_t>>{
++                {{}, 0}, {{7}, 0}, {{1, 2}, 6}, {{2, 1}, 7}, {{1, 1}, 7}, {{1, 1, 1}, 9}}) {
++            auto values = fixture.first;
++            require(mab::find_counted_sorter("quick_sort").sort(values) == fixture.second,
++                    "manually verified QuickSort comparison count changed");
++            auto expected = fixture.first;
++            std::sort(expected.begin(), expected.end());
++            require(values == expected, "exact-count fixture not sorted");
++        }
++
++        // Independently count just the STL heap calls, then exhaust QuickSort's
++        // budget. This checks comparator forwarding through its fallback.
++        mab::Values heap_input{9, -4, 7, 0, 7, -10, 5};
++        auto heap_reference = heap_input;
++        std::uint64_t heap_count = 0;
++        auto heap_less = [&](mab::Key a, mab::Key b) { ++heap_count; return a < b; };
++        std::make_heap(heap_reference.begin(), heap_reference.end(), heap_less);
++        std::sort_heap(heap_reference.begin(), heap_reference.end(), heap_less);
++        std::uint64_t fallback_count = 0;
++        HeapObserver observer;
++        mab::detail::quick_sort_with_depth(heap_input, 0, observer, mab::detail::CountingLess(fallback_count));
++        require(observer.fallbacks == 1 && fallback_count == heap_count && fallback_count > 0 &&
++                heap_input == heap_reference, "heapsort fallback comparisons were omitted");
++
++        const auto low = std::numeric_limits<mab::Key>::min();
++        const auto high = std::numeric_limits<mab::Key>::max();
++        for (const auto& input : std::vector<mab::Values>{
++                {}, {0}, {-1}, {low}, {high}, {1, 2}, {2, 1}, {1, 1},
++                {-5, -3, -7}, {low, high, 0, -1, 1, low, high}, {0, 0, 0, 0}}) check(input);
++        std::size_t combinations = 1;
++        for (std::size_t size = 0; size <= 6; ++size) {
++            for (std::size_t code = 0; code < combinations; ++code) {
++                auto remaining = code;
++                mab::Values input(size);
++                for (auto& key : input) {
++                    key = static_cast<mab::Key>(remaining % 3) - 1;
++                    remaining /= 3;
++                }
++                check(input);
++            }
++            combinations *= 3;
++        }
++        for (const auto distribution : {mab::Distribution::uniform, mab::Distribution::nearly_sorted,
++                mab::Distribution::reverse_sorted, mab::Distribution::duplicate_heavy}) {
++            for (const std::uint64_t seed : {std::uint64_t{0}, std::uint64_t{42}, std::uint64_t{1729}}) {
++                for (const std::size_t size : {0, 1, 2, 7, 23, 24, 25, 31, 32, 33, 63, 64, 65,
++                                             127, 128, 129, 255, 256, 257, 1024, 4096}) {
++                    mab::DatasetConfig config;
++                    config.size = size;
++                    config.seed = seed;
++                    config.distribution = distribution;
++                    check(mab::generate_dataset(config));
++                }
++            }
++        }
++        for (const std::size_t size : {31, 32, 63, 64, 127, 128, 1024, 4096}) {
++            mab::Values ascending(size), organ_pipe(size), sawtooth(size), alternating(size);
++            for (std::size_t i = 0; i < size; ++i) {
++                ascending[i] = static_cast<mab::Key>(i) - static_cast<mab::Key>(size / 2);
++                organ_pipe[i] = static_cast<mab::Key>(std::min(i, size - 1 - i));
++                sawtooth[i] = static_cast<mab::Key>(i % 17) - 8;
++                alternating[i] = i % 2 == 0 ? low : high;
++            }
++            auto descending = ascending;
++            std::reverse(descending.begin(), descending.end());
++            for (const auto& pattern : {ascending, descending, organ_pipe, sawtooth, alternating,
++                                       mab::Values(size, -7)}) check(pattern);
++        }
++        require(mab::counted_sorters().size() == mab::sorters().size(), "counted registry omitted an algorithm");
++        for (const auto& sorter : mab::sorters())
++            require(mab::find_counted_sorter(sorter.name).sort != nullptr, "missing counted adapter");
++        require(mab::counted_sorters().front().name == "std_sort", "counted default changed");
++        bool rejected = false;
++        try { (void)mab::find_counted_sorter("unknown"); }
++        catch (const std::invalid_argument&) { rejected = true; }
++        require(rejected, "unknown counted sorter accepted");
++        std::cout << "Passed " << checked << " comparison differential/reset/repetition inputs across four sorters; "
++                     "six exact QuickSort fixtures, comparator isolation/overflow and counted heapsort fallback passed\n";
++        return 0;
++    } catch (const std::exception& error) {
++        std::cerr << error.what() << '\n';
++        return 1;
++    }
++}
+--- /dev/null
++++ after/tests/test_memory.cpp
+@@ -0,0 +1,62 @@
++#include "benchmark/memory.hpp"
++#include "test_support.hpp"
++
++#include <exception>
++#include <iostream>
++#include <sstream>
++#include <stdexcept>
++
++namespace {
++std::string format(const mab::ProcessMemory& report) {
++    std::ostringstream stream;
++    mab::write_memory_json(stream, report);
++    return stream.str();
++}
++}  // namespace
++
++int main() {
++    try {
++        const auto unsupported = mab::ProcessMemory{};
++        require(format(unsupported) == "{\"status\":\"unsupported\",\"metric\":\"peak_rss\","
++                "\"scope\":\"process_lifetime\",\"unit\":\"bytes\",\"method\":\"none\","
++                "\"value\":null,\"error_code\":null}", "unsupported memory JSON changed");
++        const mab::ProcessMemory ok{mab::MemoryStatus::ok, "getrusage_ru_maxrss", 4096, std::nullopt};
++        require(format(ok) == "{\"status\":\"ok\",\"metric\":\"peak_rss\",\"scope\":\"process_lifetime\","
++                "\"unit\":\"bytes\",\"method\":\"getrusage_ru_maxrss\",\"value\":4096,\"error_code\":null}",
++                "supported memory JSON changed");
++        auto zero = ok;
++        zero.peak_rss_bytes = 0;
++        require(format(zero).find("\"value\":0") != std::string::npos, "zero memory confused with unavailable");
++        const mab::ProcessMemory error{mab::MemoryStatus::error, "getrusage_ru_maxrss", std::nullopt, 22};
++        require(format(error) == "{\"status\":\"error\",\"metric\":\"peak_rss\",\"scope\":\"process_lifetime\","
++                "\"unit\":\"bytes\",\"method\":\"getrusage_ru_maxrss\",\"value\":null,\"error_code\":22}",
++                "failed measurement falsely reported a value");
++        for (const auto& invalid : {mab::ProcessMemory{mab::MemoryStatus::ok, "getrusage_ru_maxrss", std::nullopt, std::nullopt},
++                mab::ProcessMemory{mab::MemoryStatus::unsupported, "none", 4096, std::nullopt},
++                mab::ProcessMemory{mab::MemoryStatus::error, "getrusage_ru_maxrss", std::nullopt, std::nullopt},
++                mab::ProcessMemory{mab::MemoryStatus::unsupported, "unescaped\"method", std::nullopt, std::nullopt}}) {
++            bool rejected = false;
++            try { (void)format(invalid); } catch (const std::invalid_argument&) { rejected = true; }
++            require(rejected, "inconsistent memory report accepted");
++        }
++        const auto first = mab::process_memory();
++        const auto second = mab::process_memory();
++#if defined(__linux__) && !defined(MAB_FORCE_UNSUPPORTED_MEMORY)
++        require(first.status == mab::MemoryStatus::ok && second.status == mab::MemoryStatus::ok,
++                "Linux getrusage failed");
++        require(first.method == "getrusage_ru_maxrss" && first.peak_rss_bytes && !first.error_code,
++                "Linux memory report metadata inconsistent");
++        require(*first.peak_rss_bytes % 1024 == 0 && *second.peak_rss_bytes >= *first.peak_rss_bytes,
++                "RSS unit conversion or process high-water semantics invalid");
++#else
++        require(first.status == mab::MemoryStatus::unsupported && second.status == mab::MemoryStatus::unsupported &&
++                !first.peak_rss_bytes && !first.error_code && first.method == "none", "unsupported branch fabricated memory");
++#endif
++        std::cout << "Passed memory JSON supported/zero/error/unsupported fixtures, four invalid reports, "
++                     "and repeated platform probes\n";
++        return 0;
++    } catch (const std::exception& error) {
++        std::cerr << error.what() << '\n';
++        return 1;
++    }
++}
+--- /dev/null
++++ after/tests/test_metrics_cli.py
+@@ -0,0 +1,126 @@
++import json
++from pathlib import Path
++import subprocess
++import sys
++import unittest
++
++
++EXECUTABLE = str(Path(sys.argv.pop(1)).resolve())
++
++
++class MetricsCliTests(unittest.TestCase):
++    def run_cli(self, *arguments):
++        return subprocess.run([EXECUTABLE, *arguments], capture_output=True, text=True)
++
++    def record(self, *arguments):
++        result = self.run_cli(*arguments)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        self.assertEqual(result.stderr, "")
++        value = json.loads(result.stdout)
++        self.assertEqual(set(value), {
++            "schema_version", "mode", "status", "sort_algorithm", "instrumented_implementation",
++            "comparison_convention", "key_comparisons", "dataset_generator", "size", "seed",
++            "distribution", "nearly_sorted_swaps", "duplicate_cardinality", "memory_sample_point",
++            "process_memory"})
++        self.assertEqual(value["schema_version"], 1)
++        self.assertEqual(value["mode"], "sort_metrics")
++        self.assertEqual(value["status"], "ok")
++        self.assertEqual(value["comparison_convention"], "key_less_than_v1")
++        self.assertEqual(value["dataset_generator"], "mt19937_64_v1")
++        self.assertEqual(value["memory_sample_point"], "after_instrumented_sort_before_validation")
++        self.assertIs(type(value["key_comparisons"]), int)
++        self.assertGreaterEqual(value["key_comparisons"], 0)
++        memory = value["process_memory"]
++        self.assertEqual(set(memory), {"status", "metric", "scope", "unit", "method", "value", "error_code"})
++        self.assertEqual(memory["metric"], "peak_rss")
++        self.assertEqual(memory["scope"], "process_lifetime")
++        self.assertEqual(memory["unit"], "bytes")
++        self.assertIsNone(memory["error_code"])
++        if sys.platform.startswith("linux"):
++            self.assertEqual(memory["status"], "ok")
++            self.assertEqual(memory["method"], "getrusage_ru_maxrss")
++            self.assertIs(type(memory["value"]), int)
++            self.assertGreaterEqual(memory["value"], 0)
++            self.assertEqual(memory["value"] % 1024, 0)
++        else:
++            self.assertEqual(memory["status"], "unsupported")
++            self.assertEqual(memory["method"], "none")
++            self.assertIsNone(memory["value"])
++        return value
++
++    def test_default(self):
++        value = self.record()
++        self.assertEqual(value["sort_algorithm"], "std_sort")
++        self.assertEqual(value["instrumented_implementation"], "std_sort_counting_less")
++        for field, expected in {"size": 1000, "seed": 1729, "distribution": "uniform",
++                                "nearly_sorted_swaps": 10, "duplicate_cardinality": 16}.items():
++            self.assertEqual(value[field], expected)
++
++    def test_all_sorters_distributions_and_repeated_counts(self):
++        identities = {"std_sort": "std_sort_counting_less",
++                      "quick_sort": "project_quick_sort_counting_less",
++                      "pdq_sort": "upstream_pdqsort_branchless_counting_less",
++                      "tim_sort": "upstream_gfx_timsort_counting_less"}
++        for sorter, identity in identities.items():
++            for distribution in ("uniform", "nearly_sorted", "reverse_sorted", "duplicate_heavy"):
++                for size in (0, 1, 2, 33, 257):
++                    with self.subTest(sorter=sorter, distribution=distribution, size=size):
++                        args = ("--sort", sorter, "--distribution", distribution, "--size", str(size),
++                                "--seed", "42", "--swaps", "3", "--distinct", "7")
++                        first = self.record(*args)
++                        self.assertEqual(first["key_comparisons"], self.record(*args)["key_comparisons"])
++                        self.assertEqual(first["sort_algorithm"], sorter)
++                        self.assertEqual(first["instrumented_implementation"], identity)
++                        for field, expected in {"size": size, "seed": 42, "distribution": distribution,
++                                                "nearly_sorted_swaps": 3, "duplicate_cardinality": 7}.items():
++                            self.assertEqual(first[field], expected)
++                        if size < 2:
++                            self.assertEqual(first["key_comparisons"], 0)
++
++    def test_manual_quicksort_equal_fixture(self):
++        value = self.record("--sort", "quick_sort", "--size", "2",
++                            "--distribution", "duplicate_heavy", "--distinct", "1")
++        self.assertEqual(value["key_comparisons"], 7)
++
++    def test_invalid_arguments(self):
++        for args in [("--sort", "unknown"), ("--sort", "timsort"), ("--sort",),
++                     ("--unknown",), ("--size",), ("--size", "-1"), ("--size", "+1"),
++                     ("--size", ""), ("--size", "1x"), ("--seed", "18446744073709551616"),
++                     ("--seed", " 1"), ("--swaps", "-1"), ("--distribution", "bad"),
++                     ("--distinct", "0"), ("--distinct", "4294967297")]:
++            with self.subTest(args=args):
++                result = self.run_cli(*args)
++                self.assertEqual(result.returncode, 1)
++                self.assertEqual(result.stdout, "")
++                self.assertTrue(result.stderr.startswith("error: "), result.stderr)
++
++    def test_repeated_options(self):
++        value = self.record("--sort", "tim_sort", "--sort", "std_sort", "--size", "4", "--size", "0",
++                            "--seed", "1", "--seed", "0", "--distribution", "nearly_sorted",
++                            "--swaps", "9", "--swaps", "2", "--distinct", "1", "--distinct", "7")
++        for field, expected in {"sort_algorithm": "std_sort", "size": 0, "seed": 0,
++                                "nearly_sorted_swaps": 2, "duplicate_cardinality": 7}.items():
++            self.assertEqual(value[field], expected)
++        self.assertEqual(self.run_cli("--size", "bad", "--size", "0").returncode, 1)
++
++    def test_unsigned_bounds_and_oversized_vector(self):
++        value = self.record("--size", "8", "--seed", "18446744073709551615",
++                            "--distribution", "duplicate_heavy", "--distinct", "4294967296")
++        self.assertEqual(value["seed"], 2**64 - 1)
++        self.assertEqual(value["duplicate_cardinality"], 2**32)
++        result = self.run_cli("--size", str(sys.maxsize))
++        self.assertEqual(result.returncode, 1)
++        self.assertEqual(result.stdout, "")
++        self.assertTrue(result.stderr.startswith("error: "))
++
++    def test_help(self):
++        result = self.run_cli("--help", "--unknown")
++        self.assertEqual(result.returncode, 0)
++        self.assertEqual(result.stderr, "")
++        self.assertIn("no timing", result.stdout)
++        for sorter in ("std_sort", "quick_sort", "pdq_sort", "tim_sort"):
++            self.assertIn(sorter, result.stdout)
++
++
++if __name__ == "__main__":
++    unittest.main()

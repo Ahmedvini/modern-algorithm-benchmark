@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "git_metadata": "absent; no clean-Git or commit claim",
+  "reviewed_revision_sha256": "7ce8297b76037af65d6d2dbbf3e2ccf5ec4684849090ee554a6d9552fcd50bda",
+  "archive_sha256": "953319b89a78d1e21498c4324570ec301bfb574eae4530a353db9c648b61b400",
+  "source_files": 153,
+  "project_membership_verified": 177,
+  "reviewed_implementation_files": 144,
+  "protected_anchors_verified": 26,
+  "evidence_seals_rehashed": {
+    "ctest_path_independent_review_20261011T000547578754Z": 27,
+    "cpu_gpu_readiness_20261011T004018152238Z": 35,
+    "colab_t4_diagnostics_20261011T005409276199Z": 27,
+    "isolated_colab_build_20261011T010417197263Z": 60
+  },
+  "unreviewed_source_changes": [],
+  "frozen_verified": true
+}

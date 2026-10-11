@@ -1,0 +1,26 @@
+{
+  "cpu_correctness": "Passed 4015 Merge Sort differential cases through public/registry/repeated paths; stable merge fixture passed\n",
+  "gpu_correctness": {
+    "algorithm": "cub_radix_sort",
+    "cases": 475,
+    "compute_major": 7,
+    "compute_minor": 5,
+    "cub_version": 300001,
+    "device": 0,
+    "driver_api_version": 13000,
+    "implementation_version": "cub_radix_sort_v1",
+    "output_checks": 1900,
+    "protocol": "cuda_sort_correctness_v2",
+    "runtime_api_version": 13000,
+    "schema_version": 1,
+    "status": "ok"
+  },
+  "prepared_diagnostic_samples": 0,
+  "production_benchmark_trials": 0,
+  "remote_archive_sha256": "764d00c2200ae835c4fd91a8d7dfa1b839edb7362412e70af63712afdd9af412",
+  "remote_evidence_files_verified": 33,
+  "scope": "isolated build and narrow correctness validation only",
+  "source_files_verified": 153,
+  "status": "READY",
+  "study_authorized": false
+}

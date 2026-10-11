@@ -1,0 +1,8 @@
+{
+  "command": "python3 scripts/capture_environment.py --build-dir build/release --output results/raw/metrics_validation_20261009T154659316368Z/release_environment.json",
+  "chunk_id": "9dd2eb",
+  "wall_time_seconds": 0.000009222,
+  "exit_code": 0,
+  "original_token_count": 20,
+  "output": "results/raw/metrics_validation_20261009T154659316368Z/release_environment.json\n"
+}

@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "/content/mab_isolated_20261011T011459127026Z/build-release/cpu_gpu_comparison",
+    "--describe"
+  ],
+  "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+  "exit_code": 0,
+  "finished_utc": "2026-10-11T01:19:54.440083+00:00",
+  "name": "comparison_describe",
+  "started_utc": "2026-10-11T01:19:54.435886+00:00"
+}

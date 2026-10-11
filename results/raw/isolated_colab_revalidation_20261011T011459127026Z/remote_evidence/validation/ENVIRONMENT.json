@@ -1,0 +1,27 @@
+{
+  "affinity": [
+    0,
+    1
+  ],
+  "cpu_count": 2,
+  "cpuinfo": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 85\nmodel name\t: Intel(R) Xeon(R) CPU @ 2.00GHz\nstepping\t: 3\nmicrocode\t: 0xffffffff\ncpu MHz\t\t: 2000.184\ncache size\t: 39424 KB\nphysical id\t: 0\nsiblings\t: 2\ncore id\t\t: 0\ncpu cores\t: 1\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat md_clear arch_capabilities\nbugs\t\t: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa mmio_stale_data retbleed bhi its\nbogomips\t: 4000.36\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 48 bits virtual\npower management:\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 85\nmodel name\t: Intel(R) Xeon(R) CPU @ 2.00GHz\nstepping\t: 3\nmicrocode\t: 0xffffffff\ncpu MHz\t\t: 2000.184\ncache size\t: 39424 KB\nphysical id\t: 0\nsiblings\t: 2\ncore id\t\t: 0\ncpu cores\t: 1\napicid\t\t: 1\ninitial apicid\t: 1\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 13\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat md_clear arch_capabilities\nbugs\t\t: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa mmio_stale_data retbleed bhi its\nbogomips\t: 4000.36\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 48 bits virtual\npower management:\n\n",
+  "disk": {
+    "free": 75442806784,
+    "total": 120942624768,
+    "used": 45483040768
+  },
+  "environment": {
+    "CUDACXX": null,
+    "CUDA_HOME": null,
+    "CUDA_PATH": null,
+    "CUDA_VISIBLE_DEVICES": null,
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "meminfo": "MemTotal:       13286936 kB\nMemFree:         8165332 kB\nMemAvailable:   12231044 kB\nBuffers:          159084 kB\nCached:          4091100 kB\nSwapCached:            0 kB\nActive:           702168 kB\nInactive:        4087188 kB\nActive(anon):       1560 kB\nInactive(anon):   539912 kB\nActive(file):     700608 kB\nInactive(file):  3547276 kB\nUnevictable:           8 kB\nMlocked:               8 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:               496 kB\nWriteback:            20 kB\nAnonPages:        539188 kB\nMapped:           446524 kB\nShmem:              2292 kB\nKReclaimable:     118108 kB\nSlab:             164708 kB\nSReclaimable:     118108 kB\nSUnreclaim:        46600 kB\nKernelStack:        5296 kB\nPageTables:         7332 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     6643468 kB\nCommitted_AS:    2718200 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       57396 kB\nVmallocChunk:          0 kB\nPercpu:             1096 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      197404 kB\nDirectMap2M:     8187904 kB\nDirectMap1G:     7340032 kB\n",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+  "python": "3.13.15"
+}

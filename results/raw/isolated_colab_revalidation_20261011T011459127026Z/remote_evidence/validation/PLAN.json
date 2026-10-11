@@ -1,0 +1,74 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "cmake",
+        "-S",
+        "/content/mab_isolated_20261011T011459127026Z/source",
+        "-B",
+        "/content/mab_isolated_20261011T011459127026Z/build-release",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_FLAGS=",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+        "-DMAB_ENABLE_OPENMP=ON",
+        "-DBUILD_TESTING=ON",
+        "-DMAB_ENABLE_CUDA=ON",
+        "-DMAB_ENABLE_CUDA_SORT=ON",
+        "-DMAB_ENABLE_CPU_GPU_COMPARISON=ON",
+        "-DMAB_ENABLE_SANITIZERS=OFF",
+        "-DCMAKE_CUDA_ARCHITECTURES=75",
+        "-DCMAKE_CUDA_FLAGS=",
+        "-DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG"
+      ],
+      "name": "configure",
+      "timeout": 180
+    },
+    {
+      "argv": [
+        "cmake",
+        "--build",
+        "/content/mab_isolated_20261011T011459127026Z/build-release",
+        "--target",
+        "cpu_gpu_comparison",
+        "comparison_input",
+        "test_cuda_sorting",
+        "test_mergesort",
+        "--parallel",
+        "2"
+      ],
+      "name": "build",
+      "timeout": 1200
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T011459127026Z/build-release/test_mergesort"
+      ],
+      "name": "cpu_correctness",
+      "timeout": 120
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T011459127026Z/build-release/test_cuda_sorting"
+      ],
+      "name": "gpu_correctness",
+      "timeout": 240
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T011459127026Z/build-release/cpu_gpu_comparison",
+        "--describe"
+      ],
+      "name": "comparison_describe",
+      "timeout": 60
+    }
+  ],
+  "prohibited": [
+    "test_comparison",
+    "test_parallel_mergesort",
+    "comparison trial invocation",
+    "--resources",
+    "pilot/study scripts"
+  ],
+  "timing_trials_authorized": false,
+  "validation_scope": "two direct existing correctness targets plus metadata-only describe; no CTest"
+}
