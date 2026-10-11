@@ -1,0 +1,95 @@
+{
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "available_memory_bytes": 3767984128,
+  "cgroups": [
+    {
+      "headroom_bytes": null,
+      "memory_current": 1476612096,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/cosmic-files-applet.scope"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 10805821440,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 10862891008,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 11219619840,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice/user-1000.slice"
+    },
+    {
+      "headroom_bytes": null,
+      "memory_current": 11245510656,
+      "memory_max": "max",
+      "path": "/sys/fs/cgroup/user.slice"
+    }
+  ],
+  "controls": "No affinity/frequency/cache/thermal/background changes; shared machine.",
+  "disk_free_bytes": 134164406272,
+  "frequency_policy": {
+    "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy10/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy11/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy5/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy6/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy7/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy8/scaling_governor": "powersave",
+    "/sys/devices/system/cpu/cpufreq/policy9/scaling_governor": "powersave"
+  },
+  "load_average": [
+    3.2373046875,
+    2.69091796875,
+    2.072265625
+  ],
+  "logical_cpu_count": 12,
+  "platform": "linux",
+  "resource_limits": {
+    "AS": [
+      -1,
+      -1
+    ],
+    "CPU": [
+      -1,
+      -1
+    ],
+    "DATA": [
+      -1,
+      -1
+    ],
+    "FSIZE": [
+      -1,
+      -1
+    ],
+    "STACK": [
+      8388608,
+      -1
+    ]
+  },
+  "total_memory_bytes": 16475164672
+}

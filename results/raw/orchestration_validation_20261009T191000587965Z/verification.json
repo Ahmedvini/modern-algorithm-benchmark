@@ -1,0 +1,59 @@
+{
+  "all_derived_regenerated_byte_identical": true,
+  "complete": true,
+  "configurations": 36,
+  "counts": {
+    "search": {
+      "failed_measured": 0,
+      "failed_warmups": 0,
+      "missing_configurations": 0,
+      "missing_measured_known": 0,
+      "missing_warmups_known": 0,
+      "successful_measured": 975,
+      "unknown_lookup_missing_upper_bound": 0,
+      "warmup_rows": 195
+    },
+    "sorting": {
+      "failed_measured": 0,
+      "failed_warmups": 0,
+      "missing_configurations": 0,
+      "missing_measured_known": 0,
+      "missing_warmups_known": 0,
+      "successful_measured": 360,
+      "unknown_lookup_missing_upper_bound": 0,
+      "warmup_rows": 72
+    },
+    "structures": {
+      "failed_measured": 0,
+      "failed_warmups": 0,
+      "missing_configurations": 0,
+      "missing_measured_known": 0,
+      "missing_warmups_known": 0,
+      "successful_measured": 1925,
+      "unknown_lookup_missing_upper_bound": 0,
+      "warmup_rows": 385
+    }
+  },
+  "cross_dataset_groups": 330,
+  "figure_pairs": 81,
+  "observations": 3912,
+  "plot_files": 163,
+  "prior_artifacts_unchanged": 867,
+  "protected_existing_files_unchanged": 91,
+  "protocol_sha256": "5bf13d60312d4958be93eb17dfe56c0be221964cf2960dec5988849d524d0d73",
+  "protocol_unchanged": true,
+  "raw_files_unchanged": 372,
+  "regeneration_command": [
+    "/usr/bin/python3",
+    "scripts/analyze_experiment.py",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_smoke_20261009T191000587965Z",
+    "--output",
+    "/tmp/tmp4j7fakfc/processed",
+    "--figures",
+    "/tmp/tmp4j7fakfc/figures"
+  ],
+  "regeneration_exit_code": 0,
+  "sort_executable_unchanged": true,
+  "summary_groups": 652,
+  "unavailable_policies": 86
+}

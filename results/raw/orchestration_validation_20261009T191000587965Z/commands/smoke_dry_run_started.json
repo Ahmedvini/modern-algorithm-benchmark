@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_experiments.py",
+    "--preset",
+    "smoke",
+    "--run-id",
+    "phase5_smoke_20261009T191000587965Z",
+    "--dry-run"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:26:54.602370+00:00"
+}

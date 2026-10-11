@@ -1,0 +1,148 @@
+{
+  "complete": true,
+  "current_final_code_summaries_observations_reports_byte_identical": true,
+  "execution_tools_archive_verified": true,
+  "files_added": 7,
+  "files_modified": 8,
+  "final_compiler_warnings": 0,
+  "frozen_protocols_unchanged": true,
+  "full_raw_artifacts_unchanged": 1764,
+  "full_study_complete": true,
+  "independent_figure_regeneration_verified": true,
+  "known_limitations": [
+    "no resume",
+    "Linux orchestration resource/signal policy",
+    "shared-machine controls unmodified",
+    "plot byte identity requires same stack",
+    "no timing-study comparison or memory metrics",
+    "no direct individual-query latency",
+    "no independent-session replication"
+  ],
+  "leak_detection_disabled": false,
+  "next_milestone": "Phase 6 OpenMP parallel sorting",
+  "patch_sha256": "f851e41cecc210a6e8d505db03b463bd204f618f07adb455162e3da13fe38820",
+  "phase5_pipeline_complete": true,
+  "pilot_artifacts_unchanged": 671,
+  "prior_artifacts_unchanged": 867,
+  "protected_original_files_unchanged": 91,
+  "release_groups_passed": 22,
+  "runs": {
+    "calibration": {
+      "counts": {
+        "search": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 24,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 0
+        },
+        "sorting": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 6,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 0
+        },
+        "structures": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 45,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 0
+        }
+      },
+      "figure_hashes_verified": true,
+      "figure_pairs": 37,
+      "processed_bytes_recomputed": true,
+      "rows": 75
+    },
+    "full": {
+      "counts": {
+        "search": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 7020,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 1404
+        },
+        "sorting": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 1800,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 360
+        },
+        "structures": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 13200,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 2640
+        }
+      },
+      "figure_hashes_verified": true,
+      "figure_pairs": 177,
+      "processed_bytes_recomputed": true,
+      "rows": 26424
+    },
+    "smoke": {
+      "counts": {
+        "search": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 975,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 195
+        },
+        "sorting": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 360,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 72
+        },
+        "structures": {
+          "failed_measured": 0,
+          "failed_warmups": 0,
+          "missing_configurations": 0,
+          "missing_measured_known": 0,
+          "missing_warmups_known": 0,
+          "successful_measured": 1925,
+          "unknown_lookup_missing_upper_bound": 0,
+          "warmup_rows": 385
+        }
+      },
+      "figure_hashes_verified": true,
+      "figure_pairs": 81,
+      "processed_bytes_recomputed": true,
+      "rows": 3912
+    }
+  },
+  "sanitize_groups_passed": 22,
+  "source_manifest_sha256": "62eeaeffd8d5c586bd0d488d362dee192945bb8615c8a9ec676bc4440ca509a5",
+  "standalone_python_tests_passed": 23
+}

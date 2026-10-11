@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/orchestration_validation_20261009T191000587965Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:53:44.802052+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/orchestration_validation_20261009T191000587965Z/final_review.py\", line 32, in <module>\n    m=load_json(figures/'plot_manifest.json');assert report(s,v,m).encode()==(processed/'REPORT.md').read_bytes()\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "wall_seconds": 1.03908403099922,
+  "ended_utc": "2026-10-09T19:53:45.841265+00:00"
+}

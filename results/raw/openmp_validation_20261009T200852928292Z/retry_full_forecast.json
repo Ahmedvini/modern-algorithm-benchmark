@@ -1,0 +1,41 @@
+{
+  "family_wall_budget_seconds": 1800,
+  "forecast_seconds": 199.61564643710625,
+  "method": "overhead-inclusive child wall * Nlog2(N+2) matrix work ratio *4; plotting separate",
+  "pilot_wall_seconds": 0.6121224160160637,
+  "runtime_gate_passed": true,
+  "target_configuration": {
+    "distinct": 16,
+    "distributions": [
+      "uniform",
+      "sorted",
+      "reverse_sorted",
+      "duplicate_heavy",
+      "nearly_sorted"
+    ],
+    "memory_limit_mib": 256,
+    "profile": "full",
+    "protocol": "parallel_sort_timing_v1",
+    "repetitions": 5,
+    "require_requested_teams": true,
+    "schema_version": 1,
+    "seeds": [
+      1729,
+      42,
+      2718
+    ],
+    "sizes": [
+      32768,
+      100000,
+      1000000
+    ],
+    "threads": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "validation_only": false,
+    "warmups": 1
+  }
+}

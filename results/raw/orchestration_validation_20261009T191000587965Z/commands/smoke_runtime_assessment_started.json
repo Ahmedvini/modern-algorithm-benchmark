@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "python3",
+    "scripts/assess_experiment.py",
+    "results/raw/phase5_smoke_20261009T191000587965Z",
+    "--output",
+    "results/raw/orchestration_validation_20261009T191000587965Z/smoke_runtime_assessment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:28:22.522905+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_experiments.py",
+    "--preset",
+    "smoke",
+    "--run-id",
+    "phase5_smoke_20261009T191000587965Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:26:54.668762+00:00",
+  "exit_code": 0,
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_smoke_20261009T191000587965Z\n",
+  "stderr": "",
+  "wall_seconds": 31.65998569599833,
+  "ended_utc": "2026-10-09T19:27:26.328874+00:00"
+}

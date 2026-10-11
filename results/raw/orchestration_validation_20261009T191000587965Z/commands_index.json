@@ -1,0 +1,546 @@
+[
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/baseline_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:10:00.904037+00:00",
+    "ended_utc": "2026-10-09T19:10:01.344679+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/baseline_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/release",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_SANITIZERS=OFF"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:10:00.724307+00:00",
+    "ended_utc": "2026-10-09T19:10:00.874015+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/baseline_ctest.json",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:10:01.374689+00:00",
+    "ended_utc": "2026-10-09T19:10:05.351996+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/calibration_pipeline.json",
+    "argv": [
+      "python3",
+      "scripts/run_experiments.py",
+      "--config",
+      "results/raw/orchestration_validation_20261009T191000587965Z/calibration_config.json",
+      "--run-id",
+      "phase5_calibration_20261009T191000587965Z"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:29:05.541914+00:00",
+    "ended_utc": "2026-10-09T19:29:20.803311+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/calibration_runtime_assessment.json",
+    "argv": [
+      "python3",
+      "scripts/assess_experiment.py",
+      "results/raw/phase5_calibration_20261009T191000587965Z",
+      "--output",
+      "results/raw/orchestration_validation_20261009T191000587965Z/calibration_runtime_assessment.json"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:30:35.234398+00:00",
+    "ended_utc": "2026-10-09T19:30:35.576258+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/completion_python_tests.json",
+    "argv": [
+      "python3",
+      "tests/test_experiments.py",
+      "build/release"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:45:38.046381+00:00",
+    "ended_utc": "2026-10-09T19:45:53.572930+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/completion_release_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:44:22.865677+00:00",
+    "ended_utc": "2026-10-09T19:44:23.192954+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/completion_release_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/release",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_SANITIZERS=OFF"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:44:22.701095+00:00",
+    "ended_utc": "2026-10-09T19:44:22.839529+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/completion_release_ctest.json",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:44:23.224194+00:00",
+    "ended_utc": "2026-10-09T19:44:42.556566+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/completion_sanitize_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/sanitize",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:44:42.736770+00:00",
+    "ended_utc": "2026-10-09T19:44:43.041371+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/completion_sanitize_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DMAB_ENABLE_SANITIZERS=ON"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:44:42.581572+00:00",
+    "ended_utc": "2026-10-09T19:44:42.710942+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/completion_sanitize_ctest.json",
+    "argv": [
+      "env",
+      "-u",
+      "ASAN_OPTIONS",
+      "-u",
+      "LSAN_OPTIONS",
+      "UBSAN_OPTIONS=halt_on_error=1",
+      "ctest",
+      "--test-dir",
+      "build/sanitize",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:44:43.070852+00:00",
+    "ended_utc": "2026-10-09T19:45:38.021597+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/corrected_python_tests.json",
+    "argv": [
+      "python3",
+      "tests/test_experiments.py",
+      "build/release"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:20:55.533281+00:00",
+    "ended_utc": "2026-10-09T19:21:09.059788+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/final_release_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:25:35.267941+00:00",
+    "ended_utc": "2026-10-09T19:25:35.617744+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/final_release_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/release",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_SANITIZERS=OFF"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:25:35.087058+00:00",
+    "ended_utc": "2026-10-09T19:25:35.237425+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/final_release_ctest.json",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:25:35.650173+00:00",
+    "ended_utc": "2026-10-09T19:25:53.777304+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/final_sanitize_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/sanitize",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:25:53.988656+00:00",
+    "ended_utc": "2026-10-09T19:25:54.292078+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/final_sanitize_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DMAB_ENABLE_SANITIZERS=ON"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:25:53.805506+00:00",
+    "ended_utc": "2026-10-09T19:25:53.962004+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/final_sanitize_ctest.json",
+    "argv": [
+      "env",
+      "-u",
+      "ASAN_OPTIONS",
+      "-u",
+      "LSAN_OPTIONS",
+      "UBSAN_OPTIONS=halt_on_error=1",
+      "ctest",
+      "--test-dir",
+      "build/sanitize",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:25:54.323185+00:00",
+    "ended_utc": "2026-10-09T19:26:45.235004+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/full_dry_run.json",
+    "argv": [
+      "python3",
+      "scripts/run_experiments.py",
+      "--preset",
+      "full",
+      "--run-id",
+      "phase5_full_20261009T191000587965Z",
+      "--dry-run"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:31:25.464087+00:00",
+    "ended_utc": "2026-10-09T19:31:25.505752+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/full_pipeline.json",
+    "argv": [
+      "python3",
+      "scripts/run_experiments.py",
+      "--preset",
+      "full",
+      "--run-id",
+      "phase5_full_20261009T191000587965Z"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:31:25.531421+00:00",
+    "ended_utc": "2026-10-09T19:39:54.633721+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/full_verification.json",
+    "argv": [
+      "python3",
+      "results/raw/orchestration_validation_20261009T191000587965Z/verify_full.py"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:41:50.911561+00:00",
+    "ended_utc": "2026-10-09T19:43:58.394378+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/integrated_release_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:22:55.794326+00:00",
+    "ended_utc": "2026-10-09T19:22:56.092510+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/integrated_release_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/release",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_SANITIZERS=OFF"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:22:55.632399+00:00",
+    "ended_utc": "2026-10-09T19:22:55.767900+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/integrated_release_ctest.json",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:22:56.120989+00:00",
+    "ended_utc": "2026-10-09T19:23:13.758092+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/integrated_sanitize_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/sanitize",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:23:20.290176+00:00",
+    "ended_utc": "2026-10-09T19:23:20.628923+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/integrated_sanitize_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DMAB_ENABLE_SANITIZERS=ON"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:23:20.131544+00:00",
+    "ended_utc": "2026-10-09T19:23:20.264710+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/integrated_sanitize_ctest.json",
+    "argv": [
+      "env",
+      "-u",
+      "ASAN_OPTIONS",
+      "-u",
+      "LSAN_OPTIONS",
+      "UBSAN_OPTIONS=halt_on_error=1",
+      "ctest",
+      "--test-dir",
+      "build/sanitize",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:23:20.662228+00:00",
+    "ended_utc": "2026-10-09T19:24:11.485422+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/reviewed_final_release_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/release",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:41:49.926420+00:00",
+    "ended_utc": "2026-10-09T19:41:50.240344+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/reviewed_final_release_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/release",
+      "-DCMAKE_BUILD_TYPE=Release",
+      "-DMAB_ENABLE_SANITIZERS=OFF"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:41:49.756817+00:00",
+    "ended_utc": "2026-10-09T19:41:49.900635+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/reviewed_final_release_ctest.json",
+    "argv": [
+      "ctest",
+      "--test-dir",
+      "build/release",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:41:50.271232+00:00",
+    "ended_utc": "2026-10-09T19:42:13.530494+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/reviewed_final_sanitize_build.json",
+    "argv": [
+      "cmake",
+      "--build",
+      "build/sanitize",
+      "--parallel",
+      "2"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:42:13.758652+00:00",
+    "ended_utc": "2026-10-09T19:42:14.158941+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/reviewed_final_sanitize_configure.json",
+    "argv": [
+      "cmake",
+      "-S",
+      ".",
+      "-B",
+      "build/sanitize",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DMAB_ENABLE_SANITIZERS=ON"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:42:13.561901+00:00",
+    "ended_utc": "2026-10-09T19:42:13.726976+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/reviewed_final_sanitize_ctest.json",
+    "argv": [
+      "env",
+      "-u",
+      "ASAN_OPTIONS",
+      "-u",
+      "LSAN_OPTIONS",
+      "UBSAN_OPTIONS=halt_on_error=1",
+      "ctest",
+      "--test-dir",
+      "build/sanitize",
+      "--output-on-failure",
+      "-V"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:42:14.193760+00:00",
+    "ended_utc": "2026-10-09T19:43:11.707204+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/reviewed_python_tests.json",
+    "argv": [
+      "python3",
+      "tests/test_experiments.py",
+      "build/release"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:43:11.738701+00:00",
+    "ended_utc": "2026-10-09T19:43:28.364063+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/smoke_dry_run.json",
+    "argv": [
+      "python3",
+      "scripts/run_experiments.py",
+      "--preset",
+      "smoke",
+      "--run-id",
+      "phase5_smoke_20261009T191000587965Z",
+      "--dry-run"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:26:54.602370+00:00",
+    "ended_utc": "2026-10-09T19:26:54.641939+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/smoke_pipeline.json",
+    "argv": [
+      "python3",
+      "scripts/run_experiments.py",
+      "--preset",
+      "smoke",
+      "--run-id",
+      "phase5_smoke_20261009T191000587965Z"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:26:54.668762+00:00",
+    "ended_utc": "2026-10-09T19:27:26.328874+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/smoke_runtime_assessment.json",
+    "argv": [
+      "python3",
+      "scripts/assess_experiment.py",
+      "results/raw/phase5_smoke_20261009T191000587965Z",
+      "--output",
+      "results/raw/orchestration_validation_20261009T191000587965Z/smoke_runtime_assessment.json"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:28:22.522905+00:00",
+    "ended_utc": "2026-10-09T19:28:23.216247+00:00"
+  },
+  {
+    "evidence": "results/raw/orchestration_validation_20261009T191000587965Z/commands/smoke_verification.json",
+    "argv": [
+      "python3",
+      "results/raw/orchestration_validation_20261009T191000587965Z/verify.py"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-10-09T19:28:03.374792+00:00",
+    "ended_utc": "2026-10-09T19:28:34.745101+00:00"
+  }
+]

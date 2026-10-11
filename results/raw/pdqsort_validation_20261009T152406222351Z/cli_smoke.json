@@ -1,0 +1,9 @@
+{
+  "record_kind": "correctness_validation",
+  "command": "build/release/algorithm_benchmark --sort pdq_sort --size 1000 --seed 1729 --distribution uniform",
+  "chunk_id": "5a88bb",
+  "wall_time_seconds": 0.000010688,
+  "exit_code": 0,
+  "original_token_count": 65,
+  "output": "{\"schema_version\":1,\"mode\":\"correctness\",\"status\":\"ok\",\"sort_algorithm\":\"pdq_sort\",\"search_algorithm\":\"std_lower_bound\",\"dataset_generator\":\"mt19937_64_v1\",\"size\":1000,\"seed\":1729,\"distribution\":\"uniform\",\"nearly_sorted_swaps\":10,\"duplicate_cardinality\":16}\n"
+}

@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "python3",
+    "scripts/assess_experiment.py",
+    "results/raw/phase5_calibration_20261009T191000587965Z",
+    "--output",
+    "results/raw/orchestration_validation_20261009T191000587965Z/calibration_runtime_assessment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:30:35.234398+00:00"
+}

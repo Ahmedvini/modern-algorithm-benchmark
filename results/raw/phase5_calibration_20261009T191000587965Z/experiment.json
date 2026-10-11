@@ -1,0 +1,305 @@
+{
+  "build_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release",
+  "configuration": {
+    "algorithms": {
+      "search": [
+        "linear_search",
+        "binary_search",
+        "exponential_search"
+      ],
+      "sorting": [
+        "std_sort",
+        "quick_sort",
+        "pdq_sort",
+        "tim_sort",
+        "merge_sort",
+        "radix_sort"
+      ],
+      "structures": [
+        "skip_list",
+        "btree_m10",
+        "btree_m16",
+        "btree_m32",
+        "btree_m64"
+      ]
+    },
+    "categories": [
+      "hit_first",
+      "hit_middle",
+      "hit_last",
+      "hit_random",
+      "miss_below",
+      "miss_between",
+      "miss_above",
+      "mixed_50",
+      "miss_empty"
+    ],
+    "distinct": 16,
+    "distributions": [
+      "uniform"
+    ],
+    "memory_limit_mib": 1024,
+    "profile": "custom",
+    "protocol": "experiment_pipeline_v1",
+    "queries": 1000,
+    "query_seeds": [
+      2718
+    ],
+    "repetitions": 1,
+    "schema_version": 1,
+    "seeds": [
+      1729
+    ],
+    "sizes": [
+      100000
+    ],
+    "structure_seed": 1729,
+    "swaps": null,
+    "validation_only": false,
+    "warmups": 0
+  },
+  "configuration_sha256": "4cd4ea71d75963f1fd9efe12090be413540c3add226c2f88c2da3fcb7359b356",
+  "families": [
+    {
+      "children": [
+        {
+          "command": [
+            "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/sort_benchmark",
+            "--output",
+            "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_calibration_20261009T191000587965Z/sorting/run_000000",
+            "--sort",
+            "std_sort,quick_sort,pdq_sort,tim_sort,merge_sort,radix_sort",
+            "--size",
+            "100000",
+            "--seed",
+            "1729",
+            "--distribution",
+            "uniform",
+            "--repetitions",
+            "1",
+            "--warmups",
+            "0",
+            "--memory-limit-mib",
+            "1024",
+            "--distinct",
+            "16",
+            "--run-id",
+            "sorting:run_000000"
+          ],
+          "distribution": "uniform",
+          "name": "run_000000",
+          "query_seed": null,
+          "seed": 1729,
+          "size": 100000
+        }
+      ],
+      "command": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/run_matrix.py",
+        "--binary",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/sort_benchmark",
+        "--output",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_calibration_20261009T191000587965Z/sorting",
+        "--sizes",
+        "100000",
+        "--seeds",
+        "1729",
+        "--distributions",
+        "uniform",
+        "--sorts",
+        "std_sort,quick_sort,pdq_sort,tim_sort,merge_sort,radix_sort",
+        "--repetitions",
+        "1",
+        "--warmups",
+        "0",
+        "--memory-limit-mib",
+        "1024",
+        "--distinct",
+        "16"
+      ],
+      "family": "sorting",
+      "protocol": "sort_timing_v1"
+    },
+    {
+      "children": [
+        {
+          "command": [
+            "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/search_benchmark",
+            "--output",
+            "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_calibration_20261009T191000587965Z/search/run_000000",
+            "--search",
+            "linear_search,binary_search,exponential_search",
+            "--size",
+            "100000",
+            "--seed",
+            "1729",
+            "--query-seed",
+            "2718",
+            "--distribution",
+            "uniform",
+            "--categories",
+            "hit_first,hit_middle,hit_last,hit_random,miss_below,miss_between,miss_above,mixed_50,miss_empty",
+            "--queries",
+            "1000",
+            "--repetitions",
+            "1",
+            "--warmups",
+            "0",
+            "--memory-limit-mib",
+            "1024",
+            "--distinct",
+            "16",
+            "--run-id",
+            "search:run_000000"
+          ],
+          "distribution": "uniform",
+          "name": "run_000000",
+          "query_seed": 2718,
+          "seed": 1729,
+          "size": 100000
+        }
+      ],
+      "command": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/run_search_matrix.py",
+        "--binary",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/search_benchmark",
+        "--output",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_calibration_20261009T191000587965Z/search",
+        "--sizes",
+        "100000",
+        "--seeds",
+        "1729",
+        "--distributions",
+        "uniform",
+        "--searches",
+        "linear_search,binary_search,exponential_search",
+        "--repetitions",
+        "1",
+        "--warmups",
+        "0",
+        "--memory-limit-mib",
+        "1024",
+        "--distinct",
+        "16",
+        "--query-seeds",
+        "2718",
+        "--queries",
+        "1000",
+        "--categories",
+        "hit_first,hit_middle,hit_last,hit_random,miss_below,miss_between,miss_above,mixed_50,miss_empty"
+      ],
+      "family": "search",
+      "protocol": "search_batch_v1"
+    },
+    {
+      "children": [
+        {
+          "command": [
+            "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/structure_benchmark",
+            "--output",
+            "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_calibration_20261009T191000587965Z/structures/run_000000",
+            "--structure",
+            "skip_list,btree_m10,btree_m16,btree_m32,btree_m64",
+            "--structure-seed",
+            "1729",
+            "--size",
+            "100000",
+            "--seed",
+            "1729",
+            "--query-seed",
+            "2718",
+            "--distribution",
+            "uniform",
+            "--categories",
+            "hit_first,hit_middle,hit_last,hit_random,miss_below,miss_between,miss_above,mixed_50,miss_empty",
+            "--queries",
+            "1000",
+            "--repetitions",
+            "1",
+            "--warmups",
+            "0",
+            "--memory-limit-mib",
+            "1024",
+            "--distinct",
+            "16",
+            "--run-id",
+            "structures:run_000000"
+          ],
+          "distribution": "uniform",
+          "name": "run_000000",
+          "query_seed": 2718,
+          "seed": 1729,
+          "size": 100000
+        }
+      ],
+      "command": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/run_structure_matrix.py",
+        "--binary",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/structure_benchmark",
+        "--output",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_calibration_20261009T191000587965Z/structures",
+        "--sizes",
+        "100000",
+        "--seeds",
+        "1729",
+        "--distributions",
+        "uniform",
+        "--structures",
+        "skip_list,btree_m10,btree_m16,btree_m32,btree_m64",
+        "--repetitions",
+        "1",
+        "--warmups",
+        "0",
+        "--memory-limit-mib",
+        "1024",
+        "--distinct",
+        "16",
+        "--query-seeds",
+        "2718",
+        "--queries",
+        "1000",
+        "--categories",
+        "hit_first,hit_middle,hit_last,hit_random,miss_below,miss_between,miss_above,mixed_50,miss_empty",
+        "--structure-seed",
+        "1729"
+      ],
+      "family": "structures",
+      "protocol": "structures_batch_v1"
+    }
+  ],
+  "figure_path": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/figures/phase5_calibration_20261009T191000587965Z",
+  "processed_path": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/phase5_calibration_20261009T191000587965Z",
+  "protocol": "experiment_pipeline_v1",
+  "raw_path": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_calibration_20261009T191000587965Z",
+  "resources": {
+    "configurations": {
+      "search": 1,
+      "sorting": 1,
+      "structures": 1
+    },
+    "disk_bytes_allowance": 66289664,
+    "figure_pair_upper_bound": 41,
+    "measured_row_upper_bounds": {
+      "search": 27,
+      "sorting": 6,
+      "structures": 50
+    },
+    "note": "Planning allowances; not measured memory/disk or hard RSS limits. Query availability changes row counts.",
+    "query_record_upper_bound": 18000,
+    "required_available_memory_bytes": 536870912,
+    "required_free_disk_bytes": 134217728,
+    "runtime_method": "After validated pilot: assess_experiment.py; overhead-inclusive complexity scaling, safety factor4; no guessed runtime.",
+    "runtime_seconds_estimate": null,
+    "total_row_upper_bound": 83,
+    "warmup_row_upper_bounds": {
+      "search": 0,
+      "sorting": 0,
+      "structures": 0
+    },
+    "workspace_bytes_estimate": 52352000
+  },
+  "run_id": "phase5_calibration_20261009T191000587965Z",
+  "schema_version": 1
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/orchestration_validation_20261009T191000587965Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:55:12.263386+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"phase5_pipeline_complete\": true,\n  \"full_study_complete\": true,\n  \"prior_artifacts_unchanged\": 867,\n  \"pilot_artifacts_unchanged\": 671,\n  \"full_raw_artifacts_unchanged\": 1764,\n  \"protected_original_files_unchanged\": 91,\n  \"files_added\": 7,\n  \"files_modified\": 8,\n  \"frozen_protocols_unchanged\": true,\n  \"release_groups_passed\": 22,\n  \"sanitize_groups_passed\": 22,\n  \"standalone_python_tests_passed\": 23,\n  \"leak_detection_disabled\": false,\n  \"final_compiler_warnings\": 0,\n  \"execution_tools_archive_verified\": true,\n  \"current_final_code_summaries_observations_reports_byte_identical\": true,\n  \"independent_figure_regeneration_verified\": true,\n  \"source_manifest_sha256\": \"62eeaeffd8d5c586bd0d488d362dee192945bb8615c8a9ec676bc4440ca509a5\",\n  \"patch_sha256\": \"f851e41cecc210a6e8d505db03b463bd204f618f07adb455162e3da13fe38820\",\n  \"known_limitations\": [\n    \"no resume\",\n    \"Linux orchestration resource/signal policy\",\n    \"shared-machine controls unmodified\",\n    \"plot byte identity requires same stack\",\n    \"no timing-study comparison or memory metrics\",\n    \"no direct individual-query latency\",\n    \"no independent-session replication\"\n  ],\n  \"next_milestone\": \"Phase 6 OpenMP parallel sorting\"\n}\n",
+  "stderr": "",
+  "wall_seconds": 23.32792677999896,
+  "ended_utc": "2026-10-09T19:55:35.591458+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "record_kind": "correctness_validation",
+  "command": "python3 scripts/capture_environment.py --build-dir build/sanitize --output /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/pdqsort_validation_20261009T152406222351Z/sanitize_environment.json",
+  "chunk_id": "e6caa0",
+  "wall_time_seconds": 0.000010761,
+  "exit_code": 0,
+  "original_token_count": 36,
+  "output": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/pdqsort_validation_20261009T152406222351Z/sanitize_environment.json\n"
+}

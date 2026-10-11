@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_experiments.py",
+    "--preset",
+    "full",
+    "--run-id",
+    "phase5_full_20261009T191000587965Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:31:25.531421+00:00",
+  "exit_code": 0,
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z\n",
+  "stderr": "",
+  "wall_seconds": 509.1021817459987,
+  "ended_utc": "2026-10-09T19:39:54.633721+00:00"
+}

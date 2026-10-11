@@ -1,0 +1,9 @@
+{
+  "record_kind": "correctness_validation",
+  "command": "python3 scripts/capture_environment.py --build-dir build/release --output /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/pdqsort_validation_20261009T152406222351Z/release_environment.json",
+  "chunk_id": "f1655a",
+  "wall_time_seconds": 0.00001357,
+  "exit_code": 0,
+  "original_token_count": 36,
+  "output": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/pdqsort_validation_20261009T152406222351Z/release_environment.json\n"
+}

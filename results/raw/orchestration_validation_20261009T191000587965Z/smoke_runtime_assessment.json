@@ -1,0 +1,221 @@
+{
+  "families": {
+    "search": {
+      "forecast_multiplier": 244498.2394366197,
+      "forecast_wall_seconds": 19148.93707612704,
+      "pilot_wall_seconds": 0.07831932499902905
+    },
+    "sorting": {
+      "forecast_multiplier": 31480.766047604695,
+      "forecast_wall_seconds": 2093.413899016647,
+      "pilot_wall_seconds": 0.06649818799996865
+    },
+    "structures": {
+      "forecast_multiplier": 16575.858704152444,
+      "forecast_wall_seconds": 1713.4521997723953,
+      "pilot_wall_seconds": 0.10337034300027881
+    }
+  },
+  "forecast_total_family_wall_seconds": 22955.803174916084,
+  "full_execution_recommended": false,
+  "limitations": "Forecast, not measured full runtime. Tiny pilots inflate fixed setup cost when extrapolated; use an intermediate pilot to refine. Distribution, validation, cache/load/frequency/allocator changes can invalidate scaling. Plot/report cost is separate; retain observed analysis wall as a planning reference.",
+  "model": "Scale overhead-inclusive family wall by N*log2(N+2) for sorting, N*Q for array search, N*log2(N+2)+Q*log2(N+2)*categories for structures; include algorithms/rounds/configurations; safety factor4.",
+  "pilot": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_smoke_20261009T191000587965Z",
+  "pilot_analysis_wall_seconds": 30.47905508199983,
+  "record_kind": "runtime_resource_forecast",
+  "resource_estimates": {
+    "configurations": {
+      "search": 60,
+      "sorting": 60,
+      "structures": 60
+    },
+    "disk_bytes_allowance": 915292160,
+    "figure_pair_upper_bound": 201,
+    "measured_row_upper_bounds": {
+      "search": 8100,
+      "sorting": 1800,
+      "structures": 15000
+    },
+    "note": "Planning allowances; not measured memory/disk or hard RSS limits. Query availability changes row counts.",
+    "query_record_upper_bound": 1080000,
+    "required_available_memory_bytes": 1026304000,
+    "required_free_disk_bytes": 1830584320,
+    "runtime_method": "After validated pilot: assess_experiment.py; overhead-inclusive complexity scaling, safety factor4; no guessed runtime.",
+    "runtime_seconds_estimate": null,
+    "total_row_upper_bound": 29880,
+    "warmup_row_upper_bounds": {
+      "search": 1620,
+      "sorting": 360,
+      "structures": 3000
+    },
+    "workspace_bytes_estimate": 513152000
+  },
+  "resource_gate_error": null,
+  "resource_gate_passed": true,
+  "resource_snapshot": {
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "available_memory_bytes": 3774746624,
+    "cgroups": [
+      {
+        "headroom_bytes": null,
+        "memory_current": 1326780416,
+        "memory_max": "max",
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/cosmic-files-applet.scope"
+      },
+      {
+        "headroom_bytes": null,
+        "memory_current": 10902163456,
+        "memory_max": "max",
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice"
+      },
+      {
+        "headroom_bytes": null,
+        "memory_current": 10962268160,
+        "memory_max": "max",
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service"
+      },
+      {
+        "headroom_bytes": null,
+        "memory_current": 11315703808,
+        "memory_max": "max",
+        "path": "/sys/fs/cgroup/user.slice/user-1000.slice"
+      },
+      {
+        "headroom_bytes": null,
+        "memory_current": 11341594624,
+        "memory_max": "max",
+        "path": "/sys/fs/cgroup/user.slice"
+      }
+    ],
+    "controls": "No affinity/frequency/cache/thermal/background changes; shared machine.",
+    "disk_free_bytes": 134279749632,
+    "frequency_policy": {
+      "/sys/devices/system/cpu/cpufreq/policy0/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy1/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy10/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy11/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy2/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy3/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy4/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy5/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy6/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy7/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy8/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpufreq/policy9/scaling_governor": "powersave"
+    },
+    "load_average": [
+      2.1611328125,
+      1.7138671875,
+      1.43408203125
+    ],
+    "logical_cpu_count": 12,
+    "platform": "linux",
+    "resource_limits": {
+      "AS": [
+        -1,
+        -1
+      ],
+      "CPU": [
+        -1,
+        -1
+      ],
+      "DATA": [
+        -1,
+        -1
+      ],
+      "FSIZE": [
+        -1,
+        -1
+      ],
+      "STACK": [
+        8388608,
+        -1
+      ]
+    },
+    "total_memory_bytes": 16475164672
+  },
+  "runtime_budget_seconds": 3600,
+  "runtime_gate_passed": false,
+  "safety_factor": 4,
+  "schema_version": 1,
+  "target_configuration": {
+    "algorithms": {
+      "search": [
+        "linear_search",
+        "binary_search",
+        "exponential_search"
+      ],
+      "sorting": [
+        "std_sort",
+        "quick_sort",
+        "pdq_sort",
+        "tim_sort",
+        "merge_sort",
+        "radix_sort"
+      ],
+      "structures": [
+        "skip_list",
+        "btree_m10",
+        "btree_m16",
+        "btree_m32",
+        "btree_m64"
+      ]
+    },
+    "categories": [
+      "hit_first",
+      "hit_middle",
+      "hit_last",
+      "hit_random",
+      "miss_below",
+      "miss_between",
+      "miss_above",
+      "mixed_50",
+      "miss_empty"
+    ],
+    "distinct": 16,
+    "distributions": [
+      "uniform",
+      "sorted",
+      "reverse_sorted",
+      "duplicate_heavy",
+      "nearly_sorted"
+    ],
+    "memory_limit_mib": 1024,
+    "profile": "full",
+    "protocol": "experiment_pipeline_v1",
+    "queries": 1000,
+    "query_seeds": [
+      2718
+    ],
+    "repetitions": 5,
+    "schema_version": 1,
+    "seeds": [
+      1729,
+      42,
+      2718
+    ],
+    "sizes": [
+      1000,
+      10000,
+      100000,
+      1000000
+    ],
+    "structure_seed": 1729,
+    "swaps": null,
+    "validation_only": false,
+    "warmups": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/orchestration_validation_20261009T191000587965Z/verify_full.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:41:50.911561+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"complete\": true,\n  \"configurations\": 180,\n  \"measured_successes\": 22020,\n  \"warmup_successes\": 4404,\n  \"total_rows\": 26424,\n  \"counts\": {\n    \"sorting\": {\n      \"successful_measured\": 1800,\n      \"failed_measured\": 0,\n      \"missing_measured_known\": 0,\n      \"warmup_rows\": 360,\n      \"failed_warmups\": 0,\n      \"missing_warmups_known\": 0,\n      \"missing_configurations\": 0,\n      \"unknown_lookup_missing_upper_bound\": 0\n    },\n    \"search\": {\n      \"successful_measured\": 7020,\n      \"failed_measured\": 0,\n      \"missing_measured_known\": 0,\n      \"warmup_rows\": 1404,\n      \"failed_warmups\": 0,\n      \"missing_warmups_known\": 0,\n      \"missing_configurations\": 0,\n      \"unknown_lookup_missing_upper_bound\": 0\n    },\n    \"structures\": {\n      \"successful_measured\": 13200,\n      \"failed_measured\": 0,\n      \"missing_measured_known\": 0,\n      \"warmup_rows\": 2640,\n      \"failed_warmups\": 0,\n      \"missing_warmups_known\": 0,\n      \"missing_configurations\": 0,\n      \"unknown_lookup_missing_upper_bound\": 0\n    }\n  },\n  \"measured_builds\": 1500,\n  \"measured_structure_lookups\": 11700,\n  \"failed_trials\": 0,\n  \"missing_trials\": 0,\n  \"per_dataset_groups\": 4404,\n  \"cross_dataset_groups\": 1468,\n  \"figure_pairs\": 177,\n  \"plot_files\": 355,\n  \"unavailable_category_configuration_pairs\": 144,\n  \"prior_artifacts_unchanged\": 867,\n  \"pilot_artifacts_unchanged\": 671,\n  \"raw_files_unchanged\": 1764,\n  \"raw_protocol_unchanged\": true,\n  \"all_processed_and_plot_bytes_regenerated\": true,\n  \"regeneration_exit_code\": 0,\n  \"regeneration_command\": [\n    \"/usr/bin/python3\",\n    \"scripts/analyze_experiment.py\",\n    \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z\",\n    \"--output\",\n    \"/tmp/tmpue9187mj/processed\",\n    \"--figures\",\n    \"/tmp/tmpue9187mj/figures\"\n  ],\n  \"measured_input_sizes\": [\n    1000,\n    10000,\n    100000,\n    1000000\n  ],\n  \"family_wall_seconds\": {\n    \"sorting\": 16.222320323999156,\n    \"search\": 158.11169128300025,\n    \"structures\": 215.4111399329995\n  },\n  \"analysis_wall_seconds\": 97.93027339700348\n}\n",
+  "stderr": "",
+  "wall_seconds": 127.48265701100172,
+  "ended_utc": "2026-10-09T19:43:58.394378+00:00"
+}

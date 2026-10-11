@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/orchestration_validation_20261009T191000587965Z/verify.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:28:03.374792+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"all_derived_regenerated_byte_identical\": true,\n  \"complete\": true,\n  \"configurations\": 36,\n  \"counts\": {\n    \"search\": {\n      \"failed_measured\": 0,\n      \"failed_warmups\": 0,\n      \"missing_configurations\": 0,\n      \"missing_measured_known\": 0,\n      \"missing_warmups_known\": 0,\n      \"successful_measured\": 975,\n      \"unknown_lookup_missing_upper_bound\": 0,\n      \"warmup_rows\": 195\n    },\n    \"sorting\": {\n      \"failed_measured\": 0,\n      \"failed_warmups\": 0,\n      \"missing_configurations\": 0,\n      \"missing_measured_known\": 0,\n      \"missing_warmups_known\": 0,\n      \"successful_measured\": 360,\n      \"unknown_lookup_missing_upper_bound\": 0,\n      \"warmup_rows\": 72\n    },\n    \"structures\": {\n      \"failed_measured\": 0,\n      \"failed_warmups\": 0,\n      \"missing_configurations\": 0,\n      \"missing_measured_known\": 0,\n      \"missing_warmups_known\": 0,\n      \"successful_measured\": 1925,\n      \"unknown_lookup_missing_upper_bound\": 0,\n      \"warmup_rows\": 385\n    }\n  },\n  \"cross_dataset_groups\": 330,\n  \"figure_pairs\": 81,\n  \"observations\": 3912,\n  \"plot_files\": 163,\n  \"prior_artifacts_unchanged\": 867,\n  \"protected_existing_files_unchanged\": 91,\n  \"protocol_sha256\": \"5bf13d60312d4958be93eb17dfe56c0be221964cf2960dec5988849d524d0d73\",\n  \"protocol_unchanged\": true,\n  \"raw_files_unchanged\": 372,\n  \"regeneration_command\": [\n    \"/usr/bin/python3\",\n    \"scripts/analyze_experiment.py\",\n    \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_smoke_20261009T191000587965Z\",\n    \"--output\",\n    \"/tmp/tmp4j7fakfc/processed\",\n    \"--figures\",\n    \"/tmp/tmp4j7fakfc/figures\"\n  ],\n  \"regeneration_exit_code\": 0,\n  \"sort_executable_unchanged\": true,\n  \"summary_groups\": 652,\n  \"unavailable_policies\": 86\n}\n",
+  "stderr": "",
+  "wall_seconds": 31.370183504001034,
+  "ended_utc": "2026-10-09T19:28:34.745101+00:00"
+}

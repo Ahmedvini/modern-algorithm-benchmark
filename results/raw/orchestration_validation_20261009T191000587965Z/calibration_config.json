@@ -1,0 +1,58 @@
+{
+  "algorithms": {
+    "search": [
+      "linear_search",
+      "binary_search",
+      "exponential_search"
+    ],
+    "sorting": [
+      "std_sort",
+      "quick_sort",
+      "pdq_sort",
+      "tim_sort",
+      "merge_sort",
+      "radix_sort"
+    ],
+    "structures": [
+      "skip_list",
+      "btree_m10",
+      "btree_m16",
+      "btree_m32",
+      "btree_m64"
+    ]
+  },
+  "categories": [
+    "hit_first",
+    "hit_middle",
+    "hit_last",
+    "hit_random",
+    "miss_below",
+    "miss_between",
+    "miss_above",
+    "mixed_50",
+    "miss_empty"
+  ],
+  "distinct": 16,
+  "distributions": [
+    "uniform"
+  ],
+  "memory_limit_mib": 1024,
+  "profile": "custom",
+  "protocol": "experiment_pipeline_v1",
+  "queries": 1000,
+  "query_seeds": [
+    2718
+  ],
+  "repetitions": 1,
+  "schema_version": 1,
+  "seeds": [
+    1729
+  ],
+  "sizes": [
+    100000
+  ],
+  "structure_seed": 1729,
+  "swaps": null,
+  "validation_only": false,
+  "warmups": 0
+}

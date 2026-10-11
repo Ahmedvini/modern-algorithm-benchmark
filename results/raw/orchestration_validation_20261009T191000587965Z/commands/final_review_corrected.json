@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/orchestration_validation_20261009T191000587965Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:54:33.196679+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/orchestration_validation_20261009T191000587965Z/final_review.py\", line 51, in <module>\n    assert load_json(e/'verification.json')['all_processed_and_plot_bytes_regenerated']\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nKeyError: 'all_processed_and_plot_bytes_regenerated'\n",
+  "wall_seconds": 24.47035782600142,
+  "ended_utc": "2026-10-09T19:54:57.667151+00:00"
+}

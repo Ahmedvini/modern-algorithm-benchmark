@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "tests/test_experiments.py",
+    "build/release"
+  ],
+  "exit_code": 1,
+  "tests": 19,
+  "passed": 18,
+  "error": "SIGTERM interruption test timed out; InterruptedError handler was retried by I/O; warnings came from failed test cleanup"
+}

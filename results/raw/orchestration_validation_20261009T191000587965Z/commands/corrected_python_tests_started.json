@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_experiments.py",
+    "build/release"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:20:55.533281+00:00"
+}

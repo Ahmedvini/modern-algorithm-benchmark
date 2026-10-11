@@ -1,0 +1,363 @@
+Start testing: Oct 09 21:29 EEST
+----------------------------------------------------------
+1/21 Testing: structures
+1/21 Test: structures
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_structures"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"structures" start time: Oct 09 21:29 EEST
+Output:
+----------------------------------------------------------
+Passed 6635 structure/input cases, 1239680 differential insertion attempts, 3218705 map-oracle lookups, 75665 invariant validations; public fixtures: skip levels=14, B-tree splits=14875
+<end of output>
+Test time =  17.16 sec
+----------------------------------------------------------
+Test Passed.
+"structures" end time: Oct 09 21:30 EEST
+"structures" time elapsed: 00:00:17
+----------------------------------------------------------
+
+2/21 Testing: structure_timing
+2/21 Test: structure_timing
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_structure_timing"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"structure_timing" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 72 reproducible structure workloads and 8190 validated build/lookup rows, rank/query tamper, failure, extrema and resource checks
+<end of output>
+Test time =   0.34 sec
+----------------------------------------------------------
+Test Passed.
+"structure_timing" end time: Oct 09 21:30 EEST
+"structure_timing" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/21 Testing: structure_framework
+3/21 Test: structure_framework
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_structure_benchmark.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/structure_benchmark"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"structure_framework" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 1.688s
+
+OK
+<end of output>
+Test time =   1.74 sec
+----------------------------------------------------------
+Test Passed.
+"structure_framework" end time: Oct 09 21:30 EEST
+"structure_framework" time elapsed: 00:00:01
+----------------------------------------------------------
+
+4/21 Testing: searching
+4/21 Test: searching
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_searching"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"searching" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 3704 search inputs and 309996 public/registry/counting oracle checks, exact predicates and reset/isolation tests
+<end of output>
+Test time =   2.18 sec
+----------------------------------------------------------
+Test Passed.
+"searching" end time: Oct 09 21:30 EEST
+"searching" time elapsed: 00:00:02
+----------------------------------------------------------
+
+5/21 Testing: search_timing
+5/21 Test: search_timing
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_search_timing"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"search_timing" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 72 reproducible search/query configurations and 4266 validated timed batches, category/duplicate/extrema/precondition/failure checks
+<end of output>
+Test time =   0.15 sec
+----------------------------------------------------------
+Test Passed.
+"search_timing" end time: Oct 09 21:30 EEST
+"search_timing" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/21 Testing: search_framework
+6/21 Test: search_framework
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_search_benchmark.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/search_benchmark" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/search_counts"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"search_framework" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+............
+----------------------------------------------------------------------
+Ran 12 tests in 1.856s
+
+OK
+<end of output>
+Test time =   1.91 sec
+----------------------------------------------------------
+Test Passed.
+"search_framework" end time: Oct 09 21:30 EEST
+"search_framework" time elapsed: 00:00:01
+----------------------------------------------------------
+
+7/21 Testing: baselines
+7/21 Test: baselines
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_baselines"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"baselines" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 3590 full-vector differential sort cases and 98508 linear-oracle search checks
+<end of output>
+Test time =   0.58 sec
+----------------------------------------------------------
+Test Passed.
+"baselines" end time: Oct 09 21:30 EEST
+"baselines" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/21 Testing: environment_manifest
+8/21 Test: environment_manifest
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_environment.py"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"environment_manifest" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"environment_manifest" end time: Oct 09 21:30 EEST
+"environment_manifest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/21 Testing: datasets
+9/21 Test: datasets
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_datasets"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"datasets" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 220 distribution/size/seed cases, five exact one-swap fixtures, one five-swap fixture, empty/singleton swap checks, and existing fixtures/validation
+<end of output>
+Test time =   0.16 sec
+----------------------------------------------------------
+Test Passed.
+"datasets" end time: Oct 09 21:30 EEST
+"datasets" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/21 Testing: cli
+10/21 Test: cli
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cli.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/algorithm_benchmark"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"cli" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 1.202s
+
+OK
+<end of output>
+Test time =   1.25 sec
+----------------------------------------------------------
+Test Passed.
+"cli" end time: Oct 09 21:30 EEST
+"cli" time elapsed: 00:00:01
+----------------------------------------------------------
+
+11/21 Testing: quicksort
+11/21 Test: quicksort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_quicksort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"quicksort" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 3718 QuickSort differential cases through public and observed paths; forced zero-budget fallback=1, one-budget fallback=1, balanced-child fallbacks=2, sentinel-range fallback=1, default-budget adversarial fallbacks=618
+<end of output>
+Test time =   1.56 sec
+----------------------------------------------------------
+Test Passed.
+"quicksort" end time: Oct 09 21:30 EEST
+"quicksort" time elapsed: 00:00:01
+----------------------------------------------------------
+
+12/21 Testing: pdqsort
+12/21 Test: pdqsort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_pdqsort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"pdqsort" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 4027 PDQSort differential cases through public and registry paths
+<end of output>
+Test time =   0.91 sec
+----------------------------------------------------------
+Test Passed.
+"pdqsort" end time: Oct 09 21:30 EEST
+"pdqsort" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/21 Testing: timsort
+13/21 Test: timsort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_timsort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"timsort" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 4149 Timsort differential cases through public and registry paths
+<end of output>
+Test time =   1.98 sec
+----------------------------------------------------------
+Test Passed.
+"timsort" end time: Oct 09 21:30 EEST
+"timsort" time elapsed: 00:00:01
+----------------------------------------------------------
+
+14/21 Testing: mergesort
+14/21 Test: mergesort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_mergesort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"mergesort" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 4015 Merge Sort differential cases through public/registry/repeated paths; stable merge fixture passed
+<end of output>
+Test time =   1.08 sec
+----------------------------------------------------------
+Test Passed.
+"mergesort" end time: Oct 09 21:30 EEST
+"mergesort" time elapsed: 00:00:01
+----------------------------------------------------------
+
+15/21 Testing: radixsort
+15/21 Test: radixsort
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_radixsort"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"radixsort" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 4015 Signed Radix Sort differential cases through public/registry/repeated paths
+<end of output>
+Test time =   1.02 sec
+----------------------------------------------------------
+Test Passed.
+"radixsort" end time: Oct 09 21:30 EEST
+"radixsort" time elapsed: 00:00:01
+----------------------------------------------------------
+
+16/21 Testing: comparisons
+16/21 Test: comparisons
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_comparisons"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"comparisons" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 1404 comparison differential/reset/repetition inputs across 5 sorters; six exact QuickSort and eleven exact Merge Sort fixtures, radix unsupported, comparator isolation/overflow and counted heapsort fallback passed
+<end of output>
+Test time =   1.91 sec
+----------------------------------------------------------
+Test Passed.
+"comparisons" end time: Oct 09 21:30 EEST
+"comparisons" time elapsed: 00:00:01
+----------------------------------------------------------
+
+17/21 Testing: memory
+17/21 Test: memory
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_memory"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"memory" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed memory JSON supported/zero/error/unsupported fixtures, four invalid reports, and repeated platform probes
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"memory" end time: Oct 09 21:30 EEST
+"memory" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/21 Testing: memory_unsupported
+18/21 Test: memory_unsupported
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_memory_unsupported"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"memory_unsupported" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed memory JSON supported/zero/error/unsupported fixtures, four invalid reports, and repeated platform probes
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"memory_unsupported" end time: Oct 09 21:30 EEST
+"memory_unsupported" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/21 Testing: metrics_cli
+19/21 Test: metrics_cli
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_metrics_cli.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/sort_metrics"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"metrics_cli" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 1.633s
+
+OK
+<end of output>
+Test time =   1.68 sec
+----------------------------------------------------------
+Test Passed.
+"metrics_cli" end time: Oct 09 21:30 EEST
+"metrics_cli" time elapsed: 00:00:01
+----------------------------------------------------------
+
+20/21 Testing: timing
+20/21 Test: timing
+Command: "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/test_timing"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"timing" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+Passed 72 reproducible distribution/seed/size inputs and 1296 validated registry trials; sorted aliases, exact input restoration/order, failures, bounds and escaping passed
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"timing" end time: Oct 09 21:30 EEST
+"timing" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/21 Testing: benchmark_framework
+21/21 Test: benchmark_framework
+Command: "/usr/bin/python3" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_benchmark.py" "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize/sort_benchmark"
+Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize
+"benchmark_framework" start time: Oct 09 21:30 EEST
+Output:
+----------------------------------------------------------
+............
+----------------------------------------------------------------------
+Ran 12 tests in 1.776s
+
+OK
+<end of output>
+Test time =   1.84 sec
+----------------------------------------------------------
+Test Passed.
+"benchmark_framework" end time: Oct 09 21:30 EEST
+"benchmark_framework" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Oct 09 21:30 EEST

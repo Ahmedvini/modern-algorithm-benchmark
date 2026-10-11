@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_experiments.py",
+    "--preset",
+    "full",
+    "--run-id",
+    "phase5_full_20261009T191000587965Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T19:31:25.531421+00:00"
+}

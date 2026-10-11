@@ -1,0 +1,9 @@
+{
+  "record_kind": "correctness_validation",
+  "command": "git status --short",
+  "chunk_id": "5d1feb",
+  "wall_time_seconds": 0.000011144,
+  "exit_code": 128,
+  "original_token_count": 18,
+  "output": "fatal: not a git repository (or any of the parent directories): .git\n"
+}

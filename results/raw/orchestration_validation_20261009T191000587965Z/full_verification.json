@@ -1,0 +1,75 @@
+{
+  "all_processed_and_plot_bytes_regenerated": true,
+  "analysis_wall_seconds": 97.93027339700348,
+  "complete": true,
+  "configurations": 180,
+  "counts": {
+    "search": {
+      "failed_measured": 0,
+      "failed_warmups": 0,
+      "missing_configurations": 0,
+      "missing_measured_known": 0,
+      "missing_warmups_known": 0,
+      "successful_measured": 7020,
+      "unknown_lookup_missing_upper_bound": 0,
+      "warmup_rows": 1404
+    },
+    "sorting": {
+      "failed_measured": 0,
+      "failed_warmups": 0,
+      "missing_configurations": 0,
+      "missing_measured_known": 0,
+      "missing_warmups_known": 0,
+      "successful_measured": 1800,
+      "unknown_lookup_missing_upper_bound": 0,
+      "warmup_rows": 360
+    },
+    "structures": {
+      "failed_measured": 0,
+      "failed_warmups": 0,
+      "missing_configurations": 0,
+      "missing_measured_known": 0,
+      "missing_warmups_known": 0,
+      "successful_measured": 13200,
+      "unknown_lookup_missing_upper_bound": 0,
+      "warmup_rows": 2640
+    }
+  },
+  "cross_dataset_groups": 1468,
+  "failed_trials": 0,
+  "family_wall_seconds": {
+    "search": 158.11169128300025,
+    "sorting": 16.222320323999156,
+    "structures": 215.4111399329995
+  },
+  "figure_pairs": 177,
+  "measured_builds": 1500,
+  "measured_input_sizes": [
+    1000,
+    10000,
+    100000,
+    1000000
+  ],
+  "measured_structure_lookups": 11700,
+  "measured_successes": 22020,
+  "missing_trials": 0,
+  "per_dataset_groups": 4404,
+  "pilot_artifacts_unchanged": 671,
+  "plot_files": 355,
+  "prior_artifacts_unchanged": 867,
+  "raw_files_unchanged": 1764,
+  "raw_protocol_unchanged": true,
+  "regeneration_command": [
+    "/usr/bin/python3",
+    "scripts/analyze_experiment.py",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z",
+    "--output",
+    "/tmp/tmpue9187mj/processed",
+    "--figures",
+    "/tmp/tmpue9187mj/figures"
+  ],
+  "regeneration_exit_code": 0,
+  "total_rows": 26424,
+  "unavailable_category_configuration_pairs": 144,
+  "warmup_successes": 4404
+}
