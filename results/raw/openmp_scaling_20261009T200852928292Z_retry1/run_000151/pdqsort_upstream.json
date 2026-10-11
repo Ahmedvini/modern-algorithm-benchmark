@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/orlp/pdqsort",
+  "revision": "b1ef26a55cdb60d236a5cb199c4234c704f46726",
+  "license": "Zlib",
+  "author": "Orson Peters",
+  "local_modifications": [],
+  "retrieved_at_utc": "2026-10-09T15:25:21.953580+00:00",
+  "files": {
+    "pdqsort.h": {
+      "url": "https://raw.githubusercontent.com/orlp/pdqsort/b1ef26a55cdb60d236a5cb199c4234c704f46726/pdqsort.h",
+      "sha256": "1916aff237fc7ecc638dec6397662334552a1b6f823fa65011a8dfe831237fc0"
+    },
+    "license.txt": {
+      "url": "https://raw.githubusercontent.com/orlp/pdqsort/b1ef26a55cdb60d236a5cb199c4234c704f46726/license.txt",
+      "sha256": "323fc18e35fcf058d69d684022ef844f206cb8fefb2bac1298fa1767e0b9ae38"
+    }
+  }
+}
