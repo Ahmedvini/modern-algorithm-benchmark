@@ -1,0 +1,47 @@
+{
+  "candidates": [
+    {
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/docs/CPU_GPU_DRIVER_REVIEW_v1.json",
+      "symlink": false
+    },
+    {
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/before_sources/docs/CPU_GPU_DRIVER_REVIEW_v1.json",
+      "symlink": false
+    },
+    {
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/gpu_final_resolution_20261011T111957067481Z/reviewed_cpu_gpu_source.tar.gz",
+      "symlink": false
+    }
+  ],
+  "credential_contents_read": false,
+  "directories_inspected": 60640,
+  "errors": [],
+  "excluded_directory_names": [
+    ".cache",
+    ".colab-cli",
+    ".git",
+    ".gnupg",
+    ".google",
+    ".local",
+    ".mozilla",
+    ".pki",
+    ".ssh",
+    ".venv",
+    "Trash",
+    "__pycache__",
+    "build",
+    "chromium",
+    "colab-cli",
+    "google-chrome",
+    "history",
+    "node_modules",
+    "sessions",
+    "site-packages",
+    "venv"
+  ],
+  "filenames_inspected": 276331,
+  "followed_symlinks": false,
+  "limitation": "Filename search includes accessible user project/config directories; excludes caches, package stores, credentials, browser profiles and private conversation/session logs. Exclusions are not claimed verified.",
+  "relevant_environment_variable_names": [],
+  "scope": "/home/ahmedelsheikh"
+}

@@ -1,0 +1,329 @@
+{
+  "candidates": [
+    {
+      "contents_read": true,
+      "file": "/home/ahmedelsheikh/.codex/.tmp/plugins/plugins/codex-security/schemas/tools/review-items.schema.json"
+    },
+    {
+      "contents_read": true,
+      "file": "/home/ahmedelsheikh/.codex/.tmp/plugins/plugins/public-equity-investing/skills/public-equity-investing/internal-support/dashboard-builder/assets/example_payloads/earnings-preview-minimal.json"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_Root_Class_3_CA_2_2009.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/TunTrust_Root_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/AffirmTrust_Premium_ECC.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/AffirmTrust_Commercial.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/CommScope_Public_Trust_RSA_Root-01.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_EV_Root_CA_1_2020.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/CommScope_Public_Trust_ECC_Root-01.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/AffirmTrust_Networking.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/TrustAsia_TLS_RSA_Root_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/IdenTrust_Public_Sector_Root_CA_1.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_EV_Root_CA_2_2023.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/IdenTrust_Commercial_Root_CA_1.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/DigiCert_Trusted_Root_G4.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/Atos_TrustedRoot_Root_CA_ECC_TLS_2021.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/TrustAsia_Global_Root_CA_G3.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/Certum_Trusted_Root_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/TrustAsia_Global_Root_CA_G4.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_BR_Root_CA_2_2023.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/SecureTrust_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_BR_Root_CA_1_2020.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/CommScope_Public_Trust_RSA_Root-02.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/Certum_Trusted_Network_CA_2.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/Certum_Trusted_Network_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/Atos_TrustedRoot_2011.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/TrustAsia_TLS_ECC_Root_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/GLOBALTRUST_2020.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/D-TRUST_Root_Class_3_CA_2_EV_2009.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/CommScope_Public_Trust_ECC_Root-02.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/home/ahmedelsheikh/.local/share/flatpak/runtime/org.freedesktop.Platform/x86_64/24.08/8e2d609ad6f18f5e9eb119c6eddf5572e7d51fd54cf08baaaf24de823c58b0bf/files/etc/pki/ca-trust/extracted/pem/directory-hash/AffirmTrust_Premium.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/D-TRUST_Root_Class_3_CA_2_2009.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/TunTrust_Root_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/AffirmTrust_Premium_ECC.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/AffirmTrust_Commercial.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/CommScope_Public_Trust_RSA_Root-01.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/D-TRUST_EV_Root_CA_1_2020.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/CommScope_Public_Trust_ECC_Root-01.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/AffirmTrust_Networking.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/IdenTrust_Public_Sector_Root_CA_1.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/IdenTrust_Commercial_Root_CA_1.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/DigiCert_Trusted_Root_G4.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Atos_TrustedRoot_Root_CA_ECC_TLS_2021.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/TrustAsia_Global_Root_CA_G3.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Certum_Trusted_Root_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/TrustAsia_Global_Root_CA_G4.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Entrust.net_Premium_2048_Secure_Server_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/SecureTrust_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/D-TRUST_BR_Root_CA_1_2020.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/CommScope_Public_Trust_RSA_Root-02.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Certum_Trusted_Network_CA_2.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Certum_Trusted_Network_CA.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Baltimore_CyberTrust_Root.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Atos_TrustedRoot_2011.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/GLOBALTRUST_2020.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/D-TRUST_Root_Class_3_CA_2_EV_2009.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/CommScope_Public_Trust_ECC_Root-02.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/Atos_TrustedRoot_Root_CA_RSA_TLS_2021.pem"
+    },
+    {
+      "contents_read": false,
+      "file": "/etc/ssl/certs/AffirmTrust_Premium.pem"
+    }
+  ],
+  "counts": [
+    {
+      "filenames": 14453,
+      "root": "/home/ahmedelsheikh/.config"
+    },
+    {
+      "filenames": 24,
+      "root": "/home/ahmedelsheikh/.agents"
+    },
+    {
+      "filenames": 6135,
+      "root": "/home/ahmedelsheikh/.codex"
+    },
+    {
+      "filenames": 77349,
+      "root": "/home/ahmedelsheikh/.local/share"
+    },
+    {
+      "filenames": 2676,
+      "root": "/etc"
+    },
+    {
+      "filenames": 0,
+      "root": "/usr/local/etc"
+    }
+  ],
+  "credential_files_read": false,
+  "errors": [
+    {
+      "error": "PermissionError",
+      "path": "/etc/cni/net.d"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/polkit-1/rules.d"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/ssl/private"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/chatscripts"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/credstore.encrypted"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/credstore"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/ppp/peers"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/cups/ssl"
+    }
+  ],
+  "excluded_directory_names": [
+    ".cache",
+    ".git",
+    "BraveSoftware",
+    "Code",
+    "Code - Insiders",
+    "Cursor",
+    "Trash",
+    "chromium",
+    "colab-cli",
+    "google-chrome",
+    "google-colab-cli",
+    "history",
+    "keyrings",
+    "mozilla",
+    "node_modules",
+    "password-store",
+    "pip",
+    "sessions",
+    "site-packages",
+    "uv"
+  ],
+  "project_matches": [],
+  "scope": "Generic non-secret approval/review/trust configuration filenames, supplementary to exact project-name search"
+}

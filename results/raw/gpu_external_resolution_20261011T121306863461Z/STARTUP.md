@@ -1,0 +1,1 @@
+Read pwd, complete AGENTS.md, previous FINAL_AUDIT.md and COMMANDS.md: exit0. Bootstrap parsed previous FINAL_INTEGRITY.json and verified every digest map against actual files, captured all pre-existing result-file hashes and created this unique directory: exit0. No workloads or configuration changes.

@@ -1,0 +1,108 @@
+{
+  "candidates": [],
+  "contents_read": false,
+  "errors": [
+    {
+      "error": "PermissionError",
+      "path": "/etc/cni/net.d",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/polkit-1/rules.d",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/ssl/private",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/chatscripts",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/credstore.encrypted",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/credstore",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/ppp/peers",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/etc/cups/ssl",
+      "root": "/etc"
+    },
+    {
+      "error": "PermissionError",
+      "path": "/opt/containerd",
+      "root": "/opt"
+    }
+  ],
+  "excluded_directory_names": [
+    ".git",
+    "Trash",
+    "build",
+    "chromium",
+    "colab-cli",
+    "containers",
+    "google-chrome",
+    "google-colab-cli",
+    "history",
+    "keyrings",
+    "node_modules",
+    "password-store",
+    "pip",
+    "sessions",
+    "site-packages",
+    "uv"
+  ],
+  "roots": [
+    {
+      "directories": 4158,
+      "exists": true,
+      "filenames": 77333,
+      "root": "/home/ahmedelsheikh/.local/share"
+    },
+    {
+      "directories": 401,
+      "exists": true,
+      "filenames": 2676,
+      "root": "/etc"
+    },
+    {
+      "directories": 1,
+      "exists": true,
+      "filenames": 0,
+      "root": "/usr/local/etc"
+    },
+    {
+      "directories": 1081,
+      "exists": true,
+      "filenames": 13840,
+      "root": "/opt"
+    },
+    {
+      "directories": 1,
+      "exists": true,
+      "filenames": 0,
+      "root": "/mnt"
+    },
+    {
+      "directories": 2,
+      "exists": true,
+      "filenames": 0,
+      "root": "/media"
+    }
+  ],
+  "scope": "Supplementary filename-only search; package stores and credential/session directories excluded."
+}

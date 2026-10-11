@@ -1,0 +1,47 @@
+{
+  "assertions_passed": true,
+  "measured_trials": 0,
+  "new_builds": 0,
+  "new_cloud_assignments": 0,
+  "new_tests": 0,
+  "preservation": {
+    "build_metadata_sha256": {
+      "changed": [],
+      "files": 83,
+      "missing": []
+    },
+    "executable_sha256": {
+      "changed": [],
+      "files": 9,
+      "missing": []
+    },
+    "frozen_sha256": {
+      "changed": [],
+      "files": 4,
+      "missing": []
+    },
+    "historical_results_sha256": {
+      "changed": [],
+      "files": 13495,
+      "missing": []
+    },
+    "project_sha256": {
+      "changed": [],
+      "files": 221,
+      "missing": []
+    },
+    "protected_sha256": {
+      "changed": [],
+      "files": 80,
+      "missing": []
+    },
+    "report_sha256": {
+      "changed": [],
+      "files": 28,
+      "missing": []
+    }
+  },
+  "study_launched": false,
+  "unexpected_external_additions": [],
+  "warmups": 0
+}

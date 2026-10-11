@@ -1,0 +1,12 @@
+{
+  "record_kind": "user_authorization_context",
+  "source": "Current user request in this conversation",
+  "verbatim_authorization": "You have standing authorization to execute all necessary project work without asking the user for additional approval.",
+  "full_study_condition": "Once every required gate passes, execute the unchanged frozen full CPU/GPU comparison study.",
+  "resource_constraint": "Free authorized GPU only; no metered compute, purchases or paid resource creation.",
+  "independent_technical_review": false,
+  "signature": null,
+  "trusted_root": null,
+  "study_eligibility_granted_by_this_record": false,
+  "note": "This records real execution permission. It is deliberately not an independent approval artifact and is not installed into the validator."
+}

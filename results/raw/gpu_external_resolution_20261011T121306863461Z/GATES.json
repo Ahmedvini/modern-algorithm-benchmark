@@ -1,0 +1,37 @@
+[
+  {
+    "evidence": "OFFLINE_VERIFICATION.json",
+    "gate": "Frozen/source/bundle/production identity",
+    "status": "PASS"
+  },
+  {
+    "evidence": "FINAL_INTEGRITY.json",
+    "gate": "Historical evidence and CPU deliverables preserved",
+    "status": "PASS"
+  },
+  {
+    "evidence": "../gpu_final_resolution_20261011T111957067481Z/REUSED_CPU_EVIDENCE.json",
+    "gate": "CPU Release and sanitizer coverage",
+    "status": "PASS \u2014 retained 21/21 each, not rerun"
+  },
+  {
+    "evidence": "USER_CONFIGURATION_SEARCH.json; SUPPLEMENTARY_CONFIGURATION_SEARCH.json; OFFLINE_VERIFICATION.json",
+    "gate": "Independent approval/trust anchor",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "command_002.json",
+    "gate": "Confirmed free authorized GPU",
+    "status": "BLOCKED"
+  },
+  {
+    "evidence": "FINAL_AUDIT.md",
+    "gate": "Current GPU build/framework/resource/worker provenance",
+    "status": "BLOCKED \u2014 dependent on GPU and authority"
+  },
+  {
+    "evidence": "FINAL_AUDIT.md",
+    "gate": "Full study and post-run audits",
+    "status": "NOT EXECUTED"
+  }
+]

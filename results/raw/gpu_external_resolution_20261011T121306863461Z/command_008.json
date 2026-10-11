@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B -c \"import ast,pathlib; p=pathlib.Path('/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/gpu_external_resolution_20261011T121306863461Z/finalize.py'); t=ast.parse(p.read_text()); assert not any(isinstance(n,ast.Import) and any(a.name in ['subprocess','os'] for a in n.names) for n in ast.walk(t)); print('Finalizer AST parsed; only hashlib/json/pathlib imports; no subprocess/workload execution.')\"",
+  "purpose": "Statically parse preservation-only finalizer before final sealing; no helper execution or workload",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T12:24:00.719566+00:00",
+  "exit_code": 0,
+  "stdout": "Finalizer AST parsed; only hashlib/json/pathlib imports; no subprocess/workload execution.\n",
+  "stderr": ""
+}

@@ -1,0 +1,112 @@
+{
+  "actual_approval_candidates": [],
+  "archives": [
+    {
+      "approval_members": [],
+      "file": "results/raw/bounded_resume_20261011T024034091796Z/reviewed_source.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/bounded_resume_20261011T024034091796Z/reviewed_source_v2.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/bounded_resume_20261011T024034091796Z/validation_evidence.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/bounded_resume_20261011T024034091796Z/validation_evidence_failed.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/bounded_validation_20261011T020343203635Z/reviewed_source.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/bounded_validation_20261011T020343203635Z/validation_evidence.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/full_matrix_tooling_source.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/non_timing_validation_evidence.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cpu_gpu_pilot_20261010T001232473460Z/cpu_gpu_pilot_source_v1.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cpu_gpu_pilot_20261010T001232473460Z/cpu_gpu_pilot_source_v2.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cpu_gpu_pilot_20261010T001232473460Z/remote_evidence_v1.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cpu_gpu_pilot_20261010T001232473460Z/remote_evidence_v3.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cub_correctness_colab_20261009T223853955936Z/colab_evidence.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cub_correctness_colab_20261009T223853955936Z/cub_sort_source_v3.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cub_sort_final_review_20261009T222209607981Z/cub_sort_source_v2.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cub_sort_validation_20261009T220322089788Z/cub_sort_source.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cub_workspace_65537_20261010T110457531249Z/workspace_evidence.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cuda_preflight_validation_20261009T205410772326Z/phase7_source.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cuda_timing_20261009T231303050084Z/colab_gpu_timing_evidence.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/cuda_timing_20261009T231303050084Z/cuda_timing_source_v1.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/isolated_colab_build_20261011T010417197263Z/downloaded_validation.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/isolated_colab_build_20261011T010417197263Z/reviewed_source.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/isolated_colab_revalidation_20261011T011459127026Z/downloaded_validation.tar.gz"
+    },
+    {
+      "approval_members": [],
+      "file": "results/raw/isolated_colab_revalidation_20261011T011459127026Z/reviewed_source.tar.gz"
+    }
+  ],
+  "json_files_inspected": 8612,
+  "json_parse_errors": [
+    {
+      "error_type": "JSONDecodeError",
+      "file": "results/raw/cpu_gpu_repair_review_20261010T185659333607Z/untrusted_malformed.json"
+    }
+  ],
+  "named_candidates": [
+    "results/raw/cub_sort_validation_20261009T220322089788Z/cloud_evidence_review.json"
+  ],
+  "scope": "repository docs/results/report and results/raw tar.gz headers; no credentials searched"
+}
