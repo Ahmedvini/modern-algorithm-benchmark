@@ -1,0 +1,27 @@
+{
+  "complete": true,
+  "figures_sha256": {
+    "duplicate_heavy_algorithmic_efficiency.pdf": "e7a7e2af6717a43aff38c0fb3a3059fb650f9759b94fe99c183ba3522380fd06",
+    "duplicate_heavy_algorithmic_efficiency.svg": "9d2c9d6b2a4c28329e87f517eacec17c52a320be77b0998e7b5f86d0dbc84c52",
+    "duplicate_heavy_algorithmic_speedup.pdf": "72a10a9cbfdf045a756224edf4aa467d5fc35dac383ba9182ba36a5715aa2394",
+    "duplicate_heavy_algorithmic_speedup.svg": "166044d4f572334aab98445e158464563cb157a4ebb52e3fb364d66dbbd08c92",
+    "duplicate_heavy_parallel_median_ns.pdf": "a981e784fa16866a47ea16d1ff623dcf07d9ed105025ba589f97c3f5e10b1cbc",
+    "duplicate_heavy_parallel_median_ns.svg": "6bcb7b7f514e7ddc936adfcd5783f1eebe0c908e32da0431da209d26ba092643",
+    "duplicate_heavy_parallel_one_thread_speedup.pdf": "0e25b6f3ea683eb3cd1989be74234f35f1526de4446c9b5b74efc2c2c4097dc4",
+    "duplicate_heavy_parallel_one_thread_speedup.svg": "809e1ce59fcc7b18505ffa0407a51222ea8bc5179e4fdfeafe341d9963cfd61c",
+    "plot_manifest.json": "79bebdb1b80951d08a9e92dacca67997757a8e4ffc72497d3c1aa800bce44a5a",
+    "uniform_algorithmic_efficiency.pdf": "c188f6306571de9a0312bc09f0d603204a88d12f253ba2bd3734f782c8efc51a",
+    "uniform_algorithmic_efficiency.svg": "c0719d634932c4db1c6e9d854fa4ab983908b6f238d47546b2740479ec5224ea",
+    "uniform_algorithmic_speedup.pdf": "63cec41d95c43c5a5c2a886af568ee890e9523cf38066833be1b8bed799312db",
+    "uniform_algorithmic_speedup.svg": "96a61f87e0555c9a3121b26bddf264b88e554f40f1bee59954c5592061ce710c",
+    "uniform_parallel_median_ns.pdf": "0eb668eebc071c3888a053e6fae57b972cce52a6834cfbec960c6853d39e9a64",
+    "uniform_parallel_median_ns.svg": "28573e4db43345cc6d43bfa796e0ea408e7f34202aacad923b43bdd4f3c6535e",
+    "uniform_parallel_one_thread_speedup.pdf": "41b2e30d52332acb82daaa67173dfc7403421b5febb2504e7fe9ceb959ac02a2",
+    "uniform_parallel_one_thread_speedup.svg": "71171c3f309b7e169bab3b8cff3e33b2ab90fd84070e28babcdbfd8e11172f6f"
+  },
+  "files_sha256": {
+    "REPORT.md": "ef3ce339b9d5360826a6cb8d2669508f21034d0504b0310faac0fcd84689a16b",
+    "observations.jsonl": "eb0f7e94c9694072c7b9e2bd92762655badc4db41915908258c0742ca63cdc35",
+    "summary.json": "5fbb354c73b0e10bc22a404211b75890c4c6004df21db23f111bf794607455e3"
+  }
+}

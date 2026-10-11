@@ -1,0 +1,4286 @@
+{
+  "aggregation": "Within-dataset medians, ratios before equal-weight distinct-input summaries; all outliers retained; SD ddof1; no confidence interval.",
+  "build_identity": [
+    "GNU",
+    "13.3.0",
+    "Release",
+    false,
+    "-fopenmp",
+    "/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so;/usr/lib/x86_64-linux-gnu/libpthread.a",
+    "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6"
+  ],
+  "commands": [
+    {
+      "exit_code": 0,
+      "run": "run_000000",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000001",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000002",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000003",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000004",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000005",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000006",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000007",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000008",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000009",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000010",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000011",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000012",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000013",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000014",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000015",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000016",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000017",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000018",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000019",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000020",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000021",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000022",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000023",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000024",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000025",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000026",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000027",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000028",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000029",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000030",
+      "status": "successful"
+    },
+    {
+      "exit_code": 0,
+      "run": "run_000031",
+      "status": "successful"
+    }
+  ],
+  "complete": true,
+  "configuration": {
+    "distinct": 16,
+    "distributions": [
+      "uniform",
+      "duplicate_heavy"
+    ],
+    "memory_limit_mib": 256,
+    "profile": "smoke",
+    "protocol": "parallel_sort_timing_v1",
+    "repetitions": 5,
+    "require_requested_teams": true,
+    "schema_version": 1,
+    "seeds": [
+      1729
+    ],
+    "sizes": [
+      0,
+      32767,
+      32768,
+      65537
+    ],
+    "threads": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "validation_only": false,
+    "warmups": 1
+  },
+  "cross_dataset": [
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 33,
+        "mean": 33,
+        "median": 33,
+        "minimum": 33,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 1,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 27,
+        "mean": 27,
+        "median": 27,
+        "minimum": 27,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 2,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 27,
+        "mean": 27,
+        "median": 27,
+        "minimum": 27,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 4,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 27,
+        "mean": 27,
+        "median": 27,
+        "minimum": 27,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 8,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 28,
+        "mean": 28,
+        "median": 28,
+        "minimum": 28,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 1,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 29,
+        "mean": 29,
+        "median": 29,
+        "minimum": 29,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 2,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 29,
+        "mean": 29,
+        "median": 29,
+        "minimum": 29,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 4,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 30,
+        "mean": 30,
+        "median": 30,
+        "minimum": 30,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 0,
+      "threads": 8,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 974180,
+        "mean": 974180,
+        "median": 974180,
+        "minimum": 974180,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 1,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1013104,
+        "mean": 1013104,
+        "median": 1013104,
+        "minimum": 1013104,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 2,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 992454,
+        "mean": 992454,
+        "median": 992454,
+        "minimum": 992454,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 4,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 996745,
+        "mean": 996745,
+        "median": 996745,
+        "minimum": 996745,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 8,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1769904,
+        "mean": 1769904,
+        "median": 1769904,
+        "minimum": 1769904,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 1,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1755388,
+        "mean": 1755388,
+        "median": 1755388,
+        "minimum": 1755388,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 2,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1780513,
+        "mean": 1780513,
+        "median": 1780513,
+        "minimum": 1780513,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 4,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1803526,
+        "mean": 1803526,
+        "median": 1803526,
+        "minimum": 1803526,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 0,
+        "maximum": null,
+        "mean": null,
+        "median": null,
+        "minimum": null,
+        "sample_stdev": null
+      },
+      "size": 32767,
+      "threads": 8,
+      "unavailable_datasets": 1
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.9089586153071003,
+        "mean": 0.9089586153071003,
+        "median": 0.9089586153071003,
+        "minimum": 0.9089586153071003,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 0.9089586153071003,
+        "mean": 0.9089586153071003,
+        "median": 0.9089586153071003,
+        "minimum": 0.9089586153071003,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1012210,
+        "mean": 1012210,
+        "median": 1012210,
+        "minimum": 1012210,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 1,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.831833774290667,
+        "mean": 0.831833774290667,
+        "median": 0.831833774290667,
+        "minimum": 0.831833774290667,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.663667548581334,
+        "mean": 1.663667548581334,
+        "median": 1.663667548581334,
+        "minimum": 1.663667548581334,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 548050,
+        "mean": 548050,
+        "median": 548050,
+        "minimum": 548050,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.9234650123163944,
+        "mean": 0.9234650123163944,
+        "median": 0.9234650123163944,
+        "minimum": 0.9234650123163944,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.8469300246327889,
+        "mean": 1.8469300246327889,
+        "median": 1.8469300246327889,
+        "minimum": 1.8469300246327889,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 2,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.4121598691211975,
+        "mean": 0.4121598691211975,
+        "median": 0.4121598691211975,
+        "minimum": 0.4121598691211975,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.64863947648479,
+        "mean": 1.64863947648479,
+        "median": 1.64863947648479,
+        "minimum": 1.64863947648479,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 542181,
+        "mean": 542181,
+        "median": 542181,
+        "minimum": 542181,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.4667306674339381,
+        "mean": 0.4667306674339381,
+        "median": 0.4667306674339381,
+        "minimum": 0.4667306674339381,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.8669226697357524,
+        "mean": 1.8669226697357524,
+        "median": 1.8669226697357524,
+        "minimum": 1.8669226697357524,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 4,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.1953030786692204,
+        "mean": 0.1953030786692204,
+        "median": 0.1953030786692204,
+        "minimum": 0.1953030786692204,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.5624246293537631,
+        "mean": 1.5624246293537631,
+        "median": 1.5624246293537631,
+        "minimum": 1.5624246293537631,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 592074,
+        "mean": 592074,
+        "median": 592074,
+        "minimum": 592074,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.213700061141006,
+        "mean": 0.213700061141006,
+        "median": 0.213700061141006,
+        "minimum": 0.213700061141006,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.709600489128048,
+        "mean": 1.709600489128048,
+        "median": 1.709600489128048,
+        "minimum": 1.709600489128048,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 8,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.9292934810173499,
+        "mean": 0.9292934810173499,
+        "median": 0.9292934810173499,
+        "minimum": 0.9292934810173499,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 0.9292934810173499,
+        "mean": 0.9292934810173499,
+        "median": 0.9292934810173499,
+        "minimum": 0.9292934810173499,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1794191,
+        "mean": 1794191,
+        "median": 1794191,
+        "minimum": 1794191,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 1,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.8684949989971658,
+        "mean": 0.8684949989971658,
+        "median": 0.8684949989971658,
+        "minimum": 0.8684949989971658,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.7369899979943315,
+        "mean": 1.7369899979943315,
+        "median": 1.7369899979943315,
+        "minimum": 1.7369899979943315,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 987202,
+        "mean": 987202,
+        "median": 987202,
+        "minimum": 987202,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.9087253672500664,
+        "mean": 0.9087253672500664,
+        "median": 0.9087253672500664,
+        "minimum": 0.9087253672500664,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.8174507345001327,
+        "mean": 1.8174507345001327,
+        "median": 1.8174507345001327,
+        "minimum": 1.8174507345001327,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 2,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.41969961013272783,
+        "mean": 0.41969961013272783,
+        "median": 0.41969961013272783,
+        "minimum": 0.41969961013272783,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.6787984405309113,
+        "mean": 1.6787984405309113,
+        "median": 1.6787984405309113,
+        "minimum": 1.6787984405309113,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 994441,
+        "mean": 994441,
+        "median": 994441,
+        "minimum": 994441,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.45105516566593695,
+        "mean": 0.45105516566593695,
+        "median": 0.45105516566593695,
+        "minimum": 0.45105516566593695,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.8042206626637478,
+        "mean": 1.8042206626637478,
+        "median": 1.8042206626637478,
+        "minimum": 1.8042206626637478,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 4,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.18115526715465743,
+        "mean": 0.18115526715465743,
+        "median": 0.18115526715465743,
+        "minimum": 0.18115526715465743,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.4492421372372595,
+        "mean": 1.4492421372372595,
+        "median": 1.4492421372372595,
+        "minimum": 1.4492421372372595,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1182536,
+        "mean": 1182536,
+        "median": 1182536,
+        "minimum": 1182536,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.18965500838875096,
+        "mean": 0.18965500838875096,
+        "median": 0.18965500838875096,
+        "minimum": 0.18965500838875096,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.5172400671100077,
+        "mean": 1.5172400671100077,
+        "median": 1.5172400671100077,
+        "minimum": 1.5172400671100077,
+        "sample_stdev": null
+      },
+      "size": 32768,
+      "threads": 8,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.8935398309720748,
+        "mean": 0.8935398309720748,
+        "median": 0.8935398309720748,
+        "minimum": 0.8935398309720748,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 0.8935398309720748,
+        "mean": 0.8935398309720748,
+        "median": 0.8935398309720748,
+        "minimum": 0.8935398309720748,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 2100363,
+        "mean": 2100363,
+        "median": 2100363,
+        "minimum": 2100363,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 1,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.8725637743006164,
+        "mean": 0.8725637743006164,
+        "median": 0.8725637743006164,
+        "minimum": 0.8725637743006164,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.7451275486012328,
+        "mean": 1.7451275486012328,
+        "median": 1.7451275486012328,
+        "minimum": 1.7451275486012328,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1054500,
+        "mean": 1054500,
+        "median": 1054500,
+        "minimum": 1054500,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.9959046941678521,
+        "mean": 0.9959046941678521,
+        "median": 0.9959046941678521,
+        "minimum": 0.9959046941678521,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.9918093883357042,
+        "mean": 1.9918093883357042,
+        "median": 1.9918093883357042,
+        "minimum": 1.9918093883357042,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 2,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.53673109285548,
+        "mean": 0.53673109285548,
+        "median": 0.53673109285548,
+        "minimum": 0.53673109285548,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 2.14692437142192,
+        "mean": 2.14692437142192,
+        "median": 2.14692437142192,
+        "minimum": 2.14692437142192,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 863417,
+        "mean": 863417,
+        "median": 863417,
+        "minimum": 863417,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.6081542869783662,
+        "mean": 0.6081542869783662,
+        "median": 0.6081542869783662,
+        "minimum": 0.6081542869783662,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 2.4326171479134646,
+        "mean": 2.4326171479134646,
+        "median": 2.4326171479134646,
+        "minimum": 2.4326171479134646,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 4,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.28675242350466185,
+        "mean": 0.28675242350466185,
+        "median": 0.28675242350466185,
+        "minimum": 0.28675242350466185,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 2.2940193880372948,
+        "mean": 2.2940193880372948,
+        "median": 2.2940193880372948,
+        "minimum": 2.2940193880372948,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "duplicate_heavy",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 809984,
+        "mean": 809984,
+        "median": 809984,
+        "minimum": 809984,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.32413649528879585,
+        "mean": 0.32413649528879585,
+        "median": 0.32413649528879585,
+        "minimum": 0.32413649528879585,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 2.5930919623103668,
+        "mean": 2.5930919623103668,
+        "median": 2.5930919623103668,
+        "minimum": 2.5930919623103668,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 8,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.9351522761998188,
+        "mean": 0.9351522761998188,
+        "median": 0.9351522761998188,
+        "minimum": 0.9351522761998188,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 0.9351522761998188,
+        "mean": 0.9351522761998188,
+        "median": 0.9351522761998188,
+        "minimum": 0.9351522761998188,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 3886983,
+        "mean": 3886983,
+        "median": 3886983,
+        "minimum": 3886983,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 1,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.8684020622955887,
+        "mean": 0.8684020622955887,
+        "median": 0.8684020622955887,
+        "minimum": 0.8684020622955887,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.7368041245911774,
+        "mean": 1.7368041245911774,
+        "median": 1.7368041245911774,
+        "minimum": 1.7368041245911774,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 2109106,
+        "mean": 2109106,
+        "median": 2109106,
+        "minimum": 2109106,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.9214764454702609,
+        "mean": 0.9214764454702609,
+        "median": 0.9214764454702609,
+        "minimum": 0.9214764454702609,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 1.8429528909405217,
+        "mean": 1.8429528909405217,
+        "median": 1.8429528909405217,
+        "minimum": 1.8429528909405217,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 2,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.4844495104767868,
+        "mean": 0.4844495104767868,
+        "median": 0.4844495104767868,
+        "minimum": 0.4844495104767868,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 1.9377980419071472,
+        "mean": 1.9377980419071472,
+        "median": 1.9377980419071472,
+        "minimum": 1.9377980419071472,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1868655,
+        "mean": 1868655,
+        "median": 1868655,
+        "minimum": 1868655,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.5200241617634074,
+        "mean": 0.5200241617634074,
+        "median": 0.5200241617634074,
+        "minimum": 0.5200241617634074,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 2.0800966470536295,
+        "mean": 2.0800966470536295,
+        "median": 2.0800966470536295,
+        "minimum": 2.0800966470536295,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 4,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 1,
+        "maximum": 0.29824402630507446,
+        "mean": 0.29824402630507446,
+        "median": 0.29824402630507446,
+        "minimum": 0.29824402630507446,
+        "sample_stdev": null
+      },
+      "algorithmic_speedup": {
+        "count": 1,
+        "maximum": 2.3859522104405957,
+        "mean": 2.3859522104405957,
+        "median": 2.3859522104405957,
+        "minimum": 2.3859522104405957,
+        "sample_stdev": null
+      },
+      "declared_datasets": 1,
+      "distinct_inputs": 1,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 1,
+        "maximum": 1527614,
+        "mean": 1527614,
+        "median": 1527614,
+        "minimum": 1527614,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 1,
+        "maximum": 0.3180599778478071,
+        "mean": 0.3180599778478071,
+        "median": 0.3180599778478071,
+        "minimum": 0.3180599778478071,
+        "sample_stdev": null
+      },
+      "parallel_one_thread_speedup": {
+        "count": 1,
+        "maximum": 2.5444798227824568,
+        "mean": 2.5444798227824568,
+        "median": 2.5444798227824568,
+        "minimum": 2.5444798227824568,
+        "sample_stdev": null
+      },
+      "size": 65537,
+      "threads": 8,
+      "unavailable_datasets": 0
+    }
+  ],
+  "dataset_ratios": [
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 28,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 1,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 29,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 2,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 29,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 4,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 30,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 8,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 33,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 1,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 27,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 2,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 27,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 4,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14695981039346656037",
+      "parallel_median_ns": 27,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 0,
+      "threads": 8,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "6388590564026998757",
+      "parallel_median_ns": 1769904,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 1,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "6388590564026998757",
+      "parallel_median_ns": 1755388,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 2,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "6388590564026998757",
+      "parallel_median_ns": 1780513,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 4,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "6388590564026998757",
+      "parallel_median_ns": 1803526,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 8,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14622072354376408895",
+      "parallel_median_ns": 974180,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 1,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14622072354376408895",
+      "parallel_median_ns": 1013104,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 2,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14622072354376408895",
+      "parallel_median_ns": 992454,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 4,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": null,
+      "algorithmic_speedup": null,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "14622072354376408895",
+      "parallel_median_ns": 996745,
+      "parallel_one_thread_efficiency": null,
+      "parallel_one_thread_speedup": null,
+      "seed": 1729,
+      "size": 32767,
+      "threads": 8,
+      "unavailable_reason": "requires above-threshold complete positive medians, request1 baseline and exact observed team"
+    },
+    {
+      "algorithmic_efficiency": 0.9292934810173499,
+      "algorithmic_speedup": 0.9292934810173499,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "11325654902253750599",
+      "parallel_median_ns": 1794191,
+      "parallel_one_thread_efficiency": 1.0,
+      "parallel_one_thread_speedup": 1.0,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 1,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.8684949989971658,
+      "algorithmic_speedup": 1.7369899979943315,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "11325654902253750599",
+      "parallel_median_ns": 987202,
+      "parallel_one_thread_efficiency": 0.9087253672500664,
+      "parallel_one_thread_speedup": 1.8174507345001327,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 2,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.41969961013272783,
+      "algorithmic_speedup": 1.6787984405309113,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "11325654902253750599",
+      "parallel_median_ns": 994441,
+      "parallel_one_thread_efficiency": 0.45105516566593695,
+      "parallel_one_thread_speedup": 1.8042206626637478,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 4,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.18115526715465743,
+      "algorithmic_speedup": 1.4492421372372595,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "11325654902253750599",
+      "parallel_median_ns": 1182536,
+      "parallel_one_thread_efficiency": 0.18965500838875096,
+      "parallel_one_thread_speedup": 1.5172400671100077,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 8,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.9089586153071003,
+      "algorithmic_speedup": 0.9089586153071003,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "8938923277623675721",
+      "parallel_median_ns": 1012210,
+      "parallel_one_thread_efficiency": 1.0,
+      "parallel_one_thread_speedup": 1.0,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 1,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.831833774290667,
+      "algorithmic_speedup": 1.663667548581334,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "8938923277623675721",
+      "parallel_median_ns": 548050,
+      "parallel_one_thread_efficiency": 0.9234650123163944,
+      "parallel_one_thread_speedup": 1.8469300246327889,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 2,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.4121598691211975,
+      "algorithmic_speedup": 1.64863947648479,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "8938923277623675721",
+      "parallel_median_ns": 542181,
+      "parallel_one_thread_efficiency": 0.4667306674339381,
+      "parallel_one_thread_speedup": 1.8669226697357524,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 4,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.1953030786692204,
+      "algorithmic_speedup": 1.5624246293537631,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "8938923277623675721",
+      "parallel_median_ns": 592074,
+      "parallel_one_thread_efficiency": 0.213700061141006,
+      "parallel_one_thread_speedup": 1.709600489128048,
+      "seed": 1729,
+      "size": 32768,
+      "threads": 8,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.9351522761998188,
+      "algorithmic_speedup": 0.9351522761998188,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "3364258871840083376",
+      "parallel_median_ns": 3886983,
+      "parallel_one_thread_efficiency": 1.0,
+      "parallel_one_thread_speedup": 1.0,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 1,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.8684020622955887,
+      "algorithmic_speedup": 1.7368041245911774,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "3364258871840083376",
+      "parallel_median_ns": 2109106,
+      "parallel_one_thread_efficiency": 0.9214764454702609,
+      "parallel_one_thread_speedup": 1.8429528909405217,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 2,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.4844495104767868,
+      "algorithmic_speedup": 1.9377980419071472,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "3364258871840083376",
+      "parallel_median_ns": 1868655,
+      "parallel_one_thread_efficiency": 0.5200241617634074,
+      "parallel_one_thread_speedup": 2.0800966470536295,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 4,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.29824402630507446,
+      "algorithmic_speedup": 2.3859522104405957,
+      "distribution": "uniform",
+      "input_hash_fnv1a64": "3364258871840083376",
+      "parallel_median_ns": 1527614,
+      "parallel_one_thread_efficiency": 0.3180599778478071,
+      "parallel_one_thread_speedup": 2.5444798227824568,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 8,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.8935398309720748,
+      "algorithmic_speedup": 0.8935398309720748,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "13030177660018526400",
+      "parallel_median_ns": 2100363,
+      "parallel_one_thread_efficiency": 1.0,
+      "parallel_one_thread_speedup": 1.0,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 1,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.8725637743006164,
+      "algorithmic_speedup": 1.7451275486012328,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "13030177660018526400",
+      "parallel_median_ns": 1054500,
+      "parallel_one_thread_efficiency": 0.9959046941678521,
+      "parallel_one_thread_speedup": 1.9918093883357042,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 2,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.53673109285548,
+      "algorithmic_speedup": 2.14692437142192,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "13030177660018526400",
+      "parallel_median_ns": 863417,
+      "parallel_one_thread_efficiency": 0.6081542869783662,
+      "parallel_one_thread_speedup": 2.4326171479134646,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 4,
+      "unavailable_reason": null
+    },
+    {
+      "algorithmic_efficiency": 0.28675242350466185,
+      "algorithmic_speedup": 2.2940193880372948,
+      "distribution": "duplicate_heavy",
+      "input_hash_fnv1a64": "13030177660018526400",
+      "parallel_median_ns": 809984,
+      "parallel_one_thread_efficiency": 0.32413649528879585,
+      "parallel_one_thread_speedup": 2.5930919623103668,
+      "seed": 1729,
+      "size": 65537,
+      "threads": 8,
+      "unavailable_reason": null
+    }
+  ],
+  "failed_measured": 0,
+  "failed_warmups": 0,
+  "groups": [
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000000/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 33,
+        "mean_ns": 22,
+        "median_ns": 17,
+        "min_ns": 16,
+        "stdev_ns": 7.615773105863909,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000000/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 35,
+        "mean_ns": 29.4,
+        "median_ns": 28,
+        "min_ns": 27,
+        "stdev_ns": 3.2093613071762426,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000001/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 27,
+        "mean_ns": 20.2,
+        "median_ns": 17,
+        "min_ns": 16,
+        "stdev_ns": 4.969909455915671,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000001/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 45,
+        "mean_ns": 31.4,
+        "median_ns": 29,
+        "min_ns": 23,
+        "stdev_ns": 8.87693640846886,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000002/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 25,
+        "mean_ns": 19.8,
+        "median_ns": 17,
+        "min_ns": 17,
+        "stdev_ns": 3.898717737923586,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000002/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 41,
+        "mean_ns": 32.2,
+        "median_ns": 29,
+        "min_ns": 27,
+        "stdev_ns": 6.058052492344384,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000003/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 25,
+        "mean_ns": 20,
+        "median_ns": 18,
+        "min_ns": 16,
+        "stdev_ns": 4.183300132670378,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000003/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 31,
+        "mean_ns": 30.2,
+        "median_ns": 30,
+        "min_ns": 29,
+        "stdev_ns": 0.8366600265340756,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000004/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 29,
+        "mean_ns": 24.2,
+        "median_ns": 26,
+        "min_ns": 17,
+        "stdev_ns": 4.54972526643093,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000004/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 42,
+        "mean_ns": 33.8,
+        "median_ns": 33,
+        "min_ns": 26,
+        "stdev_ns": 6.685805860178712,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000005/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 26,
+        "mean_ns": 19.2,
+        "median_ns": 16,
+        "min_ns": 15,
+        "stdev_ns": 4.969909455915671,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000005/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 37,
+        "mean_ns": 29.2,
+        "median_ns": 27,
+        "min_ns": 27,
+        "stdev_ns": 4.381780460041329,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000006/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 24,
+        "mean_ns": 19.2,
+        "median_ns": 16,
+        "min_ns": 16,
+        "stdev_ns": 4.381780460041329,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000006/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 36,
+        "mean_ns": 28.6,
+        "median_ns": 27,
+        "min_ns": 26,
+        "stdev_ns": 4.219004621945797,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000007/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 26,
+        "mean_ns": 22.6,
+        "median_ns": 23,
+        "min_ns": 17,
+        "stdev_ns": 3.361547262794322,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14695981039346656037",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 0,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000007/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 37,
+        "mean_ns": 29.4,
+        "median_ns": 27,
+        "min_ns": 23,
+        "stdev_ns": 6.6558245169174945,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000008/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1675737,
+        "mean_ns": 1649190.8,
+        "median_ns": 1645731,
+        "min_ns": 1633278,
+        "stdev_ns": 16172.663840567515,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000008/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1910844,
+        "mean_ns": 1799397.2,
+        "median_ns": 1769904,
+        "min_ns": 1738176,
+        "stdev_ns": 67204.08663690029,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000009/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1681683,
+        "mean_ns": 1639630,
+        "median_ns": 1634373,
+        "min_ns": 1607866,
+        "stdev_ns": 27800.974236526316,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000009/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1797152,
+        "mean_ns": 1768158,
+        "median_ns": 1755388,
+        "min_ns": 1745990,
+        "stdev_ns": 24350.457285233886,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000010/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1739210,
+        "mean_ns": 1687414.2,
+        "median_ns": 1683259,
+        "min_ns": 1650586,
+        "stdev_ns": 32704.020336955517,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000010/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1866195,
+        "mean_ns": 1795515,
+        "median_ns": 1780513,
+        "min_ns": 1769781,
+        "stdev_ns": 39952.609357837944,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000011/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1726231,
+        "mean_ns": 1688004.4,
+        "median_ns": 1684067,
+        "min_ns": 1665038,
+        "stdev_ns": 22885.07453123105,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "6388590564026998757",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000011/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1940275,
+        "mean_ns": 1829541.6,
+        "median_ns": 1803526,
+        "min_ns": 1790390,
+        "stdev_ns": 62796.15023470786,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000012/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 887591,
+        "mean_ns": 873537,
+        "median_ns": 874678,
+        "min_ns": 862485,
+        "stdev_ns": 9496.823495253559,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000012/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 984317,
+        "mean_ns": 975660.8,
+        "median_ns": 974180,
+        "min_ns": 966375,
+        "stdev_ns": 8240.60966797967,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000013/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 918587,
+        "mean_ns": 900817.4,
+        "median_ns": 912320,
+        "min_ns": 871545,
+        "stdev_ns": 21945.38337099628,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000013/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1030989,
+        "mean_ns": 1016288.6,
+        "median_ns": 1013104,
+        "min_ns": 999609,
+        "stdev_ns": 13677.023517564046,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000014/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 917979,
+        "mean_ns": 897033.2,
+        "median_ns": 892373,
+        "min_ns": 883992,
+        "stdev_ns": 13063.790862532973,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000014/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1020368,
+        "mean_ns": 995893.4,
+        "median_ns": 992454,
+        "min_ns": 980800,
+        "stdev_ns": 16344.899504126663,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000015/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 942208,
+        "mean_ns": 893772.2,
+        "median_ns": 883932,
+        "min_ns": 874791,
+        "stdev_ns": 27384.987916740076,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "14622072354376408895",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32767,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000015/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1033898,
+        "mean_ns": 1003841.8,
+        "median_ns": 996745,
+        "min_ns": 991250,
+        "stdev_ns": 17719.319532645717,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000016/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1681512,
+        "mean_ns": 1668702.2,
+        "median_ns": 1667330,
+        "min_ns": 1658883,
+        "stdev_ns": 10258.935797635153,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000016/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1803258,
+        "mean_ns": 1795801.8,
+        "median_ns": 1794191,
+        "min_ns": 1791113,
+        "stdev_ns": 4615.604694945181,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000017/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1727602,
+        "mean_ns": 1704976,
+        "median_ns": 1714760,
+        "min_ns": 1671708,
+        "stdev_ns": 23022.677819923556,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        2
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000017/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1022455,
+        "mean_ns": 992109.6,
+        "median_ns": 987202,
+        "min_ns": 963521,
+        "stdev_ns": 22341.709084132304,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000018/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1690429,
+        "mean_ns": 1676118.8,
+        "median_ns": 1669466,
+        "min_ns": 1663171,
+        "stdev_ns": 12910.598890059284,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        4
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000018/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1021181,
+        "mean_ns": 998181.2,
+        "median_ns": 994441,
+        "min_ns": 979897,
+        "stdev_ns": 15168.522775801208,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000019/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1721661,
+        "mean_ns": 1710700.4,
+        "median_ns": 1713781,
+        "min_ns": 1696964,
+        "stdev_ns": 9988.50843719922,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        8
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "11325654902253750599",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000019/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1236510,
+        "mean_ns": 1126736,
+        "median_ns": 1182536,
+        "min_ns": 1011780,
+        "stdev_ns": 106062.42710545521,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000020/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 951821,
+        "mean_ns": 915749.8,
+        "median_ns": 920057,
+        "min_ns": 881015,
+        "stdev_ns": 26702.621045507873,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000020/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1030376,
+        "mean_ns": 1012471.2,
+        "median_ns": 1012210,
+        "min_ns": 995338,
+        "stdev_ns": 14423.479788178718,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000021/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 925253,
+        "mean_ns": 912019.2,
+        "median_ns": 911773,
+        "min_ns": 901072,
+        "stdev_ns": 10262.098333187028,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        2
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000021/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 560454,
+        "mean_ns": 544598.4,
+        "median_ns": 548050,
+        "min_ns": 525262,
+        "stdev_ns": 16357.512304748543,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000022/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 900448,
+        "mean_ns": 893930.8,
+        "median_ns": 893861,
+        "min_ns": 886131,
+        "stdev_ns": 5262.487596184907,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        4
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000022/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 549639,
+        "mean_ns": 538293.6,
+        "median_ns": 542181,
+        "min_ns": 521698,
+        "stdev_ns": 12095.939207023157,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000023/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 942330,
+        "mean_ns": 926998.8,
+        "median_ns": 925071,
+        "min_ns": 918461,
+        "stdev_ns": 9760.92394192271,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        8
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "8938923277623675721",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 32768,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000023/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 753512,
+        "mean_ns": 641507,
+        "median_ns": 592074,
+        "min_ns": 546807,
+        "stdev_ns": 96437.43808552776,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000024/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 3771213,
+        "mean_ns": 3662894.8,
+        "median_ns": 3634921,
+        "min_ns": 3624173,
+        "stdev_ns": 61539.404475506584,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000024/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 4006541,
+        "mean_ns": 3913108.8,
+        "median_ns": 3886983,
+        "min_ns": 3860689,
+        "stdev_ns": 57660.535656547625,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000025/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 3743255,
+        "mean_ns": 3678946.4,
+        "median_ns": 3663104,
+        "min_ns": 3659648,
+        "stdev_ns": 36058.19603502094,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        2
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000025/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 2216987,
+        "mean_ns": 2130527.8,
+        "median_ns": 2109106,
+        "min_ns": 2087396,
+        "stdev_ns": 52293.060650529915,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000026/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 3721248,
+        "mean_ns": 3634727,
+        "median_ns": 3621076,
+        "min_ns": 3579323,
+        "stdev_ns": 54778.043224452624,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        4
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000026/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 2138021,
+        "mean_ns": 1918032.6,
+        "median_ns": 1868655,
+        "min_ns": 1813438,
+        "stdev_ns": 131679.89153739458,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000027/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 4484243,
+        "mean_ns": 3805753.4,
+        "median_ns": 3644814,
+        "min_ns": 3588187,
+        "stdev_ns": 380525.7055486528,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        8
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "3364258871840083376",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000027/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1559766,
+        "mean_ns": 1504510.4,
+        "median_ns": 1527614,
+        "min_ns": 1443863,
+        "stdev_ns": 52762.44190046552,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000028/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 2206769,
+        "mean_ns": 1938628,
+        "median_ns": 1876758,
+        "min_ns": 1856177,
+        "stdev_ns": 150574.79775845623,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 1,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000028/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 2311961,
+        "mean_ns": 2146327.6,
+        "median_ns": 2100363,
+        "min_ns": 2065729,
+        "stdev_ns": 101725.36726303818,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000029/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1885824,
+        "mean_ns": 1836404,
+        "median_ns": 1840237,
+        "min_ns": 1793884,
+        "stdev_ns": 36108.87826421641,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        2
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 2,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000029/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1088141,
+        "mean_ns": 1056751.8,
+        "median_ns": 1054500,
+        "min_ns": 1031986,
+        "stdev_ns": 20982.549837901017,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000030/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1911040,
+        "mean_ns": 1849778.8,
+        "median_ns": 1853691,
+        "min_ns": 1784773,
+        "stdev_ns": 57297.352606381384,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        4
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 4,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000030/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1063856,
+        "mean_ns": 897276.4,
+        "median_ns": 863417,
+        "min_ns": 814527,
+        "stdev_ns": 103723.945561283,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        1
+      ],
+      "algorithm": "merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000031/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 1897232,
+        "mean_ns": 1869301,
+        "median_ns": 1858119,
+        "min_ns": 1841584,
+        "stdev_ns": 24086.855326090204,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    },
+    {
+      "actual_threads": [
+        8
+      ],
+      "algorithm": "parallel_merge_sort",
+      "architecture": "x86_64",
+      "build_type": "Release",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "input_hash_fnv1a64": "13030177660018526400",
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "parallel_threads": 8,
+      "platform": "Linux",
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seed": 1729,
+      "size": 65537,
+      "source_csv": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z/run_000031/trials.csv",
+      "successful_trials": 5,
+      "timing_ns": {
+        "max_ns": 886425,
+        "mean_ns": 827181.6,
+        "median_ns": 809984,
+        "min_ns": 780261,
+        "stdev_ns": 50699.01760192203,
+        "successful_trials": 5
+      },
+      "warmup_rows": 1
+    }
+  ],
+  "missing_configurations": [],
+  "missing_measured": 0,
+  "missing_warmups": 0,
+  "protocol": "parallel_sort_timing_v1",
+  "schema_version": 1,
+  "source": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/openmp_smoke_20261009T200852928292Z",
+  "successful_measured": 320,
+  "warmup_rows": 64
+}
