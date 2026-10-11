@@ -1,0 +1,10 @@
+{
+  "results/processed/count_memory_20261011T095554571762Z/summary.json": "578755ba252556552598b619e8f8f657148b6726fcf3ded32b8a9251c4457788",
+  "results/processed/cuda_timing_20261009T231303050084Z/matrix.json": "320d3c01028a4472322005c8b6c65bc049e97b18563f38254eb16840d622c335",
+  "results/processed/learned_rank_20261011T095554571762Z/summary.json": "083ed30bd25652559d356cdc1e3e4c6d794ca3d63f6f46c1620ea4c34fcbd26e",
+  "results/processed/openmp_scaling_20261009T200852928292Z_retry1/summary.json": "1b614d85fb4f0e83a9e932517a3d83a46e1b185317dc9107958f8f87c7dcd7bc",
+  "results/processed/phase5_full_20261009T191000587965Z/summary.json": "2e40b853d0402bb45630636e47440d00103903957c8517cd3f7ac96381c397d5",
+  "results/processed/sorting_1m_20261009T172003802655Z/cross_seed.json": "c7ea0489d0756439b6bc5a77ba6eeb5d8b46be5351866a53497c145c9b6dde58",
+  "results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m_summary.json": "07b0cd00743085054f43ca73a8fb097d2414ef2c431c388ec88c80f73fa8353b",
+  "results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m_summary.json": "cb3bd9e03224f69a6b7497f84b5b2fa42022e77ef9a2bea05f526035e21b99f1"
+}

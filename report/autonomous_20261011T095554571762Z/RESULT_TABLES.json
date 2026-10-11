@@ -1,0 +1,618 @@
+{
+  "cpu_scaling": [
+    {
+      "algorithm": "merge_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.07512929,
+      "size": 1000000
+    },
+    {
+      "algorithm": "merge_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.912024905,
+      "size": 10000000
+    },
+    {
+      "algorithm": "merge_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 11.109073894,
+      "size": 100000000
+    },
+    {
+      "algorithm": "pdq_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.02445692,
+      "size": 1000000
+    },
+    {
+      "algorithm": "pdq_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.283683551,
+      "size": 10000000
+    },
+    {
+      "algorithm": "pdq_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 3.100928792,
+      "size": 100000000
+    },
+    {
+      "algorithm": "quick_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.083770908,
+      "size": 1000000
+    },
+    {
+      "algorithm": "quick_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.979348526,
+      "size": 10000000
+    },
+    {
+      "algorithm": "quick_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 11.418276963,
+      "size": 100000000
+    },
+    {
+      "algorithm": "radix_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.007268327,
+      "size": 1000000
+    },
+    {
+      "algorithm": "radix_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.10651542,
+      "size": 10000000
+    },
+    {
+      "algorithm": "radix_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 1.111648025,
+      "size": 100000000
+    },
+    {
+      "algorithm": "std_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.057698583,
+      "size": 1000000
+    },
+    {
+      "algorithm": "std_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.724257421,
+      "size": 10000000
+    },
+    {
+      "algorithm": "std_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 8.052182914,
+      "size": 100000000
+    },
+    {
+      "algorithm": "tim_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.082326229,
+      "size": 1000000
+    },
+    {
+      "algorithm": "tim_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.957998261,
+      "size": 10000000
+    },
+    {
+      "algorithm": "tim_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 11.522669982,
+      "size": 100000000
+    }
+  ],
+  "gpu_smoke_65537_uniform": [
+    {
+      "algorithm": "cub_radix_sort",
+      "build_type": "Release",
+      "complete": true,
+      "cub_version": 300001,
+      "dataset_generator": "mt19937_64_v1",
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "gpu_name": "Tesla T4",
+      "implementation_version": "cub_radix_sort_v1",
+      "input_hash_fnv1a64": "3364258871840083376",
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 30368.000268936157,
+          "mean_ns": 27430.400252342224,
+          "median_ns": 27680.00029027462,
+          "min_ns": 24736.00022494793,
+          "stdev_ns": 2204.101084079375,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 64704.00094985962,
+          "mean_ns": 63392.00064539909,
+          "median_ns": 63904.00230884552,
+          "min_ns": 61312.0011985302,
+          "stdev_ns": 1419.9491301833073,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 129542.0,
+          "mean_ns": 127790.2,
+          "median_ns": 128136.0,
+          "min_ns": 125231.0,
+          "stdev_ns": 1683.5538898413677,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 31039.999797940254,
+          "mean_ns": 29164.79967534542,
+          "median_ns": 28896.000236272812,
+          "min_ns": 28031.999245285988,
+          "stdev_ns": 1117.1622463798565,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "nearly_sorted_swaps": 655,
+      "protocol": "cuda_sort_timing_v1",
+      "repetitions": 5,
+      "run_id": "run_0036",
+      "run_kind": "performance",
+      "schema_version": 1,
+      "seed": 1729,
+      "size": 65537,
+      "successful_trials": 5,
+      "warmup_rows": 1,
+      "warmups": 1
+    },
+    {
+      "algorithm": "cub_radix_sort",
+      "build_type": "Release",
+      "complete": true,
+      "cub_version": 300001,
+      "dataset_generator": "mt19937_64_v1",
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "failed_warmups": 0,
+      "gpu_name": "Tesla T4",
+      "implementation_version": "cub_radix_sort_v1",
+      "input_hash_fnv1a64": "2546086545277208993",
+      "metrics": {
+        "d2h_ns": {
+          "max_ns": 28640.00014960766,
+          "mean_ns": 26316.799968481064,
+          "median_ns": 26079.999282956123,
+          "min_ns": 23488.00003528595,
+          "stdev_ns": 1973.2094017744791,
+          "successful_trials": 5
+        },
+        "device_sort_ns": {
+          "max_ns": 63327.99792289734,
+          "mean_ns": 62630.40006160736,
+          "median_ns": 62591.999769210815,
+          "min_ns": 61919.99837756157,
+          "stdev_ns": 538.5135147958255,
+          "successful_trials": 5
+        },
+        "end_to_end_ns": {
+          "max_ns": 131905.0,
+          "mean_ns": 126210.0,
+          "median_ns": 125910.0,
+          "min_ns": 122726.0,
+          "stdev_ns": 3707.3764982801517,
+          "successful_trials": 5
+        },
+        "h2d_ns": {
+          "max_ns": 32159.999012947083,
+          "mean_ns": 29299.19958114624,
+          "median_ns": 28511.999174952507,
+          "min_ns": 27456.000447273254,
+          "stdev_ns": 2012.0085521195929,
+          "successful_trials": 5
+        }
+      },
+      "missing_trials": 0,
+      "missing_warmups": 0,
+      "nearly_sorted_swaps": 655,
+      "protocol": "cuda_sort_timing_v1",
+      "repetitions": 5,
+      "run_id": "run_0037",
+      "run_kind": "performance",
+      "schema_version": 1,
+      "seed": 42,
+      "size": 65537,
+      "successful_trials": 5,
+      "warmup_rows": 1,
+      "warmups": 1
+    }
+  ],
+  "learned_1m": [
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "duplicate_heavy",
+      "maximum": 39903,
+      "mean": 35536.333333333336,
+      "median": 34160,
+      "minimum": 32546,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 3866.79225370763,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 632170,
+      "mean": 568275,
+      "median": 578882,
+      "minimum": 493773,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 69805.54232294166,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 37245,
+      "mean": 32584,
+      "median": 33748,
+      "minimum": 26759,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 5339.028095074983,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "nearly_sorted",
+      "maximum": 155036,
+      "mean": 139370,
+      "median": 154655,
+      "minimum": 108419,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 26805.029210952187,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 967037,
+      "mean": 798990,
+      "median": 829069,
+      "minimum": 600864,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 184930.32786160306,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 139109,
+      "mean": 115839.33333333333,
+      "median": 107055,
+      "minimum": 101354,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 20352.72439584768,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "reverse_sorted",
+      "maximum": 126401,
+      "mean": 109398.66666666667,
+      "median": 106410,
+      "minimum": 95385,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 15722.504900089341,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 571018,
+      "mean": 546314.3333333334,
+      "median": 554255,
+      "minimum": 513670,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 29487.09745521477,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 115216,
+      "mean": 98974.66666666667,
+      "median": 94804,
+      "minimum": 86904,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 14609.523651828396,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "uniform",
+      "maximum": 171715,
+      "mean": 139250,
+      "median": 125127,
+      "minimum": 120908,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 28194.541297917935,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 1044690,
+      "mean": 766720,
+      "median": 664637,
+      "minimum": 590833,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 243541.06076594148,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 136460,
+      "mean": 120649,
+      "median": 115328,
+      "minimum": 110159,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 13934.505050413523,
+      "size": 1000000,
+      "unit": "ns"
+    }
+  ],
+  "openmp_1m_uniform": [
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.9552057035743492,
+        "mean": 0.9361452156301832,
+        "median": 0.9346843285198692,
+        "minimum": 0.9185456147963312,
+        "sample_stdev": 0.018373654254525716
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 0.9552057035743492,
+        "mean": 0.9361452156301832,
+        "median": 0.9346843285198692,
+        "minimum": 0.9185456147963312,
+        "sample_stdev": 0.018373654254525716
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 83319357,
+        "mean": 79888177,
+        "median": 79405645,
+        "minimum": 76939529,
+        "sample_stdev": 3217169.4353365973
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": 0.0
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": 0.0
+      },
+      "size": 1000000,
+      "threads": 1,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.8740037290554349,
+        "mean": 0.8630988582510739,
+        "median": 0.859893291381025,
+        "minimum": 0.8553995543167617,
+        "sample_stdev": 0.009707500895984366
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 1.7480074581108698,
+        "mean": 1.7261977165021478,
+        "median": 1.71978658276205,
+        "minimum": 1.7107991086335235,
+        "sample_stdev": 0.01941500179196873
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 46484530,
+        "mean": 43759906.666666664,
+        "median": 43032345,
+        "minimum": 41762845,
+        "sample_stdev": 2443478.4210032085
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 0.9226274445420067,
+        "mean": 0.9133269154147334,
+        "median": 0.9211480803091839,
+        "minimum": 0.8962052213930096,
+        "sample_stdev": 0.014846259941934484
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 1.8452548890840135,
+        "mean": 1.8266538308294669,
+        "median": 1.8422961606183679,
+        "minimum": 1.7924104427860192,
+        "sample_stdev": 0.029692519883868968
+      },
+      "size": 1000000,
+      "threads": 2,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.6659966962913804,
+        "mean": 0.6373962651543154,
+        "median": 0.6432035120730144,
+        "minimum": 0.6029885870985514,
+        "sample_stdev": 0.03190295509188637
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 2.6639867851655215,
+        "mean": 2.5495850606172614,
+        "median": 2.5728140482920576,
+        "minimum": 2.4119543483942056,
+        "sample_stdev": 0.12761182036754548
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 33103151,
+        "mean": 29948701.666666668,
+        "median": 28472301,
+        "minimum": 28270653,
+        "sample_stdev": 2733693.18439384
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 0.6972183684767873,
+        "mean": 0.6689473732350755,
+        "median": 0.6803833731750024,
+        "minimum": 0.6292403780534367,
+        "sample_stdev": 0.03540251921076795
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 2.7888734739071492,
+        "mean": 2.675789492940302,
+        "median": 2.7215334927000097,
+        "minimum": 2.5169615122137468,
+        "sample_stdev": 0.1416100768430718
+      },
+      "size": 1000000,
+      "threads": 4,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.43910695419434387,
+        "mean": 0.40005181423366454,
+        "median": 0.38068921660471566,
+        "minimum": 0.3803592719019341,
+        "sample_stdev": 0.033823145682918256
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 3.512855633554751,
+        "mean": 3.2004145138693163,
+        "median": 3.0455137328377253,
+        "minimum": 3.0428741752154727,
+        "sample_stdev": 0.27058516546334604
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 26010611,
+        "mean": 24607013.333333332,
+        "median": 24144551,
+        "minimum": 23665878,
+        "sample_stdev": 1238889.3282437837
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 0.43135693950158777,
+        "mean": 0.4068392030032779,
+        "median": 0.419409988718779,
+        "minimum": 0.36975068078946705,
+        "sample_stdev": 0.032670342334523705
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 3.450855516012702,
+        "mean": 3.2547136240262233,
+        "median": 3.355279909750232,
+        "minimum": 2.9580054463157364,
+        "sample_stdev": 0.26136273867618964
+      },
+      "size": 1000000,
+      "threads": 8,
+      "unavailable_datasets": 0
+    }
+  ]
+}

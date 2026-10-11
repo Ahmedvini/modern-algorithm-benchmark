@@ -1,0 +1,49 @@
+[
+  {
+    "file": "sorting_1m.png",
+    "filters": {
+      "distribution": "uniform"
+    },
+    "method": "median of seed medians; min/max spread",
+    "source": "results/processed/sorting_1m_20261009T172003802655Z/cross_seed.json",
+    "unit": "ms"
+  },
+  {
+    "file": "cpu_scaling.png",
+    "filters": {
+      "distribution": "uniform"
+    },
+    "limitation": "100M one seed; different run environments",
+    "method": "within-dataset medians then equal seed weights",
+    "sources": [
+      "results/processed/sorting_1m_20261009T172003802655Z/cross_seed.json",
+      "results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m_summary.json",
+      "results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m_summary.json"
+    ],
+    "unit": "seconds"
+  },
+  {
+    "file": "search.png",
+    "filters": {
+      "distribution": "uniform",
+      "family": "search",
+      "query_category": "mixed_50",
+      "size": 1000000
+    },
+    "method": "dataset medians divided by batch size; log y-axis",
+    "source": "results/processed/phase5_full_20261009T191000587965Z/summary.json",
+    "unit": "normalized batch ns/query"
+  },
+  {
+    "file": "structures.png",
+    "filters": {
+      "distribution": "uniform",
+      "family": "structures",
+      "query_category": "mixed_50",
+      "size": 1000000
+    },
+    "method": "dataset medians divided by batch size; log y-axis",
+    "source": "results/processed/phase5_full_20261009T191000587965Z/summary.json",
+    "unit": "normalized batch ns/query"
+  }
+]

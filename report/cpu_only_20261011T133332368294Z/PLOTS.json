@@ -1,0 +1,73 @@
+[
+  {
+    "file": "sorting_1m.png",
+    "filters": {
+      "distribution": "uniform"
+    },
+    "method": "median of seed medians; min/max spread",
+    "source": "results/processed/sorting_1m_20261009T172003802655Z/cross_seed.json",
+    "unit": "ms"
+  },
+  {
+    "file": "cpu_scaling.png",
+    "filters": {
+      "distribution": "uniform"
+    },
+    "limitation": "100M one seed; different run environments",
+    "method": "within-dataset medians then equal seed weights",
+    "sources": [
+      "results/processed/sorting_1m_20261009T172003802655Z/cross_seed.json",
+      "results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m_summary.json",
+      "results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m_summary.json"
+    ],
+    "unit": "seconds"
+  },
+  {
+    "file": "search.png",
+    "filters": {
+      "distribution": "uniform",
+      "family": "search",
+      "query_category": "mixed_50",
+      "size": 1000000
+    },
+    "method": "dataset medians divided by batch size; log y-axis",
+    "source": "results/processed/phase5_full_20261009T191000587965Z/summary.json",
+    "unit": "normalized batch ns/query"
+  },
+  {
+    "file": "structures.png",
+    "filters": {
+      "distribution": "uniform",
+      "family": "structures",
+      "query_category": "mixed_50",
+      "size": 1000000
+    },
+    "method": "dataset medians divided by batch size; log y-axis",
+    "source": "results/processed/phase5_full_20261009T191000587965Z/summary.json",
+    "unit": "normalized batch ns/query"
+  },
+  {
+    "file": "openmp.png",
+    "filters": {
+      "distribution": "uniform",
+      "size": 1000000
+    },
+    "method": "ratio of within-dataset medians to sequential merge; median/min/max across seed ratios",
+    "source": "results/processed/openmp_scaling_20261009T200852928292Z_retry1/summary.json",
+    "unit": "ratio"
+  },
+  {
+    "file": "uniform_count.png",
+    "method": "retained separate instrumented observations; median/min/max across three seeds",
+    "source": "results/processed/count_memory_20261011T095554571762Z/uniform_count.png",
+    "summary": "results/processed/count_memory_20261011T095554571762Z/summary.json",
+    "unit": "comparisons/N"
+  },
+  {
+    "file": "uniform_process_rss.png",
+    "method": "retained separate instrumented observations; median/min/max across three seeds",
+    "source": "results/processed/count_memory_20261011T095554571762Z/uniform_process_rss.png",
+    "summary": "results/processed/count_memory_20261011T095554571762Z/summary.json",
+    "unit": "process lifetime peak RSS MiB"
+  }
+]
