@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/release",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:53:30.353151+00:00",
+  "exit_code": 0,
+  "stdout": "-- Configuring done (0.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n[ 15%] Built target mab_core\n[ 18%] Built target algorithm_benchmark\n[ 25%] Built target mab_metrics\n[ 33%] Built target mab_timing\n[ 31%] Built target mab_search\n[ 40%] Built target test_baselines\n[ 40%] Built target test_datasets\n[ 46%] Built target test_pdqsort\n[ 46%] Built target test_quicksort\n[ 53%] Built target test_mergesort\n[ 53%] Built target test_timsort\n[ 60%] Built target test_comparisons\n[ 60%] Built target test_radixsort\n[ 63%] Built target test_memory\n[ 70%] Built target test_memory_unsupported\n[ 76%] Built target sort_metrics\n[ 76%] Built target test_timing\n[ 80%] Built target mab_search_metrics\n[ 83%] Built target sort_benchmark\n[ 90%] Built target mab_search_timing\n[ 90%] Built target test_searching\n[ 93%] Building CXX object CMakeFiles/search_benchmark.dir/src/benchmark/search_main.cpp.o\n[ 93%] Building CXX object CMakeFiles/search_counts.dir/src/benchmark/search_main.cpp.o\n[ 95%] Linking CXX executable search_counts\n[ 95%] Built target search_counts\n[ 98%] Built target test_search_timing\n[100%] Linking CXX executable search_benchmark\n[100%] Built target search_benchmark\n",
+  "stderr": "",
+  "wall_seconds": 2.360060016002535,
+  "ended_utc": "2026-10-09T17:53:32.713331+00:00"
+}

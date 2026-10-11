@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/analyze_experiment.py",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_smoke_20261009T191000587965Z",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/phase5_smoke_20261009T191000587965Z",
+    "--figures",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/figures/phase5_smoke_20261009T191000587965Z"
+  ],
+  "exit_code": 0,
+  "finished_utc": "2026-10-09T19:27:26.214555+00:00",
+  "started_utc": "2026-10-09T19:26:55.735500+00:00",
+  "status": "successful",
+  "stderr": "",
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/phase5_smoke_20261009T191000587965Z\n",
+  "wall_seconds": 30.47905508199983
+}

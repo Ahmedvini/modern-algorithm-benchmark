@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "build/release",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^searching$"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:42:23.188561+00:00",
+  "exit_code": 0,
+  "stdout": "Internal ctest changing into directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nUpdateCTestConfiguration  from :/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nParse Config file:/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/DartConfiguration.tcl\nTest project /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\nConstructing a list of tests\nDone constructing a list of tests\nUpdating test list for fixtures\nAdded 0 tests to meet fixture requirements\nChecking test dependency graph...\nChecking test dependency graph end\ntest 1\n    Start 1: searching\n\n1: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/test_searching\n1: Working Directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n1: Test timeout computed to be: 1500\n1: Passed 3704 search inputs and 309996 public/registry/counting oracle checks, exact predicates and reset/isolation tests\n1/1 Test #1: searching ........................   Passed    0.04 sec\n\nThe following tests passed:\n\tsearching\n\n100% tests passed, 0 tests failed out of 1\n\nTotal Test time (real) =   0.04 sec\n",
+  "stderr": "",
+  "wall_seconds": 0.04528646399921854,
+  "ended_utc": "2026-10-09T17:42:23.233968+00:00"
+}

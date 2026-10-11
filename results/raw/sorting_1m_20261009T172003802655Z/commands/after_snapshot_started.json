@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/sorting_1m_20261009T172003802655Z/preflight_capture.py",
+    "after_execution.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:26:41.009821+00:00"
+}

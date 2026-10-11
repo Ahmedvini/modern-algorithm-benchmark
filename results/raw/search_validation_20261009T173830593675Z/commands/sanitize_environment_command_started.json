@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/sanitize",
+    "--output",
+    "results/raw/search_validation_20261009T173830593675Z/sanitize_environment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:01:55.199302+00:00"
+}

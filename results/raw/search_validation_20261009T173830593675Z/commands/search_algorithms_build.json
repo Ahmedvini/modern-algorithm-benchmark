@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/release",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:42:03.549505+00:00",
+  "exit_code": 0,
+  "stdout": "-- Configuring done (0.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release\n[ 17%] Built target mab_core\n[ 28%] Built target mab_metrics\n[ 28%] Built target algorithm_benchmark\n[ 30%] Building CXX object CMakeFiles/mab_search.dir/src/algorithms/searching.cpp.o\n[ 36%] Built target mab_timing\n[ 40%] Built target test_baselines\n[ 44%] Built target test_datasets\n[ 48%] Built target test_quicksort\n[ 51%] Built target test_pdqsort\n[ 55%] Built target test_timsort\n[ 59%] Built target test_mergesort\n[ 63%] Built target test_radixsort\n[ 67%] Built target test_comparisons\n[ 71%] Built target test_memory\n[ 78%] Built target test_memory_unsupported\n[ 82%] Built target test_timing\n[ 86%] Built target sort_metrics\n[ 90%] Built target sort_benchmark\n[ 92%] Linking CXX static library libmab_search.a\n[ 92%] Built target mab_search\n[ 94%] Building CXX object CMakeFiles/mab_search_metrics.dir/src/benchmark/search_comparisons.cpp.o\n[ 96%] Linking CXX static library libmab_search_metrics.a\n[ 96%] Built target mab_search_metrics\n[ 98%] Building CXX object CMakeFiles/test_searching.dir/tests/test_searching.cpp.o\n[100%] Linking CXX executable test_searching\n[100%] Built target test_searching\n",
+  "stderr": "-- GLOB mismatch!\n-- GLOB mismatch!\n",
+  "wall_seconds": 1.7061094399996364,
+  "ended_utc": "2026-10-09T17:42:05.255736+00:00"
+}

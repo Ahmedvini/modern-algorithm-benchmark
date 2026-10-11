@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "build/release",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^search"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:54:18.617301+00:00"
+}

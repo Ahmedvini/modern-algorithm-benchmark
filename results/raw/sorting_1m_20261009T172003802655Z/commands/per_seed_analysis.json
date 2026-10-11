@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "python3",
+    "scripts/analyze_results.py",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/sorting_1m_20261009T172003802655Z/matrix",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/sorting_1m_20261009T172003802655Z/per_seed.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:26:41.150178+00:00",
+  "exit_code": 0,
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/sorting_1m_20261009T172003802655Z/per_seed.json\n",
+  "stderr": "",
+  "wall_seconds": 0.041926338999473955,
+  "ended_utc": "2026-10-09T17:26:41.192217+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/search_validation_20261009T173830593675Z/verify.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:03:57.285669+00:00",
+  "exit_code": 0,
+  "stdout": "{'schema_version': 1, 'release_and_sanitizer_groups_passed': 18, 'successful_measured_batches': 705, 'successful_warmup_batches': 141, 'failed_batches': 0, 'configurations': 8, 'available_category_configurations': 47, 'unavailable_category_configurations': 25, 'summary_groups': 141, 'query_records': 3008, 'hit_query_records': 1728, 'miss_query_records': 1280, 'count_records': 384, 'summary_regenerated_byte_for_byte': True, 'raw_smoke_unchanged': True, 'prior_result_files_preserved': 534, 'frozen_search_protocol_preserved': True, 'existing_sorting_algorithms_tests_tools_vendors_unchanged': True, 'no_comparison_instrumentation_linked_in_timing': True, 'summary_sha256': '9233a50f7e51abfc2ea0e93bc4d6b34a8ee48ce8825c31407ae3c99c7e63498e'}\n",
+  "stderr": "",
+  "wall_seconds": 0.19946534500195412,
+  "ended_utc": "2026-10-09T18:03:57.485253+00:00"
+}

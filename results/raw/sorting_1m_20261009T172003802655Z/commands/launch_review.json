@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/sorting_1m_20261009T172003802655Z/launch_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:26:07.513871+00:00",
+  "exit_code": 0,
+  "stdout": "Pre-execution gate passed: output absent, RAM/disk/cgroup headroom adequate, frozen inputs and protocol unchanged.\n",
+  "stderr": "",
+  "wall_seconds": 0.021865103000891395,
+  "ended_utc": "2026-10-09T17:26:07.535862+00:00"
+}

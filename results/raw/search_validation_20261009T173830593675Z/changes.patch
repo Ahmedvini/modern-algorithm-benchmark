@@ -1,0 +1,2008 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -46,9 +46,33 @@
+ target_include_directories(sort_benchmark PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
+ target_link_libraries(sort_benchmark PRIVATE mab_timing)
+ 
++# Search is independent of the preserved sorting core and CLIs.
++add_library(mab_search src/algorithms/searching.cpp)
++target_link_libraries(mab_search PUBLIC mab_core)
++add_library(mab_search_metrics src/benchmark/search_comparisons.cpp)
++target_link_libraries(mab_search_metrics PUBLIC mab_search)
++add_library(mab_search_timing src/benchmark/search_timing.cpp)
++target_link_libraries(mab_search_timing PUBLIC mab_search mab_timing)
++add_executable(search_benchmark src/benchmark/search_main.cpp)
++target_include_directories(search_benchmark PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
++target_link_libraries(search_benchmark PRIVATE mab_search_timing)
++add_executable(search_counts src/benchmark/search_main.cpp)
++target_compile_definitions(search_counts PRIVATE MAB_SEARCH_COUNTS=1)
++target_include_directories(search_counts PRIVATE "${CMAKE_BINARY_DIR}/generated/$<CONFIG>")
++target_link_libraries(search_counts PRIVATE mab_search_timing mab_search_metrics)
++
+ include(CTest)
+ if(BUILD_TESTING)
+     find_package(Python3 REQUIRED COMPONENTS Interpreter)
++    add_executable(test_searching tests/test_searching.cpp)
++    target_link_libraries(test_searching PRIVATE mab_search_metrics)
++    add_test(NAME searching COMMAND test_searching)
++    add_executable(test_search_timing tests/test_search_timing.cpp)
++    target_link_libraries(test_search_timing PRIVATE mab_search_timing)
++    add_test(NAME search_timing COMMAND test_search_timing)
++    add_test(NAME search_framework
++             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_search_benchmark.py
++                     $<TARGET_FILE:search_benchmark> $<TARGET_FILE:search_counts>)
+     add_executable(test_baselines tests/test_baselines.cpp)
+     target_link_libraries(test_baselines PRIVATE mab_core)
+     add_test(NAME baselines COMMAND test_baselines)
+--- a/README.md
++++ b/README.md
+@@ -4,7 +4,8 @@
+ separate metrics and the reproducible timing framework are validated. The first
+ [1M sorting study](results/processed/sorting_1m_20261009T172003802655Z/RESULTS.md) is complete with
+ 450 measured trials and 90 warm-ups; findings describe one recorded machine/session.
+-Search benchmarking and the remaining roadmap phases are still pending.
++Array search benchmarking now has a separate protocol and executables; later
++roadmap phases remain pending.
+ 
+ The default sorting adapter invokes the installed standard library's `std::sort`.
+ Project QuickSort, Merge Sort and signed Radix Sort, upstream PDQSort and upstream
+@@ -300,3 +301,39 @@
+ CPU power/frequency, thermal/cache state and background load were not controlled;
+ no universal ranking or statistical significance is claimed. Comparisons/RSS were
+ not collected for this timing study. No size above 1M or CUDA workload was run.
++
++## Search algorithms and reproducible batches
++
++The separate registry provides linear_search, binary_search and exponential_search.
++All return the first matching index or absence; binary/exponential require ascending
++data, while linear supports any order. The existing std_lower_bound reference
++adapter and sorting/default CLI behavior are preserved.
++
++```sh
++build/release/search_benchmark --output results/raw/new_search_run --search all --size 1000 --queries 1000
++python3 scripts/run_search_matrix.py --binary build/release/search_benchmark --output results/raw/new_search_smoke
++python3 scripts/analyze_search_results.py results/raw/new_search_smoke --output results/processed/new_search_summary.json
++build/release/search_counts --output results/raw/new_search_counts --search all --size 64 --queries 16
++```
++
++See [the versioned search protocol](docs/SEARCH_PROTOCOL_v1.md) and
++[CLI, output and analysis details](docs/BENCHMARKING.md). Data are generated using
++the existing generator and sorted outside lookup timing. Nine query policies cover
++fixed/random hits, range/interior misses, 50% mixed batches and empty-input misses.
++Unavailable categories retain reasons, while targets/selected ranks/first-match
++answers remain in raw query CSV. All algorithms receive identical batches.
++
++steady_clock records complete batch latency; validation is outside timing.
++Normalized ns/query is a batch average, not a measured individual-query duration.
++Separate search_counts records per-query < and == predicates without timing.
++New raw/summary paths are exclusive, failures/outliers remain visible, and smoke
++runs do not establish performance superiority. No large search study has run.
++
++Fresh full Release and ASan/UBSan suites passed **18/18 groups**, with leak detection
++enabled and no final compiler warnings. The retained [search smoke summary](results/processed/search_smoke_20261009T173830593675Z.json)
++has 141 groups: 705 measured successes and 141 warm-up successes across eight
++configurations; 25 unavailable category/configuration pairs have explicit reasons.
++All 534 earlier result artifacts and frozen sorting/search protocols remain
++unchanged; the summary regenerated byte-for-byte. See [verification](results/raw/search_validation_20261009T173830593675Z/verification.json)
++and [audit](docs/AUDIT.md) for exact commands, counts and limitations.
++The batch milestone is complete; Phase 4 search structures are next.
+--- a/docs/ALGORITHMS.md
++++ b/docs/ALGORITHMS.md
+@@ -129,8 +129,8 @@
+ The reference search adapter requires ascending sorted input and returns the
+ first matching index or nullopt. Lookup uses O(log N) comparisons and O(1)
+ auxiliary space; it constructs no index. Sorting preprocessing is separate.
+-Tests use an independent linear std::find oracle. The project linear, binary and
+-exponential algorithms remain pending.
++Tests use an independent linear std::find oracle. The project linear, binary and exponential algorithms are now defined below
++in the separate array-search registry.
+ 
+ Advanced search structures remain pending. No measured algorithm-performance
+ claims are made here.
+@@ -232,3 +232,29 @@
+ CSV setup is excluded. [BENCHMARKING.md](BENCHMARKING.md) defines warmups, cyclic
+ order, repetition/timing units, metadata, failure records and separate statistics.
+ Small smoke measurements validate the engine; no performance ranking is asserted.
++
++## Array search registry
++
++Only std_lower_bound_search existed before Phase 3; it remains unchanged as the
++reference adapter. The independent searchers registry adds linear_search,
++binary_search and exponential_search with optional<size_t> first-match results.
++Absent keys return nullopt. No index structure or allocation is built per lookup;
++all three use O(1) auxiliary space and preserve the caller's data.
++
++| Algorithm | Precondition | Best time | Average time | Worst time |
++| --- | --- | --- | --- | --- |
++| linear_search | Any order | O(1) at first key | O(N) for uniformly positioned unique hits; O(N) for misses | O(N) |
++| binary_search | Ascending sorted | O(log N) for this lower-bound implementation on nonempty arrays | O(log N) | O(log N) |
++| exponential_search | Ascending sorted | O(1) at/below first key | O(log N) for uniformly positioned unique hits | O(log N) |
++
++Empty lookups are O(1). Exponential expansion followed by lower-bound refinement
++costs O(log(i+2)) for first-match index i; duplicates return their first occurrence.
++Expansion clamps before doubling to avoid size_t overflow, and refinement uses
++first+(last-first)/2. Binary lower-bound refinement finds the first equal value,
++then checks equality; it does not stop at an arbitrary duplicate. Sorted-input
++preconditions are documented on the public API, with no O(N) check per lookup.
++The search benchmark validates sortedness once outside timing and rejects unsorted
++inputs. Linear's first match refers to original order when used on unsorted data.
++Average-case statements require the stated target model; duplicates and query
++policies change observed costs. Sorting preprocessing is separate from lookup.
++See [search_batch_v1](SEARCH_PROTOCOL_v1.md) for batches and duplicate rank metadata.
+--- a/docs/AUDIT.md
++++ b/docs/AUDIT.md
+@@ -1119,3 +1119,191 @@
+ rather than treating repeated trials as independent data. No such replication
+ has run. Next implementation phase is Phase 3 deterministic hit/miss queries
+ and search benchmarking; 10M/100M scaling remains deferred.
++
++## Phase 3 array search and batch benchmarking — 2026-10-09
++
++### Inspection and baseline
++
++Read AGENTS.md fully; inspected README, ROADMAP, AUDIT, BENCHMARKING,
++EXPERIMENT_PROTOCOL, METRICS, ALGORITHMS, CMake, source/test interfaces, generator,
++timing/output utilities and Python runner/analysis. Only the unchanged
++std_lower_bound_search reference existed; the roadmap required independent linear,
++binary and exponential adapters. No project search registry or query benchmark
++existed. Anonymous temporary-file write/read/delete passed. Git metadata remains
++absent (environment git status --short probe exit 128). Source backup and SHA-256
++inventory are retained under /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/search_review_20261009T173830593675Z; all earlier results were hashed
++before writing under /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/search_validation_20261009T173830593675Z. Historical test logs were copied separately.
++
++Fresh pre-change Release configure/build/full CTest each exited 0; 15/15 groups
++passed, with no correctness defect requiring repair. The versioned
++SEARCH_PROTOCOL_v1.md and an identical evidence copy/hash were saved before engine
++implementation. The final protocol hash still matches that pre-implementation
++record. No sorting implementation/CLI/default/generator/vendor/test/tool changed.
++
++### Implementation and contracts
++
++Three project public/registry adapters: linear_search accepts any order; binary
++and exponential require ascending input, documented without an O(N) per-call
++check. Every result is first equal index or nullopt. Exponential expansion clamps
++before doubling and binary refinement uses first+(last-first)/2. Empty inputs,
++duplicates, negative values, extrema and size boundaries pass independent
++std::find differential checks. Existing std_lower_bound is the reference in the
++engine, never relabeled as the project implementation. ALGORITHMS.md documents
++best/average/worst time models and O(1) per-lookup auxiliary space.
++
++New search libraries/CLIs are separate from preserved sorting targets. Shared
++project templates instantiate normal less/equality or checked run-local counters.
++search_counts measures one executed key < or == predicate (key_predicate_v1);
++index/bookkeeping/reference operations are excluded. This is distinct from
++sorting's less-only convention. No global/shared counter or mandatory normal
++instrumentation. Timing link/nm review confirms counted code absent.
++
++search_benchmark reuses existing dataset/timing validation, fingerprints and CSV/
++JSON escaping. It generates and sorts once outside lookup timing. The separate
++preprocessing_sort_ns observation covers only final std::sort, not generation's
++transforms; no index is built. Prepared data are immutable and all algorithms
++receive the same category query lists. Source distributions can share sorted
++multisets, explicitly documented. Query RNG streams are seeded separately by fixed
++category identities, so selecting subsets does not change another category.
++
++Nine policies: fixed first/middle/last hits, random-position hits, representable
++below/interior/above misses, mixed_50 alternating random hits/misses and miss_empty.
++Fixed/rand policies intentionally can overlap values; expected first-match index
++and selected source rank remain explicit. Unavailable policies retain reasons
++in run.json and summary availability, never invented observations. Mixed batches
++have exact 50% hit/miss ratio; aggregate ratio varies with policy availability.
++All 3,008 smoke query records contain 1,728 hits and 1,280 misses before repetition.
++
++steady_clock times batch loops/normal dispatch/preallocated answer stores, in ns.
++Every answer is validated outside timing on warm-ups and measured calls. Generation,
++preprocessing, query/reference creation, buffer allocation, metadata/I/O and counts
++are excluded. All warm-ups precede measured rounds; algorithms rotate cyclically
++by dataset seed/trial within category. Batch-average ns/query is normalized, not
++individual-query time; max batch/normalized average is not max individual latency.
++No timer calibration, cache flushing, CPU affinity/frequency/thermal/load control.
++The planning estimate 16*N+128*batch_size*9 is not measured memory/hard RSS limit.
++Review reserved gap capacity to N, avoiding geometric growth exceeding its budget,
++and made missing-position hashing explicitly uint64 on narrower size_t platforms.
++Only GNU/Linux was executed; no 32-bit/Windows/macOS execution is claimed.
++
++The dedicated analyzer validates all 32 trial fields, six query fields, metadata,
++query hashes/positions/hit counts, cyclic ordering and completion/row totals.
++Per-run/algorithm/category summaries report success/failure/missing/warm-up counts,
++median/mean/sample SD (n-1)/min/max batch time and normalized average. Warm-ups and
++all raw outliers are retained; seeds/categories are not pooled. Incomplete analysis
++requires --allow-incomplete and exits 1; malformed data remain errors. Exclusive
++output ownership protects old paths; partial/failed runs cannot imply completion.
++
++### Files added/changed
++
++Added project files:
++- docs/SEARCH_PROTOCOL_v1.md
++- include/algorithms/detail/search_impl.hpp
++- include/algorithms/searching.hpp
++- include/benchmark/search_comparisons.hpp
++- include/benchmark/search_timing.hpp
++- scripts/analyze_search_results.py
++- scripts/run_search_matrix.py
++- src/algorithms/searching.cpp
++- src/benchmark/search_comparisons.cpp
++- src/benchmark/search_main.cpp
++- src/benchmark/search_timing.cpp
++- tests/test_search_benchmark.py
++- tests/test_search_timing.cpp
++- tests/test_searching.cpp
++
++Changed: CMakeLists.txt (independent search targets and three CTest groups), README
++and docs/ALGORITHMS.md, BENCHMARKING.md, EXPERIMENT_PROTOCOL.md, METRICS.md, ROADMAP.md
++and AUDIT.md (interfaces/contracts/protocol/commands/results/limitations/status).
++All original algorithms/generator/CLIs/tests/Python sorting tools and upstream
++source/licenses/provenance are preserved byte-for-byte.
++
++### Actual commands and validation
++
++Commands below all exited 0; per-command JSON retains exact argv/stdout/stderr/UTC
++interval/status. Baseline commands precede integration. Initial new algorithm
++checks passed; the first engine build emitted five misleading-indentation sites
++for both CLI compilations. Those sites were corrected before the first full suites;
++subsequent builds emit no compiler warnings. CMake GLOB mismatch messages during
++new-source discovery are regeneration notices, not build/test failures.
++
++```sh
++cmake --build build/release --parallel 2  # exit 0
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_SANITIZERS=OFF  # exit 0
++ctest --test-dir build/release --output-on-failure -V  # exit 0
++build/release/search_counts --output results/raw/search_validation_20261009T173830593675Z/counts_smoke --search all --size 64 --queries 16 --seed 1729 --query-seed 2718 --distribution uniform  # exit 0
++cmake --build build/release --parallel 2  # exit 0
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_SANITIZERS=OFF  # exit 0
++ctest --test-dir build/release --output-on-failure -V  # exit 0
++python3 scripts/capture_environment.py --build-dir build/release --output results/raw/search_validation_20261009T173830593675Z/release_environment.json  # exit 0
++cmake --build build/release --parallel 2  # exit 0
++ctest --test-dir build/release --output-on-failure -V  # exit 0
++cmake --build build/sanitize --parallel 2  # exit 0
++env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V  # exit 0
++cmake --build build/sanitize --parallel 2  # exit 0
++cmake -S . -B build/sanitize -DCMAKE_BUILD_TYPE=Debug -DMAB_ENABLE_SANITIZERS=ON  # exit 0
++env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V  # exit 0
++python3 scripts/capture_environment.py --build-dir build/sanitize --output results/raw/search_validation_20261009T173830593675Z/sanitize_environment.json  # exit 0
++cmake --build build/release --parallel 2  # exit 0
++ctest --test-dir build/release --output-on-failure -V -R '^searching$'  # exit 0
++cmake --build build/release --parallel 2  # exit 0
++cmake --build build/release --parallel 2  # exit 0
++ctest --test-dir build/release --output-on-failure -V -R '^search'  # exit 0
++python3 scripts/analyze_search_results.py results/raw/search_validation_20261009T173830593675Z/smoke_matrix --output results/processed/search_smoke_20261009T173830593675Z.json  # exit 0
++python3 scripts/run_search_matrix.py --binary build/release/search_benchmark --output results/raw/search_validation_20261009T173830593675Z/smoke_matrix --sizes 0,1,64,1000 --seeds 1729 --query-seeds 2718 --distributions uniform,duplicate_heavy --searches all --categories all --queries 64 --repetitions 5 --warmups 1  # exit 0
++python3 results/raw/search_validation_20261009T173830593675Z/verify.py  # exit 0
++```
++
++Full Release and ASan/UBSan suites initially passed 18/18 groups. After the final
++gap-capacity/parser review, both builds and full suites were repeated and again
++passed 18/18. Leak detection was enabled throughout; the historical ptrace issue
++did not recur and no leak-disabled rerun was performed. No configure/build/test/
++smoke/analysis/verification command failed. Intentional negative tests retain/assert
++CLI exits 1, Python argparse exits 2 and failed-child fixture exit 9; they are
++temporary validation fixtures, not failed study runs.
++
++New results in each final suite:
++- searching: 3,704 input cases and 309,996 public/registry/counted oracle checks;
++  exact small counts, first duplicates, unsorted linear and reset/isolation passed.
++- search_timing: 72 reproducible configuration cases and 4,266 validated batches;
++  categories, mixed ratio, subset RNG independence, duplicate rank, int64 gaps,
++  extrema/precondition/stale-answer/exception/wrong-result checks passed.
++- search_framework: 12 methods; schemas/escaping, all distributions/seeds, availability,
++  invalid arguments/path safety, actual counts CLI, build guard, synthetic statistics,
++  partial/tampered data, exclusive summary/regeneration and matrix failure passed.
++All 15 preserved sorting/metrics/environment groups also pass, including their
++3,590 sorting inputs/98,508 search-reference checks, 220 dataset cases, existing
++Quick/PDQ/Tim/Merge/Radix differential suites and 1,296 sorting timing calls.
++
++### Retained smoke and reproducibility
++
++Release matrix: sizes 0,1,64,1000; uniform/duplicate_heavy; dataset seed 1729,
++query seed 2718, all three algorithms/all nine policies, 64 queries per available
++category, one warm-up/five repetitions. Eight completed configurations; all nine
++policies occur where applicable. There are 47 available and 25 explicitly
++unavailable category/configuration pairs, 141 summary groups, 705 successful
++measured batches and 141 successful warm-ups (846 rows), zero failed/missing trials.
++Every row validates all 64 answers: 54,144 total timed query answers, including
++warm-ups. A separate 64-key/16-query/all-searchers count smoke produced 384 correct
++per-query records without latency; it is not part of timing observations.
++
++Raw bundles: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/search_validation_20261009T173830593675Z/smoke_matrix and counts_smoke.
++Processed summary: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/processed/search_smoke_20261009T173830593675Z.json.
++verification.json confirms byte-for-byte regeneration to a new temporary file,
++raw smoke hashes unchanged, configured source/binary manifests current, normal
++timing link free of metrics, and all 534 earlier raw/processed artifact hashes
++unchanged. The frozen 1M sorting protocol and all its outputs remain unchanged;
++the new search protocol also matches its original saved hash. Environment
++manifests and historical/final logs are retained separately. Smoke timings are
++actual retained validation observations; no superiority/significance claim.
++
++### Status, limitations and exact next step
++
++Phase 3's array-search/batch-benchmark milestone is complete. Direct individual-
++query latency/maxima await timer calibration; large search experiments, search
++RSS/allocations, structures and plots have not run. No CUDA or 100M workload;
++negative excessive-size arguments were rejected before allocation. Next roadmap
++implementation: Phase 4 Skip List, then B-Tree/M-way structures, with first-duplicate
++semantics, separate build costs and differential validation. A 1M search study
++requires its own frozen protocol/resource review before execution; it is not a
++result of this smoke milestone.
+--- a/docs/BENCHMARKING.md
++++ b/docs/BENCHMARKING.md
+@@ -209,3 +209,86 @@
+ timing. Recommended follow-up: separately freeze a 1M independent-session/seed
+ replication with documented affinity/power policy and counterbalanced ordering.
+ No study beyond 1M has run.
++
++## Search batch engine (separate search_batch_v1 schema)
++
++The [versioned search protocol](SEARCH_PROTOCOL_v1.md) defines nine category
++policies and their availability, deterministic query identity, duplicate semantics,
++preprocessing and cyclic ordering. Existing sorting binaries/schemas/tools and
++std_sort default are preserved. search_benchmark links the normal search library,
++existing mab_timing/output utilities and mab_core; it does not link counted code.
++search_counts is the separate comparison-only executable.
++
++```sh
++python3 scripts/run_search_matrix.py --binary build/release/search_benchmark --output results/raw/new_search_smoke
++python3 scripts/analyze_search_results.py results/raw/new_search_smoke --output results/processed/new_search_smoke.json
++build/release/search_counts --output results/raw/new_search_counts --search all --size 64 --queries 16
++```
++
++The matrix defaults to N=0,1,64,1000; uniform/duplicate_heavy; seed 1729, query
++seed 2718; all three searchers/all nine categories; 64 queries per available
++category; one warm-up and five measured repetitions. Unavailable categories are
++retained with reasons, not silently replaced by another category. All algorithms
++share each configuration's sorted data and exact category query list. Source
++ordering distributions are normalized by preprocessing and can produce identical
++prepared data; the recorded distribution identifies generation, not lookup order.
++
++| Search CLI option | Default / validation |
++| --- | --- |
++| --output | Required nonexistent directory; parent must exist |
++| --search | linear_search; comma-separated linear_search,binary_search,exponential_search or all; unique known names |
++| --size / --seed | 1000 / 1729; unsigned decimals fitting size_t / uint64; zero size allowed |
++| --query-seed | 2718; unsigned decimal fitting uint64 |
++| --distribution | uniform; same five generation/alias names as sort_benchmark |
++| --queries | 1000; even integer in [2,100000] |
++| --categories | all; comma-separated unique names from SEARCH_PROTOCOL_v1; execution uses fixed category order |
++| --swaps / --distinct | floor(N/100) / 16; same bounds as sort_benchmark |
++| --repetitions / --warmups | 5 / 1; ranges [1,10000] / [0,1000] |
++| --memory-limit-mib | 256; [1,65536], conservative 16*N+128*queries*9 planning guard |
++| --run-id | Output directory name; explicit strings are CSV/JSON escaped |
++| --validation-only | Permit Debug/sanitizer tests with validation label |
++| --list-searches / --help | Print registry names / usage and immediately exit 0 |
++
++Repeated valid options use the last parsed value. Unknown names and malformed
++numbers fail at parsing; resource/range checks occur before directory creation.
++Unsigned numbers reject signs, whitespace, overflow and trailing characters.
++Unknown/missing options, invalid configuration, allocation/write/correctness errors
++exit 1 with error: on stderr. Owned incomplete bundles retain FAILED or absent
++COMPLETE; existing output paths are never deleted/overwritten. search_counts
++accepts dataset/query/search options but rejects timing-only options; it records
++search_counts_v1, per-query predicates/answers, and no latency or RSS.
++
++Before lookup, generate and std::sort data outside timing. The separately recorded
++preprocessing_sort_ns covers only that final std::sort call, excluding generation's
++own transformations and query generation; it is one setup observation, not a
++repeated preprocessing benchmark. Input order is ascending for all algorithms.
++Only batch loop, production function dispatch and stores into a preallocated
++answer buffer are timed. Every stored result is verified against the first-match
++reference after timing. queries.csv joins categories/query IDs to target, selected
++rank and expected first-match rank/absence; run.json carries category counts and
++fingerprints. No search preprocessing or instrumentation occurs inside lookup.
++
++The dedicated analyzer validates 32 timing fields, query identity/hash/hit counts,
++metadata agreement, phase/category/order, completion and planned totals. It reports
++successful/failed/missing trials, warm-ups, availability reasons and batch latency
++median/mean/sample SD/min/max. Normalized ns/query divides batch statistics by
++batch_size; this is average batch cost, not an individual-query measurement.
++Maximum normalized batch average is not maximum individual-query latency. Every
++observation/outlier remains; incompatible runs/seeds/categories stay separate.
++Default analysis rejects partial runs; --allow-incomplete reports partial/missing
++status and exits 1. Derived files are exclusively created separately from raw data.
++
++The runner adds --sizes, --seeds, --query-seeds, --distributions, --searches and
++matrix limits, while forwarding queries/categories/dataset/timing options.
++It retains child argv/exit/stdout/stderr, environment/tool hashes and completion
++markers. A larger baseline requires an explicit new protocol/resource review:
++
++```sh
++python3 scripts/run_search_matrix.py --binary build/release/search_benchmark --output results/raw/new_1m_search_study --sizes 1000000 --seeds 1729,42,2718 --query-seeds 2718,3141 --queries 1000 --repetitions 5 --warmups 1
++```
++
++This larger command is instructions only; no 1M search study was run. Linear
++search can make large batches costly. Direct per-query timing/maxima, timer
++calibration, cold caches, affinity/frequency control and search RSS/allocation
++studies remain unimplemented. Smoke observations validate infrastructure and
++support no performance superiority claim.
+--- a/docs/EXPERIMENT_PROTOCOL.md
++++ b/docs/EXPERIMENT_PROTOCOL.md
+@@ -29,8 +29,8 @@
+ Every result must retain its exact command, compiler and flags, environment,
+ seed, distribution parameters, input size, repetitions, algorithm identity,
+ status and errors. Separate versioned metric JSON and sort_timing_v1 CSV/summary
+-schemas now exist. Sorting analysis retains failures/outliers; search experiment
+-schemas and plotting tools remain pending. Failed runs must remain visible. Raw output must never be overwritten;
++schemas now exist. Sorting and search batch analysis retain failures/outliers; plotting tools
++remain pending. Failed runs must remain visible. Raw output must never be overwritten;
+ summaries and plots belong under results/processed and results/figures.
+ 
+ CUDA and 100M experiments remain deferred until prerequisite phases are validated.
+@@ -89,8 +89,8 @@
+ O(1) auxiliary space. It builds no index; sorting preprocessing is separate.
+ The library reference adapter is not labeled as any project search algorithm.
+ The correctness tests compare it with a linear std::find oracle, including
+-duplicate and boundary queries. Required query workloads and project linear,
+-binary and exponential search implementations remain Phase 3 work.
++duplicate and boundary queries. Phase 3 now adds independent linear, binary and exponential search adapters
++and versioned query batches; the reference adapter remains unchanged.
+ 
+ ## Recorded 1M study and aggregation
+ 
+@@ -108,3 +108,20 @@
+ accompanied this study. No protocol deviation or correctness failure occurred.
+ All derived summaries regenerated exactly; the protocol and raw results stayed
+ unchanged. Follow-up studies require separate frozen protocols and new outputs.
++
++## Array search protocol
++
++[search_batch_v1](SEARCH_PROTOCOL_v1.md) was defined before the engine/matrix
++implementation. Generate existing seeded signed-int32 data, sort ascending outside
++lookup timing, and reuse identical data and deterministic query batches across
++linear/binary/exponential search. Queries retain source positions, expected first
++matching positions and explicit absence. Fixed-rank/random-hit, representable
++below/interior/above misses, balanced mixed batches and empty-input misses have
++precise policies and explicit unavailable-category reasons.
++
++Use steady_clock batch measurements with out-of-timing reference validation,
++exclusive raw CSV bundles and separate category/run summaries retaining outliers.
++Normalized batch averages are not individual-query observations. A separate
++comparison executable measures search key predicates; primary timing is uncounted.
++The sorting generator compatibility contract and frozen 1M sorting study remain
++unchanged. Large search studies, individual-query timing and plots are future work.
+--- a/docs/METRICS.md
++++ b/docs/METRICS.md
+@@ -161,3 +161,26 @@
+ planning estimate is not measured memory. Existing process peak RSS remains
+ a process-lifetime metric available through the independent metrics path; it
+ must not be inferred from sort timing or interpreted as isolated auxiliary space.
++
++## Separate search counts: key_predicate_v1
++
++search_counts shares the deterministic sorted-input/query plan with search_benchmark
++but performs separate per-query counted execution and records no lookup timing.
++One executed binary signed-int32 < or == predicate counts once, irrespective of
++its Boolean result. Linear counts equality checks; binary/exponential include
++lower-bound and expansion predicates plus final equality checks. Bookkeeping,
++index arithmetic, query construction and reference validation are excluded.
++This unit differs from sorting's key_less_than_v1; do not silently equate them.
++Production and counted adapters instantiate the same project templates, but
++normal paths have no counters or instrumentation flag. Counter copies refer to
++a checked run-local uint64; independent calls share no mutable state.
++
++search_counts uses exclusive bundles with search_counts_v1 metadata, queries.csv,
++counts.csv and COMPLETE/FAILED markers. counts.csv fields are algorithm,
++query_category,query_id,target,expected_position,actual_position,key_comparisons,
++comparison_convention,correctness. Empty positions mean absent; successful counts
++must agree with the first-match oracle. Timing-only options are rejected; the
++primary timing analyzer refuses count bundles. No process-memory or search-specific
++allocation metric is added. Sorting's Linux RSS API and limitations are unchanged.
++Normalized search batch ns/query is not directly measured individual-query latency;
++no maximum per-query duration is reported without future timer calibration.
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -8,9 +8,9 @@
+ | 0 — audit and baseline | Complete: Release build, differential tests, immutable environment manifest |
+ | 1 — correctness-first core | Complete: saved CLI/generator docs and swap regressions; fresh Release and sanitizer suites passed 4/4 |
+ | 2 — required sorting algorithms and metrics | Complete for required CPU core: six sorters, five counted adapters (radix unsupported), process RSS, timing CSV/statistics and first 1M study validated; further studies optional |
+-| 3 — search benchmarks | Pending |
++| 3 — search benchmarks | Complete for batch mode: three array searches, deterministic queries, separate counts, CSV/statistics; individual-query timing deferred |
+ | 4 — search data structures | Pending |
+-| 5 — orchestration and analysis | Partial: sorting matrix, summaries and 1M descriptive report exist; full experiment orchestration and plots pending |
++| 5 — orchestration and analysis | Partial: sorting/search matrices, summaries and 1M sorting report exist; full experiment orchestration and plots pending |
+ | 6 — OpenMP | Pending |
+ | 7 — CUDA | Pending; not run |
+ | 8 — learned index and AlphaDev study | Pending |
+@@ -80,3 +80,27 @@
+ Next implementation milestone: Phase 3 deterministic hit/miss query sets and
+ search benchmarks. No size above 1M, plots, CUDA or 100M run has occurred.
+ See BENCHMARKING.md and AUDIT.md for actual evidence and limitations.
++
++Phase 3 array search/batch infrastructure is now implemented and validated.
++linear_search, binary_search and exponential_search return first-match positions
++or absence. The unchanged std_lower_bound adapter is the reference; sorted
++preconditions are checked by the engine outside timing. search_batch_v1 fixes
++deterministic category/query semantics, normalized batch averages and explicit
++unavailable categories; search_counts separately measures key predicates.
++
++Fresh full Release and Debug ASan/UBSan suites pass 18/18 groups, with leak
++detection enabled. New search tests pass 3,704 inputs/309,996 oracle checks,
++72 reproducible configurations/4,266 validated batches and 12 Python framework
++methods. The retained Release smoke covers eight configurations and all nine
++policies where applicable: 705 measured successes, 141 warm-up successes, zero
++failures; 25 unavailable category/configuration pairs retain explicit reasons.
++Its 141-group summary regenerates byte-for-byte. All 534 earlier raw/processed
++artifacts and both frozen protocols remain unchanged; see AUDIT.md for evidence.
++
++The batch benchmark milestone is complete. No direct individual-query maximum
++is measured; calibration/individual latency, large search studies and search
++memory experiments remain future work. Next implementation milestone: Phase 4
++Skip List then B-Tree/M-way structures, with first-duplicate semantics, separate
++build costs and differential tests before benchmark integration. A controlled
++1M search study needs a separately frozen protocol/resource review; it has not
++run. No CUDA or 100M experiment was attempted.
+--- /dev/null
++++ b/docs/SEARCH_PROTOCOL_v1.md
+@@ -0,0 +1,136 @@
++# Search experiment protocol: search_batch_v1
++
++Version 1, defined before implementing the search engine/matrix. Sorting protocols,
++algorithms, CLIs and retained studies are unchanged. This is an initial validation
++protocol, not a performance leaderboard or a frozen large-scale search study.
++
++## Data and answers
++
++Use mt19937_64_v1 signed int32 datasets with recorded source distribution, size,
++seed, swaps and duplicate cardinality. Generate using the existing infrastructure,
++then sort ascending with std::sort once outside lookup timing. Uniform, reverse
++and nearly-sorted generation with the same seed have the same sorted multiset;
++their prepared fingerprints can therefore coincide. All searchers receive that
++same immutable prepared vector and exactly the same query batches. No lookup
++sorts or checks sortedness internally. The engine validates ascending order once
++before timing. Linear search also supports arbitrary order through its public API.
++
++All algorithms return optional<size_t>: the first matching index, or nullopt for
++absence. Expected answers use the existing std_lower_bound_search outside timing;
++tests independently use std::find. Duplicate target position and selected source
++position can differ: the expected index is always the first occurrence.
++
++## Query generator: mt19937_64_queries_v1
++
++Defaults: query seed 2718, batch size 1000, one warm-up and five measured rounds.
++Batch size must be even and in [2,100000]. Each category has its own fresh
++mt19937_64(query_seed XOR (0x9e3779b97f4a7c15 * (category_index+1))), with uint64
++wraparound. Indices/categories are the fixed order in the following table.
++Unbiased bounded sampling uses unsigned (0-bound)%bound rejection before modulo.
++Changing selected categories does not change another category's queries.
++
++| Index/category | Exact definition | Availability |
++| --- | --- | --- |
++| 0 hit_first | Repeat the key at selected position 0 | Nonempty data |
++| 1 hit_middle | Repeat the key at selected position floor(N/2) | Nonempty data |
++| 2 hit_last | Repeat the key at selected position N-1 | Nonempty data |
++| 3 hit_random | Independently sample a position uniformly in [0,N) | Nonempty data |
++| 4 miss_below | Repeat minimum-1, computed in int64 | Nonempty and minimum > INT32_MIN |
++| 5 miss_between | Uniformly select an adjacent gap with difference >1; use left+floor(gap/2) in int64 | At least one such gap |
++| 6 miss_above | Repeat maximum+1, computed in int64 | Nonempty and maximum < INT32_MAX |
++| 7 mixed_50 | Alternate random-position hit then miss; choose uniformly among available below/between/above miss policies, then apply that policy | Nonempty and at least one miss policy available |
++| 8 miss_empty | Low uint32 engine output minus 2^31 in int64; always absent | Empty data only |
++
++Every available category contains exactly batch_size queries. Query IDs are
++zero-based within category; queries.csv records target, selected source position,
++expected position and hit status. Fixed-position batches intentionally repeat a
++target. Hit policies can intentionally select equal values/positions, particularly
++for singleton/duplicate-heavy inputs; labels describe selection policies rather
++than disjoint key sets. The three miss policies are disjoint numeric regions.
++mixed_50 is exactly 50% hits/misses; hit-only categories are 100% hits and miss-only
++categories 0%. The overall default ratio depends on category availability and is
++reported from actual batch counts, not assumed to be 50%. Unavailable categories
++have no fabricated trials: run.json retains the reason and analysis lists them.
++
++## Timing and ordering
++
++Use steady_clock, integer nanoseconds, Release with sanitizers OFF. Debug/sanitizer
++tests require --validation-only and label observations validation. One row times
++one complete batch: loop, function dispatch and stores into a preallocated answer
++buffer are included. Generation, sorting preprocessing, query construction,
++allocation, reference checks, comparison counts and output I/O are excluded.
++Validate every answer after each batch, including warm-ups; failures stop the run.
++Store results and consume them in validation to prevent dead-code elimination.
++
++All warm-up rounds precede measured rounds. For each round, visit selected
++categories in fixed registry order; for each category rotate the selected
++algorithm list by (dataset_seed%algorithm_count + trial_index%algorithm_count)
++%algorithm_count. Indices restart for measured rounds. The raw execution_order is
++the zero-based algorithm position within the category/round. No randomization,
++frequency control, affinity, cache flushing, exclusive load or thermal control.
++Repeated targets and warm-ups can warm caches; this is not a cold-cache protocol.
++
++elapsed_ns/batch_size is normalized batch-average latency, not directly measured
++individual-query latency. Maximum batch time and maximum normalized batch average
++are not maximum per-query latency or a theoretical bound. Timer overhead is not
++subtracted; no individual-query maxima are reported without future calibration.
++
++## Resource limits, raw output and metadata
++
++Development matrix: sizes 0,1,64,1000; source distributions uniform and
++duplicate_heavy, dataset seed 1729, query seed 2718; 64 queries per available
++category, one warm-up/five repetitions, all three required algorithms. A larger
++explicit baseline may use N=1M, 1000 queries per category and multiple seeds;
++it is not a default test and is not executed in this milestone. Linear batch
++work is O(N*batch_size); check runtime as well as memory before larger studies.
++
++Use existing dataset/timing validation plus a conservative planning guard:
++16*N + 128*batch_size*9 bytes <= memory_limit_mib*2^20 (default 256 MiB).
++This allows input/gap workspace/query metadata/answers, not a hard RSS cap or
++measured allocation. Lists/configurations/total planned rows are bounded by the
++runner (1000 list entries/configurations, 1M total timing rows). Configurations
++execute serially, size/seed/query-seed/distribution order, with a new process each.
++
++Exclusively create a new output directory; refuse existing paths and symlinks.
++run.json stores schema/protocol, invocation/run identity, input/query fingerprints,
++parameters, algorithms, category availability/counts, expected trial totals,
++clock period, compiler/build/platform, CMake flags and source SHA-256 manifest.
++Copy compile commands, CMake cache and vendored provenance. A matrix environment
++manifest records available OS/kernel/CPU/RAM/tool metadata, executable hash and
++source/tool hashes. Unknown metadata is absent/null, never invented.
++
++trials.csv schema version 1 has these ordered fields:
++
++```text
++schema_version,protocol,run_id,run_kind,algorithm,distribution,size,seed,input_hash_fnv1a64,query_seed,query_generator,query_category,query_hash_fnv1a64,batch_size,hit_queries,miss_queries,phase,trial_index,execution_order,elapsed_ns,elapsed_unit,status,correctness,error,repetitions,warmups,compiler_id,compiler_version,build_type,sanitizers,platform,architecture
++```
++
++queries.csv fields: query_category,query_id,target,selected_position,
++expected_position,expected_hit. Empty positions mean absence/not applicable;
++expected_hit is true/false. Fingerprints use FNV-1a64 low-byte-first encoding:
++dataset as sort_timing_v1; query list as uint32 target then uint64 selected and
++expected positions (UINT64_MAX for null). They identify inputs, not correctness
++proofs. The parser validates the manifest, categories, query hashes/counts, row
++sequence, schema and completion markers before summarizing. CSV uses existing
++escaping (quote comma/quote/CR/LF, double quotes). Exceptions have blank elapsed
++time, status error and a diagnostic; wrong answers retain elapsed time and failed
++correctness. COMPLETE only follows all planned successes and successful writes.
++FAILED/absent completion retains partial output; default analysis refuses it.
++Explicit --allow-incomplete reports failed/missing trials and still exits 1.
++
++## Analysis and separate comparisons
++
++Group by run/algorithm/category; never silently pool seeds or categories. Retain
++every observation/outlier and all warm-up rows. Report successful/failed/missing
++trials, median/mean/sample SD (n-1)/min/max batch ns and normalized average ns per
++query. SD is null with fewer than two successes, all statistics null with none.
++No significance tests or universal performance claims. Raw observations stay
++immutable; summaries use a separate exclusively created processed path.
++
++Separate counted adapters measure each executed signed key < or == predicate
++(key_predicate_v1), excluding index/bookkeeping/reference operations. They share
++project templates with counter-free production adapters and run-local checked
++uint64 counters; no global state. This search predicate convention differs from
++sorting's less-than-only convention. A separate search_counts executable exports
++per-query answers/counts, without collecting time or running inside primary timing.
++Process RSS and algorithm allocation measurement are not added for search here.
+--- /dev/null
++++ b/include/algorithms/detail/search_impl.hpp
+@@ -0,0 +1,47 @@
++#pragma once
++
++#include "algorithms/searching.hpp"
++#include <functional>
++
++namespace mab::detail {
++template <typename Equal = std::equal_to<Key>>
++SearchResult linear_search_impl(const Values& values, Key key, Equal equal = {}) {
++    for (std::size_t i = 0; i < values.size(); ++i)
++        if (equal(values[i], key)) return i;
++    return std::nullopt;
++}
++
++template <typename Less>
++std::size_t lower_bound_index(const Values& values, Key key, std::size_t first,
++                             std::size_t last, Less less) {
++    while (first < last) {
++        const auto middle = first + (last - first) / 2;
++        if (less(values[middle], key)) first = middle + 1;
++        else last = middle;
++    }
++    return first;
++}
++
++template <typename Less = std::less<Key>, typename Equal = std::equal_to<Key>>
++SearchResult binary_search_impl(const Values& values, Key key, Less less = {}, Equal equal = {}) {
++    const auto index = lower_bound_index(values, key, 0, values.size(), less);
++    if (index < values.size() && equal(values[index], key)) return index;
++    return std::nullopt;
++}
++
++template <typename Less = std::less<Key>, typename Equal = std::equal_to<Key>>
++SearchResult exponential_search_impl(const Values& values, Key key, Less less = {}, Equal equal = {}) {
++    if (values.empty()) return std::nullopt;
++    if (!less(values[0], key)) return equal(values[0], key) ? SearchResult{0} : std::nullopt;
++    std::size_t bound = 1;
++    while (bound < values.size() && less(values[bound], key)) {
++        // Clamp before doubling; also avoids wraparound for size_t maxima.
++        if (bound > (values.size() - 1) / 2) { bound = values.size(); break; }
++        bound *= 2;
++    }
++    const auto end = bound < values.size() ? bound + 1 : values.size();
++    const auto index = lower_bound_index(values, key, bound / 2, end, less);
++    if (index < values.size() && equal(values[index], key)) return index;
++    return std::nullopt;
++}
++}  // namespace mab::detail
+--- /dev/null
++++ b/include/algorithms/searching.hpp
+@@ -0,0 +1,23 @@
++#pragma once
++
++#include "common/types.hpp"
++#include <array>
++#include <cstddef>
++#include <optional>
++#include <string_view>
++
++namespace mab {
++using SearchResult = std::optional<std::size_t>;
++// All return the first equal key's index, or nullopt. Linear accepts any order.
++SearchResult linear_search(const Values& values, Key key);
++// Preconditions: values is ascending. No per-call validation or sorting.
++SearchResult binary_search(const Values& values, Key key);
++SearchResult exponential_search(const Values& values, Key key);
++struct Searcher {
++    std::string_view name;
++    SearchResult (*search)(const Values&, Key);
++    bool requires_sorted;
++};
++const std::array<Searcher, 3>& searchers() noexcept;
++const Searcher& find_searcher(std::string_view name);
++}  // namespace mab
+--- /dev/null
++++ b/include/benchmark/search_comparisons.hpp
+@@ -0,0 +1,9 @@
++#pragma once
++#include "algorithms/searching.hpp"
++#include <cstdint>
++namespace mab {
++struct SearchCount { SearchResult position; std::uint64_t key_comparisons; };
++// Separate synchronous execution; sorted preconditions match the normal API.
++// Count every executed binary key < or == predicate, excluding bookkeeping.
++SearchCount counted_search(std::string_view name, const Values& values, Key key);
++}  // namespace mab
+--- /dev/null
++++ b/include/benchmark/search_timing.hpp
+@@ -0,0 +1,39 @@
++#pragma once
++#include "algorithms/searching.hpp"
++#include "benchmark/timing.hpp"
++#include <array>
++
++namespace mab {
++const std::array<std::string_view, 9>& query_categories() noexcept;
++struct SearchConfig {
++    TimingConfig timing;
++    std::uint64_t query_seed = 2718;
++    std::size_t batch_size = 1000;
++    std::vector<std::string> categories; // Empty selects all, in fixed category order.
++};
++struct SearchQuery {
++    Key target;
++    SearchResult selected_position;
++    SearchResult expected_position;
++};
++struct SearchBatch {
++    std::string category;
++    std::string unavailable_reason;
++    std::vector<SearchQuery> queries;
++};
++void validate_search_config(const SearchConfig& config);
++std::uint64_t query_fingerprint(const std::vector<SearchQuery>& queries) noexcept;
++std::vector<SearchBatch> make_search_batches(const Values& sorted, const SearchConfig& config);
++struct SearchTrial {
++    std::string_view algorithm, category, phase;
++    std::size_t trial_index, execution_order;
++    std::optional<std::uint64_t> elapsed_ns;
++    std::string_view status, correctness;
++    std::string error;
++};
++// Validates sorted data and every expected answer before timing. Result buffer
++// allocation and validation/sink occur outside timing; loop/dispatch/stores inside.
++bool run_search_trials(const Values& sorted, const SearchConfig& config,
++                       const std::vector<SearchBatch>& batches, const std::vector<Searcher>& algorithms,
++                       const std::function<void(const SearchTrial&)>& sink);
++}  // namespace mab
+--- /dev/null
++++ b/scripts/analyze_search_results.py
+@@ -0,0 +1,265 @@
++#!/usr/bin/env python3
++"""Validate search_batch_v1 bundles and summarize batches without pooling categories."""
++import argparse
++import csv
++import json
++from pathlib import Path
++
++from analyze_results import integer, summarize_samples
++
++CATEGORIES = ("hit_first", "hit_middle", "hit_last", "hit_random", "miss_below",
++              "miss_between", "miss_above", "mixed_50", "miss_empty")
++FIELDS = ("schema_version,protocol,run_id,run_kind,algorithm,distribution,size,seed,"
++          "input_hash_fnv1a64,query_seed,query_generator,query_category,query_hash_fnv1a64,"
++          "batch_size,hit_queries,miss_queries,phase,trial_index,execution_order,elapsed_ns,"
++          "elapsed_unit,status,correctness,error,repetitions,warmups,compiler_id,compiler_version,"
++          "build_type,sanitizers,platform,architecture").split(",")
++QUERY_FIELDS = ["query_category", "query_id", "target", "selected_position", "expected_position", "expected_hit"]
++
++
++def rows(path, fields):
++    with path.open(newline="", encoding="utf-8") as stream:
++        reader = csv.DictReader(stream, strict=True)
++        if reader.fieldnames != fields:
++            raise ValueError(f"invalid CSV schema: {path}")
++        data = list(reader)
++    if any(set(row) != set(fields) or any(value is None for value in row.values()) for row in data):
++        raise ValueError("malformed CSV row")
++    return data
++
++
++def fingerprint(queries):
++    result = 14695981039346656037
++    for query in queries:
++        words = [(int(query["target"]) & (2**32-1), 4)]
++        words += [(integer(query[field]) if query[field] else 2**64-1, 8)
++                  for field in ("selected_position", "expected_position")]
++        for word, count in words:
++            for byte in word.to_bytes(count, "little"):
++                result = ((result ^ byte) * 1099511628211) & (2**64-1)
++    return str(result)
++
++
++def read_bundle(directory, allow_incomplete=False):
++    meta = json.loads((directory / "run.json").read_text())
++    if meta.get("schema_version") != 1 or meta.get("protocol") != "search_batch_v1":
++        raise ValueError("unsupported search protocol/schema (counts are separate)")
++    algorithms = meta["algorithms"]
++    if not algorithms or len(set(algorithms)) != len(algorithms) or any(
++            name not in ("linear_search", "binary_search", "exponential_search") for name in algorithms):
++        raise ValueError("invalid search algorithm list")
++    if meta["input_order"] != "ascending" or meta["query_generator"] != "mt19937_64_queries_v1" or \
++            meta["dataset_generator"] != "mt19937_64_v1" or meta["clock"] != "steady_clock" or \
++            meta["order_policy"] != "seed_offset_cyclic_v1" or meta["elapsed_unit"] != "ns":
++        raise ValueError("unsupported dataset/query/timing policy")
++    if meta["run_kind"] not in ("validation", "performance") or (meta["run_kind"] == "performance" and
++            (meta["build_type"] != "Release" or meta["sanitizers"] is not False)):
++        raise ValueError("invalid performance build")
++    for name in ("size", "seed", "query_seed", "batch_size", "repetitions", "warmups"):
++        if type(meta[name]) is not int or not 0 <= meta[name] <= 2**64-1:
++            raise ValueError("invalid metadata integer")
++    if not 2 <= meta["batch_size"] <= 100000 or meta["batch_size"] % 2 or \
++            not 1 <= meta["repetitions"] <= 10000 or not 0 <= meta["warmups"] <= 1000:
++        raise ValueError("invalid batch/round bounds")
++    integer(meta["input_hash_fnv1a64"])
++    categories = meta["categories"]
++    names = [entry["category"] for entry in categories]
++    if not names or names != [name for name in CATEGORIES if name in names]:
++        raise ValueError("invalid category list/order")
++    queries = rows(directory / "queries.csv", QUERY_FIELDS)
++    cursor = 0
++    expected_by_target = {}
++    for entry in categories:
++        name = entry["category"]
++        if type(entry["available"]) is not bool or not isinstance(entry["reason"], str):
++            raise ValueError("invalid category availability")
++        count = meta["batch_size"] if entry["available"] else 0
++        if entry["batch_size"] != count or bool(entry["reason"]) == entry["available"]:
++            raise ValueError("unavailable category lacks reason or has invented queries")
++        selected = queries[cursor:cursor+count]
++        cursor += count
++        if len(selected) != count:
++            raise ValueError("missing query records")
++        hits = 0
++        for index, query in enumerate(selected):
++            target = query["target"]
++            value = int(target)
++            if str(value) != target or not -(2**31) <= value < 2**31:
++                raise ValueError("invalid signed int32 query target")
++            if query["query_category"] != name or integer(query["query_id"]) != index:
++                raise ValueError("query identity/order mismatch")
++            present = bool(query["expected_position"])
++            if query["expected_hit"] != str(present).lower():
++                raise ValueError("query hit/expected-position mismatch")
++            for field in ("selected_position", "expected_position"):
++                if query[field] and integer(query[field]) >= meta["size"]:
++                    raise ValueError("query position outside data")
++            if bool(query["selected_position"]) != present or (present and
++                    integer(query["expected_position"]) > integer(query["selected_position"])):
++                raise ValueError("selected/first-match position mismatch")
++            if target in expected_by_target and expected_by_target[target] != query["expected_position"]:
++                raise ValueError("same key has inconsistent expected answer")
++            expected_by_target[target] = query["expected_position"]
++            expected_hit = name.startswith("hit_") or (name == "mixed_50" and index % 2 == 0)
++            if present != expected_hit:
++                raise ValueError("category hit/miss policy mismatch")
++            if name == "miss_empty" and meta["size"] != 0:
++                raise ValueError("empty-input policy used on nonempty data")
++            if name in ("hit_first", "hit_middle", "hit_last"):
++                position = {"hit_first": 0, "hit_middle": meta["size"]//2, "hit_last": meta["size"]-1}[name]
++                if integer(query["selected_position"]) != position or target != selected[0]["target"]:
++                    raise ValueError("fixed-rank query policy mismatch")
++            hits += present
++        if entry["hit_queries"] != hits or entry["miss_queries"] != count-hits or \
++                entry["query_hash_fnv1a64"] != fingerprint(selected):
++            raise ValueError("query fingerprint/count mismatch")
++    if cursor != len(queries) or meta["query_rows"] != cursor or \
++            meta["hit_queries"] != sum(entry["hit_queries"] for entry in categories) or \
++            meta["miss_queries"] != sum(entry["miss_queries"] for entry in categories):
++        raise ValueError("query plan totals mismatch")
++    available = [entry for entry in categories if entry["available"]]
++    per_round = len(available) * len(algorithms)
++    expected = per_round * (meta["repetitions"] + meta["warmups"])
++    if meta["expected_rows"] != expected:
++        raise ValueError("planned row count mismatch")
++    data = rows(directory / "trials.csv", FIELDS)
++    if len(data) > expected:
++        raise ValueError("extra timing rows")
++    for index, row in enumerate(data):
++        if row["schema_version"] != "1" or row["protocol"] != "search_batch_v1" or row["elapsed_unit"] != "ns":
++            raise ValueError("invalid trial schema/unit")
++        for field in ("run_id", "run_kind", "distribution", "size", "seed", "input_hash_fnv1a64", "query_seed",
++                      "query_generator", "batch_size", "repetitions", "warmups", "compiler_id", "compiler_version",
++                      "build_type", "platform", "architecture"):
++            if row[field] != str(meta[field]):
++                raise ValueError(f"trial metadata mismatch: {field}")
++        if row["sanitizers"] != str(meta["sanitizers"]).lower():
++            raise ValueError("sanitizer metadata mismatch")
++        warmup_rows = meta["warmups"] * per_round
++        phase = "warmup" if index < warmup_rows else "measure"
++        phase_index = index if phase == "warmup" else index-warmup_rows
++        trial, offset = divmod(phase_index, per_round)
++        category_index, order = divmod(offset, len(algorithms))
++        entry = available[category_index]
++        algorithm = algorithms[(meta["seed"] % len(algorithms)+trial % len(algorithms)+order) % len(algorithms)]
++        if row["phase"] != phase or integer(row["trial_index"]) != trial or integer(row["execution_order"]) != order or \
++                row["algorithm"] != algorithm or row["query_category"] != entry["category"]:
++            raise ValueError("trial order/identity mismatch")
++        for field in ("hit_queries", "miss_queries", "query_hash_fnv1a64"):
++            if row[field] != str(entry[field]):
++                raise ValueError("trial query batch mismatch")
++        if row["status"] == "ok":
++            if row["correctness"] != "passed" or row["error"]:
++                raise ValueError("successful row has failed correctness")
++            integer(row["elapsed_ns"])
++        elif row["status"] == "error":
++            if row["correctness"] not in ("failed", "not_checked") or not row["error"]:
++                raise ValueError("failed row lacks diagnostic")
++            if row["elapsed_ns"]:
++                integer(row["elapsed_ns"])
++            if (row["correctness"] == "failed") != bool(row["elapsed_ns"]):
++                raise ValueError("failure timing/validation distinction mismatch")
++            if index != len(data)-1:
++                raise ValueError("rows continue after fail-fast error")
++        else:
++            raise ValueError("unknown row status")
++    complete = (directory / "COMPLETE.json").exists()
++    if complete:
++        marker = json.loads((directory / "COMPLETE.json").read_text())
++        if marker.get("schema_version") != 1 or marker.get("complete") is not True or marker.get("rows") != expected or \
++                len(data) != expected or any(row["status"] != "ok" for row in data) or (directory / "FAILED.json").exists():
++            raise ValueError("completion marker contradicts raw observations")
++    elif not allow_incomplete:
++        raise ValueError("incomplete search run; raw observations retained")
++    groups = []
++    for entry in available:
++        for algorithm in algorithms:
++            selected = [row for row in data if row["phase"] == "measure" and
++                        (row["algorithm"], row["query_category"]) == (algorithm, entry["category"])]
++            samples = [integer(row["elapsed_ns"]) for row in selected if row["status"] == "ok"]
++            stats = summarize_samples(samples)
++            group = {field: meta[field] for field in ("run_id", "run_kind", "size", "distribution", "seed", "query_seed",
++                     "input_hash_fnv1a64", "batch_size", "nearly_sorted_swaps", "duplicate_cardinality",
++                     "dataset_generator", "query_generator", "compiler_id", "compiler_version", "build_type", "sanitizers", "platform", "architecture")}
++            group.update(algorithm=algorithm, query_category=entry["category"],
++                         query_hash_fnv1a64=entry["query_hash_fnv1a64"], hit_queries=entry["hit_queries"], miss_queries=entry["miss_queries"],
++                         successful_trials=stats["successful_trials"], failed_trials=len(selected)-len(samples),
++                         missing_measured_trials=meta["repetitions"]-len(selected), run_complete=complete)
++            warmups = [row for row in data if row["phase"] == "warmup" and
++                       (row["algorithm"], row["query_category"]) == (algorithm, entry["category"])]
++            group.update(warmup_rows=len(warmups), failed_warmups=sum(row["status"] != "ok" for row in warmups))
++            for name in ("median", "mean", "stdev", "min", "max"):
++                value = stats[name+"_ns"]
++                group[name+"_batch_ns"] = value
++                group[name+"_normalized_ns_per_query"] = value/meta["batch_size"] if value is not None else None
++            groups.append(group)
++    availability = [dict(entry, run_id=meta["run_id"], size=meta["size"], distribution=meta["distribution"],
++                         seed=meta["seed"], query_seed=meta["query_seed"]) for entry in categories]
++    return complete, groups, availability
++
++
++def analyze(source, allow_incomplete=False):
++    matrix_path = source / "matrix.json"
++    missing, groups, availability = [], [], []
++    complete = True
++    if matrix_path.exists():
++        matrix = json.loads(matrix_path.read_text())
++        names = matrix["runs"]
++        if matrix.get("schema_version") != 1 or matrix.get("protocol") != "search_batch_v1" or not names or \
++                len(set(names)) != len(names) or any(Path(name).name != name or name in (".", "..") for name in names) or \
++                len(matrix["commands"]) != len(names):
++            raise ValueError("invalid search matrix plan")
++        directories = [source/name for name in names]
++        complete = (source/"COMPLETE.json").exists()
++        if complete:
++            marker = json.loads((source/"COMPLETE.json").read_text())
++            if marker.get("schema_version") != 1 or marker.get("complete") is not True or marker.get("runs") != len(names) or (source/"FAILED.json").exists():
++                raise ValueError("invalid matrix completion")
++            for name, command in zip(names, matrix["commands"]):
++                record = json.loads((source/(name+"_command.json")).read_text())
++                if record["exit_code"] != 0 or record["command"] != command:
++                    raise ValueError("completed matrix has failed/mismatched child")
++        elif not allow_incomplete:
++            raise ValueError("incomplete search matrix")
++    else:
++        directories = [source]
++    for directory in directories:
++        if not (directory/"run.json").exists():
++            if not allow_incomplete:
++                raise ValueError("missing planned search run")
++            complete = False
++            missing.append(str(directory))
++            continue
++        done, run_groups, run_availability = read_bundle(directory, allow_incomplete)
++        if matrix_path.exists() and json.loads((directory/"run.json").read_text())["invocation"] != matrix["commands"][names.index(directory.name)]:
++            raise ValueError("child invocation differs from matrix plan")
++        complete = complete and done
++        groups.extend(run_groups)
++        availability.extend(run_availability)
++    return {"schema_version": 1, "summary_kind": "search_batch_summary", "source": str(source.resolve()),
++            "complete": complete, "elapsed_unit": "ns", "outlier_policy": "retain_all",
++            "stdev_definition": "sample_ddof_1; null below two successes",
++            "normalized_latency_definition": "batch_ns/batch_size; not measured individual-query duration",
++            "missing_runs": missing, "availability": availability, "groups": groups}
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("source", type=Path)
++    parser.add_argument("--output", type=Path, required=True)
++    parser.add_argument("--allow-incomplete", action="store_true")
++    args = parser.parse_args()
++    try:
++        result = analyze(args.source, args.allow_incomplete)
++        serialized = json.dumps(result, indent=2, allow_nan=False)+"\n"
++        with args.output.open("x", encoding="utf-8") as stream:
++            stream.write(serialized)
++    except (OSError, ValueError, KeyError, TypeError, csv.Error, ZeroDivisionError) as error:
++        parser.exit(1, f"search analysis failed: {error}\n")
++    print(args.output)
++    if not result["complete"]:
++        parser.exit(1, "incomplete/failed search results retained\n")
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/scripts/run_search_matrix.py
+@@ -0,0 +1,107 @@
++#!/usr/bin/env python3
++"""Run serial search_batch_v1 validation/smoke configurations into a new directory."""
++import argparse
++import datetime
++import hashlib
++from pathlib import Path
++import subprocess
++import sys
++
++from capture_environment import capture
++from run_matrix import numbers, unsigned, save, DISTRIBUTIONS
++from analyze_search_results import CATEGORIES
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--binary", type=Path, default=Path("build/release/search_benchmark"))
++    parser.add_argument("--output", type=Path, required=True)
++    parser.add_argument("--sizes", type=numbers, default=[0, 1, 64, 1000])
++    parser.add_argument("--seeds", type=numbers, default=[1729])
++    parser.add_argument("--query-seeds", type=numbers, default=[2718])
++    parser.add_argument("--distributions", default="uniform,duplicate_heavy")
++    parser.add_argument("--searches", default="all")
++    parser.add_argument("--categories", default="all")
++    parser.add_argument("--queries", type=unsigned, default=64)
++    parser.add_argument("--repetitions", type=unsigned, default=5)
++    parser.add_argument("--warmups", type=unsigned, default=1)
++    parser.add_argument("--memory-limit-mib", type=unsigned, default=256)
++    parser.add_argument("--distinct", type=unsigned, default=16)
++    parser.add_argument("--swaps", type=unsigned)
++    parser.add_argument("--validation-only", action="store_true")
++    args = parser.parse_args()
++    owns = False
++    try:
++        binary = args.binary.resolve()
++        available = subprocess.run([str(binary), "--list-searches"], capture_output=True, text=True, check=True).stdout.splitlines()
++        searches = available if args.searches == "all" else args.searches.split(",")
++        distributions = args.distributions.split(",")
++        categories = list(CATEGORIES) if args.categories == "all" else args.categories.split(",")
++        for selected, allowed in [(searches, available), (distributions, DISTRIBUTIONS), (categories, CATEGORIES)]:
++            if not selected or len(set(selected)) != len(selected) or any(name not in allowed for name in selected):
++                raise ValueError("unknown or duplicated algorithm/distribution/category")
++        if not 2 <= args.queries <= 100000 or args.queries % 2 or not 1 <= args.repetitions <= 10000 or \
++                args.warmups > 1000 or not 1 <= args.memory_limit_mib <= 65536 or not 1 <= args.distinct <= 2**32 or \
++                (args.swaps is not None and args.swaps > 10000000):
++            raise ValueError("invalid query/round/dataset/resource bounds")
++        configurations = len(args.sizes)*len(args.seeds)*len(args.query_seeds)*len(distributions)
++        if configurations > 1000 or configurations*len(categories)*len(searches)*(args.repetitions+args.warmups) > 1000000:
++            raise ValueError("matrix exceeds configuration/row limits")
++        if any(16*size+128*args.queries*9 > args.memory_limit_mib*1024**2 for size in args.sizes):
++            raise ValueError("dataset/query workspace exceeds memory planning budget")
++        args.output.mkdir(exist_ok=False)
++        owns = True
++        build = next((p for p in [binary.parent, *binary.parent.parents] if (p/"CMakeCache.txt").is_file()), None)
++        if build is None:
++            raise ValueError("missing discoverable build cache")
++        environment = capture(build, " ".join(sys.argv))
++        environment.update(record_kind="search_matrix_environment", workload={
++            "sizes": args.sizes, "seeds": args.seeds, "query_seeds": args.query_seeds,
++            "distributions": distributions, "searches": searches, "categories": categories,
++            "batch_size": args.queries, "repetitions": args.repetitions, "warmups": args.warmups},
++            workload_note="Before search execution; completion markers determine outcome.",
++            benchmark_executable_sha256=hashlib.sha256(binary.read_bytes()).hexdigest(),
++            tool_sha256={p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in
++                         [Path(__file__), Path(__file__).with_name("analyze_search_results.py"),
++                          Path(__file__).with_name("run_matrix.py"), Path(__file__).with_name("capture_environment.py")]})
++        save(args.output/"environment.json", environment)
++        names, commands = [], []
++        for size in args.sizes:
++            for seed in args.seeds:
++                for query_seed in args.query_seeds:
++                    for distribution in distributions:
++                        name = f"run_{len(names):06d}"
++                        names.append(name)
++                        command = [str(binary), "--output", str(args.output/name), "--search", ",".join(searches),
++                                   "--size", str(size), "--seed", str(seed), "--query-seed", str(query_seed),
++                                   "--distribution", distribution, "--categories", ",".join(categories),
++                                   "--queries", str(args.queries), "--repetitions", str(args.repetitions),
++                                   "--warmups", str(args.warmups), "--memory-limit-mib", str(args.memory_limit_mib),
++                                   "--distinct", str(args.distinct), "--run-id", args.output.name+":"+name]
++                        if args.swaps is not None:
++                            command.extend(["--swaps", str(args.swaps)])
++                        if args.validation_only:
++                            command.append("--validation-only")
++                        commands.append(command)
++        save(args.output/"matrix.json", {"schema_version": 1, "protocol": "search_batch_v1",
++             "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
++             "invocation": sys.argv, "runs": names, "commands": commands})
++        for name, command in zip(names, commands):
++            result = subprocess.run(command, capture_output=True, text=True)
++            save(args.output/(name+"_command.json"), {"command": command, "exit_code": result.returncode,
++                 "stdout": result.stdout, "stderr": result.stderr})
++            if result.returncode:
++                raise RuntimeError(f"{name} failed with exit {result.returncode}: {result.stderr.strip()}")
++        save(args.output/"COMPLETE.json", {"schema_version": 1, "complete": True, "runs": len(names)})
++    except (OSError, ValueError, RuntimeError, subprocess.SubprocessError) as error:
++        if owns:
++            try:
++                save(args.output/"FAILED.json", {"complete": False, "error": str(error)})
++            except OSError:
++                pass
++        parser.exit(1, f"search matrix failed: {error}\n")
++    print(f"Completed {len(names)} search configurations: {args.output}")
++
++
++if __name__ == "__main__":
++    main()
+--- /dev/null
++++ b/src/algorithms/searching.cpp
+@@ -0,0 +1,20 @@
++#include "algorithms/searching.hpp"
++#include "algorithms/detail/search_impl.hpp"
++#include <stdexcept>
++#include <string>
++
++namespace mab {
++SearchResult linear_search(const Values& values, Key key) { return detail::linear_search_impl(values, key); }
++SearchResult binary_search(const Values& values, Key key) { return detail::binary_search_impl(values, key); }
++SearchResult exponential_search(const Values& values, Key key) { return detail::exponential_search_impl(values, key); }
++const std::array<Searcher, 3>& searchers() noexcept {
++    static const std::array<Searcher, 3> registry{{
++        {"linear_search", linear_search, false}, {"binary_search", binary_search, true},
++        {"exponential_search", exponential_search, true}}};
++    return registry;
++}
++const Searcher& find_searcher(std::string_view name) {
++    for (const auto& searcher : searchers()) if (searcher.name == name) return searcher;
++    throw std::invalid_argument("unknown searcher: " + std::string(name));
++}
++}  // namespace mab
+--- /dev/null
++++ b/src/benchmark/search_comparisons.cpp
+@@ -0,0 +1,30 @@
++#include "benchmark/search_comparisons.hpp"
++#include "algorithms/detail/search_impl.hpp"
++#include <functional>
++#include <limits>
++#include <stdexcept>
++
++namespace mab {
++namespace {
++template <typename Predicate> struct CountPredicate {
++    std::uint64_t* counter;
++    bool operator()(Key a, Key b) const {
++        if (*counter == std::numeric_limits<std::uint64_t>::max())
++            throw std::overflow_error("search comparison counter overflow");
++        ++*counter;
++        return Predicate{}(a, b);
++    }
++};
++}
++SearchCount counted_search(std::string_view name, const Values& values, Key key) {
++    (void)find_searcher(name);
++    std::uint64_t count = 0;
++    const CountPredicate<std::less<Key>> less{&count};
++    const CountPredicate<std::equal_to<Key>> equal{&count};
++    SearchResult result;
++    if (name == "linear_search") result = detail::linear_search_impl(values, key, equal);
++    else if (name == "binary_search") result = detail::binary_search_impl(values, key, less, equal);
++    else result = detail::exponential_search_impl(values, key, less, equal);
++    return {result, count};
++}
++}  // namespace mab
+--- /dev/null
++++ b/src/benchmark/search_main.cpp
+@@ -0,0 +1,215 @@
++#include "benchmark/search_timing.hpp"
++#include "benchmark/output.hpp"
++#include "benchmark_build.hpp"
++#ifdef MAB_SEARCH_COUNTS
++#include "benchmark/search_comparisons.hpp"
++#endif
++#include <algorithm>
++#include <charconv>
++#include <chrono>
++#include <filesystem>
++#include <fstream>
++#include <iostream>
++#include <locale>
++#include <sstream>
++#include <thread>
++
++namespace fs=std::filesystem;
++namespace {
++template<typename T>T number(std::string_view text){
++    T value{};const auto parsed=std::from_chars(text.data(),text.data()+text.size(),value);
++    if(text.empty() || parsed.ec!=std::errc{} || parsed.ptr!=text.data()+text.size())
++        throw std::invalid_argument("expected unsigned decimal integer: "+std::string(text));
++    return value;
++}
++std::vector<std::string> split(std::string_view text){
++    std::vector<std::string> result;
++    while(true){const auto comma=text.find(',');result.emplace_back(text.substr(0,comma));
++        if(comma==std::string_view::npos) break;
++        text.remove_prefix(comma+1);
++    }
++    return result;
++}
++std::vector<mab::Searcher> select(std::string_view names){
++    if(names=="all")return {mab::searchers().begin(),mab::searchers().end()};
++    std::vector<mab::Searcher> result;
++    for(const auto& name:split(names)){
++        const auto& algorithm=mab::find_searcher(name);
++        for(const auto& previous:result)if(previous.name==name)throw std::invalid_argument("duplicate searcher");
++        result.push_back(algorithm);
++    }
++    return result;
++}
++std::ofstream file(const fs::path& path){
++    std::ofstream stream;stream.exceptions(std::ios::badbit|std::ios::failbit);
++    stream.imbue(std::locale::classic());stream.open(path,std::ios::binary);return stream;
++}
++void json_file(const fs::path& path,const std::string& data){auto stream=file(path);stream<<data<<'\n';stream.close();}
++std::string optional_text(const fs::path& path){std::ifstream stream(path);return stream ? std::string(std::istreambuf_iterator<char>(stream),{}) : std::string{};}
++std::string position(mab::SearchResult value){return value ? std::to_string(*value) : "";}
++std::string strings(const std::vector<std::string>& items){
++    std::string result="[";for(std::size_t i=0;i<items.size();++i){if(i)result+=',';result+=mab::json_string(items[i]);}return result+"]";
++}
++struct Object {
++    std::ostringstream stream;bool first=true;
++    Object(){stream.imbue(std::locale::classic());stream<<'{';}
++    void raw(std::string_view name,const std::string& encoded){if(!first)stream<<',';first=false;stream<<mab::json_string(name)<<':'<<encoded;}
++    void text(std::string_view name,std::string_view value){raw(name,mab::json_string(value));}
++    void integer(std::string_view name,std::uint64_t value){raw(name,std::to_string(value));}
++    std::string finish(){return stream.str()+"}";}
++};
++void usage(){
++#ifdef MAB_SEARCH_COUNTS
++    std::cout<<"Usage: search_counts --output NEW_DIRECTORY (separate counts; no timing)\n";
++#else
++    std::cout<<"Usage: search_benchmark --output NEW_DIRECTORY [--repetitions R] [--warmups W] [--validation-only]\n";
++#endif
++    std::cout<<"  [--search NAME[,NAME...]|all] [--size N] [--seed S] [--query-seed S]\n"
++        "  [--distribution uniform|sorted|reverse_sorted|duplicate_heavy|nearly_sorted]\n"
++        "  [--queries Q] [--categories NAME[,NAME...]|all] [--swaps K] [--distinct K]\n"
++        "  [--memory-limit-mib M] [--run-id ID] [--list-searches] [--help]\n"
++        "Defaults: linear_search, N=1000, seed=1729, query-seed=2718, uniform, Q=1000, all categories, M=256.\n";
++}
++}
++int main(int argc,char** argv){
++    fs::path output;bool owns=false;
++    try{
++        mab::SearchConfig config;std::string names="linear_search",run_id;bool validation=false;
++        std::vector<std::string> invocation;for(int i=0;i<argc;++i)invocation.emplace_back(argv[i]);
++        for(int i=1;i<argc;++i){
++            const std::string_view option(argv[i]);
++            if(option=="--help"){usage();return 0;}
++            if(option=="--list-searches"){for(const auto& s:mab::searchers())std::cout<<s.name<<'\n';return 0;}
++#ifndef MAB_SEARCH_COUNTS
++            if(option=="--validation-only"){validation=true;continue;}
++#endif
++            if(option!="--output" && option!="--search" && option!="--size" && option!="--seed" && option!="--query-seed" &&
++               option!="--distribution" && option!="--queries" && option!="--categories" && option!="--swaps" && option!="--distinct" &&
++               option!="--memory-limit-mib" && option!="--run-id"
++#ifndef MAB_SEARCH_COUNTS
++               && option!="--repetitions" && option!="--warmups"
++#endif
++               )throw std::invalid_argument("unknown option: "+std::string(option));
++            if(++i==argc)throw std::invalid_argument("missing value for "+std::string(option));
++            const std::string_view value(argv[i]);
++            if(option=="--output")output=std::string(value);
++            else if(option=="--search"){(void)select(value);names=value;}
++            else if(option=="--size")config.timing.dataset.size=number<std::size_t>(value);
++            else if(option=="--seed")config.timing.dataset.seed=number<std::uint64_t>(value);
++            else if(option=="--query-seed")config.query_seed=number<std::uint64_t>(value);
++            else if(option=="--queries")config.batch_size=number<std::size_t>(value);
++            else if(option=="--distribution"){
++                config.timing.sorted_input=value=="sorted";
++                if(!config.timing.sorted_input)config.timing.dataset.distribution=mab::parse_distribution(value);
++            }else if(option=="--categories"){
++                config.categories=value=="all" ? std::vector<std::string>{} : split(value);
++                mab::SearchConfig category_check;
++                category_check.categories=config.categories;
++                mab::validate_search_config(category_check);
++            }
++            else if(option=="--swaps")config.timing.dataset.nearly_sorted_swaps=number<std::size_t>(value);
++            else if(option=="--distinct")config.timing.dataset.duplicate_cardinality=number<std::uint64_t>(value);
++            else if(option=="--memory-limit-mib")config.timing.memory_limit_mib=number<std::size_t>(value);
++            else if(option=="--repetitions")config.timing.repetitions=number<std::size_t>(value);
++            else if(option=="--warmups")config.timing.warmups=number<std::size_t>(value);
++            else run_id=value;
++        }
++        mab::validate_search_config(config);const auto algorithms=select(names);
++        if(output.empty())throw std::invalid_argument("--output NEW_DIRECTORY is required");
++#ifndef MAB_SEARCH_COUNTS
++        if(!validation && (std::string_view(mab::build::configuration)!="Release" || mab::build::sanitizers))
++            throw std::invalid_argument("performance requires Release without sanitizers; use --validation-only for tests");
++#else
++        (void)validation;
++#endif
++        if(run_id.empty()) run_id=output.filename().string();
++        if(run_id.empty()) throw std::invalid_argument("empty run identifier");
++        if(!fs::create_directory(output)) throw std::runtime_error("output already exists: "+output.string());
++        owns=true;
++        auto data=mab::make_timing_input(config.timing);
++#ifndef MAB_SEARCH_COUNTS
++        using Clock=std::chrono::steady_clock;const auto preprocess_start=Clock::now();
++#endif
++        std::sort(data.begin(),data.end());
++#ifndef MAB_SEARCH_COUNTS
++        const auto preprocess_ns=std::chrono::duration_cast<std::chrono::nanoseconds>(Clock::now()-preprocess_start).count();
++#endif
++        const auto batches=mab::make_search_batches(data,config);
++        const auto input_hash=std::to_string(mab::input_fingerprint(data));
++        std::size_t available=0,query_rows=0,total_hits=0;
++        std::string category_plan="[";
++        for(std::size_t b=0;b<batches.size();++b){
++            const auto& batch=batches[b];const auto hits=static_cast<std::size_t>(std::count_if(batch.queries.begin(),batch.queries.end(),[](const auto& q){return q.expected_position.has_value();}));
++            Object entry;entry.text("category",batch.category);entry.raw("available",batch.unavailable_reason.empty()?"true":"false");entry.text("reason",batch.unavailable_reason);
++            entry.integer("batch_size",batch.queries.size());entry.integer("hit_queries",hits);entry.integer("miss_queries",batch.queries.size()-hits);
++            entry.text("query_hash_fnv1a64",std::to_string(mab::query_fingerprint(batch.queries)));
++            if(b) category_plan+=',';
++            category_plan+=entry.finish();
++            if(batch.unavailable_reason.empty()) ++available;
++            query_rows+=batch.queries.size();
++            total_hits+=hits;
++        }
++        category_plan+=']';
++        std::vector<std::string> algorithm_names;for(const auto& a:algorithms)algorithm_names.emplace_back(a.name);
++#ifdef MAB_SEARCH_COUNTS
++        const std::string protocol="search_counts_v1",kind="comparison_counts";
++        const auto expected_rows=query_rows*algorithms.size();
++#else
++        const std::string protocol="search_batch_v1",kind=validation?"validation":"performance";
++        const auto expected_rows=available*algorithms.size()*(config.timing.repetitions+config.timing.warmups);
++#endif
++        Object meta;meta.integer("schema_version",1);meta.text("protocol",protocol);meta.text("run_id",run_id);meta.text("run_kind",kind);
++        meta.integer("size",data.size());meta.integer("seed",config.timing.dataset.seed);meta.text("distribution",mab::timing_distribution(config.timing));
++        meta.integer("nearly_sorted_swaps",mab::timing_swaps(config.timing));meta.integer("duplicate_cardinality",config.timing.dataset.duplicate_cardinality);
++        meta.text("dataset_generator","mt19937_64_v1");meta.text("input_hash_fnv1a64",input_hash);meta.text("input_order","ascending");
++        meta.text("preprocessing","std_sort_ascending_outside_lookup");meta.integer("query_seed",config.query_seed);meta.text("query_generator","mt19937_64_queries_v1");
++        meta.integer("batch_size",config.batch_size);meta.raw("algorithms",strings(algorithm_names));meta.raw("categories",category_plan);
++        meta.integer("query_rows",query_rows);meta.integer("hit_queries",total_hits);meta.integer("miss_queries",query_rows-total_hits);
++        meta.integer("expected_rows",expected_rows);meta.integer("memory_limit_mib",config.timing.memory_limit_mib);
++        meta.integer("planned_array_query_bytes",static_cast<std::uint64_t>(data.size())*16+static_cast<std::uint64_t>(config.batch_size)*128*9);
++        meta.text("compiler_id",mab::build::compiler_id);meta.text("compiler_version",mab::build::compiler_version);meta.text("compiler_path",mab::build::compiler_path);
++        meta.text("build_type",mab::build::configuration);meta.raw("sanitizers",mab::build::sanitizers?"true":"false");meta.integer("cplusplus",__cplusplus);
++        meta.text("platform",mab::build::platform);meta.text("architecture",mab::build::architecture);
++        meta.text("cmake_global_flags",mab::build::global_flags);meta.text("cmake_configuration_flags",mab::build::configuration_flags);
++        meta.raw("invocation",strings(invocation));meta.integer("started_unix_seconds",static_cast<std::uint64_t>(std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count()));
++        meta.integer("logical_cpu_count_hint",std::thread::hardware_concurrency());meta.text("linux_cpuinfo",optional_text("/proc/cpuinfo"));meta.text("linux_meminfo",optional_text("/proc/meminfo"));
++#ifndef MAB_SEARCH_COUNTS
++        meta.integer("repetitions",config.timing.repetitions);meta.integer("warmups",config.timing.warmups);meta.text("clock","steady_clock");
++        meta.integer("clock_period_num",Clock::period::num);meta.integer("clock_period_den",Clock::period::den);
++        meta.text("elapsed_unit","ns");meta.text("order_policy","seed_offset_cyclic_v1");meta.integer("preprocessing_sort_ns",static_cast<std::uint64_t>(preprocess_ns));
++#else
++        meta.text("comparison_convention","key_predicate_v1");
++#endif
++        for(const auto name:{"CMakeCache.txt","compile_commands.json","pdqsort_upstream.json","timsort_upstream.json"}){
++            const auto path=fs::path(mab::build::binary_dir)/name;if(fs::exists(path))fs::copy_file(path,output/name);
++        }
++        fs::copy_file(fs::path(mab::build::binary_dir)/"generated"/mab::build::configuration/"source_hashes.json",output/"source_hashes.json");
++        json_file(output/"run.json",meta.finish());
++        auto queries=file(output/"queries.csv");mab::write_csv_row(queries,{"query_category","query_id","target","selected_position","expected_position","expected_hit"});
++        for(const auto& batch:batches)for(std::size_t i=0;i<batch.queries.size();++i){const auto& q=batch.queries[i];
++            mab::write_csv_row(queries,{batch.category,std::to_string(i),std::to_string(q.target),position(q.selected_position),position(q.expected_position),q.expected_position?"true":"false"});}
++        queries.close();std::size_t actual=0;
++#ifdef MAB_SEARCH_COUNTS
++        auto csv=file(output/"counts.csv");mab::write_csv_row(csv,{"algorithm","query_category","query_id","target","expected_position","actual_position","key_comparisons","comparison_convention","correctness"});
++        for(const auto& batch:batches)for(const auto& a:algorithms)for(std::size_t i=0;i<batch.queries.size();++i){const auto& q=batch.queries[i];const auto result=mab::counted_search(a.name,data,q.target);
++            const bool correct=result.position==q.expected_position;
++            mab::write_csv_row(csv,{std::string(a.name),batch.category,std::to_string(i),std::to_string(q.target),position(q.expected_position),position(result.position),std::to_string(result.key_comparisons),"key_predicate_v1",correct?"passed":"failed"});
++            csv.flush();++actual;if(!correct)throw std::runtime_error("counted search answer mismatch");}
++#else
++        auto csv=file(output/"trials.csv");mab::write_csv_row(csv,{"schema_version","protocol","run_id","run_kind","algorithm","distribution","size","seed","input_hash_fnv1a64","query_seed","query_generator","query_category","query_hash_fnv1a64","batch_size","hit_queries","miss_queries","phase","trial_index","execution_order","elapsed_ns","elapsed_unit","status","correctness","error","repetitions","warmups","compiler_id","compiler_version","build_type","sanitizers","platform","architecture"});
++        const auto complete=mab::run_search_trials(data,config,batches,algorithms,[&](const mab::SearchTrial& row){
++            const auto batch=std::find_if(batches.begin(),batches.end(),[&](const auto& b){return b.category==row.category;});
++            const auto hits=std::count_if(batch->queries.begin(),batch->queries.end(),[](const auto& q){return q.expected_position.has_value();});
++            mab::write_csv_row(csv,{"1",protocol,run_id,kind,std::string(row.algorithm),std::string(mab::timing_distribution(config.timing)),std::to_string(data.size()),std::to_string(config.timing.dataset.seed),input_hash,std::to_string(config.query_seed),"mt19937_64_queries_v1",std::string(row.category),std::to_string(mab::query_fingerprint(batch->queries)),std::to_string(config.batch_size),std::to_string(hits),std::to_string(batch->queries.size()-static_cast<std::size_t>(hits)),std::string(row.phase),std::to_string(row.trial_index),std::to_string(row.execution_order),row.elapsed_ns?std::to_string(*row.elapsed_ns):"","ns",std::string(row.status),std::string(row.correctness),row.error,std::to_string(config.timing.repetitions),std::to_string(config.timing.warmups),mab::build::compiler_id,mab::build::compiler_version,mab::build::configuration,mab::build::sanitizers?"true":"false",mab::build::platform,mab::build::architecture});
++            csv.flush();++actual;
++        });
++        if(!complete)throw std::runtime_error("search failed; inspect retained trials.csv");
++#endif
++        csv.close();if(actual!=expected_rows)throw std::runtime_error("incomplete row count");
++        json_file(output/"COMPLETE.json","{\"schema_version\":1,\"complete\":true,\"rows\":"+std::to_string(actual)+"}");
++        std::cout<<"Completed "<<actual<<" rows; available categories="<<available<<"; raw data: "<<output<<'\n';return 0;
++    }catch(const std::exception& error){
++        if(owns)try{json_file(output/"FAILED.json","{\"complete\":false,\"error\":"+mab::json_string(error.what())+"}");}catch(...){}
++        std::cerr<<"error: "<<error.what()<<'\n';return 1;
++    }
++}
+--- /dev/null
++++ b/src/benchmark/search_timing.cpp
+@@ -0,0 +1,144 @@
++#include "benchmark/search_timing.hpp"
++#include "algorithms/baselines.hpp"
++#include <algorithm>
++#include <chrono>
++#include <limits>
++#include <random>
++#include <stdexcept>
++
++namespace mab {
++const std::array<std::string_view,9>& query_categories() noexcept {
++    static constexpr std::array<std::string_view,9> names{{"hit_first","hit_middle","hit_last","hit_random",
++        "miss_below","miss_between","miss_above","mixed_50","miss_empty"}};
++    return names;
++}
++void validate_search_config(const SearchConfig& config) {
++    validate_timing_config(config.timing);
++    if (config.batch_size < 2 || config.batch_size > 100000 || config.batch_size % 2)
++        throw std::invalid_argument("batch size must be even and in [2, 100000]");
++    const auto limit = static_cast<std::uint64_t>(config.timing.memory_limit_mib)*1024*1024;
++    const auto query_bytes = static_cast<std::uint64_t>(config.batch_size)*128*9;
++    if (query_bytes > limit || config.timing.dataset.size > (limit-query_bytes)/16)
++        throw std::invalid_argument("search input/query workspace exceeds planning budget");
++    for (std::size_t i=0;i<config.categories.size();++i) {
++        if (std::find(query_categories().begin(),query_categories().end(),config.categories[i])==query_categories().end())
++            throw std::invalid_argument("unknown query category: "+config.categories[i]);
++        if (std::find(config.categories.begin(),config.categories.begin()+static_cast<std::ptrdiff_t>(i),config.categories[i])!=config.categories.begin()+static_cast<std::ptrdiff_t>(i))
++            throw std::invalid_argument("duplicate query category");
++    }
++}
++namespace {
++std::uint64_t bounded_query(std::mt19937_64& engine, std::uint64_t bound) {
++    const auto threshold=(std::uint64_t{0}-bound)%bound;
++    std::uint64_t word;do{word=engine();}while(word<threshold);
++    return word%bound;
++}
++void require_sorted(const Values& sorted, const SearchConfig& config) {
++    validate_search_config(config);
++    if (sorted.size()!=config.timing.dataset.size || !std::is_sorted(sorted.begin(),sorted.end()))
++        throw std::invalid_argument("search benchmark requires matching size and ascending sorted data");
++}
++}
++std::uint64_t query_fingerprint(const std::vector<SearchQuery>& queries) noexcept {
++    std::uint64_t hash=14695981039346656037ULL;
++    const auto append=[&](std::uint64_t word,unsigned bytes){
++        for(unsigned i=0;i<bytes;++i){hash^=(word>>(i*8))&255U;hash*=1099511628211ULL;}
++    };
++    for(const auto& q:queries){append(static_cast<std::uint32_t>(q.target),4);
++        append(q.selected_position ? static_cast<std::uint64_t>(*q.selected_position) : std::numeric_limits<std::uint64_t>::max(),8);
++        append(q.expected_position ? static_cast<std::uint64_t>(*q.expected_position) : std::numeric_limits<std::uint64_t>::max(),8);}
++    return hash;
++}
++std::vector<SearchBatch> make_search_batches(const Values& sorted, const SearchConfig& config) {
++    require_sorted(sorted,config);
++    std::vector<std::size_t> gaps;
++    // Bound capacity rather than allowing geometric vector growth to exceed the
++    // input/gap workspace allowance used by the resource planning guard.
++    gaps.reserve(sorted.size());
++    for(std::size_t i=1;i<sorted.size();++i)
++        if(static_cast<std::int64_t>(sorted[i])-sorted[i-1]>1)gaps.push_back(i-1);
++    const bool below=!sorted.empty() && sorted.front()>std::numeric_limits<Key>::min();
++    const bool above=!sorted.empty() && sorted.back()<std::numeric_limits<Key>::max();
++    std::vector<unsigned> misses;if(below)misses.push_back(4);if(!gaps.empty())misses.push_back(5);if(above)misses.push_back(6);
++    std::vector<SearchBatch> batches;
++    for(std::size_t category=0;category<query_categories().size();++category) {
++        const std::string name(query_categories()[category]);
++        if(!config.categories.empty() && std::find(config.categories.begin(),config.categories.end(),name)==config.categories.end())continue;
++        SearchBatch batch{name,{}, {}};
++        if(category<4 && sorted.empty())batch.unavailable_reason="requires nonempty input";
++        if(category==4 && !below)batch.unavailable_reason="requires a representable value below a nonempty range";
++        if(category==5 && gaps.empty())batch.unavailable_reason="no adjacent distinct-value gap containing a missing integer";
++        if(category==6 && !above)batch.unavailable_reason="requires a representable value above a nonempty range";
++        if(category==7 && (sorted.empty() || misses.empty()))batch.unavailable_reason="requires nonempty input and an available miss policy";
++        if(category==8 && !sorted.empty())batch.unavailable_reason="only applicable to empty input";
++        if(!batch.unavailable_reason.empty()){batches.push_back(std::move(batch));continue;}
++        std::mt19937_64 engine(config.query_seed ^ (0x9e3779b97f4a7c15ULL*(category+1)));
++        batch.queries.reserve(config.batch_size);
++        for(std::size_t i=0;i<config.batch_size;++i) {
++            auto policy=category;
++            if(category==7)policy=i%2 ? misses[bounded_query(engine,misses.size())] : 3;
++            SearchQuery q{0,std::nullopt,std::nullopt};
++            if(policy<4) {
++                const auto position=policy==0 ? 0 : policy==1 ? sorted.size()/2 : policy==2 ? sorted.size()-1 : static_cast<std::size_t>(bounded_query(engine,sorted.size()));
++                q.selected_position=position;q.target=sorted[position];
++            } else if(policy==4)q.target=static_cast<Key>(static_cast<std::int64_t>(sorted.front())-1);
++            else if(policy==6)q.target=static_cast<Key>(static_cast<std::int64_t>(sorted.back())+1);
++            else if(policy==5) {
++                const auto left=gaps[bounded_query(engine,gaps.size())];
++                q.target=static_cast<Key>(static_cast<std::int64_t>(sorted[left])+(static_cast<std::int64_t>(sorted[left+1])-sorted[left])/2);
++            } else q.target=static_cast<Key>(static_cast<std::int64_t>(static_cast<std::uint32_t>(engine()))-(std::int64_t{1}<<31));
++            q.expected_position=std_lower_bound_search(sorted,q.target);
++            batch.queries.push_back(q);
++        }
++        batches.push_back(std::move(batch));
++    }
++    return batches;
++}
++bool run_search_trials(const Values& sorted,const SearchConfig& config,const std::vector<SearchBatch>& batches,
++                       const std::vector<Searcher>& algorithms,const std::function<void(const SearchTrial&)>& sink) {
++    if(algorithms.empty() || !sink)throw std::invalid_argument("search algorithms and sink must be nonempty");
++    for(std::size_t i=0;i<algorithms.size();++i) {
++        if(!algorithms[i].search || algorithms[i].name.empty())throw std::invalid_argument("invalid searcher");
++        for(std::size_t j=0;j<i;++j)if(algorithms[i].name==algorithms[j].name)throw std::invalid_argument("duplicate searcher");
++    }
++    // Reconstruct the deterministic plan once outside timing, rejecting stale or
++    // tampered answers/queries/category availability supplied through the API.
++    const auto expected_batches=make_search_batches(sorted,config);
++    if(batches.size()!=expected_batches.size())throw std::invalid_argument("query plan size mismatch");
++    for(std::size_t i=0;i<batches.size();++i) {
++        const auto& a=batches[i];const auto& b=expected_batches[i];
++        if(a.category!=b.category || a.unavailable_reason!=b.unavailable_reason || a.queries.size()!=b.queries.size())
++            throw std::invalid_argument("query plan mismatch");
++        for(std::size_t q=0;q<a.queries.size();++q)
++            if(a.queries[q].target!=b.queries[q].target || a.queries[q].selected_position!=b.queries[q].selected_position || a.queries[q].expected_position!=b.queries[q].expected_position)
++                throw std::invalid_argument("query answer/identity mismatch");
++    }
++    std::vector<SearchResult> answers(config.batch_size);
++    using Clock=std::chrono::steady_clock;static_assert(Clock::is_steady,"monotonic clock required");
++    for(const auto phase:{std::string_view{"warmup"},std::string_view{"measure"}}) {
++        const auto rounds=phase=="warmup" ? config.timing.warmups : config.timing.repetitions;
++        for(std::size_t trial=0;trial<rounds;++trial)for(const auto& batch:batches) {
++            if(!batch.unavailable_reason.empty())continue;
++            const auto offset=(config.timing.dataset.seed%algorithms.size()+trial%algorithms.size())%algorithms.size();
++            for(std::size_t order=0;order<algorithms.size();++order) {
++                const auto& algorithm=algorithms[(offset+order)%algorithms.size()];
++                SearchTrial row{algorithm.name,batch.category,phase,trial,order,std::nullopt,"ok","passed",{}};
++                try {
++                    const auto start=Clock::now();
++                    for(std::size_t q=0;q<batch.queries.size();++q)answers[q]=algorithm.search(sorted,batch.queries[q].target);
++                    const auto stop=Clock::now();
++                    const auto elapsed=std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
++                    if(elapsed<0)throw std::runtime_error("negative steady-clock duration");
++                    row.elapsed_ns=static_cast<std::uint64_t>(elapsed);
++                } catch(const std::exception& e){row.status="error";row.correctness="not_checked";row.error=e.what();}
++                catch(...){row.status="error";row.correctness="not_checked";row.error="non-standard search exception";}
++                if(row.status=="ok")for(std::size_t q=0;q<batch.queries.size();++q)if(answers[q]!=batch.queries[q].expected_position) {
++                    row.status="error";row.correctness="failed";row.error="answer differs from first-match oracle at query "+std::to_string(q);break;
++                }
++                sink(row);if(row.status!="ok")return false;
++            }
++        }
++    }
++    return true;
++}
++}  // namespace mab
+--- /dev/null
++++ b/tests/test_search_benchmark.py
+@@ -0,0 +1,256 @@
++import csv
++import json
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import tempfile
++import unittest
++
++EXECUTABLE = str(Path(sys.argv.pop(1)).resolve())
++COUNTS = str(Path(sys.argv.pop(1)).resolve())
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / "scripts"))
++import analyze_search_results as analysis
++
++
++class SearchBenchmarkTests(unittest.TestCase):
++    def setUp(self):
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.root = Path(temporary.name)
++
++    def cli(self, output, *args):
++        return subprocess.run([EXECUTABLE, "--output", str(output), "--validation-only", *args],
++                              capture_output=True, text=True)
++
++    def bundle(self, name="run", *args):
++        path = self.root/name
++        result = self.cli(path, "--size", "31", "--search", "all", "--queries", "8",
++                          "--repetitions", "2", "--warmups", "1", *args)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        return path
++
++    def test_schema_escaping_identity_availability(self):
++        identity = 'search, "quoted"\nnext'
++        path = self.bundle("schema", "--run-id", identity)
++        meta = json.loads((path/"run.json").read_text())
++        self.assertEqual(meta["run_id"], identity)
++        self.assertEqual(meta["input_order"], "ascending")
++        self.assertEqual(meta["algorithms"], ["linear_search", "binary_search", "exponential_search"])
++        with (path/"trials.csv").open(newline="") as f:
++            reader = csv.DictReader(f)
++            self.assertEqual(reader.fieldnames, analysis.FIELDS)
++            rows = list(reader)
++        self.assertEqual(len(rows), 8*3*3)
++        self.assertEqual({r["run_id"] for r in rows}, {identity})
++        for category in analysis.CATEGORIES[:-1]:
++            chosen = [r for r in rows if r["query_category"] == category]
++            self.assertEqual(len({r["query_hash_fnv1a64"] for r in chosen}), 1)
++        parsed = analysis.analyze(path)
++        self.assertTrue(parsed["complete"])
++        self.assertEqual(len(parsed["groups"]), 24)
++        self.assertTrue(all(g["successful_trials"] == 2 and g["failed_trials"] == 0 for g in parsed["groups"]))
++        self.assertEqual([e["category"] for e in parsed["availability"] if not e["available"]], ["miss_empty"])
++
++    def test_reproducible_distributions_and_seeds(self):
++        for d, distribution in enumerate(["uniform", "sorted", "reverse_sorted", "nearly_sorted", "duplicate_heavy"]):
++            for size in [0, 1, 33]:
++                args = ("--size", str(size), "--distribution", distribution, "--seed", "18446744073709551615",
++                        "--query-seed", "18446744073709551615")
++                a, b = self.bundle(f"a{d}_{size}", *args), self.bundle(f"b{d}_{size}", *args)
++                self.assertEqual((a/"queries.csv").read_bytes(), (b/"queries.csv").read_bytes())
++                self.assertEqual(json.loads((a/"run.json").read_text())["input_hash_fnv1a64"],
++                                 json.loads((b/"run.json").read_text())["input_hash_fnv1a64"])
++                self.assertTrue(analysis.analyze(a)["complete"])
++        prepared = [json.loads((self.root/f"a{d}_33/run.json").read_text())["input_hash_fnv1a64"] for d in range(4)]
++        self.assertEqual(len(set(prepared)), 1)
++
++    def test_duplicates_and_explicit_unavailable(self):
++        path = self.bundle("equal", "--distribution", "duplicate_heavy", "--distinct", "1")
++        data = analysis.rows(path/"queries.csv", analysis.QUERY_FIELDS)
++        last = [r for r in data if r["query_category"] == "hit_last"]
++        self.assertTrue(all(r["target"] == "0" and r["selected_position"] == "30" and r["expected_position"] == "0" for r in last))
++        self.assertFalse(next(e for e in analysis.analyze(path)["availability"] if e["category"] == "miss_between")["available"])
++        empty = self.bundle("no_gap", "--size", "1", "--categories", "miss_between")
++        parsed = analysis.analyze(empty)
++        self.assertTrue(parsed["complete"])
++        self.assertEqual(parsed["groups"], [])
++        self.assertTrue(parsed["availability"][0]["reason"])
++
++    def test_invalid_configuration(self):
++        invalid = [("--size", "-1"), ("--size", "+1"), ("--size", str(2**64)),
++                   ("--queries", "0"), ("--queries", "3"), ("--queries", "100002"),
++                   ("--query-seed", "-1"), ("--query-seed", str(2**64)), ("--seed", "bad"),
++                   ("--repetitions", "0"), ("--repetitions", "10001"), ("--warmups", "1001"),
++                   ("--search", "bad"), ("--search", "binary_search,binary_search"), ("--search", "binary_search,"),
++                   ("--categories", "bad"), ("--categories", "hit_first,hit_first"), ("--categories", ""),
++                   ("--distribution", "bad"), ("--distinct", "0"), ("--distinct", str(2**32+1)),
++                   ("--memory-limit-mib", "0"), ("--memory-limit-mib", "1", "--queries", "100000"),
++                   ("--size", "100000000"), ("--swaps", "10000001"), ("--size",), ("--bad",)]
++        for i, args in enumerate(invalid):
++            path = self.root/f"bad{i}"
++            result = self.cli(path, *args)
++            self.assertEqual(result.returncode, 1, args)
++            self.assertTrue(result.stderr.startswith("error:"), result.stderr)
++            self.assertFalse(path.exists())
++
++    def test_output_safety(self):
++        path = self.bundle()
++        before = {p.name: p.read_bytes() for p in path.iterdir()}
++        self.assertEqual(self.cli(path).returncode, 1)
++        self.assertEqual(before, {p.name: p.read_bytes() for p in path.iterdir()})
++        ordinary = self.root/"file"
++        ordinary.write_text("preserve")
++        self.assertEqual(self.cli(ordinary).returncode, 1)
++        self.assertEqual(ordinary.read_text(), "preserve")
++        self.assertEqual(self.cli(self.root/"missing/child").returncode, 1)
++        link = self.root/"link"
++        try:
++            link.symlink_to(path, target_is_directory=True)
++        except OSError:
++            return
++        self.assertEqual(self.cli(link).returncode, 1)
++        self.assertEqual(before, {p.name: p.read_bytes() for p in path.iterdir()})
++
++    def test_statistics_synthetic_and_regeneration(self):
++        path = self.bundle("synthetic", "--search", "linear_search", "--categories", "hit_first",
++                           "--repetitions", "3", "--warmups", "0")
++        data = analysis.rows(path/"trials.csv", analysis.FIELDS)
++        for row, value in zip(data, [10, 20, 30]):
++            row["elapsed_ns"] = str(value)
++        # Only this temporary fixture is synthetic; no retained study data changes.
++        with (path/"trials.csv").open("w", newline="") as f:
++            writer = csv.DictWriter(f, fieldnames=analysis.FIELDS)
++            writer.writeheader()
++            writer.writerows(data)
++        group = analysis.analyze(path)["groups"][0]
++        for name, value in [("median", 20), ("mean", 20), ("stdev", 10), ("min", 10), ("max", 30)]:
++            self.assertEqual(group[name+"_batch_ns"], value)
++            self.assertEqual(group[name+"_normalized_ns_per_query"], value/8)
++        before = {p.name: p.read_bytes() for p in path.iterdir()}
++        outputs = [self.root/"summary1.json", self.root/"summary2.json"]
++        for output in outputs:
++            command = [sys.executable, str(ROOT/"scripts/analyze_search_results.py"), str(path), "--output", str(output)]
++            self.assertEqual(subprocess.run(command, capture_output=True).returncode, 0)
++            self.assertEqual(subprocess.run(command, capture_output=True).returncode, 1)
++        self.assertEqual(outputs[0].read_bytes(), outputs[1].read_bytes())
++        self.assertEqual(before, {p.name: p.read_bytes() for p in path.iterdir()})
++        self.assertEqual(analysis.summarize_samples([10, 20, 10000])["max_ns"], 10000)
++        self.assertIsNone(analysis.summarize_samples([10])["stdev_ns"])
++
++    def test_partial_failure_and_missing(self):
++        path = self.bundle()
++        (path/"COMPLETE.json").unlink()
++        with self.assertRaises(ValueError):
++            analysis.analyze(path)
++        data = analysis.rows(path/"trials.csv", analysis.FIELDS)
++        data[-1].update(status="error", correctness="failed", error='wrong, "answer"\nquery')
++        with (path/"trials.csv").open("w", newline="") as f:
++            writer = csv.DictWriter(f, fieldnames=analysis.FIELDS)
++            writer.writeheader()
++            writer.writerows(data)
++        parsed = analysis.analyze(path, True)
++        self.assertFalse(parsed["complete"])
++        self.assertEqual(sum(g["failed_trials"] for g in parsed["groups"]), 1)
++        result = subprocess.run([sys.executable, str(ROOT/"scripts/analyze_search_results.py"), str(path),
++                                 "--output", str(self.root/"partial.json"), "--allow-incomplete"], capture_output=True)
++        self.assertEqual(result.returncode, 1)
++        with (path/"trials.csv").open("w", newline="") as f:
++            csv.writer(f).writerow(analysis.FIELDS)
++        empty = analysis.analyze(path, True)
++        self.assertEqual(sum(g["missing_measured_trials"] for g in empty["groups"]), 48)
++
++    def test_tampering_rejected(self):
++        for i, field in enumerate(["query_id", "target", "selected_position", "expected_position", "expected_hit"]):
++            path = self.bundle(f"tamper{i}")
++            data = analysis.rows(path/"queries.csv", analysis.QUERY_FIELDS)
++            data[0][field] = "99999" if field != "expected_hit" else "false"
++            with (path/"queries.csv").open("w", newline="") as f:
++                writer = csv.DictWriter(f, fieldnames=analysis.QUERY_FIELDS)
++                writer.writeheader()
++                writer.writerows(data)
++            with self.assertRaises(ValueError):
++                analysis.analyze(path)
++        path = self.bundle("bad_csv")
++        text = (path/"trials.csv").read_text()
++        (path/"trials.csv").write_text(text.replace("elapsed_ns", "unknown_schema", 1))
++        with self.assertRaises(ValueError):
++            analysis.analyze(path)
++
++    def test_separate_counts_and_exact_small_input(self):
++        path = self.root/"counts"
++        result = subprocess.run([COUNTS, "--output", str(path), "--search", "all", "--size", "5",
++                                 "--distribution", "duplicate_heavy", "--distinct", "1", "--queries", "4",
++                                 "--categories", "hit_first"], capture_output=True, text=True)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        meta = json.loads((path/"run.json").read_text())
++        self.assertEqual(meta["protocol"], "search_counts_v1")
++        self.assertNotIn("preprocessing_sort_ns", meta)
++        self.assertFalse((path/"trials.csv").exists())
++        with (path/"counts.csv").open(newline="") as f:
++            data = list(csv.DictReader(f))
++        self.assertEqual(len(data), 12)
++        for row in data:
++            self.assertEqual(int(row["key_comparisons"]), {"linear_search": 1, "binary_search": 4, "exponential_search": 2}[row["algorithm"]])
++            self.assertEqual(row["actual_position"], "0")
++            self.assertEqual(row["correctness"], "passed")
++        self.assertEqual(subprocess.run([COUNTS, "--output", str(path), "--warmups", "1"], capture_output=True).returncode, 1)
++        with self.assertRaises(ValueError):
++            analysis.analyze(path)
++
++    def test_defaults_help_and_build_guard(self):
++        self.assertEqual(subprocess.run([EXECUTABLE, "--list-searches"], capture_output=True, text=True).stdout.splitlines(),
++                         ["linear_search", "binary_search", "exponential_search"])
++        self.assertEqual(subprocess.run([EXECUTABLE, "--help"], capture_output=True).returncode, 0)
++        path = self.root/"default"
++        self.assertEqual(self.cli(path, "--size", "0").returncode, 0)
++        self.assertEqual(json.loads((path/"run.json").read_text())["algorithms"], ["linear_search"])
++        meta = json.loads((path/"run.json").read_text())
++        performance = self.root/"guard"
++        result = subprocess.run([EXECUTABLE, "--output", str(performance), "--size", "0", "--queries", "2"], capture_output=True)
++        self.assertEqual(result.returncode, 0 if meta["build_type"] == "Release" and not meta["sanitizers"] else 1)
++
++    def test_matrix_completion_validation_and_safety(self):
++        path = self.root/"matrix"
++        command = [sys.executable, str(ROOT/"scripts/run_search_matrix.py"), "--binary", EXECUTABLE,
++                   "--output", str(path), "--sizes", "0,1,33", "--queries", "4", "--repetitions", "1",
++                   "--warmups", "0", "--validation-only"]
++        result = subprocess.run(command, capture_output=True, text=True)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        self.assertEqual(json.loads((path/"COMPLETE.json").read_text())["runs"], 6)
++        summary = analysis.analyze(path)
++        self.assertTrue(summary["complete"])
++        self.assertEqual({e["category"] for e in summary["availability"] if e["available"]}, set(analysis.CATEGORIES))
++        before = {str(p.relative_to(path)): p.read_bytes() for p in path.rglob("*") if p.is_file()}
++        self.assertEqual(subprocess.run(command, capture_output=True).returncode, 1)
++        self.assertEqual(before, {str(p.relative_to(path)): p.read_bytes() for p in path.rglob("*") if p.is_file()})
++        for i, args in enumerate([("--sizes", "0,0"), ("--seeds", "-1"), ("--query-seeds", str(2**64)),
++                                  ("--searches", "bad"), ("--categories", "bad"), ("--queries", "3"),
++                                  ("--sizes", "999999999"), ("--queries", "100000", "--memory-limit-mib", "1")]):
++            output = self.root/f"matrix_bad{i}"
++            bad = [sys.executable, str(ROOT/"scripts/run_search_matrix.py"), "--binary", EXECUTABLE, "--output", str(output), *args]
++            self.assertNotEqual(subprocess.run(bad, capture_output=True).returncode, 0)
++            self.assertFalse(output.exists())
++
++    def test_matrix_records_failed_child(self):
++        if sys.platform == "win32":
++            self.skipTest("executable script fixture is POSIX")
++        fake = self.root/"child"
++        fake.write_text('#!/usr/bin/env python3\nimport sys\nif "--list-searches" in sys.argv:\n print("linear_search\\nbinary_search\\nexponential_search")\nelse:\n sys.exit(9)\n')
++        fake.chmod(0o700)
++        shutil.copyfile(Path(EXECUTABLE).parent/"CMakeCache.txt", self.root/"CMakeCache.txt")
++        path = self.root/"failed_matrix"
++        result = subprocess.run([sys.executable, str(ROOT/"scripts/run_search_matrix.py"), "--binary", str(fake),
++                                 "--output", str(path), "--sizes", "0", "--distributions", "uniform"], capture_output=True)
++        self.assertEqual(result.returncode, 1)
++        self.assertEqual(json.loads((path/"run_000000_command.json").read_text())["exit_code"], 9)
++        self.assertTrue((path/"FAILED.json").exists())
++        self.assertFalse((path/"COMPLETE.json").exists())
++        parsed = analysis.analyze(path, True)
++        self.assertFalse(parsed["complete"])
++        self.assertEqual(len(parsed["missing_runs"]), 1)
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- /dev/null
++++ b/tests/test_search_timing.cpp
+@@ -0,0 +1,73 @@
++#include "benchmark/search_timing.hpp"
++#include "algorithms/baselines.hpp"
++#include "test_support.hpp"
++#include <algorithm>
++#include <iostream>
++#include <limits>
++
++namespace {
++mab::SearchResult wrong(const mab::Values&,mab::Key){return std::nullopt;}
++mab::SearchResult throwing(const mab::Values&,mab::Key){throw std::runtime_error("deliberate search test exception");}
++}
++int main(){
++    try{
++        std::size_t cases=0,trials=0;
++        for(const auto size:{0U,1U,2U,31U,64U,257U})for(const auto seed:{0ULL,1729ULL,18446744073709551615ULL})
++            for(const auto dist:{mab::Distribution::uniform,mab::Distribution::nearly_sorted,mab::Distribution::reverse_sorted,mab::Distribution::duplicate_heavy}){
++                mab::SearchConfig c;c.timing.dataset.size=size;c.timing.dataset.seed=seed;c.timing.dataset.distribution=dist;c.query_seed=seed;c.batch_size=16;c.timing.repetitions=2;
++                auto data=mab::make_timing_input(c.timing);std::sort(data.begin(),data.end());const auto original=data;
++                const auto batches=mab::make_search_batches(data,c),again=mab::make_search_batches(data,c);
++                require(batches.size()==9,"category plan count");
++                std::size_t eligible=0;
++                for(std::size_t b=0;b<batches.size();++b){
++                    const auto& batch=batches[b];require(mab::query_fingerprint(batch.queries)==mab::query_fingerprint(again[b].queries),"query reproducibility");
++                    if(!batch.unavailable_reason.empty()){require(batch.queries.empty(),"unavailable queries fabricated");continue;}
++                    ++eligible;require(batch.queries.size()==16,"batch size");std::size_t hits=0;
++                    for(std::size_t i=0;i<batch.queries.size();++i){const auto& q=batch.queries[i];const auto found=std::find(data.begin(),data.end(),q.target);
++                        mab::SearchResult oracle;if(found!=data.end())oracle=static_cast<std::size_t>(found-data.begin());
++                        require(q.expected_position==oracle,"query expected answer differs from linear oracle");hits+=oracle.has_value();
++                        if(q.selected_position)require(data[*q.selected_position]==q.target && oracle && *oracle<=*q.selected_position,"selected rank/first duplicate semantics");
++                        if(batch.category=="mixed_50")require(oracle.has_value()==(i%2==0),"mixed exact ratio/order");
++                        if(batch.category=="miss_below")require(q.target<data.front(),"below category");
++                        if(batch.category=="miss_above")require(q.target>data.back(),"above category");
++                        if(batch.category=="miss_between")require(q.target>data.front() && q.target<data.back() && !oracle,"between category");
++                    }
++                    if(batch.category=="mixed_50")require(hits==8,"50 percent hit ratio");
++                    else require(hits==(batch.category.rfind("hit_",0)==0 ? 16U : 0U),"category hit ratio");
++                    auto subset=c;subset.categories={batch.category};const auto alone=mab::make_search_batches(data,subset);
++                    require(alone.size()==1 && mab::query_fingerprint(alone[0].queries)==mab::query_fingerprint(batch.queries),"subset changed category RNG");
++                }
++                const std::vector<mab::Searcher> algorithms(mab::searchers().begin(),mab::searchers().end());
++                std::size_t observed=0;
++                require(mab::run_search_trials(data,c,batches,algorithms,[&](const mab::SearchTrial& row){
++                    require(row.status=="ok" && row.correctness=="passed" && row.elapsed_ns,"valid timed batch");
++                    const auto offset=(seed%3+row.trial_index%3)%3;
++                    require(row.algorithm==algorithms[(offset+row.execution_order)%3].name,"cyclic schedule");
++                    ++observed;
++                }),"search engine failed");
++                require(observed==eligible*3*3,"warmup/measure count");require(data==original,"input modified");
++                trials+=observed;++cases;
++            }
++        mab::SearchConfig c;c.batch_size=8;c.timing.dataset.size=5;
++        const mab::Values duplicates{-2,-2,0,7,7};const auto batches=mab::make_search_batches(duplicates,c);
++        require(batches[2].queries[0].selected_position==4 && batches[2].queries[0].expected_position==3,"last target duplicate rank");
++        const auto low=std::numeric_limits<mab::Key>::min(),high=std::numeric_limits<mab::Key>::max();
++        c.timing.dataset.size=2;const auto extrema=mab::make_search_batches({low,high},c);
++        require(!extrema[4].unavailable_reason.empty() && !extrema[6].unavailable_reason.empty(),"unrepresentable range misses");
++        require(extrema[5].queries[0].target==-1,"int64 gap midpoint");
++        c.timing.dataset.size=3;const auto dense=mab::make_search_batches({-1,0,1},c);require(!dense[5].unavailable_reason.empty(),"dense gap policy");
++        bool rejected=false;try{(void)mab::make_search_batches({2,0,1},c);}catch(const std::invalid_argument&){rejected=true;}require(rejected,"unsorted input not rejected");
++        rejected=false;try{mab::run_search_trials({2,0,1},c,dense,{{"linear_search",mab::linear_search,false}},[](const auto&){});}catch(const std::invalid_argument&){rejected=true;}require(rejected,"engine accepted unsorted input");
++        c.timing.dataset.size=1;c.categories={"hit_first"};c.timing.warmups=0;
++        const auto one=mab::make_search_batches({7},c);
++        std::vector<mab::SearchTrial> failed;
++        require(!mab::run_search_trials({7},c,one,{{"wrong",wrong,false}},[&](const auto& r){failed.push_back(r);}),"wrong result accepted");
++        require(failed.size()==1 && failed[0].correctness=="failed" && failed[0].elapsed_ns,"wrong answer failure row");
++        failed.clear();require(!mab::run_search_trials({7},c,one,{{"throw",throwing,false}},[&](const auto& r){failed.push_back(r);}),"exception accepted");
++        require(failed.size()==1 && failed[0].correctness=="not_checked" && !failed[0].elapsed_ns,"exception failure row");
++        auto tampered=one;tampered[0].queries[0].expected_position=std::nullopt;
++        rejected=false;try{mab::run_search_trials({7},c,tampered,{{"linear_search",mab::linear_search,false}},[](const auto&){});}catch(const std::invalid_argument&){rejected=true;}require(rejected,"stale oracle not rejected");
++        c.categories={"bad"};rejected=false;try{mab::validate_search_config(c);}catch(const std::invalid_argument&){rejected=true;}require(rejected,"invalid category accepted");
++        std::cout<<"Passed "<<cases<<" reproducible search/query configurations and "<<trials<<" validated timed batches, category/duplicate/extrema/precondition/failure checks\n";
++    }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
++}
+--- /dev/null
++++ b/tests/test_searching.cpp
+@@ -0,0 +1,72 @@
++#include "algorithms/searching.hpp"
++#include "algorithms/baselines.hpp"
++#include "benchmark/search_comparisons.hpp"
++#include "datasets/generator.hpp"
++#include "test_support.hpp"
++#include <algorithm>
++#include <iostream>
++#include <limits>
++#include <random>
++
++int main() {
++    try {
++        std::size_t inputs = 0, checks = 0;
++        const mab::Key low = std::numeric_limits<mab::Key>::min(), high = std::numeric_limits<mab::Key>::max();
++        const auto check = [&](mab::Values values) {
++            const auto before = values;
++            for (const auto key : {low, low + 1, -2, -1, 0, 1, 2, high - 1, high}) {
++                const auto found = std::find(values.begin(), values.end(), key);
++                mab::SearchResult expected;
++                if (found != values.end()) expected = static_cast<std::size_t>(found - values.begin());
++                require(mab::linear_search(values, key) == expected, "unsorted linear oracle");
++            }
++            require(values == before, "linear changed input");
++            std::sort(values.begin(), values.end());
++            mab::Values targets{low, low + 1, -2, -1, 0, 1, 2, high - 1, high};
++            if (!values.empty()) {
++                targets.push_back(values.front()); targets.push_back(values[values.size()/2]); targets.push_back(values.back());
++                for (std::size_t i = 0; i < 16; ++i) targets.push_back(values[i * (values.size()-1) / 16]);
++            }
++            for (const auto key : targets) {
++                const auto found = std::find(values.begin(), values.end(), key);
++                mab::SearchResult expected;
++                if (found != values.end()) expected = static_cast<std::size_t>(found - values.begin());
++                require(mab::std_lower_bound_search(values, key) == expected, "reference oracle mismatch");
++                for (const auto& searcher : mab::searchers()) {
++                    const auto public_fn = searcher.name == "linear_search" ? mab::linear_search :
++                        searcher.name == "binary_search" ? mab::binary_search : mab::exponential_search;
++                    require(public_fn(values, key) == expected, "public search mismatch");
++                    require(mab::find_searcher(searcher.name).search(values, key) == expected, "registry mismatch");
++                    const auto counted = mab::counted_search(searcher.name, values, key);
++                    require(counted.position == expected, "counted mismatch");
++                    (void)mab::counted_search(searcher.name, {}, 17);
++                    require(mab::counted_search(searcher.name, values, key).key_comparisons == counted.key_comparisons,
++                            "counter reset/isolation/repetition mismatch");
++                    ++checks;
++                }
++            }
++            ++inputs;
++        };
++        for (const auto& values : std::vector<mab::Values>{{}, {0}, {low}, {high}, {2,1}, {1,2},
++             {low,low+1,-1,0,0,1,high-1,high}, {-8,-2,1,7}, {4,4,4,4}, {7,-1,0,7,-2}}) check(values);
++        for (std::size_t size=0;size<=7;++size) {
++            std::size_t total=1;for(std::size_t i=0;i<size;++i)total*=3;
++            for(std::size_t word=0;word<total;++word){auto code=word;mab::Values v(size);for(auto& k:v){k=static_cast<mab::Key>(code%3)-1;code/=3;}check(v);}
++        }
++        for (const auto size : {0U,1U,2U,3U,4U,7U,8U,9U,15U,16U,17U,31U,32U,33U,63U,64U,65U,127U,128U,129U,257U,1024U,4096U}) {
++            mab::Values spaced(size);for(std::size_t i=0;i<size;++i)spaced[i]=static_cast<mab::Key>(i*2)-4096;
++            check(spaced); std::reverse(spaced.begin(),spaced.end());check(spaced);
++            for(const auto seed : {0ULL,42ULL,1729ULL,18446744073709551615ULL})
++                for(const auto distribution : {mab::Distribution::uniform,mab::Distribution::nearly_sorted,mab::Distribution::reverse_sorted,mab::Distribution::duplicate_heavy}) {
++                    mab::DatasetConfig config;config.size=size;config.seed=seed;config.distribution=distribution;check(mab::generate_dataset(config));
++                }
++        }
++        require(mab::counted_search("linear_search", {-2,0,0,7}, 0).key_comparisons==2, "linear exact count");
++        require(mab::counted_search("binary_search", {-2,0,0,7}, 0).key_comparisons==4, "binary exact count");
++        require(mab::counted_search("exponential_search", {-2,0,0,7}, 0).key_comparisons==5, "exponential exact count");
++        for(const auto& s:mab::searchers())require(mab::counted_search(s.name, {}, 0).key_comparisons==0,"empty exact count");
++        bool rejected=false;try{(void)mab::find_searcher("bad");}catch(const std::invalid_argument&){rejected=true;}
++        require(rejected,"unknown registry name");
++        std::cout << "Passed " << inputs << " search inputs and " << checks << " public/registry/counting oracle checks, exact predicates and reset/isolation tests\n";
++    } catch (const std::exception& error) { std::cerr<<error.what()<<'\n';return 1; }
++}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/sanitize",
+    "-DCMAKE_BUILD_TYPE=Debug",
+    "-DMAB_ENABLE_SANITIZERS=ON"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:57:59.538376+00:00",
+  "exit_code": 0,
+  "stdout": "-- Configuring done (0.1s)\n-- Generating done (0.0s)\n-- Build files have been written to: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/sanitize\n",
+  "stderr": "",
+  "wall_seconds": 0.1283100420005212,
+  "ended_utc": "2026-10-09T17:57:59.666828+00:00"
+}

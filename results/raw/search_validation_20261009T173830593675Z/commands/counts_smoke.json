@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "build/release/search_counts",
+    "--output",
+    "results/raw/search_validation_20261009T173830593675Z/counts_smoke",
+    "--search",
+    "all",
+    "--size",
+    "64",
+    "--queries",
+    "16",
+    "--seed",
+    "1729",
+    "--query-seed",
+    "2718",
+    "--distribution",
+    "uniform"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:03:06.207224+00:00",
+  "exit_code": 0,
+  "stdout": "Completed 384 rows; available categories=8; raw data: \"results/raw/search_validation_20261009T173830593675Z/counts_smoke\"\n",
+  "stderr": "",
+  "wall_seconds": 0.0023862540001573507,
+  "ended_utc": "2026-10-09T18:03:06.209736+00:00"
+}

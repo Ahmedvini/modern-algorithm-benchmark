@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/sorting_1m_20261009T172003802655Z/analyze_study.py",
+    "--self-test"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:22:46.972146+00:00",
+  "exit_code": 0,
+  "stdout": "Synthetic-only tests passed: known statistics, seed-unit aggregation, missing/duplicate/invalid-seed/failure rejection; no fixture observations written.\n",
+  "stderr": "",
+  "wall_seconds": 0.036498512999969535,
+  "ended_utc": "2026-10-09T17:22:47.008757+00:00"
+}

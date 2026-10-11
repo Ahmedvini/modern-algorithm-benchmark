@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/sorting_1m_20261009T172003802655Z/verify_study.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:28:24.693539+00:00",
+  "exit_code": 0,
+  "stdout": "PASS: 15 complete configurations, 450 measured + 90 warm-up successes, zero failures/omissions, 90 per-seed + 30 cross-seed groups; all five processed files regenerate byte-for-byte; 138 raw matrix files and 334 prior raw files unchanged; frozen protocol and execution inputs unchanged.\n",
+  "stderr": "",
+  "wall_seconds": 0.2039121959987824,
+  "ended_utc": "2026-10-09T17:28:24.897579+00:00"
+}

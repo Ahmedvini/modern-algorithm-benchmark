@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    ".",
+    "-B",
+    "build/release",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_SANITIZERS=OFF"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:39:21.149732+00:00"
+}

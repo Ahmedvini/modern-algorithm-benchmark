@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/search_validation_20261009T173830593675Z/final_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:07:58.488029+00:00",
+  "exit_code": 0,
+  "stdout": "Final review passed; changed files: ['CMakeLists.txt', 'README.md', 'docs/ALGORITHMS.md', 'docs/AUDIT.md', 'docs/BENCHMARKING.md', 'docs/EXPERIMENT_PROTOCOL.md', 'docs/METRICS.md', 'docs/ROADMAP.md'] added: ['docs/SEARCH_PROTOCOL_v1.md', 'include/algorithms/detail/search_impl.hpp', 'include/algorithms/searching.hpp', 'include/benchmark/search_comparisons.hpp', 'include/benchmark/search_timing.hpp', 'scripts/analyze_search_results.py', 'scripts/run_search_matrix.py', 'src/algorithms/searching.cpp', 'src/benchmark/search_comparisons.cpp', 'src/benchmark/search_main.cpp', 'src/benchmark/search_timing.cpp', 'tests/test_search_benchmark.py', 'tests/test_search_timing.cpp', 'tests/test_searching.cpp']\n",
+  "stderr": "",
+  "wall_seconds": 0.0872861739990185,
+  "ended_utc": "2026-10-09T18:07:58.575464+00:00"
+}

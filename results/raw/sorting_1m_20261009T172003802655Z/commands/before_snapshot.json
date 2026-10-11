@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "results/raw/sorting_1m_20261009T172003802655Z/preflight_capture.py",
+    "before_execution.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T17:26:07.388667+00:00",
+  "exit_code": 0,
+  "stdout": "before_execution.json load (1.314453125, 1.16357421875, 1.103515625) available RAM bytes 4411662336 disk free 134454919168\n",
+  "stderr": "",
+  "wall_seconds": 0.049798355999882915,
+  "ended_utc": "2026-10-09T17:26:07.438581+00:00"
+}

@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "build/release/search_counts",
+    "--output",
+    "results/raw/search_validation_20261009T173830593675Z/counts_smoke",
+    "--search",
+    "all",
+    "--size",
+    "64",
+    "--queries",
+    "16",
+    "--seed",
+    "1729",
+    "--query-seed",
+    "2718",
+    "--distribution",
+    "uniform"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-09T18:03:06.207224+00:00"
+}
