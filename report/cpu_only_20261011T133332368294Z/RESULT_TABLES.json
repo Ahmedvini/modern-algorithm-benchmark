@@ -1,0 +1,2721 @@
+{
+  "comparisons_memory": [
+    {
+      "algorithm": "std_sort",
+      "count_max": 12427,
+      "count_median": 11995,
+      "count_min": 11696,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 16996,
+      "count_median": 16670,
+      "count_min": 16542,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 11455,
+      "count_median": 11184,
+      "count_min": 11175,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 8673,
+      "count_median": 8672,
+      "count_min": 8666,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 8734,
+      "count_median": 8713,
+      "count_min": 8701,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 10662,
+      "count_median": 10645,
+      "count_min": 10620,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 25140,
+      "count_median": 24688,
+      "count_min": 22859,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 6469,
+      "count_median": 6279,
+      "count_min": 5986,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 2934,
+      "count_median": 2902,
+      "count_min": 2862,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 6596,
+      "count_median": 6551,
+      "count_min": 6342,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 8138,
+      "count_median": 8138,
+      "count_min": 8138,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 28288,
+      "count_median": 28288,
+      "count_min": 28288,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 3030,
+      "count_median": 3030,
+      "count_min": 3030,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 999,
+      "count_median": 999,
+      "count_min": 999,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 4932,
+      "count_median": 4932,
+      "count_min": 4932,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 8878,
+      "count_median": 8661,
+      "count_min": 8552,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 6195,
+      "count_median": 5864,
+      "count_min": 5837,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 5671,
+      "count_median": 5612,
+      "count_min": 5553,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 7346,
+      "count_median": 7324,
+      "count_min": 7311,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 8645,
+      "count_median": 8635,
+      "count_min": 8574,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 171918,
+      "count_median": 160111,
+      "count_min": 159427,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 231353,
+      "count_median": 221125,
+      "count_min": 219628,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 150293,
+      "count_median": 149691,
+      "count_min": 146828,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 120294,
+      "count_median": 120264,
+      "count_min": 120218,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 123676,
+      "count_median": 123632,
+      "count_min": 123588,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 166289,
+      "count_median": 165476,
+      "count_min": 165325,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 351052,
+      "count_median": 331376,
+      "count_min": 327678,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 93695,
+      "count_median": 93559,
+      "count_min": 92090,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 23863,
+      "count_median": 22754,
+      "count_min": 22348,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 103671,
+      "count_median": 103199,
+      "count_min": 101770,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 122058,
+      "count_median": 122058,
+      "count_min": 122058,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 545679,
+      "count_median": 545679,
+      "count_min": 545679,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 30030,
+      "count_median": 30030,
+      "count_min": 30030,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 9999,
+      "count_median": 9999,
+      "count_min": 9999,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 64608,
+      "count_median": 64608,
+      "count_min": 64608,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 121640,
+      "count_median": 116087,
+      "count_min": 114471,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 64279,
+      "count_median": 64261,
+      "count_min": 60679,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 55170,
+      "count_median": 54236,
+      "count_min": 52234,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 77763,
+      "count_median": 77719,
+      "count_min": 77594,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 121789,
+      "count_median": 121665,
+      "count_min": 121544,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 10000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 2025675,
+      "count_median": 1995013,
+      "count_min": 1957098,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 2841762,
+      "count_median": 2815391,
+      "count_min": 2791391,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 1869537,
+      "count_median": 1868666,
+      "count_min": 1851088,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 1532576,
+      "count_median": 1532545,
+      "count_min": 1532514,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 1566569,
+      "count_median": 1566475,
+      "count_min": 1566450,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 2101422,
+      "count_median": 2096703,
+      "count_min": 2080988,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 4384328,
+      "count_median": 4336899,
+      "count_min": 4290465,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 1276390,
+      "count_median": 1269641,
+      "count_min": 1265660,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 270255,
+      "count_median": 266465,
+      "count_min": 265994,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 1355108,
+      "count_median": 1352310,
+      "count_min": 1352114,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 1516394,
+      "count_median": 1516394,
+      "count_min": 1516392,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 7493580,
+      "count_median": 7493580,
+      "count_min": 7493580,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 300030,
+      "count_median": 300030,
+      "count_min": 300030,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 100108,
+      "count_median": 100105,
+      "count_min": 100077,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 815026,
+      "count_median": 815025,
+      "count_min": 815025,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 1588800,
+      "count_median": 1491682,
+      "count_min": 1480704,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 649878,
+      "count_median": 624277,
+      "count_min": 613021,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 562385,
+      "count_median": 550526,
+      "count_min": 538532,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 780129,
+      "count_median": 780120,
+      "count_min": 779857,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 1535866,
+      "count_median": 1535507,
+      "count_min": 1534744,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 100000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 24551921,
+      "count_median": 24084625,
+      "count_min": 23908870,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 34718521,
+      "count_median": 34665838,
+      "count_min": 33485187,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 22391146,
+      "count_median": 22244405,
+      "count_min": 22117069,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 18633560,
+      "count_median": 18633323,
+      "count_min": 18633070,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 18716508,
+      "count_median": 18715461,
+      "count_min": 18714954,
+      "datasets": 3,
+      "distribution": "uniform",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 25592726,
+      "count_median": 25473419,
+      "count_min": 25460186,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 52002251,
+      "count_median": 51635850,
+      "count_min": 50883059,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 16075995,
+      "count_median": 16065319,
+      "count_min": 16045990,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 3140599,
+      "count_median": 3131592,
+      "count_min": 3128752,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 16590149,
+      "count_median": 16588032,
+      "count_min": 16576011,
+      "datasets": 3,
+      "distribution": "nearly_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 18131420,
+      "count_median": 18131254,
+      "count_min": 18131142,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 91611020,
+      "count_median": 91611014,
+      "count_min": 91610999,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 3000030,
+      "count_median": 3000030,
+      "count_min": 3000030,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 1003868,
+      "count_median": 1003367,
+      "count_min": 1003364,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 9885053,
+      "count_median": 9885052,
+      "count_min": 9885048,
+      "datasets": 3,
+      "distribution": "reverse_sorted",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "std_sort",
+      "count_max": 19241793,
+      "count_median": 18457112,
+      "count_min": 18213091,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "quick_sort",
+      "count_max": 6562839,
+      "count_median": 6440075,
+      "count_min": 5811475,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "pdq_sort",
+      "count_max": 6064477,
+      "count_median": 5375585,
+      "count_min": 5251105,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "tim_sort",
+      "count_max": 7769251,
+      "count_median": 7768231,
+      "count_min": 7767320,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    },
+    {
+      "algorithm": "merge_sort",
+      "count_max": 18299264,
+      "count_median": 18293959,
+      "count_min": 18293771,
+      "datasets": 3,
+      "distribution": "duplicate_heavy",
+      "process_rss_max_bytes": 19202048,
+      "process_rss_median_bytes": 19202048,
+      "process_rss_min_bytes": 19202048,
+      "size": 1000000,
+      "unavailable_memory": 0
+    }
+  ],
+  "cpu_scaling": [
+    {
+      "algorithm": "merge_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.07512929,
+      "size": 1000000
+    },
+    {
+      "algorithm": "merge_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.912024905,
+      "size": 10000000
+    },
+    {
+      "algorithm": "merge_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 11.109073894,
+      "size": 100000000
+    },
+    {
+      "algorithm": "pdq_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.02445692,
+      "size": 1000000
+    },
+    {
+      "algorithm": "pdq_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.283683551,
+      "size": 10000000
+    },
+    {
+      "algorithm": "pdq_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 3.100928792,
+      "size": 100000000
+    },
+    {
+      "algorithm": "quick_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.083770908,
+      "size": 1000000
+    },
+    {
+      "algorithm": "quick_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.979348526,
+      "size": 10000000
+    },
+    {
+      "algorithm": "quick_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 11.418276963,
+      "size": 100000000
+    },
+    {
+      "algorithm": "radix_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.007268327,
+      "size": 1000000
+    },
+    {
+      "algorithm": "radix_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.10651542,
+      "size": 10000000
+    },
+    {
+      "algorithm": "radix_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 1.111648025,
+      "size": 100000000
+    },
+    {
+      "algorithm": "std_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.057698583,
+      "size": 1000000
+    },
+    {
+      "algorithm": "std_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.724257421,
+      "size": 10000000
+    },
+    {
+      "algorithm": "std_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 8.052182914,
+      "size": 100000000
+    },
+    {
+      "algorithm": "tim_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.082326229,
+      "size": 1000000
+    },
+    {
+      "algorithm": "tim_sort",
+      "datasets": 3,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 0.957998261,
+      "size": 10000000
+    },
+    {
+      "algorithm": "tim_sort",
+      "datasets": 1,
+      "distribution": "uniform",
+      "median_of_dataset_medians_seconds": 11.522669982,
+      "size": 100000000
+    }
+  ],
+  "learned_1m": [
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "duplicate_heavy",
+      "maximum": 39903,
+      "mean": 35536.333333333336,
+      "median": 34160,
+      "minimum": 32546,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 3866.79225370763,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 632170,
+      "mean": 568275,
+      "median": 578882,
+      "minimum": 493773,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 69805.54232294166,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "duplicate_heavy",
+      "maximum": 37245,
+      "mean": 32584,
+      "median": 33748,
+      "minimum": 26759,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 5339.028095074983,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "nearly_sorted",
+      "maximum": 155036,
+      "mean": 139370,
+      "median": 154655,
+      "minimum": 108419,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 26805.029210952187,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 967037,
+      "mean": 798990,
+      "median": 829069,
+      "minimum": 600864,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 184930.32786160306,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "nearly_sorted",
+      "maximum": 139109,
+      "mean": 115839.33333333333,
+      "median": 107055,
+      "minimum": 101354,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 20352.72439584768,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "reverse_sorted",
+      "maximum": 126401,
+      "mean": 109398.66666666667,
+      "median": 106410,
+      "minimum": 95385,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 15722.504900089341,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 571018,
+      "mean": 546314.3333333334,
+      "median": 554255,
+      "minimum": 513670,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 29487.09745521477,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "reverse_sorted",
+      "maximum": 115216,
+      "mean": 98974.66666666667,
+      "median": 94804,
+      "minimum": 86904,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 14609.523651828396,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "binary_search",
+      "distribution": "uniform",
+      "maximum": 171715,
+      "mean": 139250,
+      "median": 125127,
+      "minimum": 120908,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 28194.541297917935,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 1044690,
+      "mean": 766720,
+      "median": 664637,
+      "minimum": 590833,
+      "n": 3,
+      "operation": "build",
+      "sample_sd": 243541.06076594148,
+      "size": 1000000,
+      "unit": "ns"
+    },
+    {
+      "aggregation": "equal-weight dataset medians",
+      "algorithm": "learned_rank",
+      "distribution": "uniform",
+      "maximum": 136460,
+      "mean": 120649,
+      "median": 115328,
+      "minimum": 110159,
+      "n": 3,
+      "operation": "lookup_batch",
+      "sample_sd": 13934.505050413523,
+      "size": 1000000,
+      "unit": "ns"
+    }
+  ],
+  "openmp_1m_uniform": [
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.9552057035743492,
+        "mean": 0.9361452156301832,
+        "median": 0.9346843285198692,
+        "minimum": 0.9185456147963312,
+        "sample_stdev": 0.018373654254525716
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 0.9552057035743492,
+        "mean": 0.9361452156301832,
+        "median": 0.9346843285198692,
+        "minimum": 0.9185456147963312,
+        "sample_stdev": 0.018373654254525716
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 83319357,
+        "mean": 79888177,
+        "median": 79405645,
+        "minimum": 76939529,
+        "sample_stdev": 3217169.4353365973
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": 0.0
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "minimum": 1.0,
+        "sample_stdev": 0.0
+      },
+      "size": 1000000,
+      "threads": 1,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.8740037290554349,
+        "mean": 0.8630988582510739,
+        "median": 0.859893291381025,
+        "minimum": 0.8553995543167617,
+        "sample_stdev": 0.009707500895984366
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 1.7480074581108698,
+        "mean": 1.7261977165021478,
+        "median": 1.71978658276205,
+        "minimum": 1.7107991086335235,
+        "sample_stdev": 0.01941500179196873
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 46484530,
+        "mean": 43759906.666666664,
+        "median": 43032345,
+        "minimum": 41762845,
+        "sample_stdev": 2443478.4210032085
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 0.9226274445420067,
+        "mean": 0.9133269154147334,
+        "median": 0.9211480803091839,
+        "minimum": 0.8962052213930096,
+        "sample_stdev": 0.014846259941934484
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 1.8452548890840135,
+        "mean": 1.8266538308294669,
+        "median": 1.8422961606183679,
+        "minimum": 1.7924104427860192,
+        "sample_stdev": 0.029692519883868968
+      },
+      "size": 1000000,
+      "threads": 2,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.6659966962913804,
+        "mean": 0.6373962651543154,
+        "median": 0.6432035120730144,
+        "minimum": 0.6029885870985514,
+        "sample_stdev": 0.03190295509188637
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 2.6639867851655215,
+        "mean": 2.5495850606172614,
+        "median": 2.5728140482920576,
+        "minimum": 2.4119543483942056,
+        "sample_stdev": 0.12761182036754548
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 33103151,
+        "mean": 29948701.666666668,
+        "median": 28472301,
+        "minimum": 28270653,
+        "sample_stdev": 2733693.18439384
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 0.6972183684767873,
+        "mean": 0.6689473732350755,
+        "median": 0.6803833731750024,
+        "minimum": 0.6292403780534367,
+        "sample_stdev": 0.03540251921076795
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 2.7888734739071492,
+        "mean": 2.675789492940302,
+        "median": 2.7215334927000097,
+        "minimum": 2.5169615122137468,
+        "sample_stdev": 0.1416100768430718
+      },
+      "size": 1000000,
+      "threads": 4,
+      "unavailable_datasets": 0
+    },
+    {
+      "algorithmic_efficiency": {
+        "count": 3,
+        "maximum": 0.43910695419434387,
+        "mean": 0.40005181423366454,
+        "median": 0.38068921660471566,
+        "minimum": 0.3803592719019341,
+        "sample_stdev": 0.033823145682918256
+      },
+      "algorithmic_speedup": {
+        "count": 3,
+        "maximum": 3.512855633554751,
+        "mean": 3.2004145138693163,
+        "median": 3.0455137328377253,
+        "minimum": 3.0428741752154727,
+        "sample_stdev": 0.27058516546334604
+      },
+      "declared_datasets": 3,
+      "distinct_inputs": 3,
+      "distribution": "uniform",
+      "parallel_median_ns": {
+        "count": 3,
+        "maximum": 26010611,
+        "mean": 24607013.333333332,
+        "median": 24144551,
+        "minimum": 23665878,
+        "sample_stdev": 1238889.3282437837
+      },
+      "parallel_one_thread_efficiency": {
+        "count": 3,
+        "maximum": 0.43135693950158777,
+        "mean": 0.4068392030032779,
+        "median": 0.419409988718779,
+        "minimum": 0.36975068078946705,
+        "sample_stdev": 0.032670342334523705
+      },
+      "parallel_one_thread_speedup": {
+        "count": 3,
+        "maximum": 3.450855516012702,
+        "mean": 3.2547136240262233,
+        "median": 3.355279909750232,
+        "minimum": 2.9580054463157364,
+        "sample_stdev": 0.26136273867618964
+      },
+      "size": 1000000,
+      "threads": 8,
+      "unavailable_datasets": 0
+    }
+  ],
+  "scope": "cpu_only_release_v1",
+  "search": [
+    {
+      "algorithm": "binary_search",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000045:binary_search:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000050:binary_search:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000055:binary_search:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "search",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 115771,
+        "mean": 114721.33333333333,
+        "median": 115577,
+        "minimum": 112816,
+        "sample_stdev": 1652.9157066630269
+      },
+      "structure_seed": null,
+      "successful_trials": 15,
+      "unit": "ns"
+    },
+    {
+      "algorithm": "exponential_search",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000045:exponential_search:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000050:exponential_search:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000055:exponential_search:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "search",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 130093,
+        "mean": 125199.33333333333,
+        "median": 124227,
+        "minimum": 121278,
+        "sample_stdev": 4487.218551991125
+      },
+      "structure_seed": null,
+      "successful_trials": 15,
+      "unit": "ns"
+    },
+    {
+      "algorithm": "linear_search",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000045:linear_search:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000050:linear_search:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/search/run_000055:linear_search:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "search",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 226672895,
+        "mean": 216608523,
+        "median": 215649975,
+        "minimum": 207502699,
+        "sample_stdev": 9620977.828206029
+      },
+      "structure_seed": null,
+      "successful_trials": 15,
+      "unit": "ns"
+    }
+  ],
+  "sorting_1m": [
+    {
+      "algorithm": "std_sort",
+      "dataset_count": 3,
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "max_seed_median_ns": 61641907,
+      "mean_of_seed_medians_ns": 58702888,
+      "median_of_seed_medians_ns": 57698583,
+      "min_seed_median_ns": 56768174,
+      "sample_stdev_of_seed_medians_ns": 2587429.175570029,
+      "seed_medians_ns": [
+        {
+          "median_ns": 56768174,
+          "seed": 1729
+        },
+        {
+          "median_ns": 61641907,
+          "seed": 42
+        },
+        {
+          "median_ns": 57698583,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "std_sort",
+      "dataset_count": 3,
+      "distribution": "sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 8763239,
+      "mean_of_seed_medians_ns": 8715506.666666666,
+      "median_of_seed_medians_ns": 8740275,
+      "min_seed_median_ns": 8643006,
+      "sample_stdev_of_seed_medians_ns": 63828.64814746849,
+      "seed_medians_ns": [
+        {
+          "median_ns": 8643006,
+          "seed": 1729
+        },
+        {
+          "median_ns": 8763239,
+          "seed": 42
+        },
+        {
+          "median_ns": 8740275,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "std_sort",
+      "dataset_count": 3,
+      "distribution": "reverse_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 6377411,
+      "mean_of_seed_medians_ns": 6066534.333333333,
+      "median_of_seed_medians_ns": 5978201,
+      "min_seed_median_ns": 5843991,
+      "sample_stdev_of_seed_medians_ns": 277464.0651207528,
+      "seed_medians_ns": [
+        {
+          "median_ns": 5978201,
+          "seed": 1729
+        },
+        {
+          "median_ns": 6377411,
+          "seed": 42
+        },
+        {
+          "median_ns": 5843991,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "std_sort",
+      "dataset_count": 3,
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "max_seed_median_ns": 21875877,
+      "mean_of_seed_medians_ns": 20365757,
+      "median_of_seed_medians_ns": 20182188,
+      "min_seed_median_ns": 19039206,
+      "sample_stdev_of_seed_medians_ns": 1427217.1432129731,
+      "seed_medians_ns": [
+        {
+          "median_ns": 19039206,
+          "seed": 1729
+        },
+        {
+          "median_ns": 21875877,
+          "seed": 42
+        },
+        {
+          "median_ns": 20182188,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "std_sort",
+      "dataset_count": 3,
+      "distribution": "nearly_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 10945874,
+      "mean_of_seed_medians_ns": 10541523.333333334,
+      "median_of_seed_medians_ns": 10406520,
+      "min_seed_median_ns": 10272176,
+      "sample_stdev_of_seed_medians_ns": 356562.3000393246,
+      "seed_medians_ns": [
+        {
+          "median_ns": 10272176,
+          "seed": 1729
+        },
+        {
+          "median_ns": 10945874,
+          "seed": 42
+        },
+        {
+          "median_ns": 10406520,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "quick_sort",
+      "dataset_count": 3,
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "max_seed_median_ns": 92384262,
+      "mean_of_seed_medians_ns": 86526373,
+      "median_of_seed_medians_ns": 83770908,
+      "min_seed_median_ns": 83423949,
+      "sample_stdev_of_seed_medians_ns": 5076045.97981155,
+      "seed_medians_ns": [
+        {
+          "median_ns": 83423949,
+          "seed": 1729
+        },
+        {
+          "median_ns": 92384262,
+          "seed": 42
+        },
+        {
+          "median_ns": 83770908,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "quick_sort",
+      "dataset_count": 3,
+      "distribution": "sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 77685218,
+      "mean_of_seed_medians_ns": 75526799.66666667,
+      "median_of_seed_medians_ns": 74458851,
+      "min_seed_median_ns": 74436330,
+      "sample_stdev_of_seed_medians_ns": 1869279.0254834439,
+      "seed_medians_ns": [
+        {
+          "median_ns": 74458851,
+          "seed": 1729
+        },
+        {
+          "median_ns": 74436330,
+          "seed": 42
+        },
+        {
+          "median_ns": 77685218,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "quick_sort",
+      "dataset_count": 3,
+      "distribution": "reverse_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 76609559,
+      "mean_of_seed_medians_ns": 72520162.33333333,
+      "median_of_seed_medians_ns": 72089704,
+      "min_seed_median_ns": 68861224,
+      "sample_stdev_of_seed_medians_ns": 3892061.741623369,
+      "seed_medians_ns": [
+        {
+          "median_ns": 72089704,
+          "seed": 1729
+        },
+        {
+          "median_ns": 76609559,
+          "seed": 42
+        },
+        {
+          "median_ns": 68861224,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "quick_sort",
+      "dataset_count": 3,
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "max_seed_median_ns": 15165048,
+      "mean_of_seed_medians_ns": 14663940.333333334,
+      "median_of_seed_medians_ns": 14573535,
+      "min_seed_median_ns": 14253238,
+      "sample_stdev_of_seed_medians_ns": 462578.87137906905,
+      "seed_medians_ns": [
+        {
+          "median_ns": 14573535,
+          "seed": 1729
+        },
+        {
+          "median_ns": 14253238,
+          "seed": 42
+        },
+        {
+          "median_ns": 15165048,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "quick_sort",
+      "dataset_count": 3,
+      "distribution": "nearly_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 33266753,
+      "mean_of_seed_medians_ns": 32221721.666666668,
+      "median_of_seed_medians_ns": 31782987,
+      "min_seed_median_ns": 31615425,
+      "sample_stdev_of_seed_medians_ns": 908893.3500127137,
+      "seed_medians_ns": [
+        {
+          "median_ns": 31615425,
+          "seed": 1729
+        },
+        {
+          "median_ns": 33266753,
+          "seed": 42
+        },
+        {
+          "median_ns": 31782987,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "pdq_sort",
+      "dataset_count": 3,
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "max_seed_median_ns": 26766690,
+      "mean_of_seed_medians_ns": 25079905.333333332,
+      "median_of_seed_medians_ns": 24456920,
+      "min_seed_median_ns": 24016106,
+      "sample_stdev_of_seed_medians_ns": 1477332.437004391,
+      "seed_medians_ns": [
+        {
+          "median_ns": 24016106,
+          "seed": 1729
+        },
+        {
+          "median_ns": 26766690,
+          "seed": 42
+        },
+        {
+          "median_ns": 24456920,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "pdq_sort",
+      "dataset_count": 3,
+      "distribution": "sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 770770,
+      "mean_of_seed_medians_ns": 750938,
+      "median_of_seed_medians_ns": 763870,
+      "min_seed_median_ns": 718174,
+      "sample_stdev_of_seed_medians_ns": 28583.42652657305,
+      "seed_medians_ns": [
+        {
+          "median_ns": 718174,
+          "seed": 1729
+        },
+        {
+          "median_ns": 763870,
+          "seed": 42
+        },
+        {
+          "median_ns": 770770,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "pdq_sort",
+      "dataset_count": 3,
+      "distribution": "reverse_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 1583518,
+      "mean_of_seed_medians_ns": 1522808.3333333333,
+      "median_of_seed_medians_ns": 1557606,
+      "min_seed_median_ns": 1427301,
+      "sample_stdev_of_seed_medians_ns": 83720.34386177194,
+      "seed_medians_ns": [
+        {
+          "median_ns": 1557606,
+          "seed": 1729
+        },
+        {
+          "median_ns": 1583518,
+          "seed": 42
+        },
+        {
+          "median_ns": 1427301,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "pdq_sort",
+      "dataset_count": 3,
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "max_seed_median_ns": 4691128,
+      "mean_of_seed_medians_ns": 4383175.333333333,
+      "median_of_seed_medians_ns": 4247840,
+      "min_seed_median_ns": 4210558,
+      "sample_stdev_of_seed_medians_ns": 267345.50783832767,
+      "seed_medians_ns": [
+        {
+          "median_ns": 4691128,
+          "seed": 1729
+        },
+        {
+          "median_ns": 4210558,
+          "seed": 42
+        },
+        {
+          "median_ns": 4247840,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "pdq_sort",
+      "dataset_count": 3,
+      "distribution": "nearly_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 8805952,
+      "mean_of_seed_medians_ns": 8611575.666666666,
+      "median_of_seed_medians_ns": 8626962,
+      "min_seed_median_ns": 8401813,
+      "sample_stdev_of_seed_medians_ns": 202508.363457743,
+      "seed_medians_ns": [
+        {
+          "median_ns": 8401813,
+          "seed": 1729
+        },
+        {
+          "median_ns": 8805952,
+          "seed": 42
+        },
+        {
+          "median_ns": 8626962,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "tim_sort",
+      "dataset_count": 3,
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "max_seed_median_ns": 84395885,
+      "mean_of_seed_medians_ns": 82661671.66666667,
+      "median_of_seed_medians_ns": 82326229,
+      "min_seed_median_ns": 81262901,
+      "sample_stdev_of_seed_medians_ns": 1593200.7164915956,
+      "seed_medians_ns": [
+        {
+          "median_ns": 82326229,
+          "seed": 1729
+        },
+        {
+          "median_ns": 84395885,
+          "seed": 42
+        },
+        {
+          "median_ns": 81262901,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "tim_sort",
+      "dataset_count": 3,
+      "distribution": "sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 415617,
+      "mean_of_seed_medians_ns": 402003,
+      "median_of_seed_medians_ns": 395861,
+      "min_seed_median_ns": 394531,
+      "sample_stdev_of_seed_medians_ns": 11808.809084746861,
+      "seed_medians_ns": [
+        {
+          "median_ns": 395861,
+          "seed": 1729
+        },
+        {
+          "median_ns": 394531,
+          "seed": 42
+        },
+        {
+          "median_ns": 415617,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "tim_sort",
+      "dataset_count": 3,
+      "distribution": "reverse_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 2236576,
+      "mean_of_seed_medians_ns": 2020661,
+      "median_of_seed_medians_ns": 2056559,
+      "min_seed_median_ns": 1768848,
+      "sample_stdev_of_seed_medians_ns": 235921.32226443628,
+      "seed_medians_ns": [
+        {
+          "median_ns": 2236576,
+          "seed": 1729
+        },
+        {
+          "median_ns": 2056559,
+          "seed": 42
+        },
+        {
+          "median_ns": 1768848,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "tim_sort",
+      "dataset_count": 3,
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "max_seed_median_ns": 42375244,
+      "mean_of_seed_medians_ns": 40833211,
+      "median_of_seed_medians_ns": 40939090,
+      "min_seed_median_ns": 39185299,
+      "sample_stdev_of_seed_medians_ns": 1597606.036461117,
+      "seed_medians_ns": [
+        {
+          "median_ns": 39185299,
+          "seed": 1729
+        },
+        {
+          "median_ns": 40939090,
+          "seed": 42
+        },
+        {
+          "median_ns": 42375244,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "tim_sort",
+      "dataset_count": 3,
+      "distribution": "nearly_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 8072686,
+      "mean_of_seed_medians_ns": 7773185.666666667,
+      "median_of_seed_medians_ns": 7693301,
+      "min_seed_median_ns": 7553570,
+      "sample_stdev_of_seed_medians_ns": 268619.66670430766,
+      "seed_medians_ns": [
+        {
+          "median_ns": 7553570,
+          "seed": 1729
+        },
+        {
+          "median_ns": 8072686,
+          "seed": 42
+        },
+        {
+          "median_ns": 7693301,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "merge_sort",
+      "dataset_count": 3,
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "max_seed_median_ns": 83319411,
+      "mean_of_seed_medians_ns": 77610751,
+      "median_of_seed_medians_ns": 75129290,
+      "min_seed_median_ns": 74383552,
+      "sample_stdev_of_seed_medians_ns": 4957885.69229475,
+      "seed_medians_ns": [
+        {
+          "median_ns": 75129290,
+          "seed": 1729
+        },
+        {
+          "median_ns": 83319411,
+          "seed": 42
+        },
+        {
+          "median_ns": 74383552,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "merge_sort",
+      "dataset_count": 3,
+      "distribution": "sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 10968926,
+      "mean_of_seed_medians_ns": 10772923,
+      "median_of_seed_medians_ns": 10941720,
+      "min_seed_median_ns": 10408123,
+      "sample_stdev_of_seed_medians_ns": 316218.78756487573,
+      "seed_medians_ns": [
+        {
+          "median_ns": 10408123,
+          "seed": 1729
+        },
+        {
+          "median_ns": 10968926,
+          "seed": 42
+        },
+        {
+          "median_ns": 10941720,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "merge_sort",
+      "dataset_count": 3,
+      "distribution": "reverse_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 11223775,
+      "mean_of_seed_medians_ns": 10442023,
+      "median_of_seed_medians_ns": 10903340,
+      "min_seed_median_ns": 9198954,
+      "sample_stdev_of_seed_medians_ns": 1088386.4439513201,
+      "seed_medians_ns": [
+        {
+          "median_ns": 10903340,
+          "seed": 1729
+        },
+        {
+          "median_ns": 11223775,
+          "seed": 42
+        },
+        {
+          "median_ns": 9198954,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "merge_sort",
+      "dataset_count": 3,
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "max_seed_median_ns": 43234581,
+      "mean_of_seed_medians_ns": 37704280,
+      "median_of_seed_medians_ns": 36602228,
+      "min_seed_median_ns": 33276031,
+      "sample_stdev_of_seed_medians_ns": 5069917.995752298,
+      "seed_medians_ns": [
+        {
+          "median_ns": 33276031,
+          "seed": 1729
+        },
+        {
+          "median_ns": 36602228,
+          "seed": 42
+        },
+        {
+          "median_ns": 43234581,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "merge_sort",
+      "dataset_count": 3,
+      "distribution": "nearly_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 16649387,
+      "mean_of_seed_medians_ns": 15182644,
+      "median_of_seed_medians_ns": 15330034,
+      "min_seed_median_ns": 13568511,
+      "sample_stdev_of_seed_medians_ns": 1545717.338622751,
+      "seed_medians_ns": [
+        {
+          "median_ns": 13568511,
+          "seed": 1729
+        },
+        {
+          "median_ns": 16649387,
+          "seed": 42
+        },
+        {
+          "median_ns": 15330034,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "radix_sort",
+      "dataset_count": 3,
+      "distribution": "uniform",
+      "failed_trials": 0,
+      "max_seed_median_ns": 8025414,
+      "mean_of_seed_medians_ns": 7475195.666666667,
+      "median_of_seed_medians_ns": 7268327,
+      "min_seed_median_ns": 7131846,
+      "sample_stdev_of_seed_medians_ns": 481364.65033520415,
+      "seed_medians_ns": [
+        {
+          "median_ns": 7131846,
+          "seed": 1729
+        },
+        {
+          "median_ns": 8025414,
+          "seed": 42
+        },
+        {
+          "median_ns": 7268327,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "radix_sort",
+      "dataset_count": 3,
+      "distribution": "sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 8558973,
+      "mean_of_seed_medians_ns": 8124829.666666667,
+      "median_of_seed_medians_ns": 8310833,
+      "min_seed_median_ns": 7504683,
+      "sample_stdev_of_seed_medians_ns": 551207.5661974655,
+      "seed_medians_ns": [
+        {
+          "median_ns": 7504683,
+          "seed": 1729
+        },
+        {
+          "median_ns": 8310833,
+          "seed": 42
+        },
+        {
+          "median_ns": 8558973,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "radix_sort",
+      "dataset_count": 3,
+      "distribution": "reverse_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 9227893,
+      "mean_of_seed_medians_ns": 8078237,
+      "median_of_seed_medians_ns": 7721099,
+      "min_seed_median_ns": 7285719,
+      "sample_stdev_of_seed_medians_ns": 1019151.9145112764,
+      "seed_medians_ns": [
+        {
+          "median_ns": 7721099,
+          "seed": 1729
+        },
+        {
+          "median_ns": 9227893,
+          "seed": 42
+        },
+        {
+          "median_ns": 7285719,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "radix_sort",
+      "dataset_count": 3,
+      "distribution": "duplicate_heavy",
+      "failed_trials": 0,
+      "max_seed_median_ns": 13409832,
+      "mean_of_seed_medians_ns": 13135165.666666666,
+      "median_of_seed_medians_ns": 13285573,
+      "min_seed_median_ns": 12710092,
+      "sample_stdev_of_seed_medians_ns": 373330.6729165625,
+      "seed_medians_ns": [
+        {
+          "median_ns": 12710092,
+          "seed": 1729
+        },
+        {
+          "median_ns": 13409832,
+          "seed": 42
+        },
+        {
+          "median_ns": 13285573,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    },
+    {
+      "algorithm": "radix_sort",
+      "dataset_count": 3,
+      "distribution": "nearly_sorted",
+      "failed_trials": 0,
+      "max_seed_median_ns": 8774693,
+      "mean_of_seed_medians_ns": 8195294.666666667,
+      "median_of_seed_medians_ns": 8387864,
+      "min_seed_median_ns": 7423327,
+      "sample_stdev_of_seed_medians_ns": 695959.5732471343,
+      "seed_medians_ns": [
+        {
+          "median_ns": 7423327,
+          "seed": 1729
+        },
+        {
+          "median_ns": 8774693,
+          "seed": 42
+        },
+        {
+          "median_ns": 8387864,
+          "seed": 2718
+        }
+      ],
+      "size": 1000000,
+      "successful_trials": 15
+    }
+  ],
+  "structures": [
+    {
+      "algorithm": "btree_m10",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000045:btree_m10:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000050:btree_m10:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000055:btree_m10:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "structures",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 312142,
+        "mean": 306201.3333333333,
+        "median": 310008,
+        "minimum": 296454,
+        "sample_stdev": 8508.605604523771
+      },
+      "structure_seed": 1729,
+      "successful_trials": 15,
+      "unit": "ns"
+    },
+    {
+      "algorithm": "btree_m16",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000045:btree_m16:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000050:btree_m16:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000055:btree_m16:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "structures",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 378178,
+        "mean": 344164,
+        "median": 360870,
+        "minimum": 293444,
+        "sample_stdev": 44769.19159422024
+      },
+      "structure_seed": 1729,
+      "successful_trials": 15,
+      "unit": "ns"
+    },
+    {
+      "algorithm": "btree_m32",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000045:btree_m32:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000050:btree_m32:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000055:btree_m32:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "structures",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 207069,
+        "mean": 199196.33333333334,
+        "median": 195844,
+        "minimum": 194676,
+        "sample_stdev": 6842.895318016587
+      },
+      "structure_seed": 1729,
+      "successful_trials": 15,
+      "unit": "ns"
+    },
+    {
+      "algorithm": "btree_m64",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000045:btree_m64:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000050:btree_m64:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000055:btree_m64:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "structures",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 191021,
+        "mean": 183575.33333333334,
+        "median": 182350,
+        "minimum": 177355,
+        "sample_stdev": 6914.909278749312
+      },
+      "structure_seed": 1729,
+      "successful_trials": 15,
+      "unit": "ns"
+    },
+    {
+      "algorithm": "skip_list",
+      "architecture": "x86_64",
+      "batch_size": 1000,
+      "build_type": "Release",
+      "cmake_flags_sha256": "088adf86b37f689f49228d2660a2d1d6836dbeef12e622cf37c86ac2def6a420",
+      "compiler_id": "GNU",
+      "compiler_version": "13.3.0",
+      "dataset_groups": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000045:skip_list:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000050:skip_list:lookup:mixed_50",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/structures/run_000055:skip_list:lookup:mixed_50"
+      ],
+      "declared_datasets": 3,
+      "distinct_input_datasets": 3,
+      "distribution": "uniform",
+      "duplicate_cardinality": 16,
+      "failed_trials": 0,
+      "family": "structures",
+      "missing_trials": 0,
+      "nearly_sorted_swaps": 10000,
+      "operation": "lookup",
+      "platform": "Linux",
+      "query_category": "mixed_50",
+      "query_seed": 2718,
+      "run_kind": "performance",
+      "sanitizers": false,
+      "seeds": [
+        42,
+        1729,
+        2718
+      ],
+      "size": 1000000,
+      "source_manifest_sha256": "e8557c0b63f8881739395191c69ff77788a52ff46344710c8a55f6a5ea1cbcc4",
+      "statistics": {
+        "count": 3,
+        "maximum": 976521,
+        "mean": 956508,
+        "median": 976069,
+        "minimum": 916934,
+        "sample_stdev": 34272.83447571852
+      },
+      "structure_seed": 1729,
+      "successful_trials": 15,
+      "unit": "ns"
+    }
+  ]
+}

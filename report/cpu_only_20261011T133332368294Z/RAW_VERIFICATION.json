@@ -1,0 +1,114 @@
+{
+  "approval_scope": "Local CPU analysis/correctness; no CPU/GPU study eligibility claimed",
+  "benchmarks_executed": 0,
+  "counts": {
+    "all_family": {
+      "search": {
+        "failed_measured": 0,
+        "failed_warmups": 0,
+        "missing_configurations": 0,
+        "missing_measured_known": 0,
+        "missing_warmups_known": 0,
+        "successful_measured": 7020,
+        "unknown_lookup_missing_upper_bound": 0,
+        "warmup_rows": 1404
+      },
+      "sorting": {
+        "failed_measured": 0,
+        "failed_warmups": 0,
+        "missing_configurations": 0,
+        "missing_measured_known": 0,
+        "missing_warmups_known": 0,
+        "successful_measured": 1800,
+        "unknown_lookup_missing_upper_bound": 0,
+        "warmup_rows": 360
+      },
+      "structures": {
+        "failed_measured": 0,
+        "failed_warmups": 0,
+        "missing_configurations": 0,
+        "missing_measured_known": 0,
+        "missing_warmups_known": 0,
+        "successful_measured": 13200,
+        "unknown_lookup_missing_upper_bound": 0,
+        "warmup_rows": 2640
+      }
+    },
+    "learned": {
+      "builds": 240,
+      "configurations": 48,
+      "diagnostic_queries": 48000,
+      "distinct_sorted_inputs": 24,
+      "failed": 0,
+      "lookup_batches": 480,
+      "missing": 0,
+      "warmups": 144
+    },
+    "openmp": {
+      "failed": 0,
+      "measured": 1800,
+      "missing": 0,
+      "warmups": 360
+    },
+    "separate_metrics": {
+      "executions": 240,
+      "failed": 0,
+      "missing": 0,
+      "radix_comparisons": "unsupported"
+    },
+    "sorting_100m": {
+      "failed": 0,
+      "measured": 150,
+      "missing": 0,
+      "warmups": 30
+    },
+    "sorting_10m": {
+      "failed": 0,
+      "measured": 450,
+      "missing": 0,
+      "warmups": 90
+    },
+    "sorting_1m": {
+      "failed": 0,
+      "measured": 450,
+      "missing": 0,
+      "warmups": 90
+    }
+  },
+  "environments": {
+    "cpu_pipeline": {
+      "captured_at_utc": "2026-10-09T19:31:25.678544+00:00",
+      "cmake": "cmake version 3.28.3",
+      "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "cpu_model": "11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz",
+      "logical_cpus": 12,
+      "mem_total_kib": 16089028,
+      "omp_environment": null,
+      "os": "Linux-6.18.7-76061807-generic-x86_64-with-glibc2.39",
+      "sha256": "58297cc72a79e9b844acf95c9808163eb514e482d23776510fcc2b397c8b5c4d",
+      "source": "results/raw/phase5_full_20261009T191000587965Z/environment.json"
+    },
+    "openmp": {
+      "captured_at_utc": "2026-10-09T20:37:49.439617+00:00",
+      "cmake": "cmake version 3.28.3",
+      "compiler": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "cpu_model": "11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz",
+      "logical_cpus": 12,
+      "mem_total_kib": 16089028,
+      "omp_environment": {
+        "OMP_DYNAMIC": "FALSE",
+        "OMP_MAX_ACTIVE_LEVELS": "1",
+        "OMP_THREAD_LIMIT": "8",
+        "OMP_WAIT_POLICY": "PASSIVE"
+      },
+      "os": "Linux-6.18.7-76061807-generic-x86_64-with-glibc2.39",
+      "sha256": "6eab31152dbc9a862a21915fb9be632dc8bebdeee814c70ddad206646a82b878",
+      "source": "results/raw/openmp_scaling_20261009T200852928292Z_retry1/environment.json"
+    }
+  },
+  "gpu_inputs_consumed": false,
+  "raw_reanalysis_passed": true,
+  "schema_version": 1,
+  "scope": "cpu_only_release_v1",
+  "subprocess_execution_forbidden": true
+}
