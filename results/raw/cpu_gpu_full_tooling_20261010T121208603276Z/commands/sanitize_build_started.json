@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "cmake",
+    "--build",
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize",
+    "--parallel",
+    "2"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:21:07.343936+00:00"
+}

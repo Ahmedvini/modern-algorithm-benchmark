@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "from pathlib import Path;p=Path(\"results/raw/cpu_gpu_final_preflight_20261011T074147349659Z\");s=(p/\"verify_review.py\").read_text();old=\"r\\x27\\\\d+/21 Test #\\\\d+: ([a-z_]+)\\\\s+\\\\.\\\\.\\\\.\\\\s+Passed\\x27\";new=\"r\\x27\\\\d+/21 Test\\\\s+#\\\\d+: ([a-z_]+)\\\\s+\\\\.{3,}\\\\s+Passed\\x27\";assert old in s;f=(p/\"verify_review_v2.py\").open(\"x\");f.write(s.replace(old,new));f.close();print(\"Preserved v1; v2 accepts literal CTest alignment and dotted padding, same21-name/count requirement.\")"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T07:46:52.864321+00:00",
+  "exit_code": 0,
+  "stdout": "Preserved v1; v2 accepts literal CTest alignment and dotted padding, same21-name/count requirement.\n",
+  "stderr": "",
+  "scope": "Create additive evidence-only parser revision; preserve failed parser and logs"
+}

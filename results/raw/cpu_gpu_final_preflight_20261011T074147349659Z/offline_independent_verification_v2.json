@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_final_preflight_20261011T074147349659Z/verify_review_v2.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T07:46:52.951280+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"frozen_verified\": 4,\n  \"retained_cpu_release\": {\n    \"discovered\": 31,\n    \"selected\": 21,\n    \"passed\": 21,\n    \"failed\": 0,\n    \"ctest_skipped\": 0,\n    \"excluded\": 10,\n    \"host_gpu_timing_python_methods_skipped\": 2,\n    \"framework_python_methods\": 52,\n    \"record_sha256\": \"aa58f9e399510de56f959939b8367771d3c8ab88fb59b82673f8c6842af90a45\",\n    \"tests_rerun_in_review\": false\n  },\n  \"retained_cpu_sanitize\": {\n    \"discovered\": 31,\n    \"selected\": 21,\n    \"passed\": 21,\n    \"failed\": 0,\n    \"ctest_skipped\": 0,\n    \"excluded\": 10,\n    \"host_gpu_timing_python_methods_skipped\": 2,\n    \"framework_python_methods\": 52,\n    \"record_sha256\": \"c5a99b99de3bbb4faf5246562d4f3f1ce647c8812d3919c243d4ab49d46a8134\",\n    \"tests_rerun_in_review\": false\n  },\n  \"retained_gpu_inputs\": 163,\n  \"retained_gpu_output_checks\": 489,\n  \"prior_seals_verified\": {\n    \"results/raw/cpu_gpu_pilot_20261010T001232473460Z\": 373,\n    \"results/raw/cub_workspace_65537_20261010T110457531249Z\": 62,\n    \"results/raw/ctest_path_independent_review_20261011T000547578754Z\": 27,\n    \"results/raw/isolated_colab_revalidation_20261011T011459127026Z\": 75,\n    \"results/raw/cpu_gpu_prelaunch_review_20261011T012430643251Z\": 25,\n    \"results/raw/bounded_resume_20261011T024034091796Z\": 190\n  },\n  \"source_guard_rejections\": {\n    \"launch_guard\": \"protected source/pin changed: ['CMakeLists.txt', 'include/benchmark/cuda_timing.hpp', 'src/cuda/cub_timing.cu']\",\n    \"analyzer_guard\": \"retained protected source differs from trusted anchor: CMakeLists.txt\"\n  },\n  \"launch_eligible\": false,\n  \"comparison_input_identity\": \"missing current hash\",\n  \"historical_pilot_binary_matches_current\": false,\n  \"no_new_tests_or_workloads\": true\n}\n",
+  "stderr": "",
+  "scope": "Offline evidence log/hash/provenance verification only; no tests/workloads"
+}

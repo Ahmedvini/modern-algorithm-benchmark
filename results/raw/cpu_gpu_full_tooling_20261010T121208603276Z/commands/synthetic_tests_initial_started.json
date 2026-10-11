@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:18:23.767862+00:00"
+}

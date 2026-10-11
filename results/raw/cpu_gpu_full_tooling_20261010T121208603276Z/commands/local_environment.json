@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "python3",
+    "scripts/capture_environment.py",
+    "--build-dir",
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/release",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/local_environment.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:30:32.534410+00:00",
+  "exit_code": 0,
+  "stdout": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/local_environment.json\n",
+  "stderr": "",
+  "wall_seconds": 0.04376513199895271,
+  "ended_utc": "2026-10-10T12:30:32.578312+00:00"
+}

@@ -1,0 +1,736 @@
+--- before/scripts/run_cpu_gpu_pilot.py
++++ current/scripts/run_cpu_gpu_pilot.py
+@@ -13,9 +13,9 @@
+ import time
+ from pathlib import Path
+ import capture_environment
+-from analyze_cpu_gpu import analyze
++from analyze_cpu_gpu import analyze, validate_resources
+ from cpu_gpu_protocol import (BACKENDS, FREEZE, MATRIX, PROTOCOL, ROOT, canonical, dump_new,
+-                              load_protocol, require, sha, verify_source_extension)
++                              load_protocol, require, schedule, sha, verify_source_extension)
+ 
+ def invoke(directory, name, argv, timeout=600, env=None):
+     record = dict(argv=[str(x) for x in argv], cwd=str(ROOT), started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+@@ -113,28 +113,46 @@
+     records=p['records']
+     require(required<=set(records),'missing prerequisite commands')
+     for name,record in records.items():
++        relative=Path(record['file'])
++        require(not relative.is_absolute() and '..' not in relative.parts,'unsafe prerequisite record path')
+         command_path=path.parent/record['file']
+         require(sha(command_path)==record['sha256'],'prerequisite record changed')
+         result=json.loads(command_path.read_text())
+         require(result['exit_code']==0 and result.get('status')=='completed','failed prerequisite '+name)
+     return p
+ 
+-def run(args):
++def run(args, part='pilot'):
+     model=load_protocol()
++    require(part in ['pilot','study'],'unknown matrix part')
++    cells=model[part]['cells'];expected=model[part]['expected']
++    per_dataset=len(BACKENDS)*(model['warmups']+model['repetitions'])
+     output=args.output.absolute() # Preserve final component: mkdir rejects dangling symlinks.
+     if args.dry_run:
+         placeholders={k:'<'+k+'>' for k in ['input-sha256','input-fnv','build-id','environment-id']}
+         placeholders.update({'matrix-sha256':sha(MATRIX),'run-id':output.name})
+-        print(json.dumps(dict(protocol=PROTOCOL,part='pilot',expected=model['pilot']['expected'],resources=model['resources'],
++        print(json.dumps(dict(protocol=PROTOCOL,part=part,expected=expected,resources=model['resources'],
++            timeout_policy=model['timeout_policy'],resume_supported=False,
+             commands=[dict(input=input_command(args.input_tool,c,output/('data_'+c['dataset_id'])),
+-                           worker=worker_command(args.executable,c,output/('data_'+c['dataset_id']),placeholders,i*30))
+-                      for i,c in enumerate(model['pilot']['cells'])]),indent=2,sort_keys=True));return 0
++                           worker=worker_command(args.executable,c,output/('data_'+c['dataset_id']),placeholders,i*per_dataset))
++                      for i,c in enumerate(cells)]),indent=2,sort_keys=True));return 0
+     require(args.prerequisites is not None,'--prerequisites is required for actual execution')
+     output.mkdir();(output/'commands').mkdir()
++    dump_new(output/'plan.json',dict(protocol=PROTOCOL,part=part,expected=expected,
++        trials=[row for i,cell in enumerate(cells) for row in schedule(cell,i*per_dataset)],resume_supported=False))
++    def partial_audit():
++        if (output/'run.json').exists():
++            try:dump_new(output/'PARTIAL_ANALYSIS.json',analyze(output,allow_incomplete=True,require_marker=False))
++            except Exception as error:dump_new(output/'PARTIAL_ANALYSIS_ERROR.json',dict(error=str(error),
++                note='Malformed/unavailable raw evidence cannot be summarized; plan and command/attempt logs remain retained.'))
+     try:
+         source=verify_source_extension(model)
+         prereq=validate_prerequisites(args.prerequisites,args.executable,args.input_tool,model)
+         dump_new(output/'prerequisites.json',prereq);dump_new(output/'source_review.json',source)
++        if part=='study':
++            for record in prereq.get('records',{}).values():
++                destination=output/'prerequisite_commands'/record['file']
++                destination.parent.mkdir(parents=True,exist_ok=True)
++                if not destination.exists():shutil.copyfile(args.prerequisites.parent/record['file'],destination)
+         policy=model['openmp_policy']['environment']
+         os.environ.update(policy)
+         describe=invoke(output/'commands','describe',[args.executable,'--describe'],60)
+@@ -147,41 +165,58 @@
+         build=dict(description=build_description,binary_sha256=sha(args.executable),input_tool_sha256=sha(args.input_tool),
+                    compile_commands_sha256=sha(build_dir/'compile_commands.json'),source_review_sha256=sha(output/'source_review.json'))
+         dump_new(output/'build.json',build)
+-        environment=snapshot(build_dir,args.executable,output);dump_new(output/'environment.json',environment);environment_gate(environment)
++        environment=snapshot(build_dir,args.executable,output)
++        if part=='study':
++            environment.update(record_kind='cpu_gpu_study_environment',workload='frozen48-dataset study',
++                               workload_note='Primary host-call timing and separate prepared diagnostics.')
++        dump_new(output/'environment.json',environment);environment_gate(environment)
+         resources={}
+-        for n in sorted({c['recipe']['size'] for c in model['pilot']['cells']}):
++        for n in sorted({c['recipe']['size'] for c in cells}):
+             record=invoke(output/'commands','resources_'+str(n),[args.executable,'--resources',str(n)],60)
+             resources[str(n)]=json.loads(record['stdout'])
++            validate_resources(resources[str(n)],n)
+         dump_new(output/'workspace_queries.json',resources)
+-        meta=dict(schema_version=1,protocol=PROTOCOL,matrix_part='pilot',run_kind='performance',run_id=output.name,
++        meta=dict(schema_version=1,protocol=PROTOCOL,matrix_part=part,run_kind='performance',run_id=output.name,
+                   matrix_sha256=sha(MATRIX),freeze_sha256=sha(FREEZE),build_id=hashlib.sha256(canonical(build)).hexdigest(),
+                   environment_id=hashlib.sha256(canonical(environment)).hexdigest(),prerequisites_passed=True,
+-                  dataset_ids=[c['dataset_id'] for c in model['pilot']['cells']],
++                  dataset_ids=[c['dataset_id'] for c in cells],
+                   implementations={b:dict(source_review='source_review.json',build='build.json',cub_pin=model['dependency'] if b.startswith('gpu_') else None) for b in BACKENDS})
+         dump_new(output/'run.json',meta)
+         for source_file in [MATRIX,FREEZE]:shutil.copyfile(source_file,output/source_file.name)
+-        deadline=time.monotonic()+300
+-        for i,cell in enumerate(model['pilot']['cells']):
++        if part=='study':
++            shutil.copyfile(ROOT/'docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md',output/'CPU_GPU_COMPARISON_PROTOCOL_v1.md')
++            shutil.copyfile(build_dir/'compile_commands.json',output/'compile_commands.json')
++            shutil.copyfile(build_dir/'CMakeCache.txt',output/'CMakeCache.txt')
++        deadline=time.monotonic()+model['timeout_policy'][part+'_total_seconds']
++        for i,cell in enumerate(cells):
+             directory=output/('data_'+cell['dataset_id'])
+-            invoke(output/'commands','input_'+str(i),input_command(args.input_tool,cell,directory),min(60,max(.001,deadline-time.monotonic())))
++            dataset_deadline=min(deadline,time.monotonic()+model['timeout_policy']['per_dataset_seconds'])
++            require(time.monotonic()<dataset_deadline,part+' total timeout before input')
++            invoke(output/'commands','input_'+str(i),input_command(args.input_tool,cell,directory),max(.001,dataset_deadline-time.monotonic()))
+             input_meta=json.loads((directory/'input.json').read_text())
+             require(all(input_meta[k]==v for k,v in cell['recipe'].items() if k!='key_type'),'generated recipe mismatch')
+             dataset=dict(recipe=cell['recipe'],dataset_id=cell['dataset_id'],input_sha256=sha(directory/'input.bin'),input_hash_fnv1a64=input_meta['input_hash_fnv1a64'])
+             dump_new(directory/'dataset.json',dataset)
+             identifiers={'input-sha256':dataset['input_sha256'],'input-fnv':dataset['input_hash_fnv1a64'],'matrix-sha256':meta['matrix_sha256'],
+                          'build-id':meta['build_id'],'environment-id':meta['environment_id'],'run-id':meta['run_id']}
+-            require(time.monotonic()<deadline,'pilot total timeout before dataset')
+-            invoke(output/'commands','dataset_'+str(i),worker_command(args.executable,cell,directory,identifiers,i*30),min(60,deadline-time.monotonic()))
++            require(time.monotonic()<dataset_deadline,part+' dataset timeout before worker')
++            invoke(output/'commands','dataset_'+str(i),worker_command(args.executable,cell,directory,identifiers,i*per_dataset),dataset_deadline-time.monotonic())
+         # Validate first; do not create a completion marker from subprocess exits alone.
+         report=analyze(output,require_marker=False)
++        after=snapshot(build_dir,args.executable,output)
++        if part=='study':
++            after.update(record_kind='cpu_gpu_study_environment',workload='frozen48-dataset study',
++                         workload_note='After primary host-call timing and separate prepared diagnostics.')
++            environment_gate(after)
++        dump_new(output/'environment_after.json',after)
++        require(verify_source_extension(model)==source,'source changed during run')
+         dump_new(output/'COMPLETE.json',dict(complete=report['complete'],measured=report['measured'],warmups=report['warmups']))
+-        dump_new(output/'environment_after.json',snapshot(build_dir,args.executable,output))
+         dump_new(output/'RAW_SHA256.json',{str(p.relative_to(output)):sha(p) for p in sorted(output.rglob('*')) if p.is_file()})
+-        print('Pilot complete:150 measured/30 warm-ups. Full study was not run.');return 0
++        print(part+' complete:'+str(expected['measured_invocations'])+' measured/'+str(expected['warmup_invocations'])+' warm-ups.');return 0
+     except KeyboardInterrupt:
+-        dump_new(output/'INTERRUPTED.json',dict(complete=False,error='interrupted'));return 130
++        dump_new(output/'INTERRUPTED.json',dict(complete=False,error='interrupted'));partial_audit();return 130
+     except Exception as error:
+-        dump_new(output/'FAILED.json',dict(complete=False,error=str(error)));print(error,file=sys.stderr);return 1
++        dump_new(output/'FAILED.json',dict(complete=False,error=str(error)));partial_audit();print(error,file=sys.stderr);return 1
+ 
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
+--- before/scripts/analyze_cpu_gpu.py
++++ current/scripts/analyze_cpu_gpu.py
+@@ -9,7 +9,7 @@
+ from pathlib import Path
+ from analyze_cuda_results import FIELDS as PREPARED_FIELDS, METRICS, read_bundle as read_prepared_bundle
+ from analyze_results import summarize_samples
+-from cpu_gpu_protocol import (BACKENDS, MATRIX, PRIMARY_PROTOCOL, PROTOCOL, SIDE_FIELDS,
++from cpu_gpu_protocol import (BACKENDS, FREEZE, MATRIX, PRIMARY_PROTOCOL, PROTOCOL, SIDE_FIELDS,
+                               canonical, dump_new, load_protocol, require, schedule, sha)
+ 
+ def table(path, fields):
+@@ -52,32 +52,94 @@
+             peak<=document['free_device_bytes_before_buffers']//2,'combined resource gate failed')
+     require(document['known_host_peak_payload_bytes']==24*size,'host payload formula mismatch')
+ 
++def strict_json(text):
++    def unique(pairs):
++        result={}
++        for key,value in pairs:
++            require(key not in result,'duplicate JSON field: '+key)
++            result[key]=value
++        return result
++    def invalid(value):raise ValueError('nonfinite JSON value: '+value)
++    return json.loads(text,object_pairs_hook=unique,parse_constant=invalid)
++
++def read_json(path):return strict_json(Path(path).read_text())
++
++def validate_study_metadata(root, meta, model):
++    require(meta.get('freeze_sha256')==sha(FREEZE),'freeze identity mismatch')
++    for source,name in [(MATRIX,MATRIX.name),(FREEZE,FREEZE.name),
++                        (MATRIX.parents[1]/'CPU_GPU_COMPARISON_PROTOCOL_v1.md','CPU_GPU_COMPARISON_PROTOCOL_v1.md')]:
++        require(sha(root/name)==sha(source),'retained frozen asset mismatch: '+name)
++    if meta['run_kind']=='performance':
++        # Import only at call time: the runner shares this independent analyzer.
++        from run_cpu_gpu_pilot import environment_gate
++        build=read_json(root/'build.json');d=build['description']
++        require(d['build_type']=='Release' and d['sanitizers'] is False and d['cub_version']==300001 and
++                d['cuda_architectures']=='75' and d['cxx_standard']==17,'incompatible study build')
++        require(d['global_flags']=='' and d['cuda_flags']=='' and
++                d['configuration_flags'].split()==['-O3','-DNDEBUG'] and
++                d['cuda_release_flags'].split()==['-O3','-DNDEBUG'],'incompatible study flags')
++        require(sha(root/'compile_commands.json')==build['compile_commands_sha256'],'compile commands changed')
++        require(sha(root/'source_review.json')==build['source_review_sha256'],'source review changed')
++        environment=read_json(root/'environment.json');environment_gate(environment)
++        require(environment['omp_environment']==model['openmp_policy']['environment'],'OpenMP environment mismatch')
++        prerequisite=read_json(root/'prerequisites.json')
++        require(prerequisite.get('complete') is True and prerequisite.get('protocol')==PROTOCOL,'study prerequisites incomplete')
++        required={'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'}
++        require(required<=set(prerequisite['records']),'missing study prerequisite commands')
++        for record in prerequisite['records'].values():
++            relative=Path(record['file'])
++            require(not relative.is_absolute() and '..' not in relative.parts,'unsafe prerequisite record path')
++            path=root/'prerequisite_commands'/relative
++            require(sha(path)==record['sha256'],'prerequisite command hash mismatch')
++            result=read_json(path)
++            require(result.get('exit_code')==0 and result.get('status')=='completed','failed study prerequisite command')
++        require(prerequisite['binary_sha256']==build['binary_sha256'] and
++                prerequisite['input_tool_sha256']==build['input_tool_sha256'],'prerequisite binary mismatch')
++        require(prerequisite['source_sha256']==read_json(root/'source_review.json')['current_source_sha256'],'prerequisite source mismatch')
++        for backend,reference in meta['implementations'].items():
++            require(reference==dict(source_review='source_review.json',build='build.json',
++                cub_pin=model['dependency'] if backend.startswith('gpu_') else None),'implementation provenance mismatch')
++
++def validate_raw_manifest(root):
++    manifest=read_json(root/'RAW_SHA256.json')
++    files={str(p.relative_to(root)) for p in root.rglob('*') if p.is_file() and p!=root/'RAW_SHA256.json'}
++    require(set(manifest)==files,'raw manifest coverage mismatch')
++    for relative,digest in manifest.items():
++        path=Path(relative)
++        require(not path.is_absolute() and '..' not in path.parts,'unsafe raw manifest path')
++        require(sha(root/path)==digest,'raw manifest hash mismatch: '+relative)
++
+ def analyze(directory, allow_incomplete=False, require_marker=True, allow_synthetic=False):
+     root = Path(directory)
+     model = load_protocol()
+-    meta = json.loads((root / 'run.json').read_text())
+-    require(meta.get('protocol') == PROTOCOL and meta.get('schema_version') == 1 and meta.get('matrix_part') == 'pilot', 'wrong run protocol/part')
++    meta = read_json(root / 'run.json')
++    part=meta.get('matrix_part')
++    require(meta.get('protocol') == PROTOCOL and meta.get('schema_version') == 1 and part in ['pilot','study'], 'wrong run protocol/part')
+     require(meta.get('run_kind') == 'performance' or (allow_synthetic and meta.get('run_kind') == 'synthetic_test_fixture'), 'not performance evidence')
+     require(meta.get('matrix_sha256') == sha(MATRIX), 'matrix hash mismatch')
+     require(isinstance(meta.get('run_id'), str) and bool(meta['run_id']), 'invalid run identity')
+-    cells = model['pilot']['cells']
++    cells = model[part]['cells'];expected_counts=model[part]['expected']
++    per_dataset=len(BACKENDS)*(model['warmups']+model['repetitions'])
+     require(meta.get('dataset_ids') == [c['dataset_id'] for c in cells], 'matrix coverage/order mismatch')
+     for name in ['build', 'environment']:
+-        document = json.loads((root / (name + '.json')).read_text())
++        document = read_json(root / (name + '.json'))
+         require(hashlib.sha256(canonical(document)).hexdigest() == meta[name + '_id'], name + ' identity mismatch')
+     require(set(meta.get('implementations', {})) == set(BACKENDS), 'missing implementation identities')
+     require(meta.get('prerequisites_passed') is True, 'prerequisites not validated')
+-    queries=json.loads((root/'workspace_queries.json').read_text())
+-    require(set(queries)=={'1025','1000000'},'missing/unexpected workspace queries')
++    if part=='study':validate_study_metadata(root,meta,model)
++    queries=read_json(root/'workspace_queries.json')
++    require(set(queries)=={str(c['recipe']['size']) for c in cells},'missing/unexpected workspace queries')
+     for size,query in queries.items():validate_resources(query,int(size))
+     require(not ((root/'COMPLETE.json').exists() and ((root/'FAILED.json').exists() or (root/'INTERRUPTED.json').exists())), 'contradictory completion markers')
++    require(not root.is_symlink() and not any(p.is_symlink() for p in root.rglob('*')),'symlink raw artifact')
++    if part=='study' and require_marker and (root/'COMPLETE.json').exists():validate_raw_manifest(root)
+     all_groups, raw_hashes, row_identities = [], {}, set()
+     actual_global = []
+     interrupted_total = failed_total = missing_total = successful_total = warmups_ok = 0
+     calibration_by_dataset = {}
+     for dataset_index, cell in enumerate(cells):
+         identity = cell['dataset_id']; recipe = cell['recipe']; base = root / ('data_' + identity)
+-        plan = schedule(cell, dataset_index * 30)
++        plan = schedule(cell, dataset_index * per_dataset)
+         expected_by_order = {r['execution_order']: r for r in plan}
+         observed, attempted = {}, {}
+         content_sha = None
+@@ -86,7 +148,7 @@
+             require(not (base/'measurements').exists(),'measurements without input identity')
+         if (base/'dataset.json').exists():
+             require(not base.is_symlink(), 'symlink dataset directory')
+-            dataset = json.loads((base / 'dataset.json').read_text())
++            dataset = read_json(base / 'dataset.json')
+             require(dataset['dataset_id'] == identity and dataset['recipe'] == recipe, 'dataset recipe mismatch')
+             binary = base / 'input.bin'
+             require(binary.stat().st_size == recipe['size'] * 4, 'input size mismatch')
+@@ -94,13 +156,17 @@
+             require(content_sha == dataset['input_sha256'], 'input SHA256 mismatch')
+             fingerprint = dataset['input_hash_fnv1a64']
+             require(uint(fingerprint, 'FNV') < 2**64, 'invalid FNV')
++            if part=='study':
++                generated=read_json(base/'input.json')
++                require(all(generated.get(k)==v for k,v in recipe.items() if k!='key_type') and
++                        generated.get('input_hash_fnv1a64')==fingerprint,'input-generation metadata mismatch')
+             measurements = base / 'measurements'
+             attempt_path = measurements / 'attempts.jsonl'
+             if attempt_path.exists():
+                 for line in attempt_path.read_text().splitlines():
+-                    attempt = json.loads(line)
++                    attempt = strict_json(line)
+                     order = attempt.get('execution_order')
+-                    require(type(order) is int and order == len(attempted) and order < 30, 'attempt order/duplicate')
++                    require(type(order) is int and order == len(attempted) and order < per_dataset, 'attempt order/duplicate')
+                     require(attempt == {k: v for k, v in expected_by_order[order].items() if k != 'dataset_id'}, 'attempt identity mismatch')
+                     attempted[order] = attempt
+             primary = measurements / 'primary.csv'
+@@ -158,14 +224,17 @@
+                     observed[order] = dict(expected, status=row['status'], metrics=metrics)
+             clock_path = measurements/'timer_calibration.json'
+             if clock_path.exists():
+-                clock = json.loads(clock_path.read_text())
++                clock = read_json(clock_path)
+                 require(clock.get('pairs') == 1000 and clock.get('policy') == 'diagnostic_only_no_subtraction', 'invalid timer calibration')
+                 require(type(clock['median_ns']) in [float, int] and math.isfinite(clock['median_ns']) and clock['median_ns'] >= 0, 'invalid clock duration')
+                 calibration_by_dataset[identity] = clock['median_ns']
+             if (measurements/'COMPLETE.json').exists():
+-                require(len(observed) == 30 and len(attempted) == 30 and all(r['status'] == 'ok' for r in observed.values()), 'contradictory dataset completion')
++                require(not any((measurements/name).exists() for name in ['FAILED.json','INTERRUPTED.json']),'contradictory dataset markers')
++                marker=read_json(measurements/'COMPLETE.json')
++                require(marker.get('complete') is True and marker.get('rows')==per_dataset,'invalid dataset completion marker')
++                require(len(observed) == per_dataset and len(attempted) == per_dataset and all(r['status'] == 'ok' for r in observed.values()), 'contradictory dataset completion')
+                 require(identity in calibration_by_dataset, 'missing calibration')
+-                resource=json.loads((measurements/'resources.json').read_text())
++                resource=read_json(measurements/'resources.json')
+                 validate_resources(resource,recipe['size'])
+                 query=queries[str(recipe['size'])]
+                 require(all(resource[k]==query[k] for k in ['prepared_query_bytes','adapter_query_bytes']),'workspace query changed between preflight and timing')
+@@ -174,6 +243,14 @@
+                 if meta['run_kind']=='performance':
+                     prepared_meta,_=read_prepared_bundle(measurements/'prepared')
+                     require(prepared_meta['run_id']==meta['run_id'] and prepared_meta['input_hash_fnv1a64']==fingerprint,'prepared metadata mismatch')
++                    if part=='study':
++                        description=read_json(root/'build.json')['description']
++                        require(all(prepared_meta.get(k)==v for k,v in description.items() if k!='implementation_version'),
++                                'prepared build differs from primary build')
++                        require(prepared_meta['gpu_name']==resource['gpu_name'] and
++                                prepared_meta['workspace_bytes']==resource['prepared_query_bytes'] and
++                                (prepared_meta['compute_major'],prepared_meta['compute_minor'])==(7,5),
++                                'prepared device/workspace mismatch')
+             for path in base.rglob('*'):
+                 if path.is_file():
+                     require(not path.is_symlink(), 'symlink raw artifact')
+@@ -189,7 +266,7 @@
+             success = [observed[r['execution_order']] for r in measured if r['execution_order'] in observed and observed[r['execution_order']]['status'] == 'ok']
+             failed = sum(r['execution_order'] in observed and observed[r['execution_order']]['status'] != 'ok' for r in measured)
+             interrupted = sum(r['execution_order'] in attempted and r['execution_order'] not in observed for r in measured)
+-            missing = 5 - len(success) - failed - interrupted
++            missing = model['repetitions'] - len(success) - failed - interrupted
+             warm = observed.get(warmup['execution_order'])
+             wstatus = warm['status'] if warm else 'interrupted' if warmup['execution_order'] in attempted else 'missing'
+             warmups_ok += wstatus == 'ok'
+@@ -202,12 +279,17 @@
+     require(actual_global == sorted(actual_global), 'global execution order mismatch')
+     expected_dirs = {'data_'+c['dataset_id'] for c in cells}
+     require(not any(p.name.startswith('data_') and p.name not in expected_dirs for p in root.iterdir()), 'unexpected dataset directory')
+-    complete = successful_total == 150 and warmups_ok == 30 and not (failed_total or interrupted_total or missing_total)
++    complete = successful_total == expected_counts['measured_invocations'] and warmups_ok == expected_counts['warmup_invocations'] and not (failed_total or interrupted_total or missing_total)
+     complete = complete and all((root/('data_'+c['dataset_id'])/'measurements/COMPLETE.json').is_file() for c in cells)
+     if (root/'FAILED.json').exists() or (root/'INTERRUPTED.json').exists():complete = False
+-    if (root/'COMPLETE.json').exists():require(complete, 'root completion contradicts raw records')
++    if (root/'COMPLETE.json').exists():
++        marker=read_json(root/'COMPLETE.json')
++        require(marker.get('complete') is True and complete, 'root completion contradicts raw records')
++        if part=='study':
++            require(marker.get('measured')==dict(successful=successful_total,failed=failed_total,interrupted=interrupted_total,missing=missing_total) and
++                    marker.get('warmups')==dict(successful=warmups_ok,failed=0,interrupted=0,missing=0),'root marker count mismatch')
+     if require_marker and not (root/'COMPLETE.json').exists():complete = False
+-    require(complete or allow_incomplete, 'incomplete pilot; use --allow-incomplete to report retained failures/missing records')
++    require(complete or allow_incomplete, 'incomplete '+part+'; use --allow-incomplete to report retained failures/missing records')
+     ratios = []
+     if complete:
+         by_key = {(g['dataset_id'],g['backend_id']):g for g in all_groups}
+@@ -226,7 +308,7 @@
+             for metric in (METRICS if backend=='gpu_cub_prepared' else ['host_call_e2e_ns']):
+                 distinct={}
+                 for group in groups:
+-                    if group['successful_trials']==5:
++                    if group['successful_trials']==model['repetitions']:
+                         distinct.setdefault(group['input_sha256'],[]).append(group['metrics'][metric]['median_ns'])
+                 values=[statistics.median(v) for v in distinct.values()]
+                 cross.append(dict(size=size,distribution=distribution,backend_id=backend,metric=metric,unit='ns',
+@@ -247,7 +329,8 @@
+                                     minimum=min(values) if values else None,maximum=max(values) if values else None)))
+     for name in ['run.json','build.json','environment.json','workspace_queries.json']:
+         raw_hashes[name]=sha(root/name)
+-    return dict(schema_version=1,protocol=PROTOCOL,matrix_part='pilot',run_id=meta['run_id'],complete=complete,
++    if part=='study' and not complete:cross=[]
++    return dict(schema_version=1,protocol=PROTOCOL,matrix_part=part,run_id=meta['run_id'],complete=complete,
+                 measured=dict(successful=successful_total,failed=failed_total,interrupted=interrupted_total,missing=missing_total),
+                 warmups=dict(successful=warmups_ok,failed=sum(g['warmup_status']=='error' for g in all_groups),
+                     interrupted=sum(g['warmup_status']=='interrupted' for g in all_groups),missing=sum(g['warmup_status']=='missing' for g in all_groups)),unit='ns',groups=all_groups,
+--- before/scripts/validate_cpu_gpu_pilot.py
++++ current/scripts/validate_cpu_gpu_pilot.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Fresh CPU/CUDA validation followed only by the frozen six-dataset pilot."""
++"""Fresh CPU/CUDA prerequisites, optionally followed by the frozen six-dataset pilot."""
+ import argparse
+ import json
+ import os
+@@ -14,9 +14,12 @@
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
+     parser.add_argument('--output',type=Path,required=True)
+-    parser.add_argument('--pilot-output',type=Path,required=True)
+-    parser.add_argument('--processed',type=Path,required=True)
++    parser.add_argument('--pilot-output',type=Path)
++    parser.add_argument('--processed',type=Path)
++    parser.add_argument('--prerequisites-only',action='store_true',help='Validate without launching any pilot or study')
+     args=parser.parse_args();output=args.output.absolute()
++    if not args.prerequisites_only and (args.pilot_output is None or args.processed is None):
++        parser.error('--pilot-output and --processed are required unless --prerequisites-only')
+     try:output.mkdir();(output/'commands').mkdir()
+     except OSError as error:print(error,file=sys.stderr);return 1
+     try:
+@@ -74,6 +77,9 @@
+                     binary_sha256=sha(gpu/'cpu_gpu_comparison'),input_tool_sha256=sha(gpu/'comparison_input'),
+                     cuda_correctness=result,preflight_sha256=sha(output/'preflight/report.json'),dependency_manifest_sha256=sha(output/'dependency_sha256.json'))
+         dump_new(output/'PREREQUISITES.json',prereq)
++        if args.prerequisites_only:
++            dump_new(output/'COMPLETE.json',dict(complete=True,prerequisites_passed=True,pilot_run=False,full_study_run=False))
++            return 0
+         call('pilot',[sys.executable,str(ROOT/'scripts/run_cpu_gpu_pilot.py'),'--output',str(args.pilot_output.absolute()),
+              '--executable',str(gpu/'cpu_gpu_comparison'),'--input-tool',str(gpu/'comparison_input'),
+              '--prerequisites',str(output/'PREREQUISITES.json')],420)
+--- before/tests/test_cpu_gpu_comparison.py
++++ current/tests/test_cpu_gpu_comparison.py
+@@ -16,7 +16,7 @@
+ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'scripts'))
+ from analyze_cpu_gpu import analyze
+ from analyze_cuda_results import FIELDS as PREPARED_FIELDS
+-from cpu_gpu_protocol import BACKENDS,MATRIX,PROTOCOL,SIDE_FIELDS,canonical,dump_new,load_protocol,schedule,sha
++from cpu_gpu_protocol import BACKENDS,FREEZE,MATRIX,PROTOCOL,SIDE_FIELDS,canonical,dump_new,load_protocol,schedule,sha
+ from run_cpu_gpu_pilot import environment_gate,invoke,worker_command
+ INPUT_TOOL=Path(sys.argv.pop(1)).absolute() if len(sys.argv)>1 and not sys.argv[1].startswith('-') else None
+ 
+@@ -30,17 +30,22 @@
+     with path.open('w',newline='') as f:
+         writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader();writer.writerows(rows)
+ 
+-def fixture(root):
++def fixture(root,part='pilot'):
+     model=load_protocol();root.mkdir();build={'fixture':'explicit synthetic metadata'};environment={'fixture':'not hardware evidence'}
+     dump_new(root/'build.json',build);dump_new(root/'environment.json',environment)
+-    meta=dict(schema_version=1,protocol=PROTOCOL,matrix_part='pilot',run_kind='synthetic_test_fixture',run_id='fixture',matrix_sha256=sha(MATRIX),
+-              dataset_ids=[c['dataset_id'] for c in model['pilot']['cells']],build_id=hashlib.sha256(canonical(build)).hexdigest(),
++    meta=dict(schema_version=1,protocol=PROTOCOL,matrix_part=part,run_kind='synthetic_test_fixture',run_id='fixture',matrix_sha256=sha(MATRIX),freeze_sha256=sha(FREEZE),
++              dataset_ids=[c['dataset_id'] for c in model[part]['cells']],build_id=hashlib.sha256(canonical(build)).hexdigest(),
+               environment_id=hashlib.sha256(canonical(environment)).hexdigest(),prerequisites_passed=True,implementations={b:{} for b in BACKENDS})
+-    dump_new(root/'run.json',meta);dump_new(root/'workspace_queries.json',{str(n):resource(n) for n in [1025,1000000]})
+-    for i,cell in enumerate(model['pilot']['cells']):
++    dump_new(root/'run.json',meta);dump_new(root/'workspace_queries.json',{str(n):resource(n) for n in sorted({c['recipe']['size'] for c in model[part]['cells']})})
++    for i,cell in enumerate(model[part]['cells']):
+         r=cell['recipe'];base=root/('data_'+cell['dataset_id']);base.mkdir()
+         # Fixed zero bytes solely to exercise retained-file identity checks; not generated benchmark data.
+-        (base/'input.bin').write_bytes(bytes(4*r['size']));input_hash=sha(base/'input.bin')
++        (base/'input.bin').write_bytes(bytes(4*r['size']))
++        if part=='study':
++            # Distinct synthetic seed tags, not generator-v1 samples or measured outputs.
++            with (base/'input.bin').open('r+b') as f:f.write(int(r['seed']).to_bytes(8,'little'))
++        input_hash=sha(base/'input.bin')
++        if part=='study':dump_new(base/'input.json',dict({k:v for k,v in r.items() if k!='key_type'},input_hash_fnv1a64='1'))
+         dump_new(base/'dataset.json',dict(recipe=r,dataset_id=cell['dataset_id'],input_sha256=input_hash,input_hash_fnv1a64='1'))
+         measurement=base/'measurements';measurement.mkdir();(measurement/'prepared').mkdir()
+         primary=[];prepared=[];sides=[];attempts=[]
+@@ -68,7 +73,16 @@
+         (measurement/'attempts.jsonl').write_text(''.join(json.dumps(a)+'\n' for a in attempts))
+         dump_new(measurement/'timer_calibration.json',dict(pairs=1000,median_ns=1,policy='diagnostic_only_no_subtraction'))
+         dump_new(measurement/'resources.json',resource(r['size']));dump_new(measurement/'COMPLETE.json',dict(complete=True,rows=30))
+-    dump_new(root/'COMPLETE.json',dict(complete=True))
++    dump_new(root/'COMPLETE.json',dict(complete=True,**(dict(measured=dict(successful=1200,failed=0,interrupted=0,missing=0),
++        warmups=dict(successful=240,failed=0,interrupted=0,missing=0)) if part=='study' else {})))
++    if part=='study':
++        for source in [MATRIX,FREEZE,ROOT/'docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md']:
++            shutil.copyfile(source,root/source.name)
++        seal_fixture(root)
++
++def seal_fixture(root):
++    (root/'RAW_SHA256.json').write_text(json.dumps({str(p.relative_to(root)):sha(p)
++        for p in root.rglob('*') if p.is_file() and p!=root/'RAW_SHA256.json'}))
+ 
+ class FrameworkTests(unittest.TestCase):
+     @classmethod
+@@ -196,4 +210,261 @@
+         def fail(rows):rows[-1].update(status='error',correctness='not_checked',elapsed_ns='',error='fixture, "quoted"\nerror')
+         self.edit_rows(fail);self.assertEqual(self.analyze(allow_incomplete=True)['measured']['failed'],1)
+ 
++class StudyAnalysisTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.temporary=tempfile.TemporaryDirectory();cls.template=Path(cls.temporary.name)/'template';fixture(cls.template,'study')
++    @classmethod
++    def tearDownClass(cls):cls.temporary.cleanup()
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)/'raw';shutil.copytree(self.template,self.root)
++        self.model=load_protocol();self.cells=self.model['study']['cells']
++        self.first=self.root/('data_'+self.cells[0]['dataset_id'])/'measurements'
++    def tearDown(self):self.temp.cleanup()
++    def analyze(self,**kwargs):return analyze(self.root,allow_synthetic=True,**kwargs)
++    def edit(self,path,operation):
++        with path.open(newline='') as f:reader=csv.DictReader(f);fields=reader.fieldnames;rows=list(reader)
++        operation(rows);write_table(path,fields,rows);seal_fixture(self.root)
++    def unseal(self):
++        (self.root/'COMPLETE.json').unlink();(self.first/'COMPLETE.json').unlink()
++    def test_full_counts_statistics_hierarchy_and_regeneration(self):
++        report=self.analyze();self.assertTrue(report['complete']);self.assertEqual(report['matrix_part'],'study')
++        self.assertEqual(report['measured'],dict(successful=1200,failed=0,interrupted=0,missing=0))
++        self.assertEqual(report['warmups'],dict(successful=240,failed=0,interrupted=0,missing=0))
++        self.assertEqual(len(report['groups']),240);self.assertEqual(len(report['paired_host_call_ratios']),144)
++        self.assertEqual(len(report['cross_dataset']),144);self.assertEqual(len(report['cross_dataset_paired_ratios']),54)
++        self.assertTrue(all(r['ratio']==1 and r['denominator']=='gpu_cub_adapter' for r in report['paired_host_call_ratios']))
++        for g in report['cross_dataset']:
++            self.assertEqual(g['distinct_inputs'],1 if g['distribution']=='signed_edges' else 3)
++            self.assertEqual(g['statistics']['median_ns'],300)
++        s=report['groups'][0]['metrics']['host_call_e2e_ns'];self.assertAlmostEqual(s['stdev_ns'],158.11388300841898)
++        self.assertEqual(canonical(report),canonical(self.analyze()))
++    def test_public_cli_rejects_synthetic_full_results(self):
++        with self.assertRaises(ValueError):analyze(self.root)
++    def test_missing_dataset_and_no_partial_ratios_or_cross_summary(self):
++        (self.root/'COMPLETE.json').unlink();shutil.rmtree(self.root/('data_'+self.cells[-1]['dataset_id']))
++        with self.assertRaises(ValueError):self.analyze()
++        report=self.analyze(allow_incomplete=True);self.assertEqual(report['measured']['missing'],25)
++        self.assertEqual(report['warmups']['missing'],5)
++        self.assertEqual(report['paired_host_call_ratios'],[]);self.assertEqual(report['cross_dataset'],[])
++    def test_failed_measured_trial_retained(self):
++        self.unseal();self.edit(self.first/'primary.csv',lambda rows:rows[-1].update(status='error',correctness='failed',error='wrong output',elapsed_ns=''))
++        with self.assertRaises(ValueError):self.analyze()
++        self.assertEqual(self.analyze(allow_incomplete=True)['measured']['failed'],1)
++    def test_interrupted_trial_and_root_interruption(self):
++        self.unseal();self.edit(self.first/'primary.csv',lambda rows:rows.pop())
++        dump_new(self.root/'INTERRUPTED.json',dict(complete=False))
++        report=self.analyze(allow_incomplete=True);self.assertFalse(report['complete']);self.assertEqual(report['measured']['interrupted'],1)
++    def test_missing_unattempted_trial(self):
++        self.unseal()
++        with (self.first/'primary.csv').open() as f:rows=list(csv.DictReader(f))
++        order=int(rows[-1]['execution_order'])
++        # Trim the complete tail from attempts and both CSV families, preserving their prefix.
++        attempts=[json.loads(line) for line in (self.first/'attempts.jsonl').read_text().splitlines()]
++        (self.first/'attempts.jsonl').write_text(''.join(json.dumps(a)+'\n' for a in attempts if a['execution_order']<order))
++        self.edit(self.first/'primary.csv',lambda rows:rows.__setitem__(slice(None),[r for r in rows if int(r['execution_order'])<order]))
++        self.edit(self.first/'prepared_order.csv',lambda rows:rows.__setitem__(slice(None),[r for r in rows if int(r['execution_order'])<order]))
++        with (self.first/'prepared_order.csv').open() as f:sides=list(csv.DictReader(f))
++        self.edit(self.first/'prepared/trials.csv',lambda rows:rows.__setitem__(slice(len(sides),None),[]))
++        self.assertGreater(self.analyze(allow_incomplete=True)['measured']['missing'],0)
++    def test_duplicate_primary_and_attempt_identity(self):
++        self.edit(self.first/'primary.csv',lambda rows:rows.append(dict(rows[0])))
++        with self.assertRaises(ValueError):self.analyze()
++    def test_duplicate_attempt(self):
++        p=self.first/'attempts.jsonl';lines=p.read_text().splitlines();p.write_text('\n'.join(lines+[lines[-1]])+'\n');seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++    def test_primary_schema_and_nonfinite_duration(self):
++        self.edit(self.first/'primary.csv',lambda rows:rows[0].update(elapsed_ns='NaN'))
++        with self.assertRaises(ValueError):self.analyze()
++    def test_identity_scope_and_threads(self):
++        for key,value in [('input_sha256','0'*64),('dataset_id','wrong'),('scope','device_sort'),('elapsed_unit','us'),
++                          ('global_trial_index','9999'),('trial_index','7'),('actual_cpu_threads','8')]:
++            with self.subTest(key=key):
++                original=(self.first/'primary.csv').read_bytes()
++                self.edit(self.first/'primary.csv',lambda rows:next(r for r in rows if r['backend_id']=='cpu_parallel_merge_sort_t2').update({key:value}))
++                with self.assertRaises(ValueError):self.analyze()
++                (self.first/'primary.csv').write_bytes(original)
++        seal_fixture(self.root)
++    def test_prepared_cannot_replace_production_primary(self):
++        self.edit(self.first/'primary.csv',lambda rows:next(r for r in rows if r['backend_id']=='gpu_cub_adapter').update(backend_id='gpu_cub_prepared'))
++        with self.assertRaises(ValueError):self.analyze()
++    def test_prepared_metrics_never_supply_ratio_denominator(self):
++        for cell in self.cells:
++            path=self.root/('data_'+cell['dataset_id'])/'measurements/prepared/trials.csv'
++            with path.open(newline='') as f:rows=list(csv.DictReader(f))
++            for row in rows:row.update(h2d_ns='1',device_sort_ns='1',d2h_ns='1',end_to_end_ns='1')
++            write_table(path,PREPARED_FIELDS,rows)
++        seal_fixture(self.root);report=self.analyze()
++        self.assertTrue(all(r['ratio']==1 for r in report['paired_host_call_ratios']))
++    def test_prepared_sidecar_and_malformed_metrics(self):
++        self.edit(self.first/'prepared_order.csv',lambda rows:rows[0].update(backend_id='gpu_cub_adapter'))
++        with self.assertRaises(ValueError):self.analyze()
++    def test_unexpected_dataset_and_matrix_identity(self):
++        (self.root/'data_unexpected').mkdir()
++        with self.assertRaises(ValueError):self.analyze()
++    def test_workspace_missing_middle_size_and_limit(self):
++        p=self.root/'workspace_queries.json';original=p.read_text();data=json.loads(original);data.pop('65537');p.write_text(json.dumps(data));seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++        data=json.loads(original);data['65537']['adapter_query_bytes']=67108865;p.write_text(json.dumps(data));seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++    def test_raw_hash_and_retained_freeze_tampering(self):
++        p=self.first/'primary.csv';p.write_text(p.read_text()+'\n')
++        with self.assertRaises(ValueError):self.analyze()
++        seal_fixture(self.root);p=self.root/MATRIX.name;p.write_text('{}');seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++    def test_duplicate_json_keys_and_wrong_freeze_identity(self):
++        p=self.root/'run.json';original=p.read_text();p.write_text(original.rstrip()[:-1]+',"matrix_part":"study"}')
++        with self.assertRaises(ValueError):self.analyze()
++        data=json.loads(original);data['freeze_sha256']='0'*64;p.write_text(json.dumps(data));seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++    def test_false_dataset_completion_and_contradictory_markers(self):
++        dump_new(self.first/'FAILED.json',dict(complete=False));seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++    def test_root_counts_and_input_recipe_must_match(self):
++        p=self.root/'COMPLETE.json';original=p.read_text();data=json.loads(original);data['measured']['successful']=1199
++        p.write_text(json.dumps(data));seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++        p.write_text(original);p=self.first.parent/'input.json';data=json.loads(p.read_text());data['seed']=999;p.write_text(json.dumps(data));seal_fixture(self.root)
++        with self.assertRaises(ValueError):self.analyze()
++    def test_performance_metadata_envelope_and_invalid_builds(self):
++        from analyze_cpu_gpu import validate_study_metadata
++        meta=json.loads((self.root/'run.json').read_text());meta['run_kind']='performance'
++        meta['implementations']={b:dict(source_review='source_review.json',build='build.json',
++            cub_pin=self.model['dependency'] if b.startswith('gpu_') else None) for b in BACKENDS}
++        source={'current_source_sha256':{'explicit_synthetic_source':'0'*64}}
++        (self.root/'source_review.json').write_text(json.dumps(source));(self.root/'compile_commands.json').write_text('[]')
++        description=dict(build_type='Release',sanitizers=False,cub_version=300001,cuda_architectures='75',cxx_standard=17,
++                         global_flags='',cuda_flags='',configuration_flags='-O3 -DNDEBUG',cuda_release_flags='-O3 -DNDEBUG')
++        build=dict(description=description,binary_sha256='1'*64,input_tool_sha256='2'*64,
++                   compile_commands_sha256=sha(self.root/'compile_commands.json'),source_review_sha256=sha(self.root/'source_review.json'))
++        environment=dict(omp_environment=self.model['openmp_policy']['environment'])
++        (self.root/'environment.json').write_text(json.dumps(environment))
++        records={}
++        for name in ['cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight']:
++            relative='commands/'+name+'.json';p=self.root/'prerequisite_commands'/relative;p.parent.mkdir(parents=True,exist_ok=True)
++            p.write_text(json.dumps(dict(exit_code=0,status='completed',fixture='synthetic command only')))
++            records[name]=dict(file=relative,sha256=sha(p))
++        prerequisite=dict(complete=True,protocol=PROTOCOL,records=records,source_sha256=source['current_source_sha256'],
++                          binary_sha256='1'*64,input_tool_sha256='2'*64)
++        (self.root/'prerequisites.json').write_text(json.dumps(prerequisite))
++        with mock.patch('run_cpu_gpu_pilot.environment_gate'):
++            (self.root/'build.json').write_text(json.dumps(build));validate_study_metadata(self.root,meta,self.model)
++            for key,value in [('cub_version',300000),('sanitizers',True),('cuda_architectures','80'),
++                              ('configuration_flags','-O0'),('build_type','Debug')]:
++                bad=copy.deepcopy(build);bad['description'][key]=value;(self.root/'build.json').write_text(json.dumps(bad))
++                with self.subTest(key=key),self.assertRaises(ValueError):validate_study_metadata(self.root,meta,self.model)
++            (self.root/'build.json').write_text(json.dumps(build))
++            p=self.root/'prerequisite_commands/commands/cuda_correctness.json';p.write_text('{}')
++            with self.assertRaises(ValueError):validate_study_metadata(self.root,meta,self.model)
++    def test_full_plan_determinism_and_explicit_execution_latch(self):
++        command=[sys.executable,str(ROOT/'scripts/run_cpu_gpu_study.py'),'--executable','unused','--input-tool','unused','--output',str(self.root),'--dry-run']
++        a=subprocess.run(command,capture_output=True,text=True);b=subprocess.run(command,capture_output=True,text=True)
++        self.assertEqual(a.returncode,0,a.stderr);self.assertEqual(a.stdout,b.stdout)
++        plan=json.loads(a.stdout);self.assertEqual(plan['part'],'study');self.assertEqual(len(plan['commands']),48)
++        self.assertEqual(plan['expected']['total_invocations'],1440)
++        for i,cell in enumerate(self.cells):
++            argv=plan['commands'][i]['worker'];self.assertEqual(argv[argv.index('--global-offset')+1],str(i*30))
++            self.assertEqual(argv[argv.index('--base-order')+1],','.join(cell['warmup_order'][0]))
++        rejected=subprocess.run(command[:-1],capture_output=True,text=True);self.assertEqual(rejected.returncode,2)
++        self.assertFalse((self.root/'FAILED.json').exists())
++
++class StudyOrchestrationTests(unittest.TestCase):
++    """Subprocesses below are mocks; no sorting or performance observations occur."""
++    def setUp(self):
++        import types
++        self.temp=tempfile.TemporaryDirectory();self.base=Path(self.temp.name)
++        self.args=types.SimpleNamespace(output=self.base/'output',executable=self.base/'worker',input_tool=self.base/'input',
++                                       prerequisites=self.base/'prerequisites.json',dry_run=False)
++        self.model=load_protocol();self.calls=[];self.failure=None
++        self.build=self.base/'build';self.build.mkdir()
++        (self.build/'compile_commands.json').write_text('[]');(self.build/'CMakeCache.txt').write_text('synthetic test cache')
++        self.args.executable.write_text('synthetic worker, never executed');self.args.input_tool.write_text('synthetic input, never executed')
++        self.description=dict(build_type='Release',sanitizers=False,cub_version=300001,global_flags='',configuration_flags='-O3 -DNDEBUG',
++                              cuda_flags='',cuda_release_flags='-O3 -DNDEBUG',cuda_architectures='75',binary_dir=str(self.build))
++    def tearDown(self):self.temp.cleanup()
++    def invoke(self,directory,name,argv,timeout=600):
++        self.calls.append((name,argv,timeout))
++        if name=='describe':return dict(stdout=json.dumps(self.description))
++        if name.startswith('resources_'):return dict(stdout=json.dumps(resource(int(argv[-1]))))
++        if name.startswith('input_'):
++            cell=self.model['study']['cells'][int(name.split('_')[1])];r=cell['recipe']
++            destination=Path(argv[argv.index('--output')+1]);destination.mkdir()
++            (destination/'input.bin').write_bytes(bytes(r['size']*4))
++            dump_new(destination/'input.json',dict({k:v for k,v in r.items() if k!='key_type'},input_hash_fnv1a64='1'))
++        if name.startswith('dataset_') and self.failure:raise self.failure
++        return dict(stdout='')
++    def execute(self):
++        import run_cpu_gpu_pilot as runner
++        print('SYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed')
++        def report(*args,**kwargs):
++            complete=not self.failure
++            return dict(complete=complete,measured=dict(successful=1200 if complete else 0,failed=0,interrupted=0,missing=0 if complete else 1200),
++                        warmups=dict(successful=240 if complete else 0,failed=0,interrupted=0,missing=0 if complete else 240))
++        with mock.patch.object(runner,'validate_prerequisites',return_value={'explicit_fixture':True}),\
++             mock.patch.object(runner,'snapshot',return_value={'explicit_fixture':'not hardware metadata'}),\
++             mock.patch.object(runner,'environment_gate'),mock.patch.object(runner,'invoke',side_effect=self.invoke),\
++             mock.patch.object(runner,'analyze',side_effect=report):
++            return runner.run(self.args,part='study')
++    def test_all_48_worker_commands_and_3_resource_sizes(self):
++        self.assertEqual(self.execute(),0)
++        workers=[call for call in self.calls if call[0].startswith('dataset_')]
++        self.assertEqual(len(workers),48)
++        self.assertEqual([call[0] for call in self.calls if call[0].startswith('resources_')],['resources_1025','resources_65537','resources_1000000'])
++        for i,(_,argv,timeout) in enumerate(workers):
++            self.assertEqual(argv[argv.index('--global-offset')+1],str(i*30));self.assertGreater(timeout,0);self.assertLessEqual(timeout,60)
++        plan=json.loads((self.args.output/'plan.json').read_text())
++        self.assertEqual(len(plan['trials']),1440);self.assertEqual([r['global_trial_index'] for r in plan['trials']],list(range(1440)))
++        self.assertEqual(json.loads((self.args.output/'run.json').read_text())['matrix_part'],'study')
++        self.assertTrue((self.args.output/'RAW_SHA256.json').exists())
++    def test_failure_stops_and_preserves_plan_and_partial_accounting(self):
++        self.failure=RuntimeError('explicit injected worker failure');self.assertEqual(self.execute(),1)
++        self.assertEqual(len([c for c in self.calls if c[0].startswith('dataset_')]),1)
++        self.assertTrue((self.args.output/'FAILED.json').exists());self.assertFalse((self.args.output/'COMPLETE.json').exists())
++        self.assertTrue((self.args.output/'PARTIAL_ANALYSIS.json').exists())
++    def test_interrupt_stops_without_completion(self):
++        self.failure=KeyboardInterrupt();self.assertEqual(self.execute(),130)
++        self.assertTrue((self.args.output/'INTERRUPTED.json').exists());self.assertFalse((self.args.output/'COMPLETE.json').exists())
++    def test_output_collision_and_no_resume(self):
++        self.args.output.mkdir();(self.args.output/'user_file').write_text('preserve')
++        with self.assertRaises(FileExistsError):self.execute()
++        self.assertEqual((self.args.output/'user_file').read_text(),'preserve');self.assertEqual(self.calls,[])
++    def test_study_deadline_stops_before_worker(self):
++        with mock.patch('run_cpu_gpu_pilot.time.monotonic',side_effect=[0,1801,1801]):
++            self.assertEqual(self.execute(),1)
++        self.assertFalse(any(c[0].startswith('dataset_') for c in self.calls))
++        self.assertTrue((self.args.output/'FAILED.json').exists())
++    def test_prerequisites_only_parser_does_not_require_pilot_outputs(self):
++        import validate_cpu_gpu_pilot as validator
++        checkout=self.base/'checkout';checkout.mkdir()
++        argv=['validator','--output',str(checkout/'validation'),'--prerequisites-only']
++        with mock.patch.object(validator,'ROOT',checkout),mock.patch.object(validator,'verify_source_extension',return_value={}),\
++             mock.patch.object(validator,'invoke',side_effect=RuntimeError('synthetic stop before preflight')),mock.patch.object(sys,'argv',argv):
++            self.assertEqual(validator.main(),1)
++        self.assertEqual(json.loads((checkout/'validation/FAILED.json').read_text())['error'],'synthetic stop before preflight')
++    def test_prerequisites_only_success_never_calls_pilot(self):
++        import validate_cpu_gpu_pilot as validator
++        checkout=self.base/'checkout';checkout.mkdir();output=checkout/'validation';calls=[]
++        include=checkout/'synthetic_headers';(include/'cub').mkdir(parents=True);(include/'cub/fake.cuh').write_text('synthetic')
++        def invoke(directory,name,argv,timeout):
++            calls.append(name);text=''
++            if name=='preflight':
++                p=output/'preflight';p.mkdir();dump_new(p/'report.json',dict(classification=dict(device0_kernel_verified=True,state='operational'),
++                    runtime_probe=dict(devices=[dict(ordinal=0,name='Tesla T4',compute_major=7,compute_minor=5)])))
++            if name=='cuda_configure':
++                gpu=checkout/'build/validation/gpu-release';gpu.mkdir()
++                (gpu/'CMakeCache.txt').write_text('MAB_CUB_INCLUDE_DIR:PATH='+str(include))
++                for executable in ['cpu_gpu_comparison','comparison_input']:(gpu/executable).write_text('synthetic binary, never executed')
++            if name in ['cpu_release_ctest','cpu_sanitize_ctest']:text='0 tests failed out of 29'
++            if name=='cuda_ctest':text='0 tests failed out of 32\nRan 14 tests'
++            if name=='cuda_correctness':text='{}'
++            result=dict(exit_code=0,status='completed',stdout=text,stderr='',fixture='synthetic mocked validation, not hardware evidence')
++            dump_new(directory/(name+'.json'),result);return result
++        argv=['validator','--output',str(output),'--prerequisites-only']
++        with mock.patch.object(validator,'ROOT',checkout),mock.patch.object(validator,'verify_source_extension',return_value={'current_source_sha256':{}}),\
++             mock.patch.object(validator,'invoke',side_effect=invoke),mock.patch.object(validator,'verify_result',return_value={'fixture':True}),mock.patch.object(sys,'argv',argv):
++            self.assertEqual(validator.main(),0)
++        self.assertNotIn('pilot',calls);self.assertNotIn('analyze',calls)
++        self.assertTrue((output/'PREREQUISITES.json').exists())
++        self.assertFalse(json.loads((output/'COMPLETE.json').read_text())['pilot_run'])
++
+ if __name__=='__main__':unittest.main()
+--- before/README.md
++++ current/README.md
+@@ -775,3 +775,15 @@
+ and [final audit](results/raw/cpu_gpu_pilot_20261010T001232473460Z/FINAL_AUDIT.md).
+ Earlier failed/expired attempts remain explicit; only the final v3 evidence supports
+ pilot acceptance. Review the pilot before authorizing the separate full study.
++
++## Full CPU/GPU matrix tooling
++
++`scripts/run_cpu_gpu_study.py --dry-run` now plans the unchanged48-dataset matrix;
++the existing pilot command still selects only six datasets. See the
++[tooling guide](docs/CPU_GPU_FULL_MATRIX_TOOLING_v1.md) for exact commands, raw
++identity/completeness checks, prerequisite-only validation and analysis.
++Actual execution requires fresh compatible prerequisites and an explicit
++`--execute-study` latch **after separate authorization**. No resume/overwrite.
++Analysis supports both recorded matrix parts; incomplete studies cannot produce
++paired/cross-input comparisons, and prepared diagnostics never replace production
++host-call timing. This is tooling support, not a completed comparison study.

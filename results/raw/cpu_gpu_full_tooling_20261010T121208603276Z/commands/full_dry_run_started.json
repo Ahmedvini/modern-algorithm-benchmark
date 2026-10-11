@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "python3",
+    "scripts/run_cpu_gpu_study.py",
+    "--dry-run",
+    "--executable",
+    "build/UNEXECUTED_GPU_BUILD/cpu_gpu_comparison",
+    "--input-tool",
+    "build/UNEXECUTED_GPU_BUILD/comparison_input",
+    "--output",
+    "results/raw/UNEXECUTED_FULL_COMPARISON"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:27:30.194831+00:00"
+}

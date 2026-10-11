@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "env",
+    "-u",
+    "ASAN_OPTIONS",
+    "-u",
+    "LSAN_OPTIONS",
+    "UBSAN_OPTIONS=halt_on_error=1",
+    "ctest",
+    "--test-dir",
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize",
+    "--output-on-failure",
+    "-V",
+    "-R",
+    "^(structures|searching|baselines|environment_manifest|cuda_preflight|cuda_benchmark_analysis|cuda_sort_handoff|datasets|cli|quicksort|pdqsort|timsort|mergesort|radixsort|comparisons|memory|memory_unsupported|metrics_cli|cpu_gpu_comparison_framework)$"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:23:36.401162+00:00"
+}

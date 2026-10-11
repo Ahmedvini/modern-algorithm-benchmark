@@ -1,0 +1,23 @@
+{
+  "files": {
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+    "docs/studies/cpu_gpu_comparison_v1.freeze.json": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+    "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+    "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+  },
+  "latest_integrity_passed": true,
+  "pilot_integrity_passed": true,
+  "expected": {
+    "backend_configurations": 240,
+    "datasets": 48,
+    "measured_invocations": 1200,
+    "measured_prepared_metric_values": 960,
+    "paired_primary_ratios": 144,
+    "prepared_measured_rows": 240,
+    "prepared_warmup_rows": 48,
+    "primary_measured_rows": 960,
+    "primary_warmup_rows": 192,
+    "total_invocations": 1440,
+    "warmup_invocations": 240
+  }
+}

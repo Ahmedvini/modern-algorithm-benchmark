@@ -1,0 +1,128 @@
+{
+  "conditional_authorization": true,
+  "decision": "NO-GO",
+  "gates": [
+    {
+      "evidence": [
+        "REVIEW_VERIFICATION.json",
+        "PRESERVATION_VERIFIED.json"
+      ],
+      "id": 1,
+      "name": "Protocol and frozen inputs unchanged",
+      "reason": "All four literal frozen digests and independently pinned freeze verified.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/BUILD_COMPLETE.json",
+        "session_inventory.json"
+      ],
+      "id": 2,
+      "name": "Source/build/binary identity established",
+      "reason": "Local source150 and retained build hashes match, but remote current executable cannot be inspected; current comparison_input hash is absent from retained build identity.",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": [
+        "PRESERVATION_VERIFIED.json"
+      ],
+      "id": 3,
+      "name": "Historical preservation and integrity",
+      "reason": "All12,237 prior result files,188 project files,80 protected files,65 build metadata unchanged; exact membership plus content hashes.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/cpu_release_ctest.json",
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/cpu_release_ctest_selection.json"
+      ],
+      "id": 4,
+      "name": "CPU Release regression",
+      "reason": "Independently parsed retained source-matched21/21 groups,0 group skips; no rerun needed.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/cpu_sanitize_ctest.json"
+      ],
+      "id": 5,
+      "name": "CPU ASan/UBSan",
+      "reason": "Independently parsed retained source-matched21/21 with leak detection enabled and required prefix.",
+      "status": "PASS"
+    },
+    {
+      "evidence": [
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/gpu_prepared_untimed.json",
+        "REVIEW_VERIFICATION.json"
+      ],
+      "id": 6,
+      "name": "GPU correctness through intended paths/framework coverage",
+      "reason": "Untimed prepared163/489 passes, but full production475/1900 and required timing-framework integration are not evidenced for the current launch binary. Historical pilot/isolated checks are different builds; do not relabel correctness as timing coverage.",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": [
+        "documented_source_eligibility.json",
+        "REVIEW_VERIFICATION.json"
+      ],
+      "id": 7,
+      "name": "Eligibility policy tested and permits exact study",
+      "reason": "Focused policy9/9 retained, but real unchanged launcher rejects3 protected framework files; analyzer independently rejects current anchors. v2 policy recognizes correctness only and never grants study eligibility; no compatible full_protocol_v1 prerequisite record for this revision.",
+      "status": "FAIL"
+    },
+    {
+      "evidence": [
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/WORKSPACE_RESOURCES.json",
+        "session_inventory.json"
+      ],
+      "id": 8,
+      "name": "Current resources/workspace at every frozen size",
+      "reason": "Retained3-size queries passed caps; fresh GPU/host/cgroup/disk/affinity/quota unavailable. Latest bounded bundle lacks cgroup/affinity/quota observations required by frozen launch environment_gate.",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": [
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/validation_commands/actual_workers_untimed.json",
+        "session_inventory.json"
+      ],
+      "id": 9,
+      "name": "Current OpenMP threshold/runtime requirement",
+      "reason": "Retained12 checks prove team1 below32768/team2 at or above for the recorded executable; current session/executable/runtime cannot be reidentified.",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": [
+        "eligibility_paths_inspection.json",
+        "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/LINK_BINDINGS.json",
+        "session_inventory.json"
+      ],
+      "id": 10,
+      "name": "Two-worker orchestration and identity",
+      "reason": "Frozen procedure serializes one process per dataset and requests2 OpenMP team members, not2 concurrent benchmark processes. Shared library binding and mock failure/collision coverage retained; current binary/input-tool/session identity and ability to start correct workers cannot be confirmed. No timing trial used to test it.",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": [
+        "session_inventory.json"
+      ],
+      "id": 11,
+      "name": "Current GPU session/environment",
+      "reason": "colab sessions exit1: interactive OAuth authorization required, aborted on empty stdin. Availability unknown, not inferred absent. No replacement/reconnection/GPU workload attempted.",
+      "status": "BLOCKED"
+    },
+    {
+      "evidence": [
+        "REVIEW_VERIFICATION.json",
+        "documented_source_eligibility.json",
+        "session_inventory.json"
+      ],
+      "id": 12,
+      "name": "No unresolved safety/isolation/integrity/protocol issues",
+      "reason": "Compatibility/coverage/current-identity blockers remain. Guards not weakened; source/protocol/results preserved. Conditional launch authorization is not activated.",
+      "status": "FAIL"
+    }
+  ],
+  "launch_condition_satisfied": false,
+  "protocol": "cpu_gpu_comparison_v1",
+  "study_launched": false
+}

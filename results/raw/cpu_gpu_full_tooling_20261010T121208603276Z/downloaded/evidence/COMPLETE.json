@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "ctest_failed": 0,
+  "ctest_groups_skipped": 0,
+  "ctest_passed": 21,
+  "cuda_inputs": 475,
+  "cuda_output_checks": 1900,
+  "exit_code": 0,
+  "gpu_benchmark_trials": 0,
+  "pilot_run": false,
+  "study_run": false
+}

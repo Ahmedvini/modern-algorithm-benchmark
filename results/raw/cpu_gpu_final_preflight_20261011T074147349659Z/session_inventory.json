@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "colab",
+    "sessions"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T07:42:45.904774+00:00",
+  "exit_code": 1,
+  "stdout": "Enter the authorization code: ",
+  "stderr": "\nTo authorize colab-cli, visit this URL in any browser:\n\n  [URL REDACTED]\n\nAfter approving, Google will display an authorization code.\n\nAborted.\n",
+  "scope": "Colab session metadata only; no new session or workloads"
+}

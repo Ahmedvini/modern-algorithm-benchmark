@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "colab",
+    "upload",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/full_matrix_tooling_source.tar.gz",
+    "/content/full_matrix_tooling_source_20261010T121208Z.tar.gz",
+    "--session",
+    "cpu-gpu-full-tooling-20261010T121208Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:27:22.270427+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "-u",
+    "ASAN_OPTIONS",
+    "-u",
+    "LSAN_OPTIONS",
+    "UBSAN_OPTIONS=halt_on_error=1",
+    "python3",
+    "tests/test_cpu_gpu_comparison.py",
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize/comparison_input"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:27:19.562092+00:00"
+}

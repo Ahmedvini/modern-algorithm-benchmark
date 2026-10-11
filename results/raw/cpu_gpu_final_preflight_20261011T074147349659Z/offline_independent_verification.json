@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_final_preflight_20261011T074147349659Z/verify_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T07:46:28.551718+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_final_preflight_20261011T074147349659Z/verify_review.py\", line 52, in <module>\n    assert len(passed)==21 and sorted(passed)==selected\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "scope": "Offline log parsing, frozen-anchor checks, sealed evidence hashes and classifier checks; no tests/workloads"
+}

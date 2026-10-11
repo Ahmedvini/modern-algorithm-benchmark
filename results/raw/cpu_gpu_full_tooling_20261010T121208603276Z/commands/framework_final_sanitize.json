@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "env",
+    "-u",
+    "ASAN_OPTIONS",
+    "-u",
+    "LSAN_OPTIONS",
+    "UBSAN_OPTIONS=halt_on_error=1",
+    "python3",
+    "tests/test_cpu_gpu_comparison.py",
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize/comparison_input"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:27:19.562092+00:00",
+  "exit_code": 0,
+  "stdout": "interrupt interrupted exit -15\nfailed completed exit 9\ntimeout timeout exit -15\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nstudy complete:1200 measured/240 warm-ups.\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\nSYNTHETIC ORCHESTRATION MOCK: no sorting or timing call executed\n",
+  "stderr": ".................fixture stop before preflight\n...........................explicit injected worker failure\n...synthetic stop before preflight\n..study total timeout before input\n.\n----------------------------------------------------------------------\nRan 50 tests in 10.501s\n\nOK\n",
+  "wall_seconds": 10.605094173999532,
+  "ended_utc": "2026-10-10T12:27:30.167344+00:00"
+}

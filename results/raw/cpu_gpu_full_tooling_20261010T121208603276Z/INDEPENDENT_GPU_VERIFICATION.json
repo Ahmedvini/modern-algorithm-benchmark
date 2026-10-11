@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "exit_code": 0,
+  "download_sha256": "7bf510bce661a077003c512aed1bd9b5ccac7242b5e274fc4cb241b6142b85ff",
+  "remote_manifest_files": 15,
+  "archive_members": 17,
+  "ctest_groups_passed": 21,
+  "framework_methods": 50,
+  "cuda_inputs": 475,
+  "cuda_output_checks": 1900,
+  "dependency_files": 1688,
+  "dependency_matches_pilot": true,
+  "source_matches_current": true,
+  "warning_count": 341,
+  "warning_category": "known nvcc line directive extension",
+  "pilot_run": false,
+  "study_run": false
+}

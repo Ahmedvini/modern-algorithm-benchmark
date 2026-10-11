@@ -1,0 +1,6 @@
+{
+  "comparison_input": "52d1fe3a6b3b5c1e575891480d4a654a45b44e963a672a031af6a33d3b84b04a",
+  "cpu_gpu_comparison": "b2a2f9d5b00709452047dee7bea2d8bdd2ffc5129546826ecfda5239073edf18",
+  "cuda_runtime_probe": "78eb63c50c81ad5e7b0a9728ab1aa1cce8f77edf1f7f6d89f0d14cb0d1dd2ec9",
+  "test_cuda_sorting": "7a3236ed5b7e4287fedf664fe2e44cc09389efec23a737952456fb4b98801815"
+}

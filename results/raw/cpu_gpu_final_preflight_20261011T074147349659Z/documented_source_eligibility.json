@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import sys; sys.path.insert(0,\"scripts\"); from cpu_gpu_protocol import load_protocol,verify_source_extension; print(verify_source_extension(load_protocol()))"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T07:42:45.755046+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/cpu_gpu_protocol.py\", line 83, in verify_source_extension\n    require(set(changed) <= {'CMakeLists.txt'}, 'protected source/pin changed: ' + str(changed))\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/cpu_gpu_protocol.py\", line 26, in require\n    raise ValueError(message)\nValueError: protected source/pin changed: ['CMakeLists.txt', 'include/benchmark/cuda_timing.hpp', 'src/cuda/cub_timing.cu']\n",
+  "scope": "Offline documented verify_source_extension gate only; no subprocess/test/workload APIs"
+}

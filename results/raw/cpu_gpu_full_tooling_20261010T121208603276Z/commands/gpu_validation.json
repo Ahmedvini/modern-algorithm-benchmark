@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-full-tooling-20261010T121208Z",
+    "--file",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/remote_non_timing_validation.py",
+    "--timeout",
+    "1200"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:28:47.512779+00:00",
+  "exit_code": 0,
+  "stdout": "gpu_initial exit 0\nnvcc exit 0\nconfigure exit 0\nbuild exit 0\nctest_non_timing exit 0\nREMOTE_RESULT {\"exit_code\": 0, \"archive\": \"/content/full_matrix_tooling_20261010T121208603276Z/non_timing_validation_evidence.tar.gz\", \"sha256\": \"7bf510bce661a077003c512aed1bd9b5ccac7242b5e274fc4cb241b6142b85ff\"}\n",
+  "stderr": "",
+  "wall_seconds": 134.0840166779999,
+  "ended_utc": "2026-10-10T12:31:01.596936+00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:18:23.767862+00:00",
+  "exit_code": 0,
+  "stdout": "interrupt interrupted exit -15\nfailed completed exit 9\ntimeout timeout exit -15\n",
+  "stderr": "......s..........fixture stop before preflight\n.............../home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cpu_gpu_comparison.py:258: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzf95d8wj/raw/data_27b4584e3aa0904528ec445de4acfcd04bfe943eec3cd0fc410e5e5060626464/measurements/primary.csv' mode='r' encoding='UTF-8'>\n  rows=list(csv.DictReader((self.first/'primary.csv').open()));order=int(rows[-1]['execution_order'])\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cpu_gpu_comparison.py:264: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpzf95d8wj/raw/data_27b4584e3aa0904528ec445de4acfcd04bfe943eec3cd0fc410e5e5060626464/measurements/prepared_order.csv' mode='r' encoding='UTF-8'>\n  sides=list(csv.DictReader((self.first/'prepared_order.csv').open()))\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n.........\n----------------------------------------------------------------------\nRan 41 tests in 9.107s\n\nOK (skipped=1)\n",
+  "wall_seconds": 9.200693581999076,
+  "ended_utc": "2026-10-10T12:18:32.968671+00:00"
+}

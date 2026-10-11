@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "colab",
+    "exec",
+    "--session",
+    "cpu-gpu-full-tooling-20261010T121208Z",
+    "--file",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/remote_non_timing_validation.py",
+    "--timeout",
+    "1200"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:28:47.512779+00:00"
+}

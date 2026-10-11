@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_full_tooling_20261010T121208603276Z/finalize_audit.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-10T12:36:44.147361+00:00",
+  "exit_code": 0,
+  "stdout": "Audit written; prior artifacts verified 11228 changed existing source ['scripts/analyze_cpu_gpu.py', 'scripts/run_cpu_gpu_pilot.py', 'scripts/validate_cpu_gpu_pilot.py', 'tests/test_cpu_gpu_comparison.py'] added ['scripts/run_cpu_gpu_study.py']\n",
+  "stderr": "",
+  "wall_seconds": 0.7124899529990216,
+  "ended_utc": "2026-10-10T12:36:44.859968+00:00"
+}

@@ -1,0 +1,36 @@
+{
+  "added_source_files": [
+    "scripts/run_cpu_gpu_study.py"
+  ],
+  "changed_existing_source_files": [
+    "scripts/analyze_cpu_gpu.py",
+    "scripts/run_cpu_gpu_pilot.py",
+    "scripts/validate_cpu_gpu_pilot.py",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "complete": true,
+  "cuda_inputs": 475,
+  "cuda_output_checks": 1900,
+  "final_framework_methods_each": 50,
+  "full_study_launch": "NO-GO",
+  "full_study_run": false,
+  "gpu_benchmark_run": false,
+  "gpu_selected_groups": 21,
+  "local_release_selected_groups": 19,
+  "local_sanitize_selected_groups": 19,
+  "pilot_rerun": false,
+  "prior_artifacts_unchanged": 11228,
+  "production_source_unchanged": true,
+  "protected_frozen_files_match": true,
+  "scope_deviation": {
+    "durations_serialized": false,
+    "evidence": "commands/release_ctest_non_timing.json",
+    "measured": 4,
+    "mitigation": "Disclosed; group excluded from all subsequent validation.",
+    "rows": 6,
+    "size": 32768,
+    "test": "parallel_mergesort",
+    "warmups": 2
+  },
+  "tooling_implemented": true
+}
