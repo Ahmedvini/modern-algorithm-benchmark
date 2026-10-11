@@ -1,0 +1,82 @@
+{
+  "approved_session_available": false,
+  "builds": 0,
+  "ctest_invocations": 0,
+  "evidence_sha256": {
+    "BEFORE.json": "086e4111238e520c87bf30898250686a0dfb7e278150cc4faac0aa5b354669b9",
+    "COMMANDS.md": "7ae0dd9c8a4d31176355d1c688411321d87b7a813f3c1eba7e40562a42d56e93",
+    "CONTROL_COMMANDS.json": "188b6043bf65c6e11123f1e04a685198f1cc2e4bfb231083e517e0fb193f14ce",
+    "FINAL_AUDIT.md": "ace8d423fe419eb29eba3721278027290878551c5568c3163ccb5c33292557d9",
+    "PRESERVATION.json": "cb221cd059cd8b4d86cb6ca86dbae82e12658522fc1c461cf450383b4365b502",
+    "colab_sessions.json": "2d367d357a7a3d7cc0be27137b7eadae705ac76d32c28ed8b9fcaed78d87da8b",
+    "colab_status.json": "36a725b0122f057da5a6d781d2f5d87ea9bf8d54bee2a9bf6d409e411a8db072",
+    "control_commands.json": "41bf0ab753b6852be848d866dce1c2c20cedef924f4829ff082ab6762c75dfd3",
+    "finalize.py": "b2dcc99bdc7b89f04f2007a21c873ef4709e16949477b1c31a6498b291338550",
+    "focused_safety_source.json": "ac7428a7dbcaed8f7a287dd76a8983c2308eb4f44db783dbedbf9378944d361d",
+    "frozen_and_cli_docs.json": "055b208f72bd4df7570d2afeb0134434918d8b39d56843c1c937ef9a6713414e",
+    "record.py": "134a9218366802a79d17fe11896869f29fac068ca8e513d328c61909b90395be",
+    "required_records.json": "1c24f6c5136d1d488f931b844357151d476a932284a9de4c984aa07218fb1484",
+    "source_entry_points.json": "490d3d42e8aa0b599ba7f21d399293b315e173377dc64b092d521680c41dd837"
+  },
+  "gpu_workloads": 0,
+  "measured_trials": 0,
+  "observed_utc": "2026-10-11T01:45:54.100410+00:00",
+  "preservation": {
+    "build_metadata_sha256": {
+      "changed_or_missing": [],
+      "count": 65
+    },
+    "cpu_gpu_prelaunch_review_20261011T012430643251Z": {
+      "exact_membership": true,
+      "sealed_members_verified": 25
+    },
+    "cub_pin_sha256": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+    "effective_anchors_verified": 26,
+    "frozen_members_verified": {
+      "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+      "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+      "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+    },
+    "historical_membership": {
+      "added": [],
+      "after": 11859,
+      "before": 11859,
+      "missing": []
+    },
+    "historical_results_sha256": {
+      "changed_or_missing": [],
+      "count": 11859
+    },
+    "isolated_colab_revalidation_20261011T011459127026Z": {
+      "exact_membership": true,
+      "sealed_members_verified": 75
+    },
+    "production_files_verified": 80,
+    "project_sha256": {
+      "changed_or_missing": [],
+      "count": 177
+    },
+    "reviewed_source_files_verified": 144,
+    "transferred_source_entries_locally_verified": 153
+  },
+  "resource_queries": 0,
+  "schema_version": 1,
+  "seal_note": "Self excluded. Local retained-file integrity, not external signed attestation.",
+  "source_modified": false,
+  "study_authorized": false,
+  "tests_discovered": 0,
+  "tests_executed": 0,
+  "tests_failed": 0,
+  "tests_passed": 0,
+  "tests_skipped_by_runner": 0,
+  "validation_gates_closed": [],
+  "validation_gates_open": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "verdict": "NO-GO \u2014 one or more required validation gates remain open",
+  "warmups": 0
+}

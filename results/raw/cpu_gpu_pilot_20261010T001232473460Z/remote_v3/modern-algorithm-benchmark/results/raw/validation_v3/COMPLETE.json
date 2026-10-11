@@ -1,0 +1,10 @@
+{
+  "complete": true,
+  "full_study_run": false,
+  "measured": 150,
+  "pilot_passed": true,
+  "source_unchanged": true,
+  "summary_regenerated_identically": true,
+  "summary_sha256": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22",
+  "warmups": 30
+}

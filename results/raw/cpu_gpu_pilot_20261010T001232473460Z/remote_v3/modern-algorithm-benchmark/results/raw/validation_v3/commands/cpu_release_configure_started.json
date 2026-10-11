@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+    "-DCMAKE_CXX_FLAGS=",
+    "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+    "-DMAB_ENABLE_OPENMP=ON",
+    "-DBUILD_TESTING=ON",
+    "-B",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/cpu-release",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_CPU_GPU_COMPARISON=OFF"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "omp_environment": {
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "started_utc": "2026-10-10T04:29:55.504945+00:00"
+}

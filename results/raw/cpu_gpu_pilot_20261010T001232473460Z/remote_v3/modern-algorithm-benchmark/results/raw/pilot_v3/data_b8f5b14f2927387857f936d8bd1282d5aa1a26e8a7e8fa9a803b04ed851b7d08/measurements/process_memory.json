@@ -1,0 +1,1 @@
+{"status":"ok","metric":"peak_rss","scope":"process_lifetime","unit":"bytes","method":"getrusage_ru_maxrss","value":133537792,"error_code":null}

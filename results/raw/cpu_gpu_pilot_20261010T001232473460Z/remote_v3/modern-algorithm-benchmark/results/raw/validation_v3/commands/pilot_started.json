@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/scripts/run_cpu_gpu_pilot.py",
+    "--output",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/results/raw/pilot_v3",
+    "--executable",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release/cpu_gpu_comparison",
+    "--input-tool",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release/comparison_input",
+    "--prerequisites",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/results/raw/validation_v3/PREREQUISITES.json"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "omp_environment": {
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "started_utc": "2026-10-10T04:38:41.098247+00:00"
+}

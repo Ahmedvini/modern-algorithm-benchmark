@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release",
+    "--output-on-failure",
+    "-V"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "omp_environment": {
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "started_utc": "2026-10-10T04:37:40.696506+00:00"
+}

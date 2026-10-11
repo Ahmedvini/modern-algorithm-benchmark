@@ -1,0 +1,82 @@
+{
+  "builds": 0,
+  "created_utc": "2026-10-11T01:33:36.330012+00:00",
+  "ctest_invocations": 0,
+  "evidence_sha256": {
+    "ADDITIONAL_CONTROL_COMMANDS.json": "76564414c2a7d743fc23c431730a39a007268586c6843483c3b0fb7f9c4088d4",
+    "BEFORE.json": "afa4d7d0c7e92d9e8647cc6043e4cee87f283336e9402300e07830cbcca4a236",
+    "COMMANDS.md": "cc1b9088af227bb72bf03570639f8500b1f678da776205a31aa0cdc66b6d55fe",
+    "CONTROL_COMMANDS.json": "965c3c8b87411dc69675cef95ced99f87c540134d9e4fe97f36edc66cc0c19bd",
+    "FINAL_AUDIT.md": "1d26c4e3e00ac638525866861506abc74bcf1f1a341b9e06d4501032fb0753c9",
+    "INDEPENDENT_FINDINGS.json": "3de8840170d33968a8ff9563108427e495a4c88f4fbfbc14df3276b255040de5",
+    "PRESERVATION.json": "145875df2ef096956d77bc466346da8e7949208be6b68e95e55fa762eaed459c",
+    "WARNING_DIAGNOSTICS.json": "e24c223db5b4908766e7d9d39111425a97dc987a69dc32a84be1b0eabfe70900",
+    "control_provenance.json": "94fa389cf6cac9b9a21f0fca69eaae9aeb3347ac2e3549c2f6fc120f532a5d59",
+    "focused_detail.json": "e50f62b0d2dcdaace99114e2222bb4936e57ab4e578fd9d89048ecf6259f5adf",
+    "frozen_protocol.json": "f3176262b5d41e6ad1b47dea803fe48ba11415b6b61439f97b44536932f9c748",
+    "historical_pilot_workspace.json": "6a66dd623105be20f96e6f1aff28ae101a0d8c0311daf6043b25f7fcbe0a794f",
+    "independent_findings.json": "97d1f0cd83118282d2bea4e02f5592e622a914229f886a2295e95fc56eb8462d",
+    "inspect_retained.py": "38bca42f787ced606177518408499557f3f170f59ebb99d7d759a7ebb6abd1a3",
+    "inspection_keys.json": "707ad24b60896ed7abfe5e79a7f57295fe9150374b871164034a07e44a0b635c",
+    "inspection_shapes.json": "3f5f7cceba95f14fd73bcc1951316d360a8ce3ae51a2944bdf6a7dec216bc124",
+    "latest_validation_evidence.json": "0a621ce78bdc7afbd2d45a10d79eb8dc6f1f27e90f767391ff6e9a1f44eaa101",
+    "launch_gate_code.json": "11b6091e53f0ba1df130fcc50e32aec3604dba3f91dde05b550a430e27bd71b3",
+    "precise_launch_sources.json": "8a7702093ae78ae99e94579bea693941d04dfb9ffc8e00526d99084184300b3b",
+    "prerequisite_identity.json": "bbca42e2b62b5ba6985950c8f1b52b662cdd2143adb1a640cc48c6252f5f31eb",
+    "preservation_check.json": "389e91b0cd38e07e72eaa1df6e0bce215eb08616595aaf6adadaaeb7348ffd8b",
+    "record.py": "134a9218366802a79d17fe11896869f29fac068ca8e513d328c61909b90395be",
+    "remaining_documentation.json": "c167c8b3b75cfc8401a8bef0e4b4c37c1f778d00a9a76ae551b5304f42e9316d",
+    "seal_review.py": "2ca6de0970fe840b1564e4cdca0fb552aac9753d71ab393a1e6f4dd58fb596ea",
+    "warning_and_scope_sources.json": "73a76d5d7cbba536448cb8aa603d3f59c9798b5256899effae05afee2fd4b040"
+  },
+  "frozen_hashes": {
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+    "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+    "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+  },
+  "gpu_commands": 0,
+  "historical_results_verified": 11833,
+  "measured_trials": 0,
+  "prerequisite_resource_commands": 0,
+  "preservation": {
+    "build_metadata_sha256": {
+      "changed_or_missing": [],
+      "count": 65
+    },
+    "effective_protected_anchors_sha256": {
+      "changed_or_missing": [],
+      "count": 26
+    },
+    "historical_membership": {
+      "added": [],
+      "after": 11833,
+      "before": 11833,
+      "missing": []
+    },
+    "prior_results_sha256": {
+      "changed_or_missing": [],
+      "count": 11833
+    },
+    "production_header_dependency_sha256": {
+      "changed_or_missing": [],
+      "count": 80
+    },
+    "project_sha256": {
+      "changed_or_missing": [],
+      "count": 177
+    },
+    "reviewed_source_sha256": {
+      "changed_or_missing": [],
+      "count": 144
+    },
+    "scope": "No project/evidence outside this new directory changed. Hashes establish retained contents, not remote lifetime or signed external attestation."
+  },
+  "review_only": true,
+  "schema_version": 1,
+  "seal_note": "Self excluded; hashes provide retained local integrity, not external attestation.",
+  "source_changes": [],
+  "study_authorized": false,
+  "tests_run": 0,
+  "verdict": "NO-GO",
+  "warmups": 0
+}

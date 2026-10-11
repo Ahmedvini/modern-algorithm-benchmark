@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "cmake",
+    "-S",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+    "-DCMAKE_CXX_FLAGS=",
+    "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+    "-DMAB_ENABLE_OPENMP=ON",
+    "-DBUILD_TESTING=ON",
+    "-B",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/cpu-release",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DMAB_ENABLE_CUDA=OFF",
+    "-DMAB_ENABLE_CPU_GPU_COMPARISON=OFF"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "omp_environment": {
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "started_utc": "2026-10-10T04:29:55.504945+00:00",
+  "status": "completed",
+  "stderr": "",
+  "stdout": "-- The CXX compiler identification is GNU 13.3.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Found Python3: /usr/local/bin/python (found version \"3.13.15\") found components: Interpreter\n-- Found OpenMP_CXX: -fopenmp (found version \"4.5\")\n-- Found OpenMP: TRUE (found version \"4.5\") found components: CXX\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n-- Found Threads: TRUE\n-- Configuring done (1.3s)\n-- Generating done (0.1s)\n-- Build files have been written to: /content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/cpu-release\n",
+  "wall_seconds": 1.5616830029999846
+}

@@ -1,0 +1,14 @@
+{
+  "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+  "input_hash_fnv1a64": "16235787445208220162",
+  "input_sha256": "b5377bd58aaa7b2a14d0700de0d250c83d197b69dba19d16a09cc9f73de82549",
+  "recipe": {
+    "dataset_generator": "mt19937_64_v1",
+    "distribution": "uniform",
+    "duplicate_cardinality": 16,
+    "key_type": "signed_int32",
+    "nearly_sorted_swaps": 0,
+    "seed": 1729,
+    "size": 1025
+  }
+}

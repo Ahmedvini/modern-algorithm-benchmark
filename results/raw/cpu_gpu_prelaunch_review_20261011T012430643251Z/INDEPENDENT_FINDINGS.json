@@ -1,0 +1,3615 @@
+{
+  "anchor_differences": {
+    "CMakeLists.txt": {
+      "current": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
+      "frozen": "9b61fd8895d565c524a5870ea41b50fe5110a1f3dcac5d53a6fdae4bacc5001b"
+    }
+  },
+  "anchors_exact_matches": 25,
+  "build_metadata_verified": 65,
+  "coverage": {
+    "benchmarks": 0,
+    "cpu_correctness": "Passed 4015 Merge Sort differential cases through public/registry/repeated paths; stable merge fixture passed\n",
+    "ctest_invocations": 0,
+    "cuda_correctness": {
+      "algorithm": "cub_radix_sort",
+      "cases": 475,
+      "compute_major": 7,
+      "compute_minor": 5,
+      "cub_version": 300001,
+      "device": 0,
+      "driver_api_version": 13000,
+      "implementation_version": "cub_radix_sort_v1",
+      "output_checks": 1900,
+      "protocol": "cuda_sort_correctness_v2",
+      "runtime_api_version": 13000,
+      "schema_version": 1,
+      "status": "ok"
+    },
+    "study_eligible": false,
+    "timing_trials": 0,
+    "validation_passed": true
+  },
+  "cpu_topology": [
+    {
+      "core id\t\t": "0",
+      "cpu MHz\t\t": "2000.184",
+      "cpu cores\t": "1",
+      "model name\t": "Intel(R) Xeon(R) CPU @ 2.00GHz",
+      "physical id\t": "0",
+      "processor\t": "0",
+      "siblings\t": "2"
+    },
+    {
+      "core id\t\t": "0",
+      "cpu MHz\t\t": "2000.184",
+      "cpu cores\t": "1",
+      "model name\t": "Intel(R) Xeon(R) CPU @ 2.00GHz",
+      "physical id\t": "0",
+      "processor\t": "1",
+      "siblings\t": "2"
+    }
+  ],
+  "cub_pin": {
+    "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+    "cub_version": 300001,
+    "files": {
+      "LICENSE": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+        "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+      },
+      "cub_version.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+        "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+      },
+      "device_radix_sort.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+        "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+      }
+    },
+    "installed_toolkit_identity": "Colab CUDA 13.0.88: reviewed version and SortKeys headers match v3.0.1; full tree hashes recorded by validation runner",
+    "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
+    "local_modifications_to_upstream": "none",
+    "previous_reference": {
+      "commit": "e944297b0b51a8e9c0f1b30425370c31c1c0e0a0",
+      "cub_version": 300000,
+      "files": {
+        "LICENSE": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/LICENSE",
+          "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE"
+        },
+        "cub_version.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/version.cuh",
+          "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh"
+        },
+        "device_radix_sort.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/device/device_radix_sort.cuh",
+          "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh"
+        }
+      },
+      "reference_release": "v3.0.0"
+    },
+    "reference_release": "v3.0.1",
+    "upstream": "https://github.com/NVIDIA/cccl",
+    "vendored_algorithm_sources": false
+  },
+  "cuda_compile_commands": [
+    {
+      "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  --options-file CMakeFiles/cuda_runtime_probe.dir/includes_CUDA.rsp -O3 -DNDEBUG -std=c++17 \"--generate-code=arch=compute_75,code=[compute_75,sm_75]\" -x cu -c /content/mab_isolated_20261011T011459127026Z/source/src/cuda/runtime_probe.cu -o CMakeFiles/cuda_runtime_probe.dir/src/cuda/runtime_probe.cu.o",
+      "directory": "/content/mab_isolated_20261011T011459127026Z/build-release",
+      "file": "/content/mab_isolated_20261011T011459127026Z/source/src/cuda/runtime_probe.cu",
+      "output": "CMakeFiles/cuda_runtime_probe.dir/src/cuda/runtime_probe.cu.o"
+    },
+    {
+      "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  --options-file CMakeFiles/mab_cuda_sort.dir/includes_CUDA.rsp -O3 -DNDEBUG -std=c++17 \"--generate-code=arch=compute_75,code=[compute_75,sm_75]\" -Xcompiler=-Wall,-Wextra,-Wpedantic -x cu -c /content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_sort.cu -o CMakeFiles/mab_cuda_sort.dir/src/cuda/cub_sort.cu.o",
+      "directory": "/content/mab_isolated_20261011T011459127026Z/build-release",
+      "file": "/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_sort.cu",
+      "output": "CMakeFiles/mab_cuda_sort.dir/src/cuda/cub_sort.cu.o"
+    },
+    {
+      "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  --options-file CMakeFiles/mab_cuda_timing.dir/includes_CUDA.rsp -O3 -DNDEBUG -std=c++17 \"--generate-code=arch=compute_75,code=[compute_75,sm_75]\" -Xcompiler=-Wall,-Wextra,-Wpedantic -x cu -c /content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_timing.cu -o CMakeFiles/mab_cuda_timing.dir/src/cuda/cub_timing.cu.o",
+      "directory": "/content/mab_isolated_20261011T011459127026Z/build-release",
+      "file": "/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_timing.cu",
+      "output": "CMakeFiles/mab_cuda_timing.dir/src/cuda/cub_timing.cu.o"
+    },
+    {
+      "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler  --options-file CMakeFiles/mab_cuda_comparison.dir/includes_CUDA.rsp -O3 -DNDEBUG -std=c++17 \"--generate-code=arch=compute_75,code=[compute_75,sm_75]\" -Xcompiler=-Wall,-Wextra,-Wpedantic -x cu -c /content/mab_isolated_20261011T011459127026Z/source/src/cuda/comparison_resources.cu -o CMakeFiles/mab_cuda_comparison.dir/src/cuda/comparison_resources.cu.o",
+      "directory": "/content/mab_isolated_20261011T011459127026Z/build-release",
+      "file": "/content/mab_isolated_20261011T011459127026Z/source/src/cuda/comparison_resources.cu",
+      "output": "CMakeFiles/mab_cuda_comparison.dir/src/cuda/comparison_resources.cu.o"
+    }
+  ],
+  "driver_review": {
+    "current_cmake_sha256": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
+    "evidence": "results/raw/cpu_gpu_pilot_20261010T001232473460Z/CMAKE_ADDITIONS.diff",
+    "frozen_cmake_sha256": "9b61fd8895d565c524a5870ea41b50fe5110a1f3dcac5d53a6fdae4bacc5001b",
+    "protocol": "cpu_gpu_comparison_v1",
+    "review": "Additive comparison library/input executable, explicit GPU comparison opt-in target, two CTest groups. Existing algorithms/targets and protocols preserved.",
+    "reviewed_additive_only": true,
+    "schema_version": 1
+  },
+  "environment": {
+    "affinity": [
+      0,
+      1
+    ],
+    "cpu_count": 2,
+    "disk": {
+      "free": 75442806784,
+      "total": 120942624768,
+      "used": 45483040768
+    },
+    "environment": {
+      "CUDACXX": null,
+      "CUDA_HOME": null,
+      "CUDA_PATH": null,
+      "CUDA_VISIBLE_DEVICES": null,
+      "OMP_DYNAMIC": null,
+      "OMP_MAX_ACTIVE_LEVELS": null,
+      "OMP_PROC_BIND": null,
+      "OMP_THREAD_LIMIT": null,
+      "OMP_WAIT_POLICY": null
+    },
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "python": "3.13.15"
+  },
+  "error_lines": [],
+  "executed_records": [
+    {
+      "argv": [
+        "cmake",
+        "-S",
+        "/content/mab_isolated_20261011T011459127026Z/source",
+        "-B",
+        "/content/mab_isolated_20261011T011459127026Z/build-release",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_FLAGS=",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG",
+        "-DMAB_ENABLE_OPENMP=ON",
+        "-DBUILD_TESTING=ON",
+        "-DMAB_ENABLE_CUDA=ON",
+        "-DMAB_ENABLE_CUDA_SORT=ON",
+        "-DMAB_ENABLE_CPU_GPU_COMPARISON=ON",
+        "-DMAB_ENABLE_SANITIZERS=OFF",
+        "-DCMAKE_CUDA_ARCHITECTURES=75",
+        "-DCMAKE_CUDA_FLAGS=",
+        "-DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG"
+      ],
+      "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:19:13.718109+00:00",
+      "name": "configure",
+      "started_utc": "2026-10-11T01:19:06.680363+00:00"
+    },
+    {
+      "argv": [
+        "cmake",
+        "--build",
+        "/content/mab_isolated_20261011T011459127026Z/build-release",
+        "--target",
+        "cpu_gpu_comparison",
+        "comparison_input",
+        "test_cuda_sorting",
+        "test_mergesort",
+        "--parallel",
+        "2"
+      ],
+      "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:19:53.296693+00:00",
+      "name": "build",
+      "started_utc": "2026-10-11T01:19:13.719406+00:00"
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T011459127026Z/build-release/test_mergesort"
+      ],
+      "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:19:53.414640+00:00",
+      "name": "cpu_correctness",
+      "started_utc": "2026-10-11T01:19:53.298362+00:00"
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T011459127026Z/build-release/test_cuda_sorting"
+      ],
+      "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:19:54.434635+00:00",
+      "name": "gpu_correctness",
+      "started_utc": "2026-10-11T01:19:53.415691+00:00"
+    },
+    {
+      "argv": [
+        "/content/mab_isolated_20261011T011459127026Z/build-release/cpu_gpu_comparison",
+        "--describe"
+      ],
+      "cwd": "/content/mab_isolated_20261011T011459127026Z/source",
+      "exit_code": 0,
+      "finished_utc": "2026-10-11T01:19:54.440083+00:00",
+      "name": "comparison_describe",
+      "started_utc": "2026-10-11T01:19:54.435886+00:00"
+    }
+  ],
+  "freeze_hashes": {
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+    "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+    "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+  },
+  "freeze_members_verified": 3,
+  "frozen_launch_gates": {
+    "actual_cpu_team_check": true,
+    "complete_oracle_equality": true,
+    "compute_capability": "7.5",
+    "current_session_verified": false,
+    "no_concurrent_workloads": true,
+    "pilot_success_before_study": true,
+    "required_device": "Tesla T4",
+    "review_before_pilot": true,
+    "review_before_study": true
+  },
+  "frozen_openmp_policy": {
+    "environment": {
+      "OMP_DYNAMIC": "FALSE",
+      "OMP_MAX_ACTIVE_LEVELS": "1",
+      "OMP_PROC_BIND": "FALSE",
+      "OMP_THREAD_LIMIT": "2",
+      "OMP_WAIT_POLICY": "PASSIVE"
+    },
+    "expected_actual_at_or_above_threshold": 2,
+    "expected_actual_below_threshold": 1,
+    "minimum_effective_logical_cpus": 2,
+    "parallel_threshold": 32768,
+    "requested_threads": 2,
+    "task_grain": 16384
+  },
+  "frozen_resources": {
+    "combined_device_peak_formula": "16*N+max(W_prepared,1)+max(W_adapter,1)",
+    "host_peak_payload_formula": "24*N",
+    "memory_unit": "bytes",
+    "minimum_free_disk_bytes": 1073741824,
+    "minimum_host_headroom_bytes": 1073741824,
+    "payload_cap_bytes": 268435456,
+    "raw_csv_budget_assumption_bytes_per_row": 1024,
+    "required_before_launch": "query both CUB workspaces; combined device peak <=256MiB and <=half cudaMemGetInfo free before persistent allocations",
+    "study_csv_budget_bytes": 1474560,
+    "study_raw_and_build_planning_budget_bytes": 536870912,
+    "table": [
+      {
+        "adapter_device_keys_bytes": 8200,
+        "adapter_workspace_bytes": "unknown_requires_query",
+        "allocation_payload_cap_bytes": 268435456,
+        "combined_device_keys_bytes": 16400,
+        "combined_device_planning_cap_bytes": 134234128,
+        "cpu_workspace_or_adapter_output_peak_bytes": 4100,
+        "host_vectors_persistent_bytes": 12300,
+        "known_host_peak_payload_bytes": 24600,
+        "one_array_bytes": 4100,
+        "pinned_host_bytes": 8200,
+        "prepared_device_keys_bytes": 8200,
+        "prepared_workspace_current_bytes": "unknown_requires_query",
+        "prepared_workspace_historical_bytes": 1,
+        "size": 1025,
+        "unmeasured_overhead": "runtime/context/allocator/pageable-staging/stack/tasks/metadata",
+        "workspace_cap_each_bytes": 67108864
+      },
+      {
+        "adapter_device_keys_bytes": 524296,
+        "adapter_workspace_bytes": "unknown_requires_query",
+        "allocation_payload_cap_bytes": 268435456,
+        "combined_device_keys_bytes": 1048592,
+        "combined_device_planning_cap_bytes": 135266320,
+        "cpu_workspace_or_adapter_output_peak_bytes": 262148,
+        "host_vectors_persistent_bytes": 786444,
+        "known_host_peak_payload_bytes": 1572888,
+        "one_array_bytes": 262148,
+        "pinned_host_bytes": 524296,
+        "prepared_device_keys_bytes": 524296,
+        "prepared_workspace_current_bytes": "unknown_requires_query",
+        "prepared_workspace_historical_bytes": 279295,
+        "size": 65537,
+        "unmeasured_overhead": "runtime/context/allocator/pageable-staging/stack/tasks/metadata",
+        "workspace_cap_each_bytes": 67108864
+      },
+      {
+        "adapter_device_keys_bytes": 8000000,
+        "adapter_workspace_bytes": "unknown_requires_query",
+        "allocation_payload_cap_bytes": 268435456,
+        "combined_device_keys_bytes": 16000000,
+        "combined_device_planning_cap_bytes": 150217728,
+        "cpu_workspace_or_adapter_output_peak_bytes": 4000000,
+        "host_vectors_persistent_bytes": 12000000,
+        "known_host_peak_payload_bytes": 24000000,
+        "one_array_bytes": 4000000,
+        "pinned_host_bytes": 8000000,
+        "prepared_device_keys_bytes": 8000000,
+        "prepared_workspace_current_bytes": "unknown_requires_query",
+        "prepared_workspace_historical_bytes": "",
+        "size": 1000000,
+        "unmeasured_overhead": "runtime/context/allocator/pageable-staging/stack/tasks/metadata",
+        "workspace_cap_each_bytes": 67108864
+      }
+    ],
+    "workspace_each_cap_bytes": 67108864
+  },
+  "generated_marker_blocks": [
+    {
+      "context": [
+        "    1 | # 1 \"/content/mab_isolated_20261011T011459127026Z/source/src/cuda/comparison_resources.cu\"",
+        "      |   ^"
+      ],
+      "diagnostic": "/tmp/tmpxft_00002974_00000000-6_comparison_resources.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension",
+      "log_line": 1
+    },
+    {
+      "context": [
+        "tmpxft_00002974_00000000-6_comparison_resources.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension",
+        "/tmp/tmpxft_000029d1_00000000-6_cub_sort.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension"
+      ],
+      "diagnostic": "tmpxft_00002974_00000000-6_comparison_resources.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension",
+      "log_line": 231
+    },
+    {
+      "context": [
+        "/tmp/tmpxft_000029d1_00000000-6_cub_sort.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension",
+        "    1 | # 1 \"/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_sort.cu\""
+      ],
+      "diagnostic": "tmpxft_00002974_00000000-6_comparison_resources.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension",
+      "log_line": 232
+    },
+    {
+      "context": [
+        "    1 | # 1 \"/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_sort.cu\"",
+        "      |   ^"
+      ],
+      "diagnostic": "/tmp/tmpxft_000029d1_00000000-6_cub_sort.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension",
+      "log_line": 233
+    },
+    {
+      "context": [
+        "tmpxft_000029d1_00000000-6_cub_sort.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension",
+        "/tmp/tmpxft_00002a15_00000000-6_cub_timing.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension"
+      ],
+      "diagnostic": "tmpxft_000029d1_00000000-6_cub_sort.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension",
+      "log_line": 519
+    },
+    {
+      "context": [
+        "/tmp/tmpxft_00002a15_00000000-6_cub_timing.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension",
+        "    1 | # 1 \"/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_timing.cu\""
+      ],
+      "diagnostic": "tmpxft_000029d1_00000000-6_cub_sort.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension",
+      "log_line": 520
+    },
+    {
+      "context": [
+        "    1 | # 1 \"/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_timing.cu\"",
+        "      |   ^"
+      ],
+      "diagnostic": "/tmp/tmpxft_00002a15_00000000-6_cub_timing.cudafe1.cpp:1:3: warning: style of line directive is a GCC extension",
+      "log_line": 521
+    },
+    {
+      "context": [
+        "tmpxft_00002a15_00000000-6_cub_timing.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension"
+      ],
+      "diagnostic": "tmpxft_00002a15_00000000-6_cub_timing.cudafe1.stub.c:4:3: warning: style of line directive is a GCC extension",
+      "log_line": 992
+    },
+    {
+      "context": [],
+      "diagnostic": "tmpxft_00002a15_00000000-6_cub_timing.cudafe1.stub.c:2:3: warning: style of line directive is a GCC extension",
+      "log_line": 993
+    }
+  ],
+  "isolated_seal_verified": 75,
+  "matrix_counts": {
+    "pilot": {
+      "cells": [
+        {
+          "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "signed_edges_v1",
+            "distribution": "signed_edges",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+          "measure_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "signed_edges_v1",
+            "distribution": "signed_edges",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ]
+          ]
+        }
+      ],
+      "expected": {
+        "backend_configurations": 30,
+        "datasets": 6,
+        "measured_invocations": 150,
+        "measured_prepared_metric_values": 120,
+        "paired_primary_ratios": 18,
+        "prepared_measured_rows": 30,
+        "prepared_warmup_rows": 6,
+        "primary_measured_rows": 120,
+        "primary_warmup_rows": 24,
+        "total_invocations": 180,
+        "warmup_invocations": 30
+      },
+      "reuse_in_study": false
+    },
+    "repetitions": 5,
+    "study": {
+      "cells": [
+        {
+          "dataset_id": "27b4584e3aa0904528ec445de4acfcd04bfe943eec3cd0fc410e5e5060626464",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "22308b3988f5397a22c7b8cc19c7e885d8ca4117aa4db7ff53b99bef0939202e",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "signed_edges_v1",
+            "distribution": "signed_edges",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "78fcb96f25a3718e26945d84f48dae52e3755d79677ea2fb5679b5dd84984a06",
+          "measure_order": [
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "signed_edges_v1",
+            "distribution": "signed_edges",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "53c6e81942009d79c6b2446ca0175f846be46e0c78a393254e93bb061aa797bc",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "eec801d2ec2f1dbf8b42fa55befe18a378667bd7c2b2bf08923497d367f92d3f",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "8b9257ba0f71d190c49cf4ecff915428adb72f295e353704cef2cc0fa65f4dae",
+          "measure_order": [
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 655,
+            "seed": 1729,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "be4b45ab5152640e33cb3fe04201362247fafdfda6f4adb224e3054ceeb94587",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "9a83ce999aa6372ee80a7d6ef9ba8546cb6d52842f81333734f6494984b6a10f",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "ad8ca98cc00e904221ef5e9625c83e197e1e6177557935d82d84412bb2226b97",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "b06f0644e9e6e49dc3eada5019fbacd2d862b80a08f48f31975b49f17f5fcc8e",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 10,
+            "seed": 42,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "fa90260dfdb5601858c106cc4fd27a69c1b0d4305cd517a1e26a7a0adca1d74e",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "6a795422bf4bcab7d96157e1003eb1559affa90aa26033790abdd5c26293bd8c",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "293127c99f1f919f89ee9afb05536af9ced7115498edf4c7f9ebb0ed3138ae9f",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "bab4d2cc8f1b99a9f58899e12dbc2c14c7c6952eb715a80f6c716b7b0dc82499",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+          "measure_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "eddc4b232f08b062893f575b7b9533745ac4dcaababcab90e25fe0df20e5729f",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "9f62b248715d3a5b16160a291b988cf9a00480a29889d757a7a0abdd780824d8",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "e030cb385af0ce61d51fcc7c8062415cd8db0f8c3fef31494683858a81264bf8",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "5f198065daace469ace0356c88837d4b925b31332ac0946e3c98e6dbb7127ed3",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 10,
+            "seed": 2718,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "4aaae79c72495bd759d22a483ca87908ff201ec66cefe23bb1ca656c35dc463d",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "babc1723a726dfb35f7b47c5d6eb5b58a4ba998b2b39dcf2669436728fccd295",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 10000,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "0372686dc5729c1eb8aadf741415c8ef271d8dca3f9bafa1cfdd2cc31d7c26a5",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "d1460d02c8eb62d7d1db53da122d0266090715508dd5c8672c3f1610a204924e",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "d7cb69cf0e66689b2a151d74efaf4779147c06665305d7241902e0164ce347c4",
+          "measure_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "561ca08fb8d20d5c0c6689b6a368c38df16723614c1a49687aa48e31d45a2ffd",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "e8c01f76c356a74bb5b5d6642d6c832abb5b0bcba79fef1154e48558ca24966b",
+          "measure_order": [
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "cdd421712625d95ff84ea27334c97ee1ebf046cdc25c61af0eeafca12ceb1f7f",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 10,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "signed_edges_v1",
+            "distribution": "signed_edges",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "e2b7058f4509e6b3ef4499f4326eb3d3d5da3700d15266808d70c71de85b5152",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "8a5b528dc15ded6bb0f7a5b87e955dca05c3bdaaa17d0e39214008a3d9453a88",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 655,
+            "seed": 2718,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "d5c203bdefd6b279a45506b53066f74ac162afb39726502536bcad7d40f1e6c7",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "2034d2a2a9770a6b954823f8a1a2753be3de5af7d816489fb817ee78915a21a5",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "6f951c4b8ef2d4753f3eec7c538657d7aafb520f0ae7d03f54864a6b67e409f8",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "7c36404b88ed1579d3a518f2e1a5d1b8c2ec66bbe691cd18e781fd6017fa73f7",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "b1c841633af8a05344745867c653559bdeaedfd614763627c3b8861d197ff622",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "d3ca7a077f6acde3487280f07eee95adff4c235a35fb0badcdae061a006e4fc8",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "9a0d6a44aa6a9d49805ced318d79572619f1aeb4cf1d1c12554babcc76de2449",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "duplicate_heavy",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 2718,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "a67dece845164f00ad672b576193b00b9331fbbee9cc77ffb57fd26b205b55e2",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 655,
+            "seed": 42,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "a12195c0dc0beb27b4a40e789bacb8b071055b122d0e4e7a7e141e99f79128f3",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "reverse_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "278e9daac16f4a3b0639eed1938772238db2a44e91dcbb2300e990f32f7097d8",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 10000,
+            "seed": 2718,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0",
+          "measure_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "cab147b74c1df10865261991ca111cd6df66c089ccaaf7e13e252d1dc4fe54d3",
+          "measure_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "cpu_std_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "234e270633f1abf3baa46a9005cc79d593a8279d87e750dca4e0d809ab91baee",
+          "measure_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 1729,
+            "size": 65537
+          },
+          "warmup_order": [
+            [
+              "cpu_merge_sort",
+              "gpu_cub_adapter",
+              "cpu_std_sort",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "eb3895fc4863732454e5d94b4d45e0944ff9a8536229b6a463c8bd821530b5a3",
+          "measure_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ],
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_std_sort",
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "nearly_sorted",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 10000,
+            "seed": 42,
+            "size": 1000000
+          },
+          "warmup_order": [
+            [
+              "cpu_parallel_merge_sort_t2",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_std_sort",
+              "cpu_merge_sort"
+            ]
+          ]
+        },
+        {
+          "dataset_id": "4e69a38937528ac5afbff70c4151ebabf2574ca3edb8154703d568aebe962d8b",
+          "measure_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ],
+            [
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter"
+            ],
+            [
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared"
+            ],
+            [
+              "cpu_merge_sort",
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2"
+            ],
+            [
+              "cpu_std_sort",
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort"
+            ]
+          ],
+          "recipe": {
+            "dataset_generator": "mt19937_64_v1",
+            "distribution": "uniform",
+            "duplicate_cardinality": 16,
+            "key_type": "signed_int32",
+            "nearly_sorted_swaps": 0,
+            "seed": 42,
+            "size": 1025
+          },
+          "warmup_order": [
+            [
+              "gpu_cub_adapter",
+              "gpu_cub_prepared",
+              "cpu_parallel_merge_sort_t2",
+              "cpu_merge_sort",
+              "cpu_std_sort"
+            ]
+          ]
+        }
+      ],
+      "expected": {
+        "backend_configurations": 240,
+        "datasets": 48,
+        "measured_invocations": 1200,
+        "measured_prepared_metric_values": 960,
+        "paired_primary_ratios": 144,
+        "prepared_measured_rows": 240,
+        "prepared_warmup_rows": 48,
+        "primary_measured_rows": 960,
+        "primary_warmup_rows": 192,
+        "total_invocations": 1440,
+        "warmup_invocations": 240
+      }
+    },
+    "warmups": 1
+  },
+  "meminfo_bytes": {
+    "MemAvailable": 12524589056,
+    "MemTotal": 13605822464,
+    "SwapTotal": 0
+  },
+  "production_adapter_sha256": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+  "project_files_verified": 177,
+  "remote_seal_verified": 33,
+  "source_line_directives": {
+    "src/cuda/comparison_resources.cu": [],
+    "src/cuda/cub_sort.cu": [],
+    "src/cuda/cub_timing.cu": []
+  },
+  "transferred_source_matches_local": 153,
+  "warning_categories": {
+    "style of line directive is a GCC extension": 341
+  },
+  "warning_count": 341,
+  "warning_locations": {
+    "/content/mab_isolated_20261011T011459127026Z/source/include/algorithms/cuda_sorting.hpp": 7,
+    "/content/mab_isolated_20261011T011459127026Z/source/include/algorithms/sorting.hpp": 8,
+    "/content/mab_isolated_20261011T011459127026Z/source/include/benchmark/cuda_comparison.hpp": 11,
+    "/content/mab_isolated_20261011T011459127026Z/source/include/benchmark/cuda_timing.hpp": 25,
+    "/content/mab_isolated_20261011T011459127026Z/source/include/common/types.hpp": 8,
+    "/content/mab_isolated_20261011T011459127026Z/source/src/cuda/comparison_resources.cu": 66,
+    "/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_sort.cu": 78,
+    "/content/mab_isolated_20261011T011459127026Z/source/src/cuda/cub_timing.cu": 129,
+    "/tmp/tmpxft_00002974_00000000-6_comparison_resources.cudafe1.cpp": 1,
+    "/tmp/tmpxft_000029d1_00000000-6_cub_sort.cudafe1.cpp": 1,
+    "/tmp/tmpxft_00002a15_00000000-6_cub_timing.cudafe1.cpp": 1,
+    "tmpxft_00002974_00000000-6_comparison_resources.cudafe1.stub.c": 2,
+    "tmpxft_000029d1_00000000-6_cub_sort.cudafe1.stub.c": 2,
+    "tmpxft_00002a15_00000000-6_cub_timing.cudafe1.stub.c": 2
+  }
+}

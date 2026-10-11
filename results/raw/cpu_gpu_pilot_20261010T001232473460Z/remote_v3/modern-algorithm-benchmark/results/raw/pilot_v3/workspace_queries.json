@@ -1,0 +1,40 @@
+{
+  "1000000": {
+    "adapter_diagnostic_cudaMalloc_requested_bytes": 4178687,
+    "adapter_query_bytes": 4178687,
+    "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+    "combined_device_payload_bytes": 24357374,
+    "compute_major": 7,
+    "compute_minor": 5,
+    "driver_api_version": 13000,
+    "free_device_bytes_before_buffers": 15527116800,
+    "gpu_name": "Tesla T4",
+    "known_host_peak_payload_bytes": 24000000,
+    "prepared_diagnostic_cudaMalloc_requested_bytes": 4178687,
+    "prepared_query_bytes": 4178687,
+    "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+    "runtime_api_version": 13000,
+    "size": 1000000,
+    "total_device_bytes": 15637086208,
+    "workspace_policy_cap_each_bytes": 67108864
+  },
+  "1025": {
+    "adapter_diagnostic_cudaMalloc_requested_bytes": 1,
+    "adapter_query_bytes": 1,
+    "allocation_observation": "successful diagnostic cudaMalloc request sizes; allocator physical footprint not measured",
+    "combined_device_payload_bytes": 16402,
+    "compute_major": 7,
+    "compute_minor": 5,
+    "driver_api_version": 13000,
+    "free_device_bytes_before_buffers": 15527116800,
+    "gpu_name": "Tesla T4",
+    "known_host_peak_payload_bytes": 24600,
+    "prepared_diagnostic_cudaMalloc_requested_bytes": 1,
+    "prepared_query_bytes": 1,
+    "production_workspace_observation": "not instrumented; isolated same-parameter sizing query only",
+    "runtime_api_version": 13000,
+    "size": 1025,
+    "total_device_bytes": 15637086208,
+    "workspace_policy_cap_each_bytes": 67108864
+  }
+}

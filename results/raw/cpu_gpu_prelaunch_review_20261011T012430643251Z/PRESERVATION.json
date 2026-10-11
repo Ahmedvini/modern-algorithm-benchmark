@@ -1,0 +1,33 @@
+{
+  "build_metadata_sha256": {
+    "changed_or_missing": [],
+    "count": 65
+  },
+  "effective_protected_anchors_sha256": {
+    "changed_or_missing": [],
+    "count": 26
+  },
+  "historical_membership": {
+    "added": [],
+    "after": 11833,
+    "before": 11833,
+    "missing": []
+  },
+  "prior_results_sha256": {
+    "changed_or_missing": [],
+    "count": 11833
+  },
+  "production_header_dependency_sha256": {
+    "changed_or_missing": [],
+    "count": 80
+  },
+  "project_sha256": {
+    "changed_or_missing": [],
+    "count": 177
+  },
+  "reviewed_source_sha256": {
+    "changed_or_missing": [],
+    "count": 144
+  },
+  "scope": "No project/evidence outside this new directory changed. Hashes establish retained contents, not remote lifetime or signed external attestation."
+}

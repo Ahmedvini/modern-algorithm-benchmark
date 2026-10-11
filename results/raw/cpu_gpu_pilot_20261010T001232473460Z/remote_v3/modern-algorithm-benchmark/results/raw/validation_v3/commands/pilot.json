@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/usr/bin/python3",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/scripts/run_cpu_gpu_pilot.py",
+    "--output",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/results/raw/pilot_v3",
+    "--executable",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release/cpu_gpu_comparison",
+    "--input-tool",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/build/validation_v3/gpu-release/comparison_input",
+    "--prerequisites",
+    "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark/results/raw/validation_v3/PREREQUISITES.json"
+  ],
+  "cwd": "/content/cpu_gpu_pilot_20261010T001232473460Z_v3/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "omp_environment": {
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "started_utc": "2026-10-10T04:38:41.098247+00:00",
+  "status": "completed",
+  "stderr": "",
+  "stdout": "describe completed exit 0\nresources_1025 completed exit 0\nresources_1000000 completed exit 0\ninput_0 completed exit 0\ndataset_0 completed exit 0\ninput_1 completed exit 0\ndataset_1 completed exit 0\ninput_2 completed exit 0\ndataset_2 completed exit 0\ninput_3 completed exit 0\ndataset_3 completed exit 0\ninput_4 completed exit 0\ndataset_4 completed exit 0\ninput_5 completed exit 0\ndataset_5 completed exit 0\nPilot complete:150 measured/30 warm-ups. Full study was not run.\n",
+  "wall_seconds": 7.360124724000002
+}

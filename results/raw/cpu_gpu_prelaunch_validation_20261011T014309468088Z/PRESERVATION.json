@@ -1,0 +1,38 @@
+{
+  "build_metadata_sha256": {
+    "changed_or_missing": [],
+    "count": 65
+  },
+  "cpu_gpu_prelaunch_review_20261011T012430643251Z": {
+    "exact_membership": true,
+    "sealed_members_verified": 25
+  },
+  "cub_pin_sha256": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+  "effective_anchors_verified": 26,
+  "frozen_members_verified": {
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+    "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+    "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+  },
+  "historical_membership": {
+    "added": [],
+    "after": 11859,
+    "before": 11859,
+    "missing": []
+  },
+  "historical_results_sha256": {
+    "changed_or_missing": [],
+    "count": 11859
+  },
+  "isolated_colab_revalidation_20261011T011459127026Z": {
+    "exact_membership": true,
+    "sealed_members_verified": 75
+  },
+  "production_files_verified": 80,
+  "project_sha256": {
+    "changed_or_missing": [],
+    "count": 177
+  },
+  "reviewed_source_files_verified": 144,
+  "transferred_source_entries_locally_verified": 153
+}

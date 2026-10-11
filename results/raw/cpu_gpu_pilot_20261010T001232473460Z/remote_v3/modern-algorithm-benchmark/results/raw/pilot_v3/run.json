@@ -1,0 +1,87 @@
+{
+  "build_id": "55da4400147799a7ec0864f025c6488bc48e83ed6dc80e015fa02d3e3aabe99b",
+  "dataset_ids": [
+    "165d412fee938b9aadbd61e577c0b0e75795d20746eaac1ecea1a4ab5111899d",
+    "b8f5b14f2927387857f936d8bd1282d5aa1a26e8a7e8fa9a803b04ed851b7d08",
+    "ad820393316a1cfd77454babc2d838a2a5c9ba1eab2227961528a552bb54e407",
+    "e41da1be1f203ac1b4c73b1ff47ddf1966dbf79e5f18af77bfa149e6ecdc3f1e",
+    "57fda37acfcd314cd59b4b3ad79220abed2f976d3bb2b24f37ac2ec16d8e1e5b",
+    "c68abdcccf294f4f71f56dde5eeb40d61957c8e8dfa4810813fabfe463e840e0"
+  ],
+  "environment_id": "0542625c6b4de2446c2b16b4ecdc5cb774f46cac03a221da3394d65b636d954f",
+  "freeze_sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+  "implementations": {
+    "cpu_merge_sort": {
+      "build": "build.json",
+      "cub_pin": null,
+      "source_review": "source_review.json"
+    },
+    "cpu_parallel_merge_sort_t2": {
+      "build": "build.json",
+      "cub_pin": null,
+      "source_review": "source_review.json"
+    },
+    "cpu_std_sort": {
+      "build": "build.json",
+      "cub_pin": null,
+      "source_review": "source_review.json"
+    },
+    "gpu_cub_adapter": {
+      "build": "build.json",
+      "cub_pin": {
+        "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+        "cub_version": 300001,
+        "files": {
+          "LICENSE": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+            "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+          },
+          "cub_version.cuh": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+            "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+          },
+          "device_radix_sort.cuh": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+            "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+          }
+        },
+        "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
+        "reference_release": "v3.0.1",
+        "upstream": "https://github.com/NVIDIA/cccl"
+      },
+      "source_review": "source_review.json"
+    },
+    "gpu_cub_prepared": {
+      "build": "build.json",
+      "cub_pin": {
+        "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+        "cub_version": 300001,
+        "files": {
+          "LICENSE": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+            "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+          },
+          "cub_version.cuh": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+            "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+          },
+          "device_radix_sort.cuh": {
+            "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+            "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+          }
+        },
+        "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
+        "reference_release": "v3.0.1",
+        "upstream": "https://github.com/NVIDIA/cccl"
+      },
+      "source_review": "source_review.json"
+    }
+  },
+  "matrix_part": "pilot",
+  "matrix_sha256": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+  "prerequisites_passed": true,
+  "protocol": "cpu_gpu_comparison_v1",
+  "run_id": "pilot_v3",
+  "run_kind": "performance",
+  "schema_version": 1
+}
