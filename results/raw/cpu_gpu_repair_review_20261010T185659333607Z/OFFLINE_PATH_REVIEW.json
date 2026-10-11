@@ -1,0 +1,205 @@
+{
+  "ctest_executed": false,
+  "gpu_executed": false,
+  "kind": "offline_helper_review_not_test_suite",
+  "prerequisites_executed": false,
+  "provenance": {
+    "CMakeLists.txt": {
+      "error": "ValueError: retained protected source differs from trusted anchor: CMakeLists.txt",
+      "rejected": true
+    },
+    "accepted_pilot_source_claim_valid": true,
+    "duplicate_json_fields": {
+      "error": "ValueError: ambiguous provenance JSON field: x",
+      "rejected": true
+    },
+    "redefined_model_and_map": {
+      "error": "ValueError: analysis model differs from trusted source anchors",
+      "rejected": true
+    },
+    "src/cuda/cub_sort.cu": {
+      "error": "ValueError: retained protected source differs from trusted anchor: src/cuda/cub_sort.cu",
+      "rejected": true
+    },
+    "src/cuda/cub_timing.cu": {
+      "error": "ValueError: retained protected source differs from trusted anchor: src/cuda/cub_timing.cu",
+      "rejected": true
+    },
+    "third_party/cub/UPSTREAM.json": {
+      "error": "ValueError: retained protected source differs from trusted anchor: third_party/cub/UPSTREAM.json",
+      "rejected": true
+    },
+    "trusted_freeze_ambiguous": {
+      "error": "ValueError: trusted freeze identity missing/changed",
+      "rejected": true
+    },
+    "trusted_freeze_malformed": {
+      "error": "ValueError: trusted freeze identity missing/changed",
+      "rejected": true
+    },
+    "trusted_freeze_missing": {
+      "error": "ValueError: trusted freeze identity missing/changed",
+      "rejected": true
+    }
+  },
+  "resource_checks_executed": false,
+  "selection": {
+    "dependency": {
+      "error": "ValueError: unsafe/unreviewed CTest properties: datasets",
+      "rejected": true
+    },
+    "duplicate": {
+      "error": "ValueError: duplicate/malformed discovered tests",
+      "rejected": true
+    },
+    "environment": {
+      "error": "ValueError: unsafe/unreviewed CTest properties: datasets",
+      "rejected": true
+    },
+    "fixture": {
+      "error": "ValueError: unsafe/unreviewed CTest properties: datasets",
+      "rejected": true
+    },
+    "missing": {
+      "error": "ValueError: unknown/missing/unclassified discovered tests",
+      "rejected": true
+    },
+    "modified_source": {
+      "error": "ValueError: non-timing source snapshot changed; review and reclassify before execution",
+      "rejected": true
+    },
+    "retained_discovery_plan": {
+      "allow_gpu_correctness": false,
+      "ctest_argv": [
+        "ctest",
+        "--test-dir",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_full_tooling_20261010T121208603276Z/release",
+        "--output-on-failure",
+        "-V",
+        "--parallel",
+        "1",
+        "-R",
+        "^(baselines|cli|comparisons|cpu_gpu_comparison_framework|cuda_benchmark_analysis|cuda_preflight|cuda_sort_handoff|datasets|environment_manifest|memory|memory_unsupported|mergesort|metrics_cli|pdqsort|quicksort|radixsort|searching|structures|timsort)$"
+      ],
+      "discovered_count": 29,
+      "excluded": [
+        {
+          "classification": "timing",
+          "name": "experiment_pipeline",
+          "reason": "End-to-end experiment tests invoke benchmark processes."
+        },
+        {
+          "classification": "timing",
+          "name": "structure_timing",
+          "reason": "Calls real construction and lookup timing engines."
+        },
+        {
+          "classification": "timing",
+          "name": "structure_framework",
+          "reason": "Launches structure_benchmark."
+        },
+        {
+          "classification": "timing",
+          "name": "search_timing",
+          "reason": "Calls real search batch timing engine."
+        },
+        {
+          "classification": "timing",
+          "name": "search_framework",
+          "reason": "Launches search_benchmark."
+        },
+        {
+          "classification": "timing",
+          "name": "timing",
+          "reason": "Calls real sorting timing engine."
+        },
+        {
+          "classification": "timing",
+          "name": "benchmark_framework",
+          "reason": "Launches sort_benchmark."
+        },
+        {
+          "classification": "timing",
+          "name": "parallel_mergesort",
+          "reason": "Embedded N32768, W1/R2, sequential and parallel sort timing: six actual rows."
+        },
+        {
+          "classification": "timing",
+          "name": "parallel_framework",
+          "reason": "Launches parallel_sort_benchmark."
+        },
+        {
+          "classification": "timing",
+          "name": "comparison_engine",
+          "reason": "Calls comparison trial timing engine."
+        }
+      ],
+      "full_protocol_prerequisites": false,
+      "manifest_sha256": "9f103cac1554ae491838fbe6777d88ea93fc0df85ac9c478a16ab2c8fd9d456d",
+      "policy": "non_timing_correctness_v1",
+      "schema_version": 1,
+      "selected": [
+        "baselines",
+        "cli",
+        "comparisons",
+        "cpu_gpu_comparison_framework",
+        "cuda_benchmark_analysis",
+        "cuda_preflight",
+        "cuda_sort_handoff",
+        "datasets",
+        "environment_manifest",
+        "memory",
+        "memory_unsupported",
+        "mergesort",
+        "metrics_cli",
+        "pdqsort",
+        "quicksort",
+        "radixsort",
+        "searching",
+        "structures",
+        "timsort"
+      ],
+      "selected_count": 19,
+      "tests_executed": false
+    },
+    "timing_command": {
+      "error": "ValueError: timing entry point cannot be selected: datasets",
+      "rejected": true
+    },
+    "unknown": {
+      "error": "ValueError: unknown/missing/unclassified discovered tests",
+      "rejected": true
+    },
+    "unreviewed_build_hooks": {
+      "conclusion": "Directory-level CTest hooks/includes are outside reviewed source/discovery guards.",
+      "hook_execution_performed": false,
+      "hook_files_consulted_by_selector": false,
+      "pre_test_hook_text": "set(CTEST_CUSTOM_PRE_TEST \"/unexecuted/forbidden-timing-command\")\n",
+      "selected": [
+        "baselines",
+        "cli",
+        "comparisons",
+        "cpu_gpu_comparison_framework",
+        "cuda_benchmark_analysis",
+        "cuda_preflight",
+        "cuda_sort_handoff",
+        "datasets",
+        "environment_manifest",
+        "memory",
+        "memory_unsupported",
+        "mergesort",
+        "metrics_cli",
+        "pdqsort",
+        "quicksort",
+        "radixsort",
+        "searching",
+        "structures",
+        "timsort"
+      ],
+      "selection_accepted": true,
+      "test_include_text": "include(\"unreviewed.cmake\")\n"
+    }
+  },
+  "subprocesses_executed": 0,
+  "timing_executed": false
+}

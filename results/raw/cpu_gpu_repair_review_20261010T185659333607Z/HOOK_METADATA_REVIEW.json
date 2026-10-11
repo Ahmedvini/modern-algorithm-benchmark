@@ -1,0 +1,33 @@
+{
+  "actual_ctest_discovery_executed": false,
+  "ctest_executed": false,
+  "hook_executed": false,
+  "kind": "static_matching_registration_hook_review",
+  "limitation": "Build metadata is copied/rebased as text; no runtime CTest hook behavior is claimed to have been exercised.",
+  "metadata_directory": "results/raw/cpu_gpu_repair_review_20261010T185659333607Z/UNEXECUTED_MATCHING_CTEST_METADATA",
+  "registrations_preserved": 29,
+  "reviewed_source_unchanged": true,
+  "selected": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort"
+  ],
+  "selection_accepted": true,
+  "tests_executed": false
+}

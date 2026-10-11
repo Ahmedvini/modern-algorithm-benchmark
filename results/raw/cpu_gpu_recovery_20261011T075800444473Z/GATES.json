@@ -1,0 +1,35 @@
+{
+  "benchmark_trials": 0,
+  "gates": [
+    {
+      "blocker": "Full evidence remains absent; new source snapshot needs independent review/reclassification. No prerequisite was upgraded.",
+      "gate": 1,
+      "implementation": "PASS: pinned explicit compatibility and public launch/analyzer regressions",
+      "name": "Framework compatibility and eligibility",
+      "status": "BLOCKED"
+    },
+    {
+      "blocker": "Server reports no active sessions. No replacement created in this recovery; current T4/toolchain/resources cannot be inspected.",
+      "gate": 2,
+      "implementation": "Authentication metadata command succeeds; CLI0.7.4",
+      "name": "Colab authentication and environment",
+      "status": "BLOCKED"
+    },
+    {
+      "blocker": "No accessible intended build. Current production475/1900 and full GPU framework14 coverage still not established; timing runs forbidden here.",
+      "gate": 3,
+      "implementation": "No new GPU execution; retained bounded results preserved",
+      "name": "Identity-matched GPU/framework validation",
+      "status": "BLOCKED"
+    },
+    {
+      "blocker": "Actual intended remote input-tool hash unavailable; old BUILD_COMPLETE lacks it. No historical manifest rewritten or substitute binary accepted.",
+      "gate": 4,
+      "implementation": "PASS: read-only snapshot/verification and missing/stale/mismatched regressions",
+      "name": "comparison_input identity",
+      "status": "BLOCKED"
+    }
+  ],
+  "study_launched": false,
+  "verdict": "NO-GO"
+}

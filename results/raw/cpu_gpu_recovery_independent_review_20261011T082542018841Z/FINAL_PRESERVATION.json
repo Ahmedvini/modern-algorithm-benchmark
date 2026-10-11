@@ -1,0 +1,35 @@
+{
+  "build_metadata": {
+    "added": [],
+    "after_count": 65,
+    "before_count": 65,
+    "changed": [],
+    "exact_membership_and_sha256_match": true,
+    "removed": []
+  },
+  "frozen_sha256": {
+    "changed": [],
+    "count": 4
+  },
+  "historical_results": {
+    "added": [],
+    "after_count": 12294,
+    "before_count": 12294,
+    "changed": [],
+    "exact_membership_and_sha256_match": true,
+    "removed": []
+  },
+  "project": {
+    "added": [],
+    "after_count": 193,
+    "before_count": 193,
+    "changed": [],
+    "exact_membership_and_sha256_match": true,
+    "removed": []
+  },
+  "protected_sha256": {
+    "changed": [],
+    "count": 80
+  },
+  "recovery_seal_unchanged": true
+}

@@ -1,0 +1,27 @@
+{
+  "build_metadata_sha256": {
+    "count": 65,
+    "differences": []
+  },
+  "frozen_sha256": {
+    "count": 4,
+    "differences": []
+  },
+  "historical_results_sha256": {
+    "count": 12261,
+    "differences": []
+  },
+  "project_after_sha256": {
+    "count": 193,
+    "differences": []
+  },
+  "protected_sha256": {
+    "count": 80,
+    "differences": []
+  },
+  "recovery_evidence": {
+    "count": 32,
+    "differences": []
+  },
+  "results_start_count": 12294
+}

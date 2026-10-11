@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import json,importlib.metadata;from pathlib import Path;e=Path(\"results/raw/cpu_gpu_recovery_design_20261011T014656388000Z\");print(\"CLI VERSION\",json.loads((e/\"cli_version.json\").read_text())[\"stdout\"]);d=importlib.metadata.distribution(\"google-colab-cli\");print(\"DISTRIBUTION\",d.version);print(\"PUBLIC SOURCE LOCATIONS\");[print(d.locate_file(p)) for p in d.files if str(p).endswith(\".py\") and any(s in str(p) for s in [\"session\",\"main\",\"cli\",\"commands\"])];print(\"INTERFACES\");fs={\"include/benchmark/cuda_timing.hpp\":None,\"src/cuda/cub_timing.cu\":(1,78),\"src/cuda/comparison_resources.cu\":None,\"include/benchmark/cuda_comparison.hpp\":None,\"include/algorithms/parallel_mergesort.hpp\":None,\"scripts/non_timing_tests.py\":(1,82),\"scripts/validate_cpu_gpu_pilot.py\":(35,72)};[(print(f),print(\"\\n\".join(f\"{i}: {s}\" for i,s in enumerate(Path(f).read_text().splitlines(),1) if span is None or span[0]<=i<=span[1]))) for f,span in fs.items()]"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T01:47:42.921352+00:00",
+  "exit_code": 1,
+  "stdout": "CLI VERSION Version: 0.7.4\n\n",
+  "stderr": "Traceback (most recent call last):\n  File \"/usr/lib/python3.12/importlib/metadata/__init__.py\", line 397, in from_name\n    return next(cls.discover(name=name))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/usr/lib/python3.12/importlib/metadata/__init__.py\", line 862, in distribution\n    return Distribution.from_name(distribution_name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/importlib/metadata/__init__.py\", line 399, in from_name\n    raise PackageNotFoundError(name)\nimportlib.metadata.PackageNotFoundError: No package metadata was found for google-colab-cli\n",
+  "scope": "Read-only local interfaces, metadata and installed CLI locations; no credentials"
+}

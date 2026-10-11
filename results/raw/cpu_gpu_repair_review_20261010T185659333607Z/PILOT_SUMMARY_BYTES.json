@@ -1,0 +1,11 @@
+{
+  "byte_identical": true,
+  "regeneration_executed": false,
+  "sha256": {
+    "results/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed/summary.json": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22",
+    "results/processed/cpu_gpu_pilot_20261010T001232473460Z/summary.json": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22",
+    "results/processed/cpu_gpu_pilot_20261010T001232473460Z/summary_regenerated.json": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/PILOT_REANALYSIS.json": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/PILOT_REANALYSIS.json": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22"
+  }
+}

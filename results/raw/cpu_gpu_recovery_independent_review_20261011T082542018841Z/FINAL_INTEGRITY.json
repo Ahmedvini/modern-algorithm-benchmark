@@ -1,0 +1,88 @@
+{
+  "authorization_granted": false,
+  "benchmark_trials": 0,
+  "build_metadata_files_unchanged": 65,
+  "builds": 0,
+  "created_utc": "2026-10-11T08:35:29.196944+00:00",
+  "ctest_discovery": 0,
+  "evidence_files_excluding_seal": 12,
+  "evidence_sha256": {
+    "BASELINE.json": "d29b94bcf9fe693f6a183ef7945aa9f15fab8061eb66fed49551c331c401df3e",
+    "COMMANDS.md": "96c9fab6800358a64ea54049a2ba1b6f71d72ffaef2fac4a7d7d92340de57b29",
+    "COMMAND_RECORDS.json": "e4c468cc3d00db715572403509c728f0181c4ed55a46a24328eadc7b97b128b7",
+    "FINAL_AUDIT.md": "381a1aeb9eef22dcc9a9160f2db57c810e603c32b74fbd5b91e5970a8ad44517",
+    "FINAL_PRESERVATION.json": "3a11e4657346134fb17b2cb700cbb8588e75ef838947681a4a1c394324949d96",
+    "INITIAL_VERIFICATION.json": "ad788498b662ce7ac6639c79385a3e5be8ead87c2897d022072810867b57de91",
+    "INSPECTED_FILES.json": "92a269de966422a5b4fe89bdb55fb70e996c46b367565fffc44946881d5fcc4f",
+    "LOG_REVIEW.json": "b02b20ad3f4f5fd4dd1f4cc5fbd20f24af97dfcee3f91de60ca3bf5f7bc33c69",
+    "STATIC_REVIEW.json": "2ba573f01f037f63a78d703b54c9c0eab0740d8abb8427e40ed9391b21fbf265",
+    "TRUST_AND_BUILD_REVIEW.json": "240fc96e0a4d7a6b75f6858ba83323fa73c439d367117f7745f0b95afc138c15",
+    "seal_review.py": "3277b4e911203b5ded2c94822141eea4cdcb687d2aa1e292f8065deba1488094",
+    "verify_preservation.py": "02691bbadb60947bc331290a31ca4d72df8e39d95010353f123bdd17d09bf7fb"
+  },
+  "frozen_sha256": {
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+    "docs/studies/cpu_gpu_comparison_v1.freeze.json": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+    "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+    "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+  },
+  "gpu_commands": 0,
+  "historical_files_verified": 12294,
+  "historical_manifest": "BASELINE.json",
+  "historical_manifest_field": "results_sha256",
+  "preservation_results": {
+    "build_metadata": {
+      "added": [],
+      "after_count": 65,
+      "before_count": 65,
+      "changed": [],
+      "exact_membership_and_sha256_match": true,
+      "removed": []
+    },
+    "frozen_sha256": {
+      "changed": [],
+      "count": 4
+    },
+    "historical_results": {
+      "added": [],
+      "after_count": 12294,
+      "before_count": 12294,
+      "changed": [],
+      "exact_membership_and_sha256_match": true,
+      "removed": []
+    },
+    "project": {
+      "added": [],
+      "after_count": 193,
+      "before_count": 193,
+      "changed": [],
+      "exact_membership_and_sha256_match": true,
+      "removed": []
+    },
+    "protected_sha256": {
+      "changed": [],
+      "count": 80
+    },
+    "recovery_seal_unchanged": true
+  },
+  "project_files_unchanged": 193,
+  "protected_files_unchanged": 80,
+  "recorded_regressions_reviewed": {
+    "existing_policy_methods": 9,
+    "freshly_executed": 0,
+    "new_methods": 26
+  },
+  "recovery_seal_sha256": "ca1e6746b68fc7a3f90caf6c5d945d5bc1c6e36db5801cf37929e55e85d626bf",
+  "schema_version": 1,
+  "seal_command": [
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_recovery_independent_review_20261011T082542018841Z/seal_review.py"
+  ],
+  "seal_excludes_itself": true,
+  "source_files_modified": 0,
+  "study_launched": false,
+  "tests_executed": 0,
+  "verdict": "NO-GO",
+  "warmups": 0
+}

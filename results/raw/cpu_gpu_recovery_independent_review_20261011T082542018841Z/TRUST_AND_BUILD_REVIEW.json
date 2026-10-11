@@ -1,0 +1,32 @@
+{
+  "docs/CPU_GPU_DRIVER_REVIEW_v1.json": {
+    "actual_sha256": "b6a63a7e65827970d6b27e872e738052cd5faf94d88ee711dbccd5f77f90ef2a",
+    "literal_pin": "b6a63a7e65827970d6b27e872e738052cd5faf94d88ee711dbccd5f77f90ef2a",
+    "matches": true
+  },
+  "docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.json": {
+    "actual_sha256": "b6a0ae4fa3e29394daad84419219020ecf7be1434207c6ad20105eb39ccb5627",
+    "literal_pin": "b6a0ae4fa3e29394daad84419219020ecf7be1434207c6ad20105eb39ccb5627",
+    "matches": true
+  },
+  "docs/CPU_GPU_VALIDATION_POLICY_v2.json": {
+    "actual_sha256": "084664cad16ee6540323cf6a0514e3ff3420c4d4d1204a5d571d947cd445a32b",
+    "literal_pin": "084664cad16ee6540323cf6a0514e3ff3420c4d4d1204a5d571d947cd445a32b",
+    "matches": true
+  },
+  "docs/studies/cpu_gpu_comparison_v1.freeze.json": {
+    "actual_sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+    "literal_pin": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6",
+    "matches": true
+  },
+  "retained_build": {
+    "comparison_input_identity_present": false,
+    "comparison_input_text_present": false,
+    "path": "results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence/BUILD_COMPLETE.json",
+    "top_level_keys": [
+      "builds",
+      "source_verified",
+      "identities"
+    ]
+  }
+}

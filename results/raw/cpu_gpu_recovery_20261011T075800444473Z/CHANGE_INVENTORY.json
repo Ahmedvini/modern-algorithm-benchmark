@@ -1,0 +1,19 @@
+{
+  "modified": [
+    "README.md",
+    "docs/ROADMAP.md",
+    "scripts/analyze_cpu_gpu.py",
+    "scripts/cpu_gpu_protocol.py",
+    "scripts/cpu_gpu_provenance.py",
+    "scripts/run_cpu_gpu_pilot.py",
+    "scripts/run_cpu_gpu_study.py"
+  ],
+  "added": [
+    "docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.json",
+    "docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md",
+    "scripts/cpu_gpu_build_identity.py",
+    "scripts/cpu_gpu_framework_compatibility.py",
+    "tests/test_framework_compatibility.py"
+  ],
+  "removed": []
+}
