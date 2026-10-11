@@ -1,0 +1,21 @@
+{
+  "added_source_files_in_tooling_milestone": [
+    "scripts/run_cpu_gpu_study.py"
+  ],
+  "archive_members": 167,
+  "changed_source_files_in_tooling_milestone": [
+    "scripts/analyze_cpu_gpu.py",
+    "scripts/run_cpu_gpu_pilot.py",
+    "scripts/validate_cpu_gpu_pilot.py",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "documentation_changes": [
+    "README.md",
+    "docs/AUDIT.md",
+    "docs/ROADMAP.md",
+    "docs/CPU_GPU_FULL_MATRIX_TOOLING_v1.md"
+  ],
+  "extracted": false,
+  "source_files_matched": 137,
+  "unsafe_members": 0
+}

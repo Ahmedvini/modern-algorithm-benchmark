@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "sed",
+    "-n",
+    "85,125p",
+    "tests/test_parallel_mergesort.cpp"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "read_only_source_inspection",
+  "stderr": "",
+  "stdout": "    require(a.get() && b.get(),\"concurrent independent invocations failed\");\n    for(int invalid:{-1,0,65}) {mab::Values v{2,1};bool rejected=false;\n        try{mab::parallel_merge_sort(v,invalid);}catch(const std::invalid_argument&){rejected=true;}\n        require(rejected && v==mab::Values({2,1}),\"invalid threads mutated input\");}\n    bool nested_rejected=false;\n    #pragma omp parallel num_threads(2) shared(nested_rejected)\n    {\n        #pragma omp single\n        {mab::Values v{2,1};try{mab::parallel_merge_sort(v,2);}catch(const std::invalid_argument&){nested_rejected=true;}}\n    }\n    require(nested_rejected,\"nested OpenMP call was not rejected\");\n    bool serialized_rejected=false;\n    #pragma omp parallel num_threads(1) shared(serialized_rejected)\n    {\n        mab::Values v{2,1};\n        try{mab::parallel_merge_sort(v,2);}catch(const std::invalid_argument&){serialized_rejected=true;}\n    }\n    require(serialized_rejected,\"serialized enclosing OpenMP region was not rejected\");\n    mab::TimingConfig c;c.dataset.size=32768;c.repetitions=2;c.warmups=1;\n    auto v=mab::make_timing_input(c);std::size_t rows=0;\n    require(mab::run_parallel_timing_trials(v,c,{mab::find_parallel_sorter(\"merge_sort\",4),mab::find_parallel_sorter(\"parallel_merge_sort\",4)},\n        [&](const mab::TimingTrial& row){require(row.status==\"ok\" && row.correctness==\"passed\" && row.elapsed_ns.has_value(),\"timing correctness\");\n            require(row.requested_threads==(row.algorithm==\"merge_sort\"?1:4),\"requested team metadata\");++rows;}),\"shared timing failed\");\n    require(rows==6,\"shared timing row count\");\n    require(mab::sorters().size()==6 && mab::sorters().front().name==\"std_sort\",\"old registry/default changed\");\n    std::cout<<\"Passed \"<<cases<<\" inputs, \"<<output_checks<<\" public/registry output checks at threads1/2/4/8; 10 concurrent large calls; \"\n             <<trace.tasks<<\" observed tasks, \"<<trace.merges<<\" observed merges, worker mask=\"<<trace.workers\n             <<\"; stability, threshold, nested rejection and 6 timing rows passed\\n\";\n    return 0;\n } catch(const std::exception& error){std::cerr<<error.what()<<'\\n';return 1;}\n}\n",
+  "timestamp_utc": "2026-10-10T21:21:50.281439+00:00"
+}

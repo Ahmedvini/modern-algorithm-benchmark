@@ -1,0 +1,21 @@
+{
+  "added_source": [
+    "scripts/cpu_gpu_provenance.py",
+    "scripts/non_timing_tests.py",
+    "tests/fixtures/cpu_gpu_provenance_reproducer.py",
+    "tests/test_cpu_gpu_safety.py"
+  ],
+  "benchmark_execution": false,
+  "changed_source": [
+    "scripts/analyze_cpu_gpu.py",
+    "scripts/run_cpu_gpu_pilot.py",
+    "scripts/validate_cpu_gpu_pilot.py",
+    "tests/test_cpu_gpu_comparison.py"
+  ],
+  "gpu_execution": false,
+  "independent_frozen_provenance": true,
+  "pilot_summary_byte_identical": true,
+  "pilot_summary_sha256": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22",
+  "source_manifest_exact": true,
+  "syntax_files_checked": 8
+}

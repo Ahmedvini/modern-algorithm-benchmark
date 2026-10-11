@@ -1,0 +1,14 @@
+{
+  "actual_gpu_calls": 0,
+  "baseline_accepted": true,
+  "fixture_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "frozen_digest": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+  "kind": "synthetic_full_analysis_review_probe",
+  "note": "All timings and metadata in disposable fixtures are synthetic; no performance evidence is created.",
+  "protected_source_change_rejected": true,
+  "rejection": "retained protected source differs from trusted anchor: src/cuda/cub_sort.cu",
+  "sorting_calls": 0,
+  "synthetic_measured_records": 1200,
+  "synthetic_warmup_records": 240,
+  "target": "src/cuda/cub_sort.cu"
+}

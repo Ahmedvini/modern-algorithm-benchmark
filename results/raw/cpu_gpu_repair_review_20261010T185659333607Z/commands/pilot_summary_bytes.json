@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "-c",
+    "import hashlib,json; from pathlib import Path; base=Path(\"results/raw/cpu_gpu_repair_review_20261010T185659333607Z\"); root=Path(\"results/processed/cpu_gpu_pilot_20261010T001232473460Z\"); paths=[root/\"summary.json\",root/\"summary_regenerated.json\",root/\"reviewed/summary.json\",Path(\"results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/PILOT_REANALYSIS.json\"),Path(\"results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/PILOT_REANALYSIS.json\")]; digest={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}; assert len(set(digest.values()))==1; report=dict(byte_identical=all(p.read_bytes()==paths[0].read_bytes() for p in paths),sha256=digest,regeneration_executed=False); stream=(base/\"PILOT_SUMMARY_BYTES.json\").open(\"x\"); json.dump(report,stream,indent=2,sort_keys=True); stream.write(\"\\n\"); stream.close(); print(json.dumps(report,indent=2,sort_keys=True))"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "read_only_byte_comparison_no_regeneration",
+  "stderr": "",
+  "stdout": "{\n  \"byte_identical\": true,\n  \"regeneration_executed\": false,\n  \"sha256\": {\n    \"results/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed/summary.json\": \"07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22\",\n    \"results/processed/cpu_gpu_pilot_20261010T001232473460Z/summary.json\": \"07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22\",\n    \"results/processed/cpu_gpu_pilot_20261010T001232473460Z/summary_regenerated.json\": \"07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22\",\n    \"results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/PILOT_REANALYSIS.json\": \"07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22\",\n    \"results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/PILOT_REANALYSIS.json\": \"07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22\"\n  }\n}\n",
+  "timestamp_utc": "2026-10-10T21:25:32.704532+00:00"
+}

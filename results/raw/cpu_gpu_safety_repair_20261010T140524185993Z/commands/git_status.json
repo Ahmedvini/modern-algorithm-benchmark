@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "status",
+    "--short",
+    "--branch"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 128,
+  "safety_classification": "read_only_metadata",
+  "stderr": "fatal: not a git repository (or any of the parent directories): .git\n",
+  "stdout": "",
+  "timestamp_utc": "2026-10-10T14:20:58.746253+00:00"
+}

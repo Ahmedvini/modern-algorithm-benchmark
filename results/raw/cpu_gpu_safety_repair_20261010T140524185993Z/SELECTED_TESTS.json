@@ -1,0 +1,94 @@
+{
+  "allow_gpu_correctness": false,
+  "ctest_argv": [
+    "ctest",
+    "--test-dir",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_full_tooling_20261010T121208603276Z/release",
+    "--output-on-failure",
+    "-V",
+    "--parallel",
+    "1",
+    "-R",
+    "^(baselines|cli|comparisons|cpu_gpu_comparison_framework|cuda_benchmark_analysis|cuda_preflight|cuda_sort_handoff|datasets|environment_manifest|memory|memory_unsupported|mergesort|metrics_cli|pdqsort|quicksort|radixsort|searching|structures|timsort)$"
+  ],
+  "discovered_count": 29,
+  "excluded": [
+    {
+      "classification": "timing",
+      "name": "experiment_pipeline",
+      "reason": "End-to-end experiment tests invoke benchmark processes."
+    },
+    {
+      "classification": "timing",
+      "name": "structure_timing",
+      "reason": "Calls real construction and lookup timing engines."
+    },
+    {
+      "classification": "timing",
+      "name": "structure_framework",
+      "reason": "Launches structure_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "search_timing",
+      "reason": "Calls real search batch timing engine."
+    },
+    {
+      "classification": "timing",
+      "name": "search_framework",
+      "reason": "Launches search_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "timing",
+      "reason": "Calls real sorting timing engine."
+    },
+    {
+      "classification": "timing",
+      "name": "benchmark_framework",
+      "reason": "Launches sort_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "parallel_mergesort",
+      "reason": "Embedded N32768, W1/R2, sequential and parallel sort timing: six actual rows."
+    },
+    {
+      "classification": "timing",
+      "name": "parallel_framework",
+      "reason": "Launches parallel_sort_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "comparison_engine",
+      "reason": "Calls comparison trial timing engine."
+    }
+  ],
+  "full_protocol_prerequisites": false,
+  "manifest_sha256": "960e8535251b3c75786eeb2ffb93cb028eef8acf9b5dec82ebaf354772d14339",
+  "policy": "non_timing_correctness_v1",
+  "schema_version": 1,
+  "selected": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort"
+  ],
+  "selected_count": 19,
+  "tests_executed": false
+}

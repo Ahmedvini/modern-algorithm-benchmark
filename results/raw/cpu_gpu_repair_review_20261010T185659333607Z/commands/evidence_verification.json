@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_repair_review_20261010T185659333607Z/verify_evidence.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 1,
+  "safety_classification": "file_hashes_and_retained_log_inspection_only",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_repair_review_20261010T185659333607Z/verify_evidence.py\", line 48, in <module>\n    assert set(repair_actual) == set(seal['evidence_sha256']) | {str(REPAIR/'FINAL_INTEGRITY.json')}\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "stdout": "",
+  "timestamp_utc": "2026-10-10T18:59:24.053378+00:00"
+}

@@ -1,0 +1,321 @@
+--- before/README.md
++++ after/README.md
+@@ -787,3 +787,11 @@
+ Analysis supports both recorded matrix parts; incomplete studies cannot produce
+ paired/cross-input comparisons, and prepared diagnostics never replace production
+ host-call timing. This is tooling support, not a completed comparison study.
++
++The [safety repair](docs/CPU_GPU_SAFETY_REPAIR_v1.md) adds independent frozen-source
++anchor enforcement and a reviewed, fail-closed non-timing test selector.
++`python3 -B scripts/non_timing_tests.py --build-dir build/EXISTING_RELEASE` only
++prints discovery/selection; it never executes tests. The prerequisite-only
++validator now uses that selection and marks its result correctness-only,
++`study_eligible=false`. It cannot satisfy the unchanged frozen full-study gate.
++No fresh prerequisite run or study was performed by this repair.
+--- before/docs/AUDIT.md
++++ after/docs/AUDIT.md
+@@ -2603,3 +2603,39 @@
+ authorization. Shared-cloud load/SMT/thermal/frequency/cache controls remain
+ uncontrolled. Next: review tooling/deviation, then authorize fresh prerequisites
+ and the unchanged study separately. No frozen protocol change is proposed.
++
++## Provenance and non-timing selection repair
++
++Evidence: [FINAL_AUDIT.md](../results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/FINAL_AUDIT.md),
++[commands and safety classifications](../results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/COMMANDS.md),
++[final selection](../results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/SELECTED_TESTS_FINAL.json),
++[synthetic original reproducer](../results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/FULL_ANALYSIS_PROBE.json).
++
++Read the latest independent review before edits and checked its retained seals.
++The analyzer previously compared mutually consistent mutable source claims;
++it now derives expected adapter/pin/code identities from an independently pinned
++freeze and its verified matrix, with only the existing pinned CMake exception.
++The exact previously accepted 1440-record synthetic reproducer now rejects the
++changed production-adapter digest, while its baseline remains accepted.
++
++Prerequisite-only selection previously included timing-bearing CTest groups.
++A reviewed source/command manifest now selects 19 CPU correctness groups, excludes
++all ten timing groups including parallel_mergesort, and rejects unknown commands,
++sources, tests and fixture/dependency/environment scheduling. Its CUDA correctness
++opt-in selects 21 groups, never the GPU benchmark framework. No selected CTest
++suite, prerequisite validator or GPU work executed during this repair.
++Correctness-only prerequisite manifests cannot satisfy the frozen full-study gate.
++
++Final focused methods22/22 and existing synthetic framework50/50 pass, no skips.
++The initial focused attempt ran21 methods with three failures/one error because
++legacy code-only source maps omit frozen documentation; the repair checks that
++document directly without weakening code anchors. That failed attempt is retained.
++Accepted pilot summary regenerates byte-for-byte, with no measurements launched.
++No fresh build, Release/ASan suite, GPU suite, pilot or full study is claimed here.
++Git status128 confirms absent metadata; no repository initialization occurred.
++
++All11345 pre-existing result files, four frozen assets, production source,
++protected anchors, CMake review and CUB3.0.1 pin are preserved; exact comparisons
++and final evidence hashes are retained. Full-study launch remains **NO-GO**,
++pending independent repair review and separately authorized fresh prerequisites,
++resources and study execution. This repair stops at the audit.
+--- before/docs/CPU_GPU_FULL_MATRIX_TOOLING_v1.md
++++ after/docs/CPU_GPU_FULL_MATRIX_TOOLING_v1.md
+@@ -26,21 +26,26 @@
+ resource formulas and frozen timeout policy. Runtime identities remain labelled
+ placeholders. The existing pilot CLI remains pilot-only.
+ 
+-Only after separate authorization, the future prerequisite-only command is:
++The prerequisite-only command now selects the reviewed correctness subset:
+ 
+ ```sh
+ python3 scripts/validate_cpu_gpu_pilot.py --prerequisites-only \
+   --output results/raw/NEW_FULL_PREREQUISITES
+ ```
+ 
+-That command builds/runs the established full prerequisite suites, which include
+-timing-framework tests, but does not launch a pilot or study. **It is not the
+-non-timing validation command for this tooling milestone.** This milestone uses
+-an explicit CTest allowlist excluding timing/framework/parallel-timing groups.
+-Actual validation commands and omissions belong in the audit.
++That command builds and runs the fail-closed non-timing CTest selection, together
++with its explicit CUDA runtime/correctness checks. It does not launch a pilot or
++study. Its manifest is labelled `non_timing_correctness_v1`, `study_eligible=false`;
++it **cannot satisfy the frozen full-study prerequisite gate**. The runner and
++analyzer reject that subset as study prerequisites. Full protocol coverage, which
++includes timing-framework tests, still requires separately authorized validation.
++This repair does not execute either prerequisite workflow. See
++[the safety repair](CPU_GPU_SAFETY_REPAIR_v1.md) for discovery-only commands and
++the reviewed selection manifest. Actual commands and omissions belong in the audit.
+ 
+-After reviewing the resulting current-source/current-binary PREREQUISITES.json,
+-future execution requires both that manifest and an explicit CLI latch:
++After separately obtaining and reviewing a complete, current-source/current-binary,
++full-protocol PREREQUISITES.json (not the correctness-only subset above), future
++execution requires both that manifest and an explicit CLI latch:
+ 
+ ```sh
+ # Future authorized execution only; not run for this milestone.
+@@ -92,6 +97,14 @@
+ metadata. Synthetic fixtures require explicit API opt-in and are rejected by the
+ public performance CLI.
+ 
++Retained source claims are also checked against independently pinned frozen
++anchors, including the production CUB adapter and dependency pin. Mutually
++consistent retained source/prerequisite/build/raw hashes cannot redefine those
++anchors. The existing pinned CMake review is the only permitted exception. Legacy
++code-only source maps remain supported; their omitted frozen documentation is
++verified directly against its frozen hash. Missing or ambiguous trust roots fail
++closed.
++
+ `--allow-incomplete` reports failed/interrupted/missing measured and warm-up counts,
+ exits1, and suppresses all paired/cross-input comparisons for an incomplete study.
+ Malformed evidence is rejected rather than repaired. No stale count can establish
+--- before/docs/ROADMAP.md
++++ after/docs/ROADMAP.md
+@@ -443,3 +443,24 @@
+ review this tooling and its validation/deviation, then authorize prerequisite-only
+ validation and the unchanged48-dataset study separately. No main study,100M,
+ learned-index/AlphaDev or final research deliverable is claimed complete.
++
++## CPU/GPU validation safety repair — synthetic validation passed
++
++Independent frozen-anchor enforcement now rejects the exact mutually rehashed
++adapter-digest reproducer. The unchanged synthetic baseline and legacy accepted
++pilot remain analyzable. A reviewed source/command manifest supplies a reusable
++non-timing selector: 19 CPU correctness groups, excluding all ten timing groups
++and the embedded N32768 parallel-mergesort timing case. Unknown sources, tests,
++commands and implicit fixture/dependency execution fail closed.
++
++Repair validation: 22 focused provenance/selector methods and all 50 existing
++synthetic framework methods pass; no CTest group, prerequisite validator, timing
++trial or GPU execution ran. Prerequisite-only manifests are now explicitly
++correctness-only and cannot authorize the unchanged frozen full-study gate.
++See [repair audit](../results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/FINAL_AUDIT.md)
++and [selection contract](CPU_GPU_SAFETY_REPAIR_v1.md).
++
++Full-study launch remains **NO-GO**. Next: independently review this repair, then
++separately authorize fresh validation on the execution VM. Full frozen coverage
++(including timing-framework tests) and all-size resource gates remain required
++before separate study authorization. No fresh prerequisite validation was run.
+--- before/scripts/analyze_cpu_gpu.py
++++ after/scripts/analyze_cpu_gpu.py
+@@ -9,6 +9,7 @@
+ from pathlib import Path
+ from analyze_cuda_results import FIELDS as PREPARED_FIELDS, METRICS, read_bundle as read_prepared_bundle
+ from analyze_results import summarize_samples
++from cpu_gpu_provenance import validate_retained_source
+ from cpu_gpu_protocol import (BACKENDS, FREEZE, MATRIX, PRIMARY_PROTOCOL, PROTOCOL, SIDE_FIELDS,
+                               canonical, dump_new, load_protocol, require, schedule, sha)
+ 
+@@ -80,10 +81,14 @@
+                 d['cuda_release_flags'].split()==['-O3','-DNDEBUG'],'incompatible study flags')
+         require(sha(root/'compile_commands.json')==build['compile_commands_sha256'],'compile commands changed')
+         require(sha(root/'source_review.json')==build['source_review_sha256'],'source review changed')
++        source_review=read_json(root/'source_review.json')
++        validate_retained_source(source_review,model)
+         environment=read_json(root/'environment.json');environment_gate(environment)
+         require(environment['omp_environment']==model['openmp_policy']['environment'],'OpenMP environment mismatch')
+         prerequisite=read_json(root/'prerequisites.json')
+         require(prerequisite.get('complete') is True and prerequisite.get('protocol')==PROTOCOL,'study prerequisites incomplete')
++        require(prerequisite.get('validation_scope','full_protocol_v1')=='full_protocol_v1' and
++                prerequisite.get('study_eligible',True) is True,'non-timing subset is not full study prerequisites')
+         required={'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'}
+         require(required<=set(prerequisite['records']),'missing study prerequisite commands')
+         for record in prerequisite['records'].values():
+@@ -95,7 +100,7 @@
+             require(result.get('exit_code')==0 and result.get('status')=='completed','failed study prerequisite command')
+         require(prerequisite['binary_sha256']==build['binary_sha256'] and
+                 prerequisite['input_tool_sha256']==build['input_tool_sha256'],'prerequisite binary mismatch')
+-        require(prerequisite['source_sha256']==read_json(root/'source_review.json')['current_source_sha256'],'prerequisite source mismatch')
++        require(prerequisite['source_sha256']==source_review['current_source_sha256'],'prerequisite source mismatch')
+         for backend,reference in meta['implementations'].items():
+             require(reference==dict(source_review='source_review.json',build='build.json',
+                 cub_pin=model['dependency'] if backend.startswith('gpu_') else None),'implementation provenance mismatch')
+@@ -127,6 +132,7 @@
+     require(set(meta.get('implementations', {})) == set(BACKENDS), 'missing implementation identities')
+     require(meta.get('prerequisites_passed') is True, 'prerequisites not validated')
+     if part=='study':validate_study_metadata(root,meta,model)
++    elif meta['run_kind']=='performance':validate_retained_source(read_json(root/'source_review.json'),model)
+     queries=read_json(root/'workspace_queries.json')
+     require(set(queries)=={str(c['recipe']['size']) for c in cells},'missing/unexpected workspace queries')
+     for size,query in queries.items():validate_resources(query,int(size))
+--- before/scripts/run_cpu_gpu_pilot.py
++++ after/scripts/run_cpu_gpu_pilot.py
+@@ -107,6 +107,8 @@
+ def validate_prerequisites(path, executable, input_tool, model):
+     p=json.loads(path.read_text())
+     require(p.get('protocol')==PROTOCOL and p.get('complete') is True,'prerequisite validation incomplete')
++    require(p.get('validation_scope','full_protocol_v1')=='full_protocol_v1' and p.get('study_eligible',True) is True,
++            'non-timing subset is not full study prerequisites')
+     require(p['source_sha256']==verify_source_extension(model)['current_source_sha256'],'source changed after prerequisite validation')
+     require(p['binary_sha256']==sha(executable) and p['input_tool_sha256']==sha(input_tool),'binary changed after validation')
+     required={'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'}
+--- before/scripts/validate_cpu_gpu_pilot.py
++++ after/scripts/validate_cpu_gpu_pilot.py
+@@ -10,13 +10,14 @@
+ from cpu_gpu_protocol import PROTOCOL, ROOT, dump_new, load_protocol, require, sha, verify_source_extension
+ from run_cpu_gpu_pilot import invoke
+ from validate_cuda_sort import verify_result
++from non_timing_tests import selected_ctest
+ 
+ def main():
+     parser=argparse.ArgumentParser(description=__doc__,allow_abbrev=False)
+     parser.add_argument('--output',type=Path,required=True)
+     parser.add_argument('--pilot-output',type=Path)
+     parser.add_argument('--processed',type=Path)
+-    parser.add_argument('--prerequisites-only',action='store_true',help='Validate without launching any pilot or study')
++    parser.add_argument('--prerequisites-only',action='store_true',help='Only audited non-timing correctness prerequisites; never pilot/study; not full study authorization')
+     args=parser.parse_args();output=args.output.absolute()
+     if not args.prerequisites_only and (args.pilot_output is None or args.processed is None):
+         parser.error('--pilot-output and --processed are required unless --prerequisites-only')
+@@ -42,22 +43,31 @@
+         common=['cmake','-S',str(ROOT),'-DCMAKE_CXX_FLAGS=','-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG','-DMAB_ENABLE_OPENMP=ON','-DBUILD_TESTING=ON']
+         call('cpu_release_configure',common+['-B',str(cpu),'-DCMAKE_BUILD_TYPE=Release','-DMAB_ENABLE_CUDA=OFF','-DMAB_ENABLE_CPU_GPU_COMPARISON=OFF'])
+         call('cpu_release_build',['cmake','--build',str(cpu),'--parallel','2'])
+-        result=call('cpu_release_ctest',['ctest','--test-dir',str(cpu),'--output-on-failure','-V'],900)
+-        require('0 tests failed out of 29' in result['stdout'],'CPU regression coverage mismatch')
++        if args.prerequisites_only:
++            result=selected_ctest(call,output,'cpu_release_ctest',cpu)
++        else:
++            result=call('cpu_release_ctest',['ctest','--test-dir',str(cpu),'--output-on-failure','-V'],900)
++            require('0 tests failed out of 29' in result['stdout'],'CPU regression coverage mismatch')
+         call('cpu_sanitize_configure',common+['-B',str(san),'-DCMAKE_BUILD_TYPE=Debug','-DMAB_ENABLE_CUDA=OFF','-DMAB_ENABLE_CPU_GPU_COMPARISON=OFF','-DMAB_ENABLE_SANITIZERS=ON'])
+         call('cpu_sanitize_build',['cmake','--build',str(san),'--parallel','2'])
+         try:
+-            result=call('cpu_sanitize_ctest',['env','-u','ASAN_OPTIONS','-u','LSAN_OPTIONS','UBSAN_OPTIONS=halt_on_error=1',
+-                'ctest','--test-dir',str(san),'--output-on-failure','-V'],900)
++            prefix=['env','-u','ASAN_OPTIONS','-u','LSAN_OPTIONS','UBSAN_OPTIONS=halt_on_error=1']
++            if args.prerequisites_only:
++                result=selected_ctest(call,output,'cpu_sanitize_ctest',san,prefix=prefix)
++            else:
++                result=call('cpu_sanitize_ctest',prefix+['ctest','--test-dir',str(san),'--output-on-failure','-V'],900)
+         except RuntimeError:
+             record=json.loads((commands/'cpu_sanitize_ctest.json').read_text())
+             text=record['stdout']+record['stderr']
+             require('LeakSanitizer does not work under ptrace' in text,'unrelated sanitizer failure; stop before pilot')
+-            result=call('cpu_sanitize_ctest_no_leaks',['env','ASAN_OPTIONS=detect_leaks=0','UBSAN_OPTIONS=halt_on_error=1',
+-                'ctest','--test-dir',str(san),'--output-on-failure','-V'],900)
++            prefix=['env','ASAN_OPTIONS=detect_leaks=0','UBSAN_OPTIONS=halt_on_error=1']
++            if args.prerequisites_only:
++                result=selected_ctest(call,output,'cpu_sanitize_ctest_no_leaks',san,prefix=prefix)
++            else:
++                result=call('cpu_sanitize_ctest_no_leaks',prefix+['ctest','--test-dir',str(san),'--output-on-failure','-V'],900)
+             records['cpu_sanitize_ctest']=records['cpu_sanitize_ctest_no_leaks']
+             dump_new(output/'LEAK_LIMITATION.json',dict(reason='LeakSanitizer does not work under ptrace',original_record='commands/cpu_sanitize_ctest.json'))
+-        require('0 tests failed out of 29' in result['stdout'],'sanitizer coverage mismatch')
++        if not args.prerequisites_only:require('0 tests failed out of 29' in result['stdout'],'sanitizer coverage mismatch')
+         call('cuda_configure',common+['-B',str(gpu),'-DCMAKE_BUILD_TYPE=Release','-DMAB_ENABLE_CUDA=ON','-DMAB_ENABLE_CUDA_SORT=ON',
+             '-DMAB_ENABLE_CPU_GPU_COMPARISON=ON','-DMAB_ENABLE_SANITIZERS=OFF','-DCMAKE_CUDA_ARCHITECTURES=75',
+             '-DCMAKE_CUDA_FLAGS=','-DCMAKE_CUDA_FLAGS_RELEASE=-O3 -DNDEBUG'])
+@@ -69,16 +79,22 @@
+         call('cuda_build',['cmake','--build',str(gpu),'--parallel','2'],1200)
+         correctness=call('cuda_correctness',[str(gpu/'test_cuda_sorting')],240)
+         result=verify_result(json.loads(correctness['stdout']))
+-        ctest=call('cuda_ctest',['ctest','--test-dir',str(gpu),'--output-on-failure','-V'],900)
+-        require('0 tests failed out of 32' in ctest['stdout'] and '***Skipped' not in ctest['stdout'],'CUDA regression group skipped/missing')
+-        require('Ran 14 tests' in ctest['stdout'],'GPU framework coverage absent')
++        if args.prerequisites_only:
++            ctest=selected_ctest(call,output,'cuda_ctest',gpu,allow_gpu=True)
++        else:
++            ctest=call('cuda_ctest',['ctest','--test-dir',str(gpu),'--output-on-failure','-V'],900)
++            require('0 tests failed out of 32' in ctest['stdout'] and '***Skipped' not in ctest['stdout'],'CUDA regression group skipped/missing')
++            require('Ran 14 tests' in ctest['stdout'],'GPU framework coverage absent')
+         after=verify_source_extension(model);require(before==after,'source changed during prerequisite validation')
+         prereq=dict(schema_version=1,protocol=PROTOCOL,complete=True,records=records,source_sha256=after['current_source_sha256'],
+                     binary_sha256=sha(gpu/'cpu_gpu_comparison'),input_tool_sha256=sha(gpu/'comparison_input'),
+-                    cuda_correctness=result,preflight_sha256=sha(output/'preflight/report.json'),dependency_manifest_sha256=sha(output/'dependency_sha256.json'))
++                    cuda_correctness=result,preflight_sha256=sha(output/'preflight/report.json'),dependency_manifest_sha256=sha(output/'dependency_sha256.json'),
++                    validation_scope='non_timing_correctness_v1' if args.prerequisites_only else 'full_protocol_v1',
++                    study_eligible=not args.prerequisites_only)
+         dump_new(output/'PREREQUISITES.json',prereq)
+         if args.prerequisites_only:
+-            dump_new(output/'COMPLETE.json',dict(complete=True,prerequisites_passed=True,pilot_run=False,full_study_run=False))
++            dump_new(output/'COMPLETE.json',dict(complete=True,prerequisites_passed=True,pilot_run=False,full_study_run=False,
++                validation_scope='non_timing_correctness_v1',study_eligible=False))
+             return 0
+         call('pilot',[sys.executable,str(ROOT/'scripts/run_cpu_gpu_pilot.py'),'--output',str(args.pilot_output.absolute()),
+              '--executable',str(gpu/'cpu_gpu_comparison'),'--input-tool',str(gpu/'comparison_input'),
+--- before/tests/test_cpu_gpu_comparison.py
++++ after/tests/test_cpu_gpu_comparison.py
+@@ -331,7 +331,8 @@
+         meta=json.loads((self.root/'run.json').read_text());meta['run_kind']='performance'
+         meta['implementations']={b:dict(source_review='source_review.json',build='build.json',
+             cub_pin=self.model['dependency'] if b.startswith('gpu_') else None) for b in BACKENDS}
+-        source={'current_source_sha256':{'explicit_synthetic_source':'0'*64}}
++        from cpu_gpu_protocol import verify_source_extension
++        source=verify_source_extension(self.model)
+         (self.root/'source_review.json').write_text(json.dumps(source));(self.root/'compile_commands.json').write_text('[]')
+         description=dict(build_type='Release',sanitizers=False,cub_version=300001,cuda_architectures='75',cxx_standard=17,
+                          global_flags='',cuda_flags='',configuration_flags='-O3 -DNDEBUG',cuda_release_flags='-O3 -DNDEBUG')
+@@ -447,6 +448,13 @@
+         include=checkout/'synthetic_headers';(include/'cub').mkdir(parents=True);(include/'cub/fake.cuh').write_text('synthetic')
+         def invoke(directory,name,argv,timeout):
+             calls.append(name);text=''
++            if name.endswith('_discovery'):
++                from non_timing_tests import load_manifest,expected_command
++                manifest=load_manifest();gpu=name.startswith('cuda_')
++                names=manifest['cpu_build_tests']+(manifest['cuda_additional_tests'] if gpu else [])
++                build=Path(argv[argv.index('--test-dir')+1])
++                text=json.dumps(dict(kind='ctestInfo',version=dict(major=1,minor=0),tests=[
++                    dict(name=n,command=expected_command(manifest['tests'][n]['command'],build),properties=[]) for n in names]))
+             if name=='preflight':
+                 p=output/'preflight';p.mkdir();dump_new(p/'report.json',dict(classification=dict(device0_kernel_verified=True,state='operational'),
+                     runtime_probe=dict(devices=[dict(ordinal=0,name='Tesla T4',compute_major=7,compute_minor=5)])))
+@@ -454,8 +462,8 @@
+                 gpu=checkout/'build/validation/gpu-release';gpu.mkdir()
+                 (gpu/'CMakeCache.txt').write_text('MAB_CUB_INCLUDE_DIR:PATH='+str(include))
+                 for executable in ['cpu_gpu_comparison','comparison_input']:(gpu/executable).write_text('synthetic binary, never executed')
+-            if name in ['cpu_release_ctest','cpu_sanitize_ctest']:text='0 tests failed out of 29'
+-            if name=='cuda_ctest':text='0 tests failed out of 32\nRan 14 tests'
++            if name in ['cpu_release_ctest','cpu_sanitize_ctest']:text='0 tests failed out of 19'
++            if name=='cuda_ctest':text='0 tests failed out of 21'
+             if name=='cuda_correctness':text='{}'
+             result=dict(exit_code=0,status='completed',stdout=text,stderr='',fixture='synthetic mocked validation, not hardware evidence')
+             dump_new(directory/(name+'.json'),result);return result
+@@ -466,5 +474,10 @@
+         self.assertNotIn('pilot',calls);self.assertNotIn('analyze',calls)
+         self.assertTrue((output/'PREREQUISITES.json').exists())
+         self.assertFalse(json.loads((output/'COMPLETE.json').read_text())['pilot_run'])
++        self.assertFalse(json.loads((output/'PREREQUISITES.json').read_text())['study_eligible'])
++        for name in ['cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest']:
++            selection=json.loads((output/(name+'_selection.json')).read_text())
++            self.assertNotIn('parallel_mergesort',selection['selected'])
++            self.assertFalse(selection['full_protocol_prerequisites'])
+ 
+ if __name__=='__main__':unittest.main()

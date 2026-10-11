@@ -1,0 +1,8 @@
+{
+  "source": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_full_tooling_20261010T121208603276Z/release/CTestTestfile.cmake",
+  "copied": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/discovery/CTestTestfile.cmake",
+  "source_sha256": "e9d08f5cdd7db61794346936808b90a8c7c392a0b3e39de038f0781565d1059d",
+  "copied_sha256": "e9d08f5cdd7db61794346936808b90a8c7c392a0b3e39de038f0781565d1059d",
+  "unchanged_absolute_test_commands": true,
+  "tests_executed": false
+}

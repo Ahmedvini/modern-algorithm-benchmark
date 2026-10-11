@@ -1,0 +1,11 @@
+{
+  "baseline_accepted": true,
+  "fixture_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "frozen_digest": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+  "hardware_validation": false,
+  "kind": "synthetic_metadata_only_review_probe",
+  "note": "Only disposable fixture metadata was changed; the actual production adapter was not modified.",
+  "protected_source_change_rejected": false,
+  "sorting_calls": 0,
+  "target": "src/cuda/cub_sort.cu"
+}

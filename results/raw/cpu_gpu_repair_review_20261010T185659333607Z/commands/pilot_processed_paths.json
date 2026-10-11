@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "rg",
+    "--files",
+    "results/processed/cpu_gpu_pilot_20261010T001232473460Z"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "read_only_file_listing",
+  "stderr": "",
+  "stdout": "results/processed/cpu_gpu_pilot_20261010T001232473460Z/summary.json\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/resources_observed.csv\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed/summary.json\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed/resources_observed.csv\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed/statistics.csv\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed/REPORT.md\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/reviewed/README.txt\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/statistics.csv\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/REPORT.md\nresults/processed/cpu_gpu_pilot_20261010T001232473460Z/summary_regenerated.json\n",
+  "timestamp_utc": "2026-10-10T21:24:54.894566+00:00"
+}

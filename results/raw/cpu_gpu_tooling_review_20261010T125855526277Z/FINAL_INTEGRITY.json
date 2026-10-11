@@ -1,0 +1,72 @@
+{
+  "actual_timing_calls": 0,
+  "command": "python3 -B /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/finalize_review.py",
+  "evidence_sha256": {
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/BUNDLE_REVIEW.json": "17c6f4b826668ad6800c5bf18a0946461f52039ff56bd9f75f68946f96c6aa79",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/COMMANDS.md": "7c637eb3ac060d8faea3345020f4d8c07af03206afff425e72bbc0aa7b8d689f",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/DRY_RUN.json": "69819c908697a9e0a82101add9f837c1d2199426e070386568d8466b7bbbbfa2",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/FINAL_AUDIT.md": "7792d40227534a0f1df95c9dda065e1daaeaa871247335977b130ae2d7adcbc0",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/FULL_ANALYSIS_PROBE.json": "123de09e2e047ba846c6efd3d68fee7368b8b1d636d14b45015e23d2b43efdad",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/INDEPENDENT_INTEGRITY.json": "6a1902a9223e9795cb9e4d01997ad1f5be2f932ac621b8d71a05029e5ec1fb92",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/PILOT_REANALYSIS.json": "07e69e2e0c8853f93d3f3da895337b5e4b72e5e2dd0ff0577db3cbd1f7053a22",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/PLAN_AND_COMPATIBILITY.json": "d0965d155ccbc1f6d0230c83fc51618f9da39f63d753c5bfb86896d3db8d1ab3",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/SELECTION_REVIEW.json": "5f793ae805ba9b49f56c1d707d1ef8ee2cfd71700c84a14407b653e4c01a9486",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/SOURCE_VALIDATION_PROBE.json": "c47b6594f04561e9c7c975fb4a120d6b2a9bd18e668d0d4b0b2d0f4db54381f3",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/START_SNAPSHOT.json": "fc8a5c40c9c3beb024a3c992808094f9723389a87e9c8c028fa745d171ffdb91",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/check_plan_and_compatibility.py": "214f7fce7eda4ea9a9a2452669d2f3d8f604ec2532d393a74492117bcdbf2329",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/bundle_review.json": "f93db59a08fc3c28554a10790ee9da999ef9e3ee1f6fd7262281830b5e680be6",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/full_analysis_probe.json": "f80a76b8a9d58dce6845582f78cb579588d3943479504dc1f5795cdd11e3488f",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/git_status.json": "13db50b1c79c13d2294608c1e0a789ae30c8721b5f3e7cb401a52561d18e0702",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/integrity.json": "619b275fbee20ec449f264d33206778be80bd1fe28c52ef9802f3f13cb4f91d3",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/pilot_reanalysis.json": "fb493c47e2a42d6ea2bd183b131ecd3f55859a68bf2873477ff7f8fa00be1d6b",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/plan_and_compatibility.json": "b7abf9d8d8e1c93329751a0465dd1eb35fa0a34b26f44f7301d5399418139cf6",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/selection_review.json": "51b04dc224b8d4f56ece4a155add2b6991f27f8bc3357a44092c715a358c84d1",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/source_validation_probe.json": "136892b471740062f40255d6cc70a163580dc936809e7208f19e01f99671ca50",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/source_validation_probe_v2.json": "875036a66110598a1ac81b2bc036f40ac5debeb63fbe541a566568b797ac302b",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/commands/synthetic_framework.json": "a0d8b413a781ed9accbd09617ea1d06eadf753aa8617aafdbda302caec9a8c6e",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/finalize_review.py": "1ebbdcd8e607c03ddc5b36e4d76cdd74161ea32838048d370ea8cca6105869a0",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/inspect_bundle.py": "fe604744f944439895bd16233b13c61d158649092c76db2a8b3408ad8e49697c",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/probe_full_analysis.py": "1588c1ce06ded80b91d9806673b883effb7c98b0ace8d1eadb5c04688072142c",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/probe_source_validation.py": "1837bb818a9622badbf961db616fff306fe9dbdf4909a959ac05bab5d3d51a59",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/probe_source_validation_v2.py": "59acfb9357ac4aa3215c61b9c42bdbf759105b8f66fda79731d911f4cb9812d1",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/record_command.py": "1cc4720e45d2514578bbc873e0c95c13c7dad45c09ade839b209cc8408f7929c",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/review_selection.py": "282d12190c2c610760efddc648bf672466a01420af89fb6218fb5405917a3068",
+    "results/raw/cpu_gpu_tooling_review_20261010T125855526277Z/verify_retained.py": "b88713a939d5b95797a6f77b64786bf649707f98305efbe2616ea69a0466223f"
+  },
+  "exit_code": 0,
+  "fresh_prerequisite_validation_run": false,
+  "manifest_excludes_itself": true,
+  "pilot_run": false,
+  "preservation": {
+    "current_source_sha256": {
+      "changed": [],
+      "checked": 137,
+      "missing": []
+    },
+    "documentation_sha256": {
+      "changed": [],
+      "checked": 4,
+      "missing": []
+    },
+    "evidence_sha256": {
+      "changed": [],
+      "checked": 85,
+      "missing": []
+    },
+    "frozen_files_sha256": {
+      "changed": [],
+      "checked": 4,
+      "missing": []
+    },
+    "review_start_results": {
+      "changed": [],
+      "checked": 11314,
+      "missing": []
+    }
+  },
+  "recommendation": "NO-GO",
+  "review_evidence_complete": true,
+  "review_passed": false,
+  "study_run": false,
+  "verified_utc": "2026-10-10T13:08:55.306262+00:00"
+}

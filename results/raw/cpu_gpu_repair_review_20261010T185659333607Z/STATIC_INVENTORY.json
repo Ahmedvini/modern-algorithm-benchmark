@@ -1,0 +1,1241 @@
+{
+  "analyzer_paths": [
+    {
+      "calls": [
+        {
+          "callee": "load_protocol",
+          "line": 119
+        },
+        {
+          "callee": "validate_study_metadata",
+          "line": 134
+        },
+        {
+          "callee": "validate_retained_source",
+          "line": 135
+        }
+      ],
+      "function": "analyze",
+      "line": 117
+    },
+    {
+      "calls": [
+        {
+          "callee": "validate_retained_source",
+          "line": 85
+        }
+      ],
+      "function": "validate_study_metadata",
+      "line": 68
+    },
+    {
+      "calls": [
+        {
+          "callee": "analyze",
+          "line": 351
+        }
+      ],
+      "function": "main",
+      "line": 346
+    }
+  ],
+  "cpp_timing_symbol_scan": {
+    "baselines": [],
+    "comparisons": [],
+    "datasets": [],
+    "memory": [],
+    "memory_unsupported": [],
+    "mergesort": [],
+    "pdqsort": [],
+    "quicksort": [],
+    "radixsort": [],
+    "searching": [],
+    "structures": [],
+    "timsort": []
+  },
+  "existing_build_metadata": {
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/release": {
+      "exists": true,
+      "metadata": {
+        "build/cpu_gpu_full_tooling_20261010T121208603276Z/release/CTestTestfile.cmake": {
+          "hook_lines": [],
+          "sha256": "e9d08f5cdd7db61794346936808b90a8c7c392a0b3e39de038f0781565d1059d"
+        },
+        "build/cpu_gpu_full_tooling_20261010T121208603276Z/release/DartConfiguration.tcl": {
+          "hook_lines": [],
+          "sha256": "b3fd6adf2ac81670e5f3501ac593f9fcd374c79d2aa41a59a967078a7e17274e"
+        }
+      }
+    },
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize": {
+      "exists": true,
+      "metadata": {
+        "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize/CTestTestfile.cmake": {
+          "hook_lines": [],
+          "sha256": "bbdbc3689348c1204ddb211a364ce8c3e779757a0e6d3800b7c0b6b058279af4"
+        },
+        "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize/DartConfiguration.tcl": {
+          "hook_lines": [],
+          "sha256": "eff0fefd8a470d6233581eefc5125650f16c454749e12f3f9f4d541b42a87abb"
+        }
+      }
+    }
+  },
+  "inspected_files": {
+    "AGENTS.md": {
+      "lines": 301,
+      "relevant_lines": [],
+      "sha256": "328d3af1dc97f3022bacae39693457496dc7d3ce0d670a83288969488b50413b"
+    },
+    "CMakeLists.txt": {
+      "lines": 227,
+      "relevant_lines": [],
+      "sha256": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe"
+    },
+    "README.md": {
+      "lines": 797,
+      "relevant_lines": [
+        {
+          "line": 19,
+          "text": "ctest --test-dir build/release --output-on-failure"
+        },
+        {
+          "line": 91,
+          "text": "env -u ASAN_OPTIONS -u LSAN_OPTIONS UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V"
+        },
+        {
+          "line": 101,
+          "text": "ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 ctest --test-dir build/sanitize --output-on-failure -V"
+        },
+        {
+          "line": 215,
+          "text": "steady_clock measures only the normal sorting call, in integer nanoseconds;"
+        },
+        {
+          "line": 326,
+          "text": "steady_clock records complete batch latency; validation is outside timing."
+        },
+        {
+          "line": 664,
+          "text": "H2D, device-sort and D2H CUDA-event intervals plus host `steady_clock` prepared"
+        },
+        {
+          "line": 696,
+          "text": "provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock"
+        }
+      ],
+      "sha256": "5a12bb7b3e38ce9fe0a75a278eedf8f5c0f7f74bd9b68f9bf960187592912a23"
+    },
+    "cmake/cuda.cmake": {
+      "lines": 86,
+      "relevant_lines": [],
+      "sha256": "575474ecb26c0c18e1bed301404425d55206dc47bb9df1ce59cfdcaff98898bd"
+    },
+    "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": {
+      "lines": 386,
+      "relevant_lines": [
+        {
+          "line": 145,
+          "text": "`steady_clock::now()`, invoke the **unchanged** public sorter, then take the stop"
+        },
+        {
+          "line": 150,
+          "text": "nanoseconds as `host_call_e2e_ns` (CSV column `elapsed_ns`, unit `ns`)."
+        },
+        {
+          "line": 166,
+          "text": "return. The stop timestamp therefore does not merely time asynchronous enqueue."
+        },
+        {
+          "line": 225,
+          "text": "schema_version,protocol,run_id,matrix_sha256,build_id,environment_id,dataset_id,input_sha256,input_hash_fnv1a64,size,distribution,seed,dataset_generator,nearly_sorted_swaps,duplicate_cardinality,backend_id,algorithm,implementation_identity_ref,scope,phase,trial_index,execution_order,global_trial_index,requested_cpu_threads,actual_cpu_threads,parallel_region,elapsed_ns,elapsed_unit,status,correctness,error"
+        }
+      ],
+      "sha256": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70"
+    },
+    "docs/CPU_GPU_DRIVER_REVIEW_v1.json": {
+      "lines": 9,
+      "relevant_lines": [],
+      "sha256": "b6a63a7e65827970d6b27e872e738052cd5faf94d88ee711dbccd5f77f90ef2a"
+    },
+    "docs/CPU_GPU_FULL_MATRIX_TOOLING_v1.md": {
+      "lines": 134,
+      "relevant_lines": [
+        {
+          "line": 60,
+          "text": "and symlink collisions fail before subprocesses or writes inside user outputs."
+        },
+        {
+          "line": 126,
+          "text": "subprocess doubles never execute a sorter; their console completion messages are"
+        }
+      ],
+      "sha256": "0f7f9bd78bd540f46a7facbade43584ce935b7f8a5afdceb7e7f1f38ac17cb7b"
+    },
+    "docs/CPU_GPU_SAFETY_REPAIR_v1.md": {
+      "lines": 77,
+      "relevant_lines": [
+        {
+          "line": 43,
+          "text": "  --discovery-json /path/to/ctest-discovery.json --output /path/to/NEW-plan.json"
+        },
+        {
+          "line": 52,
+          "text": "The comparison framework uses synthetic records, subprocess doubles and small"
+        }
+      ],
+      "sha256": "8afd18ffd2c1a6f8cea1e2f47252e6c2c867fde877d7654fe7a597b2f1d1636a"
+    },
+    "docs/EXPERIMENT_PROTOCOL.md": {
+      "lines": 250,
+      "relevant_lines": [
+        {
+          "line": 122,
+          "text": "Use steady_clock batch measurements with out-of-timing reference validation,"
+        },
+        {
+          "line": 227,
+          "text": "provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock"
+        }
+      ],
+      "sha256": "7be7c4f3c8703fa018534dd98dd9290c810374a4e4f4a38f7897fc1735f009c2"
+    },
+    "docs/NON_TIMING_TEST_SELECTION_v1.json": {
+      "lines": 434,
+      "relevant_lines": [],
+      "sha256": "9f103cac1554ae491838fbe6777d88ea93fc0df85ac9c478a16ab2c8fd9d456d"
+    },
+    "docs/ROADMAP.md": {
+      "lines": 466,
+      "relevant_lines": [
+        {
+          "line": 302,
+          "text": "provide separately labelled H2D/device-sort/D2H CUDA events and steady_clock"
+        },
+        {
+          "line": 436,
+          "text": "explicit synthetic records/subprocess doubles, never fabricated observations."
+        }
+      ],
+      "sha256": "6bbdc8d3a64c82ce0aa154dcbb1b779120942f94c1114259a73e7b61b2c3a1e6"
+    },
+    "docs/studies/cpu_gpu_comparison_v1.freeze.json": {
+      "lines": 12,
+      "relevant_lines": [],
+      "sha256": "518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6"
+    },
+    "docs/studies/cpu_gpu_comparison_v1.matrix.json": {
+      "lines": 3797,
+      "relevant_lines": [
+        {
+          "line": 823,
+          "text": "      \"elapsed_ns\","
+        },
+        {
+          "line": 3793,
+          "text": "    \"primary_csv_elapsed_column\": \"elapsed_ns\","
+        }
+      ],
+      "sha256": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833"
+    },
+    "docs/studies/cpu_gpu_comparison_v1.resources.csv": {
+      "lines": 4,
+      "relevant_lines": [],
+      "sha256": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+    },
+    "scripts/analyze_cpu_gpu.py": {
+      "lines": 356,
+      "relevant_lines": [
+        {
+          "line": 92,
+          "text": "        required={'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'}"
+        },
+        {
+          "line": 196,
+          "text": "                        metrics = {'host_call_e2e_ns': duration(row['elapsed_ns'], True)}"
+        },
+        {
+          "line": 205,
+          "text": "                        require(row['status'] == 'error' and row['correctness'] in ['failed', 'not_checked'] and bool(row['error']) and row['elapsed_ns'] == '', 'malformed primary failure')"
+        }
+      ],
+      "sha256": "95230ed3f2472ab47cf0d92edeaa0feefdff07def95cd1ba3606672950a5c7cc"
+    },
+    "scripts/analyze_cuda_results.py": {
+      "lines": 153,
+      "relevant_lines": [
+        {
+          "line": 37,
+          "text": "            meta.get('end_to_end_clock') == 'steady_clock' and"
+        }
+      ],
+      "sha256": "e63f2fdcc46b15be9506080509b9eeaf4a2ba0544cf29a516fb5581a1f16eca0"
+    },
+    "scripts/analyze_results.py": {
+      "lines": 177,
+      "relevant_lines": [
+        {
+          "line": 11,
+          "text": "          \"input_hash_fnv1a64\", \"phase\", \"trial_index\", \"execution_order\", \"elapsed_ns\","
+        },
+        {
+          "line": 81,
+          "text": "                integer(row[\"elapsed_ns\"])"
+        },
+        {
+          "line": 85,
+          "text": "                if row[\"elapsed_ns\"]:"
+        },
+        {
+          "line": 86,
+          "text": "                    integer(row[\"elapsed_ns\"])"
+        },
+        {
+          "line": 106,
+          "text": "        samples = [integer(row[\"elapsed_ns\"]) for row in selected if row[\"status\"] == \"ok\"]"
+        }
+      ],
+      "sha256": "742d4eeaff4234ad7572f942dd5f510d45e8b14025e416a960da5933dfe54f24"
+    },
+    "scripts/capture_environment.py": {
+      "lines": 91,
+      "relevant_lines": [
+        {
+          "line": 11,
+          "text": "import subprocess"
+        },
+        {
+          "line": 17,
+          "text": "        result = subprocess.run(command, capture_output=True, text=True, check=False)"
+        }
+      ],
+      "sha256": "1d49b0ac22c91ddf8e904232d41525a482d37f2c812c28da012449625e645210"
+    },
+    "scripts/cpu_gpu_protocol.py": {
+      "lines": 90,
+      "relevant_lines": [],
+      "sha256": "1c11df990ebe642dfc40271fc0970d0051a9e5c883c2e2bd622cc698ac3d6ea4"
+    },
+    "scripts/cpu_gpu_provenance.py": {
+      "lines": 95,
+      "relevant_lines": [],
+      "sha256": "590735aacd70238c718e3943d7e8de01020ee948e05c0cc17fd6d8d263a11f3f"
+    },
+    "scripts/cuda_preflight.py": {
+      "lines": 222,
+      "relevant_lines": [
+        {
+          "line": 15,
+          "text": "import subprocess"
+        },
+        {
+          "line": 36,
+          "text": "        r=subprocess.run(argv,capture_output=True,text=True,errors='replace',timeout=timeout,check=False)"
+        },
+        {
+          "line": 38,
+          "text": "    except subprocess.TimeoutExpired as error:"
+        },
+        {
+          "line": 131,
+          "text": "def collect(timeout=60,runner=command,environ=None,discovery=None,which=shutil.which):"
+        },
+        {
+          "line": 163,
+          "text": "        platform=dict(os=platform.system(),release=platform.release(),kernel=platform.version(),architecture=platform.machine(),cpu=platform.processor() or None,logical_cpu_count=os.cpu_count(),python=sys.version),"
+        }
+      ],
+      "sha256": "6338c3ef5ad73c3c13eadc9d765a8480b4377e6b8da5909eabdca55ffed44cd8"
+    },
+    "scripts/non_timing_tests.py": {
+      "lines": 146,
+      "relevant_lines": [
+        {
+          "line": 7,
+          "text": "import subprocess"
+        },
+        {
+          "line": 71,
+          "text": "    require(isinstance(discovery, dict) and discovery.get('kind') == 'ctestInfo' and"
+        },
+        {
+          "line": 101,
+          "text": "    argv = ['ctest', '--test-dir', str(build_dir), '--output-on-failure', '-V', '--parallel', '1', '-R', expression]"
+        },
+        {
+          "line": 104,
+          "text": "                discovered_count=len(tests), selected_count=len(selected), ctest_argv=argv,"
+        },
+        {
+          "line": 108,
+          "text": "def selected_ctest(call, output, name, build_dir, allow_gpu=False, prefix=None):"
+        },
+        {
+          "line": 110,
+          "text": "    discovery = call(name + '_discovery', ['ctest', '--test-dir', str(build_dir), '-N', '--show-only=json-v1'], 60)"
+        },
+        {
+          "line": 115,
+          "text": "    result = call(name, list(prefix or []) + plan['ctest_argv'], 900)"
+        },
+        {
+          "line": 132,
+          "text": "            child = subprocess.run(['ctest', '--test-dir', str(args.build_dir), '-N', '--show-only=json-v1'],"
+        },
+        {
+          "line": 140,
+          "text": "    except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:"
+        }
+      ],
+      "sha256": "c6eb159729a44dd8d12da95e49882d3c66cb78f17484b8e3034f2c1d65fee01e"
+    },
+    "scripts/run_cpu_gpu_pilot.py": {
+      "lines": 230,
+      "relevant_lines": [
+        {
+          "line": 11,
+          "text": "import subprocess"
+        },
+        {
+          "line": 20,
+          "text": "def invoke(directory, name, argv, timeout=600, env=None):"
+        },
+        {
+          "line": 26,
+          "text": "        child = subprocess.Popen(record['argv'], cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,"
+        },
+        {
+          "line": 35,
+          "text": "    except (subprocess.TimeoutExpired, KeyboardInterrupt) as error:"
+        },
+        {
+          "line": 38,
+          "text": "        except subprocess.TimeoutExpired:"
+        },
+        {
+          "line": 40,
+          "text": "        status = 'timeout' if isinstance(error,subprocess.TimeoutExpired) else 'interrupted'"
+        },
+        {
+          "line": 74,
+          "text": "    require(platform.system()=='Linux', 'pilot currently requires Linux')"
+        },
+        {
+          "line": 114,
+          "text": "    required={'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'}"
+        },
+        {
+          "line": 160,
+          "text": "        describe=invoke(output/'commands','describe',[args.executable,'--describe'],60)"
+        },
+        {
+          "line": 177,
+          "text": "            record=invoke(output/'commands','resources_'+str(n),[args.executable,'--resources',str(n)],60)"
+        },
+        {
+          "line": 197,
+          "text": "            invoke(output/'commands','input_'+str(i),input_command(args.input_tool,cell,directory),max(.001,dataset_deadline-time.monotonic()))"
+        },
+        {
+          "line": 205,
+          "text": "            invoke(output/'commands','dataset_'+str(i),worker_command(args.executable,cell,directory,identifiers,i*per_dataset),dataset_deadline-time.monotonic())"
+        },
+        {
+          "line": 206,
+          "text": "        # Validate first; do not create a completion marker from subprocess exits alone."
+        }
+      ],
+      "sha256": "44af462ec585480ffcacbcd62ada99cdc28576abbdbeccdaa5bb8317cd73ba8a"
+    },
+    "scripts/run_cpu_gpu_study.py": {
+      "lines": 24,
+      "relevant_lines": [],
+      "sha256": "f9b05de7a6cd84abfde5442ad782b1fcc44cee51ae91be36933b7f481e824dbd"
+    },
+    "scripts/run_cuda_matrix.py": {
+      "lines": 88,
+      "relevant_lines": [
+        {
+          "line": 8,
+          "text": "import subprocess"
+        },
+        {
+          "line": 40,
+          "text": "def run(executable, output, configurations, runner=subprocess.run):"
+        },
+        {
+          "line": 58,
+          "text": "            except subprocess.TimeoutExpired as error:"
+        },
+        {
+          "line": 67,
+          "text": "                raise ValueError('subprocess configuration mismatch')"
+        }
+      ],
+      "sha256": "007ff388d0acfd84b6d5f8bbec1f3779b94a5b419d705ff7da786fbe24f03c9f"
+    },
+    "scripts/validate_cpu_gpu_pilot.py": {
+      "lines": 117,
+      "relevant_lines": [
+        {
+          "line": 13,
+          "text": "from non_timing_tests import selected_ctest"
+        },
+        {
+          "line": 35,
+          "text": "            result=invoke(commands,name,argv,timeout)"
+        },
+        {
+          "line": 47,
+          "text": "            result=selected_ctest(call,output,'cpu_release_ctest',cpu)"
+        },
+        {
+          "line": 49,
+          "text": "            result=call('cpu_release_ctest',['ctest','--test-dir',str(cpu),'--output-on-failure','-V'],900)"
+        },
+        {
+          "line": 56,
+          "text": "                result=selected_ctest(call,output,'cpu_sanitize_ctest',san,prefix=prefix)"
+        },
+        {
+          "line": 58,
+          "text": "                result=call('cpu_sanitize_ctest',prefix+['ctest','--test-dir',str(san),'--output-on-failure','-V'],900)"
+        },
+        {
+          "line": 60,
+          "text": "            record=json.loads((commands/'cpu_sanitize_ctest.json').read_text())"
+        },
+        {
+          "line": 65,
+          "text": "                result=selected_ctest(call,output,'cpu_sanitize_ctest_no_leaks',san,prefix=prefix)"
+        },
+        {
+          "line": 67,
+          "text": "                result=call('cpu_sanitize_ctest_no_leaks',prefix+['ctest','--test-dir',str(san),'--output-on-failure','-V'],900)"
+        },
+        {
+          "line": 68,
+          "text": "            records['cpu_sanitize_ctest']=records['cpu_sanitize_ctest_no_leaks']"
+        },
+        {
+          "line": 69,
+          "text": "            dump_new(output/'LEAK_LIMITATION.json',dict(reason='LeakSanitizer does not work under ptrace',original_record='commands/cpu_sanitize_ctest.json'))"
+        },
+        {
+          "line": 83,
+          "text": "            ctest=selected_ctest(call,output,'cuda_ctest',gpu,allow_gpu=True)"
+        },
+        {
+          "line": 85,
+          "text": "            ctest=call('cuda_ctest',['ctest','--test-dir',str(gpu),'--output-on-failure','-V'],900)"
+        },
+        {
+          "line": 86,
+          "text": "            require('0 tests failed out of 32' in ctest['stdout'] and '***Skipped' not in ctest['stdout'],'CUDA regression group skipped/missing')"
+        },
+        {
+          "line": 87,
+          "text": "            require('Ran 14 tests' in ctest['stdout'],'GPU framework coverage absent')"
+        }
+      ],
+      "sha256": "6985e5c3e1d7817146da0e498c2c0013cfc38c2063d11aeaa513428610ee00dc"
+    },
+    "scripts/validate_cuda_sort.py": {
+      "lines": 138,
+      "relevant_lines": [
+        {
+          "line": 10,
+          "text": "import subprocess"
+        },
+        {
+          "line": 51,
+          "text": "def verify_ctest(text):"
+        },
+        {
+          "line": 56,
+          "text": "def run(output, runner=subprocess.run):"
+        },
+        {
+          "line": 71,
+          "text": "        def invoke(name, argv, timeout=600):"
+        },
+        {
+          "line": 76,
+          "text": "            except subprocess.TimeoutExpired as error:"
+        },
+        {
+          "line": 87,
+          "text": "        invoke('preflight', [sys.executable, str(ROOT/'scripts/cuda_preflight.py'),"
+        },
+        {
+          "line": 95,
+          "text": "        invoke('configure', ['cmake','-S',str(ROOT),'-B',str(build),'-DCMAKE_BUILD_TYPE=Release',"
+        },
+        {
+          "line": 109,
+          "text": "        invoke('build', ['cmake','--build',str(build),'--target','test_cuda_sorting','--parallel','2'])"
+        },
+        {
+          "line": 110,
+          "text": "        result=verify_result(json.loads(invoke('sorting', [str(build/'test_cuda_sorting')],timeout=240).stdout))"
+        },
+        {
+          "line": 113,
+          "text": "        ctest=invoke('ctest', ['ctest','--test-dir',str(build),'--output-on-failure','-V','-R','^cuda_sorting$'])"
+        },
+        {
+          "line": 114,
+          "text": "        verify_ctest(ctest.stdout)"
+        }
+      ],
+      "sha256": "e26d46059d7f82ec601304730178039fe26e0ccb463c3ad4ee757deb997150bf"
+    },
+    "scripts/validate_cuda_timing.py": {
+      "lines": 85,
+      "relevant_lines": [
+        {
+          "line": 7,
+          "text": "import subprocess"
+        },
+        {
+          "line": 25,
+          "text": "        def invoke(name,argv,timeout=600):"
+        },
+        {
+          "line": 28,
+          "text": "            try:r=subprocess.run(argv,cwd=ROOT,capture_output=True,text=True,timeout=timeout,check=False)"
+        },
+        {
+          "line": 29,
+          "text": "            except subprocess.TimeoutExpired as error:"
+        },
+        {
+          "line": 36,
+          "text": "        invoke('correctness',[sys.executable,str(ROOT/'scripts/validate_cuda_sort.py'),'--output',str(output/'correctness')],900)"
+        },
+        {
+          "line": 38,
+          "text": "        invoke('build_benchmark',['cmake','--build',str(build),'--target','cuda_sort_benchmark','--parallel','2'])"
+        },
+        {
+          "line": 45,
+          "text": "        invoke('smallest_smoke',[str(executable),'--output',str(output/'smallest'),'--size','1025',"
+        },
+        {
+          "line": 48,
+          "text": "        invoke('analyze_smallest',[sys.executable,str(analyze),str(output/'smallest'),'--output',str(processed/'smallest.json')])"
+        },
+        {
+          "line": 49,
+          "text": "        invoke('gpu_framework',['ctest','--test-dir',str(build),'--output-on-failure','-V','-R','^cuda_benchmark_gpu_framework$'])"
+        },
+        {
+          "line": 50,
+          "text": "        invoke('smoke_matrix',[sys.executable,str(ROOT/'scripts/run_cuda_matrix.py'),'--executable',str(executable),"
+        },
+        {
+          "line": 57,
+          "text": "        invoke('analyze_matrix',[sys.executable,str(analyze),str(output/'matrix'),'--output',str(processed/'matrix.json')])"
+        },
+        {
+          "line": 59,
+          "text": "            invoke('regenerate_'+name,[sys.executable,str(analyze),str(output/name),'--output',str(processed/(name+'_regenerated.json'))])"
+        }
+      ],
+      "sha256": "6a891b7c3d99baba0a23521041cec723737ebcf06607fb0deee2ef84dfd7133e"
+    },
+    "src/benchmark/comparison.cpp": {
+      "lines": 118,
+      "relevant_lines": [
+        {
+          "line": 3,
+          "text": "#include <chrono>"
+        },
+        {
+          "line": 59,
+          "text": "    using Clock = std::chrono::steady_clock;"
+        },
+        {
+          "line": 95,
+          "text": "                        const auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count();"
+        },
+        {
+          "line": 97,
+          "text": "                        trial.elapsed_ns = static_cast<std::uint64_t>(elapsed);"
+        },
+        {
+          "line": 108,
+          "text": "                    trial.status = \"error\"; trial.error = error.what(); trial.elapsed_ns.reset();"
+        }
+      ],
+      "sha256": "5df45e362a34bb12dd76c1ab1f4bbeac3c79deaee40a70efb8765aee98943b37"
+    },
+    "src/benchmark/comparison_input_main.cpp": {
+      "lines": 50,
+      "relevant_lines": [],
+      "sha256": "09c429a17cf275bcd64ac545b1bdcd4dba9cd00a57e08c49906d3f923e82567b"
+    },
+    "src/benchmark/metrics_main.cpp": {
+      "lines": 86,
+      "relevant_lines": [],
+      "sha256": "2e4f6c321015a8a1a38d6bea877a9c64ac80e68c81ad4556a5e5effba16bc20d"
+    },
+    "src/main.cpp": {
+      "lines": 86,
+      "relevant_lines": [],
+      "sha256": "a6e2542c402ce1d24c32397064211b1817a7e0e0453a22bcbec1fee7ffa445a5"
+    },
+    "tests/fixtures/cpu_gpu_provenance_reproducer.py": {
+      "lines": 100,
+      "relevant_lines": [
+        {
+          "line": 45,
+          "text": "    for name in ['cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight']:"
+        },
+        {
+          "line": 64,
+          "text": "            end_to_end_clock='steady_clock', phase_clock='cuda_event_float_ms_to_ns', gpu_name='Tesla T4',"
+        }
+      ],
+      "sha256": "1588c1ce06ded80b91d9806673b883effb7c98b0ace8d1eadb5c04688072142c"
+    },
+    "tests/test_baselines.cpp": {
+      "lines": 83,
+      "relevant_lines": [],
+      "sha256": "6cc9b36024aba24f8b5054de19b1ade4fe559975afd55437fe85233999c95776"
+    },
+    "tests/test_cli.py": {
+      "lines": 155,
+      "relevant_lines": [
+        {
+          "line": 3,
+          "text": "import subprocess"
+        },
+        {
+          "line": 13,
+          "text": "        return subprocess.run([EXECUTABLE, *arguments], capture_output=True, text=True)"
+        }
+      ],
+      "sha256": "88774fd13fd8dcbc28de51c0f2d6a26a502393fd765ecd499064e03a9b703019"
+    },
+    "tests/test_comparisons.cpp": {
+      "lines": 176,
+      "relevant_lines": [],
+      "sha256": "6373369f9fde8e58b0144b1df95a1d77df76e3cf4eaa0c4a875c43a28d13703e"
+    },
+    "tests/test_cpu_gpu_comparison.py": {
+      "lines": 483,
+      "relevant_lines": [
+        {
+          "line": 10,
+          "text": "import subprocess"
+        },
+        {
+          "line": 69,
+          "text": "                    parallel_region='' if gpu else 'true' if actual==2 else 'false',elapsed_ns=str(sample)))"
+        },
+        {
+          "line": 119,
+          "text": "        with mock.patch.object(validator,'ROOT',checkout),mock.patch.object(validator,'verify_source_extension',return_value={}),\\"
+        },
+        {
+          "line": 120,
+          "text": "             mock.patch.object(validator,'invoke',side_effect=RuntimeError('fixture stop before preflight')),mock.patch.object(sys,'argv',argv):"
+        },
+        {
+          "line": 139,
+          "text": "            rows[-1].update(status='error',correctness='failed',elapsed_ns='',error='fixture wrong output')"
+        },
+        {
+          "line": 144,
+          "text": "            self.edit_rows(lambda rows:rows[0].update(elapsed_ns=bad))"
+        },
+        {
+          "line": 159,
+          "text": "    def test_subprocess_failure_and_timeout_records(self):"
+        },
+        {
+          "line": 161,
+          "text": "        with self.assertRaises(RuntimeError):invoke(commands,'failed',[sys.executable,'-c','raise SystemExit(9)'],5)"
+        },
+        {
+          "line": 163,
+          "text": "        with self.assertRaises(RuntimeError):invoke(commands,'timeout',[sys.executable,'-c','import time;time.sleep(10)'],.02)"
+        },
+        {
+          "line": 167,
+          "text": "        a=subprocess.run(command,capture_output=True,text=True);b=subprocess.run(command,capture_output=True,text=True)"
+        },
+        {
+          "line": 169,
+          "text": "        collision=subprocess.run(command[:-1]+['--prerequisites','unused_prerequisites'],capture_output=True,text=True)"
+        },
+        {
+          "line": 172,
+          "text": "        if INPUT_TOOL is None:self.skipTest('input tool not supplied')"
+        },
+        {
+          "line": 175,
+          "text": "        result=subprocess.run(args,capture_output=True,text=True);self.assertEqual(result.returncode,0,result.stderr)"
+        },
+        {
+          "line": 178,
+          "text": "        before=sha(destination/'input.bin');self.assertNotEqual(subprocess.run(args,capture_output=True).returncode,0);self.assertEqual(sha(destination/'input.bin'),before)"
+        },
+        {
+          "line": 181,
+          "text": "            self.assertNotEqual(subprocess.run(invalid,capture_output=True).returncode,0)"
+        },
+        {
+          "line": 198,
+          "text": "        result=subprocess.run(command,capture_output=True,text=True)"
+        },
+        {
+          "line": 203,
+          "text": "        with mock.patch('run_cpu_gpu_pilot.subprocess.Popen',return_value=child),mock.patch('run_cpu_gpu_pilot.os.killpg'):"
+        },
+        {
+          "line": 204,
+          "text": "            with self.assertRaises(KeyboardInterrupt):invoke(commands,'interrupt',['fixture'])"
+        },
+        {
+          "line": 206,
+          "text": "        with self.assertRaises(RuntimeError):invoke(commands,'absent',['/nonexistent/mab-test-fixture'])"
+        },
+        {
+          "line": 210,
+          "text": "        def fail(rows):rows[-1].update(status='error',correctness='not_checked',elapsed_ns='',error='fixture, \"quoted\"\\nerror')"
+        },
+        {
+          "line": 251,
+          "text": "        self.unseal();self.edit(self.first/'primary.csv',lambda rows:rows[-1].update(status='error',correctness='failed',error='wrong output',elapsed_ns=''))"
+        },
+        {
+          "line": 277,
+          "text": "        self.edit(self.first/'primary.csv',lambda rows:rows[0].update(elapsed_ns='NaN'))"
+        },
+        {
+          "line": 344,
+          "text": "        for name in ['cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight']:"
+        },
+        {
+          "line": 351,
+          "text": "        with mock.patch('run_cpu_gpu_pilot.environment_gate'):"
+        },
+        {
+          "line": 362,
+          "text": "        a=subprocess.run(command,capture_output=True,text=True);b=subprocess.run(command,capture_output=True,text=True)"
+        },
+        {
+          "line": 369,
+          "text": "        rejected=subprocess.run(command[:-1],capture_output=True,text=True);self.assertEqual(rejected.returncode,2)"
+        },
+        {
+          "line": 386,
+          "text": "    def invoke(self,directory,name,argv,timeout=600):"
+        },
+        {
+          "line": 404,
+          "text": "        with mock.patch.object(runner,'validate_prerequisites',return_value={'explicit_fixture':True}),\\"
+        },
+        {
+          "line": 405,
+          "text": "             mock.patch.object(runner,'snapshot',return_value={'explicit_fixture':'not hardware metadata'}),\\"
+        },
+        {
+          "line": 406,
+          "text": "             mock.patch.object(runner,'environment_gate'),mock.patch.object(runner,'invoke',side_effect=self.invoke),\\"
+        },
+        {
+          "line": 407,
+          "text": "             mock.patch.object(runner,'analyze',side_effect=report):"
+        },
+        {
+          "line": 433,
+          "text": "        with mock.patch('run_cpu_gpu_pilot.time.monotonic',side_effect=[0,1801,1801]):"
+        },
+        {
+          "line": 441,
+          "text": "        with mock.patch.object(validator,'ROOT',checkout),mock.patch.object(validator,'verify_source_extension',return_value={}),\\"
+        },
+        {
+          "line": 442,
+          "text": "             mock.patch.object(validator,'invoke',side_effect=RuntimeError('synthetic stop before preflight')),mock.patch.object(sys,'argv',argv):"
+        },
+        {
+          "line": 449,
+          "text": "        def invoke(directory,name,argv,timeout):"
+        },
+        {
+          "line": 456,
+          "text": "                text=json.dumps(dict(kind='ctestInfo',version=dict(major=1,minor=0),tests=["
+        },
+        {
+          "line": 465,
+          "text": "            if name in ['cpu_release_ctest','cpu_sanitize_ctest']:text='0 tests failed out of 19'"
+        },
+        {
+          "line": 466,
+          "text": "            if name=='cuda_ctest':text='0 tests failed out of 21'"
+        },
+        {
+          "line": 471,
+          "text": "        with mock.patch.object(validator,'ROOT',checkout),mock.patch.object(validator,'verify_source_extension',return_value={'current_source_sha256':{}}),\\"
+        },
+        {
+          "line": 472,
+          "text": "             mock.patch.object(validator,'invoke',side_effect=invoke),mock.patch.object(validator,'verify_result',return_value={'fixture':True}),mock.patch.object(sys,'argv',argv):"
+        },
+        {
+          "line": 478,
+          "text": "        for name in ['cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest']:"
+        }
+      ],
+      "sha256": "aabee54e413c5efba862880f0f4bff36614089b4fb6d6091b9eae235fc3968c4"
+    },
+    "tests/test_cpu_gpu_safety.py": {
+      "lines": 229,
+      "relevant_lines": [
+        {
+          "line": 8,
+          "text": "import subprocess"
+        },
+        {
+          "line": 24,
+          "text": "    return dict(kind='ctestInfo', version=dict(major=1, minor=0), tests=[dict("
+        },
+        {
+          "line": 51,
+          "text": "        with mock.patch.object(provenance,'sha',side_effect=lambda p: '0'*64 if p==path else original(p)),\\"
+        },
+        {
+          "line": 81,
+          "text": "                with self.subTest(text=text), mock.patch.object(provenance, 'FREEZE', path):"
+        },
+        {
+          "line": 88,
+          "text": "            with mock.patch.object(provenance, 'CMAKE_REVIEW', path), self.assertRaisesRegex(ValueError, 'trusted CMake review'):"
+        },
+        {
+          "line": 113,
+          "text": "            result = subprocess.run([sys.executable, '-B', str(path)], cwd=ROOT,"
+        },
+        {
+          "line": 129,
+          "text": "        with mock.patch.object(selector.subprocess, 'run', side_effect=AssertionError('must not execute')):"
+        },
+        {
+          "line": 136,
+          "text": "        expression = plan['ctest_argv'][-1]"
+        },
+        {
+          "line": 170,
+          "text": "        for property_name in ['FIXTURES_REQUIRED','FIXTURES_SETUP','DEPENDS','ENVIRONMENT','ENVIRONMENT_MODIFICATION']:"
+        },
+        {
+          "line": 181,
+          "text": "            with mock.patch.object(selector,'MANIFEST',path), self.assertRaisesRegex(ValueError,'source snapshot changed'):"
+        },
+        {
+          "line": 186,
+          "text": "        with mock.patch.object(selector,'load_manifest',return_value=manifest), self.assertRaisesRegex(ValueError,'timing entry point'):"
+        },
+        {
+          "line": 193,
+          "text": "            with mock.patch.object(selector,'MANIFEST',path), self.assertRaisesRegex(ValueError,'unclassified'):"
+        },
+        {
+          "line": 208,
+          "text": "            selector.selected_ctest(call,output,'fixture',self.build)"
+        },
+        {
+          "line": 215,
+          "text": "            selector.selected_ctest(call,Path(d),'fixture',self.build)"
+        }
+      ],
+      "sha256": "832855c4ced18df51ea7f59beb3c888a7f9fbb4654c112717c65f5d6e65ea5dc"
+    },
+    "tests/test_cuda_benchmark.py": {
+      "lines": 168,
+      "relevant_lines": [
+        {
+          "line": 7,
+          "text": "import subprocess"
+        },
+        {
+          "line": 26,
+          "text": "        stream_policy='private_nonblocking_serial',end_to_end_clock='steady_clock',phase_clock='cuda_event_float_ms_to_ns',"
+        },
+        {
+          "line": 89,
+          "text": "    def test_failed_timeout_interrupted_subprocess(self):"
+        },
+        {
+          "line": 93,
+          "text": "                    if kind=='timeout':raise subprocess.TimeoutExpired(argv,1,b'partial',b'detail')"
+        },
+        {
+          "line": 95,
+          "text": "                    return subprocess.CompletedProcess(argv,9,'out','error')"
+        },
+        {
+          "line": 112,
+          "text": "                r=subprocess.run([sys.executable,str(ROOT/'scripts/analyze_cuda_results.py'),str(p),'--output',str(output)],capture_output=True)"
+        },
+        {
+          "line": 115,
+          "text": "            r=subprocess.run([sys.executable,str(ROOT/'scripts/analyze_cuda_results.py'),str(p),'--output',str(outputs[0])],capture_output=True)"
+        },
+        {
+          "line": 129,
+          "text": "            with patch.object(validation.subprocess,'run') as command:"
+        },
+        {
+          "line": 134,
+          "text": "            with patch.object(validation.subprocess,'run') as command:"
+        },
+        {
+          "line": 140,
+          "text": "            with patch.object(validation.subprocess,'run',return_value=subprocess.CompletedProcess(['fixture'],9,'diagnostic','failure')):"
+        },
+        {
+          "line": 147,
+          "text": "@unittest.skipUnless(EXE,'real CUDA executable not supplied; host tests only')"
+        },
+        {
+          "line": 153,
+          "text": "                p=Path(d)/'run';r=subprocess.run([str(EXE),'--output',str(p)]+args,capture_output=True)"
+        },
+        {
+          "line": 157,
+          "text": "            r=subprocess.run([str(EXE),'--output',str(p)],capture_output=True);self.assertEqual(r.returncode,1)"
+        },
+        {
+          "line": 164,
+          "text": "                    r=subprocess.run([str(EXE),'--output',str(p),'--size',str(n),'--distribution',dist,"
+        }
+      ],
+      "sha256": "caa772e61eef60b29adc0c64b02412c4828d4552699b1b5b4f88ad37e906c94e"
+    },
+    "tests/test_cuda_preflight.py": {
+      "lines": 146,
+      "relevant_lines": [
+        {
+          "line": 9,
+          "text": "import subprocess"
+        },
+        {
+          "line": 65,
+          "text": "        with patch.object(cuda.subprocess,'run',side_effect=FileNotFoundError('missing')):"
+        },
+        {
+          "line": 67,
+          "text": "        with patch.object(cuda.subprocess,'run',side_effect=subprocess.TimeoutExpired(['fake'],1,output=b'partial',stderr=b'diagnostic')):"
+        },
+        {
+          "line": 69,
+          "text": "        with patch.object(cuda.subprocess,'run',return_value=subprocess.CompletedProcess(['fake'],9,'out','err')):"
+        },
+        {
+          "line": 75,
+          "text": "        r=cuda.collect(runner=runner,environ={},discovery=discovery())"
+        },
+        {
+          "line": 89,
+          "text": "            r=cuda.collect(runner=runner,environ={},discovery=found)"
+        },
+        {
+          "line": 97,
+          "text": "        a=cuda.collect(runner=runner,environ=env,discovery=discovery());b=cuda.collect(runner=runner,environ={},discovery=discovery())"
+        },
+        {
+          "line": 102,
+          "text": "        r=cuda.collect(runner=lambda a,t:result('',127),environ={},discovery=discovery())"
+        },
+        {
+          "line": 123,
+          "text": "        r=cuda.collect(runner=lambda a,t:result('',127),environ={'SERVICE_TOKEN':'secret-value','API_KEY':'1234'},discovery=found)"
+        },
+        {
+          "line": 127,
+          "text": "        r=subprocess.run([sys.executable,str(ROOT/'scripts/cuda_preflight.py'),'--output','unused','--timeout-seconds','0'],capture_output=True,text=True)"
+        },
+        {
+          "line": 139,
+          "text": "                r=subprocess.run(cmd,capture_output=True,text=True,env=env)"
+        }
+      ],
+      "sha256": "cce76386413ec62c521176dbfd817e9b3513423b6dee641e7caf09214be8a6af"
+    },
+    "tests/test_cuda_sort_handoff.py": {
+      "lines": 86,
+      "relevant_lines": [
+        {
+          "line": 5,
+          "text": "import subprocess"
+        },
+        {
+          "line": 23,
+          "text": "    def test_ctest_must_select_and_pass(self):"
+        },
+        {
+          "line": 24,
+          "text": "        handoff.verify_ctest('1/1 Test #26: cuda_sorting ........ Passed  1.0 sec')"
+        },
+        {
+          "line": 27,
+          "text": "            with self.subTest(text=text),self.assertRaises(ValueError):handoff.verify_ctest(text)"
+        },
+        {
+          "line": 41,
+          "text": "            with self.assertRaises(FileExistsError):handoff.run(p,runner=lambda *a,**k:self.fail('executed'))"
+        },
+        {
+          "line": 52,
+          "text": "                handoff.run(link,runner=lambda *a,**k:self.fail('executed'))"
+        },
+        {
+          "line": 57,
+          "text": "            def unavailable(argv,**kwargs):return subprocess.CompletedProcess(argv,2,'unavailable','no GPU')"
+        },
+        {
+          "line": 58,
+          "text": "            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=unavailable),1)"
+        },
+        {
+          "line": 63,
+          "text": "            def timeout(argv,**kwargs):raise subprocess.TimeoutExpired(argv,1,output=b'partial',stderr=b'detail')"
+        },
+        {
+          "line": 64,
+          "text": "            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=timeout),1)"
+        },
+        {
+          "line": 70,
+          "text": "            p=Path(d)/'attempt';self.assertEqual(handoff.run(p,runner=stop),130)"
+        },
+        {
+          "line": 78,
+          "text": "            r=subprocess.run(['cmake','-S',str(ROOT),'-B',d,'-DMAB_ENABLE_CUDA=OFF',"
+        },
+        {
+          "line": 83,
+          "text": "        r=subprocess.run([sys.executable,str(ROOT/'scripts/validate_cuda_sort.py'),'--bad'],capture_output=True,text=True)"
+        }
+      ],
+      "sha256": "ddc7901dc238cce4d36cb583650840a5661c92cf5892049dd09236c7d6762d42"
+    },
+    "tests/test_datasets.cpp": {
+      "lines": 175,
+      "relevant_lines": [],
+      "sha256": "d9feb87d30949c54905d3f862187df434f85b03bc3fccbc7acbe01541043449d"
+    },
+    "tests/test_environment.py": {
+      "lines": 40,
+      "relevant_lines": [],
+      "sha256": "9689cb6d191590a8e4cc6f915156c6e426418a2bcc3ca659bc9f1206ddb9bb9a"
+    },
+    "tests/test_integer_sorts.hpp": {
+      "lines": 105,
+      "relevant_lines": [],
+      "sha256": "0d908da0789a6fbf47e43d19dfbf662c742571384b4e19962b9fbb9fcbe0d8de"
+    },
+    "tests/test_memory.cpp": {
+      "lines": 62,
+      "relevant_lines": [],
+      "sha256": "ebeffc505f293f91d16608579056c01f93b2ef3a040b9fc435820dda3802f7e1"
+    },
+    "tests/test_mergesort.cpp": {
+      "lines": 23,
+      "relevant_lines": [],
+      "sha256": "bbda01afab865a8c74f1f7addcee51fa18624d917ba0a3d684eae7d4360d473f"
+    },
+    "tests/test_metrics_cli.py": {
+      "lines": 140,
+      "relevant_lines": [
+        {
+          "line": 3,
+          "text": "import subprocess"
+        },
+        {
+          "line": 13,
+          "text": "        return subprocess.run([EXECUTABLE, *arguments], capture_output=True, text=True)"
+        }
+      ],
+      "sha256": "5eac7e1aed7f66f4893bbee93fc0d6946cfaa48605059fff484fefe3838db385"
+    },
+    "tests/test_parallel_mergesort.cpp": {
+      "lines": 115,
+      "relevant_lines": [
+        {
+          "line": 105,
+          "text": "    require(mab::run_parallel_timing_trials(v,c,{mab::find_parallel_sorter(\"merge_sort\",4),mab::find_parallel_sorter(\"parallel_merge_sort\",4)},"
+        },
+        {
+          "line": 106,
+          "text": "        [&](const mab::TimingTrial& row){require(row.status==\"ok\" && row.correctness==\"passed\" && row.elapsed_ns.has_value(),\"timing correctness\");"
+        }
+      ],
+      "sha256": "eaf9c15d6c2e61347df574df785bc6ba76131866992395e39524ac55190758ac"
+    },
+    "tests/test_pdqsort.cpp": {
+      "lines": 114,
+      "relevant_lines": [],
+      "sha256": "c129adda593d54c3b82caa49614ecc59633ba7ac6c3be283c731ebacc8e17adc"
+    },
+    "tests/test_quicksort.cpp": {
+      "lines": 169,
+      "relevant_lines": [],
+      "sha256": "6686b5a94951cb19e9178b9f769a277f68e3158dfb88072d50b7a26a010175d1"
+    },
+    "tests/test_radixsort.cpp": {
+      "lines": 17,
+      "relevant_lines": [],
+      "sha256": "6d79152c7ba18b0088666ee7512cf21b8846d518b2adbf616c9e71ca39e584a7"
+    },
+    "tests/test_searching.cpp": {
+      "lines": 72,
+      "relevant_lines": [],
+      "sha256": "a575387a0332bdce0eff7676cba1ca1c82a5780d7631bd45ce32252923637be6"
+    },
+    "tests/test_structures.cpp": {
+      "lines": 101,
+      "relevant_lines": [],
+      "sha256": "54cbc977167c22cab7e6dae5d687176c4228a89dfdca559a36ab1dc00a901e74"
+    },
+    "tests/test_support.hpp": {
+      "lines": 11,
+      "relevant_lines": [],
+      "sha256": "c8c307258004449c4dd8217b016611b0cd3b9c8d64e93a5f12789f6aff99c7ea"
+    },
+    "tests/test_timsort.cpp": {
+      "lines": 149,
+      "relevant_lines": [],
+      "sha256": "3008c66ea12c1a35717f05d14f8ead69017e4db40c6a292e0d078d41487ecd38"
+    }
+  },
+  "limitations": "Symbol scan supports manual call-path review; it is not a static proof of arbitrary program behavior.",
+  "no_test_or_ctest_execution": true,
+  "selected_cpp_groups": 12,
+  "selected_cpu_tests": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort"
+  ]
+}

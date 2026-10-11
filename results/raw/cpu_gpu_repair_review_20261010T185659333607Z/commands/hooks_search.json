@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "rg",
+    "-n",
+    "CTEST_CUSTOM_PRE_TEST|CTEST_CUSTOM_POST_TEST|CTEST_TEST_ARGS|TEST_INCLUDE_FILES|TEST_INCLUDE_FILE|execute_process|add_custom_command|add_custom_target|CMAKE_PROJECT_INCLUDE|CMAKE_TOOLCHAIN_FILE",
+    "CMakeLists.txt",
+    "cmake",
+    "scripts/non_timing_tests.py",
+    "scripts/validate_cpu_gpu_pilot.py",
+    "/usr/share/cmake-3.28/Help/variable/CTEST_CUSTOM_PRE_TEST.rst",
+    "/usr/share/cmake-3.28/Help/variable/CTEST_CUSTOM_POST_TEST.rst",
+    "/usr/share/cmake-3.28/Help/command/ctest_read_custom_files.rst"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "read_only_source_and_installed_documentation",
+  "stderr": "",
+  "stdout": "/usr/share/cmake-3.28/Help/variable/CTEST_CUSTOM_POST_TEST.rst:1:CTEST_CUSTOM_POST_TEST\n/usr/share/cmake-3.28/Help/variable/CTEST_CUSTOM_PRE_TEST.rst:1:CTEST_CUSTOM_PRE_TEST\n",
+  "timestamp_utc": "2026-10-10T18:57:37.206892+00:00"
+}

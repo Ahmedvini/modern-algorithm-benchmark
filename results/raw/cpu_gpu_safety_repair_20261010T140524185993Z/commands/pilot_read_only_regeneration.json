@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "scripts/analyze_cpu_gpu.py",
+    "results/raw/cpu_gpu_pilot_20261010T001232473460Z/remote_v3/modern-algorithm-benchmark/results/raw/pilot_v3",
+    "--output",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/PILOT_REANALYSIS.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "read_only_existing_results_analysis_no_timing_no_gpu",
+  "stderr": "",
+  "stdout": "",
+  "timestamp_utc": "2026-10-10T14:20:58.606365+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_repair_review_20261010T185659333607Z/hook_metadata_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "inert_metadata_only_subprocesses_blocked",
+  "stderr": "",
+  "stdout": "{\n  \"actual_ctest_discovery_executed\": false,\n  \"ctest_executed\": false,\n  \"hook_executed\": false,\n  \"kind\": \"static_matching_registration_hook_review\",\n  \"limitation\": \"Build metadata is copied/rebased as text; no runtime CTest hook behavior is claimed to have been exercised.\",\n  \"metadata_directory\": \"results/raw/cpu_gpu_repair_review_20261010T185659333607Z/UNEXECUTED_MATCHING_CTEST_METADATA\",\n  \"registrations_preserved\": 29,\n  \"reviewed_source_unchanged\": true,\n  \"selected\": [\n    \"baselines\",\n    \"cli\",\n    \"comparisons\",\n    \"cpu_gpu_comparison_framework\",\n    \"cuda_benchmark_analysis\",\n    \"cuda_preflight\",\n    \"cuda_sort_handoff\",\n    \"datasets\",\n    \"environment_manifest\",\n    \"memory\",\n    \"memory_unsupported\",\n    \"mergesort\",\n    \"metrics_cli\",\n    \"pdqsort\",\n    \"quicksort\",\n    \"radixsort\",\n    \"searching\",\n    \"structures\",\n    \"timsort\"\n  ],\n  \"selection_accepted\": true,\n  \"tests_executed\": false\n}\n",
+  "timestamp_utc": "2026-10-10T21:24:38.299284+00:00"
+}

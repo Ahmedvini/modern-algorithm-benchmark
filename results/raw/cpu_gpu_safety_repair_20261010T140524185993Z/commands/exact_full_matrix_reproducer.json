@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/reproducer.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "synthetic_only_no_sorting_no_gpu",
+  "stderr": "",
+  "stdout": "{\n  \"kind\": \"synthetic_full_analysis_review_probe\",\n  \"sorting_calls\": 0,\n  \"actual_gpu_calls\": 0,\n  \"baseline_accepted\": true,\n  \"protected_source_change_rejected\": true,\n  \"note\": \"All timings and metadata in disposable fixtures are synthetic; no performance evidence is created.\",\n  \"synthetic_measured_records\": 1200,\n  \"synthetic_warmup_records\": 240,\n  \"rejection\": \"retained protected source differs from trusted anchor: src/cuda/cub_sort.cu\",\n  \"target\": \"src/cuda/cub_sort.cu\",\n  \"frozen_digest\": \"b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb\",\n  \"fixture_digest\": \"0000000000000000000000000000000000000000000000000000000000000000\"\n}\n",
+  "timestamp_utc": "2026-10-10T14:20:58.125701+00:00"
+}

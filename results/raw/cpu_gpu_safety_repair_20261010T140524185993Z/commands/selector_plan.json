@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "scripts/non_timing_tests.py",
+    "--build-dir",
+    "build/cpu_gpu_full_tooling_20261010T121208603276Z/release",
+    "--discovery-json",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/CTEST_DISCOVERY.json",
+    "--output",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/SELECTED_TESTS.json"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "static_selection_no_tests_no_gpu",
+  "stderr": "",
+  "stdout": "{\n  \"allow_gpu_correctness\": false,\n  \"ctest_argv\": [\n    \"ctest\",\n    \"--test-dir\",\n    \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_full_tooling_20261010T121208603276Z/release\",\n    \"--output-on-failure\",\n    \"-V\",\n    \"--parallel\",\n    \"1\",\n    \"-R\",\n    \"^(baselines|cli|comparisons|cpu_gpu_comparison_framework|cuda_benchmark_analysis|cuda_preflight|cuda_sort_handoff|datasets|environment_manifest|memory|memory_unsupported|mergesort|metrics_cli|pdqsort|quicksort|radixsort|searching|structures|timsort)$\"\n  ],\n  \"discovered_count\": 29,\n  \"excluded\": [\n    {\n      \"classification\": \"timing\",\n      \"name\": \"experiment_pipeline\",\n      \"reason\": \"End-to-end experiment tests invoke benchmark processes.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"structure_timing\",\n      \"reason\": \"Calls real construction and lookup timing engines.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"structure_framework\",\n      \"reason\": \"Launches structure_benchmark.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"search_timing\",\n      \"reason\": \"Calls real search batch timing engine.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"search_framework\",\n      \"reason\": \"Launches search_benchmark.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"timing\",\n      \"reason\": \"Calls real sorting timing engine.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"benchmark_framework\",\n      \"reason\": \"Launches sort_benchmark.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"parallel_mergesort\",\n      \"reason\": \"Embedded N32768, W1/R2, sequential and parallel sort timing: six actual rows.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"parallel_framework\",\n      \"reason\": \"Launches parallel_sort_benchmark.\"\n    },\n    {\n      \"classification\": \"timing\",\n      \"name\": \"comparison_engine\",\n      \"reason\": \"Calls comparison trial timing engine.\"\n    }\n  ],\n  \"full_protocol_prerequisites\": false,\n  \"manifest_sha256\": \"960e8535251b3c75786eeb2ffb93cb028eef8acf9b5dec82ebaf354772d14339\",\n  \"policy\": \"non_timing_correctness_v1\",\n  \"schema_version\": 1,\n  \"selected\": [\n    \"baselines\",\n    \"cli\",\n    \"comparisons\",\n    \"cpu_gpu_comparison_framework\",\n    \"cuda_benchmark_analysis\",\n    \"cuda_preflight\",\n    \"cuda_sort_handoff\",\n    \"datasets\",\n    \"environment_manifest\",\n    \"memory\",\n    \"memory_unsupported\",\n    \"mergesort\",\n    \"metrics_cli\",\n    \"pdqsort\",\n    \"quicksort\",\n    \"radixsort\",\n    \"searching\",\n    \"structures\",\n    \"timsort\"\n  ],\n  \"selected_count\": 19,\n  \"tests_executed\": false\n}\n",
+  "timestamp_utc": "2026-10-10T14:14:13.549493+00:00"
+}

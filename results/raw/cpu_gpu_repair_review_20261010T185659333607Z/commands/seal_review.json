@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_repair_review_20261010T185659333607Z/seal_review.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "hash_verification_and_evidence_sealing_only",
+  "stderr": "",
+  "stdout": "Review evidence sealed; preservation checks passed.",
+  "timestamp_utc": "2026-10-10T21:27:50.909018+00:00"
+}

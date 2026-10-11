@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/prepare_selection.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "static_no_timing_no_gpu",
+  "stderr": "",
+  "stdout": "{\n  \"classified\": 32,\n  \"selected_cpu\": 19,\n  \"optional_gpu_correctness\": 2,\n  \"blocked_timing\": 11,\n  \"manifest\": \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/docs/NON_TIMING_TEST_SELECTION_v1.json\",\n  \"discovery_copy\": \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/discovery\"\n}\n",
+  "timestamp_utc": "2026-10-10T14:13:55.075081+00:00"
+}

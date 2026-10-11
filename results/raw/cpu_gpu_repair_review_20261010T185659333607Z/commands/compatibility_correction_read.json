@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "diff",
+    "-u",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/attempt1/scripts/cpu_gpu_provenance.py",
+    "scripts/cpu_gpu_provenance.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 1,
+  "safety_classification": "read_only_diff_expected_exit_one",
+  "stderr": "",
+  "stdout": "--- results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/attempt1/scripts/cpu_gpu_provenance.py\t2026-10-10 17:16:12.784438392 +0300\n+++ scripts/cpu_gpu_provenance.py\t2026-10-10 17:16:12.827879051 +0300\n@@ -82,6 +82,14 @@\n     actual = source_review.get('current_source_sha256')\n     validate_digest_map(actual, 'retained source digests')\n     for path, digest in expected.items():\n+        if path.startswith('docs/'):\n+            # Existing source_manifest deliberately omits documentation. Verify\n+            # the frozen document itself; any optional retained claim must agree.\n+            document = ROOT / path\n+            require(document.is_file() and not document.is_symlink() and sha(document) == digest,\n+                    'trusted documentation anchor missing/changed: ' + path)\n+            require(path not in actual or actual[path] == digest, 'retained documentation anchor mismatch: ' + path)\n+            continue\n         require(actual.get(path) == digest, 'retained protected source differs from trusted anchor: ' + path)\n     require(source_review.get('cmake_review_sha256') == TRUSTED_CMAKE_REVIEW_SHA256 and\n             source_review.get('changed_anchors') == ['CMakeLists.txt'], 'retained CMake exception differs from trusted review')\n",
+  "timestamp_utc": "2026-10-10T21:23:22.403818+00:00"
+}

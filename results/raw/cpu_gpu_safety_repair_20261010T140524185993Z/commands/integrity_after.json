@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "python3",
+    "-B",
+    "results/raw/cpu_gpu_safety_repair_20261010T140524185993Z/verify_integrity.py"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "read_only_hash_verification_no_timing_no_gpu",
+  "stderr": "",
+  "stdout": "{\n  \"all_new_results_confined_to_new_evidence_directory\": true,\n  \"before_results_count\": 11345,\n  \"cub_pin_sha256\": \"477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1\",\n  \"current_results_count_before_final_audit\": 11383,\n  \"frozen_files\": {\n    \"changed\": [],\n    \"checked\": 4,\n    \"missing\": []\n  },\n  \"frozen_files_sha256\": {\n    \"docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md\": \"7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70\",\n    \"docs/studies/cpu_gpu_comparison_v1.freeze.json\": \"518ac535473e50fb61dab3a70858bdfe42dfdb43570f649174f44bffe40e1ac6\",\n    \"docs/studies/cpu_gpu_comparison_v1.matrix.json\": \"29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833\",\n    \"docs/studies/cpu_gpu_comparison_v1.resources.csv\": \"324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab\"\n  },\n  \"new_evidence_files_before_final_audit\": 38,\n  \"prior_results\": {\n    \"changed\": [],\n    \"checked\": 11345,\n    \"missing\": []\n  },\n  \"prior_review_seal\": {\n    \"changed\": [],\n    \"checked\": 30,\n    \"missing\": []\n  },\n  \"production_adapter_sha256\": \"b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb\",\n  \"production_headers_sources_and_dependency_files\": {\n    \"changed\": [],\n    \"checked\": 80,\n    \"missing\": []\n  },\n  \"protected_anchors_with_existing_cmake_exception\": {\n    \"changed\": [],\n    \"checked\": 26,\n    \"missing\": []\n  },\n  \"trusted_cmake_review_unchanged\": true\n}\n",
+  "timestamp_utc": "2026-10-10T17:03:26.592733+00:00"
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "cat",
+    "/usr/share/cmake-3.28/Help/variable/CTEST_CUSTOM_PRE_TEST.rst",
+    "/usr/share/cmake-3.28/Help/variable/CTEST_CUSTOM_POST_TEST.rst",
+    "/usr/share/cmake-3.28/Help/command/ctest_read_custom_files.rst",
+    "/usr/share/cmake-3.28/Help/prop_dir/TEST_INCLUDE_FILES.rst",
+    "/usr/share/cmake-3.28/Help/prop_dir/TEST_INCLUDE_FILE.rst"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "exit_code": 0,
+  "safety_classification": "read_only_installed_documentation",
+  "stderr": "",
+  "stdout": "CTEST_CUSTOM_PRE_TEST\n----------------------\n\nA list of commands to run at the start of the :command:`ctest_test` command.\n\n.. include:: CTEST_CUSTOM_XXX.txt\nCTEST_CUSTOM_POST_TEST\n----------------------\n\nA list of commands to run at the end of the :command:`ctest_test` command.\n\n.. include:: CTEST_CUSTOM_XXX.txt\nctest_read_custom_files\n-----------------------\n\nread CTestCustom files.\n\n.. code-block:: cmake\n\n  ctest_read_custom_files(<directory>...)\n\nRead all the CTestCustom.ctest or CTestCustom.cmake files from the\ngiven directory.\n\nBy default, invoking :manual:`ctest(1)` without a script will read custom\nfiles from the binary directory.\nTEST_INCLUDE_FILES\n------------------\n\n.. versionadded:: 3.10\n\nA list of cmake files that will be included when ctest is run.\n\nIf you specify ``TEST_INCLUDE_FILES``, those files will be included and\nprocessed when ctest is run on the directory.\nTEST_INCLUDE_FILE\n-----------------\n\nDeprecated.  Use :prop_dir:`TEST_INCLUDE_FILES` instead.\n\nA cmake file that will be included when ctest is run.\n\nIf you specify ``TEST_INCLUDE_FILE``, that file will be included and\nprocessed when ctest is run on the directory.\n",
+  "timestamp_utc": "2026-10-10T18:57:46.612280+00:00"
+}

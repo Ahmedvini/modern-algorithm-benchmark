@@ -1,0 +1,128 @@
+{
+  "actual_timing_rows": 6,
+  "conclusion": "Recorded later allowlists exclude parallel_mergesort; no repository regression test protects a non-timing selector. The prerequisites-only validator intentionally runs full timing-bearing CTest suites, as its guide warns; it is unsafe under the current no-timing instruction.",
+  "future_prerequisites_ctest_calls": [
+    {
+      "line": 45,
+      "name": "cpu_release_ctest",
+      "selection_filter_present": false,
+      "source": "call('cpu_release_ctest', ['ctest', '--test-dir', str(cpu), '--output-on-failure', '-V'], 900)"
+    },
+    {
+      "line": 72,
+      "name": "cuda_ctest",
+      "selection_filter_present": false,
+      "source": "call('cuda_ctest', ['ctest', '--test-dir', str(gpu), '--output-on-failure', '-V'], 900)"
+    },
+    {
+      "line": 50,
+      "name": "cpu_sanitize_ctest",
+      "selection_filter_present": false,
+      "source": "call('cpu_sanitize_ctest', ['env', '-u', 'ASAN_OPTIONS', '-u', 'LSAN_OPTIONS', 'UBSAN_OPTIONS=halt_on_error=1', 'ctest', '--test-dir', str(san), '--output-on-failure', '-V'], 900)"
+    },
+    {
+      "line": 56,
+      "name": "cpu_sanitize_ctest_no_leaks",
+      "selection_filter_present": false,
+      "source": "call('cpu_sanitize_ctest_no_leaks', ['env', 'ASAN_OPTIONS=detect_leaks=0', 'UBSAN_OPTIONS=halt_on_error=1', 'ctest', '--test-dir', str(san), '--output-on-failure', '-V'], 900)"
+    }
+  ],
+  "initial_exit_code": 0,
+  "initial_observed_stdout": [
+    "26: Test command: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/cpu_gpu_full_tooling_20261010T121208603276Z/release/test_parallel_mergesort",
+    "26: Passed 523 inputs, 4184 public/registry output checks at threads1/2/4/8; 10 concurrent large calls; 8 observed tasks, 65549 observed merges, worker mask=248; stability, threshold, nested rejection and 6 timing rows passed",
+    "100% tests passed, 0 tests failed out of 20"
+  ],
+  "measured_rows": 4,
+  "remote_corrected_allowlist": [
+    "structures",
+    "searching",
+    "baselines",
+    "environment_manifest",
+    "cuda_preflight",
+    "cuda_benchmark_analysis",
+    "cuda_sort_handoff",
+    "datasets",
+    "cli",
+    "quicksort",
+    "pdqsort",
+    "timsort",
+    "mergesort",
+    "radixsort",
+    "comparisons",
+    "memory",
+    "memory_unsupported",
+    "metrics_cli",
+    "cpu_gpu_comparison_framework",
+    "cuda_runtime_smoke",
+    "cuda_sorting"
+  ],
+  "selection_related_test_names": [
+    "test_prerequisites_only_parser_does_not_require_pilot_outputs",
+    "test_prerequisites_only_success_never_calls_pilot"
+  ],
+  "selections": {
+    "release_ctest_final": {
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "build/cpu_gpu_full_tooling_20261010T121208603276Z/release",
+        "--output-on-failure",
+        "-V",
+        "-R",
+        "^(structures|searching|baselines|environment_manifest|cuda_preflight|cuda_benchmark_analysis|cuda_sort_handoff|datasets|cli|quicksort|pdqsort|timsort|mergesort|radixsort|comparisons|memory|memory_unsupported|metrics_cli|cpu_gpu_comparison_framework)$"
+      ],
+      "exit_code": 0,
+      "selects_parallel_mergesort": false
+    },
+    "release_ctest_non_timing": {
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "build/cpu_gpu_full_tooling_20261010T121208603276Z/release",
+        "--output-on-failure",
+        "-V",
+        "-R",
+        "^(structures|searching|baselines|environment_manifest|cuda_preflight|cuda_benchmark_analysis|cuda_sort_handoff|datasets|cli|quicksort|pdqsort|timsort|mergesort|radixsort|comparisons|memory|memory_unsupported|metrics_cli|parallel_mergesort|cpu_gpu_comparison_framework)$"
+      ],
+      "exit_code": 0,
+      "selects_parallel_mergesort": true
+    },
+    "sanitize_ctest_final": {
+      "argv": [
+        "env",
+        "-u",
+        "ASAN_OPTIONS",
+        "-u",
+        "LSAN_OPTIONS",
+        "UBSAN_OPTIONS=halt_on_error=1",
+        "ctest",
+        "--test-dir",
+        "build/cpu_gpu_full_tooling_20261010T121208603276Z/sanitize",
+        "--output-on-failure",
+        "-V",
+        "-R",
+        "^(structures|searching|baselines|environment_manifest|cuda_preflight|cuda_benchmark_analysis|cuda_sort_handoff|datasets|cli|quicksort|pdqsort|timsort|mergesort|radixsort|comparisons|memory|memory_unsupported|metrics_cli|cpu_gpu_comparison_framework)$"
+      ],
+      "exit_code": 0,
+      "selects_parallel_mergesort": false
+    }
+  },
+  "test_source_excerpt": {
+    "103": "    mab::TimingConfig c;c.dataset.size=32768;c.repetitions=2;c.warmups=1;",
+    "104": "    auto v=mab::make_timing_input(c);std::size_t rows=0;",
+    "105": "    require(mab::run_parallel_timing_trials(v,c,{mab::find_parallel_sorter(\"merge_sort\",4),mab::find_parallel_sorter(\"parallel_merge_sort\",4)},",
+    "106": "        [&](const mab::TimingTrial& row){require(row.status==\"ok\" && row.correctness==\"passed\" && row.elapsed_ns.has_value(),\"timing correctness\");",
+    "107": "            require(row.requested_threads==(row.algorithm==\"merge_sort\"?1:4),\"requested team metadata\");++rows;}),\"shared timing failed\");",
+    "108": "    require(rows==6,\"shared timing row count\");",
+    "109": "    require(mab::sorters().size()==6 && mab::sorters().front().name==\"std_sort\",\"old registry/default changed\");",
+    "110": "    std::cout<<\"Passed \"<<cases<<\" inputs, \"<<output_checks<<\" public/registry output checks at threads1/2/4/8; 10 concurrent large calls; \"",
+    "111": "             <<trace.tasks<<\" observed tasks, \"<<trace.merges<<\" observed merges, worker mask=\"<<trace.workers",
+    "112": "             <<\"; stability, threshold, nested rejection and 6 timing rows passed\\n\";",
+    "113": "    return 0;",
+    "114": " } catch(const std::exception& error){std::cerr<<error.what()<<'\\n';return 1;}",
+    "115": "}"
+  },
+  "timing_value_serialization": false,
+  "warmup_rows": 2
+}
