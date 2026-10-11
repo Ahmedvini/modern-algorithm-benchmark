@@ -1,0 +1,351 @@
+{
+  "allow_gpu_correctness": false,
+  "build_metadata": {
+    "build_dir": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+    "commands": {
+      "baselines": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_baselines"
+      ],
+      "benchmark_framework": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_benchmark.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/sort_benchmark"
+      ],
+      "cli": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cli.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/algorithm_benchmark"
+      ],
+      "comparison_engine": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_comparison"
+      ],
+      "comparisons": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_comparisons"
+      ],
+      "cpu_gpu_comparison_framework": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cpu_gpu_comparison.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/comparison_input"
+      ],
+      "cuda_benchmark_analysis": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cuda_benchmark.py"
+      ],
+      "cuda_preflight": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cuda_preflight.py"
+      ],
+      "cuda_sort_handoff": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_cuda_sort_handoff.py"
+      ],
+      "datasets": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_datasets"
+      ],
+      "environment_manifest": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_environment.py"
+      ],
+      "experiment_pipeline": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_experiments.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release"
+      ],
+      "memory": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_memory"
+      ],
+      "memory_unsupported": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_memory_unsupported"
+      ],
+      "mergesort": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_mergesort"
+      ],
+      "metrics_cli": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_metrics_cli.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/sort_metrics"
+      ],
+      "parallel_framework": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_parallel_benchmark.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/parallel_sort_benchmark"
+      ],
+      "parallel_mergesort": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_parallel_mergesort"
+      ],
+      "parallel_workers_correctness": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_parallel_workers"
+      ],
+      "pdqsort": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_pdqsort"
+      ],
+      "quicksort": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_quicksort"
+      ],
+      "radixsort": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_radixsort"
+      ],
+      "search_framework": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_search_benchmark.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/search_benchmark",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/search_counts"
+      ],
+      "search_timing": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_search_timing"
+      ],
+      "searching": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_searching"
+      ],
+      "structure_framework": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_structure_benchmark.py",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/structure_benchmark"
+      ],
+      "structure_timing": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_structure_timing"
+      ],
+      "structures": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_structures"
+      ],
+      "timing": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_timing"
+      ],
+      "timsort": [
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/test_timsort"
+      ],
+      "validation_policy": [
+        "/usr/bin/python3",
+        "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_validation_policy.py"
+      ]
+    },
+    "files_sha256": {
+      "CTestTestfile.cmake": "0191d179b0484759bb92582ecd235f59fe7fbe8a93c20e1cdb279f0ee9cd98de",
+      "DartConfiguration.tcl": "0c4cc25e16e05285f79d4f293d14a79000df29ebdbaa3b42cb15756f64469e63"
+    },
+    "policy": "flat_literal_ctest_v2",
+    "properties": {
+      "baselines": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;109;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "benchmark_framework": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;156;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "cli": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;120;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "comparison_engine": {
+        "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=2;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE;OMP_PROC_BIND=FALSE",
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;222;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "comparisons": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;140;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "cpu_gpu_comparison_framework": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;224;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "cuda_benchmark_analysis": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;114;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "cuda_preflight": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;112;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "cuda_sort_handoff": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;115;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "datasets": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;119;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "environment_manifest": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;110;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "experiment_pipeline": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;86;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "memory": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;143;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "memory_unsupported": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;149;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "mergesort": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;134;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "metrics_cli": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;150;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "parallel_framework": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;193;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "parallel_mergesort": {
+        "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=8;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE",
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;191;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "parallel_workers_correctness": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;239;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "pdqsort": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;128;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "quicksort": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;125;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "radixsort": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;137;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "search_framework": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;104;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "search_timing": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;103;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "searching": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;100;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "structure_framework": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;95;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "structure_timing": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;94;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "structures": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;91;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "timing": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;155;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "timsort": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;131;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      },
+      "validation_policy": {
+        "_BACKTRACE_TRIPLES": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;233;add_test;/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/CMakeLists.txt;0;"
+      }
+    },
+    "test_names": [
+      "baselines",
+      "benchmark_framework",
+      "cli",
+      "comparison_engine",
+      "comparisons",
+      "cpu_gpu_comparison_framework",
+      "cuda_benchmark_analysis",
+      "cuda_preflight",
+      "cuda_sort_handoff",
+      "datasets",
+      "environment_manifest",
+      "experiment_pipeline",
+      "memory",
+      "memory_unsupported",
+      "mergesort",
+      "metrics_cli",
+      "parallel_framework",
+      "parallel_mergesort",
+      "parallel_workers_correctness",
+      "pdqsort",
+      "quicksort",
+      "radixsort",
+      "search_framework",
+      "search_timing",
+      "searching",
+      "structure_framework",
+      "structure_timing",
+      "structures",
+      "timing",
+      "timsort",
+      "validation_policy"
+    ]
+  },
+  "ctest_argv": [
+    "ctest",
+    "--test-dir",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+    "--output-on-failure",
+    "-V",
+    "--parallel",
+    "1",
+    "-R",
+    "^(baselines|cli|comparisons|cpu_gpu_comparison_framework|cuda_benchmark_analysis|cuda_preflight|cuda_sort_handoff|datasets|environment_manifest|memory|memory_unsupported|mergesort|metrics_cli|parallel_workers_correctness|pdqsort|quicksort|radixsort|searching|structures|timsort|validation_policy)$"
+  ],
+  "discovered_count": 31,
+  "excluded": [
+    {
+      "classification": "timing",
+      "name": "experiment_pipeline",
+      "reason": "End-to-end experiment tests invoke benchmark processes."
+    },
+    {
+      "classification": "timing",
+      "name": "structure_timing",
+      "reason": "Calls real construction and lookup timing engines."
+    },
+    {
+      "classification": "timing",
+      "name": "structure_framework",
+      "reason": "Launches structure_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "search_timing",
+      "reason": "Calls real search batch timing engine."
+    },
+    {
+      "classification": "timing",
+      "name": "search_framework",
+      "reason": "Launches search_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "timing",
+      "reason": "Calls real sorting timing engine."
+    },
+    {
+      "classification": "timing",
+      "name": "benchmark_framework",
+      "reason": "Launches sort_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "parallel_mergesort",
+      "reason": "Embedded N32768, W1/R2, sequential and parallel sort timing: six actual rows."
+    },
+    {
+      "classification": "timing",
+      "name": "parallel_framework",
+      "reason": "Launches parallel_sort_benchmark."
+    },
+    {
+      "classification": "timing",
+      "name": "comparison_engine",
+      "reason": "Calls comparison trial timing engine."
+    }
+  ],
+  "full_protocol_prerequisites": false,
+  "manifest_sha256": "9096d1f89eebb55fd327459854ba5d2d8e31e865563a5cc205036f8a934c647b",
+  "policy": "non_timing_correctness_v5",
+  "schema_version": 1,
+  "selected": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "parallel_workers_correctness",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort",
+    "validation_policy"
+  ],
+  "selected_count": 21,
+  "tests_executed": false
+}

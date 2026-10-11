@@ -1,0 +1,27 @@
+{
+  "byte_identical": true,
+  "figures": 7,
+  "files": 17,
+  "presentation_pages": 12,
+  "report_pages": 20,
+  "sha256": {
+    "FINAL_REPORT.md": "8fc1567527e8399b006161344bc330e95f8735c0c38d12c742b2b4ca8dedc30d",
+    "INPUTS_SHA256.json": "8eaf843c690d5d941286ecb39240d8ca3d0eb1a6a120fff5355179ef7856bc60",
+    "PLOTS.json": "676a370aeb136eec1c442185794684c3dc650f393897e4d7308fe79e1eca050a",
+    "PRESENTATION.md": "926054c0a166f5c55d62efb50786108caadf43491c18a99f53f86bd372287669",
+    "PRESENTATION.pdf": "92810b04c00c31c16d4c40509094c16115beb1118ed2122f431b1db609c89d25",
+    "RAW_VERIFICATION.json": "d9af73f26808f4145cd946be5123b0053c8179eedae89caea634625a786ab091",
+    "RENDER_INPUTS_SHA256.json": "0a7724f2b0a666ba49b96ecd7d13b08409dee5b269038e50f9b05c5a2299299e",
+    "REPORT.pdf": "3ae536844c9a113b7f063bc415966facf2e2853374e30b65a138d1175bfcbc6e",
+    "RESULT_TABLES.json": "d28eb7193a231acc3568ee0a7b2ef28d39f56b4eab77cb9541dee1447e57991b",
+    "SHA256.json": "8616ff582362414d014d3c99962bcc35eb7bf6242d2a20e30ae63986e9a64598",
+    "cpu_scaling.png": "d6a18d4733c7f75666a90487b626e93a113e7a318cf8bace6331c172830e29f3",
+    "openmp.png": "6c245b575865f52fa1877961053d4f048cf033801132d305a85a11f58f3371cd",
+    "search.png": "adf3b85a1b5704c98c674f716a8e8a4eea83166966b242ae8249fbdbfb4ac9af",
+    "sorting_1m.png": "10f356ee84d7120eea5195cef4cc127342abe092b19118e2c46be1ba37d8a37d",
+    "structures.png": "6335a91977f7652cd77b888681bab9eef22f5a402884b1e9a342d02d481e4d7c",
+    "uniform_count.png": "378880cd52bbc98f2d3399c0695af288fcb2e2194074eaec1580e5339c10c37a",
+    "uniform_process_rss.png": "c10d63b7b61cac4a0a1d0afab82c8312cdcd88c74b1703e878c1d8a6891e55aa"
+  },
+  "workloads_executed": 0
+}

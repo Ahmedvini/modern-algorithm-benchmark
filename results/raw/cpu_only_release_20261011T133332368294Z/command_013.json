@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B report/generate.py --evidence results/raw/autonomous_completion_20261011T095554571762Z --learned results/processed/learned_rank_20261011T095554571762Z --metrics results/processed/count_memory_20261011T095554571762Z --output report/cpu_only_20261011T133332368294Z_regenerated",
+  "purpose": "Independently regenerate CPU-only report assets into another new directory for byte comparison; analysis only",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T13:47:15.743190+00:00",
+  "exit_code": 0,
+  "stdout": "Generated CPU-only raw-audited report,12-slide PDF and7 figures: report/cpu_only_20261011T133332368294Z_regenerated\n",
+  "stderr": ""
+}

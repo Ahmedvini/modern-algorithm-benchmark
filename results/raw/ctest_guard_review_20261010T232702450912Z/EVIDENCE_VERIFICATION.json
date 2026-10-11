@@ -1,0 +1,278 @@
+{
+  "added_project_files": [
+    "docs/CTEST_BUILD_GUARD_v1.md",
+    "scripts/ctest_build_guard.py",
+    "tests/ctest_fixture.py",
+    "tests/test_ctest_build_guard.py"
+  ],
+  "anchor_hashes": {
+    "CMakeLists.txt": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
+    "cmake/cuda.cmake": "575474ecb26c0c18e1bed301404425d55206dc47bb9df1ce59cfdcaff98898bd",
+    "docs/CUDA_TIMING_PROTOCOL_v1.md": "02b8ca8714705a76aed360f6a6582edd9c23354b179c5e4c3b944fa365b2c495",
+    "include/algorithms/cuda_sorting.hpp": "a029d6de17ceee746fdb79a295bf4ac48035f94cb0f27726204eccf13c935526",
+    "include/algorithms/detail/mergesort_impl.hpp": "df648ba49007a0e08b0c1b2b7ac61dd2c8d331a316e856d6bf63a3dff6eef390",
+    "include/algorithms/detail/parallel_mergesort_impl.hpp": "62a60391ceaab50db3dac695cabc8b1c653028ca5d0a11f30dc04b7e136bd6c0",
+    "include/algorithms/parallel_mergesort.hpp": "f15b1f5d0b46687f562894b89b9550cfef5eef67df7e47e0ac047dafb172f750",
+    "include/algorithms/sorting.hpp": "b43c28adb1306329b30928e2c2345e87221acf004548b4f3474178efdd1d5cbf",
+    "include/benchmark/cuda_timing.hpp": "79235f844f9d79094c8b973fa83e1f53782997848ab929bda4f7e183a97aef07",
+    "include/benchmark/detail/timing_impl.hpp": "5994370fdc6f2a164d2e58d862e2d629ccd04a4f120c6c56deeb19bd93597b83",
+    "include/common/types.hpp": "4b2e378fdb0d49310d300e5cda1afd54ab8c1c8314e32a16ea6ce3b67637d849",
+    "include/datasets/generator.hpp": "b0f1944f3f94a0e5e5b20dfe6dadd26d937a43ca5e619f9de176b46ffe685e8b",
+    "scripts/analyze_cuda_results.py": "e63f2fdcc46b15be9506080509b9eeaf4a2ba0544cf29a516fb5581a1f16eca0",
+    "scripts/analyze_parallel_results.py": "b3a5a4238767359ca5abdb452b2cdfd0e8c9387d92950f1d76dca46b9f857e88",
+    "scripts/analyze_results.py": "742d4eeaff4234ad7572f942dd5f510d45e8b14025e416a960da5933dfe54f24",
+    "src/algorithms/baselines.cpp": "0c93ca1513ff47a9bc9a3e37dbc56d0fded9d98e5a5c94e53c638c0df99e20d1",
+    "src/algorithms/mergesort.cpp": "a97bb2234bf8c70a814797f08c927b782131f0ea0500c96de5c0dcdb4ff42f03",
+    "src/algorithms/parallel_mergesort.cpp": "ad2bdd6210faffe88104806b2effd153b482e390426f621b5a2be0e62dcb2533",
+    "src/benchmark/cuda_main.cpp": "fcf423d6dd68a2003111b3231de82ffdaecfff20b3841c27a3fdef4592fae060",
+    "src/benchmark/parallel_timing.cpp": "7ea9a2f045fe56e996a0ed8ef78a93a7ff59ad76adc67fbe80f29d6f583e1d2c",
+    "src/benchmark/timing.cpp": "1a3d5087cb2b43681ad69fe407d5deeb5d9d2ffa98c36c20a90e1ffd1e3efb9e",
+    "src/cuda/cub_sort.cu": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+    "src/cuda/cub_timing.cu": "8a49e5b2dcbde91a49f97ada15adf7e610ca0de8865dc6f703ec2af19bc9f3f7",
+    "src/datasets/generator.cpp": "4a5cf9e840592361d77e92d147e544696d05b82b0f4c72a6d4871d8c0c726adf",
+    "third_party/cub/LICENSE": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+    "third_party/cub/UPSTREAM.json": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1"
+  },
+  "cub_pin": {
+    "commit": "f19d875da0d8bfb2e38c109b2b40522b8abbbbc3",
+    "cub_version": 300001,
+    "files": {
+      "LICENSE": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/LICENSE",
+        "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b"
+      },
+      "cub_version.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/version.cuh",
+        "sha256": "316819d3be158deebcf40e96dde6d8d08e7910e9740a69b111677d0c5a21c124"
+      },
+      "device_radix_sort.cuh": {
+        "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/f19d875da0d8bfb2e38c109b2b40522b8abbbbc3/cub/cub/device/device_radix_sort.cuh",
+        "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be"
+      }
+    },
+    "installed_toolkit_identity": "Colab CUDA 13.0.88: reviewed version and SortKeys headers match v3.0.1; full tree hashes recorded by validation runner",
+    "license": "CUB BSD-3-Clause; aggregate CCCL LICENSE retained",
+    "local_modifications_to_upstream": "none",
+    "previous_reference": {
+      "commit": "e944297b0b51a8e9c0f1b30425370c31c1c0e0a0",
+      "cub_version": 300000,
+      "files": {
+        "LICENSE": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/LICENSE",
+          "sha256": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/LICENSE"
+        },
+        "cub_version.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/version.cuh",
+          "sha256": "ad4076429355525543bb5e5d4a79f310904c78859e1e9c066baa8d4af56f8c69",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/version.cuh"
+        },
+        "device_radix_sort.cuh": {
+          "commit_url": "https://raw.githubusercontent.com/NVIDIA/cccl/e944297b0b51a8e9c0f1b30425370c31c1c0e0a0/cub/cub/device/device_radix_sort.cuh",
+          "sha256": "7190cd469e955b2bd08dacb6e4a06a4600ee9d6547747a8148750bb6a97d29be",
+          "url": "https://raw.githubusercontent.com/NVIDIA/cccl/v3.0.0/cub/cub/device/device_radix_sort.cuh"
+        }
+      },
+      "reference_release": "v3.0.0"
+    },
+    "reference_release": "v3.0.1",
+    "upstream": "https://github.com/NVIDIA/cccl",
+    "vendored_algorithm_sources": false
+  },
+  "cub_pin_sha256": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+  "deleted_project_files": [],
+  "differences": [],
+  "evidence_seals": {
+    "cpu_gpu_repair_review_20261010T185659333607Z": {
+      "actual_directory_file_count": 57,
+      "seal_digest": "cf86c527c993d0979ee26284e3118571aad11e0b53f91c5241d495aac646b910",
+      "seal_not_self_authenticated": true,
+      "sealed_file_hashes_verified": 56
+    },
+    "cpu_gpu_safety_repair_20261010T140524185993Z": {
+      "actual_directory_file_count": 46,
+      "seal_digest": "42c42354e8330345f9247ded3c9a436ad25d5d839a38db54eba3d040b53ef897",
+      "seal_not_self_authenticated": true,
+      "sealed_file_hashes_verified": 45
+    },
+    "ctest_hook_repair_20261010T223851377458Z": {
+      "actual_directory_file_count": 68,
+      "seal_digest": "616b97876f401aa8af915bfb9e1ff22cdb664253a1386d5b0410b46fbd84457c",
+      "seal_not_self_authenticated": true,
+      "sealed_file_hashes_verified": 67
+    }
+  },
+  "frozen_input_files_verified": 3,
+  "inspection_only": true,
+  "modified_project_files": [
+    "README.md",
+    "docs/AUDIT.md",
+    "docs/NON_TIMING_TEST_SELECTION_v1.json",
+    "docs/ROADMAP.md",
+    "scripts/non_timing_tests.py",
+    "tests/test_cpu_gpu_comparison.py",
+    "tests/test_cpu_gpu_safety.py"
+  ],
+  "original_historical_files_verified": 11345,
+  "production_adapter_sha256": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+  "production_file_hashes": {
+    "CMakeLists.txt": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe",
+    "include/algorithms/baselines.hpp": "cbf56227eac5b0a8cfc325b51a66ec60ffb1a9bfa4bfccaf722cbc5af265ba6b",
+    "include/algorithms/cuda_sorting.hpp": "a029d6de17ceee746fdb79a295bf4ac48035f94cb0f27726204eccf13c935526",
+    "include/algorithms/detail/mergesort_impl.hpp": "df648ba49007a0e08b0c1b2b7ac61dd2c8d331a316e856d6bf63a3dff6eef390",
+    "include/algorithms/detail/parallel_mergesort_impl.hpp": "62a60391ceaab50db3dac695cabc8b1c653028ca5d0a11f30dc04b7e136bd6c0",
+    "include/algorithms/detail/quicksort_impl.hpp": "4436e70c66d3c4e3ae15241b323eb12e167051217360834ccd1aec04e3f35d8b",
+    "include/algorithms/detail/search_impl.hpp": "41f4c9048de6d479d381e6c14e65e5f83a26d4dd8b593b57aee20b34c6796695",
+    "include/algorithms/mergesort.hpp": "53a41391d5aa2f9ed79531f188cb78403a927a88e5cb549fe8660d01e8fa9fa1",
+    "include/algorithms/parallel_mergesort.hpp": "f15b1f5d0b46687f562894b89b9550cfef5eef67df7e47e0ac047dafb172f750",
+    "include/algorithms/pdqsort.hpp": "c69f55020dd0266e98c072500f52fc8e77e4591331ca0666daad81cf3ad0582a",
+    "include/algorithms/quicksort.hpp": "72d768105d49ee1f234b66cc5986b08fcde7cbbf2ebd6650df7885e5b9fb564a",
+    "include/algorithms/radixsort.hpp": "2f82349521a6aae4039bb04cb70b1f076c95cd39401d93cb220d985841564282",
+    "include/algorithms/searching.hpp": "b3c270c041ca886b1dc9e286b9e7cdc0c2bc6bab5a2067c834c9257ae538850e",
+    "include/algorithms/sorting.hpp": "b43c28adb1306329b30928e2c2345e87221acf004548b4f3474178efdd1d5cbf",
+    "include/algorithms/timsort.hpp": "f2b0a2607aab818f4d294d7aca229aea8aa21f5e6b5458162bd27e759cfdaf6f",
+    "include/benchmark/comparison.hpp": "bed21a6161bb7d236c3759e3d0e12f4708a66930a68f79a3c70dd186996dbb9d",
+    "include/benchmark/comparisons.hpp": "100b3d9fc907d45297d5cfb155e42e9983d709a6a69244941a05577b406c0d0a",
+    "include/benchmark/cuda_comparison.hpp": "6a4b499be3fb4482e0fd2a966775c887d575e56614b0c17b71ce1898d69bcdf4",
+    "include/benchmark/cuda_timing.hpp": "79235f844f9d79094c8b973fa83e1f53782997848ab929bda4f7e183a97aef07",
+    "include/benchmark/detail/counting_less.hpp": "2c552d7fce1f19e76f117b2d9f35974408714f1bdb374d7ccf44c51777aaa56b",
+    "include/benchmark/detail/timing_impl.hpp": "5994370fdc6f2a164d2e58d862e2d629ccd04a4f120c6c56deeb19bd93597b83",
+    "include/benchmark/memory.hpp": "6e645ef7e05a2cccfde80cbf7573af16283a59a22e6a3c9e3b7e3cd68450af6c",
+    "include/benchmark/output.hpp": "5248af6bf798a3afe981e7b3bc45f04cdfc3c673788ac66596636b0cbb8f4756",
+    "include/benchmark/parallel_timing.hpp": "d5dc9f42841a766221b6f108a9507826656b52b65def9ca7a47e1abf1780b3b9",
+    "include/benchmark/search_comparisons.hpp": "b27a81bbd8d0d40b388e714b93d87b05fcaa51471f35cc92293fef2ecff14f5e",
+    "include/benchmark/search_timing.hpp": "1c3aa4bef548081994ce7ffca0d1a2e122b629a1412f09168e5727cb9b17cb25",
+    "include/benchmark/structure_timing.hpp": "cd74cf43245e458af16a344c26b80a1187732837f53a0a4f6f58d93346b6ec11",
+    "include/benchmark/timing.hpp": "2f3516314292dc0c49d850b9565c17335f969742c9ec906f9d42d78291ffe3ce",
+    "include/common/types.hpp": "4b2e378fdb0d49310d300e5cda1afd54ab8c1c8314e32a16ea6ce3b67637d849",
+    "include/datasets/generator.hpp": "b0f1944f3f94a0e5e5b20dfe6dadd26d937a43ca5e619f9de176b46ffe685e8b",
+    "include/structures/btree.hpp": "149a9d868e8844fbcd07b2a18dc35c66ae0f4d296dbbba5afffce122091514ca",
+    "include/structures/ordered_index.hpp": "95bde9cbdda68e10bd60f48d909351c5d463136cfab3165228b46839f50e3e6b",
+    "include/structures/skip_list.hpp": "0da4ba31a9e4aff917126c0f28ee2388a4a6db13d8aaf8044b81f8425dc0d178",
+    "src/algorithms/baselines.cpp": "0c93ca1513ff47a9bc9a3e37dbc56d0fded9d98e5a5c94e53c638c0df99e20d1",
+    "src/algorithms/mergesort.cpp": "a97bb2234bf8c70a814797f08c927b782131f0ea0500c96de5c0dcdb4ff42f03",
+    "src/algorithms/parallel_mergesort.cpp": "ad2bdd6210faffe88104806b2effd153b482e390426f621b5a2be0e62dcb2533",
+    "src/algorithms/pdqsort.cpp": "63b65adb2213139b6ff9e5bddede9eb70284be02137b551d8e5f3e92f162bcbf",
+    "src/algorithms/quicksort.cpp": "3a56801c6bb56020b39a0aa017eefc043c0a654666da73c7a6a603ec43a83505",
+    "src/algorithms/radixsort.cpp": "7899aadd7d3f67bee338f18cc05163c7a5979786bddc04b4652f38b45d9d4dac",
+    "src/algorithms/searching.cpp": "14806843911614e7d3adec3ccf1a4acde8bd97d697d8ea4af202e610f218fc18",
+    "src/algorithms/sorting.cpp": "d6ecb76f7aee469580052a1411f762b8dd1137adc1c81a172e7e9a0806ea4e7c",
+    "src/algorithms/timsort.cpp": "4379e74023f5f88139036f4dd1b1ea06ac481f9a2b48f396824d317d683f35b3",
+    "src/benchmark/comparison.cpp": "5df45e362a34bb12dd76c1ab1f4bbeac3c79deaee40a70efb8765aee98943b37",
+    "src/benchmark/comparison_input_main.cpp": "09c429a17cf275bcd64ac545b1bdcd4dba9cd00a57e08c49906d3f923e82567b",
+    "src/benchmark/comparisons.cpp": "47a34edb2b6b3cc1cbd9dfd86f418b6f88e0996af13dd83d74fbbd328920c249",
+    "src/benchmark/cpu_gpu_main.cpp": "e3a024a2916505f30a9a7cc360d78340bdc260c56522fe483e4ecd23f3d0a278",
+    "src/benchmark/cuda_main.cpp": "fcf423d6dd68a2003111b3231de82ffdaecfff20b3841c27a3fdef4592fae060",
+    "src/benchmark/memory.cpp": "843207d0ad5da07546b11fa926a9c1a713f622c71666149f1a93ca2e4fb7070a",
+    "src/benchmark/memory_json.cpp": "56276513d8a20f48c3d679d1d3b2f5c202d65a1f98ad33dbcb39c66891f430ea",
+    "src/benchmark/metrics_main.cpp": "2e4f6c321015a8a1a38d6bea877a9c64ac80e68c81ad4556a5e5effba16bc20d",
+    "src/benchmark/output.cpp": "38ca1243ec2b59d66d2d0137ea191d4706fad79755c34755ffce726299c2ddfb",
+    "src/benchmark/parallel_main.cpp": "b094a07b845e2b8854ea4f868ebc67e6202c2f19cc5f340eeb5e0f168fdc72c3",
+    "src/benchmark/parallel_timing.cpp": "7ea9a2f045fe56e996a0ed8ef78a93a7ff59ad76adc67fbe80f29d6f583e1d2c",
+    "src/benchmark/search_comparisons.cpp": "78058b6ca7e35a8dbab5944443a4d3928654171e30cf19cf54b0c2a86852eb02",
+    "src/benchmark/search_main.cpp": "0897d8392aa94b7dab1c4d74d5e009c483d2ee9925c865f7b7b3b8dcc4d78646",
+    "src/benchmark/search_timing.cpp": "a2a47a148f2c2745fe59a1e704309a3122d74174758f8a5a71cc74372b6a1dff",
+    "src/benchmark/structure_main.cpp": "e6bb70453d9f5af62cc77ec39b3ce31f261f711f44a428953b33690aec82b186",
+    "src/benchmark/structure_timing.cpp": "0750fb9f956a95d0313e5341925de480c808836240e500d7fc12b184bcf91a58",
+    "src/benchmark/timing.cpp": "1a3d5087cb2b43681ad69fe407d5deeb5d9d2ffa98c36c20a90e1ffd1e3efb9e",
+    "src/benchmark/timing_main.cpp": "31c0de82be2652475443f700377c991175c707f28c5a5ab8972f9c8a61f48a73",
+    "src/cuda/comparison_resources.cu": "6e7d5955c7f2f8f18a000ff45996091c9c46cb9e750f4c9943bbff0cfc54e146",
+    "src/cuda/cub_sort.cu": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
+    "src/cuda/cub_timing.cu": "8a49e5b2dcbde91a49f97ada15adf7e610ca0de8865dc6f703ec2af19bc9f3f7",
+    "src/cuda/runtime_probe.cu": "313d37414ae36529c4eab5cf5def9443bdec3b859eeff9b2e7b78e66a0aad73b",
+    "src/datasets/generator.cpp": "4a5cf9e840592361d77e92d147e544696d05b82b0f4c72a6d4871d8c0c726adf",
+    "src/main.cpp": "a6e2542c402ce1d24c32397064211b1817a7e0e0453a22bcbec1fee7ffa445a5",
+    "src/structures/btree.cpp": "0a033ae4bb2d22d8ba08211910da01a12815d713b7423e4d449ce1d562027677",
+    "src/structures/registry.cpp": "5f46245b9cb08c49ba4fbaa167c824d35713538052033b9c2d64c6ef11650610",
+    "src/structures/skip_list.cpp": "dc15fd493b1cf76289ffde424ee1c866e8eb1309c3db20aaf417b9f871366539",
+    "third_party/cub/LICENSE": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
+    "third_party/cub/README.md": "a1681b54542ce7d7db0c3f75e42b36ffaadf1bb4c8b594f30fbaf231def3f9f2",
+    "third_party/cub/UPSTREAM.json": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+    "third_party/pdqsort/README.md": "393fcfa6e18a26f35923210011628f726d208ff3f42c9e50f86baa2dcec8644b",
+    "third_party/pdqsort/UPSTREAM.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "third_party/pdqsort/license.txt": "323fc18e35fcf058d69d684022ef844f206cb8fefb2bac1298fa1767e0b9ae38",
+    "third_party/pdqsort/pdqsort.h": "1916aff237fc7ecc638dec6397662334552a1b6f823fa65011a8dfe831237fc0",
+    "third_party/timsort/LICENSE": "210f3341e9e04dc3004f416ae0e28dc7e8eaa84528c5966661186a1b512f34c3",
+    "third_party/timsort/README.md": "21bbccf7a32802d004021eced841f33be4cd826a4c46f53b85db6b93d59675c3",
+    "third_party/timsort/UPSTREAM.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "third_party/timsort/include/gfx/timsort.hpp": "a5cf0f0f61d92a62cf14528d1969a236db587b95678b088b5e38833d9865e9c9"
+  },
+  "production_headers_dependencies_verified": 80,
+  "protected_anchors_verified": 26,
+  "protected_identity_documents_verified": 2,
+  "repair_additive_evidence_files": 68,
+  "repair_baseline_build_metadata_verified": 21,
+  "repair_baseline_result_files_verified": 11448,
+  "repair_inventory": {
+    "README.md": {
+      "after": "89fce98a189d94cbdc767fccbeca3548d7923ba2f1ddecfeb656034f7dce24ec",
+      "before": "5a12bb7b3e38ce9fe0a75a278eedf8f5c0f7f74bd9b68f9bf960187592912a23"
+    },
+    "docs/AUDIT.md": {
+      "after": "72893ad7b0200d790e7de4fab87b746e80d83aeb36e2051cbe1c78327871137a",
+      "before": "36b90b5ff4d0e1ed3a0d0668d00df657b55cd42b37a945df4121185048826bba"
+    },
+    "docs/CTEST_BUILD_GUARD_v1.md": {
+      "after": "c754cd4d3b79eaed59885994112c5197d7f18324f85463e16add46442faeaf75",
+      "before": null
+    },
+    "docs/NON_TIMING_TEST_SELECTION_v1.json": {
+      "after": "8afd9ff3fb9d50cee284ae15476d8ea16cb2f867e932f7f49a1154473a3bdbaf",
+      "before": "9f103cac1554ae491838fbe6777d88ea93fc0df85ac9c478a16ab2c8fd9d456d"
+    },
+    "docs/ROADMAP.md": {
+      "after": "d0ed436525d3f285570dd5afd1ffff34ccca29ffde4e4e4e26e1c701bf777afa",
+      "before": "6bbdc8d3a64c82ce0aa154dcbb1b779120942f94c1114259a73e7b61b2c3a1e6"
+    },
+    "scripts/ctest_build_guard.py": {
+      "after": "f95928cab03bc9886ef6ae68f3a3b8386d8a86f5ae3f411557eba88e821957c9",
+      "before": null
+    },
+    "scripts/non_timing_tests.py": {
+      "after": "99dd6b2fcc99aa81962a477313f13d178e2f6ae01de12794d9908d3b82d05396",
+      "before": "c6eb159729a44dd8d12da95e49882d3c66cb78f17484b8e3034f2c1d65fee01e"
+    },
+    "tests/ctest_fixture.py": {
+      "after": "a53030aa3bd8f0b43415b37eec8c8df56f3ece0185e854a058ca88b012c4dd56",
+      "before": null
+    },
+    "tests/test_cpu_gpu_comparison.py": {
+      "after": "ca19c5ead3133d710e49b73dd556dec4d3a119e6c86b6d221927be667cd6e9d5",
+      "before": "aabee54e413c5efba862880f0f4bff36614089b4fb6d6091b9eae235fc3968c4"
+    },
+    "tests/test_cpu_gpu_safety.py": {
+      "after": "bb56043276c73c4c303bd1f7dc225db5908d6a2d3e06f20494ec4aa589663183",
+      "before": "832855c4ced18df51ea7f59beb3c888a7f9fbb4654c112717c65f5d6e65ea5dc"
+    },
+    "tests/test_ctest_build_guard.py": {
+      "after": "68aa92da813c0c5ad7770649f82d6ccbe51a37009f2d6eae05d1e3295ede1c4f",
+      "before": null
+    }
+  },
+  "retained_plan_matches_policy": true,
+  "review_start_build_metadata_verified": 21,
+  "review_start_project_files_verified": 177,
+  "review_start_result_files_verified": 11516,
+  "reviewed_source_snapshot_files_verified": 144,
+  "selected_cpu_tests": [
+    "baselines",
+    "cli",
+    "comparisons",
+    "cpu_gpu_comparison_framework",
+    "cuda_benchmark_analysis",
+    "cuda_preflight",
+    "cuda_sort_handoff",
+    "datasets",
+    "environment_manifest",
+    "memory",
+    "memory_unsupported",
+    "mergesort",
+    "metrics_cli",
+    "pdqsort",
+    "quicksort",
+    "radixsort",
+    "searching",
+    "structures",
+    "timsort"
+  ]
+}

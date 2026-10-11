@@ -1,0 +1,488 @@
+--- before/README.md
++++ README.md
+@@ -1,11 +1,23 @@
+-# Modern Search & Sorting Benchmark
+-
+-The frozen full CPU/GPU study remains blocked by its absent independent evidence
+-trust anchor and unavailable confirmed-free T4 execution/provenance. No full
+-comparison is claimed. The user's standing authorization permits execution only
+-after the unchanged gates pass. Local correctness now uses a separately reviewed
+-v5 source snapshot; historical v3 and inactive v4 are preserved. See the
+-[current audit](results/raw/autonomous_completion_20261011T095554571762Z/FINAL_AUDIT.md).
++# Modern Search & Sorting Benchmark — CPU-only release
++
++This release delivers an empirical CPU study: six sequential sorters, array
++search, Skip List/B-tree structures, OpenMP Merge Sort, and a learned rank index.
++It retains the completed 1M, multi-size, OpenMP, and 10M/100M CPU observations;
++no performance experiment was repeated for this release revision.
++
++Read the [CPU-only methodology and acceptance scope](docs/CPU_ONLY_RELEASE_v1.md),
++[final report](report/cpu_only_20261011T133332368294Z/FINAL_REPORT.md),
++[report PDF](report/cpu_only_20261011T133332368294Z/REPORT.pdf), and
++[12-slide presentation](report/cpu_only_20261011T133332368294Z/PRESENTATION.pdf).
++The [release audit](results/raw/cpu_only_release_20261011T133332368294Z/FINAL_AUDIT.md)
++records numerical reanalysis, correctness checks, and preservation.
++
++GPU execution and CUDA/CUB comparisons are deferred and are not CPU-release
++completion requirements. Their code, frozen protocols, pins, and historical
++artifacts remain preserved in place; see the [deferred archive index](docs/DEFERRED_GPU.md).
++No CPU-versus-GPU result is claimed. The independent CPU/GPU launch guard remains
++unchanged. Local CPU correctness uses the separate [v5 procedure](docs/LOCAL_VALIDATION_v5.md);
++historical v3 and inactive v4 are preserved.
+ 
+ This directory initially contained only `AGENTS.md`. Six C++17 sorting algorithms,
+ separate metrics and the reproducible timing framework are validated. The first
+@@ -13,20 +25,24 @@
+ 450 measured trials and 90 warm-ups; findings describe one recorded machine/session.
+ Array search and ordered-structure benchmarking have separate protocols and
+ executables. The additive learned rank index has passed deterministic correctness
+-and ASan/UBSan tests and a 48-dataset held-out CPU evaluation. Scale/report status
+-and external blockers are recorded in the roadmap and current audit.
++and ASan/UBSan tests and a 48-configuration held-out CPU evaluation (24 distinct
++sorted vectors). Scale/report status and limitations are recorded in the roadmap.
+ 
+ The default sorting adapter invokes the installed standard library's `std::sort`.
+ Project QuickSort, Merge Sort and signed Radix Sort, upstream PDQSort and upstream
+ Timsort have separate named adapters.
+ 
+-Build and test in Release mode:
+-
+-```sh
+-cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release
++Build in Release mode with CUDA explicitly disabled:
++
++```sh
++cmake -S . -B build/release -DCMAKE_BUILD_TYPE=Release -DMAB_ENABLE_OPENMP=ON -DMAB_ENABLE_CUDA=OFF -DMAB_ENABLE_CUDA_SORT=OFF -DMAB_ENABLE_CPU_GPU_COMPARISON=OFF
+ cmake --build build/release --parallel 2
+-ctest --test-dir build/release --output-on-failure
+-```
++```
++
++For correctness-only validation, follow [the guarded local procedure](docs/LOCAL_VALIDATION_v5.md).
++Do not invoke the full CTest registry to avoid repeating timing-bearing integration
++tests. Existing report data can be audited and regenerated without running any
++benchmark; see [reporting instructions](report/README.md).
+ 
+ Tests use explicit checks that remain enabled under `NDEBUG` and compare the
+ entire output with `std::stable_sort` or `std::sort`, including integer boundaries, duplicates,
+@@ -541,6 +557,12 @@
+ Colab/cloud guide, with GPU results explicitly not run until a device is verified.
+ 
+ ## CUDA readiness and cloud execution (Phase 7)
++
++**Deferred archive material.** This and the following CUDA/CPU-GPU sections
++retain historical implementation and validation notes. Their milestone-local
++claims are not current CPU-release completion criteria. Follow the
++[archive index](docs/DEFERRED_GPU.md) for context; no frozen full comparison was
++executed, and none of these GPU observations enters the CPU-only report.
+ 
+ CUDA support is **disabled by default** (`MAB_ENABLE_CUDA=OFF`). CPU algorithms,
+ registries, defaults and timing schemas are unchanged. Preflight needs only Python
+--- before/docs/ALGORITHMS.md
++++ docs/ALGORITHMS.md
+@@ -1,4 +1,11 @@
+ # Implemented algorithms
++
++Current [release scope is CPU-only](CPU_ONLY_RELEASE_v1.md): all six sequential
++sorters, three array searches, Skip List/B-tree variants, OpenMP Merge Sort and
++learned index remain implemented. `std_sort` remains the default. Any CUDA/CUB
++description below documents [deferred preserved code](DEFERRED_GPU.md), not a
++current release result or CPU-versus-GPU comparison. Implementations, pins and
++licenses are unchanged by this scope revision.
+ 
+ ## Learned rank index (additive standalone target)
+ 
+--- before/docs/AUDIT.md
++++ docs/AUDIT.md
+@@ -1,4 +1,36 @@
+ # Initial repository audit
++
++## CPU-only release revision — 2026-10-11
++
++The user explicitly removed GPU execution/CUDA/CUB comparison from current
++release requirements. Historical studies, protocols, source and report assets
++are preserved. [New final audit](../results/raw/cpu_only_release_20261011T133332368294Z/FINAL_AUDIT.md),
++[commands](../results/raw/cpu_only_release_20261011T133332368294Z/COMMANDS.md), and
++[integrity seal](../results/raw/cpu_only_release_20261011T133332368294Z/FINAL_INTEGRITY.json)
++record the scope revision and actual checks. Earlier entries below are history.
++
++- Existing CPU-only Release build checked successfully; fresh guarded correctness
++  selection passed 21/21 groups. Ten timing-bearing groups were excluded; two
++  internal GPU execution methods were intentionally skipped in host analysis.
++- Unchanged engine/build identities retain prior ASan/UBSan 21/21 evidence with
++  leak detection enabled. No sanitizer or performance experiment was repeated
++  without a source change requiring it.
++- Eight focused reporting regressions and eight existing metrics-parser tests
++  pass. An initial raw audit failed on tuple-versus-JSON-list representation in
++  OpenMP build metadata; numeric values matched. The fix and failed log are retained.
++- Existing raw observations regenerate every consumed CPU summary, including
++  1M sorting, full multi-family CPU orchestration, OpenMP, 10M/100M, learned index
++  and 240 separate metrics executions. Report tables use medians, not minima.
++- New CPU-only report/presentation, seven figures and numerical tables are under
++  `report/cpu_only_20261011T133332368294Z/`. Regeneration and preservation checks
++  are recorded in the release seal. Original generated assets remain unchanged.
++- No CPU performance trial, GPU work, CPU/GPU pilot or full comparison was run.
++  [Deferred GPU index](DEFERRED_GPU.md) documents preserved material. The
++  independent CPU/GPU approval guard remains enforced and is not a local CPU gate.
++
++The [CPU-only methodology](CPU_ONLY_RELEASE_v1.md) records hardware/compiler,
++batch-latency and RSS semantics, sample hierarchy, single-seed 100M limitations,
++uncontrolled conditions, unmeasured query maxima and race-detection limitations.
+ 
+ ## Latest autonomous completion evidence — 2026-10-11
+ 
+--- before/docs/BENCHMARKING.md
++++ docs/BENCHMARKING.md
+@@ -1,4 +1,16 @@
+ # Reproducible sorting protocol: sort_timing_v1
++
++## Current release: CPU-only
++
++The [CPU-only release contract](CPU_ONLY_RELEASE_v1.md) defines current acceptance,
++statistical aggregation and measurement limitations. Existing sorting, search,
++structure, OpenMP and learned-index studies are retained; no trial was repeated
++for this release revision. Updated report/presentation assets are under
++`report/cpu_only_20261011T133332368294Z/`, with raw-audited regeneration documented
++in [report/README.md](../report/README.md). Earlier report paths below are historical.
++All CUDA/CUB and CPU/GPU sections are [deferred archive material](DEFERRED_GPU.md),
++not required CPU-release work or current comparative findings. Frozen protocols
++remain unchanged.
+ 
+ ## Additional completed CPU experiments (2026-10-11)
+ 
+--- before/docs/METRICS.md
++++ docs/METRICS.md
+@@ -1,4 +1,11 @@
+ # Sorting metric definitions
++
++The current [CPU-only release methodology](CPU_ONLY_RELEASE_v1.md) distinguishes
++within-dataset repetitions from cross-dataset summaries, minima from medians,
++and RSS from auxiliary space. Existing CPU timing/count/memory observations are
++retained. GPU metric definitions later in this document are
++[deferred historical specifications](DEFERRED_GPU.md), not current release
++measurements or completion criteria.
+ 
+ ## Completed separate metrics matrix
+ 
+--- before/docs/ROADMAP.md
++++ docs/ROADMAP.md
+@@ -3,16 +3,17 @@
+ Work follows the phase order in `AGENTS.md`. Completion requires code, tests,
+ documentation, and actual validation; scaffolding alone is insufficient.
+ 
+-Current status (2026-10-11): the autonomous CPU completion work is retained in
+-[its audit](../results/raw/autonomous_completion_20261011T095554571762Z/FINAL_AUDIT.md).
+-Fresh guarded CPU Release and ASan/UBSan suites passed 21/21 groups, leaks enabled.
+-The learned rank index, held-out evaluation, AlphaDev primary-source review,
+-10M/100M CPU studies, separate comparison/RSS figures, report and presentation
+-are delivered. The full frozen CPU/GPU comparison was not launched: its independently
+-protected evidence approval is absent, and a confirmed free usable T4 runtime is
+-unavailable. Standing user authorization does not manufacture that trust artifact.
+-The [v5 selection](LOCAL_VALIDATION_v5.md) activates only local correctness;
+-v3 and the inactive v4 candidate remain unchanged. GPU evidence remains historical.
++Current release scope (2026-10-11): [CPU-only study](CPU_ONLY_RELEASE_v1.md).
++The user explicitly removed GPU execution and comparisons from release acceptance.
++CPU studies, separate counts/RSS, learned-index evaluation, AlphaDev research,
++OpenMP scaling, and 10M/100M results are retained. New CPU-only deliverables are
++under `report/cpu_only_20261011T133332368294Z/`; earlier assets remain unchanged.
++The [release audit](../results/raw/cpu_only_release_20261011T133332368294Z/FINAL_AUDIT.md)
++records raw-data verification and fresh guarded Release correctness results.
++Prior identity-matched ASan/UBSan evidence is reused for unchanged engine code.
++The [v5 selection](LOCAL_VALIDATION_v5.md), historical v3, and inactive v4 remain
++unchanged. [GPU material is deferred in place](DEFERRED_GPU.md), with its launch
++guards enforced; an unexecuted CPU/GPU study is not a CPU-release blocker.
+ 
+ | Phase | Status |
+ | --- | --- |
+@@ -23,12 +24,17 @@
+ | 4 — search data structures | Complete: Skip List and B-tree orders 10/16/32/64, differential/invariant tests, separate build/lookup smoke and verified immutable evidence |
+ | 5 — orchestration and analysis | Complete for CPU timing: strict all-family orchestration, hierarchical statistics, SVG/PDF variability plots/report, validated smoke and full multi-size study |
+ | 6 — OpenMP | Complete: stable task Merge Sort, team metadata, fresh 24/24 Release/sanitizer groups and validated 1/2/4/8-thread scaling study; TSan startup limitation retained |
+-| 7 — CUDA | Historical correctness, prepared timing smoke and pilot validated on T4; full comparison blocked by independent evidence trust and free GPU/build prerequisites, not by a request for redundant user permission |
++| 7 — CUDA | Deferred, outside this release: source, historical correctness/smoke/pilot evidence and frozen full comparison preserved; full frozen comparison not executed |
+ | 8 — learned index and AlphaDev study | Delivered: endpoint rank model with certified correction/fallback, 45,201 oracle checks, 48 held-out workload configurations, separate counts/memory, primary-source research; optional selector not implemented |
+ | 9 — 100M scale | Completed CPU extension: six sorters, five distributions, 10M at three seeds and 100M at one seed; 600 measured sorts, 120 warm-ups, zero failed/missing; single-seed 100M inference limited |
+-| 10 — report and presentation | Delivered for available evidence: reproducible Markdown/PDF report, 12-slide PDF/Markdown presentation and plot manifests; full CPU/GPU comparative conclusions explicitly unavailable |
+-
+-The entries below record milestone history; the status table and latest phase entry describe the current state.
++| 10 — report and presentation | CPU-only release delivered: raw-audited Markdown/PDF report, 12-slide presentation, seven figures, numerical tables and manifests; previous assets preserved |
++
++The entries below are historical milestone records, not current release requirements.
++Past statements about future CUDA work or incomplete phases are superseded by the
++CPU-only scope above. Remaining research limitations include individual-query
++maximum latency, isolated structure memory, race-detector support, and independent
++machine/session replication. These are explicitly unmeasured or deferred, not
++claimed as completed experiments.
+ 
+ Phase 0 validation: 2/2 CTest tests passed (310 differential sort cases and three
+ Python environment-manifest tests). See AUDIT.md for the initial missing-build
+--- before/report/README.md
++++ report/README.md
+@@ -1,11 +1,13 @@
+ # Reproducible research deliverables
+ 
+-The delivered report is [FINAL_REPORT.md](autonomous_20261011T095554571762Z/FINAL_REPORT.md)
+-with [a compact PDF](autonomous_20261011T095554571762Z/REPORT.pdf).
+-The [12-slide PDF](autonomous_20261011T095554571762Z/PRESENTATION.pdf) and
+-[slide source](autonomous_20261011T095554571762Z/PRESENTATION.md) explicitly identify
+-unavailable CPU/GPU full-study results. No GPU speedup claim is inferred from
+-device-only historical smoke timings.
++The CPU-only release is [FINAL_REPORT.md](cpu_only_20261011T133332368294Z/FINAL_REPORT.md)
++with [a compact PDF](cpu_only_20261011T133332368294Z/REPORT.pdf),
++[12-slide PDF](cpu_only_20261011T133332368294Z/PRESENTATION.pdf), and
++[slide source](cpu_only_20261011T133332368294Z/PRESENTATION.md).
++Seven figures cover sorting, scaling, search, structures, OpenMP, comparisons and
++RSS. GPU results are excluded. Earlier assets at
++`autonomous_20261011T095554571762Z/` and its `_regenerated` counterpart remain
++unchanged historical deliverables; they are not replaced in place.
+ 
+ Regenerate into a fresh directory:
+ 
+@@ -13,10 +15,16 @@
+ python3 -B report/generate.py --evidence results/raw/autonomous_completion_20261011T095554571762Z --learned results/processed/learned_rank_20261011T095554571762Z --metrics results/processed/count_memory_20261011T095554571762Z --output report/NEW_REPORT_DIRECTORY
+ ```
+ 
++Generation first validates summaries against immutable CPU raw observations;
++`RAW_VERIFICATION.json` records counts and source environment identities.
+ `INPUTS_SHA256.json` identifies every summary consumed; `PLOTS.json` records
+ filters, transformations and units. `RESULT_TABLES.json` preserves numerical
+ tables. Repeated generation is byte-identical in the retained environment,
+ including PDFs and PNGs; a different Matplotlib/font version may render differently.
+-See the raw audit for actual commands, source identities, initial failures and
++`RENDER_INPUTS_SHA256.json` also binds generator code and copied count/RSS figures.
++`verify_cpu.py` blocks subprocess launches during numerical reanalysis; it does
++not generate datasets or invoke algorithms. Existing output paths are rejected.
++See the [release audit](../results/raw/cpu_only_release_20261011T133332368294Z/FINAL_AUDIT.md)
++for actual commands, source identities, initial failures and
+ preservation checks. The additional count/RSS plots are generated by
+ `report/collect_metrics.py analyze`, separately from all timing runs.
+--- before/report/generate.py
++++ report/generate.py
+@@ -1,11 +1,13 @@
+ #!/usr/bin/env python3
+-"""Regenerate report, 12-slide PDF and figures from retained validated summaries."""
++"""Generate the CPU-only release from raw-audited retained CPU studies."""
+ import argparse
+ import hashlib
+ import json
+ from pathlib import Path
+ import statistics
+ import textwrap
++import shutil
++from verify_cpu import verify
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ 
+@@ -18,16 +20,21 @@
+     with path.open('x') as stream: json.dump(value,stream,indent=2,sort_keys=True,allow_nan=False);stream.write('\n')
+ 
+ 
+-def generate(evidence, learned, metrics, output):
++def input_paths(evidence, learned, metrics):
+     historical = ROOT / 'results/processed'
+-    paths = dict(sort1m=historical/'sorting_1m_20261009T172003802655Z/cross_seed.json',
++    return dict(sort1m=historical/'sorting_1m_20261009T172003802655Z/cross_seed.json',
+         cpu=historical/'phase5_full_20261009T191000587965Z/summary.json',
+         openmp=historical/'openmp_scaling_20261009T200852928292Z_retry1/summary.json',
+-        gpu=historical/'cuda_timing_20261009T231303050084Z/matrix.json',
+         learned=learned/'summary.json',metrics=metrics/'summary.json',
+         scale10=evidence/'sorting_10m_summary.json',scale100=evidence/'sorting_100m_summary.json')
++
++
++def generate(evidence, learned, metrics, output):
++    if output.exists() or output.is_symlink(): raise FileExistsError('report destination already exists')
++    raw_audit = verify(evidence, learned, metrics)
++    paths = input_paths(evidence, learned, metrics)
+     inputs = {k:load(p) for k,p in paths.items()}
+-    for k in ['cpu','openmp','gpu','scale10','scale100']: require(inputs[k]['complete'] is True,'incomplete '+k)
++    for k in ['cpu','openmp','scale10','scale100']: require(inputs[k]['complete'] is True,'incomplete '+k)
+     for k in ['learned','metrics']: require(inputs[k]['failed']==0 and inputs[k]['missing']==0,'incomplete '+k)
+     require(inputs['learned']['configurations']==48 and inputs['metrics']['configurations']==240,'wrong extension coverage')
+     require(sum(g['successful_trials'] for g in inputs['scale10']['groups'])==450,'10M trials')
+@@ -35,6 +42,7 @@
+     for k in ['scale10','scale100']:
+         require(all(g['failed_trials']==0 and g['missing_measured_trials']==0 and g['run_complete'] for g in inputs[k]['groups']), 'failed scale rows')
+     output.mkdir()
++    write(output/'RAW_VERIFICATION.json',raw_audit)
+     write(output/'INPUTS_SHA256.json',{str(p.relative_to(ROOT)):sha(p) for p in paths.values()})
+     import matplotlib
+     matplotlib.use('Agg')
+@@ -91,8 +99,26 @@
+                           unit='normalized batch ns/query',method='dataset medians divided by batch size; log y-axis'))
+ 
+     learned_rows=[r for r in inputs['learned']['cross_seed'] if r['size']==1000000]
+-    gpu_rows=[r for r in inputs['gpu']['groups'] if r['size']==65537 and r['distribution']=='uniform']
+     omp_rows=[r for r in inputs['openmp']['cross_dataset'] if r['size']==1000000 and r['distribution']=='uniform']
++    fig,ax=plt.subplots(figsize=(8,4.8),layout='constrained')
++    x=[r['threads'] for r in omp_rows];y=[r['algorithmic_speedup']['median'] for r in omp_rows]
++    ax.errorbar(x,y,yerr=[[m-r['algorithmic_speedup']['minimum'] for m,r in zip(y,omp_rows)],
++                         [r['algorithmic_speedup']['maximum']-m for m,r in zip(y,omp_rows)]],marker='o',capsize=4)
++    ax.axhline(1,color='gray',linestyle='--');ax.set_xticks(x);ax.set_ylim(bottom=0);ax.grid(alpha=.2)
++    ax.set(xlabel='Requested and observed team size',ylabel='Sequential Merge Sort / parallel Merge Sort',
++           title='Retained OpenMP: uniform N=1,000,000\nMedian of 3 dataset ratios; min–max spread; 5 trials/dataset')
++    fig.savefig(output/'openmp.png',dpi=220);plt.close(fig)
++    plots.append(dict(file='openmp.png',source=str(paths['openmp'].relative_to(ROOT)),
++        filters=dict(size=1000000,distribution='uniform'),unit='ratio',
++        method='ratio of within-dataset medians to sequential merge; median/min/max across seed ratios'))
++    for name in ['uniform_count.png','uniform_process_rss.png']:
++        shutil.copyfile(metrics/name,output/name)
++        plots.append(dict(file=name,source=str((metrics/name).relative_to(ROOT)),summary=str(paths['metrics'].relative_to(ROOT)),
++            method='retained separate instrumented observations; median/min/max across three seeds',
++            unit='comparisons/N' if name=='uniform_count.png' else 'process lifetime peak RSS MiB'))
++    # Record rendering inputs and code as well as the numerical summaries.
++    extra=[Path(__file__),Path(__file__).with_name('verify_cpu.py'),metrics/'uniform_count.png',metrics/'uniform_process_rss.png']
++    write(output/'RENDER_INPUTS_SHA256.json',{str(p.relative_to(ROOT)):sha(p) for p in extra})
+     sections=[]
+     def section(title,body):sections.append((title,body))
+     section('Abstract',
+@@ -101,19 +127,19 @@
+         'The retained CPU experiments and new held-out learned/10M/100M studies provide descriptive evidence. '
+         'The new scale extension completed 600 measured sorts and 120 warm-ups, all correct. '
+         'The learned study completed 480 measured query batches and 240 measured builds. '
+-        'A historical Tesla T4 CUB correctness suite and prepared-buffer timing smoke exist; the frozen full CPU/GPU study is NOT complete. '
+-        'Its external trust/runtime prerequisites remain unmet. No universal performance ranking or significance claim is made.')
++        'This release is CPU-only: GPU/CUDA/CUB execution and comparisons are deferred, not completion requirements. '
++        'No CPU-versus-GPU performance result is claimed. No universal performance ranking or significance claim is made.')
+     section('Introduction and research questions',
+         'How do input order and duplicate frequency affect concrete sort implementations? How do query outcome and location '
+         'affect array and ordered-index lookup? How does OpenMP scaling compare with sequential Merge Sort? '
+-        'When does a rank model require correction or fallback? Which timing boundaries make a CPU/GPU comparison defensible? '
++        'When does a rank model require correction or fallback? How do separate key-comparison and process-memory observations inform timing? '
+         'The project addresses these questions with deterministic inputs, full oracle checking and retained raw data.')
+     section('Related work and implementation identities',
+         'PDQSort is Orson Peters’ upstream implementation at commit b1ef26a55cdb60d236a5cb199c4234c704f46726 (Zlib). '
+         'Timsort is cpp-TimSort at99b612d9826e8387a30008f2b21be206181ad890 (MIT). std_sort is this toolchain’s standard-library sort, '
+         'not renamed PDQSort or Timsort. QuickSort has a depth budget and heapsort fallback. Merge Sort is stable and uses a temporary vector. '
+         'Signed Radix Sort uses four stable byte passes and a signed-order bit mapping. OpenMP tasks retain the sequential baseline. '
+-        'CUB3.0.1 DeviceRadixSort::SortKeys is pinned separately. See docs/ALGORITHMS.md and vendor UPSTREAM.json files for licenses/hashes. '
++        'See docs/ALGORITHMS.md and vendor UPSTREAM.json files for licenses/hashes. Deferred GPU code is excluded from this release’s result inputs. '
+         'The learned endpoint model and AlphaDev research review are documented in docs/LEARNED_INDEX_PROTOCOL_v1.md and docs/ALPHADEV_STUDY.md.')
+     section('Methodology and environment',
+         'Signed int32 generator-v1 uses a fresh mt19937_64(seed); distributions and rejection sampling are frozen in EXPERIMENT_PROTOCOL.md. '
+@@ -143,7 +169,7 @@
+     section('Results: search and ordered structures',
+         'The retained full CPU pipeline includes '+str(cpu['counts']['search']['successful_measured'])+' measured search batches and '
+         +str(cpu['counts']['structures']['successful_measured'])+' measured structure operations. '
+-        'Construction and lookup remain separate. Binary/exponential search return the first equal array index; structures implement unique-key set semantics. '
++        'Construction and lookup remain separate. Binary/exponential search return the first equal array index; structures implement ordered maps with unique keys and first-inserted payloads. '
+         'Mixed query batches use exact50% hit/miss ratios. The following is a representative retained uniform group. '
+         'Batch time/query count is a normalized average, not a directly measured individual-query latency or maximum.\n\n'+query_table+
+         '\n![Search](search.png)\n\n![Structures](structures.png)')
+@@ -156,30 +182,40 @@
+         'Workload labels are kept separate and are not pooled as independent datasets. '
+         'Evaluation seeds are held out from performance tuning; some also appear in correctness tests, which did not tune the model. '
+         'The indexed vector itself supplies model endpoints; this is not unseen-key neural generalization. '
+-        '480 measured lookups,240 measured builds,144 warm-ups and48000 untimed diagnostic queries completed with no failures. '
++        '480 measured lookup batches,240 measured builds,144 warm-ups and48000 untimed diagnostic queries completed with no failures. '
+         'Build includes the owned copy and validation. Query batches exclude build and diagnostics. '
+         'summary.json retains fallback rates, correction distance, separate comparisons and logical memory. '
+         'The model does not guarantee O(1) lookup; duplicate/skewed data can force O(logN) fallback.\n\n'+learned_table)
+-    section('Results: OpenMP, GPU scope, comparisons and memory',
+-        'The retained OpenMP scaling study completed1800 measured sorts and360 warm-ups across requested1/2/4/8-thread configurations. '
++    omp_table='|Threads|Median sequential-baseline speedup|Min–max dataset speedup|Median efficiency|Parallel-one-thread baseline speedup|\n|---:|---:|---:|---:|---:|\n'
++    for r in omp_rows:
++        s=r['algorithmic_speedup']
++        omp_table+=f"|{r['threads']}|{s['median']:.3f}|{s['minimum']:.3f}–{s['maximum']:.3f}|{r['algorithmic_efficiency']['median']:.3f}|{r['parallel_one_thread_speedup']['median']:.3f}|\n"
++    section('Results: OpenMP scaling',
++        'The retained OpenMP scaling study completed1800 measured sorts and360 warm-ups across requested1/2/4/8-thread configurations at32768/100000/1000000 keys. '
+         'Its primary speedup baseline is sequential Merge Sort; parallel one-thread timing is separately identified. '
+-        'A fresh untimed diagnostic observed one-worker teams below32768 and two-worker teams at/above32768 locally; '
+-        'team size does not establish task participation or race freedom.\n\n'
+-        'Historical T4 CUDA correctness and48 prepared timing-smoke configurations (sizes0/1/1025/65537) are retained. '
+-        'H2D/device/D2H use CUDA event scopes; prepared end-to-end uses the host clock and excludes allocation/setup. '
+-        'These diagnostic timings must not be used as a host-API CPU speedup denominator. '
+-        'The frozen48-dataset CPU/GPU study was not launched in this execution. '
+-        'The CLI exposed a meteredT4 rate of1.07 compute units/hour with0 balance; it was released before GPU execution. '
+-        'The independently reviewed evidence trust anchor is also absent; no approval was fabricated.\n\n'
++        'Speedup is T_sequential/T_parallel and efficiency is speedup/observed team size; values below1 are retained. '
++        'Ratios are calculated within datasets before equal weighting distinct input fingerprints. '
++        'The uniform1M table uses three seed datasets, each with five timings per implementation. '
++        'Team size does not establish task participation, physical-core concurrency or race freedom.\n\n'+omp_table+'\n![OpenMP scaling](openmp.png)')
++    section('Results: comparison counts and process memory',
+         '240 separate sort_metrics executions provide exact key-comparison counts for five adapters and process RSS. '
+         'Radix counting is unsupported. Counts have consistent executed-key-predicate semantics but do not model moves, cache misses or total instructions. '
+-        'RSS includes input/runtime/allocator/instrumentation and is not isolated auxiliary space. See the separate metric figures and manifest.')
++        'RSS includes input/runtime/allocator/instrumentation and is not isolated auxiliary space. '
++        'Each size/distribution/algorithm has three seed observations, not repeated RSS samples. '
++        'Median and min–max across these observations describe different inputs, not independent process-repeatability estimates.\n\n'
++        '![Separate comparison counts](uniform_count.png)\n\n![Process memory](uniform_process_rss.png)')
++    section('Release scope and deferred work',
++        'This is a complete CPU-only release for the declared studies. GPU execution, CUDA/CUB comparisons and the frozen CPU/GPU full study '
++        'are outside the release acceptance criteria. Their source, pins, protocols, matrices and failed/partial validation attempts are preserved in place '
++        'and indexed by docs/DEFERRED_GPU.md. Historical GPU pilots are separate earlier experiments, not observations from the unexecuted full protocol. '
++        'No GPU numbers enter the report tables or plots, and no CPU-versus-GPU conclusion is made. '
++        'The independent CPU/GPU approval gate remains enforced and unmodified; it is not a prerequisite for local CPU analysis or correctness. '
++        'Individual-query maxima, isolated structure allocations and independent-machine replication remain documented limitations, not fabricated deliverables.')
+     section('Statistical interpretation and threats to validity',
+         'Repeated timings are first summarized within each dataset using median, mean, sample SD, min and max. '
+         'Cross-seed summaries equally weight dataset medians; identical fingerprints are collapsed where the family analyzer specifies it. '
+         'No outliers are discarded and no confidence interval or significance claim is inferred from three seeds. '
+         '100M uses one seed, so only within-dataset variability exists. '
+-        'CPU/GPU transfer and host-call scopes are incompatible with device-only speedup ratios. '
+         'Shared runtime scheduling, SMT, allocator/cache history, frequency/thermal behavior and background load can confound observations. '
+         'Key-only tests cannot empirically distinguish the order of equal payloads; stability follows the documented merge strategy and existing generic stability tests. '
+         'Search individual-query maxima are not collected because the batch engine does not measure them; normalized batch maxima cannot substitute. '
+@@ -187,7 +223,7 @@
+         'ThreadSanitizer/OpenMP limitations in earlier audits mean ordinary passing tests are not a proof of race freedom.')
+     section('Conclusion, reproducibility and references',
+         'The validated CPU implementation, held-out model evaluation and completed100M feasibility extension support workload-specific analysis. '
+-        'The frozen full CPU/GPU comparison remains blocked, so a final CPU/GPU performance conclusion would be unsupported. '
++        'The release conclusions concern CPU implementations only. GPU comparisons are deferred and do not prevent completion of this CPU-only scope. '
+         'AlphaDev is reviewed from primary sources; no reinforcement-learning training or assembly discovery was reproduced.\n\n'
+         'Regenerate this report with `python3 report/generate.py --evidence '+str(evidence.relative_to(ROOT))+
+         ' --learned '+str(learned.relative_to(ROOT))+' --metrics '+str(metrics.relative_to(ROOT))+' --output NEW_REPORT_DIRECTORY`. '
+@@ -195,31 +231,32 @@
+         'FINAL_AUDIT.md and COMMANDS.md retain actual validation/build/experiment commands and failures. '
+         'Raw CSV remains immutable; derived outputs use new directories.\n\n'
+         'Primary references: [PDQSort](https://github.com/orlp/pdqsort); [cpp-TimSort](https://github.com/timsort/cpp-TimSort); '
+-        '[NVIDIA CUB](https://github.com/NVIDIA/cccl/tree/v3.0.1/cub); '
+         '[Kraska et al., SIGMOD2018](https://arxiv.org/abs/1712.01208v3); '
+         '[Mankowitz et al., Nature2023](https://www.nature.com/articles/s41586-023-06004-9); '
+         '[official AlphaDev archive](https://github.com/google-deepmind/alphadev).')
+ 
+     with (output/'FINAL_REPORT.md').open('x') as stream:
+         stream.write('# Large-Scale Evaluation of Modern Search and Sorting Algorithms\n\n'
+-                     'Evidence-based report; full CPU/GPU comparison explicitly incomplete.\n\n')
++                     'CPU-only release v1: six sorters, search, structures, OpenMP and learned-index studies. GPU comparisons are deferred and excluded.\n\n')
+         for i,(title,body) in enumerate(sections,1):stream.write(f'## {i}. {title}\n\n{body}\n\n')
+     write(output/'PLOTS.json',plots)
+-    write(output/'RESULT_TABLES.json',dict(cpu_scaling=scale_rows,learned_1m=learned_rows,gpu_smoke_65537_uniform=gpu_rows,openmp_1m_uniform=omp_rows))
++    write(output/'RESULT_TABLES.json',dict(scope='cpu_only_release_v1',sorting_1m=inputs['sort1m']['groups'],
++        cpu_scaling=scale_rows,search=search,structures=structures,learned_1m=learned_rows,
++        openmp_1m_uniform=omp_rows,comparisons_memory=inputs['metrics']['groups']))
+ 
+     slides=[
+-        ('Modern Search and Sorting Benchmark', ['Individual C++17/Python research project','Correctness first; reproducible raw data; scope-specific observations','CPU experiments complete for delivered matrices; frozen CPU/GPU full study remains blocked'],None),
+-        ('Research questions and implementations', ['Six sequential sorters: std_sort, QuickSort, PDQSort, Timsort, Merge Sort, Signed Radix Sort','Linear/Binary/Exponential Search; Skip List; B-tree orders10/16/32/64','OpenMP Merge Sort; CUB radix adapter; endpoint learned rank index'],None),
+-        ('Experimental design', ['Deterministic signed-int32 generator; identical inputs; oracle equality outside timing','Release, steady_clock; one warm-up/five measured repetitions','Separate counts/RSS and GPU event scopes; no hidden setup or device-only speedup ratio','Dataset medians first; no outlier removal or unsupported significance claims'],None),
++        ('Modern Search and Sorting Benchmark', ['CPU-only C++17/Python academic release','Correctness first; reproducible raw data; scope-specific observations','CPU studies complete for declared matrices; GPU execution/comparisons deferred'],None),
++        ('Research questions and implementations', ['Six sequential sorters: std_sort, QuickSort, PDQSort, Timsort, Merge Sort, Signed Radix Sort','Linear/Binary/Exponential Search; Skip List; B-tree orders10/16/32/64','OpenMP Merge Sort and endpoint learned rank index'],None),
++        ('Experimental design', ['Deterministic signed-int32 generator; identical inputs; oracle equality outside timing','Release, steady_clock; one warm-up/five measured repetitions','Separate key counts/process RSS; allocation scope documented per engine','Dataset medians first; no outlier removal or unsupported significance claims'],None),
+         ('1M sorting: workload-specific observations',['Uniform group shown; other distributions differ','Three seed datasets, five trials each; spread is not a confidence interval'],'sorting_1m.png'),
+         ('CPU scaling through100M',['10M:450 measured +90 warm-ups;100M:150 measured +30 warm-ups','All six sorters, five distributions;100M has one seed','Log/log axes; distinct study sessions; no extrapolated performance'],'cpu_scaling.png'),
+         ('Search: query outcome and position matter',['Same1000-query mixed50% batch for each searcher','Normalized batch average, not directly measured individual-query latency'],'search.png'),
+-        ('Ordered structures',['Skip List and B-tree variants; unique-key set contract','Construction and lookup timed separately; representative uniform lookup shown'],'structures.png'),
++        ('Ordered structures',['Skip List and B-tree variants; ordered maps preserve first-inserted payloads','Construction and lookup timed separately; representative uniform lookup shown'],'structures.png'),
+         ('Learned rank index',['Endpoint affine prediction; radius32 correction; certified binary fallback','48 held-out configurations;480 measured lookup batches;240 measured builds','48000 separate diagnostics; counts, correction distance, fallback and logical storage retained','No constant-time guarantee; duplicate-heavy data can be poorly predicted'],None),
+-        ('Parallel and GPU findings',['Historical OpenMP sweep:1800 measured sorts; sequential Merge Sort is the primary baseline','Fresh untimed worker diagnostic confirms team threshold, not task participation/race freedom','T4 correctness and prepared timing smoke are historical, validated separately','Full frozen CPU/GPU comparison NOT launched: external trust anchor and confirmed free runtime unavailable'],None),
++        ('OpenMP scaling',['1800 sorts;360 warm-ups;1/2/4/8 teams','Sequential Merge Sort baseline; cross-seed median/min–max','Team size does not prove task participation or race freedom'],'openmp.png'),
+         ('Comparison counts and memory',['240 separate instrumented executions; five comparison adapters; Radix count unsupported','Comparison counts exclude moves, bookkeeping and instructions','RSS is whole-process lifetime peak, not isolated auxiliary allocation','All plots derive from retained observations; missing metrics remain explicit'],None),
+         ('Limitations and AlphaDev',['Background load, frequency, thermals and cache state not controlled','Three seeds do not establish statistical significance;100M has one seed','Batch averages cannot establish maximum individual-query latency','AlphaDev primary-source review only: no training/discovery reproduction'],None),
+-        ('Conclusion and reproducibility',['CPU core, learned evaluation, scaling and this report are reproducible from retained data','Historical evidence and frozen protocols preserved; failed attempts retained','Frozen CPU/GPU launch guards remain enforced; no fabricated approval or provenance','INPUTS_SHA256.json, PLOTS.json, audit and command records identify every derived claim'],None)]
++        ('Conclusion and reproducibility',['CPU-only studies/report are reproducible from retained raw evidence','All historical assets preserved; GPU source/protocols/pilots deferred in place','No CPU-versus-GPU comparison; deferred guards remain enforced','RAW_VERIFICATION.json, INPUTS_SHA256.json, PLOTS.json and audits trace the results'],None)]
+     with (output/'PRESENTATION.md').open('x') as stream:
+         for i,(title,bullets,image) in enumerate(slides,1):
+             stream.write(f'# Slide{i}: {title}\n\n'+'\n'.join('- '+b for b in bullets)+'\n\n')
+@@ -251,10 +288,10 @@
+                 fig.text(.08,.89,'\n'.join(lines[offset:offset+48]),fontsize=10,va='top',linespacing=1.4)
+                 fig.text(.08,.03,'Full tables and sources: FINAL_REPORT.md / INPUTS_SHA256.json',fontsize=8)
+                 pdf.savefig(fig);plt.close(fig)
+-        for name in ['sorting_1m.png','cpu_scaling.png','search.png','structures.png']:
++        for name in ['sorting_1m.png','cpu_scaling.png','search.png','structures.png','openmp.png','uniform_count.png','uniform_process_rss.png']:
+             fig,axis=plt.subplots(figsize=(8.27,6));axis.imshow(plt.imread(output/name));axis.axis('off');pdf.savefig(fig);plt.close(fig)
+     write(output/'SHA256.json',{p.name:sha(p) for p in sorted(output.iterdir()) if p.is_file()})
+-    print('Generated evidence report,12-slide PDF and4 figures:',output)
++    print('Generated CPU-only raw-audited report,12-slide PDF and7 figures:',output)
+ 
+ 
+ if __name__=='__main__':

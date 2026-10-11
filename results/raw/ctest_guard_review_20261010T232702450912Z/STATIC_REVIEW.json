@@ -1,0 +1,183 @@
+{
+  "concurrency_qualification": "Boundary rechecks detect inter-boundary modifications but are not atomic; exclusive quiescent trees and trusted tools remain unenforced assumptions.",
+  "guard_methods": {
+    "test_clean_fixture_runner_callbacks_are_only_python_fakes": 62,
+    "test_clean_reviewed_fixture_preserves_exact_19_plan": 55,
+    "test_cli_clean_default_uses_only_explicit_fake_discovery": 195,
+    "test_cli_clean_retained_json_never_invokes_subprocess": 188,
+    "test_cli_default_and_retained_json_reject_hooks_before_subprocess": 179,
+    "test_ctest_environment_override_and_unreviewed_wrapper_rejected": 145,
+    "test_custom_pre_and_post_hooks_and_ctest_variant_fail_before_discovery": 67,
+    "test_dart_unknown_commands_duplicate_and_malformed_records_rejected": 225,
+    "test_discovery_command_properties_and_registry_identity_must_match_guard": 238,
+    "test_duplicates_and_missing_declarations_rejected": 133,
+    "test_exact_prior_review_inert_hook_fixture_is_rejected_before_discovery": 80,
+    "test_final_boundary_rechecks_build_metadata": 168,
+    "test_gpu_metadata_fixture_still_requires_opt_in_never_selects_diagnostics": 202,
+    "test_hook_added_during_fake_discovery_never_reaches_execution": 161,
+    "test_malformed_ambiguous_and_control_flow_are_rejected": 122,
+    "test_metadata_modified_during_fake_discovery_never_reaches_execution": 152,
+    "test_missing_file_and_directory_rejected": 118,
+    "test_modified_previously_reviewed_command_rejected": 99,
+    "test_modified_reviewed_properties_and_backtrace_rejected": 103,
+    "test_reviewed_bracket_quoted_generator_format": 220,
+    "test_reviewed_cuda_backtrace_matches_retained_generator_stack_shape": 210,
+    "test_reviewed_dart_metadata_and_modified_command": 230,
+    "test_source_manifest_mismatch_rejected_before_discovery": 176,
+    "test_subdirs_nested_unreviewed_file_fails_closed": 86,
+    "test_symlinked_metadata_and_build_rejected": 139,
+    "test_unreadable_file_rejected_even_under_privileged_test_user": 110,
+    "test_unreferenced_nested_metadata_and_hooks_also_rejected": 93,
+    "test_unreviewed_include_rejected_without_reading_or_running_included_code": 75
+  },
+  "initial_guard_correction_diff": "--- retained_attempt1\n+++ current\n@@ -72,7 +72,7 @@\n     for line in raw.decode('utf-8', errors='strict').splitlines():\n         if not line.strip() or line.lstrip().startswith('#'):\n             continue\n-        require(re.fullmatch(r'[A-Za-z]+: [^\\x00\\r\\n]*', line) is not None,\n+        require(re.fullmatch(r'[A-Za-z][A-Za-z0-9]*: [^\\x00\\r\\n]*', line) is not None,\n                 'malformed Dart configuration')\n         key, value = line.split(': ', 1)\n         require(key not in values, 'duplicate Dart setting')\n",
+  "initial_regression_failure": {
+    "errors": 1,
+    "exit_code": 1,
+    "methods": 26,
+    "passed": 25,
+    "reason": "Dart key grammar excluded digits; retained error and source correction inspected"
+  },
+  "legacy_paths_outside_guard": {
+    "scope_note": "Intentional full/timing workflows do not silently enter prerequisites-only; universal guard coverage is not implemented.",
+    "scripts/validate_cpu_gpu_pilot.py": [
+      49,
+      58,
+      67,
+      85
+    ],
+    "scripts/validate_cuda_sort.py": [
+      113
+    ],
+    "scripts/validate_cuda_timing.py": [
+      49
+    ]
+  },
+  "method_counts": {
+    "distinct_total": 39,
+    "existing_selector": 11,
+    "new_guard": 28
+  },
+  "relative_discovery_path_static_counterexample": {
+    "callback_lines": [
+      20,
+      21,
+      26
+    ],
+    "current_prerequisite_calls_supply_absolute_paths": true,
+    "different_tree_identities": true,
+    "discovery_argv_argument": "build/REVIEW_PATH_EXAMPLE",
+    "discovery_line": 139,
+    "existing_invoke_callback_cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+    "existing_tests_use_absolute_temporary_build_paths": true,
+    "fix_recommendation_only": "Pin discovery to guarded[build_dir], or reject nonabsolute paths before any callback; add inert mixed-cwd coverage.",
+    "guard_lines": [
+      106,
+      107,
+      156
+    ],
+    "kind": "static control-flow/path analysis, not executed",
+    "public_entry": "scripts/non_timing_tests.py:selected_ctest:133",
+    "relative_argument_example": "build/REVIEW_PATH_EXAMPLE",
+    "tree_checked_by_guard": "/tmp/REVIEW_CALLER_EXAMPLE/build/REVIEW_PATH_EXAMPLE",
+    "tree_opened_by_that_callback": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/REVIEW_PATH_EXAMPLE",
+    "validator_cwd_example": "/tmp/REVIEW_CALLER_EXAMPLE"
+  },
+  "retained_success_logs_match_current_method_names": true,
+  "selector_methods": {
+    "test_bad_discovery_never_reaches_execution_callback": 210,
+    "test_even_a_relabelled_known_timing_entry_point_is_forbidden": 183,
+    "test_exact_cpu_list_excludes_all_timing_tests_and_known_32768_case": 127,
+    "test_fixture_dependencies_environment_and_missing_commands_rejected": 168,
+    "test_gpu_correctness_requires_explicit_opt_in_and_never_includes_gpu_benchmark": 141,
+    "test_non_timing_prerequisites_cannot_authorize_a_study": 217,
+    "test_safe_name_cannot_mask_timing_command_or_arguments": 160,
+    "test_selection_is_saved_before_execution_callback": 195,
+    "test_source_snapshot_change_requires_reclassification": 176,
+    "test_unclassified_manifest_entry_rejected": 188,
+    "test_unknown_missing_duplicate_and_malformed_discovery_fail_closed": 151
+  },
+  "source_inventory": {
+    "AGENTS.md": {
+      "lines": 301,
+      "sha256": "328d3af1dc97f3022bacae39693457496dc7d3ce0d670a83288969488b50413b"
+    },
+    "CMakeLists.txt": {
+      "lines": 227,
+      "sha256": "5bb6e8d6e0de052fcb269e7f23d51f6c6ebb827f12e6565ae53343c332bf65fe"
+    },
+    "README.md": {
+      "lines": 804,
+      "sha256": "89fce98a189d94cbdc767fccbeca3548d7923ba2f1ddecfeb656034f7dce24ec"
+    },
+    "cmake/cuda.cmake": {
+      "lines": 86,
+      "sha256": "575474ecb26c0c18e1bed301404425d55206dc47bb9df1ce59cfdcaff98898bd"
+    },
+    "docs/CTEST_BUILD_GUARD_v1.md": {
+      "lines": 76,
+      "sha256": "c754cd4d3b79eaed59885994112c5197d7f18324f85463e16add46442faeaf75"
+    },
+    "docs/EXPERIMENT_PROTOCOL.md": {
+      "lines": 250,
+      "sha256": "7be7c4f3c8703fa018534dd98dd9290c810374a4e4f4a38f7897fc1735f009c2"
+    },
+    "docs/NON_TIMING_TEST_SELECTION_v1.json": {
+      "lines": 605,
+      "sha256": "8afd9ff3fb9d50cee284ae15476d8ea16cb2f867e932f7f49a1154473a3bdbaf"
+    },
+    "docs/ROADMAP.md": {
+      "lines": 480,
+      "sha256": "d0ed436525d3f285570dd5afd1ffff34ccca29ffde4e4e4e26e1c701bf777afa"
+    },
+    "scripts/cpu_gpu_protocol.py": {
+      "lines": 90,
+      "sha256": "1c11df990ebe642dfc40271fc0970d0051a9e5c883c2e2bd622cc698ac3d6ea4"
+    },
+    "scripts/cpu_gpu_provenance.py": {
+      "lines": 95,
+      "sha256": "590735aacd70238c718e3943d7e8de01020ee948e05c0cc17fd6d8d263a11f3f"
+    },
+    "scripts/ctest_build_guard.py": {
+      "lines": 157,
+      "sha256": "f95928cab03bc9886ef6ae68f3a3b8386d8a86f5ae3f411557eba88e821957c9"
+    },
+    "scripts/non_timing_tests.py": {
+      "lines": 180,
+      "sha256": "99dd6b2fcc99aa81962a477313f13d178e2f6ae01de12794d9908d3b82d05396"
+    },
+    "scripts/run_cpu_gpu_pilot.py": {
+      "lines": 230,
+      "sha256": "44af462ec585480ffcacbcd62ada99cdc28576abbdbeccdaa5bb8317cd73ba8a"
+    },
+    "scripts/validate_cpu_gpu_pilot.py": {
+      "lines": 117,
+      "sha256": "6985e5c3e1d7817146da0e498c2c0013cfc38c2063d11aeaa513428610ee00dc"
+    },
+    "scripts/validate_cuda_sort.py": {
+      "lines": 138,
+      "sha256": "e26d46059d7f82ec601304730178039fe26e0ccb463c3ad4ee757deb997150bf"
+    },
+    "scripts/validate_cuda_timing.py": {
+      "lines": 85,
+      "sha256": "6a891b7c3d99baba0a23521041cec723737ebcf06607fb0deee2ef84dfd7133e"
+    },
+    "tests/ctest_fixture.py": {
+      "lines": 26,
+      "sha256": "a53030aa3bd8f0b43415b37eec8c8df56f3ece0185e854a058ca88b012c4dd56"
+    },
+    "tests/test_cpu_gpu_comparison.py": {
+      "lines": 484,
+      "sha256": "ca19c5ead3133d710e49b73dd556dec4d3a119e6c86b6d221927be667cd6e9d5"
+    },
+    "tests/test_cpu_gpu_safety.py": {
+      "lines": 228,
+      "sha256": "bb56043276c73c4c303bd1f7dc225db5908d6a2d3e06f20494ec4aa589663183"
+    },
+    "tests/test_ctest_build_guard.py": {
+      "lines": 250,
+      "sha256": "68aa92da813c0c5ad7770649f82d6ccbe51a37009f2d6eae05d1e3295ede1c4f"
+    }
+  },
+  "tests_executed_by_this_review": 0
+}

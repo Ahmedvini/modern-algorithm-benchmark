@@ -1,0 +1,6 @@
+{
+  "command": "python3 -B results/raw/cpu_only_release_20261011T133332368294Z/seal_release.py",
+  "exit_code": 0,
+  "purpose": "Evidence generation and hashing only",
+  "study_launched": false
+}

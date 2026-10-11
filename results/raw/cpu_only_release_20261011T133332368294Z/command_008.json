@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B - <<'PY'\nimport sys,json,pathlib\nsys.path.insert(0,'scripts')\nfrom analyze_parallel_results import analyze\nx,_=analyze(pathlib.Path('results/raw/openmp_scaling_20261009T200852928292Z_retry1'))\ny=json.loads(pathlib.Path('results/processed/openmp_scaling_20261009T200852928292Z_retry1/summary.json').read_text())\ndef diff(a,b,p=''):\n if type(a)!=type(b): print(p,type(a),type(b));return\n if isinstance(a,dict):\n  for k in a.keys()|b.keys():\n   if k not in a or k not in b:print(p,k,'missing')\n   elif a[k]!=b[k]:diff(a[k],b[k],p+'/'+k)\n elif isinstance(a,list):\n  if len(a)!=len(b):print(p,'length',len(a),len(b))\n  else:\n   for i,(u,v) in enumerate(zip(a,b)):\n    if u!=v:diff(u,v,p+'/'+str(i))\n else:print(p,repr(a),repr(b))\ndiff(x,y)\nPY",
+  "purpose": "Diagnose raw OpenMP audit mismatch without launching executables",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T13:42:31.699150+00:00",
+  "exit_code": 0,
+  "stdout": "/build_identity <class 'tuple'> <class 'list'>\n",
+  "stderr": ""
+}

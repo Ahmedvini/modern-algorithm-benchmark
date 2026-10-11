@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B '/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_only_release_20261011T133332368294Z/validate_cpu.py'",
+  "purpose": "Run existing guarded CPU-only Release correctness suite after static path/source/build classification; excludes all timing tests",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T13:39:23.886415+00:00",
+  "exit_code": 0,
+  "stdout": "Static source/build/path gate passed; exact21 untimed names: baselines, cli, comparisons, cpu_gpu_comparison_framework, cuda_benchmark_analysis, cuda_preflight, cuda_sort_handoff, datasets, environment_manifest, memory, memory_unsupported, mergesort, metrics_cli, parallel_workers_correctness, pdqsort, quicksort, radixsort, searching, structures, timsort, validation_policy\ncpu_release_discovery completed exit 0\ncpu_release completed exit 0\n",
+  "stderr": ""
+}

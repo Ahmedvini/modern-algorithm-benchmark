@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "ctest",
+    "--test-dir",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+    "--output-on-failure",
+    "-V",
+    "--parallel",
+    "1",
+    "-R",
+    "^(baselines|cli|comparisons|cpu_gpu_comparison_framework|cuda_benchmark_analysis|cuda_preflight|cuda_sort_handoff|datasets|environment_manifest|memory|memory_unsupported|mergesort|metrics_cli|parallel_workers_correctness|pdqsort|quicksort|radixsort|searching|structures|timsort|validation_policy)$"
+  ],
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "omp_environment": {
+    "OMP_DYNAMIC": null,
+    "OMP_MAX_ACTIVE_LEVELS": null,
+    "OMP_PROC_BIND": null,
+    "OMP_THREAD_LIMIT": null,
+    "OMP_WAIT_POLICY": null
+  },
+  "started_utc": "2026-10-11T13:39:24.060531+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B - <<'PY'\nimport json,pathlib,sys\nsys.path.insert(0,'report')\nfrom verify_cpu import verify\np=pathlib.Path('results/raw/autonomous_completion_20261011T095554571762Z')\nv=verify(p,pathlib.Path('results/processed/learned_rank_20261011T095554571762Z'),pathlib.Path('results/processed/count_memory_20261011T095554571762Z'))\nwith pathlib.Path(\"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/cpu_only_release_20261011T133332368294Z/RAW_NUMERIC_AUDIT.json\").open('x') as f:json.dump(v,f,indent=2,sort_keys=True)\nprint(json.dumps(v,indent=2))\nPY",
+  "purpose": "Recompute every CPU report summary from immutable raw observations using existing parsers; subprocess/workload execution blocked",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T13:37:40.203454+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 5, in <module>\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/report/verify_cpu.py\", line 37, in verify\n    return _verify(Path(evidence), Path(learned), Path(metrics))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/report/verify_cpu.py\", line 73, in _verify\n    require(omp == load(processed/omp_raw.name/'summary.json') and omp['complete'], 'OpenMP raw/summary mismatch')\n  File \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/report/verify_cpu.py\", line 19, in require\n    if not ok: raise ValueError(message)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: OpenMP raw/summary mismatch\n"
+}

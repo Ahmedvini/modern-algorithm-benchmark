@@ -1,0 +1,9 @@
+{
+  "command": "python3 -B report/test_cpu_release.py -v\npython3 -B report/test_tools.py -v",
+  "purpose": "Run focused CPU-release report/statistical regressions and existing synthetic metrics parser tests; subprocess launches blocked",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "started_utc": "2026-10-11T13:38:53.874562+00:00",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "test_duplicate_seed_rejected (__main__.CPUReleaseTests.test_duplicate_seed_rejected) ... ok\ntest_existing_output_preserved_before_any_input_work (__main__.CPUReleaseTests.test_existing_output_preserved_before_any_input_work) ... ok\ntest_failed_missing_or_incomplete_dataset_rejected (__main__.CPUReleaseTests.test_failed_missing_or_incomplete_dataset_rejected) ... ok\ntest_inputs_are_cpu_only (__main__.CPUReleaseTests.test_inputs_are_cpu_only) ... ok\ntest_median_is_not_minimum_or_mean (__main__.CPUReleaseTests.test_median_is_not_minimum_or_mean) ... ok\ntest_missing_seed_rejected (__main__.CPUReleaseTests.test_missing_seed_rejected) ... ok\ntest_sample_standard_deviation (__main__.CPUReleaseTests.test_sample_standard_deviation) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.004s\n\nOK\ntest_api_field_is_not_wire_schema (__main__.MetricsTests.test_api_field_is_not_wire_schema) ... ok\ntest_bad_memory (__main__.MetricsTests.test_bad_memory) ... ok\ntest_failed_exit (__main__.MetricsTests.test_failed_exit) ... ok\ntest_identity (__main__.MetricsTests.test_identity) ... ok\ntest_invalid_counts (__main__.MetricsTests.test_invalid_counts) ... ok\ntest_malformed_record (__main__.MetricsTests.test_malformed_record) ... ok\ntest_unsupported_memory (__main__.MetricsTests.test_unsupported_memory) ... ok\ntest_valid (__main__.MetricsTests.test_valid) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.002s\n\nOK\n"
+}
