@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/scripts/run_matrix.py",
+    "--binary",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/release/sort_benchmark",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/phase5_full_20261009T191000587965Z/sorting",
+    "--sizes",
+    "1000,10000,100000,1000000",
+    "--seeds",
+    "1729,42,2718",
+    "--distributions",
+    "uniform,sorted,reverse_sorted,duplicate_heavy,nearly_sorted",
+    "--sorts",
+    "std_sort,quick_sort,pdq_sort,tim_sort,merge_sort,radix_sort",
+    "--repetitions",
+    "5",
+    "--warmups",
+    "1",
+    "--memory-limit-mib",
+    "1024",
+    "--distinct",
+    "16"
+  ],
+  "started_utc": "2026-10-09T19:31:25.698528+00:00"
+}
