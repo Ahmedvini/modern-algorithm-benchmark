@@ -1,0 +1,1401 @@
+{
+  "figures": [
+    {
+      "distribution": "uniform",
+      "metric": "parallel_median_ns",
+      "outputs": {
+        "pdf": "uniform_parallel_median_ns.pdf",
+        "svg": "uniform_parallel_median_ns.svg"
+      },
+      "points": [
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 28,
+            "mean": 28,
+            "median": 28,
+            "minimum": 28,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 28,
+            "mean": 28,
+            "median": 28,
+            "minimum": 28,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 29,
+            "mean": 29,
+            "median": 29,
+            "minimum": 29,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 29,
+            "mean": 29,
+            "median": 29,
+            "minimum": 29,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 1856588,
+            "mean": 1856588,
+            "median": 1856588,
+            "minimum": 1856588,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 2095735,
+            "mean": 2095735,
+            "median": 2095735,
+            "minimum": 2095735,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 2037388,
+            "mean": 2037388,
+            "median": 2037388,
+            "minimum": 2037388,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 2075707,
+            "mean": 2075707,
+            "median": 2075707,
+            "minimum": 2075707,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 2014185,
+            "mean": 2014185,
+            "median": 2014185,
+            "minimum": 2014185,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1033885,
+            "mean": 1033885,
+            "median": 1033885,
+            "minimum": 1033885,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1013972,
+            "mean": 1013972,
+            "median": 1013972,
+            "minimum": 1013972,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1244254,
+            "mean": 1244254,
+            "median": 1244254,
+            "minimum": 1244254,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 4317623,
+            "mean": 4317623,
+            "median": 4317623,
+            "minimum": 4317623,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2132527,
+            "mean": 2132527,
+            "median": 2132527,
+            "minimum": 2132527,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1782829,
+            "mean": 1782829,
+            "median": 1782829,
+            "minimum": 1782829,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1557579,
+            "mean": 1557579,
+            "median": 1557579,
+            "minimum": 1557579,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "ms"
+    },
+    {
+      "distribution": "uniform",
+      "metric": "algorithmic_speedup",
+      "outputs": {
+        "pdf": "uniform_algorithmic_speedup.pdf",
+        "svg": "uniform_algorithmic_speedup.svg"
+      },
+      "points": [
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.9176793591452622,
+            "mean": 0.9176793591452622,
+            "median": 0.9176793591452622,
+            "minimum": 0.9176793591452622,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.7166580422387403,
+            "mean": 1.7166580422387403,
+            "median": 1.7166580422387403,
+            "minimum": 1.7166580422387403,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.6453817265171031,
+            "mean": 1.6453817265171031,
+            "median": 1.6453817265171031,
+            "minimum": 1.6453817265171031,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.7495479218873318,
+            "mean": 1.7495479218873318,
+            "median": 1.7495479218873318,
+            "minimum": 1.7495479218873318,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.9403917386951107,
+            "mean": 0.9403917386951107,
+            "median": 0.9403917386951107,
+            "minimum": 0.9403917386951107,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.643702049258931,
+            "mean": 1.643702049258931,
+            "median": 1.643702049258931,
+            "minimum": 1.643702049258931,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.03845180889474,
+            "mean": 2.03845180889474,
+            "median": 2.03845180889474,
+            "minimum": 2.03845180889474,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.3830816928065928,
+            "mean": 2.3830816928065928,
+            "median": 2.3830816928065928,
+            "minimum": 2.3830816928065928,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "Sequential Merge Sort / parallel"
+    },
+    {
+      "distribution": "uniform",
+      "metric": "parallel_one_thread_speedup",
+      "outputs": {
+        "pdf": "uniform_parallel_one_thread_speedup.pdf",
+        "svg": "uniform_parallel_one_thread_speedup.svg"
+      },
+      "points": [
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.9481712182689563,
+            "mean": 1.9481712182689563,
+            "median": 1.9481712182689563,
+            "minimum": 1.9481712182689563,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.9864305917717648,
+            "mean": 1.9864305917717648,
+            "median": 1.9864305917717648,
+            "minimum": 1.9864305917717648,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.61878925042636,
+            "mean": 1.61878925042636,
+            "median": 1.61878925042636,
+            "minimum": 1.61878925042636,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.02465103607129,
+            "mean": 2.02465103607129,
+            "median": 2.02465103607129,
+            "minimum": 2.02465103607129,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.4217818983200297,
+            "mean": 2.4217818983200297,
+            "median": 2.4217818983200297,
+            "minimum": 2.4217818983200297,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.7720089960124015,
+            "mean": 2.7720089960124015,
+            "median": 2.7720089960124015,
+            "minimum": 2.7720089960124015,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "Parallel one-thread / parallel"
+    },
+    {
+      "distribution": "uniform",
+      "metric": "algorithmic_efficiency",
+      "outputs": {
+        "pdf": "uniform_algorithmic_efficiency.pdf",
+        "svg": "uniform_algorithmic_efficiency.svg"
+      },
+      "points": [
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.9176793591452622,
+            "mean": 0.9176793591452622,
+            "median": 0.9176793591452622,
+            "minimum": 0.9176793591452622,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8583290211193702,
+            "mean": 0.8583290211193702,
+            "median": 0.8583290211193702,
+            "minimum": 0.8583290211193702,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.4113454316292758,
+            "mean": 0.4113454316292758,
+            "median": 0.4113454316292758,
+            "minimum": 0.4113454316292758,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.21869349023591647,
+            "mean": 0.21869349023591647,
+            "median": 0.21869349023591647,
+            "minimum": 0.21869349023591647,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.9403917386951107,
+            "mean": 0.9403917386951107,
+            "median": 0.9403917386951107,
+            "minimum": 0.9403917386951107,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8218510246294655,
+            "mean": 0.8218510246294655,
+            "median": 0.8218510246294655,
+            "minimum": 0.8218510246294655,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.509612952223685,
+            "mean": 0.509612952223685,
+            "median": 0.509612952223685,
+            "minimum": 0.509612952223685,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.2978852116008241,
+            "mean": 0.2978852116008241,
+            "median": 0.2978852116008241,
+            "minimum": 0.2978852116008241,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "Sequential-baseline speedup / actual team size"
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "metric": "parallel_median_ns",
+      "outputs": {
+        "pdf": "duplicate_heavy_parallel_median_ns.pdf",
+        "svg": "duplicate_heavy_parallel_median_ns.svg"
+      },
+      "points": [
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 28,
+            "mean": 28,
+            "median": 28,
+            "minimum": 28,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 38,
+            "mean": 38,
+            "median": 38,
+            "minimum": 38,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 27,
+            "mean": 27,
+            "median": 27,
+            "minimum": 27,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 0,
+          "statistics": {
+            "count": 1,
+            "maximum": 28,
+            "mean": 28,
+            "median": 28,
+            "minimum": 28,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 1155132,
+            "mean": 1155132,
+            "median": 1155132,
+            "minimum": 1155132,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 1066555,
+            "mean": 1066555,
+            "median": 1066555,
+            "minimum": 1066555,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 1103161,
+            "mean": 1103161,
+            "median": 1103161,
+            "minimum": 1103161,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32767,
+          "statistics": {
+            "count": 1,
+            "maximum": 1100789,
+            "mean": 1100789,
+            "median": 1100789,
+            "minimum": 1100789,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1171626,
+            "mean": 1171626,
+            "median": 1171626,
+            "minimum": 1171626,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 606608,
+            "mean": 606608,
+            "median": 606608,
+            "minimum": 606608,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 632087,
+            "mean": 632087,
+            "median": 632087,
+            "minimum": 632087,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 629989,
+            "mean": 629989,
+            "median": 629989,
+            "minimum": 629989,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2067621,
+            "mean": 2067621,
+            "median": 2067621,
+            "minimum": 2067621,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1042643,
+            "mean": 1042643,
+            "median": 1042643,
+            "minimum": 1042643,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 846041,
+            "mean": 846041,
+            "median": 846041,
+            "minimum": 846041,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 742697,
+            "mean": 742697,
+            "median": 742697,
+            "minimum": 742697,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "ms"
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "metric": "algorithmic_speedup",
+      "outputs": {
+        "pdf": "duplicate_heavy_algorithmic_speedup.pdf",
+        "svg": "duplicate_heavy_algorithmic_speedup.svg"
+      },
+      "points": [
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8898607576137778,
+            "mean": 0.8898607576137778,
+            "median": 0.8898607576137778,
+            "minimum": 0.8898607576137778,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.6830523171471528,
+            "mean": 1.6830523171471528,
+            "median": 1.6830523171471528,
+            "minimum": 1.6830523171471528,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.6068911399854766,
+            "mean": 1.6068911399854766,
+            "median": 1.6068911399854766,
+            "minimum": 1.6068911399854766,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.9378512958162761,
+            "mean": 1.9378512958162761,
+            "median": 1.9378512958162761,
+            "minimum": 1.9378512958162761,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8996856774041277,
+            "mean": 0.8996856774041277,
+            "median": 0.8996856774041277,
+            "minimum": 0.8996856774041277,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.788920080986493,
+            "mean": 1.788920080986493,
+            "median": 1.788920080986493,
+            "minimum": 1.788920080986493,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.270718558556855,
+            "mean": 2.270718558556855,
+            "median": 2.270718558556855,
+            "minimum": 2.270718558556855,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.5839676207120803,
+            "mean": 2.5839676207120803,
+            "median": 2.5839676207120803,
+            "minimum": 2.5839676207120803,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "Sequential Merge Sort / parallel"
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "metric": "parallel_one_thread_speedup",
+      "outputs": {
+        "pdf": "duplicate_heavy_parallel_one_thread_speedup.pdf",
+        "svg": "duplicate_heavy_parallel_one_thread_speedup.svg"
+      },
+      "points": [
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.9314384248147074,
+            "mean": 1.9314384248147074,
+            "median": 1.9314384248147074,
+            "minimum": 1.9314384248147074,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.8535834465825116,
+            "mean": 1.8535834465825116,
+            "median": 1.8535834465825116,
+            "minimum": 1.8535834465825116,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.8597562814588826,
+            "mean": 1.8597562814588826,
+            "median": 1.8597562814588826,
+            "minimum": 1.8597562814588826,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.0,
+            "mean": 1.0,
+            "median": 1.0,
+            "minimum": 1.0,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 1.9830574798852532,
+            "mean": 1.9830574798852532,
+            "median": 1.9830574798852532,
+            "minimum": 1.9830574798852532,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.4438780153680497,
+            "mean": 2.4438780153680497,
+            "median": 2.4438780153680497,
+            "minimum": 2.4438780153680497,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 2.783936113919943,
+            "mean": 2.783936113919943,
+            "median": 2.783936113919943,
+            "minimum": 2.783936113919943,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "Parallel one-thread / parallel"
+    },
+    {
+      "distribution": "duplicate_heavy",
+      "metric": "algorithmic_efficiency",
+      "outputs": {
+        "pdf": "duplicate_heavy_algorithmic_efficiency.pdf",
+        "svg": "duplicate_heavy_algorithmic_efficiency.svg"
+      },
+      "points": [
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8898607576137778,
+            "mean": 0.8898607576137778,
+            "median": 0.8898607576137778,
+            "minimum": 0.8898607576137778,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8415261585735764,
+            "mean": 0.8415261585735764,
+            "median": 0.8415261585735764,
+            "minimum": 0.8415261585735764,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.40172278499636915,
+            "mean": 0.40172278499636915,
+            "median": 0.40172278499636915,
+            "minimum": 0.40172278499636915,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 32768,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.24223141197703452,
+            "mean": 0.24223141197703452,
+            "median": 0.24223141197703452,
+            "minimum": 0.24223141197703452,
+            "sample_stdev": null
+          },
+          "threads": 8
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8996856774041277,
+            "mean": 0.8996856774041277,
+            "median": 0.8996856774041277,
+            "minimum": 0.8996856774041277,
+            "sample_stdev": null
+          },
+          "threads": 1
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.8944600404932465,
+            "mean": 0.8944600404932465,
+            "median": 0.8944600404932465,
+            "minimum": 0.8944600404932465,
+            "sample_stdev": null
+          },
+          "threads": 2
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.5676796396392138,
+            "mean": 0.5676796396392138,
+            "median": 0.5676796396392138,
+            "minimum": 0.5676796396392138,
+            "sample_stdev": null
+          },
+          "threads": 4
+        },
+        {
+          "size": 65537,
+          "statistics": {
+            "count": 1,
+            "maximum": 0.32299595258901004,
+            "mean": 0.32299595258901004,
+            "median": 0.32299595258901004,
+            "minimum": 0.32299595258901004,
+            "sample_stdev": null
+          },
+          "threads": 8
+        }
+      ],
+      "unit": "Sequential-baseline speedup / actual team size"
+    }
+  ],
+  "matplotlib_version": "3.11.0",
+  "output_sha256": {
+    "duplicate_heavy_algorithmic_efficiency.pdf": "e7a7e2af6717a43aff38c0fb3a3059fb650f9759b94fe99c183ba3522380fd06",
+    "duplicate_heavy_algorithmic_efficiency.svg": "9d2c9d6b2a4c28329e87f517eacec17c52a320be77b0998e7b5f86d0dbc84c52",
+    "duplicate_heavy_algorithmic_speedup.pdf": "72a10a9cbfdf045a756224edf4aa467d5fc35dac383ba9182ba36a5715aa2394",
+    "duplicate_heavy_algorithmic_speedup.svg": "166044d4f572334aab98445e158464563cb157a4ebb52e3fb364d66dbbd08c92",
+    "duplicate_heavy_parallel_median_ns.pdf": "a981e784fa16866a47ea16d1ff623dcf07d9ed105025ba589f97c3f5e10b1cbc",
+    "duplicate_heavy_parallel_median_ns.svg": "6bcb7b7f514e7ddc936adfcd5783f1eebe0c908e32da0431da209d26ba092643",
+    "duplicate_heavy_parallel_one_thread_speedup.pdf": "0e25b6f3ea683eb3cd1989be74234f35f1526de4446c9b5b74efc2c2c4097dc4",
+    "duplicate_heavy_parallel_one_thread_speedup.svg": "809e1ce59fcc7b18505ffa0407a51222ea8bc5179e4fdfeafe341d9963cfd61c",
+    "uniform_algorithmic_efficiency.pdf": "c188f6306571de9a0312bc09f0d603204a88d12f253ba2bd3734f782c8efc51a",
+    "uniform_algorithmic_efficiency.svg": "c0719d634932c4db1c6e9d854fa4ab983908b6f238d47546b2740479ec5224ea",
+    "uniform_algorithmic_speedup.pdf": "63cec41d95c43c5a5c2a886af568ee890e9523cf38066833be1b8bed799312db",
+    "uniform_algorithmic_speedup.svg": "96a61f87e0555c9a3121b26bddf264b88e554f40f1bee59954c5592061ce710c",
+    "uniform_parallel_median_ns.pdf": "0eb668eebc071c3888a053e6fae57b972cce52a6834cfbec960c6853d39e9a64",
+    "uniform_parallel_median_ns.svg": "28573e4db43345cc6d43bfa796e0ea408e7f34202aacad923b43bdd4f3c6535e",
+    "uniform_parallel_one_thread_speedup.pdf": "41b2e30d52332acb82daaa67173dfc7403421b5febb2504e7fe9ceb959ac02a2",
+    "uniform_parallel_one_thread_speedup.svg": "71171c3f309b7e169bab3b8cff3e33b2ab90fd84070e28babcdbfd8e11172f6f"
+  },
+  "protocol": "parallel_sort_timing_v1",
+  "source_sha256": {
+    "COLLECTED.json": "8296dc3cbc78f876de18b68d2020caca9898c0e6d034fd0558981f27589541e1",
+    "PROTOCOL_v1.md": "83a7bdf942e941fe69a6b6e0cf1795edaeb96e82e7c80975a67a587b2477e7ac",
+    "environment.json": "38ebf19ecb6b59ae13d9abbf780cd29842dd3972976c1d2ab27a76c35c7665d5",
+    "matrix.json": "54ebbd7dd0d71e910ce803b355af23e08f231d3df280e1530bc1bce5ccd7716f",
+    "preflight.json": "445cdddab8dcb882018a62aeb61d93e505572f145215324c3319d1e1db46526c",
+    "protocol.json": "e589ea710fe00352218f7a9b4191b1be671aecd0145a4428a4d30c3e677d70f4",
+    "run_000000/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000000/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000000/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000000/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000000/run.json": "94199a7898163f6eb17a353cd145ad8e13cc7d809aed2f0d73bfd1ffa23507d1",
+    "run_000000/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000000/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000000/trials.csv": "1e645703681f8b40c936f9bf502a0da614adee92c2e77decd5e80ae6dccc2abf",
+    "run_000000_command.json": "03eddab942d77a3c7bbb48bdc7005c5d3bebd7acbcffb248364241435eb35a24",
+    "run_000000_started.json": "02e8c7ada31e1c10632d9e68ed98f4fd4223bcf85f4ed88fc0e4e9b147ae4df1",
+    "run_000001/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000001/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000001/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000001/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000001/run.json": "2ca0b0f32ef47df5ea35c553c8ebe4858f061628638f4976d8b7751f88a25af1",
+    "run_000001/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000001/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000001/trials.csv": "803bdc4d934ea4a025499850ff020c9fb587371389496e2d50601e26f9c03f06",
+    "run_000001_command.json": "7e703cfd4d9e3be5dad417e931f97f18975520d0b58f469da25be8c3d08f1ac5",
+    "run_000001_started.json": "d34f573a7e962ac02e0511b70882a1f8805a95c0bb990c41c6de1f027a041c7b",
+    "run_000002/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000002/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000002/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000002/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000002/run.json": "14b3d0706957051b8e38873097d18088272d39381c3ee2f1f0c6306bea78438e",
+    "run_000002/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000002/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000002/trials.csv": "b1f94b107160463ae187ef1328e5076b1dff83d83aa1e624e1bab464734c83c0",
+    "run_000002_command.json": "11b2f6a6f6dd9b7f61988ffe69c29063d6e506ec617728a6219ea244c1eb3d2d",
+    "run_000002_started.json": "b485836bfe31ee0b006c470ecf2e0c36e4f953f031138751e6b2d2e614d20d3f",
+    "run_000003/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000003/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000003/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000003/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000003/run.json": "884a7b922ffd0c23e5562a3a7c6442f3f2237777c33114b887a70c1b89e38b52",
+    "run_000003/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000003/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000003/trials.csv": "8456164cd5b1457d0bf8e6e8d763dda3a6b26361dac53394c8d1234f4c3c02b8",
+    "run_000003_command.json": "84d6df7f0419c2dcdb286275b29bdb41c0df2f4f44d8e4ca5fb2bc621f4bde7b",
+    "run_000003_started.json": "5041609e0d5ef383a7139fdb762f5bb5e23556ad9ee7352a68fc5880f0c0850a",
+    "run_000004/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000004/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000004/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000004/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000004/run.json": "e7a00eee182ebb148793cbbd9175c2681ac47ef2d2e946bf39a71d24b3d46a4d",
+    "run_000004/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000004/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000004/trials.csv": "aba6936740305dfa951ce21ede1b1fb5a66a44d502f5744032026ebff26ce01d",
+    "run_000004_command.json": "a5f72662ec1eb69b279e5897fc6c8cc77329624931692b4630d884c2ea3ab816",
+    "run_000004_started.json": "87e560acb944dcf5ff8c5387ac162c7a399e8b3c8f6c7b5be50167bc63eeab2a",
+    "run_000005/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000005/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000005/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000005/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000005/run.json": "068220e00ef19eb7042a752e9ef4d421bf17b94a8ed3f7a160dd4cecb5a26301",
+    "run_000005/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000005/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000005/trials.csv": "1fbec6e40292844efa194a40ce5f26efd8b9a1e9837c9bd0e6383de496bca24a",
+    "run_000005_command.json": "96f2d3292596f996d229a4a9fc3725bac4d234dc7d137f50712cbc9dc17ecd94",
+    "run_000005_started.json": "b4636561b25ff1e166bafe75144af5cb92e6391eac0e947cc3385c2123ad3afe",
+    "run_000006/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000006/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000006/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000006/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000006/run.json": "2efe519863ba7c448700adb32960e3d4c3eefb24ef6ec2a8165fb97d1958e334",
+    "run_000006/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000006/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000006/trials.csv": "fa691acbf9ff2b7977c1a0fe092cea5c460a72e04a64fdd9d49bbd218f87ca09",
+    "run_000006_command.json": "7910af418dda0926a0b31fcb2c57577bbafe71495a1031fd13b1fd6faa381a87",
+    "run_000006_started.json": "6c2e4d46a00d247a44b3c20514bc97789528613fca894aea0d134be3b335eed9",
+    "run_000007/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000007/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000007/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000007/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000007/run.json": "206ae854421ae5d6f2185817bed758e6885f82a6ec08594859e7344d80755f68",
+    "run_000007/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000007/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000007/trials.csv": "8a0ce07af2cd95b27c33d11405b98f98f5b79e48044ab87985e9eb63c968d841",
+    "run_000007_command.json": "42ab7cf5578cad62b723ddff9baa26c3bcda237b476122c354ef83757e701592",
+    "run_000007_started.json": "90c20fa8603e9229db0e5405c2f3c8f8a92597bd6a25136903933d3ebe9a3176",
+    "run_000008/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000008/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000008/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000008/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000008/run.json": "dafc052ac4d5cf708b6b2dd0cf455a339a5294fe85709e358fc4f65ad9dcea54",
+    "run_000008/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000008/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000008/trials.csv": "97a1958dd2e246146927aa87baff9f1c27e6dc014b1f6bb7fffd8c11e65778af",
+    "run_000008_command.json": "b263c22c060d14564e2cd0afcb74686c79e3336abf53c3c977e568a7ad75f05e",
+    "run_000008_started.json": "6eb3d6ac2b4cab177c6cbd42522358da6bec79fff5bf864b3c674c852d82d61e",
+    "run_000009/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000009/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000009/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000009/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000009/run.json": "2ac67930463d5d4ef9ffb46bed018b14bdd92f16e66feab3dd43d5ff4b2cde16",
+    "run_000009/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000009/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000009/trials.csv": "a0a8535cdb2e7f8706c00057470adcfa57807f3cace6529ed02f1ab34077e770",
+    "run_000009_command.json": "48298b57db91e0bc20d9e3e9daf483646b8a133a11b9cd5aecc15fb4fea6a097",
+    "run_000009_started.json": "dd8387f2ab73b4ee5bc1394b46bd915711fb5309e2df3b49f3748b7e69d9c579",
+    "run_000010/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000010/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000010/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000010/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000010/run.json": "8f77574717e827b87c1f32a758101489fddae2a057a653caef6427c5d16e3735",
+    "run_000010/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000010/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000010/trials.csv": "323ac718571ff5f0195c1ecb935dd952ffd01394a020faf2f1214c9273e7cf19",
+    "run_000010_command.json": "a21f34900c5f4a6ee3d2dc028668ca5563bd326ffed0e4c0d832fe6c444f39a5",
+    "run_000010_started.json": "558b6c3e075b55e2034410c93e6f5bfa0ff9da5058e5b30e4baaa19ff2963cda",
+    "run_000011/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000011/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000011/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000011/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000011/run.json": "1ecbc3e918c27834cad8739307a2c4668dc5a77e74082f605db0d9dfb0f791c0",
+    "run_000011/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000011/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000011/trials.csv": "35548cdbd6db3d4037d5d49947c5ff4ce7d67dcf77e497566e41e8ba6e9f557d",
+    "run_000011_command.json": "da2ca855168403fab01cc09735c3bdd5e9700ac5dedaa9e9f3e62a94654827e5",
+    "run_000011_started.json": "1cac1c311ee68aebae29f1ce2e153ad0acd75368656d94bb8fc5240dfac4ea79",
+    "run_000012/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000012/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000012/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000012/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000012/run.json": "5e2c2fcae93d438e195a911e29106edb5e1f9bc9cbd82d389f590c1c646a4eed",
+    "run_000012/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000012/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000012/trials.csv": "690c028f7404de9dd9b343806274a48c1625e3d0fad218b01acef1bb58adac93",
+    "run_000012_command.json": "422bb3573440b18f3874ca38a7e131c26392ee917f7afa554d6de8805237e598",
+    "run_000012_started.json": "54553f5c15f17fedff4b0f4d7266f27750cacf860cbf33ed895e49de3d665afb",
+    "run_000013/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000013/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000013/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000013/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000013/run.json": "47e0628fc748cf7272f786025b00af8c6be13d83e480b708fa5192f7ed103acd",
+    "run_000013/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000013/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000013/trials.csv": "bf686421a8ea9e150e7e3d11b5290c201eb826e8cdf3308d0913ea986406e6bf",
+    "run_000013_command.json": "9131f3b5b3caf1a34b5e1236b7f635d555382b6873cec93cb0c886197a6a09c8",
+    "run_000013_started.json": "f59d24849407688398e80eae65382f5182874eae9e50044bb4fd6623a460fe3b",
+    "run_000014/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000014/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000014/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000014/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000014/run.json": "a27f00ff122f129b3c279432707492d12b1ffb580c22ea0101ab8e46c6e8e8ee",
+    "run_000014/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000014/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000014/trials.csv": "8c33a72a0a86cd591c95034918f636f51200dce280db7540f8480d083269f3d1",
+    "run_000014_command.json": "420d5ef53eaa3b69ac00f73b1277f3c1916cc832b8223030b40cf123c2bc9678",
+    "run_000014_started.json": "9678dda960ffde5899b1ed3ac1510ff9c75b48e3d526c199dd5ec1cf5749697d",
+    "run_000015/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000015/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000015/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000015/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000015/run.json": "e115862e477dad763fc0a9f1354568af1ddc5ac8eb1d41e29fc060ffc6d3310a",
+    "run_000015/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000015/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000015/trials.csv": "41a29f34540150d32d4847d796171402481ab00c09f763501d343b5ce5ae4be3",
+    "run_000015_command.json": "d9019335e313fe05ed1fabf8187b8df65bf5e8a12fda7f0761f9e94aa33bd4dd",
+    "run_000015_started.json": "c69a7ad2d5b720cb9a8efb7f2481c2ecb27a8e00cbd3dcbedf560838b59dbbe0",
+    "run_000016/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000016/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000016/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000016/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000016/run.json": "303fe88890a740c74c36706614c0ad7e67a825797d8413358be6af2a22a49e48",
+    "run_000016/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000016/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000016/trials.csv": "6251ee8079ba4db9804e681a6c39bb065d21fc63c278d8be67d6791316fa7dde",
+    "run_000016_command.json": "8a1ef2a84b3730416719bc341607080d3cda1d60889eb9abd4dc1c6f138940dd",
+    "run_000016_started.json": "d061eae9b61b690109666e4aeb575ef359a749e3c5f084616b7ca331a2eb4429",
+    "run_000017/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000017/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000017/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000017/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000017/run.json": "28be9cb453ec9349c5a808a6cffba8c2850bf3a56f3e59128945c390b689aa8f",
+    "run_000017/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000017/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000017/trials.csv": "6d74e6f8c095655c4bc5f0d05d846932330f87254b71c5b64ab8995bec0a9e71",
+    "run_000017_command.json": "f14a3d0782dddc24f3b743748e62cb7a079978c6ef50d645b3cbb9d96b7c403d",
+    "run_000017_started.json": "e15f870a23ce35cd47cb6cb469f76c55e466733031c486b8dccf0ac109bdafdc",
+    "run_000018/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000018/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000018/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000018/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000018/run.json": "6b54cc6ecb8e62947466700f6fdf9b0003cc17ac9e3d7c9d83e7cf568e792714",
+    "run_000018/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000018/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000018/trials.csv": "409886f4df36bdf3d984b23bf1424aa00901343cda8d7536dd92ea2472318858",
+    "run_000018_command.json": "371007eb579c57cd64bec49eb2375ece3df7ab2a131cd38da8b361dec0a5da94",
+    "run_000018_started.json": "c311d84fafc0705a08758132119dcf4738736ccaa9e31f88dcdf670db2499ecd",
+    "run_000019/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000019/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000019/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000019/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000019/run.json": "f51f33b41c8312aa5c85fb5459fdd6d9672bbb0da602bfda312c6665646d2b3b",
+    "run_000019/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000019/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000019/trials.csv": "26e96a35ba3c0cb3b0e80a541d7c099bcf547bfa2696fde24fecc4de0b1586c7",
+    "run_000019_command.json": "c5446f826928e003b5308ff3d16a14193fcd45357db6be6adb959fcc78193c49",
+    "run_000019_started.json": "b2c38c719ace4890f3f7fc7cec4c2a8feca60a26e3c745167cef4828621c82f6",
+    "run_000020/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000020/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000020/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000020/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000020/run.json": "7547c66ac9bca886d4cf1861fdd36902682a76e399d06cfe83ccc5fb49b69c94",
+    "run_000020/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000020/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000020/trials.csv": "1385a3eb267d6bcbb53863d30f07a01168e50c14f9d2c3d56fd60b1e2f2dbfa1",
+    "run_000020_command.json": "3211a8e70294ea6cb512212fe486e2181221cd469c53a9ea4bd8e9e04556f2e1",
+    "run_000020_started.json": "6864d7efb3f29f768017700bf167088cdf98d12f0ff7c9a513d1d8e3bb322933",
+    "run_000021/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000021/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000021/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000021/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000021/run.json": "5380a4ced1ca9aa8fd0b2e0c12de203937d8207153cd53994b0330cefa61f6c1",
+    "run_000021/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000021/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000021/trials.csv": "ef2389a52a49a686650e06cade08a23210fbfd39ba996bb4b85a1640b34b4eef",
+    "run_000021_command.json": "50ed35a45abaf1c0aec0e370edd1e141f67deda9b53a498738df9ae8e8b23240",
+    "run_000021_started.json": "2699b3440a76e796878ea3aa46da0f576420c907dfb8705a94b7d6f277f5843d",
+    "run_000022/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000022/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000022/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000022/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000022/run.json": "c4db25b8fe4b66248e1b060026c60658204da7bc12305191daa32fed410f8af9",
+    "run_000022/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000022/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000022/trials.csv": "c0b3c351100b565aab496721f445e51f54aba6b8bea585025bf093ca74a27355",
+    "run_000022_command.json": "e62a54419cdc966dc5c3343cd423ea664cff3a01bcbd04e5352e86ee44bc73f6",
+    "run_000022_started.json": "58b35656b0f77bfc31f6183d898ed8d771ea0676d51307b5a71b8ceff5baed39",
+    "run_000023/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000023/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000023/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000023/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000023/run.json": "12eb5e93ddd325f33fa8a91122c5d6f361fcc2acf86841bd1c2b4db83dc8d988",
+    "run_000023/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000023/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000023/trials.csv": "b87d1ee3e4be62b593c7205d1c6d0db6a8076c17c67afe4ea1768cc0d72f76c7",
+    "run_000023_command.json": "a78a95ed6e2107b7440a7169b452601f3b1e25aba2d245ffd02beaf4b2916afd",
+    "run_000023_started.json": "bce10db63f5071b2d033caa936548e3fb80616f82efdea7890f2715e886b2976",
+    "run_000024/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000024/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000024/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000024/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000024/run.json": "09b8f4d18a68fcfb46df3ea5c556affb9ab307b9afe414d1d22d083fb8da603b",
+    "run_000024/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000024/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000024/trials.csv": "c4a8269c0e7ddabad4aa3a8f5e7f4047253b72057b98924e23e606eab0269165",
+    "run_000024_command.json": "36b145b7ed84d140e823791ea00f974258b7fe77fa9028484524188627a6e3c8",
+    "run_000024_started.json": "d4846c6913d2985add2298a621edf095c0b84d1284d92ea607e6f7fc96113660",
+    "run_000025/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000025/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000025/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000025/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000025/run.json": "89af46bc884e8b51ff3d6affae2b66b6d1c58c434b24d0956b68b56fc8382c03",
+    "run_000025/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000025/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000025/trials.csv": "70770a033433689c3ef97f3b6bbf3d1730b33f676763538b0ad63304034f81ac",
+    "run_000025_command.json": "127bd0071e7f33ccf2538b42edba80e1e63ad2df9b3cb2259a04477c2602eec2",
+    "run_000025_started.json": "a4918247072c63101d004e068c5fb8f9959f78719d5086d06aac5a5fe7da1bf8",
+    "run_000026/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000026/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000026/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000026/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000026/run.json": "46fcdf98de4af010e84eee3a92886bbcf4d96129f0ddc2cfab977b8de1ccded0",
+    "run_000026/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000026/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000026/trials.csv": "80d277d4efcdab388a173bc5d6936f646ee3d9cc51a1b3a54be0b59e60d2e243",
+    "run_000026_command.json": "a84dd1f51f9d67d11e0c86b5077bfdd9bfa25e78576e7cfa6b4c02dee6d56daa",
+    "run_000026_started.json": "986fbad95e8f8da6cafcb8313715dbe55cafdc8746829831186802cab258e714",
+    "run_000027/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000027/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000027/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000027/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000027/run.json": "af15fa247f7ce3607429a4cb0ad4ec0408b9957636583542d5d6481b8cf08e16",
+    "run_000027/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000027/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000027/trials.csv": "1f2ac95af30b6ffe98f797bf66561d6c39ee9351739f1f6c9eb4ffdd014270df",
+    "run_000027_command.json": "bc5ce60a6ddb8e28fcea7718e8cda5ad362053b888904c1b32f38a8b4230463b",
+    "run_000027_started.json": "f50893900d4c4bc26c62916bf6a2c1e804763f33f9b6e1f39141427d8c7b137d",
+    "run_000028/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000028/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000028/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000028/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000028/run.json": "f35776b569bc2b403b094b754a9a4fd531b6fbac7bf5cf0280a18f791270c089",
+    "run_000028/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000028/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000028/trials.csv": "5b3f79979919d906f93021d27d1b26c221d974c39c9f6eab98e7cf4ee3b9f422",
+    "run_000028_command.json": "a183eb76645453c755b9ede5b6eb68bece6b3ef5de6cdf4b3285a4cf098ea9a8",
+    "run_000028_started.json": "43bf4d3b6411c12012941cc77b69cd41414c60d381264bc9047675d799ccfdaf",
+    "run_000029/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000029/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000029/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000029/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000029/run.json": "f40b1a98f2336bc24d42419cadc98e2880753eab0ca82820a5905ad2ec9c7295",
+    "run_000029/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000029/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000029/trials.csv": "06e24c2dfa71463221961e452de3d516ffa30c45bd8197febcc068a7d08ba4c2",
+    "run_000029_command.json": "6910b767bfb27ca1d9540ff174bf778f98e499ed3da13e52e20225b2adc712bf",
+    "run_000029_started.json": "c09ee38e42a6c0a14ce276d615897dcd3b610a75672e97c4ccdff3e6d986bccc",
+    "run_000030/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000030/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000030/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000030/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000030/run.json": "4e89452d89f7144600514a8cf280ff56e52b1e66db6d50debf5d2f5772207097",
+    "run_000030/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000030/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000030/trials.csv": "799c7fe3f1bf634cba86e36628cf109b59de267fccafd99a868fb16852d4f05e",
+    "run_000030_command.json": "a1f858487181806acd00cdf8ff3b837b272db976e878a67e93ba40e7905bd78c",
+    "run_000030_started.json": "5550f33b3a844e994e60756b01c89bdc957c3cb13208ef98bfeb9514783a801f",
+    "run_000031/CMakeCache.txt": "8dca183513234a22ebcec1404bc3aca2e6e6b585a3def265a2adb6d3a7845444",
+    "run_000031/COMPLETE.json": "d167fab2bd06677aa92a1960d50fd837653d79bdc8a61c2c74c6a16416ff4494",
+    "run_000031/compile_commands.json": "5ff41cc05ac17bb764cb80d2703c079de8ffceca8b6d0a113e9ba09ee39030a6",
+    "run_000031/pdqsort_upstream.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
+    "run_000031/run.json": "a8a4223d68992740c589115feeb094b8e73f68d5f7bf0684c30141c37cbfdff0",
+    "run_000031/source_hashes.json": "21effb8940ceac6656c5c1e9fa1bc0cd73c8b5cbfaf11a27a13bc0212f80babd",
+    "run_000031/timsort_upstream.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
+    "run_000031/trials.csv": "6d42044ebdb5ae0421a9594e866f793ff1ef455f081432b4b8cc936779a49ae6",
+    "run_000031_command.json": "41e47580cead9b32545d50beda3154a1cc0f64267e60ca780a7b327b8b41e55a",
+    "run_000031_started.json": "cddd6c7d5d153f487e2dce22c81e91302a9d82dca101b3bfcc505b8c3278a27f"
+  },
+  "summary_sha256": "5fbb354c73b0e10bc22a404211b75890c4c6004df21db23f111bf794607455e3"
+}
