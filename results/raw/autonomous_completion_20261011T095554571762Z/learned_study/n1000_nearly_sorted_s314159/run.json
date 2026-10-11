@@ -1,0 +1,1 @@
+{"schema_version":1,"protocol":"learned_rank_v1","size":1000,"seed":314159,"distribution":"nearly_sorted","input_fingerprint":"13198114741911734222","query_fingerprint":"5282073259436644666","query_seed":2718,"queries":1000,"hits":500,"misses":500,"warmups":1,"repetitions":5,"radius":32,"compiler":"13.3.0","build_type":"Release","clock":"steady_clock"}

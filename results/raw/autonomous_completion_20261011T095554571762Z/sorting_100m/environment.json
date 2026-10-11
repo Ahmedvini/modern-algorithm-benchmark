@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "record_kind": "sorting_matrix_environment",
+  "captured_at_utc": "2026-10-11T10:34:51.390972+00:00",
+  "invocation": "scripts/run_matrix.py --binary build/autonomous_cpu_release/sort_benchmark --output /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_100m --sizes 100000000 --seeds 1729 --distributions uniform,sorted,reverse_sorted,duplicate_heavy,nearly_sorted --sorts all --repetitions 5 --warmups 1 --memory-limit-mib 2048",
+  "working_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "build_directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+  "os": "Linux-6.18.7-76061807-generic-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "cpu_reported_by_python": "x86_64",
+  "logical_cpu_count": 12,
+  "cpu_probe": {
+    "command": [
+      "lscpu"
+    ],
+    "returncode": 0,
+    "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           39 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  12\nOn-line CPU(s) list:                     0-11\nVendor ID:                               GenuineIntel\nModel name:                              11th Gen Intel(R) Core(TM) i5-11400H @ 2.70GHz\nCPU family:                              6\nModel:                                   141\nThread(s) per core:                      2\nCore(s) per socket:                      6\nSocket(s):                               1\nStepping:                                1\nCPU(s) scaling MHz:                      59%\nCPU max MHz:                             4500.0000\nCPU min MHz:                             800.0000\nBogoMIPS:                                5376.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l2 cdp_l2 ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb intel_pt avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid movdiri movdir64b fsrm avx512_vp2intersect md_clear ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               288 KiB (6 instances)\nL1i cache:                               192 KiB (6 instances)\nL2 cache:                                7.5 MiB (6 instances)\nL3 cache:                                12 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-11\nVulnerability Gather data sampling:      Vulnerable\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Mitigation; Aligned branch/return thunks\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+    "stderr": ""
+  },
+  "linux_meminfo": "MemTotal:       16089012 kB\nMemFree:         3088312 kB\nMemAvailable:    6576672 kB\nBuffers:          191472 kB\nCached:          5215404 kB\nSwapCached:         3108 kB\nActive:          4707084 kB\nInactive:        5395396 kB\nActive(anon):    3877608 kB\nInactive(anon):  1999372 kB\nActive(file):     829476 kB\nInactive(file):  3396024 kB\nUnevictable:      395296 kB\nMlocked:            7560 kB\nSwapTotal:      42675696 kB\nSwapFree:       38052848 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              1640 kB\nWriteback:             0 kB\nAnonPages:       5089028 kB\nMapped:          1920160 kB\nShmem:           1175788 kB\nKReclaimable:     519308 kB\nSlab:             839768 kB\nSReclaimable:     519308 kB\nSUnreclaim:       320460 kB\nKernelStack:       49504 kB\nPageTables:       117772 kB\nSecPageTables:      6944 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    50720200 kB\nCommitted_AS:   48024584 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      220748 kB\nVmallocChunk:          0 kB\nPercpu:            14016 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:     20480 kB\nShmemHugePages:   401408 kB\nShmemPmdMapped:        0 kB\nFileHugePages:    647168 kB\nFilePmdMapped:         0 kB\nCmaTotal:              0 kB\nCmaFree:               0 kB\nUnaccepted:            0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      315800 kB\nDirectMap2M:    11982848 kB\nDirectMap1G:     5242880 kB\n",
+  "linux_cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-cosmic-com.system76.CosmicAppList-7038.scope\n",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "cmake": {
+    "command": [
+      "cmake",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "cmake version 3.28.3\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+    "stderr": ""
+  },
+  "compiler": {
+    "command": [
+      "/usr/bin/c++",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": ""
+  },
+  "cmake_cache": "# This is the CMakeCache file.\n# For build in directory: /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release\n# It was generated by CMake: /usr/bin/cmake\n# You can edit this file to change values found and used by cmake.\n# If you do not want to change any of the values, simply exit the editor.\n# If you do want to change a value, simply edit, save, and exit the editor.\n# The syntax for the file is as follows:\n# KEY:TYPE=VALUE\n# KEY is the name of a variable in the cache.\n# TYPE is a hint to GUIs for the type of VALUE, DO NOT EDIT TYPE!.\n# VALUE is the current value for the KEY.\n\n########################\n# EXTERNAL cache entries\n########################\n\n//Build the testing tree.\nBUILD_TESTING:BOOL=ON\n\n//Path to a program.\nCMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line\n\n//Path to a program.\nCMAKE_AR:FILEPATH=/usr/bin/ar\n\n//Choose the type of build, options are: None Debug Release RelWithDebInfo\n// MinSizeRel ...\nCMAKE_BUILD_TYPE:STRING=Release\n\n//Enable/Disable color output during build.\nCMAKE_COLOR_MAKEFILE:BOOL=ON\n\n//CXX compiler\nCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++\n\n//A wrapper around 'ar' adding the appropriate '--plugin' option\n// for the GCC compiler\nCMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-13\n\n//A wrapper around 'ranlib' adding the appropriate '--plugin' option\n// for the GCC compiler\nCMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-13\n\n//Flags used by the CXX compiler during all build types.\nCMAKE_CXX_FLAGS:STRING=\n\n//Flags used by the CXX compiler during DEBUG builds.\nCMAKE_CXX_FLAGS_DEBUG:STRING=-g\n\n//Flags used by the CXX compiler during MINSIZEREL builds.\nCMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG\n\n//Flags used by the CXX compiler during RELEASE builds.\nCMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG\n\n//Flags used by the CXX compiler during RELWITHDEBINFO builds.\nCMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG\n\n//Path to a program.\nCMAKE_DLLTOOL:FILEPATH=CMAKE_DLLTOOL-NOTFOUND\n\n//Flags used by the linker during all build types.\nCMAKE_EXE_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during DEBUG builds.\nCMAKE_EXE_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during MINSIZEREL builds.\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during RELEASE builds.\nCMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during RELWITHDEBINFO builds.\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Enable/Disable output of compile commands during generation.\nCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=\n\n//Value Computed by CMake.\nCMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/CMakeFiles/pkgRedirects\n\n//Install path prefix, prepended onto install directories.\nCMAKE_INSTALL_PREFIX:PATH=/usr/local\n\n//Path to a program.\nCMAKE_LINKER:FILEPATH=/usr/bin/ld\n\n//Path to a program.\nCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake\n\n//Flags used by the linker during the creation of modules during\n// all build types.\nCMAKE_MODULE_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of modules during\n// DEBUG builds.\nCMAKE_MODULE_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of modules during\n// MINSIZEREL builds.\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of modules during\n// RELEASE builds.\nCMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of modules during\n// RELWITHDEBINFO builds.\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Path to a program.\nCMAKE_NM:FILEPATH=/usr/bin/nm\n\n//Path to a program.\nCMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy\n\n//Path to a program.\nCMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump\n\n//Value Computed by CMake\nCMAKE_PROJECT_DESCRIPTION:STATIC=\n\n//Value Computed by CMake\nCMAKE_PROJECT_HOMEPAGE_URL:STATIC=\n\n//Value Computed by CMake\nCMAKE_PROJECT_NAME:STATIC=modern_algorithm_benchmark\n\n//Value Computed by CMake\nCMAKE_PROJECT_VERSION:STATIC=0.1.0\n\n//Value Computed by CMake\nCMAKE_PROJECT_VERSION_MAJOR:STATIC=0\n\n//Value Computed by CMake\nCMAKE_PROJECT_VERSION_MINOR:STATIC=1\n\n//Value Computed by CMake\nCMAKE_PROJECT_VERSION_PATCH:STATIC=0\n\n//Value Computed by CMake\nCMAKE_PROJECT_VERSION_TWEAK:STATIC=\n\n//Path to a program.\nCMAKE_RANLIB:FILEPATH=/usr/bin/ranlib\n\n//Path to a program.\nCMAKE_READELF:FILEPATH=/usr/bin/readelf\n\n//Flags used by the linker during the creation of shared libraries\n// during all build types.\nCMAKE_SHARED_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during DEBUG builds.\nCMAKE_SHARED_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during MINSIZEREL builds.\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during RELEASE builds.\nCMAKE_SHARED_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of shared libraries\n// during RELWITHDEBINFO builds.\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//If set, runtime paths are not added when installing shared libraries,\n// but are added when building.\nCMAKE_SKIP_INSTALL_RPATH:BOOL=NO\n\n//If set, runtime paths are not added when using shared libraries.\nCMAKE_SKIP_RPATH:BOOL=NO\n\n//Flags used by the linker during the creation of static libraries\n// during all build types.\nCMAKE_STATIC_LINKER_FLAGS:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during DEBUG builds.\nCMAKE_STATIC_LINKER_FLAGS_DEBUG:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during MINSIZEREL builds.\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during RELEASE builds.\nCMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=\n\n//Flags used by the linker during the creation of static libraries\n// during RELWITHDEBINFO builds.\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=\n\n//Path to a program.\nCMAKE_STRIP:FILEPATH=/usr/bin/strip\n\n//Path to a program.\nCMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND\n\n//If this value is on, makefiles will be generated without the\n// .SILENT directive, and all commands will be echoed to the console\n// during the make.  This is useful for debugging only. With Visual\n// Studio IDE projects all commands are done without /nologo.\nCMAKE_VERBOSE_MAKEFILE:BOOL=FALSE\n\n//Path to the coverage program that CTest uses for performing coverage\n// inspection\nCOVERAGE_COMMAND:FILEPATH=/usr/bin/gcov\n\n//Extra command line flags to pass to the coverage tool\nCOVERAGE_EXTRA_FLAGS:STRING=-l\n\n//How many times to retry timed-out CTest submissions.\nCTEST_SUBMIT_RETRY_COUNT:STRING=3\n\n//How long to wait between timed-out CTest submissions.\nCTEST_SUBMIT_RETRY_DELAY:STRING=5\n\n//Maximum time allowed before CTest will kill the test.\nDART_TESTING_TIMEOUT:STRING=1500\n\n//Build the frozen-protocol CPU/GPU comparison worker\nMAB_ENABLE_CPU_GPU_COMPARISON:BOOL=OFF\n\n//Build the optional CUDA readiness probe (no GPU algorithms)\nMAB_ENABLE_CUDA:BOOL=OFF\n\n//Build the separately opted-in CUB correctness adapter\nMAB_ENABLE_CUDA_SORT:BOOL=OFF\n\n//Build the separate OpenMP parallel sorting family\nMAB_ENABLE_OPENMP:BOOL=ON\n\n//Enable address and undefined-behavior sanitizers\nMAB_ENABLE_SANITIZERS:BOOL=OFF\n\n//Build untimed validation diagnostics\nMAB_ENABLE_VALIDATION_DIAGNOSTICS:BOOL=ON\n\n//Command to build the project\nMAKECOMMAND:STRING=/usr/bin/cmake --build . --config \"${CTEST_CONFIGURATION_TYPE}\"\n\n//Path to the memory checking command, used for memory error detection.\nMEMORYCHECK_COMMAND:FILEPATH=MEMORYCHECK_COMMAND-NOTFOUND\n\n//File that contains suppressions for the memory checker\nMEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=\n\n//CXX compiler flags for OpenMP parallelization\nOpenMP_CXX_FLAGS:STRING=-fopenmp\n\n//CXX compiler libraries for OpenMP parallelization\nOpenMP_CXX_LIB_NAMES:STRING=gomp;pthread\n\n//Path to the gomp library for OpenMP\nOpenMP_gomp_LIBRARY:FILEPATH=/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so\n\n//Path to the pthread library for OpenMP\nOpenMP_pthread_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libpthread.a\n\n//Name of the computer/site where compile is being run\nSITE:STRING=pop-os\n\n//Value Computed by CMake\nmodern_algorithm_benchmark_BINARY_DIR:STATIC=/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release\n\n//Value Computed by CMake\nmodern_algorithm_benchmark_IS_TOP_LEVEL:STATIC=ON\n\n//Value Computed by CMake\nmodern_algorithm_benchmark_SOURCE_DIR:STATIC=/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark\n\n\n########################\n# INTERNAL cache entries\n########################\n\n//ADVANCED property for variable: CMAKE_ADDR2LINE\nCMAKE_ADDR2LINE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_AR\nCMAKE_AR-ADVANCED:INTERNAL=1\n//This is the directory where this CMakeCache.txt was created\nCMAKE_CACHEFILE_DIR:INTERNAL=/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release\n//Major version of cmake used to create the current loaded cache\nCMAKE_CACHE_MAJOR_VERSION:INTERNAL=3\n//Minor version of cmake used to create the current loaded cache\nCMAKE_CACHE_MINOR_VERSION:INTERNAL=28\n//Patch version of cmake used to create the current loaded cache\nCMAKE_CACHE_PATCH_VERSION:INTERNAL=3\n//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE\nCMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1\n//Path to CMake executable.\nCMAKE_COMMAND:INTERNAL=/usr/bin/cmake\n//Path to cpack program executable.\nCMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack\n//ADVANCED property for variable: CMAKE_CTEST_COMMAND\nCMAKE_CTEST_COMMAND-ADVANCED:INTERNAL=1\n//Path to ctest program executable.\nCMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest\n//ADVANCED property for variable: CMAKE_CXX_COMPILER\nCMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_COMPILER_AR\nCMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_COMPILER_RANLIB\nCMAKE_CXX_COMPILER_RANLIB-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS\nCMAKE_CXX_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_DEBUG\nCMAKE_CXX_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_MINSIZEREL\nCMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELEASE\nCMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO\nCMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_DLLTOOL\nCMAKE_DLLTOOL-ADVANCED:INTERNAL=1\n//Executable file format\nCMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS\nCMAKE_EXE_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_DEBUG\nCMAKE_EXE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_MINSIZEREL\nCMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELEASE\nCMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_EXPORT_COMPILE_COMMANDS\nCMAKE_EXPORT_COMPILE_COMMANDS-ADVANCED:INTERNAL=1\n//Name of external makefile project generator.\nCMAKE_EXTRA_GENERATOR:INTERNAL=\n//Name of generator.\nCMAKE_GENERATOR:INTERNAL=Unix Makefiles\n//Generator instance identifier.\nCMAKE_GENERATOR_INSTANCE:INTERNAL=\n//Name of generator platform.\nCMAKE_GENERATOR_PLATFORM:INTERNAL=\n//Name of generator toolset.\nCMAKE_GENERATOR_TOOLSET:INTERNAL=\n//Test CMAKE_HAVE_LIBC_PTHREAD\nCMAKE_HAVE_LIBC_PTHREAD:INTERNAL=1\n//Source directory with the top level CMakeLists.txt file for this\n// project\nCMAKE_HOME_DIRECTORY:INTERNAL=/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark\n//Install .so files without execute permission.\nCMAKE_INSTALL_SO_NO_EXE:INTERNAL=1\n//ADVANCED property for variable: CMAKE_LINKER\nCMAKE_LINKER-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MAKE_PROGRAM\nCMAKE_MAKE_PROGRAM-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS\nCMAKE_MODULE_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_DEBUG\nCMAKE_MODULE_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL\nCMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELEASE\nCMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_NM\nCMAKE_NM-ADVANCED:INTERNAL=1\n//number of local generators\nCMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1\n//ADVANCED property for variable: CMAKE_OBJCOPY\nCMAKE_OBJCOPY-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_OBJDUMP\nCMAKE_OBJDUMP-ADVANCED:INTERNAL=1\n//Platform information initialized\nCMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_RANLIB\nCMAKE_RANLIB-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_READELF\nCMAKE_READELF-ADVANCED:INTERNAL=1\n//Path to CMake installation.\nCMAKE_ROOT:INTERNAL=/usr/share/cmake-3.28\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS\nCMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG\nCMAKE_SHARED_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL\nCMAKE_SHARED_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELEASE\nCMAKE_SHARED_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SKIP_INSTALL_RPATH\nCMAKE_SKIP_INSTALL_RPATH-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_SKIP_RPATH\nCMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS\nCMAKE_STATIC_LINKER_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_DEBUG\nCMAKE_STATIC_LINKER_FLAGS_DEBUG-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL\nCMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELEASE\nCMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO\nCMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_STRIP\nCMAKE_STRIP-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CMAKE_TAPI\nCMAKE_TAPI-ADVANCED:INTERNAL=1\n//uname command\nCMAKE_UNAME:INTERNAL=/usr/bin/uname\n//ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE\nCMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: COVERAGE_COMMAND\nCOVERAGE_COMMAND-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: COVERAGE_EXTRA_FLAGS\nCOVERAGE_EXTRA_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CTEST_SUBMIT_RETRY_COUNT\nCTEST_SUBMIT_RETRY_COUNT-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: CTEST_SUBMIT_RETRY_DELAY\nCTEST_SUBMIT_RETRY_DELAY-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: DART_TESTING_TIMEOUT\nDART_TESTING_TIMEOUT-ADVANCED:INTERNAL=1\n//Details about finding OpenMP\nFIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][cfound components: CXX ][v4.5()]\n//Details about finding OpenMP_CXX\nFIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-fopenmp][/usr/lib/gcc/x86_64-linux-gnu/13/libgomp.so][/usr/lib/x86_64-linux-gnu/libpthread.a][v4.5()]\n//Details about finding Python3\nFIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/usr/bin/python3][cfound components: Interpreter ][v3.12.3()]\n//Details about finding Threads\nFIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]\n//ADVANCED property for variable: MAKECOMMAND\nMAKECOMMAND-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: MEMORYCHECK_COMMAND\nMEMORYCHECK_COMMAND-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: MEMORYCHECK_SUPPRESSIONS_FILE\nMEMORYCHECK_SUPPRESSIONS_FILE-ADVANCED:INTERNAL=1\n//Result of TRY_COMPILE\nOpenMP_COMPILE_RESULT_CXX_fopenmp:INTERNAL=TRUE\n//ADVANCED property for variable: OpenMP_CXX_FLAGS\nOpenMP_CXX_FLAGS-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: OpenMP_CXX_LIB_NAMES\nOpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL=1\n//CXX compiler's OpenMP specification date\nOpenMP_CXX_SPEC_DATE:INTERNAL=201511\n//Result of TRY_COMPILE\nOpenMP_SPECTEST_CXX_:INTERNAL=TRUE\n//ADVANCED property for variable: OpenMP_gomp_LIBRARY\nOpenMP_gomp_LIBRARY-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: OpenMP_pthread_LIBRARY\nOpenMP_pthread_LIBRARY-ADVANCED:INTERNAL=1\n//ADVANCED property for variable: SITE\nSITE-ADVANCED:INTERNAL=1\n//linker supports push/pop state\n_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE\n//Compiler reason failure\n_Python3_Compiler_REASON_FAILURE:INTERNAL=\n//Development reason failure\n_Python3_Development_REASON_FAILURE:INTERNAL=\n//Path to a program.\n_Python3_EXECUTABLE:INTERNAL=/usr/bin/python3\n//Python3 Properties\n_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;12;3;64;32;;cpython-312-x86_64-linux-gnu;abi3;/usr/lib/python3.12;/usr/lib/python3.12;/usr/local/lib/python3.12/dist-packages;/usr/local/lib/python3.12/dist-packages\n_Python3_INTERPRETER_SIGNATURE:INTERNAL=4c8bfa8951e99fa32e4000a94f8c04a2\n//NumPy reason failure\n_Python3_NumPy_REASON_FAILURE:INTERNAL=\n\n",
+  "compile_commands": [
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/baselines.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/baselines.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/baselines.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/algorithms/baselines.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/datasets/generator.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/datasets/generator.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/datasets/generator.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/datasets/generator.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/quicksort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/quicksort.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/algorithms/quicksort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/sorting.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/sorting.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/sorting.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/algorithms/sorting.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/pdqsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/pdqsort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/pdqsort.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/algorithms/pdqsort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/timsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/timsort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/timsort.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/algorithms/timsort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/mergesort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/mergesort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/mergesort.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/algorithms/mergesort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_core.dir/src/algorithms/radixsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/radixsort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/radixsort.cpp",
+      "output": "CMakeFiles/mab_core.dir/src/algorithms/radixsort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/algorithm_benchmark.dir/src/main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/main.cpp",
+      "output": "CMakeFiles/algorithm_benchmark.dir/src/main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_metrics.dir/src/benchmark/comparisons.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparisons.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparisons.cpp",
+      "output": "CMakeFiles/mab_metrics.dir/src/benchmark/comparisons.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_metrics.dir/src/benchmark/memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+      "output": "CMakeFiles/mab_metrics.dir/src/benchmark/memory.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/pdqsort -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/third_party/timsort/include -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_metrics.dir/src/benchmark/memory_json.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+      "output": "CMakeFiles/mab_metrics.dir/src/benchmark/memory_json.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/sort_metrics.dir/src/benchmark/metrics_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/metrics_main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/metrics_main.cpp",
+      "output": "CMakeFiles/sort_metrics.dir/src/benchmark/metrics_main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_timing.dir/src/benchmark/timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing.cpp",
+      "output": "CMakeFiles/mab_timing.dir/src/benchmark/timing.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_timing.dir/src/benchmark/output.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/output.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/output.cpp",
+      "output": "CMakeFiles/mab_timing.dir/src/benchmark/output.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_comparison.dir/src/benchmark/comparison.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparison.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparison.cpp",
+      "output": "CMakeFiles/mab_comparison.dir/src/benchmark/comparison.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/comparison_input.dir/src/benchmark/comparison_input_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparison_input_main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/comparison_input_main.cpp",
+      "output": "CMakeFiles/comparison_input.dir/src/benchmark/comparison_input_main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/generated/Release -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/sort_benchmark.dir/src/benchmark/timing_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing_main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/timing_main.cpp",
+      "output": "CMakeFiles/sort_benchmark.dir/src/benchmark/timing_main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_search.dir/src/algorithms/searching.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/searching.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/searching.cpp",
+      "output": "CMakeFiles/mab_search.dir/src/algorithms/searching.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_search_metrics.dir/src/benchmark/search_comparisons.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_comparisons.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_comparisons.cpp",
+      "output": "CMakeFiles/mab_search_metrics.dir/src/benchmark/search_comparisons.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_search_timing.dir/src/benchmark/search_timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_timing.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_timing.cpp",
+      "output": "CMakeFiles/mab_search_timing.dir/src/benchmark/search_timing.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/generated/Release -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/search_benchmark.dir/src/benchmark/search_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_main.cpp",
+      "output": "CMakeFiles/search_benchmark.dir/src/benchmark/search_main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++ -DMAB_SEARCH_COUNTS=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/generated/Release -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/search_counts.dir/src/benchmark/search_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/search_main.cpp",
+      "output": "CMakeFiles/search_counts.dir/src/benchmark/search_main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_structures.dir/src/structures/skip_list.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/structures/skip_list.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/structures/skip_list.cpp",
+      "output": "CMakeFiles/mab_structures.dir/src/structures/skip_list.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_structures.dir/src/structures/btree.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/structures/btree.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/structures/btree.cpp",
+      "output": "CMakeFiles/mab_structures.dir/src/structures/btree.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_structures.dir/src/structures/registry.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/structures/registry.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/structures/registry.cpp",
+      "output": "CMakeFiles/mab_structures.dir/src/structures/registry.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_structure_timing.dir/src/benchmark/structure_timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/structure_timing.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/structure_timing.cpp",
+      "output": "CMakeFiles/mab_structure_timing.dir/src/benchmark/structure_timing.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/generated/Release -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/structure_benchmark.dir/src/benchmark/structure_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/structure_main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/structure_main.cpp",
+      "output": "CMakeFiles/structure_benchmark.dir/src/benchmark/structure_main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_structures.dir/tests/test_structures.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_structures.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_structures.cpp",
+      "output": "CMakeFiles/test_structures.dir/tests/test_structures.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_structure_timing.dir/tests/test_structure_timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_structure_timing.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_structure_timing.cpp",
+      "output": "CMakeFiles/test_structure_timing.dir/tests/test_structure_timing.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_searching.dir/tests/test_searching.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_searching.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_searching.cpp",
+      "output": "CMakeFiles/test_searching.dir/tests/test_searching.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_search_timing.dir/tests/test_search_timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_search_timing.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_search_timing.cpp",
+      "output": "CMakeFiles/test_search_timing.dir/tests/test_search_timing.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_baselines.dir/tests/test_baselines.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_baselines.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_baselines.cpp",
+      "output": "CMakeFiles/test_baselines.dir/tests/test_baselines.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_datasets.dir/tests/test_datasets.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_datasets.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_datasets.cpp",
+      "output": "CMakeFiles/test_datasets.dir/tests/test_datasets.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_quicksort.dir/tests/test_quicksort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_quicksort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_quicksort.cpp",
+      "output": "CMakeFiles/test_quicksort.dir/tests/test_quicksort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_pdqsort.dir/tests/test_pdqsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_pdqsort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_pdqsort.cpp",
+      "output": "CMakeFiles/test_pdqsort.dir/tests/test_pdqsort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_timsort.dir/tests/test_timsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timsort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timsort.cpp",
+      "output": "CMakeFiles/test_timsort.dir/tests/test_timsort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_mergesort.dir/tests/test_mergesort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_mergesort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_mergesort.cpp",
+      "output": "CMakeFiles/test_mergesort.dir/tests/test_mergesort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_radixsort.dir/tests/test_radixsort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_radixsort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_radixsort.cpp",
+      "output": "CMakeFiles/test_radixsort.dir/tests/test_radixsort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_comparisons.dir/tests/test_comparisons.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparisons.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparisons.cpp",
+      "output": "CMakeFiles/test_comparisons.dir/tests/test_comparisons.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory.dir/tests/test_memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+      "output": "CMakeFiles/test_memory.dir/tests/test_memory.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++ -DMAB_FORCE_UNSUPPORTED_MEMORY=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory_unsupported.dir/tests/test_memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_memory.cpp",
+      "output": "CMakeFiles/test_memory_unsupported.dir/tests/test_memory.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++ -DMAB_FORCE_UNSUPPORTED_MEMORY=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory.cpp",
+      "output": "CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++ -DMAB_FORCE_UNSUPPORTED_MEMORY=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory_json.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/memory_json.cpp",
+      "output": "CMakeFiles/test_memory_unsupported.dir/src/benchmark/memory_json.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/test_timing.dir/tests/test_timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timing.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_timing.cpp",
+      "output": "CMakeFiles/test_timing.dir/tests/test_timing.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -fopenmp -o CMakeFiles/mab_parallel.dir/src/algorithms/parallel_mergesort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/parallel_mergesort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/algorithms/parallel_mergesort.cpp",
+      "output": "CMakeFiles/mab_parallel.dir/src/algorithms/parallel_mergesort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -fopenmp -o CMakeFiles/mab_parallel_timing.dir/src/benchmark/parallel_timing.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/parallel_timing.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/parallel_timing.cpp",
+      "output": "CMakeFiles/mab_parallel_timing.dir/src/benchmark/parallel_timing.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/generated/Release -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -fopenmp -o CMakeFiles/parallel_sort_benchmark.dir/src/benchmark/parallel_main.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/parallel_main.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/parallel_main.cpp",
+      "output": "CMakeFiles/parallel_sort_benchmark.dir/src/benchmark/parallel_main.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -fopenmp -o CMakeFiles/test_parallel_mergesort.dir/tests/test_parallel_mergesort.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_parallel_mergesort.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_parallel_mergesort.cpp",
+      "output": "CMakeFiles/test_parallel_mergesort.dir/tests/test_parallel_mergesort.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++ -DMAB_TEST_COMPARISON_OPENMP=1 -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -fopenmp -o CMakeFiles/test_comparison.dir/tests/test_comparison.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparison.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_comparison.cpp",
+      "output": "CMakeFiles/test_comparison.dir/tests/test_comparison.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -o CMakeFiles/mab_diagnostic_output.dir/src/benchmark/output.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/output.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/src/benchmark/output.cpp",
+      "output": "CMakeFiles/mab_diagnostic_output.dir/src/benchmark/output.cpp.o"
+    },
+    {
+      "directory": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release",
+      "command": "/usr/bin/c++  -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/generated/Release -I/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/include -O3 -DNDEBUG -Wall -Wextra -Wpedantic -fopenmp -o CMakeFiles/test_parallel_workers.dir/tests/test_parallel_workers.cpp.o -c /home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_parallel_workers.cpp",
+      "file": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/tests/test_parallel_workers.cpp",
+      "output": "CMakeFiles/test_parallel_workers.dir/tests/test_parallel_workers.cpp.o"
+    }
+  ],
+  "git_status": {
+    "command": [
+      "git",
+      "status",
+      "--short"
+    ],
+    "returncode": 128,
+    "stdout": "",
+    "stderr": "fatal: not a git repository (or any of the parent directories): .git\n"
+  },
+  "workload": {
+    "sizes": [
+      100000000
+    ],
+    "seeds": [
+      1729
+    ],
+    "distributions": [
+      "uniform",
+      "sorted",
+      "reverse_sorted",
+      "duplicate_heavy",
+      "nearly_sorted"
+    ],
+    "sorts": [
+      "std_sort",
+      "quick_sort",
+      "pdq_sort",
+      "tim_sort",
+      "merge_sort",
+      "radix_sort"
+    ],
+    "repetitions": 5,
+    "warmups": 1
+  },
+  "workload_note": "Environment captured before the declared sorting matrix; completion markers determine outcome.",
+  "gpu_status": "not probed; no GPU experiment attempted",
+  "benchmark_executable_sha256": "65fc8d2631cab11afa42dff13fb27a9671c4604d71d6e1630f814b9a7816e1c1"
+}

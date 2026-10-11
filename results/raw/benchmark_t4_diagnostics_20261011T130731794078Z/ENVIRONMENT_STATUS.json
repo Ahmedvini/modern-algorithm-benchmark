@@ -1,0 +1,22 @@
+{
+  "account_balance_compute_units": 0.0,
+  "account_usage_compute_units_per_hour": 1.07,
+  "active_assignments": 1,
+  "actual_gpu_model": null,
+  "cli_version": "0.7.4",
+  "compiler_version": null,
+  "cub_version": null,
+  "cuda_runtime_version": null,
+  "cuda_toolkit_version": null,
+  "driver_version": null,
+  "endpoint": "gpu-t4-s-kkb-ass1c0-vef28uetz4qh",
+  "evidence": "command_002.json",
+  "free_compute_verified": false,
+  "limitation": "CLI control-plane observation establishes accessibility, not free billing, device usability or toolchain versions. Remote execution held under no-paid-compute constraint; session left untouched.",
+  "python_version": null,
+  "record_kind": "control_plane_observation_not_gpu_runtime_validation",
+  "remote_execution_performed": false,
+  "reported_hardware": "T4",
+  "session_name": "benchmark-t4",
+  "session_status": "IDLE"
+}

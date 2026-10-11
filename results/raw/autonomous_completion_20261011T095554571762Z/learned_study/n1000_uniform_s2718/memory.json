@@ -1,0 +1,1 @@
+{"owned_capacity_bytes":4000,"object_bytes":24,"process_lifetime_peak":{"status":"ok","metric":"peak_rss","scope":"process_lifetime","unit":"bytes","method":"getrusage_ru_maxrss","value":20434944,"error_code":null}}

@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/build/autonomous_cpu_release/sort_benchmark",
+    "--output",
+    "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m/run_000012",
+    "--sort",
+    "std_sort,quick_sort,pdq_sort,tim_sort,merge_sort,radix_sort",
+    "--size",
+    "10000000",
+    "--seed",
+    "2718",
+    "--distribution",
+    "reverse_sorted",
+    "--repetitions",
+    "5",
+    "--warmups",
+    "1",
+    "--memory-limit-mib",
+    "512",
+    "--distinct",
+    "16",
+    "--run-id",
+    "sorting_10m:run_000012"
+  ],
+  "exit_code": 0,
+  "stdout": "Completed 30 measured trials; raw data: \"/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark/results/raw/autonomous_completion_20261011T095554571762Z/sorting_10m/run_000012/trials.csv\"\n",
+  "stderr": ""
+}

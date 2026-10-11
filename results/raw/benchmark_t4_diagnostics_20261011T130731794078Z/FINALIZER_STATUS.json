@@ -1,0 +1,48 @@
+{
+  "assertions_passed": true,
+  "builds_executed": 0,
+  "gpu_workloads": 0,
+  "measured_trials": 0,
+  "new_cloud_assignments": 0,
+  "preservation": {
+    "build_metadata_sha256": {
+      "changed": [],
+      "files": 83,
+      "missing": []
+    },
+    "executable_sha256": {
+      "changed": [],
+      "files": 9,
+      "missing": []
+    },
+    "frozen_sha256": {
+      "changed": [],
+      "files": 4,
+      "missing": []
+    },
+    "historical_results_sha256": {
+      "changed": [],
+      "files": 13518,
+      "missing": []
+    },
+    "project_sha256": {
+      "changed": [],
+      "files": 221,
+      "missing": []
+    },
+    "protected_sha256": {
+      "changed": [],
+      "files": 80,
+      "missing": []
+    },
+    "report_sha256": {
+      "changed": [],
+      "files": 28,
+      "missing": []
+    }
+  },
+  "source_changes": 0,
+  "tests_executed": 0,
+  "unexpected_result_additions": [],
+  "warmups": 0
+}
