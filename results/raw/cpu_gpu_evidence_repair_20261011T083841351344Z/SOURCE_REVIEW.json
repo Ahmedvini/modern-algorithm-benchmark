@@ -1,0 +1,12 @@
+{
+  "changed_or_added": [
+    "scripts/cpu_gpu_build_identity.py",
+    "scripts/cpu_gpu_build_provenance.py",
+    "scripts/cpu_gpu_evidence.py",
+    "scripts/cpu_gpu_evidence_io.py",
+    "scripts/cpu_gpu_framework_compatibility.py",
+    "tests/test_evidence_enforcement.py",
+    "tests/test_framework_compatibility.py"
+  ],
+  "review": "Static AST and diff; tests block subprocess/shell and create inert temporary data; no CTest registration or guard changes."
+}

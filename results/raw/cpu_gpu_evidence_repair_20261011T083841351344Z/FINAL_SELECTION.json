@@ -1,0 +1,26 @@
+{
+  "activated": false,
+  "approved": false,
+  "path": "docs/NON_TIMING_TEST_SELECTION_v4.candidate.json",
+  "sha256": "9d39e00b3910975f56b6c2eb0c08a7f57a23ab0762fc789c261a936e82aa0a71",
+  "source_count": 157,
+  "source_delta": {
+    "added": [
+      "scripts/cpu_gpu_build_identity.py",
+      "scripts/cpu_gpu_build_provenance.py",
+      "scripts/cpu_gpu_evidence.py",
+      "scripts/cpu_gpu_evidence_io.py",
+      "scripts/cpu_gpu_framework_compatibility.py",
+      "tests/test_evidence_enforcement.py",
+      "tests/test_framework_compatibility.py"
+    ],
+    "modified": [
+      "scripts/analyze_cpu_gpu.py",
+      "scripts/cpu_gpu_protocol.py",
+      "scripts/cpu_gpu_provenance.py",
+      "scripts/run_cpu_gpu_pilot.py",
+      "scripts/run_cpu_gpu_study.py"
+    ],
+    "removed": []
+  }
+}

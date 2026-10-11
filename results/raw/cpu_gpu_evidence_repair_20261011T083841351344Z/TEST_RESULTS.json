@@ -1,0 +1,40 @@
+{
+  "final": {
+    "compatibility_reviewed.log": {
+      "errors": 0,
+      "executed": 26,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 26,
+      "scope": "inert Python fixtures only",
+      "skipped": 0
+    },
+    "evidence_tests_reviewed.log": {
+      "errors": 0,
+      "executed": 39,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 39,
+      "scope": "inert Python fixtures only",
+      "skipped": 0
+    },
+    "validation_policy_reviewed.log": {
+      "errors": 0,
+      "executed": 9,
+      "exit_code": 0,
+      "failed": 0,
+      "passed": 9,
+      "scope": "inert Python fixtures only",
+      "skipped": 0
+    }
+  },
+  "final_distinct_total": 74,
+  "initial_error": {
+    "errors": 1,
+    "executed": 28,
+    "exit_code": 1,
+    "passed": 27,
+    "reason": "duplicate missing keyword in synthetic fixture constructor"
+  },
+  "native_or_gpu_tests_run": 0
+}

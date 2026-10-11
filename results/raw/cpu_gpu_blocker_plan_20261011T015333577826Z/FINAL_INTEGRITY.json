@@ -1,0 +1,70 @@
+{
+  "builds": 0,
+  "colab_commands": 0,
+  "command_exit_codes": {
+    "control_record.json": 0,
+    "exact_constraints.json": 0,
+    "gpu_paths.json": 0,
+    "required_evidence.json": 0,
+    "worker_policy_paths.json": 0
+  },
+  "created_utc": "2026-10-11T01:59:31.567228+00:00",
+  "ctest_discovery": 0,
+  "evidence_sha256": {
+    "BEFORE.json": "f1d774ae16f4395a2110937d33f061e8d563b4ed6dedc00bbfb85cad38714810",
+    "COMMANDS.md": "dfc2683609f427f388b26abdb8d2a39c05edfd827f0a0b2857d2a21af4030772",
+    "CONTROL_COMMANDS.json": "04c5dbb4011d3f5cf00b588ee6749b03a0809da643e888a563c1b687e5c04bdc",
+    "FINAL_AUDIT.md": "59e744730c5cc0343310a4d13a83bf9aa6a5e71068f6ac27e871c07e076401ae",
+    "PRESERVATION.json": "f2a06d03529910231851a3bd149c77dcf58cf92c80df215df2bb403eb6b88748",
+    "control_record.json": "e551df9475972582c19fd1e0db3b2cb196ffd79378cd08954253bbe1b176092d",
+    "exact_constraints.json": "ccdd05c4e4adb3dde1915e21d07e54225af1baccdc26c97e0c49fcbac1cce3fa",
+    "finalize.py": "7038a992ab9d5c00381098345e4747248677bc8553bb8d4f3a8a78987375dae6",
+    "gpu_paths.json": "2063d7971e97c56942d9fc2f13fce17d06c21d9d71cf0afe99e6a103ce60a5ac",
+    "record.py": "134a9218366802a79d17fe11896869f29fac068ca8e513d328c61909b90395be",
+    "required_evidence.json": "e0504b6163c7c54a657ca0ae4b10e1a93ace378eaa76e8a0af29466bd73a6f58",
+    "worker_policy_paths.json": "1a5cf4f127f5939ff2205b6df776111773b1ee8ccae70ffa5d8488805135b5f5"
+  },
+  "gpu_execution": 0,
+  "measured_trials": 0,
+  "new_sessions": 0,
+  "preservation": {
+    "build_metadata_sha256": {
+      "changed_or_missing": [],
+      "verified_count": 65
+    },
+    "cub_pin_sha256": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
+    "effective_anchors_verified": 26,
+    "frozen_members_sha256": {
+      "docs/CPU_GPU_COMPARISON_PROTOCOL_v1.md": "7738d21ff0ea611c04a557418182ab562769b568c7dc0b898ca5d50280e21c70",
+      "docs/studies/cpu_gpu_comparison_v1.matrix.json": "29f9f2765e466a88fc3a7b6e590b1c38dd1ebe5f4f003a37e02aabc9b7074833",
+      "docs/studies/cpu_gpu_comparison_v1.resources.csv": "324a67c9668d258366f738348ad853cbadd65ce4edd6f34b3ec16f4baaafeaab"
+    },
+    "historical_membership": {
+      "after": 11897,
+      "before": 11897,
+      "missing": [],
+      "unexpected": []
+    },
+    "historical_results_sha256": {
+      "changed_or_missing": [],
+      "verified_count": 11897
+    },
+    "latest_design_sealed_members_verified": 22,
+    "production_header_dependency_files_verified": 80,
+    "project_sha256": {
+      "changed_or_missing": [],
+      "verified_count": 177
+    },
+    "reviewed_source_files_verified": 144
+  },
+  "proposed_changes_implemented": false,
+  "resource_probes": 0,
+  "schema_version": 1,
+  "seal_note": "Self excluded; retained local integrity rather than external signed attestation.",
+  "source_changes": [],
+  "study_authorized": false,
+  "tests": 0,
+  "validation_executed": false,
+  "verdict": "NO-GO \u2014 design review only; no validation executed",
+  "warmups": 0
+}

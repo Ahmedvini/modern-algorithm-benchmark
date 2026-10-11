@@ -1,0 +1,201 @@
+{
+  "cwd": "/home/ahmedelsheikh/Documents/GitHub/modern-algorithm-benchmark",
+  "records": [
+    {
+      "cmd": null,
+      "exit_code": null,
+      "scope": "Initial read-only inspection orchestration failed before any shell execution: JavaScript SyntaxError: Missing initializer in const declaration (accidental object suffix on cmd string). Corrected next call; no workload ran.",
+      "note": "Orchestration parser error before shell execution; not a command."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport hashlib,json,datetime\nfrom pathlib import Path\nr=Path.cwd();p=r/'results/raw/cpu_gpu_recovery_independent_review_20261011T082542018841Z'\nh=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\ns=json.loads((p/'FINAL_INTEGRITY.json').read_text())\nassert all(h(p/n)==v for n,v in s['evidence_sha256'].items())\nprior=json.loads((p/'BASELINE.json').read_text())\nassert all(h(r/n)==v for k in ['project_sha256','frozen_sha256','protected_sha256','build_metadata_sha256','results_sha256'] for n,v in prior[k].items())\ne=r/'results/raw'/('cpu_gpu_evidence_repair_'+datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'));e.mkdir()\nd=dict(prior,results_sha256={str(f.relative_to(r)):h(f) for f in sorted((r/'results').rglob('*')) if f.is_file() and not f.is_relative_to(e)},review_seal_sha256=h(p/'FINAL_INTEGRITY.json'))\n(e/'BEFORE.json').write_text(json.dumps(d,indent=2,sort_keys=True)+'\\n')\nfor n in prior['project_sha256']:\n f=e/'before_sources'/n;f.parent.mkdir(parents=True,exist_ok=True);f.write_bytes((r/n).read_bytes())\nprint('EVIDENCE='+str(e.relative_to(r)));print('historical',len(d['results_sha256']),'project',len(d['project_sha256']))\nPY",
+      "exit_code": 0,
+      "scope": "File-only baseline capture; verified latest review seal and all protected/project/historical hashes before edits."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nbase=Path('results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence')\nfor p in sorted(base.rglob('*.json')):\n if any(w in p.name for w in ['selection','workspace','worker','prepared','ctest','BUILD_COMPLETE']):\n  d=json.loads(p.read_text()); print(str(p),list(d) if isinstance(d,dict) else type(d).__name__)\n  if isinstance(d,dict) and 'stdout' in d:print('output',d['stdout'][:300],d.get('argv'))\nPY\ncat tests/test_cuda_prepared_correctness.cpp\ncat tests/test_parallel_workers.cpp\nsed -n '1,100p' scripts/non_timing_tests.py\ncat docs/CTEST_COLAB_METADATA_v2.md",
+      "exit_code": 0,
+      "scope": "Read-only actual command/result/selection schemas and diagnostic implementations."
+    },
+    {
+      "cmd": "rg -n 'cpu_gpu_comparison|comparison_input|mab_cuda_timing|test_parallel_workers|target_link_libraries' CMakeLists.txt\ncat scripts/cpu_gpu_validation_policy.py\npython3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nb=Path('results/raw/bounded_resume_20261011T024034091796Z/downloaded/evidence')\nfor n in ['validation_commands/actual_workers_untimed.json','cpu_release_ctest_selection.json','validation_commands/workspace_1025.json']:\n p=b/n\n if p.exists():\n  d=json.loads(p.read_text()); print(n); print(d.get('stdout','') if 'stdout' in d else json.dumps({k:v for k,v in d.items() if k!='excluded'},indent=2)[:1800])\nprint('commandnames',[p.name for p in (b/'validation_commands').glob('*.json')])\nPY",
+      "exit_code": 0,
+      "scope": "Read-only current targets, unchanged parent classifier, actual worker/selection and workspace command schemas."
+    },
+    {
+      "cmd": "sed -n '1,210p' scripts/analyze_cuda_results.py\nsed -n '1,120p' scripts/run_cuda_matrix.py\nsed -n '165,250p' tests/test_framework_compatibility.py\nsed -n '1,90p' docs/NON_TIMING_TEST_SELECTION_v3.json\ncat results/raw/cpu_gpu_recovery_independent_review_20261011T082542018841Z/INITIAL_VERIFICATION.json",
+      "exit_code": 0,
+      "scope": "Read-only analysis APIs and candidate snapshot semantics; no analysis runner or timing executed."
+    },
+    {
+      "cmd": "rg -n '^class|def fixture|def make|def full|def synthetic' tests/test_cpu_gpu_comparison.py\nsed -n '1,145p' tests/test_cpu_gpu_comparison.py\nsed -n '1,110p' tests/fixtures/cpu_gpu_provenance_reproducer.py",
+      "exit_code": 0,
+      "scope": "Static inspection of existing synthetic fixture writers; no helper executed."
+    },
+    {
+      "cmd": "sed -n '240,430p' scripts/cpu_gpu_evidence.py\ncat scripts/cpu_gpu_build_provenance.py\ncat scripts/cpu_gpu_framework_compatibility.py\ncat scripts/cpu_gpu_build_identity.py\ncat tests/test_framework_compatibility.py",
+      "exit_code": 0,
+      "scope": "Static inspection of new validators and existing public validation/tests; no execution."
+    },
+    {
+      "cmd": "rg --files src | rg 'comparison_input|cpu_gpu'\nsed -n '120,230p' scripts/run_cpu_gpu_pilot.py\nsed -n '1,100p' docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md\ncat results/raw/cpu_gpu_recovery_independent_review_20261011T082542018841Z/FINAL_AUDIT.md",
+      "exit_code": 0,
+      "scope": "Read-only public launch and compatibility-policy inspection."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nm=json.loads(Path('docs/NON_TIMING_TEST_SELECTION_v3.json').read_text())\nprint(m.keys());print(m['tests']['baselines']);print(m['build_metadata']['test_properties']['baselines']);print([n for n,v in m['tests'].items() if v['classification']=='cpu_correctness'])\nPY",
+      "exit_code": 0,
+      "scope": "Pure manifest inspection; corrected inspection after missing default_selection key (exit 1)."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport ast,difflib,hashlib,json\nfrom pathlib import Path\nroot=Path.cwd();e=root/\"results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z\"\nb=json.loads((e/'BEFORE.json').read_text());inventory=[];diff=[]\npaths=set(b['project_sha256'])\nfor directory in ['include','src','scripts','tests','cmake','third_party']:\n paths.update(str(p.relative_to(root)) for p in (root/directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts)\npaths.add('CMakeLists.txt')\nfor name in sorted(paths):\n p=root/name;old=e/'before_sources'/name\n if old.exists() and p.exists() and old.read_bytes()==p.read_bytes():continue\n inventory.append(name)\n if p.suffix=='.py':ast.parse(p.read_text(),filename=name)\n before=old.read_text().splitlines(True) if old.exists() else []\n diff.extend(difflib.unified_diff(before,p.read_text().splitlines(True),fromfile='before/'+name,tofile='after/'+name))\n(e/'SOURCE_REVIEW.diff').write_text(''.join(diff))\n(e/'SOURCE_REVIEW.json').write_text(json.dumps(dict(changed_or_added=inventory,review='Static AST and diff; tests block subprocess/shell and create inert temporary data; no CTest registration or guard changes.'),indent=2)+'\\n')\nprint('\\n'.join(inventory));print('diff lines',len(diff))\nPY",
+      "exit_code": 0,
+      "scope": "Pure AST/diff review before focused tests; no Python target execution or native compilation."
+    },
+    {
+      "cmd": "python3 -B tests/test_evidence_enforcement.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_attempt1.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_attempt1.log'\nexit \"$repair_test_status\"",
+      "exit_code": 1,
+      "scope": "Focused inert unit regressions only; subprocess/Popen/shell patched to raise; no CTest/build/GPU/timing."
+    },
+    {
+      "cmd": "python3 -B tests/test_evidence_enforcement.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_attempt2.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_attempt2.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Focused inert test file; subprocess/shell/runner invocation forbidden by mocks. No native build/discovery/timing/GPU."
+    },
+    {
+      "cmd": "python3 -B tests/test_framework_compatibility.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_attempt1.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_attempt1.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Focused inert test file; subprocess/shell/runner invocation forbidden by mocks. No native build/discovery/timing/GPU."
+    },
+    {
+      "cmd": "rg -n 'classification|operational|report|ready' scripts/cuda_preflight.py | tail -35\nrg -n 'preflight|records|build_provenance' scripts/analyze_cpu_gpu.py | head -28\ncat tests/test_validation_policy.py\nsed -n '1,80p' docs/ROADMAP.md\nsed -n '1,65p' README.md",
+      "exit_code": 0,
+      "scope": "Static schema and existing focused-policy-test safety inspection."
+    },
+    {
+      "cmd": "sed -n '85,130p' scripts/cuda_preflight.py\nsed -n '155,175p' scripts/cuda_preflight.py\nsed -n '130,170p' scripts/analyze_cpu_gpu.py\nsed -n '1,105p' scripts/non_timing_tests.py\nsed -n '1,90p' scripts/cpu_gpu_protocol.py",
+      "exit_code": 0,
+      "scope": "Read-only preflight classifier, resource validator, original selector safeguards and source-map contract."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nb=json.loads(Path('results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/BEFORE.json').read_text())\nprint('protected framework doc',any('CPU_GPU_FRAMEWORK_COMPATIBILITY' in n for n in b['protected_sha256']))\nprint('build metadata',len(b['build_metadata_sha256']))\nPY\ngit status --short --branch",
+      "exit_code": 128,
+      "scope": "Read-only protected-document membership and Git availability; Git status absent expected, no Git mutation."
+    },
+    {
+      "cmd": "python3 -B tests/test_evidence_enforcement.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_attempt3.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_attempt3.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Focused inert Python tests only; no CTest discovery, native compiler, resource/GPU query, timings or benchmark workloads."
+    },
+    {
+      "cmd": "python3 -B tests/test_framework_compatibility.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_final.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_final.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Focused inert Python tests only; no CTest discovery, native compiler, resource/GPU query, timings or benchmark workloads."
+    },
+    {
+      "cmd": "python3 -B tests/test_validation_policy.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_final.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_final.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Focused inert Python tests only; no CTest discovery, native compiler, resource/GPU query, timings or benchmark workloads."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport ast,copy,difflib,hashlib,json,sys\nfrom pathlib import Path\nroot=Path.cwd();e=root/'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z';sys.path.insert(0,str(root/'scripts'))\nfrom cpu_gpu_protocol import source_manifest\nfrom cpu_gpu_evidence import candidate,BASE_SELECTION_SHA256\nbase_path=root/'docs/NON_TIMING_TEST_SELECTION_v3.json';base=json.loads(base_path.read_text());source=source_manifest();old=base['reviewed_source_sha256']\ndelta=dict(added=sorted(set(source)-set(old)),removed=sorted(set(old)-set(source)),modified=sorted(n for n in set(source)&set(old) if source[n]!=old[n]))\nreasons={\n 'scripts/analyze_cpu_gpu.py':'Prior recovery: explicit opt-in compatibility validation in independent analyzer; unchanged in this repair.',\n 'scripts/cpu_gpu_protocol.py':'Prior recovery: explicit policy dispatch; unchanged in this repair.',\n 'scripts/cpu_gpu_provenance.py':'Prior recovery: protected compatibility source review dispatch; unchanged in this repair.',\n 'scripts/run_cpu_gpu_pilot.py':'Prior recovery: shared prerequisite validator and binary verification; unchanged in this repair.',\n 'scripts/run_cpu_gpu_study.py':'Prior recovery: explicit study-only compatibility option; unchanged in this repair.',\n 'scripts/cpu_gpu_build_identity.py':'Prior recovery addition; repair now requires compiler/linker proof in addition to snapshots.',\n 'scripts/cpu_gpu_framework_compatibility.py':'Prior recovery addition; repair adds strict independently pinned evidence-content validation.',\n 'tests/test_framework_compatibility.py':'Prior recovery addition; unsafe positive fixture is now rejected; prior protections retained.',\n 'scripts/cpu_gpu_build_provenance.py':'New offline compiler/linker graph validation; not a build or execution collector.',\n 'scripts/cpu_gpu_evidence_io.py':'New verified-byte snapshot reader with strict references and JSON parsing.',\n 'scripts/cpu_gpu_evidence.py':'New strict record, CPU plan, build and independent review checks; trust pin remains unset.',\n 'tests/test_evidence_enforcement.py':'New inert adversarial parser regressions; not implicitly approved for CTest selection.'}\nassert set(reasons)==set(delta['added']+delta['modified']+delta['removed'])\nc=copy.deepcopy(base);c.update(schema_version=4,policy='non_timing_correctness_v4_candidate',review_status='pending_independent_review',base_manifest_sha256=BASE_SELECTION_SHA256,reviewed_source_sha256=source,source_delta=delta,source_change_reasons=reasons)\np=root/'docs/NON_TIMING_TEST_SELECTION_v4.candidate.json'\nwith p.open('x') as f:json.dump(c,f,indent=2,sort_keys=True);f.write('\\n')\nassert candidate(c,source)==delta\nb=json.loads((e/'BEFORE.json').read_text());all_paths=set(b['project_sha256'])|set(source)|{str(p.relative_to(root)),'docs/CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md'}\ninventory=dict(modified=[],added=[],removed=[]);diff=[]\nfor name in sorted(all_paths):\n after=root/name;before=e/'before_sources'/name\n if before.exists() and after.exists() and before.read_bytes()==after.read_bytes():continue\n kind='added' if not before.exists() else 'removed' if not after.exists() else 'modified'\n inventory[kind].append(name)\n if after.suffix=='.py':ast.parse(after.read_text(),filename=name)\n diff.extend(difflib.unified_diff(before.read_text().splitlines(True) if before.exists() else [],after.read_text().splitlines(True) if after.exists() else [],fromfile='before/'+name,tofile='after/'+name))\n(e/'CHANGES_FINAL.diff').write_text(''.join(diff))\n(e/'SELECTION_CANDIDATE_REVIEW.json').write_text(json.dumps(dict(base_sha256=hashlib.sha256(base_path.read_bytes()).hexdigest(),candidate_sha256=hashlib.sha256(p.read_bytes()).hexdigest(),old_source_count=len(old),current_source_count=len(source),delta=delta,reasons=reasons,approved=False,activated=False,inventory=inventory),indent=2,sort_keys=True)+'\\n')\nprint(json.dumps(dict(old_count=len(old),current_count=len(source),delta=delta,inventory=inventory),indent=2))\nPY",
+      "exit_code": 0,
+      "scope": "Exclusive inactive candidate creation, pure source hashes/AST and final diff; no guard activation or discovery."
+    },
+    {
+      "cmd": "python3 -B tests/test_evidence_enforcement.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_final.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_final.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final focused inert regressions; native subprocess/shell execution forbidden in evidence/compatibility tests; policy methods read/static/classify only."
+    },
+    {
+      "cmd": "python3 -B tests/test_framework_compatibility.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_final2.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_final2.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final focused inert regressions; native subprocess/shell execution forbidden in evidence/compatibility tests; policy methods read/static/classify only."
+    },
+    {
+      "cmd": "python3 -B tests/test_validation_policy.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_final2.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_final2.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final focused inert regressions; native subprocess/shell execution forbidden in evidence/compatibility tests; policy methods read/static/classify only."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\np=Path('results/raw/cpu_gpu_recovery_independent_review_20261011T082542018841Z/FINAL_INTEGRITY.json');v=json.loads(p.read_text());print(v.keys());print(json.dumps({k:x for k,x in v.items() if k not in ['evidence_sha256','current_project_sha256','project_sha256','historical_sha256','results_sha256']},indent=2)[:5000])\nPY\nrg -n 'def .*integrity|FINAL_INTEGRITY|evidence_sha256|historical_unchanged' scripts | head -45",
+      "exit_code": 0,
+      "scope": "Read-only established integrity manifest structure and existing file-only hashing mechanism inspection."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nb=json.loads(Path('results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/BEFORE.json').read_text())\nprint('project roots',sorted(set(Path(p).parts[0] for p in b['project_sha256'])))\nprint('protected roots',sorted(set(Path(p).parts[0] for p in b['protected_sha256'])))\nprint('metadata names',list(b['build_metadata_sha256'])[:8])\nprint('project count',len(b['project_sha256']))\nPY\nrg -n 'project_sha256|rglob|metadata' results/raw/cpu_gpu_recovery_independent_review_20261011T082542018841Z/seal_review.py",
+      "exit_code": 0,
+      "scope": "Read-only baseline membership and established sealing script inspection."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nb=json.loads(Path('results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/BEFORE.json').read_text());print(sorted({Path(n).name for n in b['build_metadata_sha256']}))\nPY\nsed -n '1,38p' results/raw/cpu_gpu_recovery_independent_review_20261011T082542018841Z/seal_review.py",
+      "exit_code": 0,
+      "scope": "Static sealing conventions only; no previous seal script executed or overwritten."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport ast,difflib,hashlib,json,sys\nfrom pathlib import Path\nr=Path.cwd();e=r/'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z';sys.path.insert(0,str(r/'scripts'))\nfrom cpu_gpu_protocol import source_manifest\nfrom cpu_gpu_evidence import candidate\np=r/'docs/NON_TIMING_TEST_SELECTION_v4.candidate.json';original=p.read_bytes()\nwith (e/'SELECTION_CANDIDATE_INITIAL.json').open('xb') as f:f.write(original)\nc=json.loads(original);c['reviewed_source_sha256']=source_manifest()\nbase=json.loads((r/'docs/NON_TIMING_TEST_SELECTION_v3.json').read_text())['reviewed_source_sha256'];current=c['reviewed_source_sha256']\nc['source_delta']=dict(added=sorted(set(current)-set(base)),removed=sorted(set(base)-set(current)),modified=sorted(n for n in set(current)&set(base) if current[n]!=base[n]))\n# This is an unapproved working-source addition from this task, not historical or frozen evidence.\np.write_text(json.dumps(c,indent=2,sort_keys=True)+'\\n');candidate(c,current)\nb=json.loads((e/'BEFORE.json').read_text());paths=set(b['project_sha256'])|set(current)|{str(p.relative_to(r)),'docs/CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md'}\ninventory=dict(added=[],modified=[],removed=[]);diff=[]\nfor name in sorted(paths):\n old=e/'before_sources'/name;new=r/name\n if old.exists() and new.exists() and old.read_bytes()==new.read_bytes():continue\n k='added' if not old.exists() else 'removed' if not new.exists() else 'modified';inventory[k].append(name)\n if new.suffix=='.py':ast.parse(new.read_text(),filename=name)\n diff.extend(difflib.unified_diff(old.read_text().splitlines(True) if old.exists() else [],new.read_text().splitlines(True) if new.exists() else [],fromfile='before/'+name,tofile='after/'+name))\nwith (e/'CHANGES_REVIEWED.diff').open('x') as f:f.writelines(diff)\nwith (e/'CHANGE_INVENTORY.json').open('x') as f:json.dump(inventory,f,indent=2,sort_keys=True);f.write('\\n')\nwith (e/'SELECTION_CANDIDATE_FINAL.json').open('x') as f:json.dump(dict(path=str(p.relative_to(r)),sha256=hashlib.sha256(p.read_bytes()).hexdigest(),old_count=len(base),current_count=len(current),delta=c['source_delta'],reasons=c['source_change_reasons'],approved=False,activated=False,retained_initial_sha256=hashlib.sha256(original).hexdigest()),f,indent=2,sort_keys=True);f.write('\\n')\nprint(json.dumps(inventory,indent=2));print('candidate',len(current),'source files; pending; selector unchanged')\nPY",
+      "exit_code": 0,
+      "scope": "Final pure AST/diff/candidate hash refresh after stricter schema edits; initial candidate retained, v3/default selector untouched."
+    },
+    {
+      "cmd": "sed -n '1,240p' scripts/cpu_gpu_evidence.py\nsed -n '240,420p' scripts/cpu_gpu_evidence.py\nsed -n '1,165p' scripts/cpu_gpu_build_provenance.py",
+      "exit_code": 0,
+      "scope": "Final static source review of all strict parser/provenance paths, no code invoked."
+    },
+    {
+      "cmd": "sed -n '1,175p' scripts/analyze_cuda_results.py\nsed -n '305,332p' scripts/analyze_cpu_gpu.py",
+      "exit_code": 0,
+      "scope": "Final read-only analyzer API check; no raw analysis or workload execution."
+    },
+    {
+      "cmd": "python3 -B tests/test_evidence_enforcement.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/evidence_tests_reviewed.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+    },
+    {
+      "cmd": "python3 -B tests/test_framework_compatibility.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/compatibility_reviewed.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+    },
+    {
+      "cmd": "python3 -B tests/test_validation_policy.py -v > 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_reviewed.log' 2>&1\nrepair_test_status=$?\ncat 'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/validation_policy_reviewed.log'\nexit \"$repair_test_status\"",
+      "exit_code": 0,
+      "scope": "Final reviewed focused synthetic regressions only; no CTest/build/GPU/resource commands or timing trials."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nfor n in ['docs/CPU_GPU_VALIDATION_POLICY_v2.json','docs/CPU_GPU_DRIVER_REVIEW_v1.json']:\n v=json.loads(Path(n).read_text());print(n,list(v))\n print([(k,len(x)) for k,x in v.items() if isinstance(x,dict)])\nPY",
+      "exit_code": 0,
+      "scope": "Pure protected anchor field discovery for sealing."
+    },
+    {
+      "cmd": "sed -n '1,105p' scripts/cpu_gpu_provenance.py",
+      "exit_code": 0,
+      "scope": "Read-only exact trusted-anchor derivation for final preservation audit."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport ast,difflib,hashlib,json,sys\nfrom pathlib import Path\nr=Path.cwd();e=r/'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z';sys.path.insert(0,str(r/'scripts'))\nfrom cpu_gpu_protocol import source_manifest\nfrom cpu_gpu_evidence import candidate\np=r/'docs/NON_TIMING_TEST_SELECTION_v4.candidate.json';old=p.read_bytes()\nwith (e/'SELECTION_CANDIDATE_INTERMEDIATE.json').open('xb') as f:f.write(old)\nc=json.loads(old);c['reviewed_source_sha256']=source_manifest();candidate(c,c['reviewed_source_sha256'])\np.write_text(json.dumps(c,indent=2,sort_keys=True)+'\\n')\nwith (e/'FINAL_SELECTION.json').open('x') as f:json.dump(dict(path=str(p.relative_to(r)),sha256=hashlib.sha256(p.read_bytes()).hexdigest(),source_count=len(c['reviewed_source_sha256']),source_delta=c['source_delta'],activated=False,approved=False),f,indent=2,sort_keys=True);f.write('\\n')\nb=json.loads((e/'BEFORE.json').read_text());inv=json.loads((e/'CHANGE_INVENTORY.json').read_text());diff=[]\nfor name in sorted(inv['modified']+inv['added']):\n old=e/'before_sources'/name;after=r/name\n if after.suffix=='.py':ast.parse(after.read_text(),filename=name)\n diff.extend(difflib.unified_diff(old.read_text().splitlines(True) if old.exists() else [],after.read_text().splitlines(True),fromfile='before/'+name,tofile='after/'+name))\nwith (e/'CHANGES_SEALED.diff').open('x') as f:f.writelines(diff)\nprint('Final source diff',len(diff),'lines; inactive candidate',len(c['reviewed_source_sha256']),'source hashes')\nPY",
+      "exit_code": 0,
+      "scope": "Final pure candidate/diff refresh; earlier candidates/diffs retained. No runtime selection activation or workloads."
+    },
+    {
+      "cmd": "python3 -B results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z/verify_preservation.py",
+      "exit_code": 0,
+      "scope": "File-only full membership/SHA256 comparison of historical, frozen, protected, metadata and candidate; no project imports/execution."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport ast,difflib,json,re\nfrom pathlib import Path\nr=Path.cwd();e=r/'results/raw/cpu_gpu_evidence_repair_20261011T083841351344Z';inv=json.loads((e/'CHANGE_INVENTORY.json').read_text());changes=[];methods={}\nfor n in sorted(inv['modified']+inv['added']):\n old=e/'before_sources'/n;after=r/n\n changes.extend(difflib.unified_diff(old.read_text().splitlines(True) if old.exists() else [],after.read_text().splitlines(True),fromfile='before/'+n,tofile='after/'+n))\n if after.suffix=='.py':ast.parse(after.read_text(),filename=n)\nwith (e/'CHANGES_VERIFIED.diff').open('x') as f:f.writelines(changes)\nlogs=['evidence_tests_reviewed.log','compatibility_reviewed.log','validation_policy_reviewed.log']\nexpected=[39,26,9]\nfor name,count in zip(logs,expected):\n text=(e/name).read_text();names=re.findall(r'^test_[^ ]+ .* \\.\\.\\. ok$',text,re.M)\n assert len(names)==count and re.search(r'Ran '+str(count)+r' tests? in [0-9.]+s\\n\\nOK\\s*$',text)\n methods[name]=dict(executed=count,passed=count,failed=0,errors=0,skipped=0,exit_code=0,scope='inert Python fixtures only')\ninitial=(e/'evidence_tests_attempt1.log').read_text()\nassert 'Ran 28 tests' in initial and 'FAILED (errors=1)' in initial\nwith (e/'TEST_RESULTS.json').open('x') as f:json.dump(dict(final=methods,final_distinct_total=sum(expected),initial_error=dict(executed=28,passed=27,errors=1,exit_code=1,reason='duplicate missing keyword in synthetic fixture constructor'),native_or_gpu_tests_run=0),f,indent=2,sort_keys=True);f.write('\\n')\nprint('Reviewed final diff',len(changes),'lines; 74 final focused tests passed, no skips; initial error retained')\nPY",
+      "exit_code": 0,
+      "scope": "Read-only final current diff/AST/log verification; writes new review artifacts only, no test invocation."
+    },
+    {
+      "cmd": "python3 -B - <<'PY'\nimport json\nfrom pathlib import Path\nm=json.loads(Path('docs/NON_TIMING_TEST_SELECTION_v3.json').read_text())\nprint(m['policy']);print(len(m['cpu_build_tests']));print(m['default_selection']);print(m['tests']['baselines']);print(m['build_metadata']['test_properties']['baselines'])\nPY",
+      "exit_code": 1,
+      "scope": "Read-only inspection; KeyError default_selection; corrected later; no selection or test execution."
+    }
+  ],
+  "limitations": [
+    "Some initial read-only inspection shell text was not retained in the accumulator; not reconstructed.",
+    "Source edits used apply_patch; complete final diff and six-modified/six-added inventory retained.",
+    "Every focused test attempt has actual retained stdout/stderr and exit status. No native CTest/build/GPU/resource/timing execution."
+  ]
+}

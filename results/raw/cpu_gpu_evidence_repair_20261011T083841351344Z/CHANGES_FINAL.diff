@@ -1,0 +1,2084 @@
+--- before/README.md
++++ after/README.md
+@@ -1,4 +1,10 @@
+ # Modern Search & Sorting Benchmark
++
++CPU/GPU launch evidence is currently blocked pending independent review of the
++[evidence-enforcement repair](docs/CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md), an inactive
++additive selection candidate, actual T4 build provenance and identity-matched
++validation. This repair runs inert parser regressions only; it does not authorize
++or run the comparison study.
+ 
+ This directory initially contained only `AGENTS.md`. Six C++17 sorting algorithms,
+ separate metrics and the reproducible timing framework are validated. The first
+--- before/docs/CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md
++++ after/docs/CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md
+@@ -0,0 +1,135 @@
++# CPU/GPU evidence enforcement v1 — pending independent review
++
++This repair does not approve selection, establish a T4 build, authorize validation,
++or authorize timing. Frozen comparison inputs, validation-v2 and compatibility-v1
++trust roots, the CUB 3.0.1 pin and the production adapters are unchanged.
++
++`scripts/cpu_gpu_evidence.py` implements `cpu_gpu_evidence_enforcement_v1`.
++Both the launcher prerequisite path and independent study analyzer already share
++`cpu_gpu_framework_compatibility.validate_evidence`; neither may return success
++without the new strict validator. Legacy source reviews remain legacy. They
++cannot opt into the three framework exceptions implicitly.
++
++## Trust and byte identity
++
++The compatibility path now requires a separately reviewed, independently pinned
++`docs/CPU_GPU_EVIDENCE_REVIEW_v1.json`. **It does not exist and its production pin
++is deliberately `None`.** No CLI flag, supplied source map, digest or passing
++assertion can install it. All current full-framework acceptance remains blocked.
++Installing a review and activating a selection are separate reviewed changes.
++Do not generate a self-approved review from these fixtures.
++
++A future review must bind the exact source/build/binary/freeze/session context,
++canonical source/build paths, Python path, selection digest, GPU and both CPU
++build-provenance digests, all nine record digests, the five legacy command
++references and preflight-report digest. It must explicitly withhold execution
++authorization. This binds an external review decision, not a claim copied from
++the prerequisite's mutable metadata. Hashes and command logs alone are not
++independent attestations of execution.
++
++`EvidenceStore` rejects unsafe paths and aliases, reads bounded regular files,
++checks descriptor identity/size/change stamps, hashes the bytes read, and parses
++that same private byte snapshot. Duplicate JSON keys and nonfinite numbers fail.
++Nested references use the same store. Timing-bundle analyzers receive private
++copies of verified bytes, never a second read of mutable original records.
++
++## Required content
++
++Each framework record is schema 1, kind `cpu_gpu_framework_record_v1`, with its
++exact gate, independently reviewed context and typed evidence references
++`{file, sha256}`. References are canonical paths relative to the evidence root.
++The validator derives coverage; caller assertions must exactly match it.
++
++| Gate | Validated contents |
++| --- | --- |
++| CPU Release / sanitizer | Exact approved manifest/source map; guarded selection plan, generated registry/properties, retained discovery JSON, exact execution command and directory, 21 unique started/passed tests, no failures/skips/contradictory sanitizer output; matching compiler/linker provenance and selected executable hashes |
++| Prepared correctness | Exact existing untimed result schema, 163 inputs, 489 output and invalid-operation checks, zero failures, exact build-relative executable/command |
++| Workers | Exact untimed scope/build/runtime/environment, twelve unique size/API checks, correct results, team 1 below 32,768 and team 2 at/above; team size is not task participation |
++| Workspace | Three unique size/query commands (1,025 / 65,537 / 1,000,000), existing byte/cap/headroom formulas and retained host/disk/environment gate |
++| Production GPU | Existing `verify_result` schema, CUB 300001, T4 capability 7.5, 475 inputs and 1,900 checks, exact executable |
++| Timing smoke | Existing complete raw CUDA bundle parsed by the read-only analyzer; synthetic/validation records excluded |
++| Pilot | Existing frozen six-dataset raw analyzer, 150 measured / 30 warm-ups, no failures/missing; matching source and comparison binary |
++| Independent review | Explicit accepted decision tied to the independent context, with execution authorization false |
++
++The five legacy logs must agree with independently pinned references. CPU and
++production references must also equal the strict records' command references.
++The retained preflight schema/source map and actual probe classification must
++support operational readiness. The original 14-method GPU framework log check
++remains mandatory. These readers never run the stored commands.
++
++No new timing data is generated. Historical smoke/pilot evidence is not relabeled
++to match changed sources or binaries. In particular the unchanged pilot analyzer
++rejects framework-exception source maps: resolving any compatibility transition
++requires independent review, not an implicit waiver here.
++
++Conditional LeakSanitizer retries are not silently accepted by this new record
++format: CPU sanitizer evidence currently requires the documented leak-enabled
++command. Supporting a ptrace-limited retry needs a separately reviewed extension
++retaining both the original failure and the diagnostic retry. Retained remote
++Dart metadata also requires the same source root for its existing static parser;
++relocation is blocked rather than interpreted permissively.
++
++## Build provenance versus a content snapshot
++
++`capture_snapshot()` explicitly provides content identity only. It cannot satisfy
++`verify()`. The public capture CLI additionally requires `--build-provenance`.
++`scripts/cpu_gpu_build_provenance.py` validates a retained schema-1
++`cpu_gpu_build_provenance_v1` graph:
++
++- Identical complete source maps before and after; canonical source/build paths.
++- Successful actual configure and verbose build command records and tool-version
++  records, tool identities, generated cache/compile database/CTest metadata.
++- Nonempty compile database with reviewed translation units and unique outputs.
++- Separate actual compiler/linker command records, exit codes, source maps and
++  product hashes; every compile command accounted for; linked object/library
++  hashes agree through the graph; all requested binaries have link provenance.
++- Exact resulting executable/library hashes, including `comparison_input`.
++
++The intended build's actual regular executable files must exist and match the
++proof. Empty arbitrary compile-command lists, snapshot-only manifests, missing
++commands, failed commands, stale objects and foreign-build evidence are rejected.
++The independent review additionally pins the complete proof digest. An internally
++consistent synthetic graph is useful only as a unit fixture, not build proof.
++
++Future, separately authorized build procedure: capture the actual configure,
++verbose build, compiler and linker invocations and their exit statuses during an
++isolated documented build, retaining all stdout/stderr and source/tool/metadata/
++object/output identities. **This task did not run that build and does not provide
++an execution collector or certify existing logs as sufficient.** Review the
++collection/assembly procedure before executing it; do not reconstruct successful
++exit records retrospectively from `compile_commands.json`.
++
++Only after genuine records exist, the read-only content/proof check is:
++
++```sh
++python3 -B scripts/cpu_gpu_build_identity.py \
++  --build-dir /absolute/verified/gpu-release \
++  --build-provenance /absolute/verified/gpu-release/provenance.json \
++  --output /new/path/BUILD_IDENTITY.json
++```
++
++There is no current identity-matched T4 build or verified `comparison_input`
++executable under this repair. No real build-provenance PASS is claimed.
++
++## Selection candidate and validation scope
++
++`NON_TIMING_TEST_SELECTION_v3.json` remains unchanged and active. Its exact source
++map intentionally rejects the changed tree before discovery. The inactive
++`NON_TIMING_TEST_SELECTION_v4.candidate.json` preserves every test, command,
++classification, property and default19 name, and inventories every source
++membership/hash difference. It grants no approval to new regression files. The
++selector is unchanged and does not support this pending candidate. Independent
++review must approve the candidate and any explicit activation change first.
++
++Only inert Python regressions run for this repair. They block subprocess/shell
++execution, write clearly synthetic fixtures in temporary directories and invoke
++real evidence-parser paths. Positive CPU/build/prepared fixtures test parsing,
++not actual compiler, CTest or GPU execution. There is no accepted end-to-end full
++prerequisite fixture or real full-study proof; the absent independent pin is a
++deliberate blocker. Native Release/ASan/GPU/framework tests need identity-matched
++reruns only after separately approved selection/environment/build steps.
++
++Next gates: independent repair/candidate review; reviewed actual build collection;
++separately authorized T4 build and bounded validation; resolution of all required
++timing/framework evidence without relabeling; independent final preflight and
++separate study authorization. No benchmark launch is permitted by this document.
+--- before/docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md
++++ after/docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md
+@@ -1,4 +1,9 @@
+ # Explicit CPU/GPU framework compatibility v1
++
++The later [evidence-enforcement repair](CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md)
++requires independently reviewed content, guarded CPU plans and actual build
++provenance. Its independent trust pin is not installed: no current full-framework
++bundle qualifies. The historical explanation below does not waive these checks.
+ 
+ This additive policy repairs source compatibility, not missing validation or
+ execution permission. The frozen comparison protocol, matrix, resources, CUB
+@@ -52,7 +57,7 @@
+ `scripts/cpu_gpu_build_identity.py` captures hashes without executing anything:
+ 
+ ```sh
+-python3 -B scripts/cpu_gpu_build_identity.py --build-dir /absolute/verified/gpu-release --output /new/path/BUILD_IDENTITY.json
++python3 -B scripts/cpu_gpu_build_identity.py --build-dir /absolute/verified/gpu-release --build-provenance /absolute/verified/gpu-release/provenance.json --output /new/path/BUILD_IDENTITY.json
+ ```
+ 
+ Use only an independently validated intended build. The output path must not
+--- before/docs/NON_TIMING_TEST_SELECTION_v4.candidate.json
++++ after/docs/NON_TIMING_TEST_SELECTION_v4.candidate.json
+@@ -0,0 +1,693 @@
++{
++  "base_manifest_sha256": "fef39034b063c36dabc3eccf9dc6a162ebcf6a4e5cb44abeda83e93fbcf1a434",
++  "build_metadata": {
++    "dart_compatibility_profile": "cmake331_colab_t4_v1",
++    "dart_defaults": {
++      "BuildDirectory": "@build",
++      "BuildName": "Linux-c++",
++      "CTestSubmitRetryCount": "3",
++      "CTestSubmitRetryDelay": "5",
++      "CVSCommand": "",
++      "CVSUpdateOptions": "",
++      "Compiler": "/usr/bin/c++",
++      "CompilerVersion": "13.3.0",
++      "ConfigureCommand": "\"/usr/bin/cmake\" \"@source\"",
++      "CostDataFile": "",
++      "CoverageCommand": "/usr/bin/gcov",
++      "CoverageExtraFlags": "-l",
++      "CudaSanitizerCommand": "",
++      "CudaSanitizerCommandOptions": "",
++      "CurlOptions": "",
++      "DefaultCTestConfigurationType": "Release",
++      "DrMemoryCommand": "",
++      "DrMemoryCommandOptions": "",
++      "GITCommand": "",
++      "GITInitSubmodules": "",
++      "GITUpdateCustom": "",
++      "GITUpdateOptions": "",
++      "LabelsForSubprojects": "",
++      "MakeCommand": "/usr/bin/cmake --build . --config \"${CTEST_CONFIGURATION_TYPE}\"",
++      "MemoryCheckCommand": "MEMORYCHECK_COMMAND-NOTFOUND",
++      "MemoryCheckCommandOptions": "",
++      "MemoryCheckSanitizerOptions": "",
++      "MemoryCheckSuppressionFile": "",
++      "MemoryCheckType": "",
++      "NightlyStartTime": "00:00:00 EDT",
++      "P4Client": "",
++      "P4Command": "",
++      "P4Options": "",
++      "P4UpdateCustom": "",
++      "P4UpdateOptions": "",
++      "PurifyCommand": "",
++      "SVNCommand": "",
++      "SVNOptions": "",
++      "SVNUpdateOptions": "",
++      "Site": "pop-os",
++      "SourceDirectory": "@source",
++      "SubmitInactivityTimeout": "",
++      "SubmitURL": "http://",
++      "TestLoad": "",
++      "TimeOut": "1500",
++      "UpdateCommand": "",
++      "UpdateOptions": "",
++      "UpdateType": "",
++      "UpdateVersionOnly": "",
++      "UseLaunchers": "",
++      "ValgrindCommand": "",
++      "ValgrindCommandOptions": ""
++    },
++    "dart_inert_metadata": [
++      "Site",
++      "BuildName",
++      "Compiler",
++      "CompilerVersion"
++    ],
++    "policy": "flat_literal_ctest_v2",
++    "test_properties": {
++      "baselines": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;109;add_test;@source/CMakeLists.txt;0;"
++      },
++      "benchmark_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;156;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cli": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;120;add_test;@source/CMakeLists.txt;0;"
++      },
++      "comparison_engine": {
++        "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=2;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE;OMP_PROC_BIND=FALSE",
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;222;add_test;@source/CMakeLists.txt;0;"
++      },
++      "comparisons": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;140;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cpu_gpu_comparison_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;224;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_benchmark_analysis": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;114;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_benchmark_gpu_framework": {
++        "TIMEOUT": "180",
++        "_BACKTRACE_TRIPLES": "@source/cmake/cuda.cmake;78;add_test;@source/cmake/cuda.cmake;0;;@source/CMakeLists.txt;162;include;@source/CMakeLists.txt;0;"
++      },
++      "cuda_preflight": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;112;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_prepared_correctness": {
++        "SKIP_RETURN_CODE": "77",
++        "TIMEOUT": "240",
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;244;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_runtime_smoke": {
++        "SKIP_RETURN_CODE": "77",
++        "TIMEOUT": "60",
++        "_BACKTRACE_TRIPLES": "@source/cmake/cuda.cmake;23;add_test;@source/cmake/cuda.cmake;0;;@source/CMakeLists.txt;162;include;@source/CMakeLists.txt;0;"
++      },
++      "cuda_sort_handoff": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;115;add_test;@source/CMakeLists.txt;0;"
++      },
++      "cuda_sorting": {
++        "SKIP_RETURN_CODE": "77",
++        "TIMEOUT": "240",
++        "_BACKTRACE_TRIPLES": "@source/cmake/cuda.cmake;83;add_test;@source/cmake/cuda.cmake;0;;@source/CMakeLists.txt;162;include;@source/CMakeLists.txt;0;"
++      },
++      "datasets": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;119;add_test;@source/CMakeLists.txt;0;"
++      },
++      "environment_manifest": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;110;add_test;@source/CMakeLists.txt;0;"
++      },
++      "experiment_pipeline": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;86;add_test;@source/CMakeLists.txt;0;"
++      },
++      "memory": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;143;add_test;@source/CMakeLists.txt;0;"
++      },
++      "memory_unsupported": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;149;add_test;@source/CMakeLists.txt;0;"
++      },
++      "mergesort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;134;add_test;@source/CMakeLists.txt;0;"
++      },
++      "metrics_cli": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;150;add_test;@source/CMakeLists.txt;0;"
++      },
++      "parallel_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;193;add_test;@source/CMakeLists.txt;0;"
++      },
++      "parallel_mergesort": {
++        "ENVIRONMENT": "OMP_DYNAMIC=FALSE;OMP_THREAD_LIMIT=8;OMP_MAX_ACTIVE_LEVELS=1;OMP_WAIT_POLICY=PASSIVE",
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;191;add_test;@source/CMakeLists.txt;0;"
++      },
++      "parallel_workers_correctness": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;239;add_test;@source/CMakeLists.txt;0;"
++      },
++      "pdqsort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;128;add_test;@source/CMakeLists.txt;0;"
++      },
++      "quicksort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;125;add_test;@source/CMakeLists.txt;0;"
++      },
++      "radixsort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;137;add_test;@source/CMakeLists.txt;0;"
++      },
++      "search_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;104;add_test;@source/CMakeLists.txt;0;"
++      },
++      "search_timing": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;103;add_test;@source/CMakeLists.txt;0;"
++      },
++      "searching": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;100;add_test;@source/CMakeLists.txt;0;"
++      },
++      "structure_framework": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;95;add_test;@source/CMakeLists.txt;0;"
++      },
++      "structure_timing": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;94;add_test;@source/CMakeLists.txt;0;"
++      },
++      "structures": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;91;add_test;@source/CMakeLists.txt;0;"
++      },
++      "timing": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;155;add_test;@source/CMakeLists.txt;0;"
++      },
++      "timsort": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;131;add_test;@source/CMakeLists.txt;0;"
++      },
++      "validation_policy": {
++        "_BACKTRACE_TRIPLES": "@source/CMakeLists.txt;233;add_test;@source/CMakeLists.txt;0;"
++      }
++    }
++  },
++  "cpu_build_tests": [
++    "experiment_pipeline",
++    "structures",
++    "structure_timing",
++    "structure_framework",
++    "searching",
++    "search_timing",
++    "search_framework",
++    "baselines",
++    "environment_manifest",
++    "cuda_preflight",
++    "cuda_benchmark_analysis",
++    "cuda_sort_handoff",
++    "datasets",
++    "cli",
++    "quicksort",
++    "pdqsort",
++    "timsort",
++    "mergesort",
++    "radixsort",
++    "comparisons",
++    "memory",
++    "memory_unsupported",
++    "metrics_cli",
++    "timing",
++    "benchmark_framework",
++    "parallel_mergesort",
++    "parallel_framework",
++    "comparison_engine",
++    "cpu_gpu_comparison_framework",
++    "validation_policy",
++    "parallel_workers_correctness"
++  ],
++  "cuda_additional_tests": [
++    "cuda_runtime_smoke",
++    "cuda_sorting",
++    "cuda_benchmark_gpu_framework",
++    "cuda_prepared_correctness"
++  ],
++  "evidence": "results/raw/bounded_resume_20261011T024034091796Z",
++  "policy": "non_timing_correctness_v4_candidate",
++  "review_method": "Versioned exact CMake3.31 Colab Dart literal alternative, reviewed fixed ordinary CTest commands; all v2 registrations/source safeguards retained.",
++  "review_status": "pending_independent_review",
++  "reviewed_source_sha256": {
++    "CMakeLists.txt": "f18be8635e326e25616a1c0e133ebfd35d5d2244fbe5b3d2aca16ccb4836f30d",
++    "cmake/benchmark_metadata.cmake": "11979058897acba1ccc54a5d52f54de5d6eb33d7303d9e436bfa175e82b3a50f",
++    "cmake/cuda.cmake": "575474ecb26c0c18e1bed301404425d55206dc47bb9df1ce59cfdcaff98898bd",
++    "include/algorithms/baselines.hpp": "cbf56227eac5b0a8cfc325b51a66ec60ffb1a9bfa4bfccaf722cbc5af265ba6b",
++    "include/algorithms/cuda_sorting.hpp": "a029d6de17ceee746fdb79a295bf4ac48035f94cb0f27726204eccf13c935526",
++    "include/algorithms/detail/mergesort_impl.hpp": "df648ba49007a0e08b0c1b2b7ac61dd2c8d331a316e856d6bf63a3dff6eef390",
++    "include/algorithms/detail/parallel_mergesort_impl.hpp": "62a60391ceaab50db3dac695cabc8b1c653028ca5d0a11f30dc04b7e136bd6c0",
++    "include/algorithms/detail/quicksort_impl.hpp": "4436e70c66d3c4e3ae15241b323eb12e167051217360834ccd1aec04e3f35d8b",
++    "include/algorithms/detail/search_impl.hpp": "41f4c9048de6d479d381e6c14e65e5f83a26d4dd8b593b57aee20b34c6796695",
++    "include/algorithms/mergesort.hpp": "53a41391d5aa2f9ed79531f188cb78403a927a88e5cb549fe8660d01e8fa9fa1",
++    "include/algorithms/parallel_mergesort.hpp": "f15b1f5d0b46687f562894b89b9550cfef5eef67df7e47e0ac047dafb172f750",
++    "include/algorithms/pdqsort.hpp": "c69f55020dd0266e98c072500f52fc8e77e4591331ca0666daad81cf3ad0582a",
++    "include/algorithms/quicksort.hpp": "72d768105d49ee1f234b66cc5986b08fcde7cbbf2ebd6650df7885e5b9fb564a",
++    "include/algorithms/radixsort.hpp": "2f82349521a6aae4039bb04cb70b1f076c95cd39401d93cb220d985841564282",
++    "include/algorithms/searching.hpp": "b3c270c041ca886b1dc9e286b9e7cdc0c2bc6bab5a2067c834c9257ae538850e",
++    "include/algorithms/sorting.hpp": "b43c28adb1306329b30928e2c2345e87221acf004548b4f3474178efdd1d5cbf",
++    "include/algorithms/timsort.hpp": "f2b0a2607aab818f4d294d7aca229aea8aa21f5e6b5458162bd27e759cfdaf6f",
++    "include/benchmark/comparison.hpp": "bed21a6161bb7d236c3759e3d0e12f4708a66930a68f79a3c70dd186996dbb9d",
++    "include/benchmark/comparisons.hpp": "100b3d9fc907d45297d5cfb155e42e9983d709a6a69244941a05577b406c0d0a",
++    "include/benchmark/cuda_comparison.hpp": "6a4b499be3fb4482e0fd2a966775c887d575e56614b0c17b71ce1898d69bcdf4",
++    "include/benchmark/cuda_timing.hpp": "f73e9e4ac9681c37a3c71f58bd471dcd638dae08ba12e3257a66650ef4354c87",
++    "include/benchmark/detail/counting_less.hpp": "2c552d7fce1f19e76f117b2d9f35974408714f1bdb374d7ccf44c51777aaa56b",
++    "include/benchmark/detail/timing_impl.hpp": "5994370fdc6f2a164d2e58d862e2d629ccd04a4f120c6c56deeb19bd93597b83",
++    "include/benchmark/memory.hpp": "6e645ef7e05a2cccfde80cbf7573af16283a59a22e6a3c9e3b7e3cd68450af6c",
++    "include/benchmark/output.hpp": "5248af6bf798a3afe981e7b3bc45f04cdfc3c673788ac66596636b0cbb8f4756",
++    "include/benchmark/parallel_timing.hpp": "d5dc9f42841a766221b6f108a9507826656b52b65def9ca7a47e1abf1780b3b9",
++    "include/benchmark/search_comparisons.hpp": "b27a81bbd8d0d40b388e714b93d87b05fcaa51471f35cc92293fef2ecff14f5e",
++    "include/benchmark/search_timing.hpp": "1c3aa4bef548081994ce7ffca0d1a2e122b629a1412f09168e5727cb9b17cb25",
++    "include/benchmark/structure_timing.hpp": "cd74cf43245e458af16a344c26b80a1187732837f53a0a4f6f58d93346b6ec11",
++    "include/benchmark/timing.hpp": "2f3516314292dc0c49d850b9565c17335f969742c9ec906f9d42d78291ffe3ce",
++    "include/common/types.hpp": "4b2e378fdb0d49310d300e5cda1afd54ab8c1c8314e32a16ea6ce3b67637d849",
++    "include/datasets/generator.hpp": "b0f1944f3f94a0e5e5b20dfe6dadd26d937a43ca5e619f9de176b46ffe685e8b",
++    "include/structures/btree.hpp": "149a9d868e8844fbcd07b2a18dc35c66ae0f4d296dbbba5afffce122091514ca",
++    "include/structures/ordered_index.hpp": "95bde9cbdda68e10bd60f48d909351c5d463136cfab3165228b46839f50e3e6b",
++    "include/structures/skip_list.hpp": "0da4ba31a9e4aff917126c0f28ee2388a4a6db13d8aaf8044b81f8425dc0d178",
++    "scripts/analyze_cpu_gpu.py": "bbdc93dab1b07a4bdcd9ae7ade542a7dde2b3a103ebd96d09ee83d963c6a7c08",
++    "scripts/analyze_cuda_results.py": "e63f2fdcc46b15be9506080509b9eeaf4a2ba0544cf29a516fb5581a1f16eca0",
++    "scripts/analyze_experiment.py": "ecf00ac8c50de87b4f024679a9fa4dab076350603bd94c35799f176e2612da8f",
++    "scripts/analyze_parallel_results.py": "b3a5a4238767359ca5abdb452b2cdfd0e8c9387d92950f1d76dca46b9f857e88",
++    "scripts/analyze_results.py": "742d4eeaff4234ad7572f942dd5f510d45e8b14025e416a960da5933dfe54f24",
++    "scripts/analyze_search_results.py": "d6713c3dcb7318421f84425bc8d56ab71adc5cce3f0b00f323374e85a99b50ef",
++    "scripts/analyze_structure_results.py": "9e449fe4862b4088088b032c6da749efbc182335d670f3138c5a648abc2dcceb",
++    "scripts/assess_experiment.py": "bb68354fb7f6965cf67e6f5503e23ec2af567e797d06c68c1f19816865c62ccf",
++    "scripts/capture_environment.py": "1d49b0ac22c91ddf8e904232d41525a482d37f2c812c28da012449625e645210",
++    "scripts/cpu_gpu_build_identity.py": "d2f2912166e10caad3a9230dac1d340b61eac1bd14b83e0ca6496deae6751acd",
++    "scripts/cpu_gpu_build_provenance.py": "dbfab379bec9fc60e6eb641d9c7b4cc29a6b760033eb52669f2ab986362ba70b",
++    "scripts/cpu_gpu_evidence.py": "9b0cd2f0a5ae62b5c8c91e6115200e982a708ca0fc014f3089005ed9d6fc0257",
++    "scripts/cpu_gpu_evidence_io.py": "ad07a1fe1bde6b9011d41b8a4819b99d50b4ac76239e7f6ce630ad94966e2272",
++    "scripts/cpu_gpu_framework_compatibility.py": "842ae42da60e2441c6fd1259ded25302894a13126f8cc4418ed8a2b68d5b7630",
++    "scripts/cpu_gpu_protocol.py": "4bb143a9e0f32096075970408556d63bcecb5d9d8f25c4baf3321ce0889b9120",
++    "scripts/cpu_gpu_provenance.py": "b367c0bb84ae620efb766d76b1e9fb41b2d7e8aea442539be4c7c222d1c5ca20",
++    "scripts/cpu_gpu_validation_policy.py": "b21fe470e43e04114da13fb06844a8a0d47211a471b7e1897bdf4805cc876ad5",
++    "scripts/ctest_build_guard.py": "e63ec2a7fdb9ad43420474069d1a72c04148b370b64a2c61c4b482695b6ed607",
++    "scripts/cuda_preflight.py": "6338c3ef5ad73c3c13eadc9d765a8480b4377e6b8da5909eabdca55ffed44cd8",
++    "scripts/experiment_model.py": "8848f50284dc86dbe77bf6f65025ba68bbf14ccbe6c4820650b0588506060c75",
++    "scripts/non_timing_tests.py": "fbbc05be1bf559449760a9e2f420116d2d4999664fb30fb8ba046c15627c1dbc",
++    "scripts/plot_results.py": "a2f3a5063410f6be318806357a08cd4e5f3d71fc2a856306a9f7432536128f03",
++    "scripts/run_cpu_gpu_pilot.py": "d814fe6077066d1775eb854d39a5b6f6e42b23e2fc3b06165725e1ce0603440e",
++    "scripts/run_cpu_gpu_study.py": "5d7ee9a8522bfe4a043e8b102443cdec19d3eaa3a52f3e8687a7894db12fbb30",
++    "scripts/run_cuda_matrix.py": "007ff388d0acfd84b6d5f8bbec1f3779b94a5b419d705ff7da786fbe24f03c9f",
++    "scripts/run_experiments.py": "5aef113b16654adb685a750237cd9e97ecb5a71de02a7006a987120bcb58033f",
++    "scripts/run_matrix.py": "1e19af5ed3ef73d05591ef14b31e3f456b763e747535b0440b30fbbc24d6988d",
++    "scripts/run_parallel_matrix.py": "a96b7f35e7e0fae872c65e1e0ce6d54414cac6bf1be6c2a351c4d03c3a3db118",
++    "scripts/run_search_matrix.py": "fd2070a4ebd83f922d108a6a69476a40f69313f9cfd3dbcb9bea9db2edb08801",
++    "scripts/run_structure_matrix.py": "6f0849876d99d9e2b8faa125b2942161d5cb2866ea0587c5fbe32b7b220a1806",
++    "scripts/validate_cpu_gpu_pilot.py": "6985e5c3e1d7817146da0e498c2c0013cfc38c2063d11aeaa513428610ee00dc",
++    "scripts/validate_cuda_sort.py": "e26d46059d7f82ec601304730178039fe26e0ccb463c3ad4ee757deb997150bf",
++    "scripts/validate_cuda_timing.py": "6a891b7c3d99baba0a23521041cec723737ebcf06607fb0deee2ef84dfd7133e",
++    "src/algorithms/baselines.cpp": "0c93ca1513ff47a9bc9a3e37dbc56d0fded9d98e5a5c94e53c638c0df99e20d1",
++    "src/algorithms/mergesort.cpp": "a97bb2234bf8c70a814797f08c927b782131f0ea0500c96de5c0dcdb4ff42f03",
++    "src/algorithms/parallel_mergesort.cpp": "ad2bdd6210faffe88104806b2effd153b482e390426f621b5a2be0e62dcb2533",
++    "src/algorithms/pdqsort.cpp": "63b65adb2213139b6ff9e5bddede9eb70284be02137b551d8e5f3e92f162bcbf",
++    "src/algorithms/quicksort.cpp": "3a56801c6bb56020b39a0aa017eefc043c0a654666da73c7a6a603ec43a83505",
++    "src/algorithms/radixsort.cpp": "7899aadd7d3f67bee338f18cc05163c7a5979786bddc04b4652f38b45d9d4dac",
++    "src/algorithms/searching.cpp": "14806843911614e7d3adec3ccf1a4acde8bd97d697d8ea4af202e610f218fc18",
++    "src/algorithms/sorting.cpp": "d6ecb76f7aee469580052a1411f762b8dd1137adc1c81a172e7e9a0806ea4e7c",
++    "src/algorithms/timsort.cpp": "4379e74023f5f88139036f4dd1b1ea06ac481f9a2b48f396824d317d683f35b3",
++    "src/benchmark/comparison.cpp": "5df45e362a34bb12dd76c1ab1f4bbeac3c79deaee40a70efb8765aee98943b37",
++    "src/benchmark/comparison_input_main.cpp": "09c429a17cf275bcd64ac545b1bdcd4dba9cd00a57e08c49906d3f923e82567b",
++    "src/benchmark/comparisons.cpp": "47a34edb2b6b3cc1cbd9dfd86f418b6f88e0996af13dd83d74fbbd328920c249",
++    "src/benchmark/cpu_gpu_main.cpp": "e3a024a2916505f30a9a7cc360d78340bdc260c56522fe483e4ecd23f3d0a278",
++    "src/benchmark/cuda_main.cpp": "fcf423d6dd68a2003111b3231de82ffdaecfff20b3841c27a3fdef4592fae060",
++    "src/benchmark/memory.cpp": "843207d0ad5da07546b11fa926a9c1a713f622c71666149f1a93ca2e4fb7070a",
++    "src/benchmark/memory_json.cpp": "56276513d8a20f48c3d679d1d3b2f5c202d65a1f98ad33dbcb39c66891f430ea",
++    "src/benchmark/metrics_main.cpp": "2e4f6c321015a8a1a38d6bea877a9c64ac80e68c81ad4556a5e5effba16bc20d",
++    "src/benchmark/output.cpp": "38ca1243ec2b59d66d2d0137ea191d4706fad79755c34755ffce726299c2ddfb",
++    "src/benchmark/parallel_main.cpp": "b094a07b845e2b8854ea4f868ebc67e6202c2f19cc5f340eeb5e0f168fdc72c3",
++    "src/benchmark/parallel_timing.cpp": "7ea9a2f045fe56e996a0ed8ef78a93a7ff59ad76adc67fbe80f29d6f583e1d2c",
++    "src/benchmark/search_comparisons.cpp": "78058b6ca7e35a8dbab5944443a4d3928654171e30cf19cf54b0c2a86852eb02",
++    "src/benchmark/search_main.cpp": "0897d8392aa94b7dab1c4d74d5e009c483d2ee9925c865f7b7b3b8dcc4d78646",
++    "src/benchmark/search_timing.cpp": "a2a47a148f2c2745fe59a1e704309a3122d74174758f8a5a71cc74372b6a1dff",
++    "src/benchmark/structure_main.cpp": "e6bb70453d9f5af62cc77ec39b3ce31f261f711f44a428953b33690aec82b186",
++    "src/benchmark/structure_timing.cpp": "0750fb9f956a95d0313e5341925de480c808836240e500d7fc12b184bcf91a58",
++    "src/benchmark/timing.cpp": "1a3d5087cb2b43681ad69fe407d5deeb5d9d2ffa98c36c20a90e1ffd1e3efb9e",
++    "src/benchmark/timing_main.cpp": "31c0de82be2652475443f700377c991175c707f28c5a5ab8972f9c8a61f48a73",
++    "src/cuda/comparison_resources.cu": "6e7d5955c7f2f8f18a000ff45996091c9c46cb9e750f4c9943bbff0cfc54e146",
++    "src/cuda/cub_sort.cu": "b6d7f37c7494587fc6e4a676c00c166dc322d31cce96710811e3a4cb9cd8b9cb",
++    "src/cuda/cub_timing.cu": "230237187a3abbc1246f9604a3a72a0ed477da864f78d89f33422e44e58f1a45",
++    "src/cuda/runtime_probe.cu": "313d37414ae36529c4eab5cf5def9443bdec3b859eeff9b2e7b78e66a0aad73b",
++    "src/datasets/generator.cpp": "4a5cf9e840592361d77e92d147e544696d05b82b0f4c72a6d4871d8c0c726adf",
++    "src/main.cpp": "a6e2542c402ce1d24c32397064211b1817a7e0e0453a22bcbec1fee7ffa445a5",
++    "src/structures/btree.cpp": "0a033ae4bb2d22d8ba08211910da01a12815d713b7423e4d449ce1d562027677",
++    "src/structures/registry.cpp": "5f46245b9cb08c49ba4fbaa167c824d35713538052033b9c2d64c6ef11650610",
++    "src/structures/skip_list.cpp": "dc15fd493b1cf76289ffde424ee1c866e8eb1309c3db20aaf417b9f871366539",
++    "tests/ctest_fixture.py": "a53030aa3bd8f0b43415b37eec8c8df56f3ece0185e854a058ca88b012c4dd56",
++    "tests/fixtures/cpu_gpu_provenance_reproducer.py": "1588c1ce06ded80b91d9806673b883effb7c98b0ace8d1eadb5c04688072142c",
++    "tests/test_baselines.cpp": "6cc9b36024aba24f8b5054de19b1ade4fe559975afd55437fe85233999c95776",
++    "tests/test_benchmark.py": "334d7d94c4d60519638b02a61d062f1a6cc628835d327ffe8ecb7f5767a59938",
++    "tests/test_cli.py": "88774fd13fd8dcbc28de51c0f2d6a26a502393fd765ecd499064e03a9b703019",
++    "tests/test_comparison.cpp": "6559a39dae193c007551ff282d366bf4a8365e21c05148bd969ea14042cfc21a",
++    "tests/test_comparisons.cpp": "6373369f9fde8e58b0144b1df95a1d77df76e3cf4eaa0c4a875c43a28d13703e",
++    "tests/test_cpu_gpu_comparison.py": "0611d22c5adfb685e64eeddcea617df0e9d2e6b6bc53664082c0057fc0b005d5",
++    "tests/test_cpu_gpu_safety.py": "bb56043276c73c4c303bd1f7dc225db5908d6a2d3e06f20494ec4aa589663183",
++    "tests/test_ctest_build_guard.py": "74f7c43409aef377f278fffce16b0ed7e97cd7d032b66fea96205178743f343b",
++    "tests/test_ctest_dart_compatibility.py": "d0184e1cad0c7d4b0149c4c3753a10d918ce00fc05c8a72e3fb4945078f09e77",
++    "tests/test_cuda_benchmark.py": "caa772e61eef60b29adc0c64b02412c4828d4552699b1b5b4f88ad37e906c94e",
++    "tests/test_cuda_preflight.py": "cce76386413ec62c521176dbfd817e9b3513423b6dee641e7caf09214be8a6af",
++    "tests/test_cuda_prepared_correctness.cpp": "bff5bdc9d607bb6ecf89fdde0a7daeb68d968f52e1cbadd6533c8d05791985aa",
++    "tests/test_cuda_sort_handoff.py": "ddc7901dc238cce4d36cb583650840a5661c92cf5892049dd09236c7d6762d42",
++    "tests/test_cuda_sorting.cpp": "9fd5ee55815ac9044a945c3795372af4e087c7a6de56025f77f2e18c63fc80a7",
++    "tests/test_datasets.cpp": "d9feb87d30949c54905d3f862187df434f85b03bc3fccbc7acbe01541043449d",
++    "tests/test_environment.py": "9689cb6d191590a8e4cc6f915156c6e426418a2bcc3ca659bc9f1206ddb9bb9a",
++    "tests/test_evidence_enforcement.py": "be9d9d4783b1c535d4304d4a27eb85352854eae922c1e54218c467b1ac8fde72",
++    "tests/test_experiments.py": "99b8eecc2844e725bee2902de0fa554f78092ad269fb218959c72594b2fdfa10",
++    "tests/test_framework_compatibility.py": "78124a8ff46f1c6c9652944f3e28e867a69590c9d0ce28e5aa6ed043c26dfceb",
++    "tests/test_integer_sorts.hpp": "0d908da0789a6fbf47e43d19dfbf662c742571384b4e19962b9fbb9fcbe0d8de",
++    "tests/test_memory.cpp": "ebeffc505f293f91d16608579056c01f93b2ef3a040b9fc435820dda3802f7e1",
++    "tests/test_mergesort.cpp": "bbda01afab865a8c74f1f7addcee51fa18624d917ba0a3d684eae7d4360d473f",
++    "tests/test_metrics_cli.py": "5eac7e1aed7f66f4893bbee93fc0d6946cfaa48605059fff484fefe3838db385",
++    "tests/test_parallel_benchmark.py": "c725f5345e4f5e85422ad3af03972acbcbac3c0cdbec7facd3496b5ca679852f",
++    "tests/test_parallel_mergesort.cpp": "eaf9c15d6c2e61347df574df785bc6ba76131866992395e39524ac55190758ac",
++    "tests/test_parallel_workers.cpp": "61e03b4d77eeffcb071be180a750cc2313ef80c7bac8d8855a25b1ba2a3c6ee8",
++    "tests/test_pdqsort.cpp": "c129adda593d54c3b82caa49614ecc59633ba7ac6c3be283c731ebacc8e17adc",
++    "tests/test_quicksort.cpp": "6686b5a94951cb19e9178b9f769a277f68e3158dfb88072d50b7a26a010175d1",
++    "tests/test_radixsort.cpp": "6d79152c7ba18b0088666ee7512cf21b8846d518b2adbf616c9e71ca39e584a7",
++    "tests/test_search_benchmark.py": "345669abd2f6170acf86f2dc429931b81ab404a9510737633e9e31cc7d5578ff",
++    "tests/test_search_timing.cpp": "79fae417efd10009a979c1846dbdfe6b58626e3d878a966c95172f46a5633c96",
++    "tests/test_searching.cpp": "a575387a0332bdce0eff7676cba1ca1c82a5780d7631bd45ce32252923637be6",
++    "tests/test_structure_benchmark.py": "2308d252cba77d67464695bd6738ed5937ae6200e20c45d37b7145ca1044cfbc",
++    "tests/test_structure_timing.cpp": "d587de71cca9a3c25984d0a02eb37cbcb3e684f1692ee61e64718f311e1531c7",
++    "tests/test_structures.cpp": "54cbc977167c22cab7e6dae5d687176c4228a89dfdca559a36ab1dc00a901e74",
++    "tests/test_support.hpp": "c8c307258004449c4dd8217b016611b0cd3b9c8d64e93a5f12789f6aff99c7ea",
++    "tests/test_timing.cpp": "4ed4bdb863bbd201ffee2621284a6d87d32644c488fe5aae923089bd7516d5e1",
++    "tests/test_timsort.cpp": "3008c66ea12c1a35717f05d14f8ead69017e4db40c6a292e0d078d41487ecd38",
++    "tests/test_validation_policy.py": "89b52952551f112addcf0d10e255d0d0a0f85f0c12349d2561478a39c11a079a",
++    "tests/test_validation_selection.py": "e9fc13f229111e768fa61c2bdf1db347787b095ed87ca77e90b2a7e96d7ac3e2",
++    "third_party/cub/LICENSE": "01b767dcd7d36f42efb608076741cf83f154a995e198028cb698aadc3a43b63b",
++    "third_party/cub/README.md": "a1681b54542ce7d7db0c3f75e42b36ffaadf1bb4c8b594f30fbaf231def3f9f2",
++    "third_party/cub/UPSTREAM.json": "477b1ee70b0a9113c9f98b263c19a31d05ccee54f45ce8476aec4cc98965ced1",
++    "third_party/pdqsort/README.md": "393fcfa6e18a26f35923210011628f726d208ff3f42c9e50f86baa2dcec8644b",
++    "third_party/pdqsort/UPSTREAM.json": "5b3c1bd9252692431478267bd37081cb72177f660849133fbd351782e50682ff",
++    "third_party/pdqsort/license.txt": "323fc18e35fcf058d69d684022ef844f206cb8fefb2bac1298fa1767e0b9ae38",
++    "third_party/pdqsort/pdqsort.h": "1916aff237fc7ecc638dec6397662334552a1b6f823fa65011a8dfe831237fc0",
++    "third_party/timsort/LICENSE": "210f3341e9e04dc3004f416ae0e28dc7e8eaa84528c5966661186a1b512f34c3",
++    "third_party/timsort/README.md": "21bbccf7a32802d004021eced841f33be4cd826a4c46f53b85db6b93d59675c3",
++    "third_party/timsort/UPSTREAM.json": "b0dc4f7c2bd96cb88b1bef9868ff26aa64a3598b08f78227d948e34152dfb7b6",
++    "third_party/timsort/include/gfx/timsort.hpp": "a5cf0f0f61d92a62cf14528d1969a236db587b95678b088b5e38833d9865e9c9"
++  },
++  "schema_version": 4,
++  "source_change_reasons": {
++    "scripts/analyze_cpu_gpu.py": "Prior recovery: explicit opt-in compatibility validation in independent analyzer; unchanged in this repair.",
++    "scripts/cpu_gpu_build_identity.py": "Prior recovery addition; repair now requires compiler/linker proof in addition to snapshots.",
++    "scripts/cpu_gpu_build_provenance.py": "New offline compiler/linker graph validation; not a build or execution collector.",
++    "scripts/cpu_gpu_evidence.py": "New strict record, CPU plan, build and independent review checks; trust pin remains unset.",
++    "scripts/cpu_gpu_evidence_io.py": "New verified-byte snapshot reader with strict references and JSON parsing.",
++    "scripts/cpu_gpu_framework_compatibility.py": "Prior recovery addition; repair adds strict independently pinned evidence-content validation.",
++    "scripts/cpu_gpu_protocol.py": "Prior recovery: explicit policy dispatch; unchanged in this repair.",
++    "scripts/cpu_gpu_provenance.py": "Prior recovery: protected compatibility source review dispatch; unchanged in this repair.",
++    "scripts/run_cpu_gpu_pilot.py": "Prior recovery: shared prerequisite validator and binary verification; unchanged in this repair.",
++    "scripts/run_cpu_gpu_study.py": "Prior recovery: explicit study-only compatibility option; unchanged in this repair.",
++    "tests/test_evidence_enforcement.py": "New inert adversarial parser regressions; not implicitly approved for CTest selection.",
++    "tests/test_framework_compatibility.py": "Prior recovery addition; unsafe positive fixture is now rejected; prior protections retained."
++  },
++  "source_delta": {
++    "added": [
++      "scripts/cpu_gpu_build_identity.py",
++      "scripts/cpu_gpu_build_provenance.py",
++      "scripts/cpu_gpu_evidence.py",
++      "scripts/cpu_gpu_evidence_io.py",
++      "scripts/cpu_gpu_framework_compatibility.py",
++      "tests/test_evidence_enforcement.py",
++      "tests/test_framework_compatibility.py"
++    ],
++    "modified": [
++      "scripts/analyze_cpu_gpu.py",
++      "scripts/cpu_gpu_protocol.py",
++      "scripts/cpu_gpu_provenance.py",
++      "scripts/run_cpu_gpu_pilot.py",
++      "scripts/run_cpu_gpu_study.py"
++    ],
++    "removed": []
++  },
++  "tests": {
++    "baselines": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_baselines"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "benchmark_framework": {
++      "classification": "timing",
++      "command": [
++        "@python",
++        "@source/tests/test_benchmark.py",
++        "@build/sort_benchmark"
++      ],
++      "reason": "Launches sort_benchmark."
++    },
++    "cli": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_cli.py",
++        "@build/algorithm_benchmark"
++      ],
++      "reason": "Correctness-only algorithm_benchmark CLI; no timer or performance output."
++    },
++    "comparison_engine": {
++      "classification": "timing",
++      "command": [
++        "@build/test_comparison"
++      ],
++      "reason": "Calls comparison trial timing engine."
++    },
++    "comparisons": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_comparisons"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "cpu_gpu_comparison_framework": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_cpu_gpu_comparison.py",
++        "@build/comparison_input"
++      ],
++      "reason": "Synthetic CSV/matrix analysis and mocked orchestration/prerequisites; small untimed input generation only."
++    },
++    "cuda_benchmark_analysis": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_cuda_benchmark.py"
++      ],
++      "reason": "Only the two-argument Python command is safe; no benchmark executable supplied; GPU timing methods skip."
++    },
++    "cuda_benchmark_gpu_framework": {
++      "classification": "timing",
++      "command": [
++        "@python",
++        "@source/tests/test_cuda_benchmark.py",
++        "@build/cuda_sort_benchmark"
++      ],
++      "reason": "Executable argument enables actual GPU timing methods; never select."
++    },
++    "cuda_preflight": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_cuda_preflight.py"
++      ],
++      "reason": "Mocks driver/runtime collection; real CMake option probes explicitly disable CUDA; no runtime/kernel execution."
++    },
++    "cuda_prepared_correctness": {
++      "classification": "gpu_correctness",
++      "command": [
++        "@build/test_cuda_prepared_correctness"
++      ],
++      "diagnostic_only": true,
++      "reason": "Explicit opt-in untimed correctness diagnostic; source reviewed separately"
++    },
++    "cuda_runtime_smoke": {
++      "classification": "gpu_correctness",
++      "command": [
++        "@build/cuda_runtime_probe"
++      ],
++      "reason": "Actual device enumeration and tiny correctness kernel; explicit GPU correctness opt-in only."
++    },
++    "cuda_sort_handoff": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_cuda_sort_handoff.py"
++      ],
++      "reason": "Injected unavailable/timeout/interruption handlers; invalid CLI and CUDA-OFF option checks; no actual GPU call."
++    },
++    "cuda_sorting": {
++      "classification": "gpu_correctness",
++      "command": [
++        "@build/test_cuda_sorting"
++      ],
++      "reason": "Actual475-input/1900-output CUB correctness suite without benchmark timing; explicit GPU correctness opt-in only."
++    },
++    "datasets": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_datasets"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "environment_manifest": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_environment.py"
++      ],
++      "reason": "Manifest formatting, unavailable-command and invalid-cache tests; no timing or GPU probe."
++    },
++    "experiment_pipeline": {
++      "classification": "timing",
++      "command": [
++        "@python",
++        "@source/tests/test_experiments.py",
++        "@build"
++      ],
++      "reason": "End-to-end experiment tests invoke benchmark processes."
++    },
++    "memory": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_memory"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "memory_unsupported": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_memory_unsupported"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "mergesort": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_mergesort"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "metrics_cli": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_metrics_cli.py",
++        "@build/sort_metrics"
++      ],
++      "reason": "Counting-comparator/RSS CLI, no timing measurement or GPU sorter."
++    },
++    "parallel_framework": {
++      "classification": "timing",
++      "command": [
++        "@python",
++        "@source/tests/test_parallel_benchmark.py",
++        "@build/parallel_sort_benchmark"
++      ],
++      "reason": "Launches parallel_sort_benchmark."
++    },
++    "parallel_mergesort": {
++      "classification": "timing",
++      "command": [
++        "@build/test_parallel_mergesort"
++      ],
++      "reason": "Embedded N32768, W1/R2, sequential and parallel sort timing: six actual rows."
++    },
++    "parallel_workers_correctness": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_parallel_workers"
++      ],
++      "diagnostic_only": true,
++      "reason": "Explicit opt-in untimed correctness diagnostic; source reviewed separately"
++    },
++    "pdqsort": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_pdqsort"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "quicksort": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_quicksort"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "radixsort": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_radixsort"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "search_framework": {
++      "classification": "timing",
++      "command": [
++        "@python",
++        "@source/tests/test_search_benchmark.py",
++        "@build/search_benchmark",
++        "@build/search_counts"
++      ],
++      "reason": "Launches search_benchmark."
++    },
++    "search_timing": {
++      "classification": "timing",
++      "command": [
++        "@build/test_search_timing"
++      ],
++      "reason": "Calls real search batch timing engine."
++    },
++    "searching": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_searching"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "structure_framework": {
++      "classification": "timing",
++      "command": [
++        "@python",
++        "@source/tests/test_structure_benchmark.py",
++        "@build/structure_benchmark"
++      ],
++      "reason": "Launches structure_benchmark."
++    },
++    "structure_timing": {
++      "classification": "timing",
++      "command": [
++        "@build/test_structure_timing"
++      ],
++      "reason": "Calls real construction and lookup timing engines."
++    },
++    "structures": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_structures"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "timing": {
++      "classification": "timing",
++      "command": [
++        "@build/test_timing"
++      ],
++      "reason": "Calls real sorting timing engine."
++    },
++    "timsort": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@build/test_timsort"
++      ],
++      "reason": "C++ differential/invariant/counting/memory checks; no clock-delimited algorithm invocation or GPU call."
++    },
++    "validation_policy": {
++      "classification": "cpu_correctness",
++      "command": [
++        "@python",
++        "@source/tests/test_validation_policy.py"
++      ],
++      "diagnostic_only": true,
++      "reason": "Explicit opt-in untimed correctness diagnostic; source reviewed separately"
++    }
++  }
++}
+--- before/docs/ROADMAP.md
++++ after/docs/ROADMAP.md
+@@ -2,6 +2,12 @@
+ 
+ Work follows the phase order in `AGENTS.md`. Completion requires code, tests,
+ documentation, and actual validation; scaffolding alone is insufficient.
++
++Current CPU/GPU gate: [evidence enforcement v1](CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md)
++adds record-content/selection/build checks and an inactive additive candidate.
++Independent review, candidate approval, actual T4 compiler/linker provenance,
++identity-matched bounded validation and final preflight remain outstanding.
++No new native/GPU regression or timing execution is claimed by this repair.
+ 
+ | Phase | Status |
+ | --- | --- |
+--- before/scripts/cpu_gpu_build_identity.py
++++ after/scripts/cpu_gpu_build_identity.py
+@@ -42,7 +42,8 @@
+     return document
+ 
+ 
+-def capture(build_dir):
++def capture_snapshot(build_dir):
++    """Content snapshot only; cannot satisfy full provenance requirements."""
+     from cpu_gpu_validation_policy import verify_current_sources
+     verify_current_sources()  # Pinned freeze, CUB and exact approved framework exceptions.
+     build = canonical_path(build_dir)
+@@ -65,26 +66,51 @@
+                     MAB_ENABLE_CPU_GPU_COMPARISON='ON', MAB_ENABLE_SANITIZERS='OFF',
+                     CMAKE_CUDA_ARCHITECTURES='75')
+     require(all(cache.get(k) == v for k, v in expected.items()), 'unexpected source/build configuration')
+-    require(isinstance(strict_json((build / 'compile_commands.json').read_text()), list),
+-            'malformed compile commands')
++    from cpu_gpu_build_provenance import compile_entries
++    compile_entries(strict_json((build / 'compile_commands.json').read_text()),
++                    str(ROOT.resolve()), str(build), source_manifest())
+     return dict(schema_version=1, kind='cpu_gpu_build_identity_v1', build_dir=str(build),
+                 source_dir=str(ROOT.resolve()), freeze_sha256=TRUSTED_FREEZE_SHA256,
+                 source_sha256=source_manifest(), files_sha256=files)
++
++
++def capture(build_dir, provenance_path):
++    """Require actual retained build commands in addition to output hashes."""
++    from cpu_gpu_evidence_io import EvidenceStore
++    from cpu_gpu_build_provenance import validate_build
++    document = capture_snapshot(build_dir)
++    build = canonical_path(build_dir)
++    provenance = canonical_path(provenance_path)
++    require(provenance.is_relative_to(build), 'build provenance outside intended build')
++    reference = dict(file=str(provenance.relative_to(build)), sha256=sha(provenance))
++    store = EvidenceStore(build)
++    proof = validate_build(store, reference, document['source_sha256'],
++                           {n: document['files_sha256'][n] for n in EXECUTABLES + ('libmab_parallel.a', 'libmab_cuda_timing.a')},
++                           str(build))
++    require(all(proof['metadata'][n]['sha256'] == document['files_sha256'][n]
++                for n in ['CMakeCache.txt', 'compile_commands.json', 'CTestTestfile.cmake']),
++            'stale build metadata provenance')
++    document['build_provenance'] = reference
++    return document
+ 
+ 
+ def verify(document, executable, input_tool):
+     build = canonical_path(document['build_dir'])
+     require(canonical_path(executable) == build / 'cpu_gpu_comparison' and
+             canonical_path(input_tool) == build / 'comparison_input', 'different comparison build/executable path')
+-    require(capture(build) == document, 'stale or mismatched build identity snapshot')
++    reference = document.get('build_provenance')
++    require(isinstance(reference, dict) and isinstance(reference.get('file'), str), 'missing build provenance identity')
++    require(capture(build, build / reference['file']) == document, 'stale or mismatched build identity snapshot')
+ 
+ 
+ def main():
+     parser = argparse.ArgumentParser(description=__doc__, allow_abbrev=False)
+     parser.add_argument('--build-dir', required=True, type=Path)
+     parser.add_argument('--output', required=True, type=Path)
++    parser.add_argument('--build-provenance', required=True, type=Path,
++                        help='Retained actual configure/build/compiler/linker command records; never synthesized')
+     args = parser.parse_args()
+-    document = capture(args.build_dir)
++    document = capture(args.build_dir, args.build_provenance)
+     dump_new(args.output, document)
+     # Useful content identifier, not an attestation of execution or eligibility.
+     import hashlib
+--- before/scripts/cpu_gpu_build_provenance.py
++++ after/scripts/cpu_gpu_build_provenance.py
+@@ -0,0 +1,122 @@
++"""Validate retained compiler/linker results. Hashes alone are not build proof.
++
++An independently pinned review must also approve the resulting provenance digest.
++This module reads records only. It never invokes a compiler or a binary.
++"""
++from pathlib import Path
++import shlex
++
++from cpu_gpu_protocol import canonical, require
++from cpu_gpu_provenance import validate_digest_map, valid_digest
++from cpu_gpu_evidence_io import command, digest
++
++
++def compile_entries(value, source_dir, build_dir, source):
++    require(isinstance(value, list) and value, 'empty/malformed compile-command evidence')
++    result = {}
++    for entry in value:
++        require(isinstance(entry, dict) and entry.get('directory') == build_dir and
++                isinstance(entry.get('file'), str), 'compile source/build identity mismatch')
++        path = Path(entry['file'])
++        require(path.is_absolute() and '..' not in path.parts and path.is_relative_to(source_dir),
++                'compile source path substitution')
++        relative = str(path.relative_to(source_dir))
++        require(relative in source, 'unreviewed compile source')
++        require(('arguments' in entry) != ('command' in entry), 'ambiguous compile command')
++        argv = entry.get('arguments') if 'arguments' in entry else shlex.split(entry['command'])
++        require(isinstance(argv, list) and all(isinstance(a, str) and a for a in argv) and
++                len(argv) >= 5 and '-c' in argv and argv.count('-o') == 1 and
++                argv.index('-o') + 1 < len(argv) and str(path) in argv and
++                not any(a in [';', '&&', '||', '|', '>', '<'] for a in argv), 'invalid compile invocation')
++        output = Path(argv[argv.index('-o') + 1])
++        if not output.is_absolute(): output = Path(build_dir) / output
++        require('..' not in output.parts and output.is_relative_to(build_dir) and str(output) not in result,
++                'duplicate/unsafe compile output')
++        result[str(output)] = dict(argv=argv, source=relative)
++    return result
++
++
++def validate_build(store, reference, expected_source, required_outputs, expected_build=None):
++    proof = store.json(reference)
++    require(isinstance(proof, dict) and type(proof.get('schema_version')) is int and proof['schema_version'] == 1 and
++            proof.get('kind') == 'cpu_gpu_build_provenance_v1', 'missing build provenance schema')
++    require(proof.get('source_sha256') == expected_source and proof.get('source_after_sha256') == expected_source,
++            'stale build provenance source')
++    source, build = proof.get('source_dir'), proof.get('build_dir')
++    for value in [source, build]:
++        require(isinstance(value, str) and Path(value).is_absolute() and '..' not in Path(value).parts and
++                str(Path(value)) == value, 'ambiguous provenance directory')
++    require(expected_build is None or build == expected_build, 'different provenance build')
++    outputs = proof.get('outputs_sha256')
++    validate_digest_map(outputs, 'build output identities')
++    require(set(required_outputs) <= set(outputs), 'missing build output provenance')
++    for name, expected in required_outputs.items():
++        require(outputs[name] == expected, 'stale build output: ' + name)
++    metadata = proof.get('metadata')
++    require(isinstance(metadata, dict) and set(metadata) == {'CMakeCache.txt', 'compile_commands.json', 'CTestTestfile.cmake'},
++            'missing generated build metadata')
++    cache = store.raw(metadata['CMakeCache.txt']).decode('utf-8')
++    cache_values = {}
++    for line in cache.splitlines():
++        if not line or line.startswith(('#', '//')): continue
++        require('=' in line and ':' in line.split('=', 1)[0], 'malformed build cache')
++        field, value = line.split('=', 1); key = field.split(':', 1)[0]
++        require(key not in cache_values, 'duplicate build cache key'); cache_values[key] = value
++    require(cache_values.get('CMAKE_HOME_DIRECTORY') == source and
++            cache_values.get('CMAKE_BUILD_TYPE') == proof.get('build_type') and
++            proof.get('build_type') in ['Release', 'Debug'] and type(proof.get('sanitizers')) is bool and
++            cache_values.get('MAB_ENABLE_SANITIZERS') == ('ON' if proof['sanitizers'] else 'OFF'),
++            'build configuration provenance mismatch')
++    entries = compile_entries(store.json(metadata['compile_commands.json']), source, build, expected_source)
++    store.raw(metadata['CTestTestfile.cmake'])
++    tools = proof.get('toolchain')
++    require(isinstance(tools, dict) and tools, 'missing toolchain provenance')
++    for path, tool in tools.items():
++        require(Path(path).is_absolute() and isinstance(tool, dict) and valid_digest(tool.get('sha256')),
++                'invalid compiler/tool identity')
++        observed = command(store.json(tool['version']), cwd=source)
++        require(observed['argv'] == [path, '--version'] and observed['stdout'].strip(), 'tool version evidence mismatch')
++    configure = command(store.json(proof['configure']), cwd=source)
++    require(configure['argv'][0] in tools and Path(configure['argv'][0]).name == 'cmake' and
++            configure['argv'].count('-S') == 1 and configure['argv'].count('-B') == 1 and
++            configure['argv'][configure['argv'].index('-S')+1] == source and
++            configure['argv'][configure['argv'].index('-B')+1] == build,
++            'configure source/build mismatch')
++    build_command = command(store.json(proof['build']), cwd=source)
++    require(build_command['argv'][0] == configure['argv'][0] and build_command['argv'][1:3] == ['--build', build] and
++            '--verbose' in build_command['argv'], 'verbose build command provenance missing')
++    steps = proof.get('steps')
++    require(isinstance(steps, list) and steps, 'missing compiler/linker exit records')
++    seen, compiled, linked, products = set(), set(), set(), {}
++    for reference in steps:
++        require(reference['file'] not in seen, 'duplicate build command record'); seen.add(reference['file'])
++        record = command(store.json(reference), cwd=build)
++        require(record.get('source_before_sha256') == expected_source and record.get('source_after_sha256') == expected_source,
++                'compiler/linker source snapshot mismatch')
++        argv = record['argv']; require(argv[0] in tools, 'unrecorded compiler/linker tool')
++        output = record.get('output')
++        require(isinstance(output, str) and Path(output).is_absolute() and '..' not in Path(output).parts and
++                Path(output).is_relative_to(build), 'unsafe compiler/linker output')
++        if record.get('operation') == 'compile':
++            require(output in entries and entries[output]['argv'] == argv and output not in compiled,
++                    'compile database/command mismatch')
++            compiled.add(output)
++        else:
++            require(record.get('operation') in ['link', 'archive'] and output not in linked and
++                    output not in entries and (output in argv or str(Path(output).relative_to(build)) in argv),
++                    'invalid/duplicate linker output')
++            objects = record.get('inputs_sha256')
++            validate_digest_map(objects, 'linked object identities')
++            require(objects and all(str(Path(build)/p) in compiled or str(Path(build)/p) in linked for p in objects),
++                    'link input lacks earlier compiler/archive provenance')
++            linked.add(output)
++        require(valid_digest(record.get('output_sha256')), 'missing actual build product hash')
++        # Object/library bytes are bound across the complete recorded command graph.
++        if record.get('operation') != 'compile':
++            for name, expected in objects.items():
++                require(products.get(str(Path(build)/name)) == expected, 'linked object hash mismatch')
++        products[output] = record['output_sha256']
++    require(set(entries) == compiled, 'missing compiler exit records')
++    require(all(str(Path(build)/name) in linked and products[str(Path(build)/name)] == value
++                for name, value in outputs.items()), 'missing/stale executable or library link provenance')
++    return proof
+--- before/scripts/cpu_gpu_evidence.py
++++ after/scripts/cpu_gpu_evidence.py
+@@ -0,0 +1,363 @@
++"""Strict retained evidence validation; no discovery, subprocesses or measurements.
++
++No independent review is installed. Candidate selection/build material is never
++trusted on first use. A future independently reviewed pin is a separate gate.
++"""
++import hashlib
++from pathlib import Path
++import re
++import tempfile
++
++from cpu_gpu_protocol import ROOT, canonical, require
++from cpu_gpu_provenance import strict_json, TRUSTED_FREEZE_SHA256, validate_digest_map, valid_digest
++from cpu_gpu_validation_policy import trusted_policy, classify
++from cpu_gpu_evidence_io import EvidenceStore, command, digest
++from cpu_gpu_build_provenance import validate_build
++from ctest_build_guard import statements
++
++POLICY = 'cpu_gpu_evidence_enforcement_v1'
++APPROVAL = ROOT / 'docs/CPU_GPU_EVIDENCE_REVIEW_v1.json'
++TRUSTED_APPROVAL_SHA256 = None  # Deliberately pending independent review; not a caller option.
++BASE_SELECTION_SHA256 = 'fef39034b063c36dabc3eccf9dc6a162ebcf6a4e5cb44abeda83e93fbcf1a434'
++
++
++def approval():
++    require(TRUSTED_APPROVAL_SHA256 is not None, 'independent evidence/selection review not installed')
++    store = EvidenceStore(APPROVAL.parent)
++    value = store.json(dict(file=APPROVAL.name, sha256=TRUSTED_APPROVAL_SHA256))
++    require(isinstance(value, dict) and value.get('schema_version') == 1 and value.get('policy') == POLICY and
++            value.get('approved') is True and value.get('execution_authorized') is False,
++            'invalid independent evidence review')
++    required={'schema_version','policy','approved','execution_authorized','context','source_dir','build_dir','python',
++              'selection_sha256','cpu_build_provenance_sha256','build_provenance_sha256','record_sha256','legacy_records',
++              'preflight_report_sha256'}
++    require(set(value)==required, 'incomplete/ambiguous independent evidence review')
++    context=value['context']
++    require(isinstance(context,dict) and set(context)=={'session_id','source_identity','build_identity','binary_identity','freeze_sha256'} and
++            isinstance(context['session_id'],str) and context['session_id'] and
++            all(valid_digest(context[n]) for n in context if n!='session_id'), 'invalid independent context')
++    for name in ['source_dir','build_dir','python']:
++        path=value[name]
++        require(isinstance(path,str) and Path(path).is_absolute() and '..' not in Path(path).parts and str(Path(path))==path,
++                'invalid independent path')
++    for name in ['selection_sha256','build_provenance_sha256','preflight_report_sha256']:
++        require(valid_digest(value[name]), 'invalid independent digest')
++    validate_digest_map(value['record_sha256'],'independent framework records')
++    require(set(value['record_sha256'])==set(trusted_policy()[0]['required_records']['full_study_prerequisites']),
++            'incomplete independent framework record inventory')
++    validate_digest_map(value['cpu_build_provenance_sha256'],'independent CPU build records')
++    require(set(value['cpu_build_provenance_sha256'])=={'cpu_release','cpu_sanitize'}, 'incomplete independent CPU builds')
++    require(isinstance(value['legacy_records'],dict) and set(value['legacy_records'])==
++            {'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'}, 'incomplete independent legacy records')
++    for ref in value['legacy_records'].values():
++        require(isinstance(ref,dict) and set(ref)=={'file','sha256'} and valid_digest(ref['sha256']) and
++                isinstance(ref['file'],str) and ref['file'] and not Path(ref['file']).is_absolute() and
++                '..' not in Path(ref['file']).parts and str(Path(ref['file']))==ref['file'], 'invalid independent legacy reference')
++    return value
++
++
++def candidate(candidate, current_source):
++    """Inspect an inactive additive candidate, never activate the selector."""
++    raw = (ROOT / 'docs/NON_TIMING_TEST_SELECTION_v3.json').read_bytes()
++    require(digest(raw) == BASE_SELECTION_SHA256, 'base selection identity changed')
++    base = strict_json(raw.decode())
++    require(isinstance(candidate, dict) and candidate.get('schema_version') == 4 and
++            candidate.get('policy') == 'non_timing_correctness_v4_candidate' and
++            candidate.get('review_status') == 'pending_independent_review' and
++            candidate.get('base_manifest_sha256') == BASE_SELECTION_SHA256,
++            'invalid candidate selection identity/status')
++    for key in ['tests', 'cpu_build_tests', 'cuda_additional_tests', 'build_metadata']:
++        require(candidate.get(key) == base[key], 'candidate changed selection membership/commands: ' + key)
++    require(candidate.get('reviewed_source_sha256') == current_source, 'candidate source additions/removals/hashes changed')
++    old = base['reviewed_source_sha256']
++    delta = dict(added=sorted(set(current_source)-set(old)), removed=sorted(set(old)-set(current_source)),
++                 modified=sorted(p for p in set(old)&set(current_source) if old[p]!=current_source[p]))
++    require(candidate.get('source_delta') == delta, 'candidate source delta mismatch')
++    return delta
++
++
++def selection_manifest(store, reference, approved, source):
++    require(reference['sha256'] == approved['selection_sha256'], 'wrong approved selection snapshot')
++    manifest = store.json(reference)
++    # Existing v3 may only validate its exact historical source. Candidate v4 is
++    # never accepted here. Activation requires another independently reviewed version.
++    require(manifest.get('policy') in ['non_timing_correctness_v3', 'non_timing_correctness_v4'] and
++            manifest.get('review_status', 'approved') == 'approved', 'selection candidate is not approved')
++    base_raw = (ROOT/'docs/NON_TIMING_TEST_SELECTION_v3.json').read_bytes()
++    require(digest(base_raw) == BASE_SELECTION_SHA256, 'base selection identity changed')
++    base = strict_json(base_raw.decode())
++    for key in ['tests','cpu_build_tests','cuda_additional_tests','build_metadata']:
++        require(manifest.get(key) == base[key], 'approved default selection membership/commands changed')
++    require(manifest.get('reviewed_source_sha256') == source, 'selection source snapshot mismatch')
++    return manifest
++
++
++def ctest_coverage(text, names):
++    require(isinstance(text, str), 'missing CTest output')
++    starts = re.findall(r'(?m)^\s*Start\s+\d+: ([a-z_]+)\s*$', text)
++    passed = re.findall(r'(?m)^\s*\d+/\d+ Test\s+#\d+: ([a-z_]+)\s+\.*\s*Passed\s+[^\n]+$', text)
++    require(len(starts) == len(names) and len(set(starts)) == len(names) and set(starts) == set(names) and
++            len(passed) == len(names) and len(set(passed)) == len(names) and set(passed) == set(names),
++            'missing/duplicate/failed CTest coverage')
++    summaries = re.findall(r'(?m)^100% tests passed, 0 tests failed out of (\d+)\s*$', text)
++    require(summaries == [str(len(names))] and not any(x in text for x in
++            ['***Failed','***Skipped','FAILED (','ERROR:','AddressSanitizer:','runtime error:']),
++            'contradictory CTest/sanitizer outcome')
++    return len(names)
++
++
++def cpu_record(store, record, approved, source, gate):
++    manifest = selection_manifest(store, record['manifest'], approved, source)
++    plan = store.json(record['selection'])
++    expected_names = sorted(n for n,t in manifest['tests'].items() if t['classification']=='cpu_correctness')
++    require(len(expected_names) == 21 and plan.get('selected') == expected_names and
++            plan.get('selected_count') == 21 and plan.get('manifest_sha256') == record['manifest']['sha256'] and
++            plan.get('allow_gpu_correctness') is False and plan.get('tests_executed') is False and
++            plan.get('full_protocol_prerequisites') is False and plan.get('policy') == manifest['policy'],
++            'CPU selection plan coverage/identity mismatch')
++    proof = validate_build(store, record['build_provenance'], source, record['executables_sha256'])
++    require(record['build_provenance']['sha256'] == approved['cpu_build_provenance_sha256'][gate],
++            'unapproved CPU build provenance')
++    require(proof['build_type'] == ('Debug' if gate=='cpu_sanitize' else 'Release') and
++            proof['sanitizers'] is (gate=='cpu_sanitize'), 'wrong CPU build/sanitizer configuration')
++    build, source_dir = proof['build_dir'], proof['source_dir']
++    def expand(pattern):
++        return [approved['python'] if p=='@python' else
++                p.replace('@source',source_dir).replace('@build',build) for p in pattern]
++    all_names = sorted(manifest['cpu_build_tests'])
++    commands = {n:expand(manifest['tests'][n]['command']) for n in all_names}
++    executables = {Path(commands[n][0]).name for n in expected_names
++                   if commands[n][0].startswith(build+'/')}
++    require(set(record['executables_sha256']) == executables and
++            all(proof['outputs_sha256'][n] == value for n,value in record['executables_sha256'].items()),
++            'CPU executable coverage/identity mismatch')
++    metadata = plan.get('build_metadata', {})
++    require(metadata.get('build_dir') == build and metadata.get('test_names') == all_names and
++            metadata.get('commands') == commands and plan.get('discovered_count') == len(all_names),
++            'guarded build/command identity mismatch')
++    declarations, properties = {}, {}
++    registry = store.raw(proof['metadata']['CTestTestfile.cmake']).decode()
++    for operation, args in statements(registry):
++        require(args and args[0] in all_names, 'unreviewed retained registry')
++        name = args[0]
++        if operation=='add_test':
++            require(name not in declarations and args[1:]==commands[name], 'modified/duplicate retained command')
++            declarations[name] = args[1:]
++        else:
++            require(name in declarations and name not in properties and len(args)%2==0 and args[1]=='PROPERTIES',
++                    'ambiguous retained properties')
++            pairs = dict(zip(args[2::2],args[3::2]))
++            expected = {k:v.replace('@source',source_dir).replace('@build',build)
++                        for k,v in manifest['build_metadata']['test_properties'][name].items()}
++            require(len(pairs)==(len(args)-2)//2 and pairs==expected, 'unsafe retained hooks/fixtures/properties')
++            properties[name] = pairs
++    require(sorted(declarations)==all_names and sorted(properties)==all_names and metadata.get('properties')==properties and
++            metadata.get('files_sha256',{}).get('CTestTestfile.cmake')==proof['metadata']['CTestTestfile.cmake']['sha256'],
++            'retained guarded registry mismatch')
++    # Additional metadata must be independently retained; unknown generated files
++    # cannot be smuggled into the plan. This does not rerun the guard or discovery.
++    metadata_refs = record.get('guarded_metadata')
++    require(isinstance(metadata_refs, dict) and set(metadata_refs)==set(metadata['files_sha256']) and
++            set(metadata_refs) <= {'CTestTestfile.cmake','DartConfiguration.tcl'}, 'unreviewed guarded metadata')
++    for name, ref in metadata_refs.items():
++        require(ref['sha256']==metadata['files_sha256'][name], 'guarded metadata identity mismatch')
++        raw = store.raw(ref)
++        if name == 'DartConfiguration.tcl':
++            # Reuse the static dashboard parser on verified private bytes. It
++            # cannot evaluate CMake or execute dashboard commands.
++            from ctest_build_guard import validate_dart
++            with tempfile.TemporaryDirectory(prefix='mab-dart-snapshot-') as temporary:
++                path = Path(temporary)/name; path.write_bytes(raw)
++                require(source_dir == str(ROOT.resolve()),
++                        'Dart source relocation requires independent metadata review')
++                validate_dart(path,Path(build),manifest['build_metadata'])
++    discovery = command(store.json(record['discovery']),
++                        ['ctest','--test-dir',build,'-N','--show-only=json-v1'], source_dir)
++    discovered = strict_json(discovery['stdout'])
++    require(discovered.get('kind')=='ctestInfo' and discovered.get('version')==dict(major=1,minor=0) and
++            isinstance(discovered.get('tests'),list), 'malformed retained discovery')
++    tests = discovered['tests']
++    require(len(tests)==len(all_names) and sorted(t.get('name','') for t in tests)==all_names,
++            'missing/duplicate discovery tests')
++    for test in tests:
++        require(test.get('command')==commands[test['name']], 'discovered command substitution')
++        props = test.get('properties',[])
++        require(isinstance(props,list) and len({p['name'] for p in props})==len(props), 'duplicate discovery properties')
++        for prop in props:
++            name,value=prop['name'],prop.get('value')
++            require((name=='WORKING_DIRECTORY' and value==build) or
++                    (name in ['TIMEOUT','SKIP_RETURN_CODE'] and str(value)==properties[test['name']].get(name)),
++                    'unsafe discovery dependency/fixture/property')
++    expression = '^('+'|'.join(expected_names)+')$'
++    argv = ['ctest','--test-dir',build,'--output-on-failure','-V','--parallel','1','-R',expression]
++    require(plan.get('ctest_argv')==argv, 'CPU selection execution command mismatch')
++    prefix = ['env','-u','ASAN_OPTIONS','-u','LSAN_OPTIONS','UBSAN_OPTIONS=halt_on_error=1'] if gate=='cpu_sanitize' else []
++    result = command(store.json(record['command']), prefix+argv, source_dir)
++    # Conditional no-leaks evidence is not silently accepted; unsupported retry
++    # formats must get their own reviewed extension and original ptrace record.
++    count = ctest_coverage(result['stdout']+'\n'+result['stderr'], expected_names)
++    return dict(passed=count)
++
++
++def timing_bundle(store, record, gate, context):
++    files = record.get('raw_files')
++    require(isinstance(files,dict) and files and 'run.json' in files and 'COMPLETE.json' in files,
++            'missing timing raw bundle')
++    # Copy the verified bytes to private files for existing read-only analyzers.
++    # They cannot reread mutable original evidence between hashing and parsing.
++    with tempfile.TemporaryDirectory(prefix='mab-evidence-snapshot-') as temporary:
++        root = Path(temporary)
++        for relative, reference in files.items():
++            path = Path(relative)
++            require(not path.is_absolute() and '..' not in path.parts and str(path)==relative,
++                    'unsafe raw bundle path')
++            raw = store.raw(reference)
++            if path.suffix=='.json': strict_json(raw.decode())
++            target = root/path; target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(raw)
++        meta = strict_json((root/'run.json').read_text())
++        require(meta.get('run_kind')=='performance', 'synthetic/validation timing evidence cannot qualify')
++        if gate=='pilot':
++            from analyze_cpu_gpu import analyze
++            require(meta.get('matrix_part')=='pilot', 'wrong timing evidence scope')
++            source = strict_json((root/'source_review.json').read_text())
++            build = strict_json((root/'build.json').read_text())
++            require(digest(canonical(source['current_source_sha256']))==context['source_identity'] and
++                    build.get('binary_sha256')==context['binary_identity'], 'pilot source/binary mismatch')
++            report = analyze(root)
++            require(report['complete'] and report['measured']==dict(successful=150,failed=0,interrupted=0,missing=0) and
++                    report['warmups']==dict(successful=30,failed=0,interrupted=0,missing=0), 'incomplete pilot raw coverage')
++            return dict(measured=150,warmups=30,failed=0,missing=0)
++        from analyze_cuda_results import read_bundle
++        meta, report = read_bundle(root)
++        require(meta.get('gpu_name')=='Tesla T4' and (meta.get('compute_major'),meta.get('compute_minor'))==(7,5) and
++                report['complete'] and not any(report[k] for k in
++                ['failed_trials','missing_trials','failed_warmups','missing_warmups']), 'incomplete timing smoke')
++        return dict(complete=True,correctness=True)
++
++
++def record_coverage(store, name, reference, reviewed, source):
++    record = store.json(reference)
++    require(isinstance(record,dict) and type(record.get('schema_version')) is int and record['schema_version']==1 and
++            record.get('kind')=='cpu_gpu_framework_record_v1' and record.get('gate')==name,
++            'unsupported framework record schema: '+name)
++    require(record.get('context')==reviewed['context'], 'framework source/build/session context mismatch')
++    if name in ['cpu_release','cpu_sanitize']:
++        coverage = cpu_record(store,record,reviewed,source,name)
++    elif name in ['timing_smoke','pilot']:
++        coverage = timing_bundle(store,record,name,reviewed['context'])
++    elif name=='independent_review':
++        decision = store.json(record['decision'])
++        require(decision==dict(schema_version=1,kind='independent_evidence_review_v1',accepted=True,
++                              execution_authorized=False,context=reviewed['context']), 'review decision not accepted/current')
++        coverage = dict(accepted=True)
++    elif name=='workspace':
++        from analyze_cpu_gpu import validate_resources
++        refs = record.get('commands')
++        require(isinstance(refs,list) and len(refs)==3, 'missing workspace size coverage')
++        sizes=[]
++        for ref in refs:
++            result = command(store.json(ref),cwd=reviewed['source_dir'])
++            value = strict_json(result['stdout']); n=value.get('size')
++            require(type(n) is int and n in [1025,65537,1000000] and n not in sizes, 'duplicate/invalid workspace size')
++            command(result,[str(Path(reviewed['build_dir'])/'cpu_gpu_comparison'),'--resources',str(n)])
++            validate_resources(value,n);sizes.append(n)
++        require(sorted(sizes)==[1025,65537,1000000], 'missing workspace coverage')
++        from run_cpu_gpu_pilot import environment_gate
++        environment_gate(store.json(record['environment']))  # Retained snapshot only; never calls snapshot().
++        coverage = dict(sizes=sorted(sizes),all_limits_passed=True)
++    else:
++        executable = {'gpu_prepared':'test_cuda_prepared_correctness','workers':'test_parallel_workers',
++                      'production_gpu':'test_cuda_sorting'}.get(name)
++        require(executable is not None, 'unknown framework gate')
++        result = command(store.json(record['command']),[str(Path(reviewed['build_dir'])/executable)],reviewed['source_dir'])
++        value = strict_json(result['stdout'])
++        if name=='production_gpu':
++            from validate_cuda_sort import verify_result
++            value=verify_result(value)
++            require((value['compute_major'],value['compute_minor'])==(7,5), 'wrong production correctness device')
++            coverage=dict(inputs=value['cases'],output_checks=value['output_checks'])
++        elif name=='gpu_prepared':
++            require(value==dict(schema_version=1,artifact_kind='correctness_validation',scope='prepared_cuda_untimed_v1',
++                study_eligible=False,status='passed',inputs=163,output_checks=489,invalid_operations_rejected=489,failures=0),
++                'incomplete/failed prepared correctness')
++            coverage=dict(inputs=value['inputs'],output_checks=value['output_checks'],failures=value['failures'])
++        else:
++            from cpu_gpu_protocol import load_protocol
++            required_environment = load_protocol()['openmp_policy']['environment']
++            require(all(value.get('environment',{}).get(k)==v for k,v in required_environment.items()),
++                    'worker environment mismatch')
++            require(value.get('schema_version')==1 and value.get('scope')=='openmp_workers_untimed_v1' and
++                    value.get('artifact_kind')=='correctness_validation' and value.get('study_eligible') is False and
++                    value.get('status')=='passed' and value.get('executable')==result['argv'][0] and
++                    value.get('build_type')=='Release' and value.get('sanitizers') is False and
++                    value.get('requested_threads')==2 and value.get('runtime_dynamic')==0 and
++                    value.get('runtime_thread_limit')==2 and value.get('team_size_is_task_participation') is False,
++                    'invalid worker runtime/build evidence')
++            calls = value.get('calls'); require(isinstance(calls,list) and len(calls)==12, 'missing worker checks')
++            expected = {(n,r) for n in [0,1,32767,32768,32769,65537] for r in [False,True]};seen=set()
++            for call in calls:
++                require(type(call.get('size')) is int and type(call.get('registry')) is bool, 'malformed worker call')
++                key=(call['size'],call['registry']);parallel=call['size']>=32768
++                require(key in expected and key not in seen and call.get('correctness') is True and
++                        call.get('actual_team_size')==(2 if parallel else 1) and call.get('parallel_region') is parallel,
++                        'duplicate/failed worker threshold evidence');seen.add(key)
++            require(value.get('output_checks')==len(seen), 'worker check count mismatch')
++            coverage=dict(output_checks=len(seen),threshold_team_verified=True)
++    require(reference['sha256']==reviewed['record_sha256'].get(name), 'unapproved framework record identity: '+name)
++    return coverage
++
++
++def validate_full(prerequisite, store, source, identity):
++    reviewed = approval()
++    context = reviewed.get('context')
++    require(isinstance(context,dict) and context==dict(
++        session_id=prerequisite.get('session_id'),source_identity=digest(canonical(source)),
++        build_identity=digest(canonical(identity)),binary_identity=identity['files_sha256']['cpu_gpu_comparison'],
++        freeze_sha256=TRUSTED_FREEZE_SHA256), 'independent current context mismatch')
++    require(reviewed.get('build_dir')==identity['build_dir'] and reviewed.get('source_dir')==identity['source_dir'],
++            'independent build directory mismatch')
++    ref = prerequisite.get('build_provenance')
++    require(isinstance(ref,dict) and ref.get('sha256')==reviewed.get('build_provenance_sha256') and
++            identity.get('build_provenance',{}).get('sha256')==ref['sha256'], 'missing/unapproved build provenance')
++    from cpu_gpu_build_identity import EXECUTABLES
++    outputs = {n:identity['files_sha256'][n] for n in EXECUTABLES+('libmab_parallel.a','libmab_cuda_timing.a')}
++    proof=validate_build(store,ref,source,outputs,identity['build_dir'])
++    require(proof['build_type']=='Release' and proof['sanitizers'] is False and
++            all(proof['metadata'][n]['sha256']==identity['files_sha256'][n] for n in proof['metadata']),
++            'build metadata provenance mismatch')
++    parent,_ = trusted_policy();names=parent['required_records']['full_study_prerequisites']
++    references=prerequisite['framework_records'];artifact=prerequisite['framework_validation']
++    require(set(references)==set(names) and set(reviewed.get('record_sha256',{}))==set(names), 'framework record inventory mismatch')
++    require(len({r['file'] for r in references.values()})==len(names), 'duplicate framework record aliases')
++    derived={}
++    for name in names:
++        coverage=record_coverage(store,name,references[name],reviewed,source)
++        claimed=artifact['records'][name]
++        expected=dict(status='passed',exit_code=0,skipped=0,missing=0,sha256=references[name]['sha256'],**coverage)
++        require(canonical(claimed)==canonical(expected), 'coverage assertion unsupported by actual record: '+name)
++        derived[name]=expected
++    # Legacy records must be the same command bytes inspected by the strict CPU
++    # and production records; wrappers cannot validate one log and execute another.
++    for legacy,name in [('cpu_release_ctest','cpu_release'),('cpu_sanitize_ctest','cpu_sanitize'),('cuda_correctness','production_gpu')]:
++        record=store.json(references[name])
++        require(prerequisite['records'][legacy]==record['command'], 'legacy/strict command evidence conflict')
++    legacy=prerequisite['records']
++    require(set(legacy)=={'cpu_release_ctest','cpu_sanitize_ctest','cuda_ctest','cuda_correctness','preflight'} and
++            legacy==reviewed.get('legacy_records'), 'unapproved/ambiguous legacy command identities')
++    for reference in legacy.values():
++        command(store.json(reference),cwd=reviewed['source_dir'])
++    preflight=prerequisite.get('preflight_report')
++    require(isinstance(preflight,dict) and preflight.get('sha256')==reviewed.get('preflight_report_sha256'),
++            'missing/unapproved preflight report')
++    report=store.json(preflight)
++    require(isinstance(report,dict) and report.get('schema_version')==1 and
++            report.get('protocol')=='cuda_preflight_v1' and report.get('record_kind')=='cuda_readiness' and
++            report.get('source_sha256')=={p:source[p] for p in
++                ['CMakeLists.txt','cmake/cuda.cmake','src/cuda/runtime_probe.cu','scripts/cuda_preflight.py']},
++            'preflight source/schema mismatch')
++    from cuda_preflight import classify as preflight_classify
++    classification=preflight_classify(report['discovery'],report['probes'])
++    require(classification==report.get('classification') and classification['state']=='operational' and
++            classification['device0_kernel_verified'] is True, 'preflight probes do not support readiness')
++    derived_artifact=dict(artifact,records=derived)
++    return classify(derived_artifact,dict(context,record_sha256={n:r['sha256'] for n,r in references.items()}))
+--- before/scripts/cpu_gpu_evidence_io.py
++++ after/scripts/cpu_gpu_evidence_io.py
+@@ -0,0 +1,63 @@
++"""Read and hash the same retained bytes; never execute retained commands."""
++import hashlib
++import os
++from pathlib import Path
++import stat
++
++from cpu_gpu_protocol import require
++from cpu_gpu_provenance import strict_json, valid_digest
++
++
++def digest(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++class EvidenceStore:
++    def __init__(self, root):
++        self.root = Path(root).absolute()
++        require(self.root == self.root.resolve(strict=True), 'aliased evidence root')
++        self.cache = {}
++
++    def raw(self, reference):
++        require(isinstance(reference, dict) and set(reference) == {'file', 'sha256'},
++                'invalid evidence reference')
++        name, expected = reference['file'], reference['sha256']
++        require(isinstance(name, str) and name and valid_digest(expected), 'invalid evidence digest/path')
++        relative = Path(name)
++        require(not relative.is_absolute() and '..' not in relative.parts and str(relative) == name,
++                'unsafe evidence path')
++        if name not in self.cache:
++            path = self.root / relative
++            require(path == path.resolve(strict=True) and path.is_relative_to(self.root), 'aliased evidence path')
++            descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
++            with os.fdopen(descriptor, 'rb') as stream:
++                before = os.fstat(stream.fileno())
++                require(stat.S_ISREG(before.st_mode) and before.st_size <= 64 * 1024**2,
++                        'nonregular/oversized evidence')
++                raw = stream.read(64 * 1024**2 + 1)
++                after = os.fstat(stream.fileno())
++            require((before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns, before.st_ctime_ns) ==
++                    (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns),
++                    'evidence changed while reading')
++            require(len(raw) == before.st_size, 'incomplete evidence read')
++            self.cache[name] = raw
++        raw = self.cache[name]
++        require(digest(raw) == expected, 'retained evidence hash mismatch: ' + name)
++        return raw
++
++    def json(self, reference):
++        return strict_json(self.raw(reference).decode('utf-8', errors='strict'))
++
++
++def command(value, expected_argv=None, cwd=None):
++    require(isinstance(value, dict) and type(value.get('exit_code')) is int and value['exit_code'] == 0 and
++            value.get('status') == 'completed', 'failed/incomplete command evidence')
++    require(isinstance(value.get('argv'), list) and value['argv'] and
++            all(isinstance(a, str) and a for a in value['argv']) and
++            isinstance(value.get('stdout'), str) and isinstance(value.get('stderr'), str),
++            'malformed command evidence')
++    if expected_argv is not None:
++        require(value['argv'] == expected_argv, 'executed command identity mismatch')
++    if cwd is not None:
++        require(value.get('cwd') == cwd, 'executed working directory mismatch')
++    return value
+--- before/scripts/cpu_gpu_framework_compatibility.py
++++ after/scripts/cpu_gpu_framework_compatibility.py
+@@ -96,18 +96,17 @@
+     require(isinstance(references, dict) and set(references) == set(artifact.get('records', {})),
+             'missing/ambiguous retained framework records')
+     from pathlib import Path
++    from cpu_gpu_evidence_io import EvidenceStore
++    from cpu_gpu_evidence import validate_full
++    store = EvidenceStore(records_root)
+     hashes = {}
+     for name, reference in references.items():
+         require(isinstance(reference, dict) and isinstance(reference.get('file'), str), 'missing framework record path')
+         relative = Path(reference['file'])
+         require(not relative.is_absolute() and '..' not in relative.parts and str(relative) == reference['file'],
+                 'unsafe framework record path')
+-        file = records_root / relative
+-        require(file.absolute() == file.resolve(strict=True) and file.resolve().is_relative_to(records_root.resolve()),
+-                'aliased framework record path')
+-        require(file.is_file() and not file.is_symlink() and sha(file) == reference.get('sha256'),
+-                'retained framework record changed: ' + name)
+-        hashes[name] = sha(file)
++        store.raw(reference)  # Hash and parse the same private byte snapshot below.
++        hashes[name] = reference['sha256']
+     context = dict(session_id=prerequisite.get('session_id'),
+                    source_identity=hashlib.sha256(canonical(source['current_source_sha256'])).hexdigest(),
+                    build_identity=hashlib.sha256(canonical(identity)).hexdigest(),
+@@ -119,7 +118,7 @@
+     # run, not host-only skips or a renamed untimed diagnostic. Timing execution
+     # is NOT performed by this validator; it inspects immutable prior output.
+     reference = prerequisite['records']['cuda_ctest']
+-    result = strict_json((records_root / reference['file']).read_text())
++    result = store.json(reference)
+     argv = result.get('argv')
+     require(isinstance(argv, list) and len(argv) >= 3 and argv[0] == 'ctest' and
+             argv.count('--test-dir') == 1 and
+@@ -136,7 +135,7 @@
+             len(re.findall(r'(?m)^(?:\d+: )?OK\s*$', groups[0])) == 1 and
+             not any(term in groups[0] for term in ['skipped=', '***Skipped', 'FAILED', 'ERROR']),
+             'current full GPU timing-framework coverage absent')
+-    production = strict_json((records_root / prerequisite['records']['cuda_correctness']['file']).read_text())
++    production = store.json(prerequisite['records']['cuda_correctness'])
+     from validate_cuda_sort import verify_result
+     require(production.get('exit_code') == 0 and production.get('status') == 'completed',
+             'current production GPU correctness absent')
+@@ -144,4 +143,4 @@
+             'production GPU command executable identity mismatch')
+     result = verify_result(strict_json(production.get('stdout', '')))
+     require((result['compute_major'], result['compute_minor']) == (7, 5), 'production correctness device mismatch')
+-    return assessment
++    return validate_full(prerequisite, store, source['current_source_sha256'], identity)
+--- before/tests/test_evidence_enforcement.py
++++ after/tests/test_evidence_enforcement.py
+@@ -0,0 +1,435 @@
++"""Inert evidence parser regressions. All execution/discovery is forbidden.
++
++Compiler records and CTest stdout here are clearly synthetic unit fixtures, not
++observed builds/tests. No fixture installs the independent production trust pin.
++"""
++import copy
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest import mock
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT/'scripts'))
++with mock.patch.object(subprocess,'run',side_effect=AssertionError('execution forbidden')), \
++     mock.patch.object(subprocess,'Popen',side_effect=AssertionError('execution forbidden')):
++    import cpu_gpu_evidence as evidence
++    from cpu_gpu_evidence_io import EvidenceStore, digest, command
++    from cpu_gpu_build_provenance import validate_build
++    import cpu_gpu_protocol as protocol
++    import cpu_gpu_build_identity as identity
++
++
++class EvidenceTests(unittest.TestCase):
++    def setUp(self):
++        for target in ['subprocess.run','subprocess.Popen','os.system']:
++            patch=mock.patch(target,side_effect=AssertionError('execution/discovery forbidden'))
++            patch.start();self.addCleanup(patch.stop)
++        temporary=tempfile.TemporaryDirectory();self.addCleanup(temporary.cleanup)
++        self.root=Path(temporary.name)
++        self.source=protocol.source_manifest()
++        self.review=dict(context={'synthetic_unit_context':True}, source_dir=str(ROOT),
++                         build_dir=str(self.root/'build'), record_sha256={})
++
++    def put(self,name,value):
++        raw=value if isinstance(value,bytes) else json.dumps(value,sort_keys=True).encode()
++        path=self.root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(raw)
++        return dict(file=name,sha256=digest(raw))
++
++    def store(self):return EvidenceStore(self.root)
++
++    def cmd(self,argv,cwd=None,stdout='synthetic unit output',**more):
++        return dict(argv=argv,cwd=cwd or str(ROOT),exit_code=0,status='completed',stdout=stdout,stderr='',**more)
++
++    def proof(self,outputs=('comparison_input',),sanitize=False,prefix='proof'):
++        build=str(self.root/('san' if sanitize else 'build'));src=str(ROOT)
++        tool='/usr/bin/c++';cmake='/usr/bin/cmake';obj=build+'/input.o'
++        argv=[tool,'-c',src+'/src/benchmark/comparison_input_main.cpp','-o',obj]
++        cache=('CMAKE_HOME_DIRECTORY:INTERNAL='+src+'\nCMAKE_BUILD_TYPE:STRING='+('Debug' if sanitize else 'Release')+
++               '\nMAB_ENABLE_SANITIZERS:BOOL='+('ON' if sanitize else 'OFF')+'\n').encode()
++        meta={'CMakeCache.txt':self.put(prefix+'/cache',cache),
++              'compile_commands.json':self.put(prefix+'/compile.json',[
++                  dict(directory=build,file=argv[2],arguments=argv)]),
++              'CTestTestfile.cmake':self.put(prefix+'/registry',b'# inert\n')}
++        out_hash=digest(b'synthetic executable; never executed')
++        compile_ref=self.put(prefix+'/compile_exit.json',self.cmd(argv,build,
++            operation='compile',output=obj,output_sha256=digest(b'object'),
++            source_before_sha256=self.source,source_after_sha256=self.source))
++        steps=[compile_ref]
++        for name in outputs:
++            steps.append(self.put(prefix+'/'+name+'.json',self.cmd([tool,obj,'-o',build+'/'+name],build,
++                operation='link',output=build+'/'+name,output_sha256=out_hash,
++                inputs_sha256={'input.o':digest(b'object')},source_before_sha256=self.source,source_after_sha256=self.source)))
++        value=dict(schema_version=1,kind='cpu_gpu_build_provenance_v1',source_dir=src,build_dir=build,
++            source_sha256=self.source,source_after_sha256=self.source,build_type='Debug' if sanitize else 'Release',
++            sanitizers=sanitize,outputs_sha256={n:out_hash for n in outputs},metadata=meta,
++            toolchain={t:dict(sha256=digest(b'synthetic tool'),version=self.put(prefix+'/tool_'+Path(t).name,
++                         self.cmd([t,'--version']))) for t in [cmake,tool]},
++            configure=self.put(prefix+'/configure',self.cmd([cmake,'-S',src,'-B',build])),
++            build=self.put(prefix+'/build',self.cmd([cmake,'--build',build,'--verbose'])),steps=steps)
++        return self.put(prefix+'/provenance.json',value),value
++
++    def cpu(self,sanitize=False):
++        gate='cpu_sanitize' if sanitize else 'cpu_release'
++        manifest=json.loads((ROOT/'docs/NON_TIMING_TEST_SELECTION_v3.json').read_text())
++        # Models a future approved source review, without changing v3 or installing it.
++        manifest['reviewed_source_sha256']=self.source
++        mref=self.put('selection_manifest.json',manifest)
++        build=str(self.root/('san' if sanitize else 'build'));src=str(ROOT)
++        def expand(v):return sys.executable if v=='@python' else v.replace('@build',build).replace('@source',src)
++        names=sorted(n for n,t in manifest['tests'].items() if t['classification']=='cpu_correctness')
++        all_names=sorted(manifest['cpu_build_tests'])
++        commands={n:[expand(v) for v in manifest['tests'][n]['command']] for n in all_names}
++        executables=sorted({Path(commands[n][0]).name for n in names if commands[n][0].startswith(build+'/')})
++        pref,proof=self.proof(executables,sanitize)
++        lines=[];properties={}
++        for n in all_names:
++            args=[n]+commands[n]
++            lines.append('add_test('+' '.join(json.dumps(a) for a in args)+')')
++            props={k:expand(v) for k,v in manifest['build_metadata']['test_properties'][n].items()}
++            properties[n]=props
++            args=[n,'PROPERTIES']+[v for pair in props.items() for v in pair]
++            lines.append('set_tests_properties('+' '.join(json.dumps(a) for a in args)+')')
++        # Backtrace values have semicolons, not Python/JSON escape sequences.
++        proof['metadata']['CTestTestfile.cmake']=self.put('proof/registry',('\n'.join(lines)+'\n').encode())
++        pref=self.put('proof/provenance.json',proof)
++        argv=['ctest','--test-dir',build,'--output-on-failure','-V','--parallel','1','-R','^('+'|'.join(names)+')$']
++        plan=dict(policy=manifest['policy'],selected=names,selected_count=len(names),manifest_sha256=mref['sha256'],
++            allow_gpu_correctness=False,tests_executed=False,full_protocol_prerequisites=False,
++            discovered_count=len(all_names),ctest_argv=argv,build_metadata=dict(build_dir=build,test_names=all_names,
++            commands=commands,properties=properties,files_sha256={'CTestTestfile.cmake':proof['metadata']['CTestTestfile.cmake']['sha256']}))
++        discovery=dict(kind='ctestInfo',version=dict(major=1,minor=0),tests=[
++            dict(name=n,command=commands[n],properties=[]) for n in all_names])
++        text='\n'.join('Start '+str(i)+': '+n+'\n'+str(i)+'/21 Test #'+str(i)+': '+n+' ..... Passed 0.001 sec'
++                       for i,n in enumerate(names,1))+'\n100% tests passed, 0 tests failed out of 21\n'
++        prefix=['env','-u','ASAN_OPTIONS','-u','LSAN_OPTIONS','UBSAN_OPTIONS=halt_on_error=1'] if sanitize else []
++        record=dict(schema_version=1,kind='cpu_gpu_framework_record_v1',gate=gate,context=self.review['context'],
++            manifest=mref,selection=self.put('selection_plan.json',plan),build_provenance=pref,
++            executables_sha256=proof['outputs_sha256'],guarded_metadata={'CTestTestfile.cmake':proof['metadata']['CTestTestfile.cmake']},
++            discovery=self.put('discovery.json',self.cmd(['ctest','--test-dir',build,'-N','--show-only=json-v1'],stdout=json.dumps(discovery))),
++            command=self.put('cpu_command.json',self.cmd(prefix+argv,stdout=text)))
++        self.review.update(selection_sha256=mref['sha256'],python=sys.executable,cpu_build_provenance_sha256={gate:pref['sha256']})
++        return record
++
++    def check(self,record):
++        ref=self.put('framework.json',record)
++        self.review['record_sha256'][record['gate']]=ref['sha256']
++        return evidence.record_coverage(self.store(),record['gate'],ref,self.review,self.source)
++
++    def prepared(self):
++        value=dict(schema_version=1,artifact_kind='correctness_validation',scope='prepared_cuda_untimed_v1',
++            study_eligible=False,status='passed',inputs=163,output_checks=489,invalid_operations_rejected=489,failures=0)
++        record=dict(schema_version=1,kind='cpu_gpu_framework_record_v1',gate='gpu_prepared',context=self.review['context'],
++            command=self.put('prepared_command.json',self.cmd([self.review['build_dir']+'/test_cuda_prepared_correctness'],stdout=json.dumps(value))))
++        return record,value
++
++    def test_valid_prepared_record_is_derived(self):
++        r,v=self.prepared();self.assertEqual(self.check(r),dict(inputs=163,output_checks=489,failures=0))
++
++    def test_hash_consistent_placeholder_and_malformed_schema_rejected(self):
++        for value in [{},dict(synthetic_fixture=True,gate='gpu_prepared'),[],dict(schema_version=True,kind='cpu_gpu_framework_record_v1')]:
++            ref=self.put('placeholder.json',value);self.review['record_sha256']['gpu_prepared']=ref['sha256']
++            with self.subTest(value=value),self.assertRaisesRegex(ValueError,'unsupported framework record schema'):
++                evidence.record_coverage(self.store(),'gpu_prepared',ref,self.review,self.source)
++
++    def test_hash_consistent_failed_incomplete_prepared_records_rejected(self):
++        for key,value in [('status','failed'),('inputs',162),('output_checks',488),('failures',1),('study_eligible',True)]:
++            r,v=self.prepared();v[key]=value
++            r['command']=self.put('prepared_command.json',self.cmd([self.review['build_dir']+'/test_cuda_prepared_correctness'],stdout=json.dumps(v)))
++            with self.subTest(key=key),self.assertRaisesRegex(ValueError,'incomplete/failed prepared'):self.check(r)
++
++    def test_hash_consistent_incorrect_exit_status_rejected(self):
++        r,v=self.prepared();result=self.store().json(r['command']);result['exit_code']=1
++        r['command']=self.put('prepared_command.json',result)
++        with self.assertRaisesRegex(ValueError,'failed/incomplete command'):self.check(r)
++
++    def test_hash_consistent_wrong_context_build_and_command_rejected(self):
++        r,v=self.prepared();r['context']={'wrong_source':True}
++        with self.assertRaisesRegex(ValueError,'context mismatch'):self.check(r)
++        r,v=self.prepared();result=self.store().json(r['command']);result['argv'][0]='/other/build/test_cuda_prepared_correctness'
++        r['command']=self.put('prepared_command.json',result)
++        with self.assertRaisesRegex(ValueError,'executed command identity'):self.check(r)
++
++    def test_duplicate_json_keys_rejected_with_correct_hash(self):
++        ref=self.put('duplicate.json',b'{"inputs":163,"inputs":0}')
++        with self.assertRaises(ValueError):self.store().json(ref)
++
++    def test_tampered_and_stale_hash_rejected(self):
++        ref=self.put('record.json',dict(status='passed'));self.put('record.json',dict(status='failed'))
++        with self.assertRaisesRegex(ValueError,'hash mismatch'):self.store().json(ref)
++
++    def test_hash_and_parser_share_immutable_bytes(self):
++        ref=self.put('record.json',dict(status='passed'));store=self.store();store.raw(ref)
++        changed=self.put('record.json',dict(status='failed'))
++        self.assertEqual(store.json(ref),dict(status='passed'))
++        with self.assertRaisesRegex(ValueError,'hash mismatch'):store.json(changed)
++
++    def test_alias_and_path_substitution_rejected(self):
++        ref=self.put('record.json',{})
++        (self.root/'alias.json').symlink_to(self.root/'record.json')
++        for path in ['alias.json','../record.json','./record.json']:
++            with self.subTest(path=path),self.assertRaises(ValueError):self.store().raw(dict(ref,file=path))
++
++    def test_valid_cpu_release_record_bound_to_plan_commands_and_build(self):
++        self.assertEqual(self.check(self.cpu()),dict(passed=21))
++
++    def test_valid_cpu_sanitizer_record(self):
++        self.assertEqual(self.check(self.cpu(True)),dict(passed=21))
++
++    def test_wrong_selection_manifest_rejected_with_consistent_hash(self):
++        r=self.cpu();m=self.store().json(r['manifest']);m['reviewed_source_sha256']={'wrong':'0'*64}
++        r['manifest']=self.put('selection_manifest.json',m)
++        with self.assertRaisesRegex(ValueError,'wrong approved selection snapshot'):self.check(r)
++        self.review['selection_sha256']=r['manifest']['sha256']
++        with self.assertRaisesRegex(ValueError,'source snapshot mismatch'):self.check(r)
++
++    def test_cpu_missing_duplicate_conflicting_or_failed_tests_rejected(self):
++        for mode in ['missing','duplicate','failed','contradictory']:
++            r=self.cpu();result=self.store().json(r['command']);lines=result['stdout'].splitlines()
++            if mode=='missing':lines=lines[2:]
++            elif mode=='duplicate':lines=lines[:2]+lines
++            elif mode=='failed':lines[1]=lines[1].replace('Passed','***Failed')
++            else:lines.append('ERROR: AddressSanitizer: rejected fixture')
++            result['stdout']='\n'.join(lines);r['command']=self.put('cpu_command.json',result)
++            with self.subTest(mode=mode),self.assertRaisesRegex(ValueError,'CTest coverage|contradictory CTest'):self.check(r)
++
++    def test_cpu_command_and_plan_tampering_rejected(self):
++        for mode in ['selection','argv','cwd','exit','executables']:
++            r=self.cpu()
++            if mode=='selection':
++                p=self.store().json(r['selection']);p['selected'].pop();r['selection']=self.put('selection_plan.json',p)
++            elif mode=='executables':r['executables_sha256']={}
++            else:
++                c=self.store().json(r['command'])
++                if mode=='argv':c['argv'][-1]='.*'
++                elif mode=='cwd':c['cwd']='/another/source'
++                else:c['exit_code']=1
++                r['command']=self.put('cpu_command.json',c)
++            with self.subTest(mode=mode),self.assertRaisesRegex(ValueError,'plan coverage|command identity|working directory|failed/incomplete|executable coverage'):self.check(r)
++
++    def test_discovery_includes_fixtures_or_modified_commands_rejected(self):
++        for mode in ['fixtures','commands','duplicate']:
++            r=self.cpu();d=self.store().json(r['discovery']);value=json.loads(d['stdout'])
++            if mode=='fixtures':value['tests'][0]['properties']=[dict(name='FIXTURES_REQUIRED',value='unreviewed')]
++            elif mode=='commands':value['tests'][0]['command']=['/unreviewed/wrapper']
++            else:value['tests'][0]=value['tests'][1]
++            d['stdout']=json.dumps(value);r['discovery']=self.put('discovery.json',d)
++            with self.subTest(mode=mode),self.assertRaisesRegex(ValueError,'unsafe discovery|command substitution|duplicate discovery'):self.check(r)
++
++    def test_valid_build_graph_is_not_empty_compile_list(self):
++        ref,p=self.proof();self.assertEqual(validate_build(self.store(),ref,self.source,p['outputs_sha256']),p)
++
++    def test_arbitrary_empty_or_fabricated_compile_list_rejected(self):
++        for entries in [[],[{}],{},[dict(directory='/wrong',file='/unreviewed')]]:
++            ref,p=self.proof();p['metadata']['compile_commands.json']=self.put('proof/compile.json',entries)
++            ref=self.put('proof/provenance.json',p)
++            with self.subTest(entries=entries),self.assertRaisesRegex(ValueError,'compile-command|compile source/build'):
++                validate_build(self.store(),ref,self.source,p['outputs_sha256'])
++
++    def test_missing_compiler_linker_or_failed_exit_evidence_rejected(self):
++        for mode in ['none','compile','link','failed','object']:
++            ref,p=self.proof()
++            if mode=='none':p['steps']=[]
++            elif mode=='compile':p['steps']=p['steps'][1:]
++            elif mode=='link':p['steps']=p['steps'][:1]
++            else:
++                s=self.store().json(p['steps'][1])
++                if mode=='failed':s['exit_code']=2
++                else:s['inputs_sha256']['input.o']='0'*64
++                p['steps'][1]=self.put('proof/comparison_input.json',s)
++            ref=self.put('proof/provenance.json',p)
++            with self.subTest(mode=mode),self.assertRaisesRegex(ValueError,'missing compiler|lacks earlier|missing/stale|failed/incomplete|object hash'):
++                validate_build(self.store(),ref,self.source,p['outputs_sha256'])
++
++    def test_stale_build_source_outputs_and_other_build_rejected(self):
++        for mode in ['source','output','missing','build']:
++            ref,p=self.proof();required=dict(p['outputs_sha256'])
++            if mode=='source':p['source_after_sha256']={'stale':'0'*64}
++            elif mode=='output':required['comparison_input']='0'*64
++            elif mode=='missing':required['missing_binary']='0'*64
++            else:p['build_dir']='/another/build'
++            ref=self.put('proof/provenance.json',p)
++            with self.subTest(mode=mode),self.assertRaisesRegex(ValueError,'stale build|missing build output|different provenance build'):
++                validate_build(self.store(),ref,self.source,required,str(self.root/'build'))
++
++    def test_missing_trusted_review_is_not_trust_on_first_use(self):
++        with self.assertRaisesRegex(ValueError,'review not installed'):evidence.approval()
++
++    def test_malformed_missing_or_mutated_independent_anchor_rejected(self):
++        for data in [b'{',b'{}',b'{"policy":1,"policy":2}']:
++            ref=self.put('review.json',data)
++            with mock.patch.object(evidence,'APPROVAL',self.root/'review.json'), \
++                 mock.patch.object(evidence,'TRUSTED_APPROVAL_SHA256',ref['sha256']),self.assertRaises(ValueError):evidence.approval()
++        with mock.patch.object(evidence,'APPROVAL',self.root/'absent'), \
++             mock.patch.object(evidence,'TRUSTED_APPROVAL_SHA256','0'*64),self.assertRaises(OSError):evidence.approval()
++
++    def candidate(self):
++        base=json.loads((ROOT/'docs/NON_TIMING_TEST_SELECTION_v3.json').read_text())
++        old=base['reviewed_source_sha256'];source=self.source
++        return dict(base,schema_version=4,policy='non_timing_correctness_v4_candidate',
++            review_status='pending_independent_review',base_manifest_sha256=evidence.BASE_SELECTION_SHA256,
++            reviewed_source_sha256=source,source_delta=dict(added=sorted(set(source)-set(old)),removed=sorted(set(old)-set(source)),
++                modified=sorted(n for n in set(source)&set(old) if source[n]!=old[n])))
++
++    def test_inactive_candidate_preserves_default_19_and_classifications(self):
++        c=self.candidate();delta=evidence.candidate(c,self.source);self.assertTrue(delta['added'])
++        base=json.loads((ROOT/'docs/NON_TIMING_TEST_SELECTION_v3.json').read_text())
++        self.assertEqual(c['tests'],base['tests']);self.assertEqual(c['cpu_build_tests'],base['cpu_build_tests'])
++        default=sorted(n for n,v in c['tests'].items() if v['classification']=='cpu_correctness' and not v.get('diagnostic_only'))
++        self.assertEqual(default,sorted('baselines cli comparisons cpu_gpu_comparison_framework cuda_benchmark_analysis cuda_preflight cuda_sort_handoff datasets environment_manifest memory memory_unsupported mergesort metrics_cli pdqsort quicksort radixsort searching structures timsort'.split()))
++
++    def test_candidate_unreviewed_add_remove_path_or_hash_changes_rejected(self):
++        for mode in ['add','remove','path','hash','test']:
++            c=copy.deepcopy(self.candidate())
++            if mode=='add':c['reviewed_source_sha256']['unapproved']='0'*64
++            elif mode=='remove':c['reviewed_source_sha256'].pop('CMakeLists.txt')
++            elif mode=='path':c['reviewed_source_sha256']['../CMakeLists.txt']=c['reviewed_source_sha256'].pop('CMakeLists.txt')
++            elif mode=='hash':c['reviewed_source_sha256']['CMakeLists.txt']='0'*64
++            else:c['tests']['parallel_mergesort']['classification']='cpu_correctness'
++            with self.subTest(mode=mode),self.assertRaisesRegex(ValueError,'candidate source|candidate changed'):evidence.candidate(c,self.source)
++
++    def test_candidate_cannot_establish_approved_selection(self):
++        c=self.candidate();ref=self.put('candidate.json',c)
++        with self.assertRaisesRegex(ValueError,'candidate is not approved'):
++            evidence.selection_manifest(self.store(),ref,dict(selection_sha256=ref['sha256']),self.source)
++
++    def test_full_validator_rejects_internally_consistent_unsupported_assertion(self):
++        cpu=self.cpu();cpu['context']=None
++        outputs=identity.EXECUTABLES+('libmab_parallel.a','libmab_cuda_timing.a')
++        bref,bproof=self.proof(outputs,prefix='main_build')
++        build_identity=dict(source_dir=str(ROOT),build_dir=bproof['build_dir'],build_provenance=bref,
++            files_sha256=dict(bproof['outputs_sha256'],**{n:r['sha256'] for n,r in bproof['metadata'].items()}))
++        context=dict(session_id='inert-unit',source_identity=digest(protocol.canonical(self.source)),
++            build_identity=digest(protocol.canonical(build_identity)),binary_identity=bproof['outputs_sha256']['cpu_gpu_comparison'],
++            freeze_sha256=evidence.TRUSTED_FREEZE_SHA256)
++        self.review.update(context=context,build_provenance_sha256=bref['sha256'])
++        cpu['context']=context
++        parent,anchors=evidence.trusted_policy();names=parent['required_records']['full_study_prerequisites']
++        refs={n:self.put('full_'+n+'.json',cpu if n=='cpu_release' else {}) for n in names}
++        self.review['record_sha256']={n:r['sha256'] for n,r in refs.items()}
++        records={n:dict(dict(status='passed',exit_code=0,skipped=0,missing=0,sha256=refs[n]['sha256']),**parent['coverage'][n]) for n in names}
++        records['cpu_release']['passed']=22
++        p=dict(session_id='inert-unit',build_provenance=bref,framework_records=refs,framework_validation=dict(records=records))
++        with mock.patch.object(evidence,'approval',return_value=self.review), \
++             self.assertRaisesRegex(ValueError,'coverage assertion unsupported by actual record: cpu_release'):
++            evidence.validate_full(p,self.store(),self.source,build_identity)
++
++    def test_workspace_missing_or_duplicate_size_is_rejected(self):
++        r=dict(schema_version=1,kind='cpu_gpu_framework_record_v1',gate='workspace',context=self.review['context'],commands=[])
++        with self.assertRaisesRegex(ValueError,'missing workspace size coverage'):self.check(r)
++
++    def test_independent_review_failed_decision_rejected_with_correct_hash(self):
++        r=dict(schema_version=1,kind='cpu_gpu_framework_record_v1',gate='independent_review',context=self.review['context'],
++            decision=self.put('decision.json',dict(schema_version=1,kind='independent_evidence_review_v1',accepted=False,
++                execution_authorized=False,context=self.review['context'])))
++        with self.assertRaisesRegex(ValueError,'decision not accepted'):self.check(r)
++
++    def test_synthetic_timing_bundle_cannot_qualify_as_performance(self):
++        for gate in ['pilot','timing_smoke']:
++            r=dict(schema_version=1,kind='cpu_gpu_framework_record_v1',gate=gate,context=self.review['context'],
++                raw_files={'run.json':self.put('raw_run.json',dict(run_kind='synthetic_test_fixture')),
++                           'COMPLETE.json':self.put('raw_complete.json',{})})
++            with self.subTest(gate=gate),self.assertRaisesRegex(ValueError,'synthetic/validation timing evidence cannot qualify'):self.check(r)
++
++    def identity_fixture(self):
++        outputs=identity.EXECUTABLES+('libmab_parallel.a','libmab_cuda_timing.a')
++        ref,proof=self.proof(outputs)
++        build=Path(proof['build_dir']);build.mkdir()
++        cache=self.store().raw(proof['metadata']['CMakeCache.txt'])
++        cache+=b'MAB_ENABLE_OPENMP:BOOL=ON\nMAB_ENABLE_CUDA:BOOL=ON\nMAB_ENABLE_CUDA_SORT:BOOL=ON\n'
++        cache+=b'MAB_ENABLE_CPU_GPU_COMPARISON:BOOL=ON\nCMAKE_CUDA_ARCHITECTURES:STRING=75\n'
++        proof['metadata']['CMakeCache.txt']=self.put('proof/cache',cache)
++        self.put('proof/provenance.json',proof)
++        # The retained records are copied under the intended build, like a future
++        # reviewed build capture. Inert fixture bytes, never executed.
++        import shutil
++        shutil.copytree(self.root/'proof',build/'proof')
++        for name,reference in proof['metadata'].items():
++            (build/name).write_bytes(self.store().raw(reference))
++        for name in outputs:
++            (build/name).write_bytes(b'synthetic executable; never executed')
++            if name in identity.EXECUTABLES:(build/name).chmod(0o700)
++        return build,build/ref['file']
++
++    def test_capture_requires_compile_link_proof_not_just_json_list(self):
++        build,path=self.identity_fixture()
++        document=identity.capture(build,path)
++        identity.verify(document,build/'cpu_gpu_comparison',build/'comparison_input')
++        (build/'compile_commands.json').write_text('[]')
++        with self.assertRaisesRegex(ValueError,'empty/malformed compile-command'):identity.capture(build,path)
++
++    def test_actual_fixture_binary_hash_mismatch_and_missing_binary_rejected(self):
++        build,path=self.identity_fixture();document=identity.capture(build,path)
++        (build/'comparison_input').write_text('stale bytes')
++        with self.assertRaisesRegex(ValueError,'stale build output'):identity.verify(document,build/'cpu_gpu_comparison',build/'comparison_input')
++        (build/'comparison_input').unlink()  # Inert temporary fixture only.
++        with self.assertRaises(OSError):identity.capture(build,path)
++
++    def test_snapshot_only_is_never_accepted_as_provenance(self):
++        build,path=self.identity_fixture();document=identity.capture_snapshot(build)
++        with self.assertRaisesRegex(ValueError,'missing build provenance identity'):
++            identity.verify(document,build/'cpu_gpu_comparison',build/'comparison_input')
++
++    def test_default_guard_still_rejects_changed_source_and_inactive_candidate(self):
++        import non_timing_tests as selector
++        with self.assertRaisesRegex(ValueError,'source snapshot changed'):selector.load_manifest()
++        ref=self.put('inactive.json',self.candidate())
++        with mock.patch.object(selector,'MANIFEST',self.root/ref['file']),self.assertRaisesRegex(ValueError,'invalid non-timing manifest'):
++            selector.load_manifest()  # Pure JSON/source validation, never discovery.
++
++    def workspace(self):
++        refs=[]
++        for n in [1025,65537,1000000]:
++            v=dict(size=n,gpu_name='Tesla T4',compute_major=7,compute_minor=5,
++                prepared_query_bytes=32,adapter_query_bytes=32,free_device_bytes_before_buffers=8*1024**3,
++                prepared_diagnostic_cudaMalloc_requested_bytes=32,adapter_diagnostic_cudaMalloc_requested_bytes=32,
++                combined_device_payload_bytes=16*n+64,known_host_peak_payload_bytes=24*n)
++            refs.append(self.put('resource_'+str(n),self.cmd([self.review['build_dir']+'/cpu_gpu_comparison','--resources',str(n)],stdout=json.dumps(v))))
++        keys=['/sys/fs/cgroup/cpu.max','/sys/fs/cgroup/memory.max','/sys/fs/cgroup/memory.current',
++              '/sys/fs/cgroup/memory/memory.limit_in_bytes','/sys/fs/cgroup/memory/memory.usage_in_bytes']
++        for directory in ['/sys/fs/cgroup/cpu','/sys/fs/cgroup/cpu,cpuacct']:
++            keys.extend(directory+'/'+name for name in ['cpu.cfs_quota_us','cpu.cfs_period_us'])
++        env=dict(affinity=[0,1],disk_free_bytes=2*1024**3,linux_meminfo='MemAvailable: 2097152 kB',
++                 resource_files={k:None for k in keys},**{n:dict(returncode=0,stdout='') for n in ['nvidia_smi','gpu_processes','gpu_details','nvcc']})
++        return dict(schema_version=1,kind='cpu_gpu_framework_record_v1',gate='workspace',context=self.review['context'],
++                    commands=refs,environment=self.put('environment.json',env))
++
++    def test_valid_workspace_all_sizes_and_retained_host_disk_limits(self):
++        self.assertEqual(self.check(self.workspace()),dict(sizes=[1025,65537,1000000],all_limits_passed=True))
++
++    def test_duplicate_workspace_size_or_insufficient_resource_snapshot_rejected(self):
++        r=self.workspace();r['commands'][2]=r['commands'][0]
++        with self.assertRaisesRegex(ValueError,'duplicate/invalid workspace size'):self.check(r)
++        r=self.workspace();env=self.store().json(r['environment']);env['disk_free_bytes']=0
++        r['environment']=self.put('environment.json',env)
++        with self.assertRaisesRegex(ValueError,'free disk'):self.check(r)
++
++    def workers(self):
++        value=dict(schema_version=1,artifact_kind='correctness_validation',scope='openmp_workers_untimed_v1',study_eligible=False,
++            status='passed',executable=self.review['build_dir']+'/test_parallel_workers',build_type='Release',sanitizers=False,
++            requested_threads=2,runtime_dynamic=0,runtime_thread_limit=2,team_size_is_task_participation=False,
++            environment=protocol.load_protocol()['openmp_policy']['environment'],output_checks=12,
++            calls=[dict(size=n,registry=r,correctness=True,actual_team_size=2 if n>=32768 else 1,parallel_region=n>=32768)
++                   for n in [0,1,32767,32768,32769,65537] for r in [False,True]])
++        record=dict(schema_version=1,kind='cpu_gpu_framework_record_v1',gate='workers',context=self.review['context'])
++        return record,value
++
++    def test_valid_worker_threshold_contents_and_conflicting_calls(self):
++        for mode in ['valid','duplicate','failed','team','environment']:
++            r,v=self.workers()
++            if mode=='duplicate':v['calls'][0]=v['calls'][1]
++            elif mode=='failed':v['calls'][0]['correctness']=False
++            elif mode=='team':v['calls'][-1]['actual_team_size']=1
++            elif mode=='environment':v['environment']={}
++            r['command']=self.put('workers.json',self.cmd([v['executable']],stdout=json.dumps(v)))
++            if mode=='valid':self.assertEqual(self.check(r),dict(output_checks=12,threshold_team_verified=True))
++            else:
++                with self.subTest(mode=mode),self.assertRaisesRegex(ValueError,'worker threshold|worker environment'):self.check(r)
++
++
++if __name__=='__main__':
++    unittest.main()
+--- before/tests/test_framework_compatibility.py
++++ after/tests/test_framework_compatibility.py
+@@ -1,7 +1,8 @@
+ """Inert provenance regressions; fake binaries are hashed, never executed.
+ 
+ All subprocess, shell and runner execution paths are blocked, including imports.
+-The positive full-evidence fixtures model metadata, not observed GPU execution.
++The former accepted placeholder reproducer must now fail closed. Content
++snapshots below are explicitly not claims of observed compiler/GPU execution.
+ """
+ import copy
+ import hashlib
+@@ -47,8 +48,11 @@
+                         MAB_ENABLE_CPU_GPU_COMPARISON='ON', MAB_ENABLE_SANITIZERS='OFF',
+                         CMAKE_CUDA_ARCHITECTURES='75')
+         (self.build / 'CMakeCache.txt').write_text('\n'.join(k + ':STRING=' + v for k, v in settings.items()))
+-        (self.build / 'compile_commands.json').write_text('[]')
+-        self.document = identity.capture(self.build)
++        (self.build / 'compile_commands.json').write_text(json.dumps([dict(
++            directory=str(self.build), file=str(ROOT/'src/benchmark/comparison_input_main.cpp'),
++            arguments=['/usr/bin/c++','-c',str(ROOT/'src/benchmark/comparison_input_main.cpp'),
++                       '-o',str(self.build/'input.o')])]))
++        self.document = identity.capture_snapshot(self.build)
+         self.binary = self.build / 'cpu_gpu_comparison'; self.input = self.build / 'comparison_input'
+ 
+     def fixture(self):
+@@ -135,8 +139,10 @@
+             with self.subTest(field=field), self.assertRaises(ValueError):
+                 provenance.validate_retained_source(altered, self.model)
+ 
+-    def test_complete_synthetic_launch_metadata_accepted_without_execution(self):
+-        p = self.fixture(); self.assertEqual(self.validate(p), p)
++    def test_previously_accepted_exact_placeholder_reproducer_rejected(self):
++        p = self.fixture()
++        with self.assertRaisesRegex(ValueError, 'independent evidence/selection review not installed'):
++            self.validate(p)
+ 
+     def test_correctness_bundle_cannot_replace_full_evidence(self):
+         p = self.fixture(); p['framework_validation']['artifact_kind'] = 'correctness_validation'
+@@ -156,7 +162,7 @@
+ 
+     def test_framework_record_hash_mismatch_rejected(self):
+         p = self.fixture(); (self.root / p['framework_records']['pilot']['file']).write_text('{}')
+-        with self.assertRaisesRegex(ValueError, 'record changed'): self.validate(p)
++        with self.assertRaisesRegex(ValueError, 'evidence hash mismatch'): self.validate(p)
+ 
+     def test_prepared_or_host_only_output_cannot_replace_gpu_framework(self):
+         for text in ['163 inputs 489 checks', 'Ran 14 tests\nOK (skipped=2)',
+@@ -217,23 +223,24 @@
+             with self.subTest(value=value), self.assertRaisesRegex(ValueError, 'missing/wrong build identity'): self.validate(p)
+         p = self.fixture(); p['build_identity']['files_sha256'].pop('comparison_input')
+         with self.assertRaisesRegex(ValueError, 'build file identity'): self.validate(p)
+-        self.document = identity.capture(self.build)
++        self.document = identity.capture_snapshot(self.build)
+         (self.build / 'comparison_input').write_text('new bytes')
+-        with self.assertRaisesRegex(ValueError, 'stale or mismatched'): identity.verify(self.document, self.binary, self.input)
++        with self.assertRaisesRegex(ValueError, 'missing build provenance'): identity.verify(self.document, self.binary, self.input)
++        self.assertNotEqual(identity.capture_snapshot(self.build), self.document)
+ 
+     def test_absent_input_file_cannot_be_captured(self):
+         self.input.unlink()  # Inert temporary fixture only.
+-        with self.assertRaises((OSError, ValueError)): identity.capture(self.build)
++        with self.assertRaises((OSError, ValueError)): identity.capture_snapshot(self.build)
+ 
+     def test_symlink_or_different_build_identity_cannot_be_used(self):
+         alias = self.root / 'alias'; alias.symlink_to(self.build, target_is_directory=True)
+-        with self.assertRaisesRegex(ValueError, 'aliased/symlink'): identity.capture(alias)
++        with self.assertRaisesRegex(ValueError, 'aliased/symlink'): identity.capture_snapshot(alias)
+         other = self.root / 'another_input'; other.write_text(self.input.read_text()); other.chmod(0o700)
+         with self.assertRaisesRegex(ValueError, 'different comparison build'): identity.verify(self.document, self.binary, other)
+ 
+     def test_wrong_build_configuration_rejected(self):
+         file = self.build / 'CMakeCache.txt'; file.write_text(file.read_text().replace('Release', 'Debug'))
+-        with self.assertRaisesRegex(ValueError, 'unexpected source/build'): identity.capture(self.build)
++        with self.assertRaisesRegex(ValueError, 'unexpected source/build'): identity.capture_snapshot(self.build)
+ 
+     def test_source_or_compile_manifest_mismatch_rejected(self):
+         with self.assertRaisesRegex(ValueError, 'stale build source'):
+@@ -262,7 +269,8 @@
+             b: dict(source_review='source_review.json', build='build.json',
+                     cub_pin=self.model['dependency'] if b.startswith('gpu_') else None) for b in protocol.BACKENDS})
+         with mock.patch.object(runner, 'environment_gate'):
+-            analyzer.validate_study_metadata(self.root, meta, self.model)
++            with self.assertRaisesRegex(ValueError, 'independent evidence/selection review not installed'):
++                analyzer.validate_study_metadata(self.root, meta, self.model)
+             p['framework_validation']['artifact_kind'] = 'correctness_validation'; self.write('prerequisites.json', p)
+             with self.assertRaisesRegex(ValueError, 'correctness is insufficient'):
+                 analyzer.validate_study_metadata(self.root, meta, self.model)

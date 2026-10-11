@@ -1,0 +1,19 @@
+{
+  "added": [
+    "docs/CPU_GPU_EVIDENCE_ENFORCEMENT_v1.md",
+    "docs/NON_TIMING_TEST_SELECTION_v4.candidate.json",
+    "scripts/cpu_gpu_build_provenance.py",
+    "scripts/cpu_gpu_evidence.py",
+    "scripts/cpu_gpu_evidence_io.py",
+    "tests/test_evidence_enforcement.py"
+  ],
+  "modified": [
+    "README.md",
+    "docs/CPU_GPU_FRAMEWORK_COMPATIBILITY_v1.md",
+    "docs/ROADMAP.md",
+    "scripts/cpu_gpu_build_identity.py",
+    "scripts/cpu_gpu_framework_compatibility.py",
+    "tests/test_framework_compatibility.py"
+  ],
+  "removed": []
+}
